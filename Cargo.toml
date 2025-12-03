@@ -3,7 +3,7 @@ name = "rust-ocpp"
 description = "ocpp 1.6, 2.0.1 and 2.1 libraries"
 readme = "README.md"
 license = "MIT OR Apache-2.0"
-version = "3.0.1"
+version = "3.0.4"
 authors = ["Tommy Malmqvist <tommy.malmqvist@codelabs.se"]
 homepage = "https://codelabs.se/"
 repository = "https://github.com/codelabsab/rust-ocpp"
@@ -26,7 +26,7 @@ all-features = true
 # No default feature, so each version must be explicitly enabled
 v1_6 = []
 v2_0_1 = []
-v2_1 = []
+#v2_1 = []
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
