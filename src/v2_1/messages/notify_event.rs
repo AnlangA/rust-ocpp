@@ -1,7 +1,6 @@
-use crate::v2_1::datatypes::CustomDataType;
+use crate::v2_1::datatypes::{CustomDataType, EventDataType};
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 use validator::Validate;
 
 /// Request body for the NotifyEvent request.
@@ -20,7 +19,7 @@ pub struct NotifyEventRequest {
     pub seq_no: i32,
 
     #[validate(length(min = 1))]
-    pub event_data: Vec<Value>,
+    pub event_data: Vec<EventDataType>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
@@ -37,7 +36,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    pub fn new(generated_at: DateTime<Utc>, seq_no: i32, event_data: Vec<Value>) -> Self {
+    pub fn new(generated_at: DateTime<Utc>, seq_no: i32, event_data: Vec<EventDataType>) -> Self {
         Self {
             generated_at,
             tbc: None,
@@ -90,7 +89,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_event_data(&mut self, event_data: Vec<Value>) -> &mut Self {
+    pub fn set_event_data(&mut self, event_data: Vec<EventDataType>) -> &mut Self {
         self.event_data = event_data;
         self
     }
@@ -139,7 +138,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// The event_data field
-    pub fn get_event_data(&self) -> &Vec<Value> {
+    pub fn get_event_data(&self) -> &Vec<EventDataType> {
         &self.event_data
     }
 
@@ -175,7 +174,6 @@ impl NotifyEventRequest {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the NotifyEvent response.
@@ -195,9 +193,7 @@ impl NotifyEventResponse {
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the custom_data field.
@@ -232,24 +228,44 @@ impl NotifyEventResponse {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use chrono::Utc;
-    use serde_json::{self, json};
+
     use validator::Validate;
 
     fn create_test_custom_data() -> CustomDataType {
         CustomDataType::new("TestVendor".to_string())
     }
 
-    fn create_test_event_data() -> Vec<Value> {
+    fn create_test_event_data() -> Vec<EventDataType> {
+        use crate::v2_1::datatypes::ComponentType;
+        use crate::v2_1::datatypes::VariableType;
+        use crate::v2_1::enumerations::event_notification::EventNotificationEnumType;
+        use crate::v2_1::enumerations::event_trigger::EventTriggerEnumType;
+
         vec![
-            json!({"eventType": "Alert", "component": "EVSE", "variable": "AvailabilityState"}),
-            json!({"eventType": "Warning", "component": "Connector", "variable": "ConnectorType"}),
+            EventDataType::new(
+                1,
+                Utc::now(),
+                EventTriggerEnumType::Alerting,
+                "Value".to_string(),
+                EventNotificationEnumType::HardWiredNotification,
+                ComponentType::new("EVSE".to_string()),
+                VariableType::new("AvailabilityState".to_string()),
+            ),
+            EventDataType::new(
+                2,
+                Utc::now(),
+                EventTriggerEnumType::Delta,
+                "Value".to_string(),
+                EventNotificationEnumType::HardWiredNotification,
+                ComponentType::new("Connector".to_string()),
+                VariableType::new("ConnectorType".to_string()),
+            ),
         ]
     }
 
@@ -259,11 +275,7 @@ mod tests {
         let seq_no = 0;
         let event_data = create_test_event_data();
 
-        let request = NotifyEventRequest::new(
-            generated_at,
-            seq_no,
-            event_data.clone(),
-        );
+        let request = NotifyEventRequest::new(generated_at, seq_no, event_data.clone());
 
         assert_eq!(request.get_generated_at(), &generated_at);
         assert_eq!(request.get_seq_no(), &seq_no);
@@ -333,7 +345,20 @@ mod tests {
 
         let new_generated_at = Utc::now();
         let new_seq_no = 2;
-        let new_event_data = vec![json!({"eventType": "Error", "component": "ChargingStation"})];
+        use crate::v2_1::datatypes::ComponentType;
+        use crate::v2_1::datatypes::VariableType;
+        use crate::v2_1::enumerations::event_notification::EventNotificationEnumType;
+        use crate::v2_1::enumerations::event_trigger::EventTriggerEnumType;
+
+        let new_event_data = vec![EventDataType::new(
+            3,
+            Utc::now(),
+            EventTriggerEnumType::Alerting,
+            "ErrorValue".to_string(),
+            EventNotificationEnumType::HardWiredNotification,
+            ComponentType::new("ChargingStation".to_string()),
+            VariableType::new("ErrorVariable".to_string()),
+        )];
         let custom_data = create_test_custom_data();
 
         request
@@ -375,7 +400,20 @@ mod tests {
 
         // Test with minimum valid seq_no
         let seq_no = 0; // Minimum valid value
-        let event_data = vec![json!({"eventType": "Info"})]; // Minimum length of 1
+        use crate::v2_1::datatypes::ComponentType;
+        use crate::v2_1::datatypes::VariableType;
+        use crate::v2_1::enumerations::event_notification::EventNotificationEnumType;
+        use crate::v2_1::enumerations::event_trigger::EventTriggerEnumType;
+
+        let event_data = vec![EventDataType::new(
+            4,
+            Utc::now(),
+            EventTriggerEnumType::Delta,
+            "InfoValue".to_string(),
+            EventNotificationEnumType::HardWiredNotification,
+            ComponentType::new("InfoComponent".to_string()),
+            VariableType::new("InfoVariable".to_string()),
+        )]; // Minimum length of 1
 
         let request = NotifyEventRequest::new(generated_at, seq_no, event_data.clone());
 
@@ -401,8 +439,7 @@ mod tests {
     #[test]
     fn test_notify_event_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = NotifyEventResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyEventResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -420,8 +457,7 @@ mod tests {
     #[test]
     fn test_notify_event_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = NotifyEventResponse::new()
-            .with_custom_data(custom_data);
+        let response = NotifyEventResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: NotifyEventResponse =
