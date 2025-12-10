@@ -24,6 +24,7 @@ all-features = true
 
 [features]
 # No default feature, so each version must be explicitly enabled
+default = ["v2_1"]
 v1_6 = []
 v2_0_1 = []
 v2_1 = []
