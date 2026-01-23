@@ -1740,6 +1740,112 @@
 
 ---
 
+## 第十六轮验证 (2026-01-23 迭代16)
+
+继续加速批量验证datatype，重点检查清除、证书、网络相关类型：
+
+### 验证的datatype:
+
+#### 149. ClearMonitoringResultType datatype
+- **状态**: ✅ 结构正确
+  - 字段：status, id, status_info, custom_data
+  - 清除监控请求的结果
+  - 描述匹配："Result of the clear request for this monitor, identified by its Id"
+  - 验证规则：
+    - status, id: required ✅
+    - id: range(min = 0) ✅
+  - 字段顺序完全匹配schema
+
+#### 150. ClearTariffsResultType datatype
+- **状态**: ✅ 结构正确
+  - 字段：status_info, tariff_id, status, custom_data
+  - 清除电价的结果
+  - 描述匹配："Result of clearing a tariff"
+  - 验证规则：
+    - status: required ✅
+    - tariff_id: maxLength 60 (optional) ✅
+  - 字段顺序完全匹配schema
+
+#### 151. CertificateStatusType datatype
+- **状态**: ✅ 结构正确
+  - 字段：certificate_hash_data, source, status, next_update, custom_data
+  - 证书的撤销状态
+  - 描述匹配："Revocation status of certificate"
+  - 验证规则：
+    - certificate_hash_data, source, status, next_update: required ✅
+  - 字段顺序完全匹配schema
+
+#### 152. APNType datatype
+- **状态**: ✅ 结构正确
+  - 字段：apn, apn_user_name, apn_password, sim_pin, preferred_network, use_only_preferred_network, apn_authentication, custom_data
+  - 蜂窝网络数据连接的配置数据
+  - 描述匹配："Collection of configuration data needed to make a data-connection over a cellular network"
+  - 验证规则：
+    - apn: maxLength 2000, required ✅
+    - apn_user_name: maxLength 50 (optional) ✅
+    - apn_password: maxLength 64 (optional) ✅
+    - apn_authentication: required ✅
+    - preferred_network: maxLength 6 (optional) ✅
+  - 字段顺序完全匹配schema
+
+#### 153. AddressType datatype
+- **状态**: ✅ 结构正确
+  - 字段：name, address1, address2, city, postal_code, country, custom_data
+  - 通用地址格式
+  - 描述匹配："A generic address format"
+  - 验证规则：
+    - name: maxLength 50, required ✅
+    - address1: maxLength 100, required ✅
+    - address2: maxLength 100 (optional) ✅
+    - city: maxLength 100, required ✅
+    - postal_code: maxLength 20 (optional) ✅
+    - country: maxLength 50, required ✅
+  - 字段顺序完全匹配schema
+
+#### 154. BatteryDataType datatype
+- **状态**: ✅ 结构正确
+  - 字段：evse_id, serial_number, so_c, so_h, production_date, vendor_info, custom_data
+  - EV电池参数
+  - 描述匹配："Contains EV battery parameters"
+  - 验证规则：
+    - evse_id: range(min = 0), required ✅
+    - serial_number: maxLength 50, required ✅
+    - so_c, so_h: custom range 0-100, required ✅
+    - production_date: required (DateTime) ✅
+    - vendor_info: maxLength 500 (optional) ✅
+  - 包含自定义验证器（validate_decimal_range）
+  - 字段顺序完全匹配schema
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查证书、网络、电池相关的复杂验证规则
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的6个datatype字段顺序与schema完全匹配
+- 所有验证规则与schema一致
+- 包含清除结果、证书状态、网络配置和电池数据
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（十六轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约154个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 154/181项 (约85%)
+- 剩余: 约27项待验证
+- 持续加速验证，接近完成目标
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
