@@ -1535,6 +1535,73 @@
 
 ---
 
+## 第十三轮验证 (2026-01-23 迭代13)
+
+继续加速批量验证datatype，重点检查充电需求、限制、参数相关类型：
+
+### 验证的datatype:
+
+#### 140. ChargingNeedsType datatype
+- **状态**: ✅ 结构正确
+  - 字段：requested_energy_transfer, available_energy_transfer, control_mode, mobility_needs_mode, departure_time, v2x_charging_parameters, dc_charging_parameters, ac_charging_parameters, ev_energy_offer, der_charging_parameters, custom_data
+  - 共11个字段的复杂结构，描述EV充电需求和能量提供
+  - 描述匹配：包含完整的多行描述说明充电需求的用途
+  - 验证规则：
+    - requested_energy_transfer, ev_energy_offer: required ✅
+    - departure_time: required (DateTime) ✅
+  - 支持多种充电模式（AC、DC、V2X、DER）
+  - 符合ISO 15118-2标准
+
+#### 141. ChargingLimitType datatype
+- **状态**: ✅ 结构正确
+  - 字段：charging_limit_source, is_local_generation, is_grid_critical, custom_data
+  - 用于充电会话限制
+  - 描述匹配："Charging limit for a charging session."
+  - 验证规则：
+    - charging_limit_source: required (ChargingLimitSourceEnumType) ✅
+    - is_local_generation, is_grid_critical: optional (bool) ✅
+  - 字段顺序完全匹配schema
+
+#### 142. ACChargingParametersType datatype
+- **状态**: ✅ 结构正确
+  - 字段：energy_amount, ev_min_current, ev_max_current, ev_max_voltage, custom_data
+  - AC充电参数，基于ISO 15118-2标准
+  - 描述匹配："AC Charging parameters, as defined in ISO 15118-2."
+  - 验证规则：
+    - energy_amount: required (Decimal) ✅
+    - ev_min_current, ev_max_current, ev_max_voltage: optional (Decimal) ✅
+  - 字段顺序完全匹配schema
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查充电参数的复杂验证规则
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的3个datatype字段顺序与schema完全匹配
+- 所有验证规则与schema一致
+- 包含充电需求、限制和AC/DC充电参数
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（十三轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约142个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 142/181项 (约78%)
+- 剩余: 约39项待验证
+- 接近完成，持续加速验证
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
