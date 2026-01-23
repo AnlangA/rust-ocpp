@@ -7,22 +7,22 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SecurityEventNotificationRequest {
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
+    /// Type of the security event. This value should be taken from the Security events list.
+    #[serde(rename = "type")]
+    #[validate(length(max = 50))]
+    pub type_: String,
+
+    /// Date and time at which the event occurred.
+    pub timestamp: DateTime<Utc>,
 
     /// Additional information about the occurred security event.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 255))]
     pub tech_info: Option<String>,
 
-    /// Date and time at which the event occurred.
-    pub timestamp: DateTime<Utc>,
-
-    /// Type of the security event. This value should be taken from the Security events list.
-    #[serde(rename = "type")]
-    #[validate(length(max = 50))]
-    pub type_: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 }
 
 impl SecurityEventNotificationRequest {
@@ -36,10 +36,10 @@ impl SecurityEventNotificationRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(type_: String, timestamp: DateTime<Utc>) -> Self {
         Self {
-            custom_data: None,
-            tech_info: None,
-            timestamp,
             type_,
+            timestamp,
+            tech_info: None,
+            custom_data: None,
         }
     }
 

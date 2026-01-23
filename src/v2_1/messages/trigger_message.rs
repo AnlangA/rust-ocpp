@@ -9,7 +9,9 @@ use validator::Validate;
 pub struct TriggerMessageRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
+    pub evse: Option<EVSEType>,
+
+    pub requested_message: MessageTriggerEnumType,
 
     /// *(2.1)* When _requestedMessage_ = `CustomTrigger` this will trigger sending the corresponding message in field _customTrigger_, if supported by Charging Station.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -18,9 +20,7 @@ pub struct TriggerMessageRequest {
 
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
-    pub evse: Option<EVSEType>,
-
-    pub requested_message: MessageTriggerEnumType,
+    pub custom_data: Option<CustomDataType>,
 }
 
 impl TriggerMessageRequest {
@@ -33,10 +33,10 @@ impl TriggerMessageRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(requested_message: MessageTriggerEnumType) -> Self {
         Self {
-            custom_data: None,
-            custom_trigger: None,
             evse: None,
             requested_message,
+            custom_trigger: None,
+            custom_data: None,
         }
     }
 

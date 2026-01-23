@@ -8,17 +8,17 @@ use validator::Validate;
 #[serde(rename_all = "camelCase")]
 pub struct SendLocalListRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(min = 1))]
     pub local_authorization_list: Option<Vec<AuthorizationData>>,
 
-    pub update_type: UpdateEnumType,
-
     /// In case of a full update this is the version number of the full list. In case of a differential update it is the version number of the list after the update has been applied.
     pub version_number: i32,
+
+    pub update_type: UpdateEnumType,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 }
 
 impl SendLocalListRequest {
@@ -32,10 +32,10 @@ impl SendLocalListRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(version_number: i32, update_type: UpdateEnumType) -> Self {
         Self {
-            custom_data: None,
             local_authorization_list: None,
-            update_type,
             version_number,
+            update_type,
+            custom_data: None,
         }
     }
 

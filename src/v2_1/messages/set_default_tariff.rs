@@ -7,16 +7,16 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetDefaultTariffRequest {
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
-
     /// EVSE that tariff applies to. When _evseId_ = 0, then tarriff applies to all EVSEs.
     #[validate(range(min = 0))]
     pub evse_id: i32,
 
     #[validate(nested)]
     pub tariff: TariffType,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 }
 
 impl SetDefaultTariffRequest {
@@ -30,9 +30,9 @@ impl SetDefaultTariffRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(evse_id: i32, tariff: TariffType) -> Self {
         Self {
-            custom_data: None,
             evse_id,
             tariff,
+            custom_data: None,
         }
     }
 

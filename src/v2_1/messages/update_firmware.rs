@@ -7,17 +7,6 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateFirmwareRequest {
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
-
-    #[validate(nested)]
-    pub firmware: FirmwareType,
-
-    /// The Id of this request
-    #[validate(range(min = 0))]
-    pub request_id: i32,
-
     /// This specifies how many times Charging Station must retry to download the firmware before giving up. If this field is not present, it is left to Charging Station to decide how many times it wants to retry. If the value is 0, it means: no retries.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0))]
@@ -26,6 +15,16 @@ pub struct UpdateFirmwareRequest {
     /// The interval in seconds after which a retry may be attempted. If this field is not present, it is left to Charging Station to decide how long to wait between attempts.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub retry_interval: Option<i32>,
+
+    /// The Id of this request
+    pub request_id: i32,
+
+    #[validate(nested)]
+    pub firmware: FirmwareType,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 }
 
 impl UpdateFirmwareRequest {
@@ -39,11 +38,11 @@ impl UpdateFirmwareRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(request_id: i32, firmware: FirmwareType) -> Self {
         Self {
-            custom_data: None,
-            firmware,
-            request_id,
             retries: None,
             retry_interval: None,
+            request_id,
+            firmware,
+            custom_data: None,
         }
     }
 
@@ -430,7 +429,8 @@ mod tests {
         let mut request = UpdateFirmwareRequest::new(1, firmware);
         request.set_request_id(-1);
 
-        assert!(request.validate().is_err());
+        // Schema has no minimum restriction on requestId, so negative values are valid
+        assert!(request.validate().is_ok());
     }
 
     #[test]
