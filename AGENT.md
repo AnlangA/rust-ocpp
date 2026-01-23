@@ -1001,6 +1001,69 @@
 
 ---
 
+## 第六轮验证 (2026-01-23 迭代6)
+
+继续系统性验证重要的datatype，重点关注结构复杂的核心数据类型：
+
+### 验证的datatype:
+
+#### 113. VariableType datatype
+- **状态**: ✅ 结构正确
+  - 字段：name, instance, custom_data
+  - 在GetVariablesRequest、SetVariablesRequest等schema的definitions中被引用
+  - 描述匹配："Reference key to a component-variable."
+  - 验证规则：name maxLength: 50, instance maxLength: 50
+  - 字段顺序完全匹配schema
+
+#### 114. EVSEType datatype
+- **状态**: ✅ 结构正确
+  - 字段：id, connector_id, custom_data
+  - 在多个消息schema的definitions中被引用
+  - 描述：Rust使用更详细的描述（"EVSE object with properties common to OCPP 2.0.1 and OCPP 2.1.0."），schema使用简短描述（"Electric Vehicle Supply Equipment"）
+  - 验证规则：id minimum: 0, connector_id minimum: 0
+  - 字段顺序完全匹配schema
+
+#### 115. StatusInfoType datatype
+- **状态**: ✅ 结构正确
+  - 字段：reason_code, additional_info, custom_data
+  - 在所有Response消息的definitions中被引用
+  - 描述匹配："Element providing more information about the status."
+  - 验证规则：reason_code maxLength: 20, additional_info maxLength: 1024
+  - 字段顺序完全匹配schema
+
+#### 116. SampledValueType datatype
+- **状态**: ✅ 结构正确
+  - 字段：value, measurand, context, phase, location, signed_meter_value, unit_of_measure, custom_data
+  - 在MeterValuesRequest的definitions中被引用
+  - 描述匹配：包含完整的多行描述说明默认值和单位
+  - 验证规则：value required (number), 其他字段均为optional
+  - 字段顺序完全匹配schema（8个字段）
+
+### 验证方法:
+- 检查Rust结构体字段顺序
+- 对比schema定义（在definitions中）
+- 验证字段类型和约束（required/optional, maxLength, minimum等）
+- 检查描述文本一致性
+- 运行相关测试确认功能正常
+- 验证cargo check无错误
+
+### 验证结论:
+- 所有验证的datatype字段顺序与schema完全匹配
+- 验证规则（type, required, maxLength, minimum）与schema一致
+- 描述文本与schema保持一致（部分datatype使用更详细的中文/英文混合描述）
+- 字段命名使用snake_case，通过serde的`rename_all = "camelCase"`正确映射到camelCase
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（六轮迭代）:
+- **修复了10个字段顺序问题**（第1-2轮）
+- **修复了14个验证范围问题**（移除不必要的range(min=0)验证）
+- **验证了约116个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **建立了正确的验证方法**：字段顺序、类型、约束、描述四维检查
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
