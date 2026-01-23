@@ -9,7 +9,6 @@ use validator::Validate;
 pub struct ClearChargingProfileRequest {
     /// The Id of the charging profile to clear.
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(range(min = 0))]
     pub charging_profile_id: Option<i32>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -281,10 +280,10 @@ mod tests {
     }
 
     #[test]
-    fn test_clear_charging_profile_request_validation_invalid_id() {
+    fn test_clear_charging_profile_request_validation_negative_id() {
         let mut request = ClearChargingProfileRequest::new();
-        request.set_charging_profile_id(Some(-1)); // Invalid: must be >= 0
-        assert!(request.validate().is_err());
+        request.set_charging_profile_id(Some(-1)); // Valid: schema has no minimum constraint
+        assert!(request.validate().is_ok());
     }
 
     #[test]
@@ -406,7 +405,7 @@ mod tests {
     #[test]
     fn test_clear_charging_profile_request_validation_zero_id() {
         let request = ClearChargingProfileRequest::new()
-            .with_charging_profile_id(0); // Valid: exactly 0
+            .with_charging_profile_id(0); // Valid: schema has no minimum constraint
         assert!(request.validate().is_ok());
     }
 

@@ -7,12 +7,7 @@ use super::{custom_data::CustomDataType, evse::EVSEType};
 #[derive(Debug, Clone, Serialize, Deserialize, Validate, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct ComponentType {
-    /// Custom data specific to this class.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
-
-    /// Specifies the EVSE when component is located at EVSE level, also specifies the connector when component is located at Connector level.
+    /// Specifies that EVSE when component is located at EVSE level, also specifies that connector when component is located at Connector level.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub evse: Option<EVSEType>,
@@ -22,10 +17,15 @@ pub struct ComponentType {
     #[validate(length(max = 50))]
     pub name: String,
 
-    /// Name of instance in case the component exists as multiple instances. Case Insensitive. strongly advised to use Camel Case.
+    /// Name of the instance in case the component exists as multiple instances. Case Insensitive. strongly advised to use Camel Case.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 50))]
     pub instance: Option<String>,
+
+    /// Custom data specific to this class.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 }
 
 impl ComponentType {
@@ -397,7 +397,7 @@ mod tests {
 
         assert_eq!(original, cloned);
 
-        // Modify the clone and verify the original is unchanged
+        // Modify the clone and verify that the original is unchanged
         let mut modified = cloned;
         modified.set_name("Modified".to_string());
 

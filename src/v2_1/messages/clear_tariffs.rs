@@ -8,7 +8,7 @@ use validator::Validate;
 pub struct ClearTariffsRequest {
     /// List of tariff Ids to clear. When absent clears all tariffs at _evseId_.
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(length(min = 1))]
+    #[validate(length(min = 1, max = 60))]
     pub tariff_ids: Option<Vec<String>>,
 
     /// When present only clear tariffs matching _tariffIds_ at EVSE _evseId_.
@@ -336,6 +336,18 @@ mod tests {
         let request = ClearTariffsRequest::new()
             .with_tariff_ids(empty_tariff_ids);
 
+        let validation_result = request.validate();
+        assert!(validation_result.is_err());
+    }
+
+    #[test]
+    fn test_clear_tariffs_request_validation_max_tariff_ids() {
+        let mut tariff_ids: Vec<String> = vec![];
+        for i in 0..61 {
+            tariff_ids.push(format!("tariff-{}", i));
+        }
+        let request = ClearTariffsRequest::new()
+            .with_tariff_ids(tariff_ids);
         let validation_result = request.validate();
         assert!(validation_result.is_err());
     }

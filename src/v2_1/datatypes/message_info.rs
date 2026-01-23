@@ -1,5 +1,5 @@
 use super::{
-    component::ComponentType, custom_data::CustomDataType, id_token::IdTokenType,
+    component::ComponentType, custom_data::CustomDataType,
     message_content::MessageContentType,
 };
 use crate::v2_1::enumerations::{MessagePriorityEnumType, MessageStateEnumType};
@@ -15,6 +15,11 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct MessageInfoType {
+    /// Optional. Display component that this message concerns.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub display: Option<ComponentType>,
+
     /// Required. The identifier that identifies this message.
     ///
     /// Unique id within an exchange context. It is defined within the OCPP context
@@ -27,10 +32,11 @@ pub struct MessageInfoType {
     /// Defines how the message should be prioritized on the Charging Station's display.
     pub priority: MessagePriorityEnumType,
 
-    /// Required. Current state of this message.
+    /// Current state of this message.
     ///
     /// Defines during which state of the Charging Station this message should be shown.
-    pub state: MessageStateEnumType,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub state: Option<MessageStateEnumType>,
 
     /// Required. Date and time at which this message was received.
     ///
@@ -51,19 +57,10 @@ pub struct MessageInfoType {
     #[validate(nested)]
     pub message: Option<MessageContentType>,
 
-    /// Optional. Display component that this message concerns.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub display: Option<ComponentType>,
-
-    /// Optional. Identification of the token for which this message is intended.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    pub id_token: Option<IdTokenType>,
-
     /// Optional. Additional message details.
-    #[serde(skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
     #[validate(nested)]
-    pub message_extra: Option<MessageContentType>,
+    pub message_extra: Vec<MessageContentType>,
 
     /// Custom data from the Charging Station.
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -78,7 +75,6 @@ impl MessageInfoType {
     ///
     /// * `id` - The identifier that identifies this message (must be >= 0)
     /// * `priority` - Priority with which this message should be shown
-    /// * `state` - Current state of this message
     /// * `start_timestamp` - Date and time at which this message was received
     ///
     /// # Returns
@@ -89,33 +85,30 @@ impl MessageInfoType {
     ///
     /// ```
     /// use rust_ocpp::v2_1::datatypes::message_info::MessageInfoType;
-    /// use rust_ocpp::v2_1::enumerations::{MessagePriorityEnumType, MessageStateEnumType};
+    /// use rust_ocpp::v2_1::enumerations::MessagePriorityEnumType;
     /// use chrono::Utc;
     ///
     /// let message_info = MessageInfoType::new(
     ///     1,
     ///     MessagePriorityEnumType::AlwaysFront,
-    ///     MessageStateEnumType::Idle,
     ///     Utc::now()
     /// );
     /// ```
     pub fn new(
         id: i32,
         priority: MessagePriorityEnumType,
-        state: MessageStateEnumType,
         start_timestamp: DateTime<Utc>,
     ) -> Self {
         Self {
             id,
             priority,
-            state,
+            state: None,
             start_timestamp,
             end_timestamp: None,
             transaction_id: None,
             message: None,
             display: None,
-            id_token: None,
-            message_extra: None,
+            message_extra: Vec::new(),
             custom_data: None,
         }
     }
@@ -128,7 +121,6 @@ impl MessageInfoType {
     ///
     /// * `id` - The identifier that identifies this message (must be >= 0)
     /// * `priority` - Priority with which this message should be shown
-    /// * `state` - Current state of this message
     /// * `start_timestamp` - Date and time at which this message was received
     ///
     /// # Returns
@@ -137,10 +129,9 @@ impl MessageInfoType {
     pub fn builder(
         id: i32,
         priority: MessagePriorityEnumType,
-        state: MessageStateEnumType,
         start_timestamp: DateTime<Utc>,
     ) -> Self {
-        Self::new(id, priority, state, start_timestamp)
+        Self::new(id, priority, start_timestamp)
     }
 
     /// Sets the end timestamp.
@@ -154,6 +145,20 @@ impl MessageInfoType {
     /// Self reference for method chaining
     pub fn with_end_timestamp(mut self, end_timestamp: DateTime<Utc>) -> Self {
         self.end_timestamp = Some(end_timestamp);
+        self
+    }
+
+    /// Sets the state.
+    ///
+    /// # Arguments
+    ///
+    /// * `state` - Current state of this message
+    ///
+    /// # Returns
+    ///
+    /// Self reference for method chaining
+    pub fn with_state(mut self, state: MessageStateEnumType) -> Self {
+        self.state = Some(state);
         self
     }
 
@@ -199,20 +204,6 @@ impl MessageInfoType {
         self
     }
 
-    /// Sets the ID token.
-    ///
-    /// # Arguments
-    ///
-    /// * `id_token` - Identification of the token for which this message is intended
-    ///
-    /// # Returns
-    ///
-    /// Self reference for method chaining
-    pub fn with_id_token(mut self, id_token: IdTokenType) -> Self {
-        self.id_token = Some(id_token);
-        self
-    }
-
     /// Sets the additional message content.
     ///
     /// # Arguments
@@ -222,8 +213,8 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    pub fn with_message_extra(mut self, message_extra: MessageContentType) -> Self {
-        self.message_extra = Some(message_extra);
+    pub fn with_message_extra(mut self, message_extra: Vec<MessageContentType>) -> Self {
+        self.message_extra = message_extra;
         self
     }
 
@@ -291,21 +282,21 @@ impl MessageInfoType {
     ///
     /// # Returns
     ///
-    /// The current state of this message
-    pub fn state(&self) -> &MessageStateEnumType {
-        &self.state
+    /// An optional reference to the current state of this message
+    pub fn state(&self) -> Option<&MessageStateEnumType> {
+        self.state.as_ref()
     }
 
     /// Sets the message state.
     ///
     /// # Arguments
     ///
-    /// * `state` - Current state of this message
+    /// * `state` - Current state of this message, or None to clear
     ///
     /// # Returns
     ///
     /// Self reference for method chaining
-    pub fn set_state(&mut self, state: MessageStateEnumType) -> &mut Self {
+    pub fn set_state(&mut self, state: Option<MessageStateEnumType>) -> &mut Self {
         self.state = state;
         self
     }
@@ -425,48 +416,25 @@ impl MessageInfoType {
         self
     }
 
-    /// Gets the ID token.
-    ///
-    /// # Returns
-    ///
-    /// An optional reference to the identification of the token for which this message is intended
-    pub fn id_token(&self) -> Option<&IdTokenType> {
-        self.id_token.as_ref()
-    }
-
-    /// Sets the ID token.
-    ///
-    /// # Arguments
-    ///
-    /// * `id_token` - Identification of the token for which this message is intended, or None to clear
-    ///
-    /// # Returns
-    ///
-    /// Self reference for method chaining
-    pub fn set_id_token(&mut self, id_token: Option<IdTokenType>) -> &mut Self {
-        self.id_token = id_token;
-        self
-    }
-
     /// Gets the additional message content.
     ///
     /// # Returns
     ///
-    /// An optional reference to the additional message details
-    pub fn message_extra(&self) -> Option<&MessageContentType> {
-        self.message_extra.as_ref()
+    /// A reference to the additional message details
+    pub fn message_extra(&self) -> &[MessageContentType] {
+        &self.message_extra
     }
 
     /// Sets the additional message content.
     ///
     /// # Arguments
     ///
-    /// * `message_extra` - Additional message details, or None to clear
+    /// * `message_extra` - Additional message details
     ///
     /// # Returns
     ///
     /// Self reference for method chaining
-    pub fn set_message_extra(&mut self, message_extra: Option<MessageContentType>) -> &mut Self {
+    pub fn set_message_extra(&mut self, message_extra: Vec<MessageContentType>) -> &mut Self {
         self.message_extra = message_extra;
         self
     }
@@ -517,18 +485,18 @@ mod tests {
         let start_timestamp = Utc::now();
 
         let message_info =
-            MessageInfoType::new(id, priority.clone(), state.clone(), start_timestamp);
+            MessageInfoType::new(id, priority.clone(), start_timestamp)
+                .with_state(state.clone());
 
         assert_eq!(message_info.id(), id);
         assert_eq!(message_info.priority(), &priority);
-        assert_eq!(message_info.state(), &state);
+        assert_eq!(message_info.state(), Some(&state));
         assert_eq!(message_info.start_timestamp(), &start_timestamp);
         assert_eq!(message_info.end_timestamp(), None);
         assert_eq!(message_info.transaction_id(), None);
         assert_eq!(message_info.message(), None);
         assert_eq!(message_info.display(), None);
-        assert_eq!(message_info.id_token(), None);
-        assert_eq!(message_info.message_extra(), None);
+        assert!(message_info.message_extra().is_empty());
         assert_eq!(message_info.custom_data(), None);
     }
 
@@ -540,18 +508,18 @@ mod tests {
         let start_timestamp = Utc::now();
 
         let message_info =
-            MessageInfoType::builder(id, priority.clone(), state.clone(), start_timestamp);
+            MessageInfoType::builder(id, priority.clone(), start_timestamp)
+                .with_state(state.clone());
 
         assert_eq!(message_info.id(), id);
         assert_eq!(message_info.priority(), &priority);
-        assert_eq!(message_info.state(), &state);
+        assert_eq!(message_info.state(), Some(&state));
         assert_eq!(message_info.start_timestamp(), &start_timestamp);
         assert_eq!(message_info.end_timestamp(), None);
         assert_eq!(message_info.transaction_id(), None);
         assert_eq!(message_info.message(), None);
         assert_eq!(message_info.display(), None);
-        assert_eq!(message_info.id_token(), None);
-        assert_eq!(message_info.message_extra(), None);
+        assert!(message_info.message_extra().is_empty());
         assert_eq!(message_info.custom_data(), None);
     }
 
@@ -567,39 +535,37 @@ mod tests {
         let message_content = MessageContentType::new(
             "Please plug in your vehicle.".to_string(),
             crate::v2_1::enumerations::MessageFormatEnumType::ASCII,
-            "en".to_string(),
-        );
+        )
+        .with_language("en".to_string());
 
         let message_extra = MessageContentType::new(
             "Additional information".to_string(),
             crate::v2_1::enumerations::MessageFormatEnumType::UTF8,
-            "en".to_string(),
-        );
+        )
+        .with_language("en".to_string());
 
         let display = ComponentType::new("MainDisplay".to_string());
-        let id_token = IdTokenType::new("TAG123".to_string(), "RFID".to_string());
         let custom_data = CustomDataType::new("VendorX".to_string());
 
         let message_info =
-            MessageInfoType::new(id, priority.clone(), state.clone(), start_timestamp)
+            MessageInfoType::new(id, priority.clone(), start_timestamp)
+                .with_state(state.clone())
                 .with_end_timestamp(end_timestamp)
                 .with_transaction_id(transaction_id.clone())
                 .with_message(message_content.clone())
-                .with_message_extra(message_extra.clone())
+                .with_message_extra(vec![message_extra.clone()])
                 .with_display(display.clone())
-                .with_id_token(id_token.clone())
                 .with_custom_data(custom_data.clone());
 
         assert_eq!(message_info.id(), id);
         assert_eq!(message_info.priority(), &priority);
-        assert_eq!(message_info.state(), &state);
+        assert_eq!(message_info.state(), Some(&state));
         assert_eq!(message_info.start_timestamp(), &start_timestamp);
         assert_eq!(message_info.end_timestamp(), Some(&end_timestamp));
         assert_eq!(message_info.transaction_id(), Some(transaction_id.as_str()));
         assert_eq!(message_info.message(), Some(&message_content));
-        assert_eq!(message_info.message_extra(), Some(&message_extra));
+        assert_eq!(message_info.message_extra().len(), 1);
         assert_eq!(message_info.display(), Some(&display));
-        assert_eq!(message_info.id_token(), Some(&id_token));
         assert_eq!(message_info.custom_data(), Some(&custom_data));
     }
 
@@ -619,45 +585,43 @@ mod tests {
         let message_content = MessageContentType::new(
             "Please plug in your vehicle.".to_string(),
             crate::v2_1::enumerations::MessageFormatEnumType::ASCII,
-            "en".to_string(),
-        );
+        )
+        .with_language("en".to_string());
 
         let message_extra = MessageContentType::new(
             "Additional information".to_string(),
             crate::v2_1::enumerations::MessageFormatEnumType::UTF8,
-            "en".to_string(),
-        );
+        )
+        .with_language("en".to_string());
 
         let display = ComponentType::new("MainDisplay".to_string());
-        let id_token = IdTokenType::new("TAG123".to_string(), "RFID".to_string());
         let custom_data = CustomDataType::new("VendorX".to_string());
 
         let mut message_info =
-            MessageInfoType::new(id1, priority1.clone(), state1.clone(), start_timestamp1);
+            MessageInfoType::new(id1, priority1.clone(), start_timestamp1)
+                .with_state(state1.clone());
 
         message_info
             .set_id(id2)
             .set_priority(priority2.clone())
-            .set_state(state2.clone())
+            .set_state(Some(state2.clone()))
             .set_start_timestamp(start_timestamp2)
             .set_end_timestamp(Some(end_timestamp))
             .set_transaction_id(Some(transaction_id.clone()))
             .set_message(Some(message_content.clone()))
-            .set_message_extra(Some(message_extra.clone()))
+            .set_message_extra(vec![message_extra.clone()])
             .set_display(Some(display.clone()))
-            .set_id_token(Some(id_token.clone()))
             .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(message_info.id(), id2);
         assert_eq!(message_info.priority(), &priority2);
-        assert_eq!(message_info.state(), &state2);
+        assert_eq!(message_info.state(), Some(&state2));
         assert_eq!(message_info.start_timestamp(), &start_timestamp2);
         assert_eq!(message_info.end_timestamp(), Some(&end_timestamp));
         assert_eq!(message_info.transaction_id(), Some(transaction_id.as_str()));
         assert_eq!(message_info.message(), Some(&message_content));
-        assert_eq!(message_info.message_extra(), Some(&message_extra));
+        assert_eq!(message_info.message_extra().len(), 1);
         assert_eq!(message_info.display(), Some(&display));
-        assert_eq!(message_info.id_token(), Some(&id_token));
         assert_eq!(message_info.custom_data(), Some(&custom_data));
 
         // Test clearing optional fields
@@ -665,17 +629,15 @@ mod tests {
             .set_end_timestamp(None)
             .set_transaction_id(None)
             .set_message(None)
-            .set_message_extra(None)
+            .set_message_extra(Vec::new())
             .set_display(None)
-            .set_id_token(None)
             .set_custom_data(None);
 
         assert_eq!(message_info.end_timestamp(), None);
         assert_eq!(message_info.transaction_id(), None);
         assert_eq!(message_info.message(), None);
-        assert_eq!(message_info.message_extra(), None);
+        assert!(message_info.message_extra().is_empty());
         assert_eq!(message_info.display(), None);
-        assert_eq!(message_info.id_token(), None);
         assert_eq!(message_info.custom_data(), None);
     }
 
@@ -684,9 +646,9 @@ mod tests {
         let message_info = MessageInfoType::new(
             1,
             MessagePriorityEnumType::AlwaysFront,
-            MessageStateEnumType::Charging,
             Utc::now(),
-        );
+        )
+        .with_state(MessageStateEnumType::Charging);
 
         // Validation should pass
         assert!(message_info.validate().is_ok());
@@ -698,14 +660,13 @@ mod tests {
         let message_info = MessageInfoType {
             id: -1,
             priority: MessagePriorityEnumType::AlwaysFront,
-            state: MessageStateEnumType::Charging,
+            state: Some(MessageStateEnumType::Charging),
             start_timestamp: Utc::now(),
             end_timestamp: None,
             transaction_id: None,
             message: None,
             display: None,
-            id_token: None,
-            message_extra: None,
+            message_extra: Vec::new(),
             custom_data: None,
         };
 
@@ -723,9 +684,9 @@ mod tests {
         let message_info = MessageInfoType::new(
             1,
             MessagePriorityEnumType::AlwaysFront,
-            MessageStateEnumType::Charging,
             Utc::now(),
         )
+        .with_state(MessageStateEnumType::Charging)
         .with_transaction_id(long_transaction_id);
 
         // Validation should fail
@@ -741,16 +702,16 @@ mod tests {
         let invalid_message_content = MessageContentType {
             content: "a".repeat(1025), // Exceeds max length of 1024
             format: crate::v2_1::enumerations::MessageFormatEnumType::ASCII,
-            language: "en".to_string(),
+            language: Some("en".to_string()),
             custom_data: None,
         };
 
         let message_info = MessageInfoType::new(
             1,
             MessagePriorityEnumType::AlwaysFront,
-            MessageStateEnumType::Charging,
             Utc::now(),
         )
+        .with_state(MessageStateEnumType::Charging)
         .with_message(invalid_message_content);
 
         // Validation should fail due to nested validation
@@ -768,13 +729,14 @@ mod tests {
         let message_content = MessageContentType::new(
             "Please plug in your vehicle.".to_string(),
             crate::v2_1::enumerations::MessageFormatEnumType::ASCII,
-            "en".to_string(),
-        );
+        )
+        .with_language("en".to_string());
 
         let custom_data = CustomDataType::new("VendorX".to_string())
             .with_property("version".to_string(), json!("1.0"));
 
-        let message_info = MessageInfoType::new(id, priority, state, start_timestamp)
+        let message_info = MessageInfoType::new(id, priority, start_timestamp)
+            .with_state(state)
             .with_message(message_content)
             .with_custom_data(custom_data);
 
@@ -811,17 +773,13 @@ mod tests {
                 "format": "ASCII",
                 "language": "en"
             },
-            "messageExtra": {
+            "messageExtra": [{
                 "content": "Additional information",
                 "format": "UTF8",
                 "language": "en"
-            },
+            }],
             "display": {
                 "name": "MainDisplay"
-            },
-            "idToken": {
-                "idToken": "TAG123",
-                "type": "RFID"
             },
             "customData": {
                 "vendorId": "VendorX"
@@ -837,12 +795,11 @@ mod tests {
             message_info.priority(),
             &MessagePriorityEnumType::AlwaysFront
         );
-        assert_eq!(message_info.state(), &MessageStateEnumType::Charging);
+        assert_eq!(message_info.state(), Some(&MessageStateEnumType::Charging));
         assert_eq!(message_info.transaction_id(), Some("TX001"));
         assert!(message_info.message().is_some());
-        assert!(message_info.message_extra().is_some());
+        assert!(!message_info.message_extra().is_empty());
         assert!(message_info.display().is_some());
-        assert!(message_info.id_token().is_some());
         assert!(message_info.custom_data().is_some());
 
         // Create JSON with only required fields
@@ -859,13 +816,12 @@ mod tests {
         // Check fields
         assert_eq!(message_info.id(), 2);
         assert_eq!(message_info.priority(), &MessagePriorityEnumType::InFront);
-        assert_eq!(message_info.state(), &MessageStateEnumType::Idle);
+        assert_eq!(message_info.state(), Some(&MessageStateEnumType::Idle));
         assert!(message_info.end_timestamp().is_none());
         assert!(message_info.transaction_id().is_none());
         assert!(message_info.message().is_none());
-        assert!(message_info.message_extra().is_none());
+        assert!(message_info.message_extra().is_empty());
         assert!(message_info.display().is_none());
-        assert!(message_info.id_token().is_none());
         assert!(message_info.custom_data().is_none());
     }
 
@@ -885,11 +841,11 @@ mod tests {
             let message_info = MessageInfoType::new(
                 1,
                 MessagePriorityEnumType::AlwaysFront,
-                state.clone(),
                 Utc::now(),
-            );
+            )
+            .with_state(state.clone());
 
-            assert_eq!(message_info.state(), &state);
+            assert_eq!(message_info.state(), Some(&state));
         }
     }
 }

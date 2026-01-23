@@ -489,8 +489,8 @@ mod tests {
         let message_content = MessageContentType::new(
             "Welcome User!".to_string(),
             MessageFormatEnumType::ASCII,
-            "en".to_string(),
-        );
+        )
+        .with_language("en".to_string());
 
         let evse_ids = vec![1, 2, 3];
 
@@ -532,8 +532,8 @@ mod tests {
         let message_content = MessageContentType::new(
             "Welcome User!".to_string(),
             MessageFormatEnumType::ASCII,
-            "en".to_string(),
-        );
+        )
+        .with_language("en".to_string());
 
         let evse_ids = vec![1, 2, 3];
 

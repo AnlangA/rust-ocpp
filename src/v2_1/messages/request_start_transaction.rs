@@ -25,7 +25,6 @@ pub struct RequestStartTransactionRequest {
     pub id_token: IdTokenType,
 
     /// Id given by the server to this start request. The Charging Station will return this in the &lt;&lt;transactioneventrequest, TransactionEventRequest&gt;&gt;, letting the server know which transaction was started for this request. Use to start a transaction.
-    #[validate(range(min = 0))]
     pub remote_start_id: i32,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -473,16 +472,9 @@ mod tests {
         let valid_request = RequestStartTransactionRequest::new(id_token.clone(), 0);
         assert!(valid_request.validate().is_ok());
 
-        // Invalid remote_start_id (negative)
-        let invalid_request = RequestStartTransactionRequest {
-            evse_id: None,
-            group_id_token: None,
-            id_token: id_token.clone(),
-            remote_start_id: -1,
-            charging_profile: None,
-            custom_data: None,
-        };
-        assert!(invalid_request.validate().is_err());
+        // remote_start_id can be negative (schema has no minimum constraint)
+        let negative_id_request = RequestStartTransactionRequest::new(id_token.clone(), -1);
+        assert!(negative_id_request.validate().is_ok());
 
         // Invalid evse_id (zero - should be > 0 if present)
         let invalid_evse_request = RequestStartTransactionRequest {

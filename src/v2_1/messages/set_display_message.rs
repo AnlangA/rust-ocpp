@@ -214,7 +214,8 @@ mod tests {
     use chrono::Utc;
 
     fn create_test_message() -> MessageInfoType {
-        MessageInfoType::new(1, MessagePriorityEnumType::NormalCycle, MessageStateEnumType::Charging, Utc::now())
+        MessageInfoType::new(1, MessagePriorityEnumType::NormalCycle, Utc::now())
+            .with_state(MessageStateEnumType::Charging)
     }
 
     #[test]
@@ -259,7 +260,8 @@ mod tests {
     #[test]
     fn test_set_display_message_request_setters() {
         let message1 = create_test_message();
-        let message2 = MessageInfoType::new(2, MessagePriorityEnumType::AlwaysFront, MessageStateEnumType::Idle, Utc::now());
+        let message2 = MessageInfoType::new(2, MessagePriorityEnumType::AlwaysFront, Utc::now())
+            .with_state(MessageStateEnumType::Idle);
         let mut request = SetDisplayMessageRequest::new(message1);
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
@@ -347,9 +349,9 @@ mod tests {
         let high_priority_message = MessageInfoType::new(
             999,
             MessagePriorityEnumType::AlwaysFront,
-            MessageStateEnumType::Faulted,
             Utc::now()
-        );
+        )
+        .with_state(MessageStateEnumType::Faulted);
 
         let request = SetDisplayMessageRequest::new(high_priority_message);
         assert!(request.validate().is_ok());

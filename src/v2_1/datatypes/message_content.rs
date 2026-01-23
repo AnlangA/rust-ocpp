@@ -12,22 +12,23 @@ use crate::v2_1::enumerations::MessageFormatEnumType;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct MessageContentType {
-    /// Required. Message contents.
-    ///
-    /// Maximum length is 1024 characters as defined in the OCPP 2.1 specification.
-    #[validate(length(max = 1024))]
-    pub content: String,
-
     /// Required. Format of the message.
     ///
     /// Defines how the message should be rendered on the Charging Station's display.
     pub format: MessageFormatEnumType,
 
-    /// Required. Language identifier of the message content.
+    /// Language identifier of the message content.
     ///
     /// Contains a language code as defined in RFC5646.
+    #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 8))]
-    pub language: String,
+    pub language: Option<String>,
+
+    /// Required. Message contents.
+    ///
+    /// Maximum length is 1024 characters as defined in the OCPP 2.1 specification.
+    #[validate(length(max = 1024))]
+    pub content: String,
 
     /// Custom data from the Charging Station.
     ///
@@ -44,7 +45,6 @@ impl MessageContentType {
     ///
     /// * `content` - Message contents (max 1024 characters)
     /// * `format` - Format of the message (ASCII, HTML, etc.)
-    /// * `language` - Language identifier of the message content (RFC5646 language code, max 8 characters)
     ///
     /// # Returns
     ///
@@ -59,14 +59,14 @@ impl MessageContentType {
     /// let message = MessageContentType::new(
     ///     "Please plug in your vehicle.".to_string(),
     ///     MessageFormatEnumType::ASCII,
-    ///     "en".to_string()
-    /// );
+    /// )
+    /// .with_language("en".to_string());
     /// ```
-    pub fn new(content: String, format: MessageFormatEnumType, language: String) -> Self {
+    pub fn new(content: String, format: MessageFormatEnumType) -> Self {
         Self {
             content,
             format,
-            language,
+            language: None,
             custom_data: None,
         }
     }
@@ -79,13 +79,26 @@ impl MessageContentType {
     ///
     /// * `content` - Message contents
     /// * `format` - Format of the message
-    /// * `language` - Language identifier of the message content
     ///
     /// # Returns
     ///
     /// A new instance of `MessageContentType` with optional fields set to `None`
-    pub fn builder(content: String, format: MessageFormatEnumType, language: String) -> Self {
-        Self::new(content, format, language)
+    pub fn builder(content: String, format: MessageFormatEnumType) -> Self {
+        Self::new(content, format)
+    }
+
+    /// Sets the language.
+    ///
+    /// # Arguments
+    ///
+    /// * `language` - Language identifier of the message content (RFC5646 language code, max 8 characters)
+    ///
+    /// # Returns
+    ///
+    /// Self reference for method chaining
+    pub fn with_language(mut self, language: String) -> Self {
+        self.language = Some(language);
+        self
     }
 
     /// Sets the custom data.
@@ -109,8 +122,9 @@ impl MessageContentType {
     /// let message = MessageContentType::new(
     ///     "Please plug in your vehicle.".to_string(),
     ///     MessageFormatEnumType::ASCII,
-    ///     "en".to_string()
-    /// ).with_custom_data(custom_data);
+    /// )
+    /// .with_language("en".to_string())
+    /// .with_custom_data(custom_data);
     /// ```
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
@@ -167,21 +181,21 @@ impl MessageContentType {
     ///
     /// # Returns
     ///
-    /// The language identifier of the message content as a string slice
-    pub fn language(&self) -> &str {
-        &self.language
+    /// An optional reference to the language identifier of the message content
+    pub fn language(&self) -> Option<&str> {
+        self.language.as_deref()
     }
 
     /// Sets the language identifier.
     ///
     /// # Arguments
     ///
-    /// * `language` - Language identifier of the message content (RFC5646 language code, max 8 characters)
+    /// * `language` - Language identifier of the message content (RFC5646 language code, max 8 characters), or None to clear
     ///
     /// # Returns
     ///
     /// Self reference for method chaining
-    pub fn set_language(&mut self, language: String) -> &mut Self {
+    pub fn set_language(&mut self, language: Option<String>) -> &mut Self {
         self.language = language;
         self
     }
@@ -230,11 +244,12 @@ mod tests {
         let format = MessageFormatEnumType::ASCII;
         let language = "en".to_string();
 
-        let message = MessageContentType::new(content.clone(), format.clone(), language.clone());
+        let message = MessageContentType::new(content.clone(), format.clone())
+            .with_language(language.clone());
 
         assert_eq!(message.content(), content);
         assert_eq!(message.format(), &format);
-        assert_eq!(message.language(), language);
+        assert_eq!(message.language(), Some(language.as_str()));
         assert_eq!(message.custom_data(), None);
     }
 
@@ -245,11 +260,12 @@ mod tests {
         let language = "en".to_string();
 
         let message =
-            MessageContentType::builder(content.clone(), format.clone(), language.clone());
+            MessageContentType::builder(content.clone(), format.clone())
+                .with_language(language.clone());
 
         assert_eq!(message.content(), content);
         assert_eq!(message.format(), &format);
-        assert_eq!(message.language(), language);
+        assert_eq!(message.language(), Some(language.as_str()));
         assert_eq!(message.custom_data(), None);
     }
 
@@ -260,12 +276,13 @@ mod tests {
         let language = "en".to_string();
         let custom_data = CustomDataType::new("VendorX".to_string());
 
-        let message = MessageContentType::new(content.clone(), format.clone(), language.clone())
+        let message = MessageContentType::new(content.clone(), format.clone())
+            .with_language(language.clone())
             .with_custom_data(custom_data.clone());
 
         assert_eq!(message.content(), content);
         assert_eq!(message.format(), &format);
-        assert_eq!(message.language(), language);
+        assert_eq!(message.language(), Some(language.as_str()));
         assert_eq!(message.custom_data(), Some(&custom_data));
     }
 
@@ -280,17 +297,18 @@ mod tests {
         let custom_data = CustomDataType::new("VendorX".to_string());
 
         let mut message =
-            MessageContentType::new(content1.clone(), format1.clone(), language1.clone());
+            MessageContentType::new(content1.clone(), format1.clone())
+                .with_language(language1.clone());
 
         message
             .set_content(content2.clone())
             .set_format(format2.clone())
-            .set_language(language2.clone())
+            .set_language(Some(language2.clone()))
             .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(message.content(), content2);
         assert_eq!(message.format(), &format2);
-        assert_eq!(message.language(), language2);
+        assert_eq!(message.language(), Some(language2.as_str()));
         assert_eq!(message.custom_data(), Some(&custom_data));
 
         // Test clearing optional fields
@@ -304,8 +322,8 @@ mod tests {
         let message = MessageContentType::new(
             "Valid message".to_string(),
             MessageFormatEnumType::ASCII,
-            "en".to_string(),
-        );
+        )
+        .with_language("en".to_string());
 
         // Validation should pass
         assert!(message.validate().is_ok());
@@ -316,7 +334,8 @@ mod tests {
         // Create a message with content that exceeds the maximum length (1024 characters)
         let long_content = "a".repeat(1025);
         let message =
-            MessageContentType::new(long_content, MessageFormatEnumType::ASCII, "en".to_string());
+            MessageContentType::new(long_content, MessageFormatEnumType::ASCII)
+                .with_language("en".to_string());
 
         // Validation should fail
         let result = message.validate();
@@ -332,8 +351,8 @@ mod tests {
         let message = MessageContentType::new(
             "Valid message".to_string(),
             MessageFormatEnumType::ASCII,
-            long_language,
-        );
+        )
+        .with_language(long_language);
 
         // Validation should fail
         let result = message.validate();
@@ -351,8 +370,8 @@ mod tests {
         let message = MessageContentType::new(
             "Valid message".to_string(),
             MessageFormatEnumType::ASCII,
-            "en".to_string(),
         )
+        .with_language("en".to_string())
         .with_custom_data(invalid_custom_data);
 
         // Validation should fail
@@ -368,7 +387,8 @@ mod tests {
         let custom_data = CustomDataType::new("VendorX".to_string())
             .with_property("version".to_string(), json!("1.0"));
 
-        let message = MessageContentType::new(content.clone(), format.clone(), language.clone())
+        let message = MessageContentType::new(content.clone(), format.clone())
+            .with_language(language.clone())
             .with_custom_data(custom_data);
 
         // Serialize to JSON
@@ -402,7 +422,7 @@ mod tests {
         // Check fields
         assert_eq!(message.content(), "Please plug in your vehicle.");
         assert_eq!(message.format(), &MessageFormatEnumType::HTML);
-        assert_eq!(message.language(), "fr");
+        assert_eq!(message.language(), Some("fr"));
         assert!(message.custom_data().is_some());
         assert_eq!(message.custom_data().unwrap().vendor_id(), "VendorY");
 
@@ -419,7 +439,7 @@ mod tests {
         // Check fields
         assert_eq!(message.content(), "Required message");
         assert_eq!(message.format(), &MessageFormatEnumType::ASCII);
-        assert_eq!(message.language(), "en");
+        assert_eq!(message.language(), Some("en"));
         assert!(message.custom_data().is_none());
     }
 
@@ -438,8 +458,8 @@ mod tests {
             let message = MessageContentType::new(
                 "Test message".to_string(),
                 format.clone(),
-                "en".to_string(),
-            );
+            )
+            .with_language("en".to_string());
 
             assert_eq!(message.format(), &format);
         }

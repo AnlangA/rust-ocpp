@@ -12,7 +12,6 @@ pub struct NotifyDisplayMessagesRequest {
     pub message_info: Option<Vec<MessageInfoType>>,
 
     /// The id of the &lt;&lt;getdisplaymessagesrequest,GetDisplayMessagesRequest&gt;&gt; that requested this message.
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     /// "to be continued" indicator. Indicates whether another part of the report follows in an upcoming NotifyDisplayMessagesRequest message. Default value when omitted is false.
@@ -236,9 +235,9 @@ mod tests {
         MessageInfoType::new(
             1,
             MessagePriorityEnumType::AlwaysFront,
-            MessageStateEnumType::Idle,
             Utc::now(),
         )
+        .with_state(MessageStateEnumType::Idle)
     }
 
     #[test]
@@ -277,11 +276,11 @@ mod tests {
 
     #[test]
     fn test_notify_display_messages_request_validation_negative_request_id() {
-        let request_id = -1; // Invalid negative value
+        let request_id = -1; // Valid: schema has no minimum constraint
 
         let request = NotifyDisplayMessagesRequest::new(request_id);
 
-        assert!(request.validate().is_err());
+        assert!(request.validate().is_ok());
     }
 
     #[test]
@@ -378,9 +377,9 @@ mod tests {
             MessageInfoType::new(
                 2,
                 MessagePriorityEnumType::InFront,
-                MessageStateEnumType::Charging,
                 Utc::now(),
-            ),
+            )
+            .with_state(MessageStateEnumType::Charging),
         ];
 
         let request = NotifyDisplayMessagesRequest::new(request_id)
@@ -392,8 +391,8 @@ mod tests {
 
     #[test]
     fn test_notify_display_messages_request_boundary_values() {
-        // Test with minimum valid request_id
-        let request_id = 0; // Minimum valid value
+        // Test with negative request_id (valid per schema)
+        let request_id = -1;
 
         let request = NotifyDisplayMessagesRequest::new(request_id);
 

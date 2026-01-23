@@ -16,7 +16,6 @@ pub struct CertificateSignedRequest {
 
     /// *(2.1)* RequestId to correlate this message with the SignCertificateRequest.
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(range(min = 0))]
     pub request_id: Option<i32>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -325,12 +324,14 @@ mod tests {
     }
 
     #[test]
-    fn test_certificate_signed_request_validation_invalid_request_id() {
+    fn test_certificate_signed_request_with_negative_request_id() {
         let certificate_chain = create_test_certificate_chain();
-        let mut request = CertificateSignedRequest::new(certificate_chain);
-        request.set_request_id(Some(-1)); // Invalid: must be >= 0
+        // Negative request_id is allowed per schema (no minimum constraint)
+        let request = CertificateSignedRequest::new(certificate_chain)
+            .with_request_id(-1);
 
-        assert!(request.validate().is_err());
+        assert_eq!(request.get_request_id(), Some(&-1));
+        assert!(request.validate().is_ok());
     }
 
     #[test]

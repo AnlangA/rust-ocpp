@@ -591,8 +591,8 @@ mod tests {
         let description = vec![MessageContentType::new(
             "Standard Tariff".to_string(),
             MessageFormatEnumType::ASCII,
-            "en".to_string(),
-        )];
+        )
+        .with_language("en".to_string())];
         let energy = TariffEnergyType::new(vec![TariffEnergyPriceType::new(Decimal::new(25, 2))]); // 0.25
         let valid_from = Utc::now();
         let charging_time =
@@ -693,8 +693,8 @@ mod tests {
         let description = vec![MessageContentType::new(
             "Standard Tariff".to_string(),
             MessageFormatEnumType::ASCII,
-            "en".to_string(),
-        )];
+        )
+        .with_language("en".to_string())];
         let energy = TariffEnergyType::new(vec![TariffEnergyPriceType::new(Decimal::new(25, 2))]); // 0.25
         let valid_from = Utc::now();
         let charging_time =

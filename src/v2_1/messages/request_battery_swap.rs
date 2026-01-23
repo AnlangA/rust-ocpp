@@ -11,7 +11,6 @@ pub struct RequestBatterySwapRequest {
     pub id_token: IdTokenType,
 
     /// Request id to match with BatterySwapRequest.
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -287,13 +286,13 @@ mod tests {
         let valid_request = RequestBatterySwapRequest::new(id_token.clone(), 0);
         assert!(valid_request.validate().is_ok());
 
-        // Invalid request_id (negative)
-        let invalid_request = RequestBatterySwapRequest {
+        // Negative request_id is also valid per schema (no minimum constraint)
+        let negative_request = RequestBatterySwapRequest {
             id_token: id_token.clone(),
             request_id: -1,
             custom_data: None,
         };
-        assert!(invalid_request.validate().is_err());
+        assert!(negative_request.validate().is_ok());
     }
 
     #[test]

@@ -17,6 +17,11 @@ pub struct ChargingStationType {
     #[validate(length(max = 20))]
     pub model: String,
 
+    /// Defines parameters required for initiating and maintaining wireless communication with other devices.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub modem: Option<ModemType>,
+
     /// Required. Identifies the vendor (not necessarily in a unique manner).
     #[validate(length(max = 50))]
     pub vendor_name: String,
@@ -25,11 +30,6 @@ pub struct ChargingStationType {
     #[validate(length(max = 50))]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub firmware_version: Option<String>,
-
-    /// Defines parameters required for initiating and maintaining wireless communication with other devices.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub modem: Option<ModemType>,
 
     /// Custom data specific to this class.
     #[serde(skip_serializing_if = "Option::is_none")]

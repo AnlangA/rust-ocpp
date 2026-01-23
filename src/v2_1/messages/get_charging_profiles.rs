@@ -8,7 +8,6 @@ use validator::Validate;
 #[serde(rename_all = "camelCase")]
 pub struct GetChargingProfilesRequest {
     /// Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, ReportChargingProfilesRequest&gt;&gt; when provided.
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     /// For which EVSE installed charging profiles SHALL be reported. If 0, only charging profiles installed on the Charging Station itself (the grid connection) SHALL be reported. If omitted, all installed charging profiles SHALL be reported. + Reported charging profiles SHALL match the criteria in field _chargingProfile_.
@@ -382,9 +381,9 @@ mod tests {
     fn test_get_charging_profiles_request_validation_negative_request_id() {
         let charging_profile = create_test_charging_profile_criterion();
         let mut request = GetChargingProfilesRequest::new(100, charging_profile);
-        request.set_request_id(-1);
+        request.set_request_id(-1); // Valid: schema has no minimum constraint
 
-        assert!(request.validate().is_err());
+        assert!(request.validate().is_ok());
     }
 
     #[test]
