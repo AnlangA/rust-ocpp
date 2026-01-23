@@ -648,7 +648,7 @@ impl ChargingSchedulePeriodType {
 
         // Validate number_phases (range 0-3)
         if let Some(phases) = self.number_phases {
-            if phases < 0 || phases > 3 {
+            if !(0..=3).contains(&phases) {
                 let mut error = ValidationError::new("number_phases_range");
                 error.message = Some("Number of phases must be between 0 and 3".into());
                 errors.add("number_phases", error);
@@ -657,7 +657,7 @@ impl ChargingSchedulePeriodType {
 
         // Validate phase_to_use (range 1-3)
         if let Some(phase) = self.phase_to_use {
-            if phase < 1 || phase > 3 {
+            if !(1..=3).contains(&phase) {
                 let mut error = ValidationError::new("phase_to_use_range");
                 error.message = Some("Phase to use must be between 1 and 3".into());
                 errors.add("phase_to_use", error);

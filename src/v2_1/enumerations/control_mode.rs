@@ -6,15 +6,12 @@ use serde::{Deserialize, Serialize};
 /// ISO 15118-20:
 /// ServiceSelectionReq(SelectedEnergyTransferService)
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum ControlModeEnumType {
     #[serde(rename = "ScheduledControl")]
+    #[default]
     ScheduledControl,
     #[serde(rename = "DynamicControl")]
     DynamicControl,
 }
 
-impl Default for ControlModeEnumType {
-    fn default() -> Self {
-        Self::ScheduledControl
-    }
-}

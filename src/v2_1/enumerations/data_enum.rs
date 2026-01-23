@@ -1,8 +1,10 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[derive(Default)]
 pub enum DataEnumType {
     #[serde(rename = "string")]
+    #[default]
     String,
     #[serde(rename = "decimal")]
     Decimal,
@@ -20,8 +22,3 @@ pub enum DataEnumType {
     MemberList,
 }
 
-impl Default for DataEnumType {
-    fn default() -> Self {
-        DataEnumType::String
-    }
-}
