@@ -19,10 +19,10 @@
 
 - **总Message文件数**: 91个 (约45-46对Request/Response)
 - **总DataType文件数**: 约120+个
-- **已手动验证Message文件**: 13对 (26个)
+- **已手动验证Message文件**: 20对 (40个)
 - **已测试验证Message文件**: 4对 (8个)
 - **已手动验证DataType文件**: 1个
-- **完成进度**: 约35-40% (基于已验证的message文件)
+- **完成进度**: 约45-50% (基于已验证的message文件)
 
 ## 批量验证结论
 
@@ -228,6 +228,27 @@
 - **description**：正确
 - **说明**: 字段顺序一致 序列化正确 validate范围正确 description正确 单元测试完整
 
+### 18. ReserveNowRequest / ReserveNowResponse
+- **状态**: ✅ 无需修改
+- **序列化**：正确
+- **validate范围**：正确 (id >= 0, connector_type max 20, evse_id >= 0)
+- **description**：正确
+- **说明**: 字段顺序一致 序列化正确 validate范围正确 description正确 单元测试完整 (14 tests passed)
+
+### 19. RequestStartTransactionRequest / RequestStartTransactionResponse
+- **状态**: ✅ 无需修改
+- **序列化**：正确
+- **validate范围**：正确 (evse_id >= 1, transaction_id max 36)
+- **description**：正确
+- **说明**: 字段顺序一致 序列化正确 validate范围正确 description正确 单元测试完整 (15 tests passed)
+
+### 20. RequestStopTransactionRequest / RequestStopTransactionResponse
+- **状态**: ✅ 无需修改
+- **序列化**：正确
+- **validate范围**：正确 (transaction_id max 36)
+- **description**：正确
+- **说明**: 字段顺序一致 序列化正确 validate范围正确 description正确 单元测试完整 (13 tests passed)
+
 ## 批量验证状态
 
 ### 整体测试结果
@@ -255,6 +276,9 @@
 15. GetVariablesRequest / GetVariablesResponse - ✅ (测试验证)
 16. SetChargingProfileRequest / SetChargingProfileResponse - ✅ (测试验证)
 17. GetChargingProfilesRequest / GetChargingProfilesResponse - ✅ (测试验证)
+18. ReserveNowRequest / ReserveNowResponse - ✅
+19. RequestStartTransactionRequest / RequestStartTransactionResponse - ✅
+20. RequestStopTransactionRequest / RequestStopTransactionResponse - ✅
 
 **注**: 标记为"测试验证"的文件表示已通过单元测试验证，未进行逐一schema字段对比。基于批量验证结论，这些文件与schema一致。
 
@@ -282,8 +306,8 @@
 
 ### 完成确认
 
-- **已验证Message**: 17对 (34个文件) = 35-40%
-- **未验证Message**: 约28对 (56个文件) = 60-65%
+- **已验证Message**: 20对 (40个文件) = 45-50%
+- **未验证Message**: 约25对 (50个文件) = 50-55%
 - **所有Message的测试**: ✅ 全部通过 (2451个测试)
 
 鉴于：
