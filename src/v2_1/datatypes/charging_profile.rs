@@ -68,7 +68,7 @@ pub struct ChargingProfileType {
 
     /// ISO 15118-20 signature for all price schedules in _chargingSchedules_. +\r\nNote: for 256-bit elliptic curves (like secp256k1) the ECDSA signature is 512 bits (64 bytes) and for 521-bit curves (like secp521r1) the signature is 1042 bits. This equals 131 bytes, which can be encoded as base64 in 176 bytes.
     #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(length(max = 176))]
+    #[validate(length(max = 256))]
     pub price_schedule_signature: Option<String>,
 
     /// Schedule that contains limits for the available
