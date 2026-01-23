@@ -1464,6 +1464,77 @@
 
 ---
 
+## 第十二轮验证 (2026-01-23 迭代12)
+
+继续加速批量验证datatype，重点检查证书、安全、计量相关类型：
+
+### 验证的datatype:
+
+#### 137. CertificateHashDataType datatype
+- **状态**: ✅ 结构正确
+  - 字段：hash_algorithm, issuer_name_hash, issuer_key_hash, serial_number, custom_data
+  - 用于通过OCSP验证证书的哈希数据
+  - 描述匹配："Certificate hash data for validating certificates through OCSP."
+  - 验证规则：
+    - hash_algorithm: required (HashAlgorithmEnumType) ✅
+    - issuer_name_hash, issuer_key_hash: maxLength 128 ✅
+    - serial_number: maxLength 40 ✅
+  - 字段顺序完全匹配schema
+
+#### 138. OCSPRequestDataType datatype
+- **状态**: ✅ 结构正确
+  - 字段：hash_algorithm, issuer_name_hash, issuer_key_hash, serial_number, responder_url, custom_data
+  - 用于OCSP检查的证书信息
+  - 描述匹配："Information about a certificate for an OCSP check."
+  - 验证规则：
+    - hash_algorithm: required ✅
+    - issuer_name_hash, issuer_key_hash: maxLength 128, required ✅
+    - serial_number: maxLength 40, required ✅
+    - responder_url: maxLength 2000, required ✅
+  - 字段顺序完全匹配schema
+
+#### 139. SignedMeterValueType datatype
+- **状态**: ✅ 结构正确
+  - 字段：signed_meter_data, encoding_method, signing_method, public_key, custom_data
+  - 仪表值的签名版本
+  - 描述匹配："Represent a signed version of the meter value."
+  - 验证规则：
+    - signed_meter_data: maxLength 32768, required ✅
+    - encoding_method: maxLength 50, required ✅
+    - signing_method: maxLength 50 ✅
+    - public_key: maxLength 2500 ✅
+  - 支持OCMF和EDL编码格式
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查证书和计量的复杂验证规则
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的3个datatype字段顺序与schema完全匹配
+- 所有验证规则与schema一致
+- 包含证书验证和数字签名相关类型
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（十二轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约139个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 139/181项 (约77%)
+- 剩余: 约42项待验证
+- 接近完成，持续加速验证
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
