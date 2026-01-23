@@ -7,16 +7,16 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct UsePriorityChargingRequest {
-    /// The transaction for which priority charging is requested.
-    #[validate(length(max = 36))]
-    pub transaction_id: String,
-
     /// True to request priority charging. False to request stopping priority charging.
     pub activate: bool,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
+
+    /// The transaction for which priority charging is requested.
+    #[validate(length(max = 36))]
+    pub transaction_id: String,
 }
 
 impl UsePriorityChargingRequest {
@@ -30,9 +30,9 @@ impl UsePriorityChargingRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(transaction_id: String, activate: bool) -> Self {
         Self {
-            transaction_id,
             activate,
             custom_data: None,
+            transaction_id,
         }
     }
 

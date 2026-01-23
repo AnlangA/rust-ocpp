@@ -8,7 +8,6 @@ use validator::Validate;
 #[serde(rename_all = "camelCase")]
 pub struct GetDERControlRequest {
     /// RequestId to be used in ReportDERControlRequest.
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     /// True: get a default DER control. False: get a scheduled control.
@@ -448,11 +447,13 @@ mod tests {
     }
 
     #[test]
-    fn test_get_der_control_request_validation_negative_request_id() {
+    fn test_get_der_control_request_negative_request_id_allowed() {
+        // Schema does not specify a minimum for requestId, so negative values are allowed
         let mut request = GetDERControlRequest::new(100);
         request.set_request_id(-1);
 
-        assert!(request.validate().is_err());
+        // Should not fail validation
+        assert!(request.validate().is_ok());
     }
 
     #[test]

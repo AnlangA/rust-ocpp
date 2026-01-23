@@ -7,18 +7,18 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct VatNumberValidationRequest {
-    /// VAT number to check.
-    #[validate(length(max = 20))]
-    pub vat_number: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 
     /// EVSE id for which check is done
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0))]
     pub evse_id: Option<i32>,
 
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
+    /// VAT number to check.
+    #[validate(length(max = 20))]
+    pub vat_number: String,
 }
 
 impl VatNumberValidationRequest {
@@ -31,9 +31,9 @@ impl VatNumberValidationRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(vat_number: String) -> Self {
         Self {
-            vat_number,
-            evse_id: None,
             custom_data: None,
+            evse_id: None,
+            vat_number,
         }
     }
 

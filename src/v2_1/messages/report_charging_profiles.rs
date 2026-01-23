@@ -7,7 +7,6 @@ use validator::Validate;
 #[serde(rename_all = "camelCase")]
 pub struct ReportChargingProfilesRequest {
     /// Id used to match the &lt;&lt;getchargingprofilesrequest, GetChargingProfilesRequest&gt;&gt; message with the resulting ReportChargingProfilesRequest messages. When the CSMS provided a requestId in the &lt;&lt;getchargingprofilesrequest, GetChargingProfilesRequest&gt;&gt;, this field SHALL contain the same value.
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     /// Source that has installed this charging profile. Values defined in Appendix as ChargingLimitSourceEnumStringType.
@@ -348,16 +347,14 @@ mod tests {
         );
         assert!(valid_request.validate().is_ok());
 
-        // Invalid request_id (negative)
-        let invalid_request = ReportChargingProfilesRequest {
-            request_id: -1,
-            charging_limit_source: "EMS".to_string(),
-            charging_profile: charging_profiles.clone(),
-            tbc: None,
-            evse_id: 0,
-            custom_data: None,
-        };
-        assert!(invalid_request.validate().is_err());
+        // Negative request_id is valid (schema has no minimum constraint)
+        let negative_id_request = ReportChargingProfilesRequest::new(
+            -1,
+            "EMS".to_string(),
+            charging_profiles.clone(),
+            0
+        );
+        assert!(negative_id_request.validate().is_ok());
 
         // Invalid charging_limit_source (too long)
         let invalid_source_request = ReportChargingProfilesRequest {

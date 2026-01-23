@@ -11,12 +11,12 @@ pub struct UpdateDynamicScheduleRequest {
     #[validate(range(min = 0))]
     pub charging_profile_id: i32,
 
-    #[validate(nested)]
-    pub schedule_update: ChargingScheduleUpdateType,
-
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
+
+    #[validate(nested)]
+    pub schedule_update: ChargingScheduleUpdateType,
 }
 
 impl UpdateDynamicScheduleRequest {
@@ -31,8 +31,8 @@ impl UpdateDynamicScheduleRequest {
     pub fn new(charging_profile_id: i32, schedule_update: ChargingScheduleUpdateType) -> Self {
         Self {
             charging_profile_id,
-            schedule_update,
             custom_data: None,
+            schedule_update,
         }
     }
 

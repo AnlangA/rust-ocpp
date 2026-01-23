@@ -21,6 +21,10 @@ pub struct ReportDERControlRequest {
     pub curve: Option<Vec<DERCurveGetType>>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(min = 1, max = 24))]
     #[validate(nested)]
     pub enter_service: Option<Vec<EnterServiceGetType>>,
@@ -62,10 +66,6 @@ pub struct ReportDERControlRequest {
     /// To Be Continued. Default value when omitted: false. + False indicates that there are no further messages as part of this report.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tbc: Option<bool>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
 }
 
 impl ReportDERControlRequest {
@@ -79,6 +79,7 @@ impl ReportDERControlRequest {
     pub fn new(request_id: i32) -> Self {
         Self {
             curve: None,
+            custom_data: None,
             enter_service: None,
             fixed_pf_absorb: None,
             fixed_pf_inject: None,
@@ -88,7 +89,6 @@ impl ReportDERControlRequest {
             limit_max_discharge: None,
             request_id,
             tbc: None,
-            custom_data: None,
         }
     }
 

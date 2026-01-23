@@ -13,7 +13,6 @@ pub struct GetLogRequest {
     pub log_type: LogEnumType,
 
     /// The Id of this request
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     /// This specifies how many times the Charging Station must retry to upload the log before giving up. If this field is not present, it is left to Charging Station to decide how many times it wants to retry. If the value is 0, it means: no retries.
@@ -512,8 +511,9 @@ mod tests {
             LogEnumType::DiagnosticsLog,
             -1  // Negative request ID
         );
-        
-        assert!(request.validate().is_err());
+
+        // Negative request_id is valid (schema has no minimum constraint)
+        assert!(request.validate().is_ok());
     }
 
     #[test]

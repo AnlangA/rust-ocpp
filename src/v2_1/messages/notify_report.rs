@@ -8,7 +8,6 @@ use validator::Validate;
 #[serde(rename_all = "camelCase")]
 pub struct NotifyReportRequest {
     /// The id of the GetReportRequest  or GetBaseReportRequest that requested this report
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     /// Timestamp of the moment this message was generated at the Charging Station.
@@ -345,10 +344,8 @@ mod tests {
         let generated_at = Utc::now();
         let request = NotifyReportRequest::new(-1, generated_at, 0);
 
-        let validation_result = request.validate();
-        assert!(validation_result.is_err());
-        let errors = validation_result.unwrap_err();
-        assert!(errors.field_errors().contains_key("request_id"));
+        // Negative request_id is valid (schema has no minimum constraint)
+        assert!(request.validate().is_ok());
     }
 
     #[test]

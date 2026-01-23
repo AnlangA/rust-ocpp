@@ -7,11 +7,11 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetMonitoringBaseRequest {
-    pub monitoring_base: MonitoringBaseEnumType,
-
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
+
+    pub monitoring_base: MonitoringBaseEnumType,
 }
 
 impl SetMonitoringBaseRequest {
@@ -24,8 +24,8 @@ impl SetMonitoringBaseRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(monitoring_base: MonitoringBaseEnumType) -> Self {
         Self {
-            monitoring_base,
             custom_data: None,
+            monitoring_base,
         }
     }
 

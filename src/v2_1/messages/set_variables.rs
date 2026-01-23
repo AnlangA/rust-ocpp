@@ -6,13 +6,13 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetVariablesRequest {
-    #[validate(length(min = 1))]
-    #[validate(nested)]
-    pub set_variable_data: Vec<SetVariableDataType>,
-
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
+
+    #[validate(length(min = 1))]
+    #[validate(nested)]
+    pub set_variable_data: Vec<SetVariableDataType>,
 }
 
 impl SetVariablesRequest {
@@ -25,8 +25,8 @@ impl SetVariablesRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(set_variable_data: Vec<SetVariableDataType>) -> Self {
         Self {
-            set_variable_data,
             custom_data: None,
+            set_variable_data,
         }
     }
 

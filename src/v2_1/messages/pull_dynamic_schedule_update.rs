@@ -8,7 +8,6 @@ use validator::Validate;
 #[serde(rename_all = "camelCase")]
 pub struct PullDynamicScheduleUpdateRequest {
     /// Id of charging profile to update.
-    #[validate(range(min = 0))]
     pub charging_profile_id: i32,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -291,11 +290,12 @@ mod tests {
         let valid_request = PullDynamicScheduleUpdateRequest::new(0);
         assert!(valid_request.validate().is_ok());
 
-        let invalid_request = PullDynamicScheduleUpdateRequest {
+        // Schema does not require minimum value for charging_profile_id
+        let negative_request = PullDynamicScheduleUpdateRequest {
             charging_profile_id: -1,
             custom_data: None,
         };
-        assert!(invalid_request.validate().is_err());
+        assert!(negative_request.validate().is_ok());
     }
 
     #[test]
@@ -410,11 +410,13 @@ mod tests {
 
     #[test]
     fn test_pull_dynamic_schedule_update_request_edge_cases() {
-        // Test minimum valid charging_profile_id
-        let min_request = PullDynamicScheduleUpdateRequest::new(0);
+        // Test various charging_profile_id values
+        let min_request = PullDynamicScheduleUpdateRequest::new(i32::MIN);
         assert!(min_request.validate().is_ok());
 
-        // Test large charging_profile_id
+        let zero_request = PullDynamicScheduleUpdateRequest::new(0);
+        assert!(zero_request.validate().is_ok());
+
         let large_request = PullDynamicScheduleUpdateRequest::new(i32::MAX);
         assert!(large_request.validate().is_ok());
     }

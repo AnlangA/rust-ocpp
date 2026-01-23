@@ -13,7 +13,6 @@ pub struct GetDisplayMessagesRequest {
     pub id: Option<Vec<i32>>,
 
     /// The Id of this request.
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -450,11 +449,13 @@ mod tests {
     }
 
     #[test]
-    fn test_get_display_messages_request_validation_negative_request_id() {
+    fn test_get_display_messages_request_negative_request_id_allowed() {
+        // Schema does not specify a minimum for requestId, so negative values are allowed
         let mut request = GetDisplayMessagesRequest::new(100);
         request.set_request_id(-1);
 
-        assert!(request.validate().is_err());
+        // Should not fail validation
+        assert!(request.validate().is_ok());
     }
 
     #[test]

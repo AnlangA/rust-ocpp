@@ -7,6 +7,10 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearChargingProfileRequest {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
+
     /// The Id of the charging profile to clear.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub charging_profile_id: Option<i32>,
@@ -14,10 +18,6 @@ pub struct ClearChargingProfileRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub charging_profile_criteria: Option<ClearChargingProfileType>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
 }
 
 impl ClearChargingProfileRequest {
@@ -29,9 +29,9 @@ impl ClearChargingProfileRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new() -> Self {
         Self {
+            custom_data: None,
             charging_profile_id: None,
             charging_profile_criteria: None,
-            custom_data: None,
         }
     }
 

@@ -7,12 +7,12 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetDisplayMessageRequest {
-    #[validate(nested)]
-    pub message: MessageInfoType,
-
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
+
+    #[validate(nested)]
+    pub message: MessageInfoType,
 }
 
 impl SetDisplayMessageRequest {
@@ -25,8 +25,8 @@ impl SetDisplayMessageRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(message: MessageInfoType) -> Self {
         Self {
-            message,
             custom_data: None,
+            message,
         }
     }
 

@@ -8,7 +8,6 @@ use validator::Validate;
 #[serde(rename_all = "camelCase")]
 pub struct GetBaseReportRequest {
     /// The Id of the request.
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     pub report_base: ReportBaseEnumType,
@@ -327,7 +326,8 @@ mod tests {
         let mut request = GetBaseReportRequest::new(100, ReportBaseEnumType::FullInventory);
         request.set_request_id(-1);
 
-        assert!(request.validate().is_err());
+        // Negative request_id is valid (schema has no minimum constraint)
+        assert!(request.validate().is_ok());
     }
 
     #[test]

@@ -18,9 +18,6 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetDERControlRequest {
-    /// True if this is a default DER control
-    pub is_default: bool,
-
     /// Unique id of this control, e.g. UUID
     #[validate(length(max = 36))]
     pub control_id: String,
@@ -30,6 +27,10 @@ pub struct SetDERControlRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub curve: Option<DERCurveType>,
+
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
@@ -55,13 +56,12 @@ pub struct SetDERControlRequest {
     #[validate(nested)]
     pub gradient: Option<GradientType>,
 
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub limit_max_discharge: Option<LimitMaxDischargeType>,
+    /// True if this is a default DER control
+    pub is_default: bool,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
+    pub limit_max_discharge: Option<LimitMaxDischargeType>,
 }
 
 impl SetDERControlRequest {
@@ -76,18 +76,18 @@ impl SetDERControlRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(is_default: bool, control_id: String, control_type: DERControlEnumType) -> Self {
         Self {
-            is_default,
             control_id,
             control_type,
             curve: None,
+            custom_data: None,
             enter_service: None,
             fixed_pf_absorb: None,
             fixed_pf_inject: None,
             fixed_var: None,
             freq_droop: None,
             gradient: None,
+            is_default,
             limit_max_discharge: None,
-            custom_data: None,
         }
     }
 

@@ -7,9 +7,11 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct PublishFirmwareStatusNotificationRequest {
-    pub status: PublishFirmwareStatusEnumType,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 
-    /// Required if status is Published. Can be multiple URI’s, if the Local Controller supports e.g. HTTP, HTTPS, and FTP.
+    /// Required if status is Published. Can be multiple URI's, if the Local Controller supports e.g. HTTP, HTTPS, and FTP.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(min = 1))]
     pub location: Option<Vec<String>>,
@@ -19,13 +21,11 @@ pub struct PublishFirmwareStatusNotificationRequest {
     #[validate(range(min = 0))]
     pub request_id: Option<i32>,
 
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub status_info: Option<StatusInfoType>,
+    pub status: PublishFirmwareStatusEnumType,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
+    pub status_info: Option<StatusInfoType>,
 }
 
 impl PublishFirmwareStatusNotificationRequest {
@@ -38,11 +38,11 @@ impl PublishFirmwareStatusNotificationRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(status: PublishFirmwareStatusEnumType) -> Self {
         Self {
-            status,
+            custom_data: None,
             location: None,
             request_id: None,
+            status,
             status_info: None,
-            custom_data: None,
         }
     }
 

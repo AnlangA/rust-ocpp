@@ -9,11 +9,6 @@ use super::{
 #[derive(Debug, Clone, Serialize, Deserialize, Validate, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct ConstantStreamDataType {
-    /// Custom data specific to this class.
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
-
     /// Uniquely identifies the stream.
     #[validate(range(min = 0))]
     pub id: i32,
@@ -25,6 +20,11 @@ pub struct ConstantStreamDataType {
     /// Id of monitor used to report this event. It can be a preconfigured or hardwired monitor.
     #[validate(range(min = 0))]
     pub variable_monitoring_id: i32,
+
+    /// Custom data specific to this class.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 }
 
 impl ConstantStreamDataType {

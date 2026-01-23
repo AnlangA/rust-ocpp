@@ -7,12 +7,16 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SignCertificateRequest {
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub certificate_type: Option<CertificateSigningUseEnumType>,
+
     /// The Charging Station SHALL send the public key in form of a Certificate Signing Request (CSR) as described in RFC 2986 [22] and then PEM encoded, using the &lt;&lt;signcertificaterequest,SignCertificateRequest&gt;&gt; message.
     #[validate(length(max = 5500))]
     pub csr: String,
 
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub certificate_type: Option<CertificateSigningUseEnumType>,
+    #[validate(nested)]
+    pub custom_data: Option<CustomDataType>,
 
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
@@ -22,10 +26,6 @@ pub struct SignCertificateRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0))]
     pub request_id: Option<i32>,
-
-    #[serde(skip_serializing_if = "Option::is_none")]
-    #[validate(nested)]
-    pub custom_data: Option<CustomDataType>,
 }
 
 impl SignCertificateRequest {
@@ -38,11 +38,11 @@ impl SignCertificateRequest {
     /// A new instance of the struct with required fields set and optional fields as None.
     pub fn new(csr: String) -> Self {
         Self {
-            csr,
             certificate_type: None,
+            csr,
+            custom_data: None,
             hash_root_certificate: None,
             request_id: None,
-            custom_data: None,
         }
     }
 

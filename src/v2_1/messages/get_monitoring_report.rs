@@ -13,7 +13,6 @@ pub struct GetMonitoringReportRequest {
     pub component_variable: Option<Vec<ComponentVariableType>>,
 
     /// The Id of the request.
-    #[validate(range(min = 0))]
     pub request_id: i32,
 
     /// This field contains criteria for components for which a monitoring report is requested
@@ -411,7 +410,8 @@ mod tests {
         let mut request = GetMonitoringReportRequest::new(100);
         request.set_request_id(-1);
 
-        assert!(request.validate().is_err());
+        // Negative request_id is valid (schema has no minimum constraint)
+        assert!(request.validate().is_ok());
     }
 
     #[test]
