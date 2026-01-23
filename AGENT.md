@@ -1671,6 +1671,75 @@
 
 ---
 
+## 第十五轮验证 (2026-01-23 迭代15)
+
+继续加速批量验证datatype，重点检查充电周期、配置文件和调度相关类型：
+
+### 验证的datatype:
+
+#### 146. ChargingPeriodType datatype
+- **状态**: ✅ 结构正确
+  - 字段：start_period, dimensions, tariff_id, custom_data
+  - 充电周期，包含开始时间和影响此周期的维度列表
+  - 描述匹配："A ChargingPeriodType consists of a start time, and a list of possible values that influence this period"
+  - 验证规则：
+    - start_period: required (DateTime) ✅
+    - dimensions: minItems 1 (optional) ✅
+    - tariff_id: maxLength 60 (optional) ✅
+  - 字段顺序完全匹配schema
+
+#### 147. ChargingProfileCriterionType datatype
+- **状态**: ✅ 结构正确
+  - 字段：charging_profile_purpose, stack_level, charging_profile_id, charging_limit_source, custom_data
+  - 充电配置文件过滤器，用于GetChargingProfilesRequest
+  - 描述匹配："A ChargingProfileCriterionType is a filter for charging profiles to be selected by a GetChargingProfilesRequest"
+  - 验证规则：
+    - 所有字段都是optional ✅
+    - stack_level: range(min = 0) (optional) ✅
+    - charging_profile_id: minItems 1 (optional) ✅
+  - 字段顺序完全匹配schema
+
+#### 148. CompositeScheduleType datatype
+- **状态**: ✅ 结构正确
+  - 字段：evse_id, duration, schedule_start, charging_rate_unit, charging_schedule_period, custom_data
+  - 复合调度结构，定义充电周期列表
+  - 描述匹配："Composite Schedule structure defines a list of charging periods"
+  - 验证规则：
+    - evse_id: range(min = 0), required ✅
+    - duration, schedule_start, charging_rate_unit: required ✅
+    - charging_schedule_period: minItems 1, required ✅
+  - 字段顺序完全匹配schema
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查充电调度和配置文件的复杂验证规则
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的3个datatype字段顺序与schema完全匹配
+- 所有验证规则与schema一致
+- 包含充电周期、配置文件过滤器和复合调度结构
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（十五轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约148个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 148/181项 (约82%)
+- 剩余: 约33项待验证
+- 持续加速验证，接近完成任务
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
