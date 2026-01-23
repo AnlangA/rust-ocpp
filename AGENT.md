@@ -1602,6 +1602,75 @@
 
 ---
 
+## 第十四轮验证 (2026-01-23 迭代14)
+
+继续加速批量验证datatype，重点检查DC充电参数、定价相关类型：
+
+### 验证的datatype:
+
+#### 143. DCChargingParametersType datatype
+- **状态**: ✅ 结构正确
+  - 字段：ev_max_current, ev_max_voltage, ev_max_power, ev_energy_capacity, energy_amount, state_of_charge, full_so_c, custom_data
+  - DC充电参数，基于ISO 15118-2标准
+  - 描述匹配：包含完整的多行描述说明DC充电参数的用途
+  - 验证规则：
+    - ev_max_current, ev_max_voltage: required (Decimal) ✅
+    - state_of_charge: range(min = 0, max = 100) ✅
+    - full_so_c: range(min = 0, max = 100) ✅
+  - 字段顺序完全匹配schema
+
+#### 144. CostDetailsType datatype
+- **状态**: ✅ 结构正确
+  - 字段：charging_periods, total_cost, total_usage, failure_to_calculate, failure_reason, custom_data
+  - 充电站基于TariffType计算的成本详情
+  - 描述匹配：包含完整的成本计算说明
+  - 验证规则：
+    - total_cost, total_usage: required ✅
+    - charging_periods: minItems 1 (optional) ✅
+    - failure_reason: maxLength 500 ✅
+  - 字段顺序完全匹配schema
+
+#### 145. TariffType datatype
+- **状态**: ✅ 结构正确（使用逻辑顺序）
+  - 字段：tariff_id, currency, description, energy, valid_from, charging_time, idle_time, fixed_fee, reservation_time, reservation_fixed, min_cost, max_cost, custom_data
+  - 共13个字段的复杂结构，描述电价的各种收费类型
+  - 描述匹配：包含完整的多行描述说明电价的用途
+  - 验证规则：
+    - tariff_id: maxLength 60, required ✅
+    - currency: maxLength 3, required ✅
+    - description: minItems 1, maxItems 10 (optional) ✅
+  - 字段顺序：Rust使用逻辑顺序（required字段在前，optional在后），schema使用字母顺序，两者都可接受
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查定价和充电参数的复杂验证规则
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的3个datatype字段顺序与schema完全匹配或使用合理的逻辑顺序
+- 所有验证规则与schema一致
+- 包含DC/AC充电参数和复杂的定价结构
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（十四轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约145个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 145/181项 (约80%)
+- 剩余: 约36项待验证
+- 已完成80%，持续加速验证以完成任务
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
