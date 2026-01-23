@@ -1913,6 +1913,96 @@
 
 ---
 
+## 第十八轮验证 (2026-01-23 迭代18)
+
+继续加速批量验证datatype，重点检查价格、消息、变量相关类型：
+
+### 验证的datatype:
+
+#### 158. PriceType datatype
+- **状态**: ✅ 结构正确
+  - 字段：excl_tax, incl_tax, tax_rates, custom_data
+  - 含税和不含税的价格，至少存在一个
+  - 描述匹配："Price with and without tax. At least one of exclTax, inclTax must be present"
+  - 验证规则：
+    - excl_tax, incl_tax: optional (Decimal)，至少一个必须存在 ✅
+    - tax_rates: minItems 1, maxItems 5 (optional) ✅
+  - 字段顺序完全匹配schema
+
+#### 159. MessageContentType datatype
+- **状态**: ✅ 结构正确
+  - 字段：format, language, content, custom_data
+  - 在充电站上显示的消息详情
+  - 描述匹配："Contains message details, for a message to be displayed on a Charging Station"
+  - 验证规则：
+    - format, content: required ✅
+    - content: maxLength 1024 ✅
+    - language: maxLength 8 (optional) ✅
+  - 字段顺序完全匹配schema
+
+#### 160. SetVariableDataType datatype
+- **状态**: ✅ 结构正确
+  - 字段：component, variable, attribute_value, attribute_type, custom_data
+  - SetVariable请求的参数
+  - 描述匹配："Class to hold parameters of SetVariable request"
+  - 验证规则：
+    - component, variable, attribute_value: required ✅
+    - attribute_value: maxLength 2500 ✅
+    - attribute_type: optional ✅
+  - 字段顺序完全匹配schema
+
+#### 161. SetVariableResultType datatype
+- **状态**: ✅ 结构正确
+  - 字段：component, variable, attribute_status, attribute_type, attribute_status_info, custom_data
+  - SetVariable请求的结果
+  - 描述匹配："Class to hold result of SetVariable request"
+  - 验证规则：
+    - component, variable, attribute_status: required ✅
+    - attribute_type, attribute_status_info: optional ✅
+  - 字段顺序完全匹配schema
+
+#### 162. IdTokenInfoType datatype
+- **状态**: ✅ 结构正确（已在第10轮验证）
+  - 字段：status, cache_expiry_date_time, charging_priority, language1, language2, evse_id, group_id_token, personal_message, status_info, custom_data
+  - 标识符的状态信息
+  - 描述匹配："Contains status information about an identifier"
+  - 验证规则：
+    - status: required ✅
+    - charging_priority: range(min = -9, max = 9) (optional) ✅
+    - language1, language2: maxLength 8 (optional) ✅
+    - evse_id: minItems 1 (optional) ✅
+  - 字段顺序完全匹配schema
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查价格、消息、变量的复杂验证规则
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的5个datatype字段顺序与schema完全匹配
+- 所有验证规则与schema一致
+- 包含价格类型、消息内容、变量设置结果
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（十八轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约162个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 162/181项 (约90%)
+- 剩余: 约19项待验证
+- **达成90%里程碑！**接近完成目标
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
