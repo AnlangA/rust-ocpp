@@ -1284,6 +1284,94 @@
 
 ---
 
+## 第十轮验证 (2026-01-23 迭代10)
+
+继续加速批量验证datatype，重点检查授权、固件、日志相关类型：
+
+### 验证的datatype:
+
+#### 127. AuthorizationData datatype
+- **状态**: ✅ 结构正确
+  - 字段：id_token, id_token_info, custom_data
+  - 用于授权数据，包含标识符和状态信息
+  - 描述匹配："Contains the identifier to use for authorization."
+  - 验证规则：id_token, id_token_info required ✅
+  - 字段顺序完全匹配schema
+
+#### 128. IdTokenInfoType datatype
+- **状态**: ✅ 结构正确
+  - 字段：status, cache_expiry_date_time, charging_priority, language1, language2, evse_id, group_id_token, personal_message, status_info, custom_data
+  - 共11个字段，包含标识符的完整状态信息
+  - 描述匹配："Contains status information about an identifier."
+  - 验证规则：
+    - status: required ✅
+    - charging_priority: range(min = -9, max = 9) ✅
+    - language1, language2: maxLength 8 ✅
+    - evse_id: minItems 1 ✅
+  - 字段顺序完全匹配schema
+
+#### 129. ChargingSchedulePeriodType datatype
+- **状态**: ✅ 结构正确
+  - 字段：start_period, limit, limit_l2, limit_l3, number_phases, phase_to_use
+  - 充电调度周期结构，用于定义调度时间段
+  - 描述匹配："Charging schedule period structure defines a time period in a charging schedule."
+  - 验证规则：
+    - start_period: required (i32) ✅
+    - number_phases: range(min = 0, max = 3) ✅
+    - phase_to_use: range(min = 1, max = 3) ✅
+  - 支持单相和三相充电限制
+
+#### 130. FirmwareType datatype
+- **状态**: ✅ 结构正确
+  - 字段：location, retrieve_date_time, install_date_time, signature, signing_certificate, custom_data
+  - 包含固件版本和下载信息
+  - 描述匹配："Contains information about a specific firmware version."
+  - 验证规则：
+    - location: maxLength 2000, required ✅
+    - signature: maxLength 800, required ✅
+    - signing_certificate: maxLength 5500 ✅
+  - 字段顺序完全匹配schema
+
+#### 131. LogParametersType datatype
+- **状态**: ✅ 结构正确
+  - 字段：remote_location, oldest_timestamp, latest_timestamp, custom_data
+  - 用于GetLog请求的日志参数
+  - 描述匹配："Log parameters for GetLog request."
+  - 验证规则：
+    - remote_location: maxLength 2000, required ✅
+    - 额外验证：custom validator检查latest_timestamp > oldest_timestamp ✅
+  - 字段顺序完全匹配schema
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查自定义验证器实现
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的5个datatype字段顺序与schema完全匹配
+- 所有验证规则与schema一致
+- 包含自定义验证器（timestamp验证）
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（十轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约131个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 131/181项 (约72%)
+- 剩余: 约50项待验证
+- 持续加速验证，接近完成目标
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
