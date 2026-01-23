@@ -2225,6 +2225,98 @@
 
 ---
 
+## 第二十二轮验证 (2026-01-23 迭代22)
+
+继续完成最后的datatype验证：
+
+### 验证的datatype:
+
+#### 175. TaxRateType datatype
+- **状态**: ✅ 结构正确
+  - 字段：type_, tax, stack, custom_data
+  - 税率百分比
+  - 描述匹配："Tax percentage"
+  - 验证规则：
+    - type_: required, maxLength 20 ✅
+    - tax: required (Decimal) ✅
+    - stack: range(min = 0) (optional) ✅
+  - 字段顺序完全匹配schema
+
+#### 176. TaxRuleType datatype
+- **状态**: ✅ 结构正确
+  - 字段：tax_rule_id, tax_rule_name, tax_included_in_price, applies_to_energy_fee, applies_to_parking_fee, applies_to_overstay_fee, applies_to_minimum_maximum_cost, tax_rate, custom_data
+  - ISO 15118-20价格调度的一部分
+  - 描述匹配："Part of ISO 15118-20 price schedule"
+  - 验证规则：
+    - tax_rule_id: required, range(min = 0) ✅
+    - applies_to_energy_fee, applies_to_parking_fee, applies_to_overstay_fee, applies_to_minimum_maximum_cost: required (bool) ✅
+    - tax_rate: required ✅
+    - tax_rule_name: maxLength 100 (optional) ✅
+  - 字段顺序完全匹配schema
+
+#### 177. CostDimensionType datatype
+- **状态**: ✅ 结构正确
+  - 字段：type_, volume, custom_data
+  - 成本维度的消耗量
+  - 描述匹配："Volume consumed of cost dimension"
+  - 验证规则：
+    - type_, volume: required ✅
+  - 字段顺序完全匹配schema
+
+#### 178. VPNType datatype
+- **状态**: ✅ 结构正确
+  - 字段：server, user, group, password, key, type_, custom_data
+  - VPN配置设置
+  - 描述匹配："VPN Configuration settings"
+  - 验证规则：
+    - server, user, password, key, type_: required ✅
+    - server: maxLength 2000 ✅
+    - user: maxLength 50 ✅
+    - group: maxLength 50 (optional) ✅
+    - password: maxLength 64 ✅
+    - key: maxLength 255 ✅
+  - 字段顺序完全匹配schema
+
+#### 179. V2XChargingParametersType datatype
+- **状态**: ✅ 结构正确
+  - 字段：min_charge_power, min_charge_power_l2, min_charge_power_l3, max_charge_power, max_charge_power_l2, max_charge_power_l3, ev_min_energy, ev_max_energy, ev_target_energy, ev_min_v2x_energy, ev_max_v2x_energy, custom_data
+  - ISO 15118-20充电参数，支持V2X充电/放电
+  - 描述匹配："Charging parameters for ISO 15118-20, also supporting V2X charging/discharging"
+  - 验证规则：
+    - 所有功率和能量字段：optional (Decimal) ✅
+  - 符合ISO 15118-20和IEC 61850标准
+  - 字段顺序完全匹配schema
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查税务、VPN、V2X充电的复杂验证规则
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的5个datatype字段顺序与schema完全匹配
+- 所有验证规则与schema一致
+- 包含税务、VPN配置和V2X充电参数
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（二十三轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约179个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 179/181项 (约99%)
+- 剩余: 约2项待验证
+- **即将完成！**
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
