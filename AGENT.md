@@ -1145,6 +1145,70 @@
 
 ---
 
+## 第八轮验证 (2026-01-23 迭代8)
+
+继续系统性验证重要的datatype，重点关注充电相关的复杂结构：
+
+### 验证的datatype:
+
+#### 121. ChargingScheduleType datatype
+- **状态**: ✅ 结构正确（使用逻辑顺序）
+  - 字段：id, start_schedule, duration, charging_rate_unit, min_charging_rate, power_tolerance, signature_id, digest_value, use_local_time, randomized_delay, sales_tariff, charging_schedule_period, absolute_price_schedule, price_level_schedule, limit_at_so_c, custom_data
+  - 共16个字段的复杂结构，用于充电调度配置
+  - 描述匹配：包含完整的多行描述说明充电调度结构的用途
+  - 字段顺序：Rust使用逻辑顺序（相关字段分组），schema使用字母顺序，两者都可接受
+  - 验证规则：
+    - id, chargingRateUnit, chargingSchedulePeriod: required ✅
+    - chargingSchedulePeriod: minItems 1, maxItems 1024 ✅
+    - signatureId: minimum 0 ✅
+    - digestValue: maxLength 88 ✅
+    - randomizedDelay: minimum 0 ✅
+  - 支持ISO 15118-2和ISO 15118-20的电价调度和签名
+
+#### 122. ModemType datatype
+- **状态**: ✅ 结构正确
+  - 字段：iccid, imsi, custom_data
+  - 在ChargingStationType的definitions中被引用
+  - 描述匹配："Defines parameters required for initiating and maintaining wireless communication with other devices."
+  - 验证规则：
+    - iccid: maxLength 20, required ✅
+    - imsi: maxLength 20, required ✅
+    - 额外验证：custom validator for identifier string (验证ICCID和IMSI格式) ✅
+  - 字段顺序完全匹配schema
+
+### 验证方法:
+- 检查Rust结构体字段顺序
+- 对比schema定义（在definitions中）
+- 验证字段类型和约束（required/optional, maxLength, minimum, minItems, maxItems）
+- 检查自定义验证器实现
+- 检查描述文本一致性
+- 运行相关测试确认功能正常
+- 验证cargo check无错误
+
+### 验证结论:
+- 验证的2个datatype字段顺序合理（逻辑顺序或完全匹配schema）
+- 所有验证规则（type, required, maxLength, minimum, minItems, maxItems）与schema一致
+- 自定义验证器正确实现（identifier string验证）
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（八轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约122个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **建立了完善的验证方法**：字段顺序、类型、约束、描述、自定义验证器五维检查
+
+### 进度说明:
+- 已完成: 122/181项 (约67%)
+- 剩余: 约59项待验证
+- 所有测试通过，代码质量良好
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
