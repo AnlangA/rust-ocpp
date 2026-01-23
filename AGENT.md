@@ -1846,6 +1846,73 @@
 
 ---
 
+## 第十七轮验证 (2026-01-23 迭代17)
+
+继续加速批量验证datatype，重点检查DER、EV电源调度、变量相关类型：
+
+### 验证的datatype:
+
+#### 155. DERChargingParametersType datatype
+- **状态**: ✅ 结构正确
+  - 字段：ev_supported_der_control, ev_over_excited_max_discharge_power, ev_over_excited_power_factor, ev_under_excited_max_discharge_power, ev_under_excited_power_factor, max_apparent_power, filled_under_excited_reactive_power, islanding_detection, custom_data
+  - DER充电参数，用于ISO 15118-20 AC_BPT_DER/AC_DER充电会话
+  - 描述匹配："DERChargingParametersType is used in ChargingNeedsType during an ISO 15118-20 session"
+  - 验证规则：
+    - ev_supported_der_control: minItems 1, required ✅
+    - 所有功率相关字段：optional (Decimal) ✅
+  - 符合ISO 15118-20和IEC 61850标准
+  - 字段顺序完全匹配schema
+
+#### 156. EVPowerScheduleType datatype
+- **状态**: ✅ 结构正确
+  - 字段：time_anchor, ev_power_schedule_entries, custom_data
+  - EV能量提供的电源调度
+  - 描述匹配："Power schedule of EV energy offer"
+  - 验证规则：
+    - time_anchor, ev_power_schedule_entries: required ✅
+    - ev_power_schedule_entries: minItems 1, maxItems 1024 ✅
+  - 字段顺序完全匹配schema
+
+#### 157. GetVariableResultType datatype
+- **状态**: ✅ 结构正确
+  - 字段：component, variable, attribute_type, attribute_value, attribute_status, attribute_status_info, custom_data
+  - GetVariables请求的结果
+  - 描述匹配："Class to hold results of GetVariables request"
+  - 验证规则：
+    - component, variable, attribute_status: required ✅
+    - attribute_value: maxLength 2500 (optional) ✅
+  - 字段顺序完全匹配schema
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查DER控制和EV电源调度的复杂验证规则
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的3个datatype字段顺序与schema完全匹配
+- 所有验证规则与schema一致
+- 包含DER充电参数、EV电源调度和变量结果
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（十七轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约157个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 157/181项 (约87%)
+- 剩余: 约24项待验证
+- 接近完成，持续加速验证
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
