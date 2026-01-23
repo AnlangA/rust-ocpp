@@ -2159,6 +2159,72 @@
 
 ---
 
+## 第二十一轮验证 (2026-01-23 迭代21)
+
+继续加速批量验证datatype，重点检查成本和总价相关类型：
+
+### 验证的datatype:
+
+#### 172. TotalCostType datatype
+- **状态**: ✅ 结构正确
+  - 字段：currency, type_of_cost, fixed, energy, charging_time, idle_time, reservation_time, reservation_fixed, total, custom_data
+  - 事务期间计算的成本
+  - 描述匹配："This contains the cost calculated during a transaction. It is used both for running cost and final cost of the transaction"
+  - 验证规则：
+    - currency, type_of_cost, total: required ✅
+    - currency: maxLength 3 ✅
+    - fixed, energy, charging_time, idle_time, reservation_time, reservation_fixed: optional ✅
+  - 字段顺序完全匹配schema
+
+#### 173. TotalUsageType datatype
+- **状态**: ✅ 结构正确
+  - 字段：energy, charging_time, idle_time, reservation_time, custom_data
+  - 事务期间计算的能源、充电时间和空闲时间
+  - 描述匹配："This contains the calculated usage of energy, charging time and idle time during a transaction"
+  - 验证规则：
+    - energy, charging_time, idle_time: required ✅
+    - reservation_time: optional ✅
+  - 字段顺序完全匹配schema
+
+#### 174. TotalPriceType datatype
+- **状态**: ✅ 结构正确
+  - 字段：excl_tax, incl_tax, custom_data
+  - 含税和不含税的总成本
+  - 描述匹配："Total cost with and without tax. Contains the total of energy, charging time, idle time, fixed and reservation costs including and/or excluding tax"
+  - 验证规则：
+    - excl_tax, incl_tax: optional (Decimal)，至少一个应存在 ✅
+  - 字段顺序完全匹配schema
+
+### 验证方法:
+- 快速批量检查datatype结构
+- 验证字段顺序、类型、约束
+- 检查成本和总价的复杂验证规则
+- 运行测试确认功能正常
+
+### 验证结论:
+- 验证的3个datatype字段顺序与schema完全匹配
+- 所有验证规则与schema一致
+- 包含事务成本、使用量和总价
+- 描述文本与schema保持一致
+- 所有2451个测试通过
+- cargo check通过
+
+### 累计统计（二十一轮迭代）:
+- **修复了11个验证问题**：
+  - 10个字段顺序问题（第1-2轮）
+  - 14个验证范围问题（移除不必要的range(min=0)验证）
+  - 1个maxLength不一致问题（第7轮）
+- **验证了约174个项目**（消息类型和datatype）
+- **所有测试通过**：2451个测试
+- **完善的验证方法**：五维检查（字段顺序、类型、约束、描述、自定义验证器）
+
+### 进度说明:
+- 已完成: 174/181项 (约96%)
+- 剩余: 约7项待验证
+- **非常接近完成目标！**
+
+---
+
 ## 第二轮验证 (2026-01-23 迭代2)
 
 对之前标记为"已修复"的文件进行了二次验证：
