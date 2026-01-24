@@ -7,6 +7,7 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct BatterySwapRequest {
+    /// List of batteries being swapped.
     #[validate(length(min = 1))]
     #[validate(nested)]
     pub battery_data: Vec<BatteryDataType>,
