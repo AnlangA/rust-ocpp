@@ -2141,4 +2141,185 @@ fn test_invalid_cleared_charging_limit_request() -> Result<(), Box<dyn std::erro
     Ok(())
 }
 
+#[test]
+fn test_valid_certificate_signed_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "certificateChain": "-----BEGIN CERTIFICATE-----\nMIIBkTCB+wIJAKH1gAwIBAgIQ-----END CERTIFICATE-----"
+    });
+    assert!(validate_schema_instance(
+        "CertificateSignedRequest.json",
+        instance
+    )?);
+
+    // Test with optional fields
+    let instance = serde_json::json!({
+        "certificateChain": "-----BEGIN CERTIFICATE-----\nMIIBkTCB+wIJAKH1gAwIBAgIQ-----END CERTIFICATE-----",
+        "certificateType": "ChargingStationCertificate",
+        "requestId": 12345
+    });
+    assert!(validate_schema_instance(
+        "CertificateSignedRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_certificate_signed_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "CertificateSignedResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "status": "Rejected",
+        "statusInfo": {
+            "reasonCode": "InvalidCertificate"
+        }
+    });
+    assert!(validate_schema_instance(
+        "CertificateSignedResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_certificate_signed_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required certificateChain
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "CertificateSignedRequest.json",
+        instance
+    )?);
+
+    // Test with certificateChain exceeding max length (10000)
+    let instance = serde_json::json!({
+        "certificateChain": "A".repeat(10001)
+    });
+    assert!(!validate_schema_instance(
+        "CertificateSignedRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_clear_tariffs_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test empty request (no required fields)
+    let instance = serde_json::json!({});
+    assert!(validate_schema_instance(
+        "ClearTariffsRequest.json",
+        instance
+    )?);
+
+    // Test with tariffIds
+    let instance = serde_json::json!({
+        "tariffIds": ["tariff1", "tariff2"]
+    });
+    assert!(validate_schema_instance(
+        "ClearTariffsRequest.json",
+        instance
+    )?);
+
+    // Test with evseId
+    let instance = serde_json::json!({
+        "tariffIds": ["tariff1"],
+        "evseId": 1
+    });
+    assert!(validate_schema_instance(
+        "ClearTariffsRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_clear_tariffs_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "clearTariffsResult": [{
+            "status": "Accepted",
+            "tariffId": "tariff1"
+        }]
+    });
+    assert!(validate_schema_instance(
+        "ClearTariffsResponse.json",
+        instance
+    )?);
+
+    // Test with multiple results
+    let instance = serde_json::json!({
+        "clearTariffsResult": [
+            {
+                "status": "Accepted",
+                "tariffId": "tariff1"
+            },
+            {
+                "status": "NoTariff"
+            }
+        ]
+    });
+    assert!(validate_schema_instance(
+        "ClearTariffsResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_clear_tariffs_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with empty tariffIds array (minItems is 1)
+    let instance = serde_json::json!({
+        "tariffIds": []
+    });
+    assert!(!validate_schema_instance(
+        "ClearTariffsRequest.json",
+        instance
+    )?);
+
+    // Test with tariffId exceeding max length (60)
+    let instance = serde_json::json!({
+        "tariffIds": ["A".repeat(61)]
+    });
+    assert!(!validate_schema_instance(
+        "ClearTariffsRequest.json",
+        instance
+    )?);
+
+    // Test with negative evseId
+    let instance = serde_json::json!({
+        "tariffIds": ["tariff1"],
+        "evseId": -1
+    });
+    assert!(!validate_schema_instance(
+        "ClearTariffsRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_clear_tariffs_response() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required clearTariffsResult
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "ClearTariffsResponse.json",
+        instance
+    )?);
+
+    // Test with empty clearTariffsResult array
+    let instance = serde_json::json!({
+        "clearTariffsResult": []
+    });
+    assert!(!validate_schema_instance(
+        "ClearTariffsResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
 // We recommend installing an extension to run rust tests.
