@@ -11,6 +11,7 @@ pub struct GetTransactionStatusRequest {
     #[validate(length(max = 36))]
     pub transaction_id: Option<String>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -109,6 +110,7 @@ pub struct GetTransactionStatusResponse {
     /// Whether there are still message to be delivered.
     pub messages_in_queue: bool,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

@@ -8,11 +8,14 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct BootNotificationRequest {
+    /// The physical system where an Electrical Vehicle (EV) can be charged.
     #[validate(nested)]
     pub charging_station: ChargingStationType,
 
+    /// This contains the reason for sending this message to the CSMS.
     pub reason: BootReasonEnumType,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -122,12 +125,15 @@ pub struct BootNotificationResponse {
     /// When &lt;&lt;cmn_registrationstatusenumtype,Status&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next BootNotification request.
     pub interval: i32,
 
+    /// This contains whether the Charging Station has been registered within the CSMS.
     pub status: RegistrationStatusEnumType,
 
+    /// Element providing more information about the status.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

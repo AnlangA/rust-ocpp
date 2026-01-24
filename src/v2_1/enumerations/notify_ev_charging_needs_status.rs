@@ -1,12 +1,9 @@
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq, Default)]
+#[serde(rename_all = "PascalCase")]
 pub enum NotifyEVChargingNeedsStatusEnumType {
     #[default]
-    #[serde(rename = "Accepted")]
     Accepted,
-    #[serde(rename = "Rejected")]
     Rejected,
-    #[serde(rename = "Processing")]
     Processing,
-    #[serde(rename = "NoChargingProfile")]
     NoChargingProfile,
 }

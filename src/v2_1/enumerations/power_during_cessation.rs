@@ -1,8 +1,7 @@
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq, Default)]
+#[serde(rename_all = "PascalCase")]
 pub enum PowerDuringCessationEnumType {
     #[default]
-    #[serde(rename = "Active")]
     Active,
-    #[serde(rename = "Reactive")]
     Reactive,
 }

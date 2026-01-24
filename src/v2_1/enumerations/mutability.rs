@@ -1,10 +1,8 @@
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq, Default)]
+#[serde(rename_all = "PascalCase")]
 pub enum MutabilityEnumType {
-    #[serde(rename = "ReadOnly")]
     ReadOnly,
-    #[serde(rename = "WriteOnly")]
     WriteOnly,
     #[default]
-    #[serde(rename = "ReadWrite")]
     ReadWrite,
 }

@@ -6,12 +6,11 @@ use serde::{Deserialize, Serialize};
 /// ISO 15118-20:
 /// ServiceSelectionReq(SelectedEnergyTransferService)
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")]
 #[derive(Default)]
 pub enum ControlModeEnumType {
-    #[serde(rename = "ScheduledControl")]
     #[default]
     ScheduledControl,
-    #[serde(rename = "DynamicControl")]
     DynamicControl,
 }
 

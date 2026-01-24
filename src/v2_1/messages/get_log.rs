@@ -7,9 +7,11 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetLogRequest {
+    /// This field specifies the log criteria (e.g., start and end time) for the requested log file.
     #[validate(nested)]
     pub log: LogParametersType,
 
+    /// Type of log which is requested.
     pub log_type: LogEnumType,
 
     /// The Id of this request
@@ -24,6 +26,7 @@ pub struct GetLogRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub retry_interval: Option<i32>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -218,8 +221,10 @@ impl GetLogRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetLogResponse {
+    /// Indicates whether the Charging Station was able to accept the request.
     pub status: LogStatusEnumType,
 
+    /// Element providing more information about the status.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
@@ -229,6 +234,7 @@ pub struct GetLogResponse {
     #[validate(length(max = 255))]
     pub filename: Option<String>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

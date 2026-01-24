@@ -7,6 +7,7 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearCacheRequest {
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -64,12 +65,15 @@ impl ClearCacheRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearCacheResponse {
+    /// Accepted if the Charging Station has executed the request, otherwise rejected.
     pub status: ClearCacheStatusEnumType,
 
+    /// Element providing more information about the status.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

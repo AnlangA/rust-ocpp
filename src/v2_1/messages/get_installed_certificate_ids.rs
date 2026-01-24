@@ -12,6 +12,7 @@ pub struct GetInstalledCertificateIdsRequest {
     #[validate(length(min = 1))]
     pub certificate_type: Option<Vec<GetCertificateIdUseEnumType>>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -105,15 +106,18 @@ impl GetInstalledCertificateIdsRequest {
 pub struct GetInstalledCertificateIdsResponse {
     pub status: GetInstalledCertificateStatusEnumType,
 
+    /// Element providing more information about the status.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
+    /// List of certificate hash data chains.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(min = 1))]
     #[validate(nested)]
     pub certificate_hash_data_chain: Option<Vec<CertificateHashDataChainType>>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

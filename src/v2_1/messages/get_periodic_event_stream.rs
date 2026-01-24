@@ -6,6 +6,7 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPeriodicEventStreamRequest {
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -63,11 +64,13 @@ impl GetPeriodicEventStreamRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetPeriodicEventStreamResponse {
+    /// List of the constant stream data configured in the Charging Station.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(min = 1))]
     #[validate(nested)]
     pub constant_stream_data: Option<Vec<ConstantStreamDataType>>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

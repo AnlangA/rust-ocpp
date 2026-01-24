@@ -11,8 +11,10 @@ pub struct BatterySwapRequest {
     #[validate(nested)]
     pub battery_data: Vec<BatteryDataType>,
 
+    /// Battery in/out
     pub event_type: BatterySwapEventEnumType,
 
+    /// Contains a case insensitive identifier to use for the authorization and the type of authorization to support multiple forms of identifiers.
     #[validate(nested)]
     pub id_token: IdTokenType,
 
@@ -20,6 +22,7 @@ pub struct BatterySwapRequest {
     #[validate(range(min = 0))]
     pub request_id: i32,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -169,6 +172,7 @@ impl BatterySwapRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct BatterySwapResponse {
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

@@ -1,14 +1,10 @@
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq, Default)]
+#[serde(rename_all = "PascalCase")]
 pub enum ReserveNowStatusEnumType {
     #[default]
-    #[serde(rename = "Accepted")]
     Accepted,
-    #[serde(rename = "Faulted")]
     Faulted,
-    #[serde(rename = "Occupied")]
     Occupied,
-    #[serde(rename = "Rejected")]
     Rejected,
-    #[serde(rename = "Unavailable")]
     Unavailable,
 }

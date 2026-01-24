@@ -10,6 +10,7 @@ pub struct ClearVariableMonitoringRequest {
     #[validate(length(min = 1))]
     pub id: Vec<i32>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -94,6 +95,7 @@ pub struct ClearVariableMonitoringResponse {
     #[validate(nested)]
     pub clear_monitoring_result: Vec<ClearMonitoringResultType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

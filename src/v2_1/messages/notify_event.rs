@@ -18,9 +18,11 @@ pub struct NotifyEventRequest {
     #[validate(range(min = 0))]
     pub seq_no: i32,
 
+    /// Class to report an event notification for a component-variable.
     #[validate(length(min = 1))]
     pub event_data: Vec<EventDataType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -180,6 +182,7 @@ impl NotifyEventRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyEventResponse {
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

@@ -2,11 +2,9 @@ use serde::{Deserialize, Serialize};
 
 /// Battery in/out
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")]
 pub enum BatterySwapEventEnumType {
-    #[serde(rename = "BatteryIn")]
     BatteryIn,
-    #[serde(rename = "BatteryOut")]
     BatteryOut,
-    #[serde(rename = "BatteryOutTimeout")]
     BatteryOutTimeout,
 }

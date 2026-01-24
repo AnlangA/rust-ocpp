@@ -7,9 +7,11 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct DeleteCertificateRequest {
+    /// Contains a hash code of the certificate to be deleted.
     #[validate(nested)]
     pub certificate_hash_data: CertificateHashDataType,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -92,10 +94,12 @@ impl DeleteCertificateRequest {
 pub struct DeleteCertificateResponse {
     pub status: DeleteCertificateStatusEnumType,
 
+    /// Element providing more information about the status.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

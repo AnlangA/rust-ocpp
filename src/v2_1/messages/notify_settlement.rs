@@ -49,6 +49,7 @@ pub struct NotifySettlementRequest {
     #[validate(length(max = 20))]
     pub vat_number: Option<String>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -412,6 +413,7 @@ pub struct NotifySettlementResponse {
     #[validate(length(max = 50))]
     pub receipt_id: Option<String>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

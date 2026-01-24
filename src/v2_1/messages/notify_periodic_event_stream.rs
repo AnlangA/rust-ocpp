@@ -22,6 +22,7 @@ pub struct NotifyPeriodicEventStream {
     /// Base timestamp to add to time offset of values.
     pub basetime: DateTime<Utc>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

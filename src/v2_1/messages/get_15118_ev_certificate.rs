@@ -11,6 +11,7 @@ pub struct Get15118EVCertificateRequest {
     #[validate(length(max = 50))]
     pub iso_15118_schema_version: String,
 
+    /// The action to be performed with the certificate.
     pub action: CertificateActionEnumType,
 
     /// *(2.1)* Raw CertificateInstallationReq request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
@@ -27,6 +28,7 @@ pub struct Get15118EVCertificateRequest {
     #[validate(length(min = 1, max = 8))]
     pub prioritized_emai_ds: Option<Vec<String>>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -221,8 +223,10 @@ impl Get15118EVCertificateRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Get15118EVCertificateResponse {
+    /// Indicates whether the CSMS has successfully processed the EXI request and can provide a certificate chain.
     pub status: Iso15118EVCertificateStatusEnumType,
 
+    /// Element providing more information about the status.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
@@ -236,6 +240,7 @@ pub struct Get15118EVCertificateResponse {
     #[validate(range(min = 0))]
     pub remaining_contracts: Option<i32>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

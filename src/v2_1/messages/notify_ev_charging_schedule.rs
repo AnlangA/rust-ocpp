@@ -27,6 +27,7 @@ pub struct NotifyEVChargingScheduleRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub power_tolerance_acceptance: Option<bool>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -223,10 +224,12 @@ impl NotifyEVChargingScheduleRequest {
 pub struct NotifyEVChargingScheduleResponse {
     pub status: GenericStatusEnumType,
 
+    /// Element providing more information about the status.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

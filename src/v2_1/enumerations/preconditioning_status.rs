@@ -1,12 +1,9 @@
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq, Default)]
+#[serde(rename_all = "PascalCase")]
 pub enum PreconditioningStatusEnumType {
     #[default]
-    #[serde(rename = "Unknown")]
     Unknown,
-    #[serde(rename = "Ready")]
     Ready,
-    #[serde(rename = "NotReady")]
     NotReady,
-    #[serde(rename = "Preconditioning")]
     Preconditioning,
 }

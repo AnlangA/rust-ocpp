@@ -1,8 +1,7 @@
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq, Default)]
+#[serde(rename_all = "PascalCase")]
 pub enum RequestStartStopStatusEnumType {
     #[default]
-    #[serde(rename = "Accepted")]
     Accepted,
-    #[serde(rename = "Rejected")]
     Rejected,
 }

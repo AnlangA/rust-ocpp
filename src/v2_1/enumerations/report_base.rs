@@ -1,10 +1,8 @@
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq, Default)]
+#[serde(rename_all = "PascalCase")]
 pub enum ReportBaseEnumType {
     #[default]
-    #[serde(rename = "ConfigurationInventory")]
     ConfigurationInventory,
-    #[serde(rename = "FullInventory")]
     FullInventory,
-    #[serde(rename = "SummaryInventory")]
     SummaryInventory,
 }

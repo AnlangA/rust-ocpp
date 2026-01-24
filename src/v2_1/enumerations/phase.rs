@@ -1,13 +1,10 @@
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq, Default)]
+#[serde(rename_all = "UPPERCASE")]
 pub enum PhaseEnumType {
     #[default]
-    #[serde(rename = "L1")]
     L1,
-    #[serde(rename = "L2")]
     L2,
-    #[serde(rename = "L3")]
     L3,
-    #[serde(rename = "N")]
     N,
     #[serde(rename = "L1-N")]
     L1N,

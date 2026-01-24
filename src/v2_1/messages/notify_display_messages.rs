@@ -6,6 +6,7 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyDisplayMessagesRequest {
+    /// Contains message details, for a message to be displayed on a Charging Station.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(min = 1))]
     #[validate(nested)]
@@ -18,6 +19,7 @@ pub struct NotifyDisplayMessagesRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tbc: Option<bool>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -166,6 +168,7 @@ impl NotifyDisplayMessagesRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyDisplayMessagesResponse {
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

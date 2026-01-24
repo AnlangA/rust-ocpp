@@ -12,10 +12,12 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct CustomerInformationRequest {
+    /// Contains a hash code of the customer certificate.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub customer_certificate: Option<CertificateHashDataType>,
 
+    /// Provides an IdToken.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub id_token: Option<IdTokenType>,
@@ -35,6 +37,7 @@ pub struct CustomerInformationRequest {
     #[validate(length(max = 64))]
     pub customer_identifier: Option<String>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -265,10 +268,12 @@ impl CustomerInformationRequest {
 pub struct CustomerInformationResponse {
     pub status: CustomerInformationStatusEnumType,
 
+    /// Element providing more information about the status.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

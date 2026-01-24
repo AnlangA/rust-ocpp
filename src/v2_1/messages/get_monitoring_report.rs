@@ -7,6 +7,7 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetMonitoringReportRequest {
+    /// A list of components for which a monitoring report is requested.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(min = 1))]
     #[validate(nested)]
@@ -20,6 +21,7 @@ pub struct GetMonitoringReportRequest {
     #[validate(length(min = 1, max = 3))]
     pub monitoring_criteria: Option<Vec<MonitoringCriterionEnumType>>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -168,12 +170,15 @@ impl GetMonitoringReportRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetMonitoringReportResponse {
+    /// Indicates whether the Charging Station was able to accept the request.
     pub status: GenericDeviceModelStatusEnumType,
 
+    /// Element providing more information about the status.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

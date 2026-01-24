@@ -13,6 +13,7 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct AuthorizeRequest {
+    /// Contains a case insensitive identifier to use for the authorization and the type of authorization to support multiple forms of identifiers.
     #[validate(nested)]
     pub id_token: IdTokenType,
 
@@ -21,11 +22,13 @@ pub struct AuthorizeRequest {
     #[validate(length(max = 10000))]
     pub certificate: Option<String>,
 
+    /// *(2.1)* Certificate hash data for OCSP certificate status check.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(min = 1, max = 4))]
     #[validate(nested)]
     pub iso_15118_certificate_hash_data: Option<Vec<OCSPRequestDataType>>,
 
+    /// Custom data
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -174,9 +177,11 @@ impl AuthorizeRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct AuthorizeResponse {
+    /// Contains status information about an identifier.
     #[validate(nested)]
     pub id_token_info: IdTokenInfoType,
 
+    /// Certificate status information. - if all certificates are valid: return 'Accepted'. - if one of the certificates was revoked, return 'CertificateRevoked'.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub certificate_status: Option<AuthorizeCertificateStatusEnumType>,
 
@@ -185,10 +190,12 @@ pub struct AuthorizeResponse {
     #[validate(length(min = 1))]
     pub allowed_energy_transfer: Option<Vec<EnergyTransferModeEnumType>>,
 
+    /// A tariff is described by fields with prices for: energy, charging time, idle time, fixed fee, reservation time, reservation fixed fee.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub tariff: Option<TariffType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

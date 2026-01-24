@@ -22,18 +22,15 @@ pub enum ChargingLimitSourceEnumType {
 
 /// Standard OCPP charging limit source values
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "UPPERCASE")]
 pub enum StandardChargingLimitSourceEnumType {
     /// Indicates that an Energy Management System has sent a charging limit.
-    #[serde(rename = "EMS")]
     EMS,
     /// Indicates that an external source, not being an EMS or system operator, has sent a charging limit.
-    #[serde(rename = "Other")]
     Other,
     /// Indicates that a System Operator (DSO or TSO) has sent a charging limit.
-    #[serde(rename = "SO")]
     SO,
     /// Indicates that the CSO has set this charging profile.
-    #[serde(rename = "CSO")]
     CSO,
 }
 

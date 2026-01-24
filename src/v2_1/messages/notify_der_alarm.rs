@@ -8,8 +8,10 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyDERAlarmRequest {
+    /// Name of DER control, e.g. LFMustTrip
     pub control_type: DERControlEnumType,
 
+    /// Type of grid event that caused this
     #[serde(skip_serializing_if = "Option::is_none")]
     pub grid_event_fault: Option<GridEventFaultEnumType>,
 
@@ -25,6 +27,7 @@ pub struct NotifyDERAlarmRequest {
     #[validate(length(max = 200))]
     pub extra_info: Option<String>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -230,6 +233,7 @@ impl NotifyDERAlarmRequest {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyDERAlarmResponse {
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

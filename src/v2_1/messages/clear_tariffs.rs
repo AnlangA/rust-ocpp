@@ -16,6 +16,7 @@ pub struct ClearTariffsRequest {
     #[validate(range(min = 0))]
     pub evse_id: Option<i32>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -145,6 +146,7 @@ pub struct ClearTariffsResponse {
     #[validate(nested)]
     pub clear_tariffs_result: Vec<ClearTariffsResultType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

@@ -10,6 +10,7 @@ pub struct GetVariablesRequest {
     #[validate(nested)]
     pub get_variable_data: Vec<GetVariableDataType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -94,6 +95,7 @@ pub struct GetVariablesResponse {
     #[validate(nested)]
     pub get_variable_result: Vec<GetVariableResultType>,
 
+    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,

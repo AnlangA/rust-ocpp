@@ -1,11 +1,9 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")]
 pub enum RegistrationStatusEnumType {
-    #[serde(rename = "Accepted")]
     Accepted,
-    #[serde(rename = "Pending")]
     Pending,
-    #[serde(rename = "Rejected")]
     Rejected,
 }
