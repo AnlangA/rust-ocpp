@@ -389,3 +389,30 @@ Message 文件 (5个):
 
 **下一步:**
 - 继续为剩余消息添加 schema 验证测试
+
+---
+
+### 2026-01-24 Ralph Loop - Iteration 10
+
+#### 缓存与可用性消息验证测试 ✅
+
+**本次迭代完成的任务:**
+
+**新增验证测试 (6个):**
+   1. ✅ ClearCache (3 tests) - Request/Response/Invalid
+   2. ✅ ChangeAvailability (3 tests) - Request/Response/Invalid
+
+**测试结果:**
+- ✅ Schema 验证测试: 61 → 67 (增加 6 个, +10%)
+- ✅ 所有 2498 个测试通过 (包含新增测试)
+- ✅ 覆盖缓存和可用性管理功能
+
+**当前状态:**
+- 92 个消息文件中已有 67 个验证测试
+- 剩余约 25 个消息文件需要添加验证测试
+
+**修改文件:**
+- `src/tests/schema_validation/v2_1.rs` - 新增 6 个验证测试
+
+**下一步:**
+- 继续为剩余消息添加 schema 验证测试
