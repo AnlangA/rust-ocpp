@@ -109,7 +109,7 @@ pub enum APNAuthenticationEnumType {
 - 已推送到远程仓库：origin/main
 - 完成时间：2026-01-24
 
-**完成的任务**：
+**完成的任务（迭代2）**：
 1. ✓ 对比所有114个JSON schema与Rust数据结构
 2. ✓ 修复代码中与文档不一致的地方
 3. ✓ 确保description与字段注释保持一致
@@ -118,6 +118,13 @@ pub enum APNAuthenticationEnumType {
 6. ✓ 补全单元测试（所有2523个测试通过）
 7. ✓ 优化serde序列化格式（全部使用结构级别的rename_all）
 8. ✓ 构建git提交并push到远程服务器
+
+**完成的任务（迭代3）**：
+1. ✓ 运行 cargo fmt 统一代码格式
+2. ✓ 修复所有格式化问题（尾随空格、函数调用格式等）
+3. ✓ 所有测试通过（2721个测试）
+4. ✓ Clippy 检查通过（无警告）
+5. ✓ 构建git提交并push到远程服务器
 
 **验证结果**：
 - 92个消息文件：全部通过 ✓
