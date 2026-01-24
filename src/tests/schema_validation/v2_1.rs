@@ -1480,4 +1480,236 @@ fn test_invalid_set_variables_request() -> Result<(), Box<dyn std::error::Error>
     Ok(())
 }
 
+#[test]
+fn test_valid_request_start_transaction_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "remoteStartId": 12345,
+        "idToken": {
+            "idToken": "ABC12345",
+            "type": "ISO14443"
+        }
+    });
+    assert!(validate_schema_instance(
+        "RequestStartTransactionRequest.json",
+        instance
+    )?);
+
+    // Test with optional fields
+    let instance = serde_json::json!({
+        "remoteStartId": 67890,
+        "idToken": {
+            "idToken": "XYZ67890",
+            "type": "ISO15693"
+        },
+        "evseId": 1
+    });
+    assert!(validate_schema_instance(
+        "RequestStartTransactionRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_request_start_transaction_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "RequestStartTransactionResponse.json",
+        instance
+    )?);
+
+    // Test with optional transactionId
+    let instance = serde_json::json!({
+        "status": "Accepted",
+        "transactionId": "TX12345"
+    });
+    assert!(validate_schema_instance(
+        "RequestStartTransactionResponse.json",
+        instance
+    )?);
+
+    // Test with statusInfo
+    let instance = serde_json::json!({
+        "status": "Rejected",
+        "statusInfo": {
+            "reasonCode": "Unavailable"
+        }
+    });
+    assert!(validate_schema_instance(
+        "RequestStartTransactionResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_request_start_transaction_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required remoteStartId
+    let instance = serde_json::json!({
+        "idToken": {
+            "idToken": "ABC12345",
+            "type": "ISO14443"
+        }
+    });
+    assert!(!validate_schema_instance(
+        "RequestStartTransactionRequest.json",
+        instance
+    )?);
+
+    // Test with invalid evseId (must be >= 1)
+    let instance = serde_json::json!({
+        "remoteStartId": 12345,
+        "idToken": {
+            "idToken": "ABC12345",
+            "type": "ISO14443"
+        },
+        "evseId": 0
+    });
+    assert!(!validate_schema_instance(
+        "RequestStartTransactionRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_request_stop_transaction_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "transactionId": "TX12345"
+    });
+    assert!(validate_schema_instance(
+        "RequestStopTransactionRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_request_stop_transaction_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "RequestStopTransactionResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "status": "Rejected",
+        "statusInfo": {
+            "reasonCode": "UnknownTransaction"
+        }
+    });
+    assert!(validate_schema_instance(
+        "RequestStopTransactionResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_request_stop_transaction_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required transactionId
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "RequestStopTransactionRequest.json",
+        instance
+    )?);
+
+    // Test with transactionId exceeding max length
+    let instance = serde_json::json!({
+        "transactionId": "A".repeat(37)
+    });
+    assert!(!validate_schema_instance(
+        "RequestStopTransactionRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_trigger_message_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "requestedMessage": "Heartbeat"
+    });
+    assert!(validate_schema_instance(
+        "TriggerMessageRequest.json",
+        instance
+    )?);
+
+    // Test with optional evse
+    let instance = serde_json::json!({
+        "requestedMessage": "MeterValues",
+        "evse": {
+            "id": 1,
+            "connectorId": 2
+        }
+    });
+    assert!(validate_schema_instance(
+        "TriggerMessageRequest.json",
+        instance
+    )?);
+
+    // Test with customTrigger
+    let instance = serde_json::json!({
+        "requestedMessage": "CustomTrigger",
+        "customTrigger": "CustomTriggerValue"
+    });
+    assert!(validate_schema_instance(
+        "TriggerMessageRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_trigger_message_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "TriggerMessageResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "status": "Rejected",
+        "statusInfo": {
+            "reasonCode": "NotSupported"
+        }
+    });
+    assert!(validate_schema_instance(
+        "TriggerMessageResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_trigger_message_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required requestedMessage
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "TriggerMessageRequest.json",
+        instance
+    )?);
+
+    // Test with invalid evseId
+    let instance = serde_json::json!({
+        "requestedMessage": "StatusNotification",
+        "evse": {
+            "id": -1
+        }
+    });
+    assert!(!validate_schema_instance(
+        "TriggerMessageRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
 // We recommend installing an extension to run rust tests.
