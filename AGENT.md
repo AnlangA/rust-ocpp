@@ -361,3 +361,31 @@ Message 文件 (5个):
 **下一步:**
 - 继续为剩余消息添加 schema 验证测试
 - 优先处理高优先级消息
+
+---
+
+### 2026-01-24 Ralph Loop - Iteration 9
+
+#### 事务消息验证测试 ✅
+
+**本次迭代完成的任务:**
+
+**新增验证测试 (9个):**
+   1. ✅ RequestStartTransaction (3 tests) - Request/Response/Invalid
+   2. ✅ RequestStopTransaction (3 tests) - Request/Response/Invalid
+   3. ✅ TriggerMessage (3 tests) - Request/Response/Invalid
+
+**测试结果:**
+- ✅ Schema 验证测试: 52 → 61 (增加 9 个, +17%)
+- ✅ 所有 2492 个测试通过 (包含新增测试)
+- ✅ 覆盖核心事务管理流程
+
+**当前状态:**
+- 92 个消息文件中已有 61 个验证测试
+- 剩余约 31 个消息文件需要添加验证测试
+
+**修改文件:**
+- `src/tests/schema_validation/v2_1.rs` - 新增 9 个验证测试
+
+**下一步:**
+- 继续为剩余消息添加 schema 验证测试
