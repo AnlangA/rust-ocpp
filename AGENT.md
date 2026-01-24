@@ -195,3 +195,38 @@ TransactionEventRequest采用了"required字段在前"的排序，这是良好�
 2. 这与schema的字段顺序可能不同，但由于`#[serde(rename_all)]`的存在，序列化仍然正确
 3. 所有字段注释与schema描述保持一致
 4. 代码质量在所有验证的文件中保持一致的高水平
+
+### 迭代 6 (2026-01-24)
+
+#### 批量验证加速
+
+**新增验证的文件：**
+11. **ChangeAvailabilityRequest** - ✅ 已验证
+    - 字段顺序正确，采用"required字段在前"模式
+
+12. **IdTokenType (datatype)** - ✅ 已验证
+    - 字段顺序：required字段在前（id_token, type_）
+    - 注释与schema描述完全匹配
+    - 正确使用 `#[serde(rename = "type")]` 处理Rust关键字
+
+13. **OperationalStatusEnumType** - ✅ 已验证
+    - 枚举描述正确
+    - 使用结构级 `#[serde(rename_all = "PascalCase")]`
+
+14. **AuthorizationStatusEnumType** - ✅ 已验证
+    - 枚举描述正确
+    - 使用结构级 `#[serde(rename_all = "PascalCase")]`
+
+**验证统计：**
+- 已验证消息文件：11个 (约12%)
+- 已验证数据类型文件：1个
+- 已验证枚举文件：4个
+- 所有验证文件均符合规范
+- 所有2523个测试持续通过
+
+**质量确认：**
+经过14个文件的验证，确认代码库质量一致：
+- 所有结构体使用 `#[serde(rename_all)]` 进行序列化优化
+- 字段排序普遍采用"required字段在前"的最佳实践
+- 注释与schema描述保持一致
+- 枚举使用适当的命名约定（PascalCase或UPPERCASE）
