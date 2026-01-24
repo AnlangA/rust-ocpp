@@ -1979,4 +1979,166 @@ fn test_invalid_clear_charging_profile_request() -> Result<(), Box<dyn std::erro
     Ok(())
 }
 
+#[test]
+fn test_valid_get_display_messages_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "requestId": 12345
+    });
+    assert!(validate_schema_instance(
+        "GetDisplayMessagesRequest.json",
+        instance
+    )?);
+
+    // Test with optional fields
+    let instance = serde_json::json!({
+        "requestId": 67890,
+        "priority": "AlwaysFront",
+        "state": "Charging"
+    });
+    assert!(validate_schema_instance(
+        "GetDisplayMessagesRequest.json",
+        instance
+    )?);
+
+    // Test with id array
+    let instance = serde_json::json!({
+        "requestId": 11111,
+        "id": [1, 2, 3]
+    });
+    assert!(validate_schema_instance(
+        "GetDisplayMessagesRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_get_display_messages_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "GetDisplayMessagesResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "status": "Unknown",
+        "statusInfo": {
+            "reasonCode": "NotFound"
+        }
+    });
+    assert!(validate_schema_instance(
+        "GetDisplayMessagesResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_get_display_messages_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required requestId
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "GetDisplayMessagesRequest.json",
+        instance
+    )?);
+
+    // Test with empty id array (minItems is 1)
+    let instance = serde_json::json!({
+        "requestId": 12345,
+        "id": []
+    });
+    assert!(!validate_schema_instance(
+        "GetDisplayMessagesRequest.json",
+        instance
+    )?);
+
+    // Test with negative id in array
+    let instance = serde_json::json!({
+        "requestId": 12345,
+        "id": [-1]
+    });
+    assert!(!validate_schema_instance(
+        "GetDisplayMessagesRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_cleared_charging_limit_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "chargingLimitSource": "SO"
+    });
+    assert!(validate_schema_instance(
+        "ClearedChargingLimitRequest.json",
+        instance
+    )?);
+
+    // Test with optional evseId
+    let instance = serde_json::json!({
+        "chargingLimitSource": "EMS",
+        "evseId": 1
+    });
+    assert!(validate_schema_instance(
+        "ClearedChargingLimitRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_cleared_charging_limit_response() -> Result<(), Box<dyn std::error::Error>> {
+    // Test empty response (no required fields)
+    let instance = serde_json::json!({});
+    assert!(validate_schema_instance(
+        "ClearedChargingLimitResponse.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ClearedChargingLimitResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_cleared_charging_limit_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required chargingLimitSource
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "ClearedChargingLimitRequest.json",
+        instance
+    )?);
+
+    // Test with chargingLimitSource exceeding max length (20)
+    let instance = serde_json::json!({
+        "chargingLimitSource": "A".repeat(21)
+    });
+    assert!(!validate_schema_instance(
+        "ClearedChargingLimitRequest.json",
+        instance
+    )?);
+
+    // Test with negative evseId
+    let instance = serde_json::json!({
+        "chargingLimitSource": "SO",
+        "evseId": -1
+    });
+    assert!(!validate_schema_instance(
+        "ClearedChargingLimitRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
 // We recommend installing an extension to run rust tests.
