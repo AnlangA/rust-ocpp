@@ -46,6 +46,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// A new instance of `FirmwareType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(location: String, signature: String) -> Self {
         Self {
             location,
@@ -66,6 +67,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_retrieve_date_time(mut self, retrieve_date_time: DateTime<Utc>) -> Self {
         self.retrieve_date_time = Some(retrieve_date_time);
         self
@@ -80,6 +82,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_install_date_time(mut self, install_date_time: DateTime<Utc>) -> Self {
         self.install_date_time = Some(install_date_time);
         self
@@ -94,6 +97,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_signing_certificate(mut self, signing_certificate: String) -> Self {
         self.signing_certificate = Some(signing_certificate);
         self
@@ -108,6 +112,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -118,6 +123,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// The URL from which the firmware can be downloaded
+    #[must_use] 
     pub fn location(&self) -> &str {
         &self.location
     }
@@ -141,6 +147,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// An optional reference to the date and time at which the firmware shall be retrieved
+    #[must_use] 
     pub fn retrieve_date_time(&self) -> Option<&DateTime<Utc>> {
         self.retrieve_date_time.as_ref()
     }
@@ -167,6 +174,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// An optional reference to the date and time at which the firmware shall be installed
+    #[must_use] 
     pub fn install_date_time(&self) -> Option<&DateTime<Utc>> {
         self.install_date_time.as_ref()
     }
@@ -190,6 +198,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// The firmware version
+    #[must_use] 
     pub fn signature(&self) -> &str {
         &self.signature
     }
@@ -213,6 +222,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// An optional reference to the MD5 checksum over the entire firmware file
+    #[must_use] 
     pub fn signing_certificate(&self) -> Option<&str> {
         self.signing_certificate.as_deref()
     }
@@ -236,6 +246,7 @@ impl FirmwareType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

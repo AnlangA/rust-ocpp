@@ -5,7 +5,7 @@ use validator::Validate;
 
 use super::custom_data::CustomDataType;
 
-/// Cost, energy, time or SoC limit for a transaction.
+/// Cost, energy, time or `SoC` limit for a transaction.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct TransactionLimitType {
@@ -48,6 +48,7 @@ impl Default for TransactionLimitType {
 
 impl TransactionLimitType {
     /// Creates a new `TransactionLimitType` with all fields set to `None`.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             max_cost: None,
@@ -59,6 +60,7 @@ impl TransactionLimitType {
     }
 
     /// Gets the maximum cost.
+    #[must_use] 
     pub fn max_cost(&self) -> Option<Decimal> {
         self.max_cost
     }
@@ -72,6 +74,7 @@ impl TransactionLimitType {
     }
 
     /// Gets the maximum energy.
+    #[must_use] 
     pub fn max_energy(&self) -> Option<Decimal> {
         self.max_energy
     }
@@ -85,6 +88,7 @@ impl TransactionLimitType {
     }
 
     /// Gets the maximum time.
+    #[must_use] 
     pub fn max_time(&self) -> Option<i32> {
         self.max_time
     }
@@ -97,12 +101,13 @@ impl TransactionLimitType {
         self
     }
 
-    /// Gets the maximum SoC.
+    /// Gets the maximum `SoC`.
+    #[must_use] 
     pub fn max_so_c(&self) -> Option<i32> {
         self.max_so_c
     }
 
-    /// Sets the maximum SoC.
+    /// Sets the maximum `SoC`.
     ///
     /// Returns a mutable reference to self for method chaining.
     pub fn set_max_so_c(&mut self, max_so_c: Option<i32>) -> &mut Self {
@@ -111,6 +116,7 @@ impl TransactionLimitType {
     }
 
     /// Gets the custom data.
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -126,6 +132,7 @@ impl TransactionLimitType {
     /// Sets the maximum cost using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_max_cost(mut self, max_cost: Decimal) -> Self {
         self.max_cost = Some(max_cost);
         self
@@ -134,6 +141,7 @@ impl TransactionLimitType {
     /// Sets the maximum energy using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_max_energy(mut self, max_energy: Decimal) -> Self {
         self.max_energy = Some(max_energy);
         self
@@ -142,14 +150,16 @@ impl TransactionLimitType {
     /// Sets the maximum time using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_max_time(mut self, max_time: i32) -> Self {
         self.max_time = Some(max_time);
         self
     }
 
-    /// Sets the maximum SoC using the builder pattern.
+    /// Sets the maximum `SoC` using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_max_so_c(mut self, max_so_c: i32) -> Self {
         self.max_so_c = Some(max_so_c);
         self
@@ -158,12 +168,14 @@ impl TransactionLimitType {
     /// Sets the custom data using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
 
-    /// Create a new TransactionLimitType from floating point values for cost and energy.
+    /// Create a new `TransactionLimitType` from floating point values for cost and energy.
+    #[must_use] 
     pub fn new_from_f64(
         max_cost: Option<f64>,
         max_energy: Option<f64>,

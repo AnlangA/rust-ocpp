@@ -3,7 +3,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::{Validate, ValidationError};
 
-/// Log parameters for GetLog request.
+/// Log parameters for `GetLog` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct LogParametersType {
@@ -59,6 +59,7 @@ impl LogParametersType {
     /// # Returns
     ///
     /// A new instance of `LogParametersType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(remote_location: String) -> Self {
         Self {
             remote_location,
@@ -77,6 +78,7 @@ impl LogParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_oldest_timestamp(mut self, oldest_timestamp: DateTime<Utc>) -> Self {
         self.oldest_timestamp = Some(oldest_timestamp);
         self
@@ -91,6 +93,7 @@ impl LogParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_latest_timestamp(mut self, latest_timestamp: DateTime<Utc>) -> Self {
         self.latest_timestamp = Some(latest_timestamp);
         self
@@ -105,6 +108,7 @@ impl LogParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -115,6 +119,7 @@ impl LogParametersType {
     /// # Returns
     ///
     /// The Id of this request
+    #[must_use] 
     pub fn remote_location(&self) -> &str {
         &self.remote_location
     }
@@ -138,6 +143,7 @@ impl LogParametersType {
     /// # Returns
     ///
     /// An optional reference to the oldest log entry date/time to include in the response
+    #[must_use] 
     pub fn oldest_timestamp(&self) -> Option<&DateTime<Utc>> {
         self.oldest_timestamp.as_ref()
     }
@@ -161,6 +167,7 @@ impl LogParametersType {
     /// # Returns
     ///
     /// An optional reference to the latest log entry date/time to include in the response
+    #[must_use] 
     pub fn latest_timestamp(&self) -> Option<&DateTime<Utc>> {
         self.latest_timestamp.as_ref()
     }
@@ -184,6 +191,7 @@ impl LogParametersType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

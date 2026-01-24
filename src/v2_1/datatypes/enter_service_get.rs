@@ -3,11 +3,11 @@ use validator::Validate;
 
 use super::{custom_data::CustomDataType, enter_service::EnterServiceType};
 
-/// Type for getting EnterService DER control function parameters.
+/// Type for getting `EnterService` DER control function parameters.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct EnterServiceGetType {
-    /// The EnterService parameters.
+    /// The `EnterService` parameters.
     #[validate(nested)]
     pub enter_service: EnterServiceType,
 
@@ -26,12 +26,13 @@ impl EnterServiceGetType {
     ///
     /// # Arguments
     ///
-    /// * `enter_service` - The EnterService parameters
+    /// * `enter_service` - The `EnterService` parameters
     /// * `id` - Id of setting
     ///
     /// # Returns
     ///
     /// A new instance of `EnterServiceGetType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(enter_service: EnterServiceType, id: String) -> Self {
         Self {
             enter_service,
@@ -49,25 +50,27 @@ impl EnterServiceGetType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
 
-    /// Gets the EnterService parameters.
+    /// Gets the `EnterService` parameters.
     ///
     /// # Returns
     ///
-    /// A reference to the EnterService parameters
+    /// A reference to the `EnterService` parameters
+    #[must_use] 
     pub fn enter_service(&self) -> &EnterServiceType {
         &self.enter_service
     }
 
-    /// Sets the EnterService parameters.
+    /// Sets the `EnterService` parameters.
     ///
     /// # Arguments
     ///
-    /// * `enter_service` - The EnterService parameters
+    /// * `enter_service` - The `EnterService` parameters
     ///
     /// # Returns
     ///
@@ -82,6 +85,7 @@ impl EnterServiceGetType {
     /// # Returns
     ///
     /// A reference to the ID of the setting
+    #[must_use] 
     pub fn id(&self) -> &str {
         &self.id
     }
@@ -105,6 +109,7 @@ impl EnterServiceGetType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

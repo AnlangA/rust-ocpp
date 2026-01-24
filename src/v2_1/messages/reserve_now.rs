@@ -4,7 +4,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the ReserveNow request.
+/// Request body for the `ReserveNow` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ReserveNowRequest {
@@ -15,7 +15,7 @@ pub struct ReserveNowRequest {
     /// Date and time at which the reservation expires.
     pub expiry_date_time: DateTime<Utc>,
 
-    /// This field specifies the connector type. Values defined in Appendix as ConnectorEnumStringType.
+    /// This field specifies the connector type. Values defined in Appendix as `ConnectorEnumStringType`.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 20))]
     pub connector_type: Option<String>,
@@ -42,11 +42,12 @@ impl ReserveNowRequest {
     ///
     /// * `id` - Id of reservation.
     /// * `expiry_date_time` - Date and time at which the reservation expires.
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(id: i32, expiry_date_time: DateTime<Utc>, id_token: IdTokenType) -> Self {
         Self {
             id,
@@ -71,7 +72,7 @@ impl ReserveNowRequest {
         self
     }
 
-    /// Sets the expiry_date_time field.
+    /// Sets the `expiry_date_time` field.
     ///
     /// * `expiry_date_time` - Date and time at which the reservation expires.
     ///
@@ -83,9 +84,9 @@ impl ReserveNowRequest {
         self
     }
 
-    /// Sets the connector_type field.
+    /// Sets the `connector_type` field.
     ///
-    /// * `connector_type` - This field specifies the connector type. Values defined in Appendix as ConnectorEnumStringType.
+    /// * `connector_type` - This field specifies the connector type. Values defined in Appendix as `ConnectorEnumStringType`.
     ///
     /// # Returns
     ///
@@ -95,9 +96,9 @@ impl ReserveNowRequest {
         self
     }
 
-    /// Sets the id_token field.
+    /// Sets the `id_token` field.
     ///
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
@@ -107,7 +108,7 @@ impl ReserveNowRequest {
         self
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - This contains ID of the evse to be reserved.
     ///
@@ -119,9 +120,9 @@ impl ReserveNowRequest {
         self
     }
 
-    /// Sets the group_id_token field.
+    /// Sets the `group_id_token` field.
     ///
-    /// * `group_id_token` - The group_id_token field
+    /// * `group_id_token` - The `group_id_token` field
     ///
     /// # Returns
     ///
@@ -131,9 +132,9 @@ impl ReserveNowRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -148,107 +149,118 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// Id of reservation.
+    #[must_use] 
     pub fn get_id(&self) -> &i32 {
         &self.id
     }
 
-    /// Gets a reference to the expiry_date_time field.
+    /// Gets a reference to the `expiry_date_time` field.
     ///
     /// # Returns
     ///
     /// Date and time at which the reservation expires.
+    #[must_use] 
     pub fn get_expiry_date_time(&self) -> &DateTime<Utc> {
         &self.expiry_date_time
     }
 
-    /// Gets a reference to the connector_type field.
+    /// Gets a reference to the `connector_type` field.
     ///
     /// # Returns
     ///
-    /// This field specifies the connector type. Values defined in Appendix as ConnectorEnumStringType.
+    /// This field specifies the connector type. Values defined in Appendix as `ConnectorEnumStringType`.
+    #[must_use] 
     pub fn get_connector_type(&self) -> Option<&String> {
         self.connector_type.as_ref()
     }
 
-    /// Gets a reference to the id_token field.
+    /// Gets a reference to the `id_token` field.
     ///
     /// # Returns
     ///
-    /// The id_token field
+    /// The `id_token` field
+    #[must_use] 
     pub fn get_id_token(&self) -> &IdTokenType {
         &self.id_token
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// This contains ID of the evse to be reserved.
+    #[must_use] 
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
 
-    /// Gets a reference to the group_id_token field.
+    /// Gets a reference to the `group_id_token` field.
     ///
     /// # Returns
     ///
-    /// The group_id_token field
+    /// The `group_id_token` field
+    #[must_use] 
     pub fn get_group_id_token(&self) -> Option<&IdTokenType> {
         self.group_id_token.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the connector_type field and returns self for builder pattern.
+    /// Sets the `connector_type` field and returns self for builder pattern.
     ///
-    /// * `connector_type` - This field specifies the connector type. Values defined in Appendix as ConnectorEnumStringType.
+    /// * `connector_type` - This field specifies the connector type. Values defined in Appendix as `ConnectorEnumStringType`.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_connector_type(mut self, connector_type: String) -> Self {
         self.connector_type = Some(connector_type);
         self
     }
 
-    /// Sets the evse_id field and returns self for builder pattern.
+    /// Sets the `evse_id` field and returns self for builder pattern.
     ///
     /// * `evse_id` - This contains ID of the evse to be reserved.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
     }
 
-    /// Sets the group_id_token field and returns self for builder pattern.
+    /// Sets the `group_id_token` field and returns self for builder pattern.
     ///
-    /// * `group_id_token` - The group_id_token field
+    /// * `group_id_token` - The `group_id_token` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_group_id_token(mut self, group_id_token: IdTokenType) -> Self {
         self.group_id_token = Some(group_id_token);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -256,7 +268,7 @@ impl ReserveNowRequest {
 
 }
 
-/// Response body for the ReserveNow response.
+/// Response body for the `ReserveNow` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ReserveNowResponse {
@@ -268,7 +280,7 @@ pub struct ReserveNowResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -282,6 +294,7 @@ impl ReserveNowResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: ReserveNowStatusEnumType) -> Self {
         Self {
             status,
@@ -302,9 +315,9 @@ impl ReserveNowResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -314,9 +327,9 @@ impl ReserveNowResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -331,47 +344,52 @@ impl ReserveNowResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &ReserveNowStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

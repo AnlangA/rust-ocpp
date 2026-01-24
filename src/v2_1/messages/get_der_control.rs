@@ -3,11 +3,11 @@ use crate::v2_1::enumerations::{DERControlEnumType, DERControlStatusEnumType};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the GetDERControl request.
+/// Request body for the `GetDERControl` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetDERControlRequest {
-    /// RequestId to be used in ReportDERControlRequest.
+    /// `RequestId` to be used in `ReportDERControlRequest`.
     pub request_id: i32,
 
     /// True: get a default DER control. False: get a scheduled control.
@@ -30,11 +30,12 @@ pub struct GetDERControlRequest {
 impl GetDERControlRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `request_id` - RequestId to be used in ReportDERControlRequest.
+    /// * `request_id` - `RequestId` to be used in `ReportDERControlRequest`.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(request_id: i32) -> Self {
         Self {
             request_id,
@@ -45,9 +46,9 @@ impl GetDERControlRequest {
         }
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
-    /// * `request_id` - RequestId to be used in ReportDERControlRequest.
+    /// * `request_id` - `RequestId` to be used in `ReportDERControlRequest`.
     ///
     /// # Returns
     ///
@@ -57,7 +58,7 @@ impl GetDERControlRequest {
         self
     }
 
-    /// Sets the is_default field.
+    /// Sets the `is_default` field.
     ///
     /// * `is_default` - True: get a default DER control. False: get a scheduled control.
     ///
@@ -69,9 +70,9 @@ impl GetDERControlRequest {
         self
     }
 
-    /// Sets the control_type field.
+    /// Sets the `control_type` field.
     ///
-    /// * `control_type` - The control_type field
+    /// * `control_type` - The `control_type` field
     ///
     /// # Returns
     ///
@@ -81,7 +82,7 @@ impl GetDERControlRequest {
         self
     }
 
-    /// Sets the control_id field.
+    /// Sets the `control_id` field.
     ///
     /// * `control_id` - Id of setting to get. When omitted all settings for _controlType_ are retrieved.
     ///
@@ -93,9 +94,9 @@ impl GetDERControlRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -105,94 +106,103 @@ impl GetDERControlRequest {
         self
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
-    /// RequestId to be used in ReportDERControlRequest.
+    /// `RequestId` to be used in `ReportDERControlRequest`.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
 
-    /// Gets a reference to the is_default field.
+    /// Gets a reference to the `is_default` field.
     ///
     /// # Returns
     ///
     /// True: get a default DER control. False: get a scheduled control.
+    #[must_use] 
     pub fn get_is_default(&self) -> Option<&bool> {
         self.is_default.as_ref()
     }
 
-    /// Gets a reference to the control_type field.
+    /// Gets a reference to the `control_type` field.
     ///
     /// # Returns
     ///
-    /// The control_type field
+    /// The `control_type` field
+    #[must_use] 
     pub fn get_control_type(&self) -> Option<&DERControlEnumType> {
         self.control_type.as_ref()
     }
 
-    /// Gets a reference to the control_id field.
+    /// Gets a reference to the `control_id` field.
     ///
     /// # Returns
     ///
     /// Id of setting to get. When omitted all settings for _controlType_ are retrieved.
+    #[must_use] 
     pub fn get_control_id(&self) -> Option<&String> {
         self.control_id.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the is_default field and returns self for builder pattern.
+    /// Sets the `is_default` field and returns self for builder pattern.
     ///
     /// * `is_default` - True: get a default DER control. False: get a scheduled control.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_is_default(mut self, is_default: bool) -> Self {
         self.is_default = Some(is_default);
         self
     }
 
-    /// Sets the control_type field and returns self for builder pattern.
+    /// Sets the `control_type` field and returns self for builder pattern.
     ///
-    /// * `control_type` - The control_type field
+    /// * `control_type` - The `control_type` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_control_type(mut self, control_type: DERControlEnumType) -> Self {
         self.control_type = Some(control_type);
         self
     }
 
-    /// Sets the control_id field and returns self for builder pattern.
+    /// Sets the `control_id` field and returns self for builder pattern.
     ///
     /// * `control_id` - Id of setting to get. When omitted all settings for _controlType_ are retrieved.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_control_id(mut self, control_id: String) -> Self {
         self.control_id = Some(control_id);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -200,7 +210,7 @@ impl GetDERControlRequest {
 
 }
 
-/// Response body for the GetDERControl response.
+/// Response body for the `GetDERControl` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetDERControlResponse {
@@ -223,6 +233,7 @@ impl GetDERControlResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: DERControlStatusEnumType) -> Self {
         Self {
             status,
@@ -243,9 +254,9 @@ impl GetDERControlResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -255,9 +266,9 @@ impl GetDERControlResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -272,47 +283,52 @@ impl GetDERControlResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &DERControlStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

@@ -39,6 +39,7 @@ impl ConstantStreamDataType {
     /// # Returns
     ///
     /// A new instance of `ConstantStreamDataType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         id: i32,
         params: PeriodicEventStreamParamsType,
@@ -61,6 +62,7 @@ impl ConstantStreamDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -71,6 +73,7 @@ impl ConstantStreamDataType {
     /// # Returns
     ///
     /// The unique identifier of the stream
+    #[must_use] 
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -94,6 +97,7 @@ impl ConstantStreamDataType {
     /// # Returns
     ///
     /// A reference to the parameters for the periodic event stream
+    #[must_use] 
     pub fn params(&self) -> &PeriodicEventStreamParamsType {
         &self.params
     }
@@ -117,6 +121,7 @@ impl ConstantStreamDataType {
     /// # Returns
     ///
     /// The ID of monitor used to report this event
+    #[must_use] 
     pub fn variable_monitoring_id(&self) -> i32 {
         self.variable_monitoring_id
     }
@@ -140,6 +145,7 @@ impl ConstantStreamDataType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -2,7 +2,7 @@ use crate::v2_1::datatypes::{CustomDataType, MeterValueType};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the MeterValues request.
+/// Request body for the `MeterValues` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct MeterValuesRequest {
@@ -10,12 +10,12 @@ pub struct MeterValuesRequest {
     #[validate(range(min = 0))]
     pub evse_id: i32,
 
-    /// Collection of one or more sampled values in MeterValuesRequest and TransactionEvent. All sampled values in a MeterValue are sampled at the same point in time.
+    /// Collection of one or more sampled values in `MeterValuesRequest` and `TransactionEvent`. All sampled values in a `MeterValue` are sampled at the same point in time.
     #[validate(length(min = 1))]
     #[validate(nested)]
     pub meter_value: Vec<MeterValueType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -25,11 +25,12 @@ impl MeterValuesRequest {
     /// Creates a new instance of the struct.
     ///
     /// * `evse_id` - This contains a number (&gt;0) designating an EVSE of the Charging Station. ‘0’ (zero) is used to designate the main power meter.
-    /// * `meter_value` - The meter_value field
+    /// * `meter_value` - The `meter_value` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(evse_id: i32, meter_value: Vec<MeterValueType>) -> Self {
         Self {
             evse_id,
@@ -38,7 +39,7 @@ impl MeterValuesRequest {
         }
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - This contains a number (&gt;0) designating an EVSE of the Charging Station. ‘0’ (zero) is used to designate the main power meter.
     ///
@@ -50,9 +51,9 @@ impl MeterValuesRequest {
         self
     }
 
-    /// Sets the meter_value field.
+    /// Sets the `meter_value` field.
     ///
-    /// * `meter_value` - The meter_value field
+    /// * `meter_value` - The `meter_value` field
     ///
     /// # Returns
     ///
@@ -62,9 +63,9 @@ impl MeterValuesRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -74,40 +75,44 @@ impl MeterValuesRequest {
         self
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// This contains a number (&gt;0) designating an EVSE of the Charging Station. ‘0’ (zero) is used to designate the main power meter.
+    #[must_use] 
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
 
-    /// Gets a reference to the meter_value field.
+    /// Gets a reference to the `meter_value` field.
     ///
     /// # Returns
     ///
-    /// The meter_value field
+    /// The `meter_value` field
+    #[must_use] 
     pub fn get_meter_value(&self) -> &Vec<MeterValueType> {
         &self.meter_value
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -115,11 +120,11 @@ impl MeterValuesRequest {
 
 }
 
-/// Response body for the MeterValues response.
+/// Response body for the `MeterValues` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct MeterValuesResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -138,15 +143,16 @@ impl MeterValuesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -156,22 +162,24 @@ impl MeterValuesResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

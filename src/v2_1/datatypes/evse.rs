@@ -32,6 +32,7 @@ impl EVSEType {
     /// # Returns
     ///
     /// A new instance of `EVSEType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(id: i32) -> Self {
         Self {
             id,
@@ -49,6 +50,7 @@ impl EVSEType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_connector_id(mut self, connector_id: i32) -> Self {
         self.connector_id = Some(connector_id);
         self
@@ -63,6 +65,7 @@ impl EVSEType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -73,6 +76,7 @@ impl EVSEType {
     /// # Returns
     ///
     /// The numeric ID of the EVSE within the Charging Station
+    #[must_use] 
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -96,6 +100,7 @@ impl EVSEType {
     /// # Returns
     ///
     /// An optional connector ID
+    #[must_use] 
     pub fn connector_id(&self) -> Option<i32> {
         self.connector_id
     }
@@ -119,6 +124,7 @@ impl EVSEType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

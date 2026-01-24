@@ -37,6 +37,7 @@ impl PriceType {
     /// # Returns
     ///
     /// A new instance of `PriceType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(price: Decimal, is_incl_tax: bool) -> Self {
         if is_incl_tax {
             Self {
@@ -60,6 +61,7 @@ impl PriceType {
     /// # Returns
     ///
     /// An optional reference to the price excluding tax
+    #[must_use] 
     pub fn excl_tax(&self) -> Option<Decimal> {
         self.excl_tax
     }
@@ -69,6 +71,7 @@ impl PriceType {
     /// # Returns
     ///
     /// An optional reference to the price including tax
+    #[must_use] 
     pub fn incl_tax(&self) -> Option<Decimal> {
         self.incl_tax
     }
@@ -78,6 +81,7 @@ impl PriceType {
     /// # Returns
     ///
     /// An optional reference to the tax rates
+    #[must_use] 
     pub fn tax_rates(&self) -> Option<&Vec<TaxRateType>> {
         self.tax_rates.as_ref()
     }
@@ -87,6 +91,7 @@ impl PriceType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -156,6 +161,7 @@ impl PriceType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_excl_tax(mut self, excl_tax: Decimal) -> Self {
         self.excl_tax = Some(excl_tax);
         self
@@ -170,6 +176,7 @@ impl PriceType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_incl_tax(mut self, incl_tax: Decimal) -> Self {
         self.incl_tax = Some(incl_tax);
         self
@@ -184,6 +191,7 @@ impl PriceType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_tax_rates(mut self, tax_rates: Vec<TaxRateType>) -> Self {
         self.tax_rates = Some(tax_rates);
         self
@@ -198,6 +206,7 @@ impl PriceType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

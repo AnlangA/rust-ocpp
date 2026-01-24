@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::{CertificateActionEnumType, Iso15118EVCertificate
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the Get15118EVCertificate request.
+/// Request body for the `Get15118EVCertificate` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Get15118EVCertificateRequest {
@@ -14,7 +14,7 @@ pub struct Get15118EVCertificateRequest {
     /// The action to be performed with the certificate.
     pub action: CertificateActionEnumType,
 
-    /// *(2.1)* Raw CertificateInstallationReq request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
+    /// *(2.1)* Raw `CertificateInstallationReq` request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
     #[validate(length(max = 11000))]
     pub exi_request: String,
 
@@ -28,7 +28,7 @@ pub struct Get15118EVCertificateRequest {
     #[validate(length(min = 1, max = 8))]
     pub prioritized_emai_ds: Option<Vec<String>>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -39,11 +39,12 @@ impl Get15118EVCertificateRequest {
     ///
     /// * `iso_15118_schema_version` - Schema version currently used for the 15118 session between EV and Charging Station. Needed for parsing of the EXI stream by the CSMS.
     /// * `action` - The action field
-    /// * `exi_request` - *(2.1)* Raw CertificateInstallationReq request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
+    /// * `exi_request` - *(2.1)* Raw `CertificateInstallationReq` request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(iso_15118_schema_version: String, action: CertificateActionEnumType, exi_request: String) -> Self {
         Self {
             iso_15118_schema_version,
@@ -55,7 +56,7 @@ impl Get15118EVCertificateRequest {
         }
     }
 
-    /// Sets the iso_15118_schema_version field.
+    /// Sets the `iso_15118_schema_version` field.
     ///
     /// * `iso_15118_schema_version` - Schema version currently used for the 15118 session between EV and Charging Station. Needed for parsing of the EXI stream by the CSMS.
     ///
@@ -79,9 +80,9 @@ impl Get15118EVCertificateRequest {
         self
     }
 
-    /// Sets the exi_request field.
+    /// Sets the `exi_request` field.
     ///
-    /// * `exi_request` - *(2.1)* Raw CertificateInstallationReq request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
+    /// * `exi_request` - *(2.1)* Raw `CertificateInstallationReq` request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
     ///
     /// # Returns
     ///
@@ -91,7 +92,7 @@ impl Get15118EVCertificateRequest {
         self
     }
 
-    /// Sets the maximum_contract_certificate_chains field.
+    /// Sets the `maximum_contract_certificate_chains` field.
     ///
     /// * `maximum_contract_certificate_chains` - *(2.1)* Absent during ISO 15118-2 session. Required during ISO 15118-20 session. + Maximum number of contracts that EV wants to install.
     ///
@@ -103,7 +104,7 @@ impl Get15118EVCertificateRequest {
         self
     }
 
-    /// Sets the prioritized_emai_ds field.
+    /// Sets the `prioritized_emai_ds` field.
     ///
     /// * `prioritized_emai_ds` - *(2.1)*  Absent during ISO 15118-2 session. Optional during ISO 15118-20 session. List of EMAIDs for which contract certificates must be requested first, in case there are more certificates than allowed by _maximumContractCertificateChains_.
     ///
@@ -115,9 +116,9 @@ impl Get15118EVCertificateRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -127,11 +128,12 @@ impl Get15118EVCertificateRequest {
         self
     }
 
-    /// Gets a reference to the iso_15118_schema_version field.
+    /// Gets a reference to the `iso_15118_schema_version` field.
     ///
     /// # Returns
     ///
     /// Schema version currently used for the 15118 session between EV and Charging Station. Needed for parsing of the EXI stream by the CSMS.
+    #[must_use] 
     pub fn get_iso_15118_schema_version(&self) -> &String {
         &self.iso_15118_schema_version
     }
@@ -141,77 +143,85 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// The action field
+    #[must_use] 
     pub fn get_action(&self) -> &CertificateActionEnumType {
         &self.action
     }
 
-    /// Gets a reference to the exi_request field.
+    /// Gets a reference to the `exi_request` field.
     ///
     /// # Returns
     ///
-    /// *(2.1)* Raw CertificateInstallationReq request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
+    /// *(2.1)* Raw `CertificateInstallationReq` request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
+    #[must_use] 
     pub fn get_exi_request(&self) -> &String {
         &self.exi_request
     }
 
-    /// Gets a reference to the maximum_contract_certificate_chains field.
+    /// Gets a reference to the `maximum_contract_certificate_chains` field.
     ///
     /// # Returns
     ///
     /// *(2.1)* Absent during ISO 15118-2 session. Required during ISO 15118-20 session. + Maximum number of contracts that EV wants to install.
+    #[must_use] 
     pub fn get_maximum_contract_certificate_chains(&self) -> Option<&i32> {
         self.maximum_contract_certificate_chains.as_ref()
     }
 
-    /// Gets a reference to the prioritized_emai_ds field.
+    /// Gets a reference to the `prioritized_emai_ds` field.
     ///
     /// # Returns
     ///
     /// *(2.1)*  Absent during ISO 15118-2 session. Optional during ISO 15118-20 session. List of EMAIDs for which contract certificates must be requested first, in case there are more certificates than allowed by _maximumContractCertificateChains_.
+    #[must_use] 
     pub fn get_prioritized_emai_ds(&self) -> Option<&Vec<String>> {
         self.prioritized_emai_ds.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the maximum_contract_certificate_chains field and returns self for builder pattern.
+    /// Sets the `maximum_contract_certificate_chains` field and returns self for builder pattern.
     ///
     /// * `maximum_contract_certificate_chains` - *(2.1)* Absent during ISO 15118-2 session. Required during ISO 15118-20 session. + Maximum number of contracts that EV wants to install.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_maximum_contract_certificate_chains(mut self, maximum_contract_certificate_chains: i32) -> Self {
         self.maximum_contract_certificate_chains = Some(maximum_contract_certificate_chains);
         self
     }
 
-    /// Sets the prioritized_emai_ds field and returns self for builder pattern.
+    /// Sets the `prioritized_emai_ds` field and returns self for builder pattern.
     ///
     /// * `prioritized_emai_ds` - *(2.1)*  Absent during ISO 15118-2 session. Optional during ISO 15118-20 session. List of EMAIDs for which contract certificates must be requested first, in case there are more certificates than allowed by _maximumContractCertificateChains_.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_prioritized_emai_ds(mut self, prioritized_emai_ds: Vec<String>) -> Self {
         self.prioritized_emai_ds = Some(prioritized_emai_ds);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -219,7 +229,7 @@ impl Get15118EVCertificateRequest {
 
 }
 
-/// Response body for the Get15118EVCertificate response.
+/// Response body for the `Get15118EVCertificate` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct Get15118EVCertificateResponse {
@@ -231,7 +241,7 @@ pub struct Get15118EVCertificateResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// *(2/1)* Raw CertificateInstallationRes response for the EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 17000. If a longer _exiResponse_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateResponse.exiResponse" ].
+    /// *(2/1)* Raw `CertificateInstallationRes` response for the EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 17000. If a longer _exiResponse_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateResponse.exiResponse" ].
     #[validate(length(max = 17000))]
     pub exi_response: String,
 
@@ -240,7 +250,7 @@ pub struct Get15118EVCertificateResponse {
     #[validate(range(min = 0))]
     pub remaining_contracts: Option<i32>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -250,11 +260,12 @@ impl Get15118EVCertificateResponse {
     /// Creates a new instance of the struct.
     ///
     /// * `status` - The status field
-    /// * `exi_response` - *(2/1)* Raw CertificateInstallationRes response for the EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 17000. If a longer _exiResponse_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateResponse.exiResponse" ].
+    /// * `exi_response` - *(2/1)* Raw `CertificateInstallationRes` response for the EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 17000. If a longer _exiResponse_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateResponse.exiResponse" ].
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: Iso15118EVCertificateStatusEnumType, exi_response: String) -> Self {
         Self {
             status,
@@ -277,9 +288,9 @@ impl Get15118EVCertificateResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -289,9 +300,9 @@ impl Get15118EVCertificateResponse {
         self
     }
 
-    /// Sets the exi_response field.
+    /// Sets the `exi_response` field.
     ///
-    /// * `exi_response` - *(2/1)* Raw CertificateInstallationRes response for the EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 17000. If a longer _exiResponse_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateResponse.exiResponse" ].
+    /// * `exi_response` - *(2/1)* Raw `CertificateInstallationRes` response for the EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 17000. If a longer _exiResponse_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateResponse.exiResponse" ].
     ///
     /// # Returns
     ///
@@ -301,7 +312,7 @@ impl Get15118EVCertificateResponse {
         self
     }
 
-    /// Sets the remaining_contracts field.
+    /// Sets the `remaining_contracts` field.
     ///
     /// * `remaining_contracts` - *(2.1)* Number of contracts that can be retrieved with additional requests.
     ///
@@ -313,9 +324,9 @@ impl Get15118EVCertificateResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -330,77 +341,85 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &Iso15118EVCertificateStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the exi_response field.
+    /// Gets a reference to the `exi_response` field.
     ///
     /// # Returns
     ///
-    /// *(2/1)* Raw CertificateInstallationRes response for the EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 17000. If a longer _exiResponse_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateResponse.exiResponse" ].
+    /// *(2/1)* Raw `CertificateInstallationRes` response for the EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 17000. If a longer _exiResponse_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateResponse.exiResponse" ].
+    #[must_use] 
     pub fn get_exi_response(&self) -> &String {
         &self.exi_response
     }
 
-    /// Gets a reference to the remaining_contracts field.
+    /// Gets a reference to the `remaining_contracts` field.
     ///
     /// # Returns
     ///
     /// *(2.1)* Number of contracts that can be retrieved with additional requests.
+    #[must_use] 
     pub fn get_remaining_contracts(&self) -> Option<&i32> {
         self.remaining_contracts.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the remaining_contracts field and returns self for builder pattern.
+    /// Sets the `remaining_contracts` field and returns self for builder pattern.
     ///
     /// * `remaining_contracts` - *(2.1)* Number of contracts that can be retrieved with additional requests.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_remaining_contracts(mut self, remaining_contracts: i32) -> Self {
         self.remaining_contracts = Some(remaining_contracts);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

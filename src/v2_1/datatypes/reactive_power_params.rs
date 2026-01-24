@@ -7,7 +7,7 @@ use validator::Validate;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ReactivePowerParamsType {
-    /// Only for VoltVar curve: The nominal ac voltage (rms) adjustment to the voltage curve points for Volt-Var curves (percentage).
+    /// Only for `VoltVar` curve: The nominal ac voltage (rms) adjustment to the voltage curve points for Volt-Var curves (percentage).
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -15,10 +15,10 @@ pub struct ReactivePowerParamsType {
     )]
     pub v_ref: Option<Decimal>,
 
-    /// Only for VoltVar: Enable/disable autonomous VRef adjustment
+    /// Only for `VoltVar`: Enable/disable autonomous `VRef` adjustment
     pub autonomous_vref_enable: Option<bool>,
 
-    /// Only for VoltVar: Adjustment range for VRef time constant
+    /// Only for `VoltVar`: Adjustment range for `VRef` time constant
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -44,6 +44,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// A new instance of `ReactivePowerParamsType` with all optional fields set to `None`
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             v_ref: None,
@@ -53,7 +54,7 @@ impl ReactivePowerParamsType {
         }
     }
 
-    /// Sets the VRef value.
+    /// Sets the `VRef` value.
     ///
     /// # Arguments
     ///
@@ -62,34 +63,37 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_v_ref(mut self, v_ref: Decimal) -> Self {
         self.v_ref = Some(v_ref);
         self
     }
 
-    /// Sets the autonomous VRef enable flag.
+    /// Sets the autonomous `VRef` enable flag.
     ///
     /// # Arguments
     ///
-    /// * `enable` - Enable/disable autonomous VRef adjustment
+    /// * `enable` - Enable/disable autonomous `VRef` adjustment
     ///
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_autonomous_v_ref_enable(mut self, enable: bool) -> Self {
         self.autonomous_vref_enable = Some(enable);
         self
     }
 
-    /// Sets the autonomous VRef time constant.
+    /// Sets the autonomous `VRef` time constant.
     ///
     /// # Arguments
     ///
-    /// * `time_constant` - Adjustment range for VRef time constant
+    /// * `time_constant` - Adjustment range for `VRef` time constant
     ///
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_autonomous_v_ref_time_constant(mut self, time_constant: Decimal) -> Self {
         self.autonomous_vref_time_constant = Some(time_constant);
         self
@@ -104,21 +108,23 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
 
-    /// Gets the VRef value.
+    /// Gets the `VRef` value.
     ///
     /// # Returns
     ///
-    /// An optional reference to the VRef value
+    /// An optional reference to the `VRef` value
+    #[must_use] 
     pub fn v_ref(&self) -> Option<&Decimal> {
         self.v_ref.as_ref()
     }
 
-    /// Sets the VRef value.
+    /// Sets the `VRef` value.
     ///
     /// # Arguments
     ///
@@ -132,20 +138,21 @@ impl ReactivePowerParamsType {
         self
     }
 
-    /// Gets the autonomous VRef enable flag.
+    /// Gets the autonomous `VRef` enable flag.
     ///
     /// # Returns
     ///
-    /// An optional reference to the autonomous VRef enable flag
+    /// An optional reference to the autonomous `VRef` enable flag
+    #[must_use] 
     pub fn autonomous_v_ref_enable(&self) -> Option<&bool> {
         self.autonomous_vref_enable.as_ref()
     }
 
-    /// Sets the autonomous VRef enable flag.
+    /// Sets the autonomous `VRef` enable flag.
     ///
     /// # Arguments
     ///
-    /// * `enable` - Enable/disable autonomous VRef adjustment, or None to clear
+    /// * `enable` - Enable/disable autonomous `VRef` adjustment, or None to clear
     ///
     /// # Returns
     ///
@@ -155,20 +162,21 @@ impl ReactivePowerParamsType {
         self
     }
 
-    /// Gets the autonomous VRef time constant.
+    /// Gets the autonomous `VRef` time constant.
     ///
     /// # Returns
     ///
-    /// An optional reference to the autonomous VRef time constant
+    /// An optional reference to the autonomous `VRef` time constant
+    #[must_use] 
     pub fn autonomous_v_ref_time_constant(&self) -> Option<&Decimal> {
         self.autonomous_vref_time_constant.as_ref()
     }
 
-    /// Sets the autonomous VRef time constant.
+    /// Sets the autonomous `VRef` time constant.
     ///
     /// # Arguments
     ///
-    /// * `time_constant` - Adjustment range for VRef time constant, or None to clear
+    /// * `time_constant` - Adjustment range for `VRef` time constant, or None to clear
     ///
     /// # Returns
     ///
@@ -186,6 +194,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

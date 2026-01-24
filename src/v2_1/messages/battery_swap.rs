@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::BatterySwapEventEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the BatterySwap request.
+/// Request body for the `BatterySwap` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct BatterySwapRequest {
@@ -18,11 +18,11 @@ pub struct BatterySwapRequest {
     #[validate(nested)]
     pub id_token: IdTokenType,
 
-    /// RequestId to correlate BatteryIn/Out events and optional RequestBatterySwapRequest.
+    /// `RequestId` to correlate BatteryIn/Out events and optional `RequestBatterySwapRequest`.
     #[validate(range(min = 0))]
     pub request_id: i32,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -31,14 +31,15 @@ pub struct BatterySwapRequest {
 impl BatterySwapRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `battery_data` - The battery_data field
-    /// * `event_type` - The event_type field
-    /// * `id_token` - The id_token field
-    /// * `request_id` - RequestId to correlate BatteryIn/Out events and optional RequestBatterySwapRequest.
+    /// * `battery_data` - The `battery_data` field
+    /// * `event_type` - The `event_type` field
+    /// * `id_token` - The `id_token` field
+    /// * `request_id` - `RequestId` to correlate BatteryIn/Out events and optional `RequestBatterySwapRequest`.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(battery_data: Vec<BatteryDataType>, event_type: BatterySwapEventEnumType, id_token: IdTokenType, request_id: i32) -> Self {
         Self {
             battery_data,
@@ -49,9 +50,9 @@ impl BatterySwapRequest {
         }
     }
 
-    /// Sets the battery_data field.
+    /// Sets the `battery_data` field.
     ///
-    /// * `battery_data` - The battery_data field
+    /// * `battery_data` - The `battery_data` field
     ///
     /// # Returns
     ///
@@ -61,9 +62,9 @@ impl BatterySwapRequest {
         self
     }
 
-    /// Sets the event_type field.
+    /// Sets the `event_type` field.
     ///
-    /// * `event_type` - The event_type field
+    /// * `event_type` - The `event_type` field
     ///
     /// # Returns
     ///
@@ -73,9 +74,9 @@ impl BatterySwapRequest {
         self
     }
 
-    /// Sets the id_token field.
+    /// Sets the `id_token` field.
     ///
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
@@ -85,9 +86,9 @@ impl BatterySwapRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
-    /// * `request_id` - RequestId to correlate BatteryIn/Out events and optional RequestBatterySwapRequest.
+    /// * `request_id` - `RequestId` to correlate BatteryIn/Out events and optional `RequestBatterySwapRequest`.
     ///
     /// # Returns
     ///
@@ -97,9 +98,9 @@ impl BatterySwapRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -109,58 +110,64 @@ impl BatterySwapRequest {
         self
     }
 
-    /// Gets a reference to the battery_data field.
+    /// Gets a reference to the `battery_data` field.
     ///
     /// # Returns
     ///
-    /// The battery_data field
+    /// The `battery_data` field
+    #[must_use] 
     pub fn get_battery_data(&self) -> &Vec<BatteryDataType> {
         &self.battery_data
     }
 
-    /// Gets a reference to the event_type field.
+    /// Gets a reference to the `event_type` field.
     ///
     /// # Returns
     ///
-    /// The event_type field
+    /// The `event_type` field
+    #[must_use] 
     pub fn get_event_type(&self) -> &BatterySwapEventEnumType {
         &self.event_type
     }
 
-    /// Gets a reference to the id_token field.
+    /// Gets a reference to the `id_token` field.
     ///
     /// # Returns
     ///
-    /// The id_token field
+    /// The `id_token` field
+    #[must_use] 
     pub fn get_id_token(&self) -> &IdTokenType {
         &self.id_token
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
-    /// RequestId to correlate BatteryIn/Out events and optional RequestBatterySwapRequest.
+    /// `RequestId` to correlate BatteryIn/Out events and optional `RequestBatterySwapRequest`.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -168,11 +175,11 @@ impl BatterySwapRequest {
 
 }
 
-/// Response body for the BatterySwap response.
+/// Response body for the `BatterySwap` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct BatterySwapResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -191,15 +198,16 @@ impl BatterySwapResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -209,22 +217,24 @@ impl BatterySwapResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

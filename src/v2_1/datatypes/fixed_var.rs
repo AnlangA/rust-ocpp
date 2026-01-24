@@ -6,7 +6,7 @@ use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Fixed VAr settings.
+/// Fixed `VAr` settings.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct FixedVarType {
@@ -49,11 +49,12 @@ impl FixedVarType {
     /// # Arguments
     ///
     /// * `priority` - Priority of setting (0=highest)
-    /// * `var` - Fixed VAr value in VAr
+    /// * `var` - Fixed `VAr` value in `VAr`
     ///
     /// # Returns
     ///
     /// A new instance of `FixedVarType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(priority: i32, var: f64) -> Self {
         Self {
             priority,
@@ -69,11 +70,12 @@ impl FixedVarType {
     ///
     /// # Arguments
     ///
-    /// * `custom_data` - Custom data for these fixed VAr settings
+    /// * `custom_data` - Custom data for these fixed `VAr` settings
     ///
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -84,6 +86,7 @@ impl FixedVarType {
     /// # Returns
     ///
     /// The priority of setting (0=highest)
+    #[must_use] 
     pub fn priority(&self) -> i32 {
         self.priority
     }
@@ -102,20 +105,21 @@ impl FixedVarType {
         self
     }
 
-    /// Gets the VAr value.
+    /// Gets the `VAr` value.
     ///
     /// # Returns
     ///
-    /// The fixed VAr value in VAr
+    /// The fixed `VAr` value in `VAr`
+    #[must_use] 
     pub fn var(&self) -> f64 {
         self.setpoint.to_f64().unwrap_or_default()
     }
 
-    /// Sets the VAr value.
+    /// Sets the `VAr` value.
     ///
     /// # Arguments
     ///
-    /// * `var` - Fixed VAr value in VAr
+    /// * `var` - Fixed `VAr` value in `VAr`
     ///
     /// # Returns
     ///
@@ -130,6 +134,7 @@ impl FixedVarType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -138,7 +143,7 @@ impl FixedVarType {
     ///
     /// # Arguments
     ///
-    /// * `custom_data` - Custom data for these fixed VAr settings, or None to clear
+    /// * `custom_data` - Custom data for these fixed `VAr` settings, or None to clear
     ///
     /// # Returns
     ///
@@ -149,7 +154,7 @@ impl FixedVarType {
     }
 }
 
-/// Trait for managing Fixed VAr settings.
+/// Trait for managing Fixed `VAr` settings.
 pub trait FixedVarSettings {
     /// Gets the priority of the setting.
     fn get_priority(&self) -> i32;

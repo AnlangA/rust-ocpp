@@ -14,7 +14,7 @@ use crate::v2_1::enumerations::der_control::DERControlStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the SetDERControl request.
+/// Request body for the `SetDERControl` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetDERControlRequest {
@@ -69,11 +69,12 @@ impl SetDERControlRequest {
     ///
     /// * `is_default` - True if this is a default DER control
     /// * `control_id` - Unique id of this control, e.g. UUID
-    /// * `control_type` - The control_type field
+    /// * `control_type` - The `control_type` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(is_default: bool, control_id: String, control_type: DERControlEnumType) -> Self {
         Self {
             is_default,
@@ -91,7 +92,7 @@ impl SetDERControlRequest {
         }
     }
 
-    /// Sets the is_default field.
+    /// Sets the `is_default` field.
     ///
     /// * `is_default` - True if this is a default DER control
     ///
@@ -103,7 +104,7 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Sets the control_id field.
+    /// Sets the `control_id` field.
     ///
     /// * `control_id` - Unique id of this control, e.g. UUID
     ///
@@ -115,9 +116,9 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Sets the control_type field.
+    /// Sets the `control_type` field.
     ///
-    /// * `control_type` - The control_type field
+    /// * `control_type` - The `control_type` field
     ///
     /// # Returns
     ///
@@ -139,9 +140,9 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Sets the enter_service field.
+    /// Sets the `enter_service` field.
     ///
-    /// * `enter_service` - The enter_service field
+    /// * `enter_service` - The `enter_service` field
     ///
     /// # Returns
     ///
@@ -151,9 +152,9 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Sets the fixed_pf_absorb field.
+    /// Sets the `fixed_pf_absorb` field.
     ///
-    /// * `fixed_pf_absorb` - The fixed_pf_absorb field
+    /// * `fixed_pf_absorb` - The `fixed_pf_absorb` field
     ///
     /// # Returns
     ///
@@ -163,9 +164,9 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Sets the fixed_pf_inject field.
+    /// Sets the `fixed_pf_inject` field.
     ///
-    /// * `fixed_pf_inject` - The fixed_pf_inject field
+    /// * `fixed_pf_inject` - The `fixed_pf_inject` field
     ///
     /// # Returns
     ///
@@ -175,9 +176,9 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Sets the fixed_var field.
+    /// Sets the `fixed_var` field.
     ///
-    /// * `fixed_var` - The fixed_var field
+    /// * `fixed_var` - The `fixed_var` field
     ///
     /// # Returns
     ///
@@ -187,9 +188,9 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Sets the freq_droop field.
+    /// Sets the `freq_droop` field.
     ///
-    /// * `freq_droop` - The freq_droop field
+    /// * `freq_droop` - The `freq_droop` field
     ///
     /// # Returns
     ///
@@ -211,9 +212,9 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Sets the limit_max_discharge field.
+    /// Sets the `limit_max_discharge` field.
     ///
-    /// * `limit_max_discharge` - The limit_max_discharge field
+    /// * `limit_max_discharge` - The `limit_max_discharge` field
     ///
     /// # Returns
     ///
@@ -223,9 +224,9 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -235,29 +236,32 @@ impl SetDERControlRequest {
         self
     }
 
-    /// Gets a reference to the is_default field.
+    /// Gets a reference to the `is_default` field.
     ///
     /// # Returns
     ///
     /// True if this is a default DER control
+    #[must_use] 
     pub fn get_is_default(&self) -> &bool {
         &self.is_default
     }
 
-    /// Gets a reference to the control_id field.
+    /// Gets a reference to the `control_id` field.
     ///
     /// # Returns
     ///
     /// Unique id of this control, e.g. UUID
+    #[must_use] 
     pub fn get_control_id(&self) -> &String {
         &self.control_id
     }
 
-    /// Gets a reference to the control_type field.
+    /// Gets a reference to the `control_type` field.
     ///
     /// # Returns
     ///
-    /// The control_type field
+    /// The `control_type` field
+    #[must_use] 
     pub fn get_control_type(&self) -> &DERControlEnumType {
         &self.control_type
     }
@@ -267,51 +271,57 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The curve field
+    #[must_use] 
     pub fn get_curve(&self) -> Option<&DERCurveType> {
         self.curve.as_ref()
     }
 
-    /// Gets a reference to the enter_service field.
+    /// Gets a reference to the `enter_service` field.
     ///
     /// # Returns
     ///
-    /// The enter_service field
+    /// The `enter_service` field
+    #[must_use] 
     pub fn get_enter_service(&self) -> Option<&EnterServiceType> {
         self.enter_service.as_ref()
     }
 
-    /// Gets a reference to the fixed_pf_absorb field.
+    /// Gets a reference to the `fixed_pf_absorb` field.
     ///
     /// # Returns
     ///
-    /// The fixed_pf_absorb field
+    /// The `fixed_pf_absorb` field
+    #[must_use] 
     pub fn get_fixed_pf_absorb(&self) -> Option<&FixedPFType> {
         self.fixed_pf_absorb.as_ref()
     }
 
-    /// Gets a reference to the fixed_pf_inject field.
+    /// Gets a reference to the `fixed_pf_inject` field.
     ///
     /// # Returns
     ///
-    /// The fixed_pf_inject field
+    /// The `fixed_pf_inject` field
+    #[must_use] 
     pub fn get_fixed_pf_inject(&self) -> Option<&FixedPFType> {
         self.fixed_pf_inject.as_ref()
     }
 
-    /// Gets a reference to the fixed_var field.
+    /// Gets a reference to the `fixed_var` field.
     ///
     /// # Returns
     ///
-    /// The fixed_var field
+    /// The `fixed_var` field
+    #[must_use] 
     pub fn get_fixed_var(&self) -> Option<&FixedVarType> {
         self.fixed_var.as_ref()
     }
 
-    /// Gets a reference to the freq_droop field.
+    /// Gets a reference to the `freq_droop` field.
     ///
     /// # Returns
     ///
-    /// The freq_droop field
+    /// The `freq_droop` field
+    #[must_use] 
     pub fn get_freq_droop(&self) -> Option<&FreqDroopType> {
         self.freq_droop.as_ref()
     }
@@ -321,24 +331,27 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The gradient field
+    #[must_use] 
     pub fn get_gradient(&self) -> Option<&GradientType> {
         self.gradient.as_ref()
     }
 
-    /// Gets a reference to the limit_max_discharge field.
+    /// Gets a reference to the `limit_max_discharge` field.
     ///
     /// # Returns
     ///
-    /// The limit_max_discharge field
+    /// The `limit_max_discharge` field
+    #[must_use] 
     pub fn get_limit_max_discharge(&self) -> Option<&LimitMaxDischargeType> {
         self.limit_max_discharge.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -350,66 +363,72 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_curve(mut self, curve: DERCurveType) -> Self {
         self.curve = Some(curve);
         self
     }
 
-    /// Sets the enter_service field and returns self for builder pattern.
+    /// Sets the `enter_service` field and returns self for builder pattern.
     ///
-    /// * `enter_service` - The enter_service field
+    /// * `enter_service` - The `enter_service` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_enter_service(mut self, enter_service: EnterServiceType) -> Self {
         self.enter_service = Some(enter_service);
         self
     }
 
-    /// Sets the fixed_pf_absorb field and returns self for builder pattern.
+    /// Sets the `fixed_pf_absorb` field and returns self for builder pattern.
     ///
-    /// * `fixed_pf_absorb` - The fixed_pf_absorb field
+    /// * `fixed_pf_absorb` - The `fixed_pf_absorb` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_fixed_pf_absorb(mut self, fixed_pf_absorb: FixedPFType) -> Self {
         self.fixed_pf_absorb = Some(fixed_pf_absorb);
         self
     }
 
-    /// Sets the fixed_pf_inject field and returns self for builder pattern.
+    /// Sets the `fixed_pf_inject` field and returns self for builder pattern.
     ///
-    /// * `fixed_pf_inject` - The fixed_pf_inject field
+    /// * `fixed_pf_inject` - The `fixed_pf_inject` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_fixed_pf_inject(mut self, fixed_pf_inject: FixedPFType) -> Self {
         self.fixed_pf_inject = Some(fixed_pf_inject);
         self
     }
 
-    /// Sets the fixed_var field and returns self for builder pattern.
+    /// Sets the `fixed_var` field and returns self for builder pattern.
     ///
-    /// * `fixed_var` - The fixed_var field
+    /// * `fixed_var` - The `fixed_var` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_fixed_var(mut self, fixed_var: FixedVarType) -> Self {
         self.fixed_var = Some(fixed_var);
         self
     }
 
-    /// Sets the freq_droop field and returns self for builder pattern.
+    /// Sets the `freq_droop` field and returns self for builder pattern.
     ///
-    /// * `freq_droop` - The freq_droop field
+    /// * `freq_droop` - The `freq_droop` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_freq_droop(mut self, freq_droop: FreqDroopType) -> Self {
         self.freq_droop = Some(freq_droop);
         self
@@ -422,30 +441,33 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_gradient(mut self, gradient: GradientType) -> Self {
         self.gradient = Some(gradient);
         self
     }
 
-    /// Sets the limit_max_discharge field and returns self for builder pattern.
+    /// Sets the `limit_max_discharge` field and returns self for builder pattern.
     ///
-    /// * `limit_max_discharge` - The limit_max_discharge field
+    /// * `limit_max_discharge` - The `limit_max_discharge` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_limit_max_discharge(mut self, limit_max_discharge: LimitMaxDischargeType) -> Self {
         self.limit_max_discharge = Some(limit_max_discharge);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -453,7 +475,7 @@ impl SetDERControlRequest {
 
 }
 
-/// Response body for the SetDERControl response.
+/// Response body for the `SetDERControl` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetDERControlResponse {
@@ -481,6 +503,7 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: DERControlStatusEnumType) -> Self {
         Self {
             status,
@@ -502,9 +525,9 @@ impl SetDERControlResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -514,7 +537,7 @@ impl SetDERControlResponse {
         self
     }
 
-    /// Sets the superseded_ids field.
+    /// Sets the `superseded_ids` field.
     ///
     /// * `superseded_ids` - List of controlIds that are superseded as a result of setting this control.
     ///
@@ -526,9 +549,9 @@ impl SetDERControlResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -543,68 +566,75 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &DERControlStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the superseded_ids field.
+    /// Gets a reference to the `superseded_ids` field.
     ///
     /// # Returns
     ///
     /// List of controlIds that are superseded as a result of setting this control.
+    #[must_use] 
     pub fn get_superseded_ids(&self) -> Option<&Vec<String>> {
         self.superseded_ids.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the superseded_ids field and returns self for builder pattern.
+    /// Sets the `superseded_ids` field and returns self for builder pattern.
     ///
     /// * `superseded_ids` - List of controlIds that are superseded as a result of setting this control.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_superseded_ids(mut self, superseded_ids: Vec<String>) -> Self {
         self.superseded_ids = Some(superseded_ids);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

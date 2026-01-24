@@ -12,14 +12,14 @@ use super::{
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct EVAbsolutePriceScheduleType {
-    /// Starting point in time of the EVEnergyOffer.
+    /// Starting point in time of the `EVEnergyOffer`.
     pub time_anchor: DateTime<Utc>,
 
     /// Currency code according to ISO 4217.
     #[validate(length(max = 3))]
     pub currency: String,
 
-    /// ISO 15118-20 URN of price algorithm: Power, PeakPower, StackedEnergy.
+    /// ISO 15118-20 URN of price algorithm: Power, `PeakPower`, `StackedEnergy`.
     #[validate(length(max = 2000))]
     pub price_algorithm: String,
 
@@ -39,7 +39,7 @@ impl EVAbsolutePriceScheduleType {
     ///
     /// # Arguments
     ///
-    /// * `time_anchor` - Starting point in time of the EVEnergyOffer
+    /// * `time_anchor` - Starting point in time of the `EVEnergyOffer`
     /// * `currency` - Currency code according to ISO 4217
     /// * `price_algorithm` - ISO 15118-20 URN of price algorithm
     /// * `ev_absolute_price_schedule_entries` - List of price schedule entries
@@ -47,6 +47,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A new instance of `EVAbsolutePriceScheduleType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         time_anchor: DateTime<Utc>,
         currency: String,
@@ -71,6 +72,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -80,7 +82,8 @@ impl EVAbsolutePriceScheduleType {
     ///
     /// # Returns
     ///
-    /// The starting point in time of the EVEnergyOffer
+    /// The starting point in time of the `EVEnergyOffer`
+    #[must_use] 
     pub fn time_anchor(&self) -> &DateTime<Utc> {
         &self.time_anchor
     }
@@ -89,7 +92,7 @@ impl EVAbsolutePriceScheduleType {
     ///
     /// # Arguments
     ///
-    /// * `time_anchor` - Starting point in time of the EVEnergyOffer
+    /// * `time_anchor` - Starting point in time of the `EVEnergyOffer`
     ///
     /// # Returns
     ///
@@ -104,6 +107,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// The currency code according to ISO 4217
+    #[must_use] 
     pub fn currency(&self) -> &str {
         &self.currency
     }
@@ -127,6 +131,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// The ISO 15118-20 URN of price algorithm
+    #[must_use] 
     pub fn price_algorithm(&self) -> &str {
         &self.price_algorithm
     }
@@ -150,6 +155,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A reference to the list of price schedule entries
+    #[must_use] 
     pub fn ev_absolute_price_schedule_entries(&self) -> &Vec<EVAbsolutePriceScheduleEntryType> {
         &self.ev_absolute_price_schedule_entries
     }
@@ -176,6 +182,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -195,7 +202,7 @@ impl EVAbsolutePriceScheduleType {
     }
 }
 
-/// Implementation of Default trait for EVAbsolutePriceScheduleType
+/// Implementation of Default trait for `EVAbsolutePriceScheduleType`
 /// Provides a default configuration with EUR currency, "Power" price algorithm,
 /// and a single entry for 1 hour with a price of 0.0
 impl Default for EVAbsolutePriceScheduleType {
@@ -215,7 +222,7 @@ impl Default for EVAbsolutePriceScheduleType {
     }
 }
 
-/// Implementation of Display trait for EVAbsolutePriceScheduleType
+/// Implementation of Display trait for `EVAbsolutePriceScheduleType`
 /// Provides a human-readable representation of the price schedule
 impl fmt::Display for EVAbsolutePriceScheduleType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -229,7 +236,7 @@ impl fmt::Display for EVAbsolutePriceScheduleType {
     }
 }
 
-/// Implementation to convert EVAbsolutePriceScheduleType to a JSON string
+/// Implementation to convert `EVAbsolutePriceScheduleType` to a JSON string
 impl From<EVAbsolutePriceScheduleType> for String {
     fn from(schedule: EVAbsolutePriceScheduleType) -> Self {
         serde_json::to_string(&schedule)
@@ -237,7 +244,7 @@ impl From<EVAbsolutePriceScheduleType> for String {
     }
 }
 
-/// Implementation to try to convert a JSON string to EVAbsolutePriceScheduleType
+/// Implementation to try to convert a JSON string to `EVAbsolutePriceScheduleType`
 impl TryFrom<&str> for EVAbsolutePriceScheduleType {
     type Error = serde_json::Error;
 
@@ -246,7 +253,7 @@ impl TryFrom<&str> for EVAbsolutePriceScheduleType {
     }
 }
 
-/// Implementation to try to convert a JSON string to EVAbsolutePriceScheduleType
+/// Implementation to try to convert a JSON string to `EVAbsolutePriceScheduleType`
 impl TryFrom<String> for EVAbsolutePriceScheduleType {
     type Error = serde_json::Error;
 

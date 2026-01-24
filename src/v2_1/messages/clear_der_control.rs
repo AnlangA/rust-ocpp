@@ -4,7 +4,7 @@ use crate::v2_1::enumerations::der_control::DERControlStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the ClearDERControl request.
+/// Request body for the `ClearDERControl` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearDERControlRequest {
@@ -19,7 +19,7 @@ pub struct ClearDERControlRequest {
     #[validate(length(max = 36))]
     pub control_id: Option<String>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -33,6 +33,7 @@ impl ClearDERControlRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(is_default: bool) -> Self {
         Self {
             is_default,
@@ -42,7 +43,7 @@ impl ClearDERControlRequest {
         }
     }
 
-    /// Sets the is_default field.
+    /// Sets the `is_default` field.
     ///
     /// * `is_default` - True: clearing default DER controls. False: clearing scheduled controls.
     ///
@@ -54,9 +55,9 @@ impl ClearDERControlRequest {
         self
     }
 
-    /// Sets the control_type field.
+    /// Sets the `control_type` field.
     ///
-    /// * `control_type` - The control_type field
+    /// * `control_type` - The `control_type` field
     ///
     /// # Returns
     ///
@@ -66,7 +67,7 @@ impl ClearDERControlRequest {
         self
     }
 
-    /// Sets the control_id field.
+    /// Sets the `control_id` field.
     ///
     /// * `control_id` - Id of control setting to clear. When omitted all settings for _controlType_ are cleared.
     ///
@@ -78,9 +79,9 @@ impl ClearDERControlRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -90,73 +91,80 @@ impl ClearDERControlRequest {
         self
     }
 
-    /// Gets a reference to the is_default field.
+    /// Gets a reference to the `is_default` field.
     ///
     /// # Returns
     ///
     /// True: clearing default DER controls. False: clearing scheduled controls.
+    #[must_use] 
     pub fn get_is_default(&self) -> &bool {
         &self.is_default
     }
 
-    /// Gets a reference to the control_type field.
+    /// Gets a reference to the `control_type` field.
     ///
     /// # Returns
     ///
-    /// The control_type field
+    /// The `control_type` field
+    #[must_use] 
     pub fn get_control_type(&self) -> Option<&DERControlEnumType> {
         self.control_type.as_ref()
     }
 
-    /// Gets a reference to the control_id field.
+    /// Gets a reference to the `control_id` field.
     ///
     /// # Returns
     ///
     /// Id of control setting to clear. When omitted all settings for _controlType_ are cleared.
+    #[must_use] 
     pub fn get_control_id(&self) -> Option<&String> {
         self.control_id.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the control_type field and returns self for builder pattern.
+    /// Sets the `control_type` field and returns self for builder pattern.
     ///
-    /// * `control_type` - The control_type field
+    /// * `control_type` - The `control_type` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_control_type(mut self, control_type: DERControlEnumType) -> Self {
         self.control_type = Some(control_type);
         self
     }
 
-    /// Sets the control_id field and returns self for builder pattern.
+    /// Sets the `control_id` field and returns self for builder pattern.
     ///
     /// * `control_id` - Id of control setting to clear. When omitted all settings for _controlType_ are cleared.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_control_id(mut self, control_id: String) -> Self {
         self.control_id = Some(control_id);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -164,7 +172,7 @@ impl ClearDERControlRequest {
 
 }
 
-/// Response body for the ClearDERControl response.
+/// Response body for the `ClearDERControl` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearDERControlResponse {
@@ -176,7 +184,7 @@ pub struct ClearDERControlResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -190,6 +198,7 @@ impl ClearDERControlResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: DERControlStatusEnumType) -> Self {
         Self {
             status,
@@ -210,9 +219,9 @@ impl ClearDERControlResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -222,9 +231,9 @@ impl ClearDERControlResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -239,47 +248,52 @@ impl ClearDERControlResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &DERControlStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

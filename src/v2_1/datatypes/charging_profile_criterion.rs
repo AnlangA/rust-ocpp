@@ -6,7 +6,7 @@ use crate::v2_1::{
     enumerations::{ChargingLimitSourceEnumType, ChargingProfilePurposeEnumType},
 };
 
-/// A ChargingProfileCriterionType is a filter for charging profiles to be selected by a GetChargingProfilesRequest.
+/// A `ChargingProfileCriterionType` is a filter for charging profiles to be selected by a `GetChargingProfilesRequest`.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ChargingProfileCriterionType {
@@ -19,7 +19,7 @@ pub struct ChargingProfileCriterionType {
     #[validate(range(min = 0))]
     pub stack_level: Option<i32>,
 
-    /// List of all the chargingProfileIds requested. Any ChargingProfile that matches one of these profiles will be reported.
+    /// List of all the chargingProfileIds requested. Any `ChargingProfile` that matches one of these profiles will be reported.
     /// If omitted, the Charging Station SHALL not filter on chargingProfileId.
     /// This field SHALL NOT contain more ids than set in ChargingProfileEntries.maxLimit
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -48,6 +48,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// A new instance of `ChargingProfileCriterionType` with all fields set to `None`
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
@@ -67,6 +68,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_charging_profile_purpose(
         mut self,
         charging_profile_purpose: ChargingProfilePurposeEnumType,
@@ -84,6 +86,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_stack_level(mut self, stack_level: i32) -> Self {
         self.stack_level = Some(stack_level);
         self
@@ -98,6 +101,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_charging_profile_id(mut self, charging_profile_id: Vec<i32>) -> Self {
         self.charging_profile_id = Some(charging_profile_id);
         self
@@ -112,6 +116,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_charging_limit_source(
         mut self,
         charging_limit_source: ChargingLimitSourceEnumType,
@@ -129,6 +134,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -139,6 +145,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// An optional reference to the charging profile purpose
+    #[must_use] 
     pub fn charging_profile_purpose(&self) -> Option<&ChargingProfilePurposeEnumType> {
         self.charging_profile_purpose.as_ref()
     }
@@ -165,6 +172,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// An optional stack level value
+    #[must_use] 
     pub fn stack_level(&self) -> Option<i32> {
         self.stack_level
     }
@@ -188,6 +196,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// An optional reference to the list of charging profile IDs
+    #[must_use] 
     pub fn charging_profile_id(&self) -> Option<&Vec<i32>> {
         self.charging_profile_id.as_ref()
     }
@@ -211,6 +220,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// An optional reference to the charging limit source
+    #[must_use] 
     pub fn charging_limit_source(&self) -> Option<&ChargingLimitSourceEnumType> {
         self.charging_limit_source.as_ref()
     }
@@ -237,6 +247,7 @@ impl ChargingProfileCriterionType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

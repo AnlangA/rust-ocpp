@@ -2,7 +2,7 @@ use crate::v2_1::datatypes::CustomDataType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the NotifyPriorityCharging request.
+/// Request body for the `NotifyPriorityCharging` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyPriorityChargingRequest {
@@ -13,7 +13,7 @@ pub struct NotifyPriorityChargingRequest {
     /// True if priority charging was activated. False if it has stopped using the priority charging profile.
     pub activated: bool,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -28,6 +28,7 @@ impl NotifyPriorityChargingRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(transaction_id: String, activated: bool) -> Self {
         Self {
             transaction_id,
@@ -36,7 +37,7 @@ impl NotifyPriorityChargingRequest {
         }
     }
 
-    /// Sets the transaction_id field.
+    /// Sets the `transaction_id` field.
     ///
     /// * `transaction_id` - The transaction for which priority charging is requested.
     ///
@@ -60,9 +61,9 @@ impl NotifyPriorityChargingRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -72,11 +73,12 @@ impl NotifyPriorityChargingRequest {
         self
     }
 
-    /// Gets a reference to the transaction_id field.
+    /// Gets a reference to the `transaction_id` field.
     ///
     /// # Returns
     ///
     /// The transaction for which priority charging is requested.
+    #[must_use] 
     pub fn get_transaction_id(&self) -> &String {
         &self.transaction_id
     }
@@ -86,26 +88,29 @@ impl NotifyPriorityChargingRequest {
     /// # Returns
     ///
     /// True if priority charging was activated. False if it has stopped using the priority charging profile.
+    #[must_use] 
     pub fn get_activated(&self) -> &bool {
         &self.activated
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -113,11 +118,11 @@ impl NotifyPriorityChargingRequest {
 
 }
 
-/// Response body for the NotifyPriorityCharging response.
+/// Response body for the `NotifyPriorityCharging` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyPriorityChargingResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -136,15 +141,16 @@ impl NotifyPriorityChargingResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -154,22 +160,24 @@ impl NotifyPriorityChargingResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

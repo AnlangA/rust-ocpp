@@ -2,11 +2,11 @@ use crate::v2_1::datatypes::CustomDataType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the ClearedChargingLimit request.
+/// Request body for the `ClearedChargingLimit` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearedChargingLimitRequest {
-    /// Source of the charging limit. Allowed values defined in Appendix as ChargingLimitSourceEnumStringType.
+    /// Source of the charging limit. Allowed values defined in Appendix as `ChargingLimitSourceEnumStringType`.
     #[validate(length(max = 20))]
     pub charging_limit_source: String,
 
@@ -23,11 +23,12 @@ pub struct ClearedChargingLimitRequest {
 impl ClearedChargingLimitRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `charging_limit_source` - Source of the charging limit. Allowed values defined in Appendix as ChargingLimitSourceEnumStringType.
+    /// * `charging_limit_source` - Source of the charging limit. Allowed values defined in Appendix as `ChargingLimitSourceEnumStringType`.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(charging_limit_source: String) -> Self {
         Self {
             charging_limit_source,
@@ -36,9 +37,9 @@ impl ClearedChargingLimitRequest {
         }
     }
 
-    /// Sets the charging_limit_source field.
+    /// Sets the `charging_limit_source` field.
     ///
-    /// * `charging_limit_source` - Source of the charging limit. Allowed values defined in Appendix as ChargingLimitSourceEnumStringType.
+    /// * `charging_limit_source` - Source of the charging limit. Allowed values defined in Appendix as `ChargingLimitSourceEnumStringType`.
     ///
     /// # Returns
     ///
@@ -48,7 +49,7 @@ impl ClearedChargingLimitRequest {
         self
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - EVSE Identifier.
     ///
@@ -60,9 +61,9 @@ impl ClearedChargingLimitRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -72,52 +73,57 @@ impl ClearedChargingLimitRequest {
         self
     }
 
-    /// Gets a reference to the charging_limit_source field.
+    /// Gets a reference to the `charging_limit_source` field.
     ///
     /// # Returns
     ///
-    /// Source of the charging limit. Allowed values defined in Appendix as ChargingLimitSourceEnumStringType.
+    /// Source of the charging limit. Allowed values defined in Appendix as `ChargingLimitSourceEnumStringType`.
+    #[must_use] 
     pub fn get_charging_limit_source(&self) -> &String {
         &self.charging_limit_source
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// EVSE Identifier.
+    #[must_use] 
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the evse_id field and returns self for builder pattern.
+    /// Sets the `evse_id` field and returns self for builder pattern.
     ///
     /// * `evse_id` - EVSE Identifier.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -125,7 +131,7 @@ impl ClearedChargingLimitRequest {
 
 }
 
-/// Response body for the ClearedChargingLimit response.
+/// Response body for the `ClearedChargingLimit` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearedChargingLimitResponse {
@@ -147,15 +153,16 @@ impl ClearedChargingLimitResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -165,22 +172,24 @@ impl ClearedChargingLimitResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

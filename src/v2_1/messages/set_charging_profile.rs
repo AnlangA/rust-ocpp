@@ -3,11 +3,11 @@ use crate::v2_1::enumerations::ChargingProfileStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the SetChargingProfile request.
+/// Request body for the `SetChargingProfile` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetChargingProfileRequest {
-    /// For TxDefaultProfile an evseId=0 applies the profile to each individual evse. For ChargingStationMaxProfile and ChargingStationExternalConstraints an evseId=0 contains an overal limit for the whole Charging Station.
+    /// For `TxDefaultProfile` an evseId=0 applies the profile to each individual evse. For `ChargingStationMaxProfile` and `ChargingStationExternalConstraints` an evseId=0 contains an overal limit for the whole Charging Station.
     #[validate(range(min = 0))]
     pub evse_id: i32,
 
@@ -22,12 +22,13 @@ pub struct SetChargingProfileRequest {
 impl SetChargingProfileRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `evse_id` - For TxDefaultProfile an evseId=0 applies the profile to each individual evse. For ChargingStationMaxProfile and ChargingStationExternalConstraints an evseId=0 contains an overal limit for the whole Charging Station.
-    /// * `charging_profile` - The charging_profile field
+    /// * `evse_id` - For `TxDefaultProfile` an evseId=0 applies the profile to each individual evse. For `ChargingStationMaxProfile` and `ChargingStationExternalConstraints` an evseId=0 contains an overal limit for the whole Charging Station.
+    /// * `charging_profile` - The `charging_profile` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(evse_id: i32, charging_profile: ChargingProfileType) -> Self {
         Self {
             evse_id,
@@ -36,9 +37,9 @@ impl SetChargingProfileRequest {
         }
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
-    /// * `evse_id` - For TxDefaultProfile an evseId=0 applies the profile to each individual evse. For ChargingStationMaxProfile and ChargingStationExternalConstraints an evseId=0 contains an overal limit for the whole Charging Station.
+    /// * `evse_id` - For `TxDefaultProfile` an evseId=0 applies the profile to each individual evse. For `ChargingStationMaxProfile` and `ChargingStationExternalConstraints` an evseId=0 contains an overal limit for the whole Charging Station.
     ///
     /// # Returns
     ///
@@ -48,9 +49,9 @@ impl SetChargingProfileRequest {
         self
     }
 
-    /// Sets the charging_profile field.
+    /// Sets the `charging_profile` field.
     ///
-    /// * `charging_profile` - The charging_profile field
+    /// * `charging_profile` - The `charging_profile` field
     ///
     /// # Returns
     ///
@@ -60,9 +61,9 @@ impl SetChargingProfileRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -72,40 +73,44 @@ impl SetChargingProfileRequest {
         self
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
-    /// For TxDefaultProfile an evseId=0 applies the profile to each individual evse. For ChargingStationMaxProfile and ChargingStationExternalConstraints an evseId=0 contains an overal limit for the whole Charging Station.
+    /// For `TxDefaultProfile` an evseId=0 applies the profile to each individual evse. For `ChargingStationMaxProfile` and `ChargingStationExternalConstraints` an evseId=0 contains an overal limit for the whole Charging Station.
+    #[must_use] 
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
 
-    /// Gets a reference to the charging_profile field.
+    /// Gets a reference to the `charging_profile` field.
     ///
     /// # Returns
     ///
-    /// The charging_profile field
+    /// The `charging_profile` field
+    #[must_use] 
     pub fn get_charging_profile(&self) -> &ChargingProfileType {
         &self.charging_profile
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -113,7 +118,7 @@ impl SetChargingProfileRequest {
 
 }
 
-/// Response body for the SetChargingProfile response.
+/// Response body for the `SetChargingProfile` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetChargingProfileResponse {
@@ -125,7 +130,7 @@ pub struct SetChargingProfileResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -139,6 +144,7 @@ impl SetChargingProfileResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: ChargingProfileStatusEnumType) -> Self {
         Self {
             status,
@@ -159,9 +165,9 @@ impl SetChargingProfileResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -171,9 +177,9 @@ impl SetChargingProfileResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -188,47 +194,52 @@ impl SetChargingProfileResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &ChargingProfileStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

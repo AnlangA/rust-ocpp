@@ -8,7 +8,7 @@ use crate::v2_1::enumerations::CustomerInformationStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the CustomerInformation request.
+/// Request body for the `CustomerInformation` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct CustomerInformationRequest {
@@ -17,7 +17,7 @@ pub struct CustomerInformationRequest {
     #[validate(nested)]
     pub customer_certificate: Option<CertificateHashDataType>,
 
-    /// Provides an IdToken.
+    /// Provides an `IdToken`.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub id_token: Option<IdTokenType>,
@@ -26,18 +26,18 @@ pub struct CustomerInformationRequest {
     #[validate(range(min = 0))]
     pub request_id: i32,
 
-    /// Flag indicating whether the Charging Station should return NotifyCustomerInformationRequest messages containing information about the customer referred to.
+    /// Flag indicating whether the Charging Station should return `NotifyCustomerInformationRequest` messages containing information about the customer referred to.
     pub report: bool,
 
     /// Flag indicating whether the Charging Station should clear all information about the customer referred to.
     pub clear: bool,
 
-    /// A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than IdToken and Certificate. One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
+    /// A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than `IdToken` and Certificate. One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 64))]
     pub customer_identifier: Option<String>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -47,12 +47,13 @@ impl CustomerInformationRequest {
     /// Creates a new instance of the struct.
     ///
     /// * `request_id` - The Id of the request.
-    /// * `report` - Flag indicating whether the Charging Station should return NotifyCustomerInformationRequest messages containing information about the customer referred to.
+    /// * `report` - Flag indicating whether the Charging Station should return `NotifyCustomerInformationRequest` messages containing information about the customer referred to.
     /// * `clear` - Flag indicating whether the Charging Station should clear all information about the customer referred to.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(request_id: i32, report: bool, clear: bool) -> Self {
         Self {
             customer_certificate: None,
@@ -65,9 +66,9 @@ impl CustomerInformationRequest {
         }
     }
 
-    /// Sets the customer_certificate field.
+    /// Sets the `customer_certificate` field.
     ///
-    /// * `customer_certificate` - The customer_certificate field
+    /// * `customer_certificate` - The `customer_certificate` field
     ///
     /// # Returns
     ///
@@ -77,9 +78,9 @@ impl CustomerInformationRequest {
         self
     }
 
-    /// Sets the id_token field.
+    /// Sets the `id_token` field.
     ///
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
@@ -89,7 +90,7 @@ impl CustomerInformationRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
     /// * `request_id` - The Id of the request.
     ///
@@ -103,7 +104,7 @@ impl CustomerInformationRequest {
 
     /// Sets the report field.
     ///
-    /// * `report` - Flag indicating whether the Charging Station should return NotifyCustomerInformationRequest messages containing information about the customer referred to.
+    /// * `report` - Flag indicating whether the Charging Station should return `NotifyCustomerInformationRequest` messages containing information about the customer referred to.
     ///
     /// # Returns
     ///
@@ -125,9 +126,9 @@ impl CustomerInformationRequest {
         self
     }
 
-    /// Sets the customer_identifier field.
+    /// Sets the `customer_identifier` field.
     ///
-    /// * `customer_identifier` - A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than IdToken and Certificate. One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
+    /// * `customer_identifier` - A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than `IdToken` and Certificate. One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
     ///
     /// # Returns
     ///
@@ -137,9 +138,9 @@ impl CustomerInformationRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -149,29 +150,32 @@ impl CustomerInformationRequest {
         self
     }
 
-    /// Gets a reference to the customer_certificate field.
+    /// Gets a reference to the `customer_certificate` field.
     ///
     /// # Returns
     ///
-    /// The customer_certificate field
+    /// The `customer_certificate` field
+    #[must_use] 
     pub fn get_customer_certificate(&self) -> Option<&CertificateHashDataType> {
         self.customer_certificate.as_ref()
     }
 
-    /// Gets a reference to the id_token field.
+    /// Gets a reference to the `id_token` field.
     ///
     /// # Returns
     ///
-    /// The id_token field
+    /// The `id_token` field
+    #[must_use] 
     pub fn get_id_token(&self) -> Option<&IdTokenType> {
         self.id_token.as_ref()
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
     /// The Id of the request.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -180,7 +184,8 @@ impl CustomerInformationRequest {
     ///
     /// # Returns
     ///
-    /// Flag indicating whether the Charging Station should return NotifyCustomerInformationRequest messages containing information about the customer referred to.
+    /// Flag indicating whether the Charging Station should return `NotifyCustomerInformationRequest` messages containing information about the customer referred to.
+    #[must_use] 
     pub fn get_report(&self) -> &bool {
         &self.report
     }
@@ -190,71 +195,78 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// Flag indicating whether the Charging Station should clear all information about the customer referred to.
+    #[must_use] 
     pub fn get_clear(&self) -> &bool {
         &self.clear
     }
 
-    /// Gets a reference to the customer_identifier field.
+    /// Gets a reference to the `customer_identifier` field.
     ///
     /// # Returns
     ///
-    /// A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than IdToken and Certificate. One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
+    /// A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than `IdToken` and Certificate. One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
+    #[must_use] 
     pub fn get_customer_identifier(&self) -> Option<&String> {
         self.customer_identifier.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the customer_certificate field and returns self for builder pattern.
+    /// Sets the `customer_certificate` field and returns self for builder pattern.
     ///
-    /// * `customer_certificate` - The customer_certificate field
+    /// * `customer_certificate` - The `customer_certificate` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_customer_certificate(mut self, customer_certificate: CertificateHashDataType) -> Self {
         self.customer_certificate = Some(customer_certificate);
         self
     }
 
-    /// Sets the id_token field and returns self for builder pattern.
+    /// Sets the `id_token` field and returns self for builder pattern.
     ///
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_id_token(mut self, id_token: IdTokenType) -> Self {
         self.id_token = Some(id_token);
         self
     }
 
-    /// Sets the customer_identifier field and returns self for builder pattern.
+    /// Sets the `customer_identifier` field and returns self for builder pattern.
     ///
-    /// * `customer_identifier` - A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than IdToken and Certificate. One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
+    /// * `customer_identifier` - A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than `IdToken` and Certificate. One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_customer_identifier(mut self, customer_identifier: String) -> Self {
         self.customer_identifier = Some(customer_identifier);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -262,7 +274,7 @@ impl CustomerInformationRequest {
 
 }
 
-/// Response body for the CustomerInformation response.
+/// Response body for the `CustomerInformation` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct CustomerInformationResponse {
@@ -273,7 +285,7 @@ pub struct CustomerInformationResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -287,6 +299,7 @@ impl CustomerInformationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: CustomerInformationStatusEnumType) -> Self {
         Self {
             status,
@@ -307,9 +320,9 @@ impl CustomerInformationResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -319,9 +332,9 @@ impl CustomerInformationResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -336,47 +349,52 @@ impl CustomerInformationResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &CustomerInformationStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

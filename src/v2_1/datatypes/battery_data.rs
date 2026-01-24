@@ -26,7 +26,7 @@ pub fn validate_decimal_range(value: &Decimal) -> Result<(), ValidationError> {
 
 /// Contains EV battery parameters.
 ///
-/// This type represents battery data for an electric vehicle, including state of charge (SoC)
+/// This type represents battery data for an electric vehicle, including state of charge (`SoC`)
 /// at the start and end of charging, battery capacity, and rechargeable energy capacity.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
@@ -77,6 +77,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// A new instance of `BatteryDataType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         evse_id: i32,
         serial_number: String,
@@ -104,6 +105,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_vendor_info(mut self, vendor_info: String) -> Self {
         self.vendor_info = Some(vendor_info);
         self
@@ -118,6 +120,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -128,6 +131,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// The slot number where battery is inserted or removed
+    #[must_use] 
     pub fn evse_id(&self) -> i32 {
         self.evse_id
     }
@@ -151,6 +155,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// The serial number of the battery
+    #[must_use] 
     pub fn serial_number(&self) -> &str {
         &self.serial_number
     }
@@ -174,6 +179,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// The state of charge as a percentage (0-100%)
+    #[must_use] 
     pub fn so_c(&self) -> Decimal {
         self.so_c
     }
@@ -197,6 +203,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// The state of health as a percentage (0-100%)
+    #[must_use] 
     pub fn so_h(&self) -> Decimal {
         self.so_h
     }
@@ -220,6 +227,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// The production date of the battery
+    #[must_use] 
     pub fn production_date(&self) -> &DateTime<Utc> {
         &self.production_date
     }
@@ -243,6 +251,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// An optional reference to the vendor-specific info
+    #[must_use] 
     pub fn vendor_info(&self) -> Option<&String> {
         self.vendor_info.as_ref()
     }
@@ -266,6 +275,7 @@ impl BatteryDataType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

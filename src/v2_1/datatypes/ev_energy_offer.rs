@@ -32,6 +32,7 @@ impl EVEnergyOfferType {
     /// # Returns
     ///
     /// A new instance of `EVEnergyOfferType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         ev_power_schedule: EVPowerScheduleType,
         ev_absolute_price_schedule: EVAbsolutePriceScheduleType,
@@ -52,6 +53,7 @@ impl EVEnergyOfferType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -62,6 +64,7 @@ impl EVEnergyOfferType {
     /// # Returns
     ///
     /// A reference to the power schedule of EV energy offer
+    #[must_use] 
     pub fn ev_power_schedule(&self) -> &EVPowerScheduleType {
         &self.ev_power_schedule
     }
@@ -85,6 +88,7 @@ impl EVEnergyOfferType {
     /// # Returns
     ///
     /// A reference to the price schedule of EV energy offer
+    #[must_use] 
     pub fn ev_absolute_price_schedule(&self) -> &EVAbsolutePriceScheduleType {
         &self.ev_absolute_price_schedule
     }
@@ -111,6 +115,7 @@ impl EVEnergyOfferType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

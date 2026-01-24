@@ -9,7 +9,7 @@ use crate::v2_1::enumerations::{
     LocationEnumType, MeasurandEnumType, PhaseEnumType, ReadingContextEnumType,
 };
 
-/// Single sampled value in MeterValues. Each value can be accompanied by optional fields.
+/// Single sampled value in `MeterValues`. Each value can be accompanied by optional fields.
 ///
 /// To save on mobile data usage, default values of all of the optional fields are such that.
 /// The value without any additional fields will be interpreted, as a register reading of active
@@ -62,6 +62,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// A new instance of `SampledValueType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(value: f64) -> Self {
         Self {
             value,
@@ -80,6 +81,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// The value as a floating-point number
+    #[must_use] 
     pub fn value(&self) -> f64 {
         self.value
     }
@@ -103,6 +105,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// An optional type of measurement value
+    #[must_use] 
     pub fn measurand(&self) -> Option<&MeasurandEnumType> {
         self.measurand.as_ref()
     }
@@ -130,6 +133,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_measurand(mut self, measurand: MeasurandEnumType) -> Self {
         self.measurand = Some(measurand);
         self
@@ -140,6 +144,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// An optional type of detail value
+    #[must_use] 
     pub fn context(&self) -> Option<&ReadingContextEnumType> {
         self.context.as_ref()
     }
@@ -167,6 +172,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_context(mut self, context: ReadingContextEnumType) -> Self {
         self.context = Some(context);
         self
@@ -177,6 +183,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// An optional phase as measured or assumed
+    #[must_use] 
     pub fn phase(&self) -> Option<&PhaseEnumType> {
         self.phase.as_ref()
     }
@@ -204,6 +211,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_phase(mut self, phase: PhaseEnumType) -> Self {
         self.phase = Some(phase);
         self
@@ -214,6 +222,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// An optional location of measurement
+    #[must_use] 
     pub fn location(&self) -> Option<&LocationEnumType> {
         self.location.as_ref()
     }
@@ -241,6 +250,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_location(mut self, location: LocationEnumType) -> Self {
         self.location = Some(location);
         self
@@ -251,6 +261,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// An optional signed version of the meter value
+    #[must_use] 
     pub fn signed_meter_value(&self) -> Option<&SignedMeterValueType> {
         self.signed_meter_value.as_ref()
     }
@@ -281,6 +292,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_signed_meter_value(mut self, signed_meter_value: SignedMeterValueType) -> Self {
         self.signed_meter_value = Some(signed_meter_value);
         self
@@ -291,6 +303,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// An optional unit of the measured value
+    #[must_use] 
     pub fn unit_of_measure(&self) -> Option<&UnitOfMeasureType> {
         self.unit_of_measure.as_ref()
     }
@@ -318,6 +331,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_unit_of_measure(mut self, unit_of_measure: UnitOfMeasureType) -> Self {
         self.unit_of_measure = Some(unit_of_measure);
         self
@@ -328,6 +342,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -355,6 +370,7 @@ impl SampledValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

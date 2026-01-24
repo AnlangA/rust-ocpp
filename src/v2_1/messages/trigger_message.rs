@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::{MessageTriggerEnumType, TriggerMessageStatusEnum
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the TriggerMessage request.
+/// Request body for the `TriggerMessage` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct TriggerMessageRequest {
@@ -26,11 +26,12 @@ pub struct TriggerMessageRequest {
 impl TriggerMessageRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `requested_message` - The requested_message field
+    /// * `requested_message` - The `requested_message` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(requested_message: MessageTriggerEnumType) -> Self {
         Self {
             evse: None,
@@ -52,9 +53,9 @@ impl TriggerMessageRequest {
         self
     }
 
-    /// Sets the requested_message field.
+    /// Sets the `requested_message` field.
     ///
-    /// * `requested_message` - The requested_message field
+    /// * `requested_message` - The `requested_message` field
     ///
     /// # Returns
     ///
@@ -64,7 +65,7 @@ impl TriggerMessageRequest {
         self
     }
 
-    /// Sets the custom_trigger field.
+    /// Sets the `custom_trigger` field.
     ///
     /// * `custom_trigger` - *(2.1)* When _requestedMessage_ = `CustomTrigger` this will trigger sending the corresponding message in field _customTrigger_, if supported by Charging Station.
     ///
@@ -76,9 +77,9 @@ impl TriggerMessageRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -93,33 +94,37 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// The evse field
+    #[must_use] 
     pub fn get_evse(&self) -> Option<&EVSEType> {
         self.evse.as_ref()
     }
 
-    /// Gets a reference to the requested_message field.
+    /// Gets a reference to the `requested_message` field.
     ///
     /// # Returns
     ///
-    /// The requested_message field
+    /// The `requested_message` field
+    #[must_use] 
     pub fn get_requested_message(&self) -> &MessageTriggerEnumType {
         &self.requested_message
     }
 
-    /// Gets a reference to the custom_trigger field.
+    /// Gets a reference to the `custom_trigger` field.
     ///
     /// # Returns
     ///
     /// *(2.1)* When _requestedMessage_ = `CustomTrigger` this will trigger sending the corresponding message in field _customTrigger_, if supported by Charging Station.
+    #[must_use] 
     pub fn get_custom_trigger(&self) -> Option<&String> {
         self.custom_trigger.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -131,30 +136,33 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse(mut self, evse: EVSEType) -> Self {
         self.evse = Some(evse);
         self
     }
 
-    /// Sets the custom_trigger field and returns self for builder pattern.
+    /// Sets the `custom_trigger` field and returns self for builder pattern.
     ///
     /// * `custom_trigger` - *(2.1)* When _requestedMessage_ = `CustomTrigger` this will trigger sending the corresponding message in field _customTrigger_, if supported by Charging Station.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_trigger(mut self, custom_trigger: String) -> Self {
         self.custom_trigger = Some(custom_trigger);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -162,7 +170,7 @@ impl TriggerMessageRequest {
 
 }
 
-/// Response body for the TriggerMessage response.
+/// Response body for the `TriggerMessage` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct TriggerMessageResponse {
@@ -185,6 +193,7 @@ impl TriggerMessageResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: TriggerMessageStatusEnumType) -> Self {
         Self {
             status,
@@ -205,9 +214,9 @@ impl TriggerMessageResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -217,9 +226,9 @@ impl TriggerMessageResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -234,47 +243,52 @@ impl TriggerMessageResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &TriggerMessageStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

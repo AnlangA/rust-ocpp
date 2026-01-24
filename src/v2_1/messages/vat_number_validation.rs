@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::GenericStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the VatNumberValidation request.
+/// Request body for the `VatNumberValidation` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct VatNumberValidationRequest {
@@ -29,6 +29,7 @@ impl VatNumberValidationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(vat_number: String) -> Self {
         Self {
             vat_number,
@@ -37,7 +38,7 @@ impl VatNumberValidationRequest {
         }
     }
 
-    /// Sets the vat_number field.
+    /// Sets the `vat_number` field.
     ///
     /// * `vat_number` - VAT number to check.
     ///
@@ -49,7 +50,7 @@ impl VatNumberValidationRequest {
         self
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - EVSE id for which check is done
     ///
@@ -61,9 +62,9 @@ impl VatNumberValidationRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -73,52 +74,57 @@ impl VatNumberValidationRequest {
         self
     }
 
-    /// Gets a reference to the vat_number field.
+    /// Gets a reference to the `vat_number` field.
     ///
     /// # Returns
     ///
     /// VAT number to check.
+    #[must_use] 
     pub fn get_vat_number(&self) -> &String {
         &self.vat_number
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// EVSE id for which check is done
+    #[must_use] 
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the evse_id field and returns self for builder pattern.
+    /// Sets the `evse_id` field and returns self for builder pattern.
     ///
     /// * `evse_id` - EVSE id for which check is done
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -126,7 +132,7 @@ impl VatNumberValidationRequest {
 
 }
 
-/// Response body for the VatNumberValidation response.
+/// Response body for the `VatNumberValidation` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct VatNumberValidationResponse {
@@ -163,6 +169,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(vat_number: String, status: GenericStatusEnumType) -> Self {
         Self {
             company: None,
@@ -186,9 +193,9 @@ impl VatNumberValidationResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -198,7 +205,7 @@ impl VatNumberValidationResponse {
         self
     }
 
-    /// Sets the vat_number field.
+    /// Sets the `vat_number` field.
     ///
     /// * `vat_number` - VAT number that was requested.
     ///
@@ -210,7 +217,7 @@ impl VatNumberValidationResponse {
         self
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - EVSE id for which check was requested.
     ///
@@ -234,9 +241,9 @@ impl VatNumberValidationResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -251,33 +258,37 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// The company field
+    #[must_use] 
     pub fn get_company(&self) -> Option<&AddressType> {
         self.company.as_ref()
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the vat_number field.
+    /// Gets a reference to the `vat_number` field.
     ///
     /// # Returns
     ///
     /// VAT number that was requested.
+    #[must_use] 
     pub fn get_vat_number(&self) -> &String {
         &self.vat_number
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// EVSE id for which check was requested.
+    #[must_use] 
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -287,15 +298,17 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -307,42 +320,46 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_company(mut self, company: AddressType) -> Self {
         self.company = Some(company);
         self
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the evse_id field and returns self for builder pattern.
+    /// Sets the `evse_id` field and returns self for builder pattern.
     ///
     /// * `evse_id` - EVSE id for which check was requested.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

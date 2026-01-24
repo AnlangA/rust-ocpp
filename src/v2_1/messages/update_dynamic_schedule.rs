@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::ChargingProfileStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the UpdateDynamicSchedule request.
+/// Request body for the `UpdateDynamicSchedule` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateDynamicScheduleRequest {
@@ -23,11 +23,12 @@ impl UpdateDynamicScheduleRequest {
     /// Creates a new instance of the struct.
     ///
     /// * `charging_profile_id` - Id of charging profile to update.
-    /// * `schedule_update` - The schedule_update field
+    /// * `schedule_update` - The `schedule_update` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(charging_profile_id: i32, schedule_update: ChargingScheduleUpdateType) -> Self {
         Self {
             charging_profile_id,
@@ -36,7 +37,7 @@ impl UpdateDynamicScheduleRequest {
         }
     }
 
-    /// Sets the charging_profile_id field.
+    /// Sets the `charging_profile_id` field.
     ///
     /// * `charging_profile_id` - Id of charging profile to update.
     ///
@@ -48,9 +49,9 @@ impl UpdateDynamicScheduleRequest {
         self
     }
 
-    /// Sets the schedule_update field.
+    /// Sets the `schedule_update` field.
     ///
-    /// * `schedule_update` - The schedule_update field
+    /// * `schedule_update` - The `schedule_update` field
     ///
     /// # Returns
     ///
@@ -60,9 +61,9 @@ impl UpdateDynamicScheduleRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -72,40 +73,44 @@ impl UpdateDynamicScheduleRequest {
         self
     }
 
-    /// Gets a reference to the charging_profile_id field.
+    /// Gets a reference to the `charging_profile_id` field.
     ///
     /// # Returns
     ///
     /// Id of charging profile to update.
+    #[must_use] 
     pub fn get_charging_profile_id(&self) -> &i32 {
         &self.charging_profile_id
     }
 
-    /// Gets a reference to the schedule_update field.
+    /// Gets a reference to the `schedule_update` field.
     ///
     /// # Returns
     ///
-    /// The schedule_update field
+    /// The `schedule_update` field
+    #[must_use] 
     pub fn get_schedule_update(&self) -> &ChargingScheduleUpdateType {
         &self.schedule_update
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -113,7 +118,7 @@ impl UpdateDynamicScheduleRequest {
 
 }
 
-/// Response body for the UpdateDynamicSchedule response.
+/// Response body for the `UpdateDynamicSchedule` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct UpdateDynamicScheduleResponse {
@@ -136,6 +141,7 @@ impl UpdateDynamicScheduleResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: ChargingProfileStatusEnumType) -> Self {
         Self {
             status,
@@ -156,9 +162,9 @@ impl UpdateDynamicScheduleResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -168,9 +174,9 @@ impl UpdateDynamicScheduleResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -185,47 +191,52 @@ impl UpdateDynamicScheduleResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &ChargingProfileStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

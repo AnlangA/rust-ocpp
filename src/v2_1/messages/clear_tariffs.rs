@@ -2,7 +2,7 @@ use crate::v2_1::datatypes::{ClearTariffsResultType, CustomDataType};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the ClearTariffs request.
+/// Request body for the `ClearTariffs` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearTariffsRequest {
@@ -16,7 +16,7 @@ pub struct ClearTariffsRequest {
     #[validate(range(min = 0))]
     pub evse_id: Option<i32>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -35,6 +35,7 @@ impl ClearTariffsRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             tariff_ids: None,
@@ -43,7 +44,7 @@ impl ClearTariffsRequest {
         }
     }
 
-    /// Sets the tariff_ids field.
+    /// Sets the `tariff_ids` field.
     ///
     /// * `tariff_ids` - List of tariff Ids to clear. When absent clears all tariffs at _evseId_.
     ///
@@ -55,7 +56,7 @@ impl ClearTariffsRequest {
         self
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - When present only clear tariffs matching _tariffIds_ at EVSE _evseId_.
     ///
@@ -67,9 +68,9 @@ impl ClearTariffsRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -79,64 +80,70 @@ impl ClearTariffsRequest {
         self
     }
 
-    /// Gets a reference to the tariff_ids field.
+    /// Gets a reference to the `tariff_ids` field.
     ///
     /// # Returns
     ///
     /// List of tariff Ids to clear. When absent clears all tariffs at _evseId_.
+    #[must_use] 
     pub fn get_tariff_ids(&self) -> Option<&Vec<String>> {
         self.tariff_ids.as_ref()
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// When present only clear tariffs matching _tariffIds_ at EVSE _evseId_.
+    #[must_use] 
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the tariff_ids field and returns self for builder pattern.
+    /// Sets the `tariff_ids` field and returns self for builder pattern.
     ///
     /// * `tariff_ids` - List of tariff Ids to clear. When absent clears all tariffs at _evseId_.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_tariff_ids(mut self, tariff_ids: Vec<String>) -> Self {
         self.tariff_ids = Some(tariff_ids);
         self
     }
 
-    /// Sets the evse_id field and returns self for builder pattern.
+    /// Sets the `evse_id` field and returns self for builder pattern.
     ///
     /// * `evse_id` - When present only clear tariffs matching _tariffIds_ at EVSE _evseId_.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -144,7 +151,7 @@ impl ClearTariffsRequest {
 
 }
 
-/// Response body for the ClearTariffs response.
+/// Response body for the `ClearTariffs` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearTariffsResponse {
@@ -152,7 +159,7 @@ pub struct ClearTariffsResponse {
     #[validate(nested)]
     pub clear_tariffs_result: Vec<ClearTariffsResultType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -161,11 +168,12 @@ pub struct ClearTariffsResponse {
 impl ClearTariffsResponse {
     /// Creates a new instance of the struct.
     ///
-    /// * `clear_tariffs_result` - The clear_tariffs_result field
+    /// * `clear_tariffs_result` - The `clear_tariffs_result` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(clear_tariffs_result: Vec<ClearTariffsResultType>) -> Self {
         Self {
             clear_tariffs_result,
@@ -173,9 +181,9 @@ impl ClearTariffsResponse {
         }
     }
 
-    /// Sets the clear_tariffs_result field.
+    /// Sets the `clear_tariffs_result` field.
     ///
-    /// * `clear_tariffs_result` - The clear_tariffs_result field
+    /// * `clear_tariffs_result` - The `clear_tariffs_result` field
     ///
     /// # Returns
     ///
@@ -185,9 +193,9 @@ impl ClearTariffsResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -197,31 +205,34 @@ impl ClearTariffsResponse {
         self
     }
 
-    /// Gets a reference to the clear_tariffs_result field.
+    /// Gets a reference to the `clear_tariffs_result` field.
     ///
     /// # Returns
     ///
-    /// The clear_tariffs_result field
+    /// The `clear_tariffs_result` field
+    #[must_use] 
     pub fn get_clear_tariffs_result(&self) -> &Vec<ClearTariffsResultType> {
         &self.clear_tariffs_result
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

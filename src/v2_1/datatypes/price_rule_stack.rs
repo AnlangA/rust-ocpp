@@ -32,6 +32,7 @@ impl PriceRuleStackType {
     /// # Returns
     ///
     /// A new instance of `PriceRuleStackType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(duration: i32, price_rules: Vec<PriceRuleType>) -> Self {
         Self {
             custom_data: None,
@@ -49,6 +50,7 @@ impl PriceRuleStackType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -59,6 +61,7 @@ impl PriceRuleStackType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -82,6 +85,7 @@ impl PriceRuleStackType {
     /// # Returns
     ///
     /// The duration in seconds after which the price rule becomes active
+    #[must_use] 
     pub fn duration(&self) -> i32 {
         self.duration
     }
@@ -105,6 +109,7 @@ impl PriceRuleStackType {
     /// # Returns
     ///
     /// Reference to the list of price rules that are part of the stack
+    #[must_use] 
     pub fn price_rules(&self) -> &[PriceRuleType] {
         &self.price_rules
     }

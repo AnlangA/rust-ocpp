@@ -3,11 +3,11 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the NotifyReport request.
+/// Request body for the `NotifyReport` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyReportRequest {
-    /// The id of the GetReportRequest  or GetBaseReportRequest that requested this report
+    /// The id of the `GetReportRequest`  or `GetBaseReportRequest` that requested this report
     pub request_id: i32,
 
     /// Timestamp of the moment this message was generated at the Charging Station.
@@ -26,7 +26,7 @@ pub struct NotifyReportRequest {
     #[validate(range(min = 0))]
     pub seq_no: i32,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -35,13 +35,14 @@ pub struct NotifyReportRequest {
 impl NotifyReportRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `request_id` - The id of the GetReportRequest  or GetBaseReportRequest that requested this report
+    /// * `request_id` - The id of the `GetReportRequest`  or `GetBaseReportRequest` that requested this report
     /// * `generated_at` - Timestamp of the moment this message was generated at the Charging Station.
     /// * `seq_no` - Sequence number of this message. First message starts at 0.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(request_id: i32, generated_at: DateTime<Utc>, seq_no: i32) -> Self {
         Self {
             request_id,
@@ -53,9 +54,9 @@ impl NotifyReportRequest {
         }
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
-    /// * `request_id` - The id of the GetReportRequest  or GetBaseReportRequest that requested this report
+    /// * `request_id` - The id of the `GetReportRequest`  or `GetBaseReportRequest` that requested this report
     ///
     /// # Returns
     ///
@@ -65,7 +66,7 @@ impl NotifyReportRequest {
         self
     }
 
-    /// Sets the generated_at field.
+    /// Sets the `generated_at` field.
     ///
     /// * `generated_at` - Timestamp of the moment this message was generated at the Charging Station.
     ///
@@ -77,9 +78,9 @@ impl NotifyReportRequest {
         self
     }
 
-    /// Sets the report_data field.
+    /// Sets the `report_data` field.
     ///
-    /// * `report_data` - The report_data field
+    /// * `report_data` - The `report_data` field
     ///
     /// # Returns
     ///
@@ -101,7 +102,7 @@ impl NotifyReportRequest {
         self
     }
 
-    /// Sets the seq_no field.
+    /// Sets the `seq_no` field.
     ///
     /// * `seq_no` - Sequence number of this message. First message starts at 0.
     ///
@@ -113,9 +114,9 @@ impl NotifyReportRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -125,29 +126,32 @@ impl NotifyReportRequest {
         self
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
-    /// The id of the GetReportRequest  or GetBaseReportRequest that requested this report
+    /// The id of the `GetReportRequest`  or `GetBaseReportRequest` that requested this report
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
 
-    /// Gets a reference to the generated_at field.
+    /// Gets a reference to the `generated_at` field.
     ///
     /// # Returns
     ///
     /// Timestamp of the moment this message was generated at the Charging Station.
+    #[must_use] 
     pub fn get_generated_at(&self) -> &DateTime<Utc> {
         &self.generated_at
     }
 
-    /// Gets a reference to the report_data field.
+    /// Gets a reference to the `report_data` field.
     ///
     /// # Returns
     ///
-    /// The report_data field
+    /// The `report_data` field
+    #[must_use] 
     pub fn get_report_data(&self) -> Option<&Vec<ReportDataType>> {
         self.report_data.as_ref()
     }
@@ -157,35 +161,39 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// “to be continued” indicator. Indicates whether another part of the report follows in an upcoming notifyReportRequest message. Default value when omitted is false.
+    #[must_use] 
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
 
-    /// Gets a reference to the seq_no field.
+    /// Gets a reference to the `seq_no` field.
     ///
     /// # Returns
     ///
     /// Sequence number of this message. First message starts at 0.
+    #[must_use] 
     pub fn get_seq_no(&self) -> &i32 {
         &self.seq_no
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the report_data field and returns self for builder pattern.
+    /// Sets the `report_data` field and returns self for builder pattern.
     ///
-    /// * `report_data` - The report_data field
+    /// * `report_data` - The `report_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_report_data(mut self, report_data: Vec<ReportDataType>) -> Self {
         self.report_data = Some(report_data);
         self
@@ -198,18 +206,20 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -217,11 +227,11 @@ impl NotifyReportRequest {
 
 }
 
-/// Response body for the NotifyReport response.
+/// Response body for the `NotifyReport` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyReportResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -240,15 +250,16 @@ impl NotifyReportResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -258,22 +269,24 @@ impl NotifyReportResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

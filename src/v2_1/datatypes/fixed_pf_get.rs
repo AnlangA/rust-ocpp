@@ -42,6 +42,7 @@ impl FixedPFGetType {
     /// # Returns
     ///
     /// A new instance of `FixedPFGetType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(fixed_pf: FixedPFType, id: String, is_superseded: bool, is_default: bool) -> Self {
         Self {
             fixed_pf,
@@ -61,6 +62,7 @@ impl FixedPFGetType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -71,6 +73,7 @@ impl FixedPFGetType {
     /// # Returns
     ///
     /// A reference to the fixed power factor settings
+    #[must_use] 
     pub fn fixed_pf(&self) -> &FixedPFType {
         &self.fixed_pf
     }
@@ -94,6 +97,7 @@ impl FixedPFGetType {
     /// # Returns
     ///
     /// A reference to the ID of the setting
+    #[must_use] 
     pub fn id(&self) -> &str {
         &self.id
     }
@@ -117,6 +121,7 @@ impl FixedPFGetType {
     /// # Returns
     ///
     /// True if this setting is superseded by a higher priority setting
+    #[must_use] 
     pub fn is_superseded(&self) -> bool {
         self.is_superseded
     }
@@ -140,6 +145,7 @@ impl FixedPFGetType {
     /// # Returns
     ///
     /// True if this is a default setting
+    #[must_use] 
     pub fn is_default(&self) -> bool {
         self.is_default
     }
@@ -163,6 +169,7 @@ impl FixedPFGetType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -182,7 +189,7 @@ impl FixedPFGetType {
     }
 }
 
-/// Implementation of the Display trait for FixedPFGetType
+/// Implementation of the Display trait for `FixedPFGetType`
 impl fmt::Display for FixedPFGetType {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(
@@ -198,8 +205,8 @@ impl fmt::Display for FixedPFGetType {
     }
 }
 
-/// Implementation of the From<FixedPFType> trait for FixedPFGetType
-/// This allows easy conversion from a FixedPFType to a FixedPFGetType
+/// Implementation of the From<FixedPFType> trait for `FixedPFGetType`
+/// This allows easy conversion from a `FixedPFType` to a `FixedPFGetType`
 impl From<FixedPFType> for FixedPFGetType {
     fn from(fixed_pf: FixedPFType) -> Self {
         Self {

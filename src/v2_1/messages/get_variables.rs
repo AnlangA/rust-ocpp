@@ -2,7 +2,7 @@ use crate::v2_1::datatypes::{CustomDataType, GetVariableDataType, GetVariableRes
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the GetVariables request.
+/// Request body for the `GetVariables` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetVariablesRequest {
@@ -10,7 +10,7 @@ pub struct GetVariablesRequest {
     #[validate(nested)]
     pub get_variable_data: Vec<GetVariableDataType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -19,11 +19,12 @@ pub struct GetVariablesRequest {
 impl GetVariablesRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `get_variable_data` - The get_variable_data field
+    /// * `get_variable_data` - The `get_variable_data` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(get_variable_data: Vec<GetVariableDataType>) -> Self {
         Self {
             get_variable_data,
@@ -31,9 +32,9 @@ impl GetVariablesRequest {
         }
     }
 
-    /// Sets the get_variable_data field.
+    /// Sets the `get_variable_data` field.
     ///
-    /// * `get_variable_data` - The get_variable_data field
+    /// * `get_variable_data` - The `get_variable_data` field
     ///
     /// # Returns
     ///
@@ -43,9 +44,9 @@ impl GetVariablesRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -55,31 +56,34 @@ impl GetVariablesRequest {
         self
     }
 
-    /// Gets a reference to the get_variable_data field.
+    /// Gets a reference to the `get_variable_data` field.
     ///
     /// # Returns
     ///
-    /// The get_variable_data field
+    /// The `get_variable_data` field
+    #[must_use] 
     pub fn get_get_variable_data(&self) -> &Vec<GetVariableDataType> {
         &self.get_variable_data
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -87,7 +91,7 @@ impl GetVariablesRequest {
 
 }
 
-/// Response body for the GetVariables response.
+/// Response body for the `GetVariables` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetVariablesResponse {
@@ -95,7 +99,7 @@ pub struct GetVariablesResponse {
     #[validate(nested)]
     pub get_variable_result: Vec<GetVariableResultType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -104,11 +108,12 @@ pub struct GetVariablesResponse {
 impl GetVariablesResponse {
     /// Creates a new instance of the struct.
     ///
-    /// * `get_variable_result` - The get_variable_result field
+    /// * `get_variable_result` - The `get_variable_result` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(get_variable_result: Vec<GetVariableResultType>) -> Self {
         Self {
             get_variable_result,
@@ -116,9 +121,9 @@ impl GetVariablesResponse {
         }
     }
 
-    /// Sets the get_variable_result field.
+    /// Sets the `get_variable_result` field.
     ///
-    /// * `get_variable_result` - The get_variable_result field
+    /// * `get_variable_result` - The `get_variable_result` field
     ///
     /// # Returns
     ///
@@ -128,9 +133,9 @@ impl GetVariablesResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -140,31 +145,34 @@ impl GetVariablesResponse {
         self
     }
 
-    /// Gets a reference to the get_variable_result field.
+    /// Gets a reference to the `get_variable_result` field.
     ///
     /// # Returns
     ///
-    /// The get_variable_result field
+    /// The `get_variable_result` field
+    #[must_use] 
     pub fn get_get_variable_result(&self) -> &Vec<GetVariableResultType> {
         &self.get_variable_result
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

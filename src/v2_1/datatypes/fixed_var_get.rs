@@ -3,7 +3,7 @@ use super::{custom_data::CustomDataType, fixed_var::FixedVarType};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Fixed VAr get type for retrieving fixed VAr settings.
+/// Fixed `VAr` get type for retrieving fixed `VAr` settings.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct FixedVarGetType {
@@ -17,7 +17,7 @@ pub struct FixedVarGetType {
     /// True if this setting is superseded by a lower priority setting
     pub is_superseded: bool,
 
-    /// The fixed VAr settings.
+    /// The fixed `VAr` settings.
     #[validate(nested)]
     pub fixed_var: FixedVarType,
 
@@ -32,7 +32,7 @@ impl FixedVarGetType {
     ///
     /// # Arguments
     ///
-    /// * `fixed_var` - The fixed VAr settings
+    /// * `fixed_var` - The fixed `VAr` settings
     /// * `id` - Id of the setting
     /// * `is_superseded` - True if this setting is superseded by a higher priority setting
     ///
@@ -40,6 +40,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// A new instance of `FixedVarGetType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(fixed_var: FixedVarType, id: String, is_superseded: bool, is_default: bool) -> Self {
         Self {
             fixed_var,
@@ -54,30 +55,32 @@ impl FixedVarGetType {
     ///
     /// # Arguments
     ///
-    /// * `custom_data` - Custom data for this fixed VAr get
+    /// * `custom_data` - Custom data for this fixed `VAr` get
     ///
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
 
-    /// Gets the fixed VAr settings.
+    /// Gets the fixed `VAr` settings.
     ///
     /// # Returns
     ///
-    /// A reference to the fixed VAr settings
+    /// A reference to the fixed `VAr` settings
+    #[must_use] 
     pub fn fixed_var(&self) -> &FixedVarType {
         &self.fixed_var
     }
 
-    /// Sets the fixed VAr settings.
+    /// Sets the fixed `VAr` settings.
     ///
     /// # Arguments
     ///
-    /// * `fixed_var` - The fixed VAr settings
+    /// * `fixed_var` - The fixed `VAr` settings
     ///
     /// # Returns
     ///
@@ -92,6 +95,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// A reference to the ID of the setting
+    #[must_use] 
     pub fn id(&self) -> &str {
         &self.id
     }
@@ -115,6 +119,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// True if this setting is superseded by a higher priority setting
+    #[must_use] 
     pub fn is_superseded(&self) -> bool {
         self.is_superseded
     }
@@ -138,6 +143,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// True if setting is a default control
+    #[must_use] 
     pub fn is_default(&self) -> bool {
         self.is_default
     }
@@ -161,6 +167,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -169,7 +176,7 @@ impl FixedVarGetType {
     ///
     /// # Arguments
     ///
-    /// * `custom_data` - Custom data for this fixed VAr get, or None to clear
+    /// * `custom_data` - Custom data for this fixed `VAr` get, or None to clear
     ///
     /// # Returns
     ///

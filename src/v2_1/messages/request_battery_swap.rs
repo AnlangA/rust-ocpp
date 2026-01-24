@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::GenericStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the BatterySwap request.
+/// Request body for the `BatterySwap` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct RequestBatterySwapRequest {
@@ -11,10 +11,10 @@ pub struct RequestBatterySwapRequest {
     #[validate(nested)]
     pub id_token: IdTokenType,
 
-    /// Request id to match with BatterySwapRequest.
+    /// Request id to match with `BatterySwapRequest`.
     pub request_id: i32,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -23,12 +23,13 @@ pub struct RequestBatterySwapRequest {
 impl RequestBatterySwapRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `id_token` - The id_token field
-    /// * `request_id` - Request id to match with BatterySwapRequest.
+    /// * `id_token` - The `id_token` field
+    /// * `request_id` - Request id to match with `BatterySwapRequest`.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(id_token: IdTokenType, request_id: i32) -> Self {
         Self {
             id_token,
@@ -37,9 +38,9 @@ impl RequestBatterySwapRequest {
         }
     }
 
-    /// Sets the id_token field.
+    /// Sets the `id_token` field.
     ///
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
@@ -49,9 +50,9 @@ impl RequestBatterySwapRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
-    /// * `request_id` - Request id to match with BatterySwapRequest.
+    /// * `request_id` - Request id to match with `BatterySwapRequest`.
     ///
     /// # Returns
     ///
@@ -61,9 +62,9 @@ impl RequestBatterySwapRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -73,40 +74,44 @@ impl RequestBatterySwapRequest {
         self
     }
 
-    /// Gets a reference to the id_token field.
+    /// Gets a reference to the `id_token` field.
     ///
     /// # Returns
     ///
-    /// The id_token field
+    /// The `id_token` field
+    #[must_use] 
     pub fn get_id_token(&self) -> &IdTokenType {
         &self.id_token
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
-    /// Request id to match with BatterySwapRequest.
+    /// Request id to match with `BatterySwapRequest`.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -114,7 +119,7 @@ impl RequestBatterySwapRequest {
 
 }
 
-/// Response body for the BatterySwap response.
+/// Response body for the `BatterySwap` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct RequestBatterySwapResponse {
@@ -126,7 +131,7 @@ pub struct RequestBatterySwapResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -140,6 +145,7 @@ impl RequestBatterySwapResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -160,9 +166,9 @@ impl RequestBatterySwapResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -172,9 +178,9 @@ impl RequestBatterySwapResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -189,47 +195,52 @@ impl RequestBatterySwapResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

@@ -3,7 +3,7 @@ use validator::Validate;
 
 use super::{apn::APNType, custom_data::CustomDataType, vpn::VPNType};
 
-/// The NetworkConnectionProfile defines the functional and technical parameters of a communication link.
+/// The `NetworkConnectionProfile` defines the functional and technical parameters of a communication link.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NetworkConnectionProfileType {
@@ -26,7 +26,7 @@ pub struct NetworkConnectionProfileType {
     /// The best setting depends on the underlying network and response times of the CSMS. A starting point could be 30 seconds.
     pub message_timeout: i32,
 
-    /// Required. The security profile used when connecting to the CSMS with this NetworkConnectionProfile.
+    /// Required. The security profile used when connecting to the CSMS with this `NetworkConnectionProfile`.
     pub security_profile: i32,
 
     /// Required. Defines the transport protocol (e.g. SOAP or JSON). Note: SOAP is not supported in OCPP 2.x, but is supported by earlier versions.
@@ -45,7 +45,7 @@ pub struct NetworkConnectionProfileType {
     #[validate(length(max = 48))]
     pub identity: Option<String>,
 
-    /// Optional. BasicAuthPassword to use for security profile 1 or 2 (specific to OCPP 2.1).
+    /// Optional. `BasicAuthPassword` to use for security profile 1 or 2 (specific to OCPP 2.1).
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 64))]
     pub basic_auth_password: Option<String>,
@@ -76,6 +76,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// A new instance of `NetworkConnectionProfileType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         ocpp_interface: String,
         ocpp_transport: String,
@@ -108,6 +109,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// Self for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -122,6 +124,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// Self for method chaining
+    #[must_use] 
     pub fn with_apn(mut self, apn: APNType) -> Self {
         self.apn = Some(apn);
         self
@@ -136,6 +139,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// Self for method chaining
+    #[must_use] 
     pub fn with_vpn(mut self, vpn: VPNType) -> Self {
         self.vpn = Some(vpn);
         self
@@ -150,6 +154,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// Self for method chaining
+    #[must_use] 
     pub fn with_identity(mut self, identity: String) -> Self {
         self.identity = Some(identity);
         self
@@ -164,6 +169,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// Self for method chaining
+    #[must_use] 
     pub fn with_basic_auth_password(mut self, basic_auth_password: String) -> Self {
         self.basic_auth_password = Some(basic_auth_password);
         self
@@ -174,6 +180,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// An optional reference to the APN configuration
+    #[must_use] 
     pub fn apn(&self) -> Option<&APNType> {
         self.apn.as_ref()
     }
@@ -197,6 +204,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// The URL of the CSMS that this Charging Station communicates with
+    #[must_use] 
     pub fn ocpp_csms_url(&self) -> &str {
         &self.ocpp_csms_url
     }
@@ -220,6 +228,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// The applicable network interface used by OCPP
+    #[must_use] 
     pub fn ocpp_interface(&self) -> &str {
         &self.ocpp_interface
     }
@@ -243,6 +252,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// Duration in seconds before a message times-out
+    #[must_use] 
     pub fn message_timeout(&self) -> i32 {
         self.message_timeout
     }
@@ -266,6 +276,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// The security profile used when connecting to the CSMS
+    #[must_use] 
     pub fn security_profile(&self) -> i32 {
         self.security_profile
     }
@@ -289,6 +300,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// The transport protocol used by OCPP
+    #[must_use] 
     pub fn ocpp_transport(&self) -> &str {
         &self.ocpp_transport
     }
@@ -312,6 +324,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// The OCPP version used (ignored, determined during websocket handshake)
+    #[must_use] 
     pub fn ocpp_version(&self) -> &str {
         &self.ocpp_version
     }
@@ -335,6 +348,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// An optional reference to the identity string
+    #[must_use] 
     pub fn identity(&self) -> Option<&str> {
         self.identity.as_deref()
     }
@@ -358,6 +372,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// An optional reference to the basic authentication password
+    #[must_use] 
     pub fn basic_auth_password(&self) -> Option<&str> {
         self.basic_auth_password.as_deref()
     }
@@ -381,6 +396,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// An optional reference to the VPN configuration
+    #[must_use] 
     pub fn vpn(&self) -> Option<&VPNType> {
         self.vpn.as_ref()
     }
@@ -404,6 +420,7 @@ impl NetworkConnectionProfileType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

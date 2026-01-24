@@ -4,7 +4,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the StatusNotification request.
+/// Request body for the `StatusNotification` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct StatusNotificationRequest {
@@ -30,13 +30,14 @@ impl StatusNotificationRequest {
     /// Creates a new instance of the struct.
     ///
     /// * `timestamp` - The time for which the status is reported.
-    /// * `connector_status` - The connector_status field
+    /// * `connector_status` - The `connector_status` field
     /// * `evse_id` - The id of the EVSE to which the connector belongs for which the the status is reported.
     /// * `connector_id` - The id of the connector within the EVSE for which the status is reported.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(timestamp: DateTime<Utc>, connector_status: ConnectorStatusEnumType, evse_id: i32, connector_id: i32) -> Self {
         Self {
             timestamp,
@@ -59,9 +60,9 @@ impl StatusNotificationRequest {
         self
     }
 
-    /// Sets the connector_status field.
+    /// Sets the `connector_status` field.
     ///
-    /// * `connector_status` - The connector_status field
+    /// * `connector_status` - The `connector_status` field
     ///
     /// # Returns
     ///
@@ -71,7 +72,7 @@ impl StatusNotificationRequest {
         self
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - The id of the EVSE to which the connector belongs for which the the status is reported.
     ///
@@ -83,7 +84,7 @@ impl StatusNotificationRequest {
         self
     }
 
-    /// Sets the connector_id field.
+    /// Sets the `connector_id` field.
     ///
     /// * `connector_id` - The id of the connector within the EVSE for which the status is reported.
     ///
@@ -95,9 +96,9 @@ impl StatusNotificationRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -112,53 +113,59 @@ impl StatusNotificationRequest {
     /// # Returns
     ///
     /// The time for which the status is reported.
+    #[must_use] 
     pub fn get_timestamp(&self) -> &DateTime<Utc> {
         &self.timestamp
     }
 
-    /// Gets a reference to the connector_status field.
+    /// Gets a reference to the `connector_status` field.
     ///
     /// # Returns
     ///
-    /// The connector_status field
+    /// The `connector_status` field
+    #[must_use] 
     pub fn get_connector_status(&self) -> &ConnectorStatusEnumType {
         &self.connector_status
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// The id of the EVSE to which the connector belongs for which the the status is reported.
+    #[must_use] 
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
 
-    /// Gets a reference to the connector_id field.
+    /// Gets a reference to the `connector_id` field.
     ///
     /// # Returns
     ///
     /// The id of the connector within the EVSE for which the status is reported.
+    #[must_use] 
     pub fn get_connector_id(&self) -> &i32 {
         &self.connector_id
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -166,7 +173,7 @@ impl StatusNotificationRequest {
 
 }
 
-/// Response body for the StatusNotification response.
+/// Response body for the `StatusNotification` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct StatusNotificationResponse {
@@ -188,15 +195,16 @@ impl StatusNotificationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -206,22 +214,24 @@ impl StatusNotificationResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

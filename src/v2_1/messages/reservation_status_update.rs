@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::ReservationUpdateStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the ReservationStatusUpdate request.
+/// Request body for the `ReservationStatusUpdate` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ReservationStatusUpdateRequest {
@@ -14,7 +14,7 @@ pub struct ReservationStatusUpdateRequest {
     /// The updated reservation status.
     pub reservation_update_status: ReservationUpdateStatusEnumType,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -24,11 +24,12 @@ impl ReservationStatusUpdateRequest {
     /// Creates a new instance of the struct.
     ///
     /// * `reservation_id` - The ID of the reservation.
-    /// * `reservation_update_status` - The reservation_update_status field
+    /// * `reservation_update_status` - The `reservation_update_status` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(reservation_id: i32, reservation_update_status: ReservationUpdateStatusEnumType) -> Self {
         Self {
             reservation_id,
@@ -37,7 +38,7 @@ impl ReservationStatusUpdateRequest {
         }
     }
 
-    /// Sets the reservation_id field.
+    /// Sets the `reservation_id` field.
     ///
     /// * `reservation_id` - The ID of the reservation.
     ///
@@ -49,9 +50,9 @@ impl ReservationStatusUpdateRequest {
         self
     }
 
-    /// Sets the reservation_update_status field.
+    /// Sets the `reservation_update_status` field.
     ///
-    /// * `reservation_update_status` - The reservation_update_status field
+    /// * `reservation_update_status` - The `reservation_update_status` field
     ///
     /// # Returns
     ///
@@ -61,9 +62,9 @@ impl ReservationStatusUpdateRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -73,40 +74,44 @@ impl ReservationStatusUpdateRequest {
         self
     }
 
-    /// Gets a reference to the reservation_id field.
+    /// Gets a reference to the `reservation_id` field.
     ///
     /// # Returns
     ///
     /// The ID of the reservation.
+    #[must_use] 
     pub fn get_reservation_id(&self) -> &i32 {
         &self.reservation_id
     }
 
-    /// Gets a reference to the reservation_update_status field.
+    /// Gets a reference to the `reservation_update_status` field.
     ///
     /// # Returns
     ///
-    /// The reservation_update_status field
+    /// The `reservation_update_status` field
+    #[must_use] 
     pub fn get_reservation_update_status(&self) -> &ReservationUpdateStatusEnumType {
         &self.reservation_update_status
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -114,11 +119,11 @@ impl ReservationStatusUpdateRequest {
 
 }
 
-/// Response body for the ReservationStatusUpdate response.
+/// Response body for the `ReservationStatusUpdate` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ReservationStatusUpdateResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -137,15 +142,16 @@ impl ReservationStatusUpdateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -155,22 +161,24 @@ impl ReservationStatusUpdateResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

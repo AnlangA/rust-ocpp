@@ -46,6 +46,7 @@ impl ReportDataType {
     /// # Returns
     ///
     /// A new instance of `ReportDataType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         component: ComponentType,
         variable: VariableType,
@@ -69,6 +70,7 @@ impl ReportDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -83,6 +85,7 @@ impl ReportDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_variable_characteristics(
         mut self,
         variable_characteristics: VariableCharacteristicsType,
@@ -96,6 +99,7 @@ impl ReportDataType {
     /// # Returns
     ///
     /// A reference to the component
+    #[must_use] 
     pub fn component(&self) -> &ComponentType {
         &self.component
     }
@@ -119,6 +123,7 @@ impl ReportDataType {
     /// # Returns
     ///
     /// A reference to the variable
+    #[must_use] 
     pub fn variable(&self) -> &VariableType {
         &self.variable
     }
@@ -142,6 +147,7 @@ impl ReportDataType {
     /// # Returns
     ///
     /// A reference to the list of variable attributes
+    #[must_use] 
     pub fn variable_attribute(&self) -> &[VariableAttributeType] {
         &self.variable_attribute
     }
@@ -168,6 +174,7 @@ impl ReportDataType {
     /// # Returns
     ///
     /// An optional reference to the variable characteristics
+    #[must_use] 
     pub fn variable_characteristics(&self) -> Option<&VariableCharacteristicsType> {
         self.variable_characteristics.as_ref()
     }
@@ -194,6 +201,7 @@ impl ReportDataType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

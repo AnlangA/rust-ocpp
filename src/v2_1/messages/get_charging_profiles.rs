@@ -3,11 +3,11 @@ use crate::v2_1::enumerations::GetChargingProfileStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the GetChargingProfiles request.
+/// Request body for the `GetChargingProfiles` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetChargingProfilesRequest {
-    /// Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, ReportChargingProfilesRequest&gt;&gt; when provided.
+    /// Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, `ReportChargingProfilesRequest`&gt;&gt; when provided.
     pub request_id: i32,
 
     /// For which EVSE installed charging profiles SHALL be reported. If 0, only charging profiles installed on the Charging Station itself (the grid connection) SHALL be reported. If omitted, all installed charging profiles SHALL be reported. + Reported charging profiles SHALL match the criteria in field _chargingProfile_.
@@ -19,7 +19,7 @@ pub struct GetChargingProfilesRequest {
     #[validate(nested)]
     pub charging_profile: ChargingProfileCriterionType,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -28,12 +28,13 @@ pub struct GetChargingProfilesRequest {
 impl GetChargingProfilesRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `request_id` - Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, ReportChargingProfilesRequest&gt;&gt; when provided.
-    /// * `charging_profile` - The charging_profile field
+    /// * `request_id` - Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, `ReportChargingProfilesRequest`&gt;&gt; when provided.
+    /// * `charging_profile` - The `charging_profile` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(request_id: i32, charging_profile: ChargingProfileCriterionType) -> Self {
         Self {
             request_id,
@@ -43,9 +44,9 @@ impl GetChargingProfilesRequest {
         }
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
-    /// * `request_id` - Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, ReportChargingProfilesRequest&gt;&gt; when provided.
+    /// * `request_id` - Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, `ReportChargingProfilesRequest`&gt;&gt; when provided.
     ///
     /// # Returns
     ///
@@ -55,7 +56,7 @@ impl GetChargingProfilesRequest {
         self
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - For which EVSE installed charging profiles SHALL be reported. If 0, only charging profiles installed on the Charging Station itself (the grid connection) SHALL be reported. If omitted, all installed charging profiles SHALL be reported. + Reported charging profiles SHALL match the criteria in field _chargingProfile_.
     ///
@@ -67,9 +68,9 @@ impl GetChargingProfilesRequest {
         self
     }
 
-    /// Sets the charging_profile field.
+    /// Sets the `charging_profile` field.
     ///
-    /// * `charging_profile` - The charging_profile field
+    /// * `charging_profile` - The `charging_profile` field
     ///
     /// # Returns
     ///
@@ -79,9 +80,9 @@ impl GetChargingProfilesRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -91,61 +92,67 @@ impl GetChargingProfilesRequest {
         self
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
-    /// Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, ReportChargingProfilesRequest&gt;&gt; when provided.
+    /// Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, `ReportChargingProfilesRequest`&gt;&gt; when provided.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// For which EVSE installed charging profiles SHALL be reported. If 0, only charging profiles installed on the Charging Station itself (the grid connection) SHALL be reported. If omitted, all installed charging profiles SHALL be reported. + Reported charging profiles SHALL match the criteria in field _chargingProfile_.
+    #[must_use] 
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
 
-    /// Gets a reference to the charging_profile field.
+    /// Gets a reference to the `charging_profile` field.
     ///
     /// # Returns
     ///
-    /// The charging_profile field
+    /// The `charging_profile` field
+    #[must_use] 
     pub fn get_charging_profile(&self) -> &ChargingProfileCriterionType {
         &self.charging_profile
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the evse_id field and returns self for builder pattern.
+    /// Sets the `evse_id` field and returns self for builder pattern.
     ///
     /// * `evse_id` - For which EVSE installed charging profiles SHALL be reported. If 0, only charging profiles installed on the Charging Station itself (the grid connection) SHALL be reported. If omitted, all installed charging profiles SHALL be reported. + Reported charging profiles SHALL match the criteria in field _chargingProfile_.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -153,7 +160,7 @@ impl GetChargingProfilesRequest {
 
 }
 
-/// Response body for the GetChargingProfiles response.
+/// Response body for the `GetChargingProfiles` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetChargingProfilesResponse {
@@ -164,7 +171,7 @@ pub struct GetChargingProfilesResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -178,6 +185,7 @@ impl GetChargingProfilesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: GetChargingProfileStatusEnumType) -> Self {
         Self {
             status,
@@ -198,9 +206,9 @@ impl GetChargingProfilesResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -210,9 +218,9 @@ impl GetChargingProfilesResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -227,47 +235,52 @@ impl GetChargingProfilesResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &GetChargingProfileStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

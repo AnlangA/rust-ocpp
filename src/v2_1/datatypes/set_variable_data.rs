@@ -4,7 +4,7 @@ use validator::Validate;
 use super::{component::ComponentType, custom_data::CustomDataType, variable::VariableType};
 use crate::v2_1::enumerations::attribute::AttributeEnumType;
 
-/// Class to hold parameters of SetVariable request.
+/// Class to hold parameters of `SetVariable` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetVariableDataType {
@@ -47,6 +47,7 @@ impl SetVariableDataType {
     /// # Returns
     ///
     /// A new instance of `SetVariableDataType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(component: ComponentType, variable: VariableType, attribute_value: String) -> Self {
         Self {
             custom_data: None,
@@ -66,6 +67,7 @@ impl SetVariableDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -80,6 +82,7 @@ impl SetVariableDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_attribute_type(mut self, attribute_type: AttributeEnumType) -> Self {
         self.attribute_type = Some(attribute_type);
         self
@@ -90,6 +93,7 @@ impl SetVariableDataType {
     /// # Returns
     ///
     /// A reference to the component for which the variable is set
+    #[must_use] 
     pub fn component(&self) -> &ComponentType {
         &self.component
     }
@@ -113,6 +117,7 @@ impl SetVariableDataType {
     /// # Returns
     ///
     /// A reference to the variable which holds the attribute value
+    #[must_use] 
     pub fn variable(&self) -> &VariableType {
         &self.variable
     }
@@ -136,6 +141,7 @@ impl SetVariableDataType {
     /// # Returns
     ///
     /// The value to be assigned to attribute of variable
+    #[must_use] 
     pub fn attribute_value(&self) -> &str {
         &self.attribute_value
     }
@@ -159,6 +165,7 @@ impl SetVariableDataType {
     /// # Returns
     ///
     /// An optional type of attribute that is set
+    #[must_use] 
     pub fn attribute_type(&self) -> Option<&AttributeEnumType> {
         self.attribute_type.as_ref()
     }
@@ -182,6 +189,7 @@ impl SetVariableDataType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

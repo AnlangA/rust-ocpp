@@ -2,7 +2,7 @@ use crate::v2_1::datatypes::{ClearMonitoringResultType, CustomDataType};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the ClearVariableMonitoring request.
+/// Request body for the `ClearVariableMonitoring` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearVariableMonitoringRequest {
@@ -10,7 +10,7 @@ pub struct ClearVariableMonitoringRequest {
     #[validate(length(min = 1))]
     pub id: Vec<i32>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -24,6 +24,7 @@ impl ClearVariableMonitoringRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(id: Vec<i32>) -> Self {
         Self {
             id,
@@ -43,9 +44,9 @@ impl ClearVariableMonitoringRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -60,26 +61,29 @@ impl ClearVariableMonitoringRequest {
     /// # Returns
     ///
     /// List of the monitors to be cleared, identified by there Id.
+    #[must_use] 
     pub fn get_id(&self) -> &Vec<i32> {
         &self.id
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -87,7 +91,7 @@ impl ClearVariableMonitoringRequest {
 
 }
 
-/// Response body for the ClearVariableMonitoring response.
+/// Response body for the `ClearVariableMonitoring` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearVariableMonitoringResponse {
@@ -95,7 +99,7 @@ pub struct ClearVariableMonitoringResponse {
     #[validate(nested)]
     pub clear_monitoring_result: Vec<ClearMonitoringResultType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -104,11 +108,12 @@ pub struct ClearVariableMonitoringResponse {
 impl ClearVariableMonitoringResponse {
     /// Creates a new instance of the struct.
     ///
-    /// * `clear_monitoring_result` - The clear_monitoring_result field
+    /// * `clear_monitoring_result` - The `clear_monitoring_result` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(clear_monitoring_result: Vec<ClearMonitoringResultType>) -> Self {
         Self {
             clear_monitoring_result,
@@ -116,9 +121,9 @@ impl ClearVariableMonitoringResponse {
         }
     }
 
-    /// Sets the clear_monitoring_result field.
+    /// Sets the `clear_monitoring_result` field.
     ///
-    /// * `clear_monitoring_result` - The clear_monitoring_result field
+    /// * `clear_monitoring_result` - The `clear_monitoring_result` field
     ///
     /// # Returns
     ///
@@ -128,9 +133,9 @@ impl ClearVariableMonitoringResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -140,31 +145,34 @@ impl ClearVariableMonitoringResponse {
         self
     }
 
-    /// Gets a reference to the clear_monitoring_result field.
+    /// Gets a reference to the `clear_monitoring_result` field.
     ///
     /// # Returns
     ///
-    /// The clear_monitoring_result field
+    /// The `clear_monitoring_result` field
+    #[must_use] 
     pub fn get_clear_monitoring_result(&self) -> &Vec<ClearMonitoringResultType> {
         &self.clear_monitoring_result
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

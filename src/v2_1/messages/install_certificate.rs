@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::{InstallCertificateStatusEnumType, InstallCertifi
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the InstallCertificate request.
+/// Request body for the `InstallCertificate` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct InstallCertificateRequest {
@@ -14,7 +14,7 @@ pub struct InstallCertificateRequest {
     #[validate(length(max = 10000))]
     pub certificate: String,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -23,12 +23,13 @@ pub struct InstallCertificateRequest {
 impl InstallCertificateRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `certificate_type` - The certificate_type field
+    /// * `certificate_type` - The `certificate_type` field
     /// * `certificate` - A PEM encoded X.509 certificate.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(certificate_type: InstallCertificateUseEnumType, certificate: String) -> Self {
         Self {
             certificate_type,
@@ -37,9 +38,9 @@ impl InstallCertificateRequest {
         }
     }
 
-    /// Sets the certificate_type field.
+    /// Sets the `certificate_type` field.
     ///
-    /// * `certificate_type` - The certificate_type field
+    /// * `certificate_type` - The `certificate_type` field
     ///
     /// # Returns
     ///
@@ -61,9 +62,9 @@ impl InstallCertificateRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -73,11 +74,12 @@ impl InstallCertificateRequest {
         self
     }
 
-    /// Gets a reference to the certificate_type field.
+    /// Gets a reference to the `certificate_type` field.
     ///
     /// # Returns
     ///
-    /// The certificate_type field
+    /// The `certificate_type` field
+    #[must_use] 
     pub fn get_certificate_type(&self) -> &InstallCertificateUseEnumType {
         &self.certificate_type
     }
@@ -87,26 +89,29 @@ impl InstallCertificateRequest {
     /// # Returns
     ///
     /// A PEM encoded X.509 certificate.
+    #[must_use] 
     pub fn get_certificate(&self) -> &String {
         &self.certificate
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -114,7 +119,7 @@ impl InstallCertificateRequest {
 
 }
 
-/// Response body for the InstallCertificate response.
+/// Response body for the `InstallCertificate` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct InstallCertificateResponse {
@@ -126,7 +131,7 @@ pub struct InstallCertificateResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -140,6 +145,7 @@ impl InstallCertificateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: InstallCertificateStatusEnumType) -> Self {
         Self {
             status,
@@ -160,9 +166,9 @@ impl InstallCertificateResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -172,9 +178,9 @@ impl InstallCertificateResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -189,47 +195,52 @@ impl InstallCertificateResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &InstallCertificateStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

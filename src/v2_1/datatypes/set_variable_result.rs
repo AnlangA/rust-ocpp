@@ -9,7 +9,7 @@ use crate::v2_1::enumerations::{
     attribute::AttributeEnumType, set_variable_status::SetVariableStatusEnumType,
 };
 
-/// Class to hold result of SetVariable request.
+/// Class to hold result of `SetVariable` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetVariableResultType {
@@ -51,6 +51,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// A new instance of `SetVariableResultType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         component: ComponentType,
         variable: VariableType,
@@ -75,6 +76,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_attribute_type(mut self, attribute_type: AttributeEnumType) -> Self {
         self.attribute_type = Some(attribute_type);
         self
@@ -89,6 +91,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_attribute_status_info(mut self, attribute_status_info: StatusInfoType) -> Self {
         self.attribute_status_info = Some(attribute_status_info);
         self
@@ -103,6 +106,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -113,6 +117,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// A reference to the component for which the variable is set
+    #[must_use] 
     pub fn component(&self) -> &ComponentType {
         &self.component
     }
@@ -136,6 +141,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// A reference to the variable which holds the attribute value
+    #[must_use] 
     pub fn variable(&self) -> &VariableType {
         &self.variable
     }
@@ -159,6 +165,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// The status indicating whether the Charging Station has accepted the request
+    #[must_use] 
     pub fn attribute_status(&self) -> &SetVariableStatusEnumType {
         &self.attribute_status
     }
@@ -185,6 +192,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// An optional type of attribute that was set
+    #[must_use] 
     pub fn attribute_type(&self) -> Option<&AttributeEnumType> {
         self.attribute_type.as_ref()
     }
@@ -208,6 +216,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// An optional reference to the detailed status information
+    #[must_use] 
     pub fn attribute_status_info(&self) -> Option<&StatusInfoType> {
         self.attribute_status_info.as_ref()
     }
@@ -234,6 +243,7 @@ impl SetVariableResultType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

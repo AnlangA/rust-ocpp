@@ -32,6 +32,7 @@ impl ModemType {
     /// # Returns
     ///
     /// A new instance of `ModemType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(iccid: String, imsi: String) -> Self {
         Self {
             iccid,
@@ -49,6 +50,7 @@ impl ModemType {
     /// # Returns
     ///
     /// Self for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -59,6 +61,7 @@ impl ModemType {
     /// # Returns
     ///
     /// A reference to the ICCID of the modem's SIM card
+    #[must_use] 
     pub fn iccid(&self) -> &str {
         &self.iccid
     }
@@ -82,6 +85,7 @@ impl ModemType {
     /// # Returns
     ///
     /// A reference to the IMSI of the modem's SIM card
+    #[must_use] 
     pub fn imsi(&self) -> &str {
         &self.imsi
     }
@@ -105,6 +109,7 @@ impl ModemType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

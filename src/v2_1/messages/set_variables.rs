@@ -2,7 +2,7 @@ use crate::v2_1::datatypes::{CustomDataType, SetVariableDataType, SetVariableRes
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the SetVariables request.
+/// Request body for the `SetVariables` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetVariablesRequest {
@@ -18,11 +18,12 @@ pub struct SetVariablesRequest {
 impl SetVariablesRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `set_variable_data` - The set_variable_data field
+    /// * `set_variable_data` - The `set_variable_data` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(set_variable_data: Vec<SetVariableDataType>) -> Self {
         Self {
             set_variable_data,
@@ -30,9 +31,9 @@ impl SetVariablesRequest {
         }
     }
 
-    /// Sets the set_variable_data field.
+    /// Sets the `set_variable_data` field.
     ///
-    /// * `set_variable_data` - The set_variable_data field
+    /// * `set_variable_data` - The `set_variable_data` field
     ///
     /// # Returns
     ///
@@ -42,9 +43,9 @@ impl SetVariablesRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -54,31 +55,34 @@ impl SetVariablesRequest {
         self
     }
 
-    /// Gets a reference to the set_variable_data field.
+    /// Gets a reference to the `set_variable_data` field.
     ///
     /// # Returns
     ///
-    /// The set_variable_data field
+    /// The `set_variable_data` field
+    #[must_use] 
     pub fn get_set_variable_data(&self) -> &Vec<SetVariableDataType> {
         &self.set_variable_data
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -86,7 +90,7 @@ impl SetVariablesRequest {
 
 }
 
-/// Response body for the SetVariables response.
+/// Response body for the `SetVariables` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetVariablesResponse {
@@ -102,11 +106,12 @@ pub struct SetVariablesResponse {
 impl SetVariablesResponse {
     /// Creates a new instance of the struct.
     ///
-    /// * `set_variable_result` - The set_variable_result field
+    /// * `set_variable_result` - The `set_variable_result` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(set_variable_result: Vec<SetVariableResultType>) -> Self {
         Self {
             set_variable_result,
@@ -114,9 +119,9 @@ impl SetVariablesResponse {
         }
     }
 
-    /// Sets the set_variable_result field.
+    /// Sets the `set_variable_result` field.
     ///
-    /// * `set_variable_result` - The set_variable_result field
+    /// * `set_variable_result` - The `set_variable_result` field
     ///
     /// # Returns
     ///
@@ -126,9 +131,9 @@ impl SetVariablesResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -138,31 +143,34 @@ impl SetVariablesResponse {
         self
     }
 
-    /// Gets a reference to the set_variable_result field.
+    /// Gets a reference to the `set_variable_result` field.
     ///
     /// # Returns
     ///
-    /// The set_variable_result field
+    /// The `set_variable_result` field
+    #[must_use] 
     pub fn get_set_variable_result(&self) -> &Vec<SetVariableResultType> {
         &self.set_variable_result
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

@@ -31,6 +31,7 @@ pub struct TotalUsageType {
 
 impl TotalUsageType {
     /// Creates a new `TotalUsageType` with the required fields.
+    #[must_use] 
     pub fn new(energy: Decimal, charging_time: i32, idle_time: i32) -> Self {
         Self {
             energy,
@@ -42,6 +43,7 @@ impl TotalUsageType {
     }
 
     /// Creates a new `TotalUsageType` from a floating-point energy value.
+    #[must_use] 
     pub fn new_from_f64(energy: f64, charging_time: i32, idle_time: i32) -> Self {
         Self {
             energy: Decimal::from_f64(energy).unwrap_or_else(|| Decimal::new(0, 0)),
@@ -53,6 +55,7 @@ impl TotalUsageType {
     }
 
     /// Gets the energy value.
+    #[must_use] 
     pub fn energy(&self) -> Decimal {
         self.energy
     }
@@ -66,6 +69,7 @@ impl TotalUsageType {
     }
 
     /// Gets the charging time value in seconds.
+    #[must_use] 
     pub fn charging_time(&self) -> i32 {
         self.charging_time
     }
@@ -79,6 +83,7 @@ impl TotalUsageType {
     }
 
     /// Gets the idle time value in seconds.
+    #[must_use] 
     pub fn idle_time(&self) -> i32 {
         self.idle_time
     }
@@ -92,6 +97,7 @@ impl TotalUsageType {
     }
 
     /// Gets the reservation time value in seconds.
+    #[must_use] 
     pub fn reservation_time(&self) -> Option<i32> {
         self.reservation_time
     }
@@ -105,6 +111,7 @@ impl TotalUsageType {
     }
 
     /// Gets a reference to the custom data, if present.
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -120,6 +127,7 @@ impl TotalUsageType {
     /// Sets the reservation time value using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_reservation_time(mut self, reservation_time: i32) -> Self {
         self.reservation_time = Some(reservation_time);
         self
@@ -128,6 +136,7 @@ impl TotalUsageType {
     /// Sets the custom data using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

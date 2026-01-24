@@ -36,6 +36,7 @@ impl TariffAssignmentType {
     /// # Returns
     ///
     /// A new instance of `TariffAssignmentType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(tariff_id: String, start_date_time: DateTime<Utc>) -> Self {
         Self {
             tariff_id,
@@ -54,6 +55,7 @@ impl TariffAssignmentType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_expiry_date_time(mut self, expiry_date_time: DateTime<Utc>) -> Self {
         self.expiry_date_time = Some(expiry_date_time);
         self
@@ -68,6 +70,7 @@ impl TariffAssignmentType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -78,6 +81,7 @@ impl TariffAssignmentType {
     /// # Returns
     ///
     /// The unique identifier used to identify one or more tariffs
+    #[must_use] 
     pub fn tariff_id(&self) -> &str {
         &self.tariff_id
     }
@@ -101,6 +105,7 @@ impl TariffAssignmentType {
     /// # Returns
     ///
     /// The start date and time of the tariff assignment
+    #[must_use] 
     pub fn start_date_time(&self) -> &DateTime<Utc> {
         &self.start_date_time
     }
@@ -124,6 +129,7 @@ impl TariffAssignmentType {
     /// # Returns
     ///
     /// An optional reference to the end date and time of the tariff assignment
+    #[must_use] 
     pub fn expiry_date_time(&self) -> Option<&DateTime<Utc>> {
         self.expiry_date_time.as_ref()
     }
@@ -147,6 +153,7 @@ impl TariffAssignmentType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

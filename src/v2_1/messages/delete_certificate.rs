@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::DeleteCertificateStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the DeleteCertificate request.
+/// Request body for the `DeleteCertificate` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct DeleteCertificateRequest {
@@ -11,7 +11,7 @@ pub struct DeleteCertificateRequest {
     #[validate(nested)]
     pub certificate_hash_data: CertificateHashDataType,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -20,11 +20,12 @@ pub struct DeleteCertificateRequest {
 impl DeleteCertificateRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `certificate_hash_data` - The certificate_hash_data field
+    /// * `certificate_hash_data` - The `certificate_hash_data` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(certificate_hash_data: CertificateHashDataType) -> Self {
         Self {
             certificate_hash_data,
@@ -32,9 +33,9 @@ impl DeleteCertificateRequest {
         }
     }
 
-    /// Sets the certificate_hash_data field.
+    /// Sets the `certificate_hash_data` field.
     ///
-    /// * `certificate_hash_data` - The certificate_hash_data field
+    /// * `certificate_hash_data` - The `certificate_hash_data` field
     ///
     /// # Returns
     ///
@@ -44,9 +45,9 @@ impl DeleteCertificateRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -56,31 +57,34 @@ impl DeleteCertificateRequest {
         self
     }
 
-    /// Gets a reference to the certificate_hash_data field.
+    /// Gets a reference to the `certificate_hash_data` field.
     ///
     /// # Returns
     ///
-    /// The certificate_hash_data field
+    /// The `certificate_hash_data` field
+    #[must_use] 
     pub fn get_certificate_hash_data(&self) -> &CertificateHashDataType {
         &self.certificate_hash_data
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -88,7 +92,7 @@ impl DeleteCertificateRequest {
 
 }
 
-/// Response body for the DeleteCertificate response.
+/// Response body for the `DeleteCertificate` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct DeleteCertificateResponse {
@@ -99,7 +103,7 @@ pub struct DeleteCertificateResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -113,6 +117,7 @@ impl DeleteCertificateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: DeleteCertificateStatusEnumType) -> Self {
         Self {
             status,
@@ -133,9 +138,9 @@ impl DeleteCertificateResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -145,9 +150,9 @@ impl DeleteCertificateResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -162,47 +167,52 @@ impl DeleteCertificateResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &DeleteCertificateStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

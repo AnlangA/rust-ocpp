@@ -4,7 +4,7 @@ use validator::Validate;
 use super::custom_data::CustomDataType;
 use crate::v2_1::enumerations::{day_of_week::DayOfWeekEnumType, evse_kind::EvseKindEnumType};
 
-/// These conditions describe if a FixedPrice applies at start of the transaction.
+/// These conditions describe if a `FixedPrice` applies at start of the transaction.
 ///
 /// When more than one restriction is set, they are to be treated as a logical AND. All need to be valid before this price is active.
 ///
@@ -48,13 +48,13 @@ pub struct TariffConditionsFixedType {
     pub evse_kind: Option<EvseKindEnumType>,
 
     /// Optional. For which payment brand this (adhoc) tariff applies. Can be used to add a surcharge for certain payment brands.
-    /// Based on value of _additionalIdToken_ from _idToken.additionalInfo.type_ = "PaymentBrand".
+    /// Based on value of _additionalIdToken_ from _idToken.additionalInfo.type_ = "`PaymentBrand`".
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 20))]
     pub payment_brand: Option<String>,
 
     /// Optional. Type of adhoc payment, e.g. CC, Debit.
-    /// Based on value of _additionalIdToken_ from _idToken.additionalInfo.type_ = "PaymentRecognition".
+    /// Based on value of _additionalIdToken_ from _idToken.additionalInfo.type_ = "`PaymentRecognition`".
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 20))]
     pub payment_recognition: Option<String>,
@@ -77,6 +77,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// A new instance of `TariffConditionsFixedType`
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             start_time_of_day: None,
@@ -100,6 +101,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_start_time_of_day(mut self, start_time_of_day: String) -> Self {
         self.start_time_of_day = Some(start_time_of_day);
         self
@@ -114,6 +116,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_end_time_of_day(mut self, end_time_of_day: String) -> Self {
         self.end_time_of_day = Some(end_time_of_day);
         self
@@ -128,6 +131,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_day_of_week(mut self, day_of_week: Vec<DayOfWeekEnumType>) -> Self {
         self.day_of_week = Some(day_of_week);
         self
@@ -142,6 +146,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_valid_from_date(mut self, valid_from_date: String) -> Self {
         self.valid_from_date = Some(valid_from_date);
         self
@@ -156,6 +161,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_valid_to_date(mut self, valid_to_date: String) -> Self {
         self.valid_to_date = Some(valid_to_date);
         self
@@ -170,6 +176,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_evse_kind(mut self, evse_kind: EvseKindEnumType) -> Self {
         self.evse_kind = Some(evse_kind.clone());
         self
@@ -184,6 +191,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_payment_brand(mut self, payment_brand: String) -> Self {
         self.payment_brand = Some(payment_brand);
         self
@@ -198,6 +206,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_payment_recognition(mut self, payment_recognition: String) -> Self {
         self.payment_recognition = Some(payment_recognition);
         self
@@ -212,6 +221,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -222,6 +232,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// An optional reference to the start time of day
+    #[must_use] 
     pub fn start_time_of_day(&self) -> Option<&String> {
         self.start_time_of_day.as_ref()
     }
@@ -245,6 +256,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// An optional reference to the end time of day
+    #[must_use] 
     pub fn end_time_of_day(&self) -> Option<&String> {
         self.end_time_of_day.as_ref()
     }
@@ -268,6 +280,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// An optional reference to the day(s) of the week this tariff applies
+    #[must_use] 
     pub fn day_of_week(&self) -> Option<&Vec<DayOfWeekEnumType>> {
         self.day_of_week.as_ref()
     }
@@ -291,6 +304,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// An optional reference to the valid from date
+    #[must_use] 
     pub fn valid_from_date(&self) -> Option<&String> {
         self.valid_from_date.as_ref()
     }
@@ -314,6 +328,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// An optional reference to the valid to date
+    #[must_use] 
     pub fn valid_to_date(&self) -> Option<&String> {
         self.valid_to_date.as_ref()
     }
@@ -337,6 +352,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// An optional reference to the type of EVSE this tariff applies to
+    #[must_use] 
     pub fn evse_kind(&self) -> Option<&EvseKindEnumType> {
         self.evse_kind.as_ref()
     }
@@ -360,6 +376,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// An optional reference to the payment brand
+    #[must_use] 
     pub fn payment_brand(&self) -> Option<&String> {
         self.payment_brand.as_ref()
     }
@@ -383,6 +400,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// An optional reference to the type of adhoc payment
+    #[must_use] 
     pub fn payment_recognition(&self) -> Option<&String> {
         self.payment_recognition.as_ref()
     }
@@ -406,6 +424,7 @@ impl TariffConditionsFixedType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

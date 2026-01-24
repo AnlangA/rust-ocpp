@@ -3,7 +3,7 @@ use validator::Validate;
 
 use super::custom_data::CustomDataType;
 
-/// Entry in the PriceLevelSchedule.
+/// Entry in the `PriceLevelSchedule`.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct PriceLevelScheduleEntryType {
@@ -32,6 +32,7 @@ impl PriceLevelScheduleEntryType {
     /// # Returns
     ///
     /// A new instance of `PriceLevelScheduleEntryType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(duration: i32, price_level: i8) -> Self {
         Self {
             duration,
@@ -49,6 +50,7 @@ impl PriceLevelScheduleEntryType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -59,6 +61,7 @@ impl PriceLevelScheduleEntryType {
     /// # Returns
     ///
     /// The duration of the schedule entry in seconds
+    #[must_use] 
     pub fn duration(&self) -> i32 {
         self.duration
     }
@@ -82,6 +85,7 @@ impl PriceLevelScheduleEntryType {
     /// # Returns
     ///
     /// The relative price level of this schedule entry (-9 to 9)
+    #[must_use] 
     pub fn price_level(&self) -> i8 {
         self.price_level
     }
@@ -105,6 +109,7 @@ impl PriceLevelScheduleEntryType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

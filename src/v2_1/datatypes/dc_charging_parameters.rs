@@ -10,44 +10,44 @@ use crate::v2_1::datatypes::CustomDataType;
 pub struct DCChargingParametersType {
     /// Maximum current (in A) supported by the electric vehicle. Includes cable capacity.
     /// Relates to:
-    /// *ISO 15118-2*: DC_EVChargeParameterType:EVMaximumCurrentLimit
+    /// *ISO 15118-2*: `DC_EVChargeParameterType:EVMaximumCurrentLimit`
     pub ev_max_current: Decimal,
 
     /// Maximum voltage supported by the electric vehicle.
     /// Relates to:
-    /// *ISO 15118-2*: DC_EVChargeParameterType: EVMaximumVoltageLimit
+    /// *ISO 15118-2*: `DC_EVChargeParameterType`: `EVMaximumVoltageLimit`
     pub ev_max_voltage: Decimal,
 
     /// Maximum power (in W) supported by the electric vehicle. Required for DC charging.
     /// Relates to:
-    /// *ISO 15118-2*: DC_EVChargeParameterType: EVMaximumPowerLimit
+    /// *ISO 15118-2*: `DC_EVChargeParameterType`: `EVMaximumPowerLimit`
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ev_max_power: Option<Decimal>,
 
     /// Capacity of the electric vehicle battery (in Wh).
     /// Relates to:
-    /// *ISO 15118-2*: DC_EVChargeParameterType: EVEnergyCapacity
+    /// *ISO 15118-2*: `DC_EVChargeParameterType`: `EVEnergyCapacity`
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ev_energy_capacity: Option<Decimal>,
 
     /// Amount of energy requested (in Wh). This includes energy required for preconditioning.
     /// Relates to:
-    /// *ISO 15118-2*: DC_EVChargeParameterType: EVEnergyRequest
+    /// *ISO 15118-2*: `DC_EVChargeParameterType`: `EVEnergyRequest`
     #[serde(skip_serializing_if = "Option::is_none")]
     pub energy_amount: Option<Decimal>,
 
     /// Energy available in the battery (in percent of the
     /// battery capacity) Relates to:
-    /// ISO 15118-2: DC_EVChargeParameterType:
-    /// DC_EVStatus: EVRESSSOC
+    /// ISO 15118-2: `DC_EVChargeParameterType`:
+    /// `DC_EVStatus`: EVRESSSOC
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0, max = 100))]
     pub state_of_charge: Option<i32>,
 
-    /// Percentage of SoC at which the EV considers
+    /// Percentage of `SoC` at which the EV considers
     /// the battery fully charged. (possible values: 0 - 100)
     /// Relates to:
-    /// ISO 15118-2: DC_EVChargeParameterType: FullSOC
+    /// ISO 15118-2: `DC_EVChargeParameterType`: `FullSOC`
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0, max = 100))]
     pub full_so_c: Option<i32>,
@@ -69,6 +69,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// A new instance of `DCChargingParametersType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(ev_max_voltage: Decimal, ev_max_current: Decimal) -> Self {
         Self {
             ev_max_voltage,
@@ -91,6 +92,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_max_power(mut self, ev_max_power: Decimal) -> Self {
         self.ev_max_power = Some(ev_max_power);
         self
@@ -105,6 +107,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_energy_capacity(mut self, ev_energy_capacity: Decimal) -> Self {
         self.ev_energy_capacity = Some(ev_energy_capacity);
         self
@@ -119,6 +122,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_energy_amount(mut self, energy_amount: Decimal) -> Self {
         self.energy_amount = Some(energy_amount);
         self
@@ -133,6 +137,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_state_of_charge(mut self, state_of_charge: i32) -> Self {
         self.state_of_charge = Some(state_of_charge);
         self
@@ -142,11 +147,12 @@ impl DCChargingParametersType {
     ///
     /// # Arguments
     ///
-    /// * `full_so_c` - Percentage of SoC at which the EV considers the battery fully charged (0-100)
+    /// * `full_so_c` - Percentage of `SoC` at which the EV considers the battery fully charged (0-100)
     ///
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_full_so_c(mut self, full_so_c: i32) -> Self {
         self.full_so_c = Some(full_so_c);
         self
@@ -161,6 +167,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -171,6 +178,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// The maximum voltage supported by the electric vehicle
+    #[must_use] 
     pub fn ev_max_voltage(&self) -> Decimal {
         self.ev_max_voltage
     }
@@ -194,6 +202,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// The maximum current (in A) supported by the electric vehicle
+    #[must_use] 
     pub fn ev_max_current(&self) -> Decimal {
         self.ev_max_current
     }
@@ -217,6 +226,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// An optional value representing the maximum power (in W) supported by the electric vehicle
+    #[must_use] 
     pub fn ev_max_power(&self) -> Option<Decimal> {
         self.ev_max_power
     }
@@ -240,6 +250,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// An optional value representing the capacity of the electric vehicle battery (in Wh)
+    #[must_use] 
     pub fn ev_energy_capacity(&self) -> Option<Decimal> {
         self.ev_energy_capacity
     }
@@ -263,6 +274,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// An optional value representing the amount of energy requested (in Wh)
+    #[must_use] 
     pub fn energy_amount(&self) -> Option<Decimal> {
         self.energy_amount
     }
@@ -286,6 +298,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -309,6 +322,7 @@ impl DCChargingParametersType {
     /// # Returns
     ///
     /// An optional value representing the state of charge (in percent)
+    #[must_use] 
     pub fn state_of_charge(&self) -> Option<i32> {
         self.state_of_charge
     }
@@ -331,8 +345,9 @@ impl DCChargingParametersType {
     ///
     /// # Returns
     ///
-    /// An optional value representing the percentage of SoC at which the EV considers
+    /// An optional value representing the percentage of `SoC` at which the EV considers
     /// the battery fully charged (0-100)
+    #[must_use] 
     pub fn full_so_c(&self) -> Option<i32> {
         self.full_so_c
     }
@@ -341,7 +356,7 @@ impl DCChargingParametersType {
     ///
     /// # Arguments
     ///
-    /// * `full_so_c` - Percentage of SoC at which the EV considers the battery fully charged (0-100),
+    /// * `full_so_c` - Percentage of `SoC` at which the EV considers the battery fully charged (0-100),
     ///   or None to clear
     ///
     /// # Returns

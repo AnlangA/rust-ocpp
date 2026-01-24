@@ -4,7 +4,7 @@ use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// These conditions describe if and when a TariffEnergyType or TariffTimeType applies during a transaction.
+/// These conditions describe if and when a `TariffEnergyType` or `TariffTimeType` applies during a transaction.
 ///
 /// When more than one restriction is set, they are to be treated as a logical AND. All need to be valid before this price is active.
 ///
@@ -155,6 +155,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// A new instance of `TariffConditionsType` with all optional fields set to `None`
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             start_time_of_day: None,
@@ -188,6 +189,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_start_time_of_day(mut self, start_time_of_day: String) -> Self {
         self.start_time_of_day = Some(start_time_of_day);
         self
@@ -202,6 +204,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_end_time_of_day(mut self, end_time_of_day: String) -> Self {
         self.end_time_of_day = Some(end_time_of_day);
         self
@@ -216,6 +219,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_day_of_week(mut self, day_of_week: Vec<DayOfWeekEnumType>) -> Self {
         self.day_of_week = Some(day_of_week);
         self
@@ -230,6 +234,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_valid_from_date(mut self, valid_from_date: String) -> Self {
         self.valid_from_date = Some(valid_from_date);
         self
@@ -244,6 +249,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_valid_to_date(mut self, valid_to_date: String) -> Self {
         self.valid_to_date = Some(valid_to_date);
         self
@@ -258,6 +264,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_evse_kind(mut self, evse_kind: EvseKindEnumType) -> Self {
         self.evse_kind = Some(evse_kind);
         self
@@ -272,6 +279,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_min_energy(mut self, min_energy: Decimal) -> Self {
         self.min_energy = Some(min_energy);
         self
@@ -286,6 +294,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_max_energy(mut self, max_energy: Decimal) -> Self {
         self.max_energy = Some(max_energy);
         self
@@ -300,6 +309,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_min_current(mut self, min_current: Decimal) -> Self {
         self.min_current = Some(min_current);
         self
@@ -314,6 +324,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_max_current(mut self, max_current: Decimal) -> Self {
         self.max_current = Some(max_current);
         self
@@ -328,6 +339,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_min_power(mut self, min_power: Decimal) -> Self {
         self.min_power = Some(min_power);
         self
@@ -342,6 +354,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_max_power(mut self, max_power: Decimal) -> Self {
         self.max_power = Some(max_power);
         self
@@ -356,6 +369,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_min_time(mut self, min_time: i32) -> Self {
         self.min_time = Some(min_time);
         self
@@ -370,6 +384,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_max_time(mut self, max_time: i32) -> Self {
         self.max_time = Some(max_time);
         self
@@ -384,6 +399,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_min_charging_time(mut self, min_charging_time: i32) -> Self {
         self.min_charging_time = Some(min_charging_time);
         self
@@ -398,6 +414,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_max_charging_time(mut self, max_charging_time: i32) -> Self {
         self.max_charging_time = Some(max_charging_time);
         self
@@ -412,6 +429,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_min_idle_time(mut self, min_idle_time: i32) -> Self {
         self.min_idle_time = Some(min_idle_time);
         self
@@ -426,6 +444,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_max_idle_time(mut self, max_idle_time: i32) -> Self {
         self.max_idle_time = Some(max_idle_time);
         self
@@ -440,6 +459,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -450,6 +470,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional reference to the start time of day in local time
+    #[must_use] 
     pub fn start_time_of_day(&self) -> Option<&str> {
         self.start_time_of_day.as_deref()
     }
@@ -473,6 +494,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional reference to the end time of day in local time
+    #[must_use] 
     pub fn end_time_of_day(&self) -> Option<&str> {
         self.end_time_of_day.as_deref()
     }
@@ -496,6 +518,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional reference to the days of the week this tariff applies to
+    #[must_use] 
     pub fn day_of_week(&self) -> Option<&Vec<DayOfWeekEnumType>> {
         self.day_of_week.as_ref()
     }
@@ -519,6 +542,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional reference to the start date in local time
+    #[must_use] 
     pub fn valid_from_date(&self) -> Option<&str> {
         self.valid_from_date.as_deref()
     }
@@ -542,6 +566,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional reference to the end date in local time
+    #[must_use] 
     pub fn valid_to_date(&self) -> Option<&str> {
         self.valid_to_date.as_deref()
     }
@@ -565,6 +590,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional reference to the type of EVSE this tariff applies to
+    #[must_use] 
     pub fn evse_kind(&self) -> Option<&EvseKindEnumType> {
         self.evse_kind.as_ref()
     }
@@ -588,6 +614,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional minimum consumed energy in Wh
+    #[must_use] 
     pub fn min_energy(&self) -> Option<Decimal> {
         self.min_energy
     }
@@ -611,6 +638,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional maximum consumed energy in Wh
+    #[must_use] 
     pub fn max_energy(&self) -> Option<Decimal> {
         self.max_energy
     }
@@ -634,6 +662,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional sum of the minimum current (in Amperes) over all phases
+    #[must_use] 
     pub fn min_current(&self) -> Option<Decimal> {
         self.min_current
     }
@@ -657,6 +686,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional sum of the maximum current (in Amperes) over all phases
+    #[must_use] 
     pub fn max_current(&self) -> Option<Decimal> {
         self.max_current
     }
@@ -680,6 +710,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional minimum power in W
+    #[must_use] 
     pub fn min_power(&self) -> Option<Decimal> {
         self.min_power
     }
@@ -703,6 +734,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional maximum power in W
+    #[must_use] 
     pub fn max_power(&self) -> Option<Decimal> {
         self.max_power
     }
@@ -726,6 +758,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional minimum duration in seconds the transaction must last
+    #[must_use] 
     pub fn min_time(&self) -> Option<i32> {
         self.min_time
     }
@@ -749,6 +782,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional maximum duration in seconds the transaction must last
+    #[must_use] 
     pub fn max_time(&self) -> Option<i32> {
         self.max_time
     }
@@ -772,6 +806,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional minimum duration in seconds the charging must last
+    #[must_use] 
     pub fn min_charging_time(&self) -> Option<i32> {
         self.min_charging_time
     }
@@ -795,6 +830,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional maximum duration in seconds the charging must last
+    #[must_use] 
     pub fn max_charging_time(&self) -> Option<i32> {
         self.max_charging_time
     }
@@ -818,6 +854,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional minimum duration in seconds the idle period must last
+    #[must_use] 
     pub fn min_idle_time(&self) -> Option<i32> {
         self.min_idle_time
     }
@@ -841,6 +878,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional maximum duration in seconds the idle period must last
+    #[must_use] 
     pub fn max_idle_time(&self) -> Option<i32> {
         self.max_idle_time
     }
@@ -864,6 +902,7 @@ impl TariffConditionsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

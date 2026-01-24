@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::UnlockStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the UnlockConnector request.
+/// Request body for the `UnlockConnector` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct UnlockConnectorRequest {
@@ -29,6 +29,7 @@ impl UnlockConnectorRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(evse_id: i32, connector_id: i32) -> Self {
         Self {
             evse_id,
@@ -37,7 +38,7 @@ impl UnlockConnectorRequest {
         }
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - This contains the identifier of the EVSE for which a connector needs to be unlocked.
     ///
@@ -49,7 +50,7 @@ impl UnlockConnectorRequest {
         self
     }
 
-    /// Sets the connector_id field.
+    /// Sets the `connector_id` field.
     ///
     /// * `connector_id` - This contains the identifier of the connector that needs to be unlocked.
     ///
@@ -61,9 +62,9 @@ impl UnlockConnectorRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -73,40 +74,44 @@ impl UnlockConnectorRequest {
         self
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// This contains the identifier of the EVSE for which a connector needs to be unlocked.
+    #[must_use] 
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
 
-    /// Gets a reference to the connector_id field.
+    /// Gets a reference to the `connector_id` field.
     ///
     /// # Returns
     ///
     /// This contains the identifier of the connector that needs to be unlocked.
+    #[must_use] 
     pub fn get_connector_id(&self) -> &i32 {
         &self.connector_id
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -114,7 +119,7 @@ impl UnlockConnectorRequest {
 
 }
 
-/// Response body for the UnlockConnector response.
+/// Response body for the `UnlockConnector` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct UnlockConnectorResponse {
@@ -137,6 +142,7 @@ impl UnlockConnectorResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: UnlockStatusEnumType) -> Self {
         Self {
             status,
@@ -157,9 +163,9 @@ impl UnlockConnectorResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -169,9 +175,9 @@ impl UnlockConnectorResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -186,47 +192,52 @@ impl UnlockConnectorResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &UnlockStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

@@ -4,7 +4,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the NotifyEVChargingSchedule request.
+/// Request body for the `NotifyEVChargingSchedule` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyEVChargingScheduleRequest {
@@ -14,20 +14,20 @@ pub struct NotifyEVChargingScheduleRequest {
     #[validate(nested)]
     pub charging_schedule: ChargingScheduleType,
 
-    /// The charging schedule contained in this notification applies to an EVSE. EvseId must be &gt; 0.
+    /// The charging schedule contained in this notification applies to an EVSE. `EvseId` must be &gt; 0.
     #[validate(range(min = 1))]
     pub evse_id: i32,
 
-    /// *(2.1)* Id  of the _chargingSchedule_ that EV selected from the provided ChargingProfile.
+    /// *(2.1)* Id  of the _chargingSchedule_ that EV selected from the provided `ChargingProfile`.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0))]
     pub selected_charging_schedule_id: Option<i32>,
 
-    /// *(2.1)* True when power tolerance is accepted by EV. This value is taken from EVPowerProfile.PowerToleranceAcceptance in the ISO 15118-20 PowerDeliverReq message..
+    /// *(2.1)* True when power tolerance is accepted by EV. This value is taken from EVPowerProfile.PowerToleranceAcceptance in the ISO 15118-20 `PowerDeliverReq` message..
     #[serde(skip_serializing_if = "Option::is_none")]
     pub power_tolerance_acceptance: Option<bool>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -37,12 +37,13 @@ impl NotifyEVChargingScheduleRequest {
     /// Creates a new instance of the struct.
     ///
     /// * `time_base` - Periods contained in the charging profile are relative to this point in time.
-    /// * `charging_schedule` - The charging_schedule field
-    /// * `evse_id` - The charging schedule contained in this notification applies to an EVSE. EvseId must be &gt; 0.
+    /// * `charging_schedule` - The `charging_schedule` field
+    /// * `evse_id` - The charging schedule contained in this notification applies to an EVSE. `EvseId` must be &gt; 0.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(time_base: DateTime<Utc>, charging_schedule: ChargingScheduleType, evse_id: i32) -> Self {
         Self {
             time_base,
@@ -54,7 +55,7 @@ impl NotifyEVChargingScheduleRequest {
         }
     }
 
-    /// Sets the time_base field.
+    /// Sets the `time_base` field.
     ///
     /// * `time_base` - Periods contained in the charging profile are relative to this point in time.
     ///
@@ -66,9 +67,9 @@ impl NotifyEVChargingScheduleRequest {
         self
     }
 
-    /// Sets the charging_schedule field.
+    /// Sets the `charging_schedule` field.
     ///
-    /// * `charging_schedule` - The charging_schedule field
+    /// * `charging_schedule` - The `charging_schedule` field
     ///
     /// # Returns
     ///
@@ -78,9 +79,9 @@ impl NotifyEVChargingScheduleRequest {
         self
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
-    /// * `evse_id` - The charging schedule contained in this notification applies to an EVSE. EvseId must be &gt; 0.
+    /// * `evse_id` - The charging schedule contained in this notification applies to an EVSE. `EvseId` must be &gt; 0.
     ///
     /// # Returns
     ///
@@ -90,9 +91,9 @@ impl NotifyEVChargingScheduleRequest {
         self
     }
 
-    /// Sets the selected_charging_schedule_id field.
+    /// Sets the `selected_charging_schedule_id` field.
     ///
-    /// * `selected_charging_schedule_id` - *(2.1)* Id  of the _chargingSchedule_ that EV selected from the provided ChargingProfile.
+    /// * `selected_charging_schedule_id` - *(2.1)* Id  of the _chargingSchedule_ that EV selected from the provided `ChargingProfile`.
     ///
     /// # Returns
     ///
@@ -102,9 +103,9 @@ impl NotifyEVChargingScheduleRequest {
         self
     }
 
-    /// Sets the power_tolerance_acceptance field.
+    /// Sets the `power_tolerance_acceptance` field.
     ///
-    /// * `power_tolerance_acceptance` - *(2.1)* True when power tolerance is accepted by EV. This value is taken from EVPowerProfile.PowerToleranceAcceptance in the ISO 15118-20 PowerDeliverReq message..
+    /// * `power_tolerance_acceptance` - *(2.1)* True when power tolerance is accepted by EV. This value is taken from EVPowerProfile.PowerToleranceAcceptance in the ISO 15118-20 `PowerDeliverReq` message..
     ///
     /// # Returns
     ///
@@ -114,9 +115,9 @@ impl NotifyEVChargingScheduleRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -126,91 +127,100 @@ impl NotifyEVChargingScheduleRequest {
         self
     }
 
-    /// Gets a reference to the time_base field.
+    /// Gets a reference to the `time_base` field.
     ///
     /// # Returns
     ///
     /// Periods contained in the charging profile are relative to this point in time.
+    #[must_use] 
     pub fn get_time_base(&self) -> &DateTime<Utc> {
         &self.time_base
     }
 
-    /// Gets a reference to the charging_schedule field.
+    /// Gets a reference to the `charging_schedule` field.
     ///
     /// # Returns
     ///
-    /// The charging_schedule field
+    /// The `charging_schedule` field
+    #[must_use] 
     pub fn get_charging_schedule(&self) -> &ChargingScheduleType {
         &self.charging_schedule
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
-    /// The charging schedule contained in this notification applies to an EVSE. EvseId must be &gt; 0.
+    /// The charging schedule contained in this notification applies to an EVSE. `EvseId` must be &gt; 0.
+    #[must_use] 
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
 
-    /// Gets a reference to the selected_charging_schedule_id field.
+    /// Gets a reference to the `selected_charging_schedule_id` field.
     ///
     /// # Returns
     ///
-    /// *(2.1)* Id  of the _chargingSchedule_ that EV selected from the provided ChargingProfile.
+    /// *(2.1)* Id  of the _chargingSchedule_ that EV selected from the provided `ChargingProfile`.
+    #[must_use] 
     pub fn get_selected_charging_schedule_id(&self) -> Option<&i32> {
         self.selected_charging_schedule_id.as_ref()
     }
 
-    /// Gets a reference to the power_tolerance_acceptance field.
+    /// Gets a reference to the `power_tolerance_acceptance` field.
     ///
     /// # Returns
     ///
-    /// *(2.1)* True when power tolerance is accepted by EV. This value is taken from EVPowerProfile.PowerToleranceAcceptance in the ISO 15118-20 PowerDeliverReq message..
+    /// *(2.1)* True when power tolerance is accepted by EV. This value is taken from EVPowerProfile.PowerToleranceAcceptance in the ISO 15118-20 `PowerDeliverReq` message..
+    #[must_use] 
     pub fn get_power_tolerance_acceptance(&self) -> Option<&bool> {
         self.power_tolerance_acceptance.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the selected_charging_schedule_id field and returns self for builder pattern.
+    /// Sets the `selected_charging_schedule_id` field and returns self for builder pattern.
     ///
-    /// * `selected_charging_schedule_id` - *(2.1)* Id  of the _chargingSchedule_ that EV selected from the provided ChargingProfile.
+    /// * `selected_charging_schedule_id` - *(2.1)* Id  of the _chargingSchedule_ that EV selected from the provided `ChargingProfile`.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_selected_charging_schedule_id(mut self, selected_charging_schedule_id: i32) -> Self {
         self.selected_charging_schedule_id = Some(selected_charging_schedule_id);
         self
     }
 
-    /// Sets the power_tolerance_acceptance field and returns self for builder pattern.
+    /// Sets the `power_tolerance_acceptance` field and returns self for builder pattern.
     ///
-    /// * `power_tolerance_acceptance` - *(2.1)* True when power tolerance is accepted by EV. This value is taken from EVPowerProfile.PowerToleranceAcceptance in the ISO 15118-20 PowerDeliverReq message..
+    /// * `power_tolerance_acceptance` - *(2.1)* True when power tolerance is accepted by EV. This value is taken from EVPowerProfile.PowerToleranceAcceptance in the ISO 15118-20 `PowerDeliverReq` message..
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_power_tolerance_acceptance(mut self, power_tolerance_acceptance: bool) -> Self {
         self.power_tolerance_acceptance = Some(power_tolerance_acceptance);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -218,7 +228,7 @@ impl NotifyEVChargingScheduleRequest {
 
 }
 
-/// Response body for the NotifyEVChargingSchedule response.
+/// Response body for the `NotifyEVChargingSchedule` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyEVChargingScheduleResponse {
@@ -229,7 +239,7 @@ pub struct NotifyEVChargingScheduleResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -243,6 +253,7 @@ impl NotifyEVChargingScheduleResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -263,9 +274,9 @@ impl NotifyEVChargingScheduleResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -275,9 +286,9 @@ impl NotifyEVChargingScheduleResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -292,47 +303,52 @@ impl NotifyEVChargingScheduleResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

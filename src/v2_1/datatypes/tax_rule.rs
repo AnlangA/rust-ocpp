@@ -57,6 +57,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// A new instance of `TaxRuleType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         tax_rule_id: i32,
         applies_to_energy_fee: bool,
@@ -87,6 +88,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_tax_rule_name(mut self, tax_rule_name: String) -> Self {
         self.tax_rule_name = Some(tax_rule_name);
         self
@@ -101,6 +103,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_tax_included_in_price(mut self, tax_included_in_price: bool) -> Self {
         self.tax_included_in_price = Some(tax_included_in_price);
         self
@@ -115,6 +118,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -125,6 +129,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// The ID for the tax rule
+    #[must_use] 
     pub fn tax_rule_id(&self) -> i32 {
         self.tax_rule_id
     }
@@ -148,6 +153,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// An optional reference to the human readable string to identify the tax rule
+    #[must_use] 
     pub fn tax_rule_name(&self) -> Option<&str> {
         self.tax_rule_name.as_deref()
     }
@@ -171,6 +177,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// An optional boolean indicating whether the tax is included in any price or not
+    #[must_use] 
     pub fn tax_included_in_price(&self) -> Option<bool> {
         self.tax_included_in_price
     }
@@ -194,6 +201,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// A boolean indicating whether this tax applies to Energy Fees
+    #[must_use] 
     pub fn applies_to_energy_fee(&self) -> bool {
         self.applies_to_energy_fee
     }
@@ -217,6 +225,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// A boolean indicating whether this tax applies to Parking Fees
+    #[must_use] 
     pub fn applies_to_parking_fee(&self) -> bool {
         self.applies_to_parking_fee
     }
@@ -240,6 +249,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// A boolean indicating whether this tax applies to Overstay Fees
+    #[must_use] 
     pub fn applies_to_overstay_fee(&self) -> bool {
         self.applies_to_overstay_fee
     }
@@ -263,6 +273,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// A boolean indicating whether this tax applies to Minimum/Maximum Cost
+    #[must_use] 
     pub fn applies_to_minimum_maximum_cost(&self) -> bool {
         self.applies_to_minimum_maximum_cost
     }
@@ -289,6 +300,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// A reference to the tax rate
+    #[must_use] 
     pub fn tax_rate(&self) -> &RationalNumberType {
         &self.tax_rate
     }
@@ -312,6 +324,7 @@ impl TaxRuleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

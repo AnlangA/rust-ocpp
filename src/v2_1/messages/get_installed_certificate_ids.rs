@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::{GetCertificateIdUseEnumType, GetInstalledCertifi
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the GetInstalledCertificateIds request.
+/// Request body for the `GetInstalledCertificateIds` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetInstalledCertificateIdsRequest {
@@ -12,7 +12,7 @@ pub struct GetInstalledCertificateIdsRequest {
     #[validate(length(min = 1))]
     pub certificate_type: Option<Vec<GetCertificateIdUseEnumType>>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -31,6 +31,7 @@ impl GetInstalledCertificateIdsRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             certificate_type: None,
@@ -38,7 +39,7 @@ impl GetInstalledCertificateIdsRequest {
         }
     }
 
-    /// Sets the certificate_type field.
+    /// Sets the `certificate_type` field.
     ///
     /// * `certificate_type` - Indicates the type of certificates requested. When omitted, all certificate types are requested.
     ///
@@ -50,9 +51,9 @@ impl GetInstalledCertificateIdsRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -62,43 +63,47 @@ impl GetInstalledCertificateIdsRequest {
         self
     }
 
-    /// Gets a reference to the certificate_type field.
+    /// Gets a reference to the `certificate_type` field.
     ///
     /// # Returns
     ///
     /// Indicates the type of certificates requested. When omitted, all certificate types are requested.
+    #[must_use] 
     pub fn get_certificate_type(&self) -> Option<&Vec<GetCertificateIdUseEnumType>> {
         self.certificate_type.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the certificate_type field and returns self for builder pattern.
+    /// Sets the `certificate_type` field and returns self for builder pattern.
     ///
     /// * `certificate_type` - Indicates the type of certificates requested. When omitted, all certificate types are requested.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_certificate_type(mut self, certificate_type: Vec<GetCertificateIdUseEnumType>) -> Self {
         self.certificate_type = Some(certificate_type);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -106,7 +111,7 @@ impl GetInstalledCertificateIdsRequest {
 
 }
 
-/// Response body for the GetInstalledCertificateIds response.
+/// Response body for the `GetInstalledCertificateIds` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetInstalledCertificateIdsResponse {
@@ -123,7 +128,7 @@ pub struct GetInstalledCertificateIdsResponse {
     #[validate(nested)]
     pub certificate_hash_data_chain: Option<Vec<CertificateHashDataChainType>>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -137,6 +142,7 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: GetInstalledCertificateStatusEnumType) -> Self {
         Self {
             status,
@@ -158,9 +164,9 @@ impl GetInstalledCertificateIdsResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -170,9 +176,9 @@ impl GetInstalledCertificateIdsResponse {
         self
     }
 
-    /// Sets the certificate_hash_data_chain field.
+    /// Sets the `certificate_hash_data_chain` field.
     ///
-    /// * `certificate_hash_data_chain` - The certificate_hash_data_chain field
+    /// * `certificate_hash_data_chain` - The `certificate_hash_data_chain` field
     ///
     /// # Returns
     ///
@@ -182,9 +188,9 @@ impl GetInstalledCertificateIdsResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -199,68 +205,75 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &GetInstalledCertificateStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the certificate_hash_data_chain field.
+    /// Gets a reference to the `certificate_hash_data_chain` field.
     ///
     /// # Returns
     ///
-    /// The certificate_hash_data_chain field
+    /// The `certificate_hash_data_chain` field
+    #[must_use] 
     pub fn get_certificate_hash_data_chain(&self) -> Option<&Vec<CertificateHashDataChainType>> {
         self.certificate_hash_data_chain.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the certificate_hash_data_chain field and returns self for builder pattern.
+    /// Sets the `certificate_hash_data_chain` field and returns self for builder pattern.
     ///
-    /// * `certificate_hash_data_chain` - The certificate_hash_data_chain field
+    /// * `certificate_hash_data_chain` - The `certificate_hash_data_chain` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_certificate_hash_data_chain(mut self, certificate_hash_data_chain: Vec<CertificateHashDataChainType>) -> Self {
         self.certificate_hash_data_chain = Some(certificate_hash_data_chain);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

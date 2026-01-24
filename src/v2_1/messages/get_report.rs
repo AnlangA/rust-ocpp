@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::{ComponentCriterionEnumType, GenericDeviceModelSt
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the GetReport request.
+/// Request body for the `GetReport` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetReportRequest {
@@ -21,7 +21,7 @@ pub struct GetReportRequest {
     #[validate(length(min = 1, max = 4))]
     pub component_criteria: Option<Vec<ComponentCriterionEnumType>>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -35,6 +35,7 @@ impl GetReportRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(request_id: i32) -> Self {
         Self {
             component_variable: None,
@@ -44,9 +45,9 @@ impl GetReportRequest {
         }
     }
 
-    /// Sets the component_variable field.
+    /// Sets the `component_variable` field.
     ///
-    /// * `component_variable` - The component_variable field
+    /// * `component_variable` - The `component_variable` field
     ///
     /// # Returns
     ///
@@ -56,7 +57,7 @@ impl GetReportRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
     /// * `request_id` - The Id of the request.
     ///
@@ -68,7 +69,7 @@ impl GetReportRequest {
         self
     }
 
-    /// Sets the component_criteria field.
+    /// Sets the `component_criteria` field.
     ///
     /// * `component_criteria` - This field contains criteria for components for which a report is requested
     ///
@@ -80,9 +81,9 @@ impl GetReportRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -92,73 +93,80 @@ impl GetReportRequest {
         self
     }
 
-    /// Gets a reference to the component_variable field.
+    /// Gets a reference to the `component_variable` field.
     ///
     /// # Returns
     ///
-    /// The component_variable field
+    /// The `component_variable` field
+    #[must_use] 
     pub fn get_component_variable(&self) -> Option<&Vec<ComponentVariableType>> {
         self.component_variable.as_ref()
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
     /// The Id of the request.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
 
-    /// Gets a reference to the component_criteria field.
+    /// Gets a reference to the `component_criteria` field.
     ///
     /// # Returns
     ///
     /// This field contains criteria for components for which a report is requested
+    #[must_use] 
     pub fn get_component_criteria(&self) -> Option<&Vec<ComponentCriterionEnumType>> {
         self.component_criteria.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the component_variable field and returns self for builder pattern.
+    /// Sets the `component_variable` field and returns self for builder pattern.
     ///
-    /// * `component_variable` - The component_variable field
+    /// * `component_variable` - The `component_variable` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_component_variable(mut self, component_variable: Vec<ComponentVariableType>) -> Self {
         self.component_variable = Some(component_variable);
         self
     }
 
-    /// Sets the component_criteria field and returns self for builder pattern.
+    /// Sets the `component_criteria` field and returns self for builder pattern.
     ///
     /// * `component_criteria` - This field contains criteria for components for which a report is requested
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_component_criteria(mut self, component_criteria: Vec<ComponentCriterionEnumType>) -> Self {
         self.component_criteria = Some(component_criteria);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -166,7 +174,7 @@ impl GetReportRequest {
 
 }
 
-/// Response body for the GetReport response.
+/// Response body for the `GetReport` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetReportResponse {
@@ -178,7 +186,7 @@ pub struct GetReportResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -192,6 +200,7 @@ impl GetReportResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: GenericDeviceModelStatusEnumType) -> Self {
         Self {
             status,
@@ -212,9 +221,9 @@ impl GetReportResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -224,9 +233,9 @@ impl GetReportResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -241,47 +250,52 @@ impl GetReportResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &GenericDeviceModelStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

@@ -2,7 +2,7 @@ use crate::v2_1::datatypes::{CustomDataType, SetMonitoringDataType, SetMonitorin
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the SetVariableMonitoring request.
+/// Request body for the `SetVariableMonitoring` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetVariableMonitoringRequest {
@@ -18,11 +18,12 @@ pub struct SetVariableMonitoringRequest {
 impl SetVariableMonitoringRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `set_monitoring_data` - The set_monitoring_data field
+    /// * `set_monitoring_data` - The `set_monitoring_data` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(set_monitoring_data: Vec<SetMonitoringDataType>) -> Self {
         Self {
             set_monitoring_data,
@@ -30,9 +31,9 @@ impl SetVariableMonitoringRequest {
         }
     }
 
-    /// Sets the set_monitoring_data field.
+    /// Sets the `set_monitoring_data` field.
     ///
-    /// * `set_monitoring_data` - The set_monitoring_data field
+    /// * `set_monitoring_data` - The `set_monitoring_data` field
     ///
     /// # Returns
     ///
@@ -42,9 +43,9 @@ impl SetVariableMonitoringRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -54,31 +55,34 @@ impl SetVariableMonitoringRequest {
         self
     }
 
-    /// Gets a reference to the set_monitoring_data field.
+    /// Gets a reference to the `set_monitoring_data` field.
     ///
     /// # Returns
     ///
-    /// The set_monitoring_data field
+    /// The `set_monitoring_data` field
+    #[must_use] 
     pub fn get_set_monitoring_data(&self) -> &Vec<SetMonitoringDataType> {
         &self.set_monitoring_data
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -86,7 +90,7 @@ impl SetVariableMonitoringRequest {
 
 }
 
-/// Response body for the SetVariableMonitoring response.
+/// Response body for the `SetVariableMonitoring` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetVariableMonitoringResponse {
@@ -102,11 +106,12 @@ pub struct SetVariableMonitoringResponse {
 impl SetVariableMonitoringResponse {
     /// Creates a new instance of the struct.
     ///
-    /// * `set_monitoring_result` - The set_monitoring_result field
+    /// * `set_monitoring_result` - The `set_monitoring_result` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(set_monitoring_result: Vec<SetMonitoringResultType>) -> Self {
         Self {
             set_monitoring_result,
@@ -114,9 +119,9 @@ impl SetVariableMonitoringResponse {
         }
     }
 
-    /// Sets the set_monitoring_result field.
+    /// Sets the `set_monitoring_result` field.
     ///
-    /// * `set_monitoring_result` - The set_monitoring_result field
+    /// * `set_monitoring_result` - The `set_monitoring_result` field
     ///
     /// # Returns
     ///
@@ -126,9 +131,9 @@ impl SetVariableMonitoringResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -138,31 +143,34 @@ impl SetVariableMonitoringResponse {
         self
     }
 
-    /// Gets a reference to the set_monitoring_result field.
+    /// Gets a reference to the `set_monitoring_result` field.
     ///
     /// # Returns
     ///
-    /// The set_monitoring_result field
+    /// The `set_monitoring_result` field
+    #[must_use] 
     pub fn get_set_monitoring_result(&self) -> &Vec<SetMonitoringResultType> {
         &self.set_monitoring_result
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

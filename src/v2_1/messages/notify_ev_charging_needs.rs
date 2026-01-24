@@ -4,15 +4,15 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the NotifyEVChargingNeeds request.
+/// Request body for the `NotifyEVChargingNeeds` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyEVChargingNeedsRequest {
-    /// Defines the EVSE and connector to which the EV is connected. EvseId may not be 0.
+    /// Defines the EVSE and connector to which the EV is connected. `EvseId` may not be 0.
     #[validate(range(min = 1))]
     pub evse_id: i32,
 
-    /// Contains the maximum elements the EV supports for: + - ISO 15118-2: schedule tuples in SASchedule (both Pmax and Tariff). + - ISO 15118-20: PowerScheduleEntry, PriceRule and PriceLevelScheduleEntries.
+    /// Contains the maximum elements the EV supports for: + - ISO 15118-2: schedule tuples in `SASchedule` (both Pmax and Tariff). + - ISO 15118-20: `PowerScheduleEntry`, `PriceRule` and `PriceLevelScheduleEntries`.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0))]
     pub max_schedule_tuples: Option<i32>,
@@ -24,7 +24,7 @@ pub struct NotifyEVChargingNeedsRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub timestamp: Option<DateTime<Utc>>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -33,12 +33,13 @@ pub struct NotifyEVChargingNeedsRequest {
 impl NotifyEVChargingNeedsRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `evse_id` - Defines the EVSE and connector to which the EV is connected. EvseId may not be 0.
-    /// * `charging_needs` - The charging_needs field
+    /// * `evse_id` - Defines the EVSE and connector to which the EV is connected. `EvseId` may not be 0.
+    /// * `charging_needs` - The `charging_needs` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(evse_id: i32, charging_needs: ChargingNeedsType) -> Self {
         Self {
             evse_id,
@@ -49,9 +50,9 @@ impl NotifyEVChargingNeedsRequest {
         }
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
-    /// * `evse_id` - Defines the EVSE and connector to which the EV is connected. EvseId may not be 0.
+    /// * `evse_id` - Defines the EVSE and connector to which the EV is connected. `EvseId` may not be 0.
     ///
     /// # Returns
     ///
@@ -61,9 +62,9 @@ impl NotifyEVChargingNeedsRequest {
         self
     }
 
-    /// Sets the max_schedule_tuples field.
+    /// Sets the `max_schedule_tuples` field.
     ///
-    /// * `max_schedule_tuples` - Contains the maximum elements the EV supports for: + - ISO 15118-2: schedule tuples in SASchedule (both Pmax and Tariff). + - ISO 15118-20: PowerScheduleEntry, PriceRule and PriceLevelScheduleEntries.
+    /// * `max_schedule_tuples` - Contains the maximum elements the EV supports for: + - ISO 15118-2: schedule tuples in `SASchedule` (both Pmax and Tariff). + - ISO 15118-20: `PowerScheduleEntry`, `PriceRule` and `PriceLevelScheduleEntries`.
     ///
     /// # Returns
     ///
@@ -73,9 +74,9 @@ impl NotifyEVChargingNeedsRequest {
         self
     }
 
-    /// Sets the charging_needs field.
+    /// Sets the `charging_needs` field.
     ///
-    /// * `charging_needs` - The charging_needs field
+    /// * `charging_needs` - The `charging_needs` field
     ///
     /// # Returns
     ///
@@ -97,9 +98,9 @@ impl NotifyEVChargingNeedsRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -109,29 +110,32 @@ impl NotifyEVChargingNeedsRequest {
         self
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
-    /// Defines the EVSE and connector to which the EV is connected. EvseId may not be 0.
+    /// Defines the EVSE and connector to which the EV is connected. `EvseId` may not be 0.
+    #[must_use] 
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
 
-    /// Gets a reference to the max_schedule_tuples field.
+    /// Gets a reference to the `max_schedule_tuples` field.
     ///
     /// # Returns
     ///
-    /// Contains the maximum elements the EV supports for: + - ISO 15118-2: schedule tuples in SASchedule (both Pmax and Tariff). + - ISO 15118-20: PowerScheduleEntry, PriceRule and PriceLevelScheduleEntries.
+    /// Contains the maximum elements the EV supports for: + - ISO 15118-2: schedule tuples in `SASchedule` (both Pmax and Tariff). + - ISO 15118-20: `PowerScheduleEntry`, `PriceRule` and `PriceLevelScheduleEntries`.
+    #[must_use] 
     pub fn get_max_schedule_tuples(&self) -> Option<&i32> {
         self.max_schedule_tuples.as_ref()
     }
 
-    /// Gets a reference to the charging_needs field.
+    /// Gets a reference to the `charging_needs` field.
     ///
     /// # Returns
     ///
-    /// The charging_needs field
+    /// The `charging_needs` field
+    #[must_use] 
     pub fn get_charging_needs(&self) -> &ChargingNeedsType {
         &self.charging_needs
     }
@@ -141,26 +145,29 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// *(2.1)* Time when EV charging needs were received. + Field can be added when charging station was offline when charging needs were received.
+    #[must_use] 
     pub fn get_timestamp(&self) -> Option<&DateTime<Utc>> {
         self.timestamp.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the max_schedule_tuples field and returns self for builder pattern.
+    /// Sets the `max_schedule_tuples` field and returns self for builder pattern.
     ///
-    /// * `max_schedule_tuples` - Contains the maximum elements the EV supports for: + - ISO 15118-2: schedule tuples in SASchedule (both Pmax and Tariff). + - ISO 15118-20: PowerScheduleEntry, PriceRule and PriceLevelScheduleEntries.
+    /// * `max_schedule_tuples` - Contains the maximum elements the EV supports for: + - ISO 15118-2: schedule tuples in `SASchedule` (both Pmax and Tariff). + - ISO 15118-20: `PowerScheduleEntry`, `PriceRule` and `PriceLevelScheduleEntries`.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_max_schedule_tuples(mut self, max_schedule_tuples: i32) -> Self {
         self.max_schedule_tuples = Some(max_schedule_tuples);
         self
@@ -173,18 +180,20 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_timestamp(mut self, timestamp: DateTime<Utc>) -> Self {
         self.timestamp = Some(timestamp);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -192,7 +201,7 @@ impl NotifyEVChargingNeedsRequest {
 
 }
 
-/// Response body for the NotifyEVChargingNeeds response.
+/// Response body for the `NotifyEVChargingNeeds` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyEVChargingNeedsResponse {
@@ -203,7 +212,7 @@ pub struct NotifyEVChargingNeedsResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -217,6 +226,7 @@ impl NotifyEVChargingNeedsResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: NotifyEVChargingNeedsStatusEnumType) -> Self {
         Self {
             status,
@@ -237,9 +247,9 @@ impl NotifyEVChargingNeedsResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -249,9 +259,9 @@ impl NotifyEVChargingNeedsResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -266,47 +276,52 @@ impl NotifyEVChargingNeedsResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &NotifyEVChargingNeedsStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

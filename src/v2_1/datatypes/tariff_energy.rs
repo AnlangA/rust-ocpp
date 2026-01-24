@@ -34,6 +34,7 @@ impl TariffEnergyType {
     /// # Returns
     ///
     /// A new instance of `TariffEnergyType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(prices: Vec<TariffEnergyPriceType>) -> Self {
         Self {
             prices,
@@ -51,6 +52,7 @@ impl TariffEnergyType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_tax_rates(mut self, tax_rates: Vec<TaxRateType>) -> Self {
         self.tax_rates = Some(tax_rates);
         self
@@ -65,6 +67,7 @@ impl TariffEnergyType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -75,6 +78,7 @@ impl TariffEnergyType {
     /// # Returns
     ///
     /// A reference to the list of energy price elements
+    #[must_use] 
     pub fn prices(&self) -> &Vec<TariffEnergyPriceType> {
         &self.prices
     }
@@ -98,6 +102,7 @@ impl TariffEnergyType {
     /// # Returns
     ///
     /// An optional reference to the list of tax rates
+    #[must_use] 
     pub fn tax_rates(&self) -> Option<&Vec<TaxRateType>> {
         self.tax_rates.as_ref()
     }
@@ -121,6 +126,7 @@ impl TariffEnergyType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

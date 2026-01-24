@@ -25,6 +25,7 @@ pub struct V2XFreqWattPointType {
 
 impl V2XFreqWattPointType {
     /// Creates a new `V2XFreqWattPointType` with the required fields.
+    #[must_use] 
     pub fn new(frequency: Decimal, power: Decimal) -> Self {
         Self {
             frequency,
@@ -34,6 +35,7 @@ impl V2XFreqWattPointType {
     }
 
     /// Creates a new `V2XFreqWattPointType` from floating-point values.
+    #[must_use] 
     pub fn new_from_f64(frequency: f64, power: f64) -> Self {
         Self {
             frequency: Decimal::from_f64(frequency).unwrap_or_else(|| Decimal::new(0, 0)),
@@ -43,6 +45,7 @@ impl V2XFreqWattPointType {
     }
 
     /// Gets the frequency in Hz.
+    #[must_use] 
     pub fn frequency(&self) -> Decimal {
         self.frequency
     }
@@ -54,6 +57,7 @@ impl V2XFreqWattPointType {
     }
 
     /// Gets the power in W.
+    #[must_use] 
     pub fn power(&self) -> Decimal {
         self.power
     }
@@ -65,6 +69,7 @@ impl V2XFreqWattPointType {
     }
 
     /// Gets the custom data.
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -76,6 +81,7 @@ impl V2XFreqWattPointType {
     }
 
     /// Sets the custom data using the builder pattern.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

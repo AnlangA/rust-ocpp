@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::ClearChargingProfileStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the ClearChargingProfile request.
+/// Request body for the `ClearChargingProfile` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearChargingProfileRequest {
@@ -15,7 +15,7 @@ pub struct ClearChargingProfileRequest {
     #[validate(nested)]
     pub charging_profile_criteria: Option<ClearChargingProfileType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -34,6 +34,7 @@ impl ClearChargingProfileRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             charging_profile_id: None,
@@ -42,7 +43,7 @@ impl ClearChargingProfileRequest {
         }
     }
 
-    /// Sets the charging_profile_id field.
+    /// Sets the `charging_profile_id` field.
     ///
     /// * `charging_profile_id` - The Id of the charging profile to clear.
     ///
@@ -54,9 +55,9 @@ impl ClearChargingProfileRequest {
         self
     }
 
-    /// Sets the charging_profile_criteria field.
+    /// Sets the `charging_profile_criteria` field.
     ///
-    /// * `charging_profile_criteria` - The charging_profile_criteria field
+    /// * `charging_profile_criteria` - The `charging_profile_criteria` field
     ///
     /// # Returns
     ///
@@ -66,9 +67,9 @@ impl ClearChargingProfileRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -78,64 +79,70 @@ impl ClearChargingProfileRequest {
         self
     }
 
-    /// Gets a reference to the charging_profile_id field.
+    /// Gets a reference to the `charging_profile_id` field.
     ///
     /// # Returns
     ///
     /// The Id of the charging profile to clear.
+    #[must_use] 
     pub fn get_charging_profile_id(&self) -> Option<&i32> {
         self.charging_profile_id.as_ref()
     }
 
-    /// Gets a reference to the charging_profile_criteria field.
+    /// Gets a reference to the `charging_profile_criteria` field.
     ///
     /// # Returns
     ///
-    /// The charging_profile_criteria field
+    /// The `charging_profile_criteria` field
+    #[must_use] 
     pub fn get_charging_profile_criteria(&self) -> Option<&ClearChargingProfileType> {
         self.charging_profile_criteria.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the charging_profile_id field and returns self for builder pattern.
+    /// Sets the `charging_profile_id` field and returns self for builder pattern.
     ///
     /// * `charging_profile_id` - The Id of the charging profile to clear.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_charging_profile_id(mut self, charging_profile_id: i32) -> Self {
         self.charging_profile_id = Some(charging_profile_id);
         self
     }
 
-    /// Sets the charging_profile_criteria field and returns self for builder pattern.
+    /// Sets the `charging_profile_criteria` field and returns self for builder pattern.
     ///
-    /// * `charging_profile_criteria` - The charging_profile_criteria field
+    /// * `charging_profile_criteria` - The `charging_profile_criteria` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_charging_profile_criteria(mut self, charging_profile_criteria: ClearChargingProfileType) -> Self {
         self.charging_profile_criteria = Some(charging_profile_criteria);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -143,7 +150,7 @@ impl ClearChargingProfileRequest {
 
 }
 
-/// Response body for the ClearChargingProfile response.
+/// Response body for the `ClearChargingProfile` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearChargingProfileResponse {
@@ -155,7 +162,7 @@ pub struct ClearChargingProfileResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -169,6 +176,7 @@ impl ClearChargingProfileResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: ClearChargingProfileStatusEnumType) -> Self {
         Self {
             status,
@@ -189,9 +197,9 @@ impl ClearChargingProfileResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -201,9 +209,9 @@ impl ClearChargingProfileResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -218,47 +226,52 @@ impl ClearChargingProfileResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &ClearChargingProfileStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

@@ -3,7 +3,7 @@ use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the CostUpdated request.
+/// Request body for the `CostUpdated` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct CostUpdatedRequest {
@@ -14,7 +14,7 @@ pub struct CostUpdatedRequest {
     #[validate(length(max = 36))]
     pub transaction_id: String,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -29,6 +29,7 @@ impl CostUpdatedRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(total_cost: Decimal, transaction_id: String) -> Self {
         Self {
             total_cost,
@@ -37,7 +38,7 @@ impl CostUpdatedRequest {
         }
     }
 
-    /// Sets the total_cost field.
+    /// Sets the `total_cost` field.
     ///
     /// * `total_cost` - Current total cost, based on the information known by the CSMS, of the transaction including taxes. In the currency configured with the configuration Variable: [&lt;&lt;configkey-currency, Currency&gt;&gt;]
     ///
@@ -49,7 +50,7 @@ impl CostUpdatedRequest {
         self
     }
 
-    /// Sets the transaction_id field.
+    /// Sets the `transaction_id` field.
     ///
     /// * `transaction_id` - Transaction Id of the transaction the current cost are asked for.
     ///
@@ -61,9 +62,9 @@ impl CostUpdatedRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -73,40 +74,44 @@ impl CostUpdatedRequest {
         self
     }
 
-    /// Gets a reference to the total_cost field.
+    /// Gets a reference to the `total_cost` field.
     ///
     /// # Returns
     ///
     /// Current total cost, based on the information known by the CSMS, of the transaction including taxes. In the currency configured with the configuration Variable: [&lt;&lt;configkey-currency, Currency&gt;&gt;]
+    #[must_use] 
     pub fn get_total_cost(&self) -> &Decimal {
         &self.total_cost
     }
 
-    /// Gets a reference to the transaction_id field.
+    /// Gets a reference to the `transaction_id` field.
     ///
     /// # Returns
     ///
     /// Transaction Id of the transaction the current cost are asked for.
+    #[must_use] 
     pub fn get_transaction_id(&self) -> &String {
         &self.transaction_id
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -114,11 +119,11 @@ impl CostUpdatedRequest {
 
 }
 
-/// Response body for the CostUpdated response.
+/// Response body for the `CostUpdated` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct CostUpdatedResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -137,15 +142,16 @@ impl CostUpdatedResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -155,22 +161,24 @@ impl CostUpdatedResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

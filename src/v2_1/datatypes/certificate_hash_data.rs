@@ -47,6 +47,7 @@ impl CertificateHashDataType {
     /// # Returns
     ///
     /// A new instance of `CertificateHashDataType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         hash_algorithm: HashAlgorithmEnumType,
         issuer_name_hash: String,
@@ -71,6 +72,7 @@ impl CertificateHashDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -81,6 +83,7 @@ impl CertificateHashDataType {
     /// # Returns
     ///
     /// The hash algorithm used for the hashes
+    #[must_use] 
     pub fn hash_algorithm(&self) -> &HashAlgorithmEnumType {
         &self.hash_algorithm
     }
@@ -104,6 +107,7 @@ impl CertificateHashDataType {
     /// # Returns
     ///
     /// The hash of the issuer's distinguished name
+    #[must_use] 
     pub fn issuer_name_hash(&self) -> &str {
         &self.issuer_name_hash
     }
@@ -127,6 +131,7 @@ impl CertificateHashDataType {
     /// # Returns
     ///
     /// The hash of the DER encoded public key
+    #[must_use] 
     pub fn issuer_key_hash(&self) -> &str {
         &self.issuer_key_hash
     }
@@ -150,6 +155,7 @@ impl CertificateHashDataType {
     /// # Returns
     ///
     /// The hexadecimal value of the serial number
+    #[must_use] 
     pub fn serial_number(&self) -> &str {
         &self.serial_number
     }
@@ -173,6 +179,7 @@ impl CertificateHashDataType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

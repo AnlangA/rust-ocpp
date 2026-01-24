@@ -9,7 +9,7 @@ use super::custom_data::CustomDataType;
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct V2XSignalWattPointType {
-    /// Signal value from an AFRRSignalRequest.
+    /// Signal value from an `AFRRSignalRequest`.
     pub signal: i32,
 
     /// Power in W to charge (positive) or discharge (negative) at specified frequency.
@@ -24,6 +24,7 @@ pub struct V2XSignalWattPointType {
 
 impl V2XSignalWattPointType {
     /// Creates a new `V2XSignalWattPointType` with the required fields.
+    #[must_use] 
     pub fn new(signal: i32, power: Decimal) -> Self {
         Self {
             signal,
@@ -33,6 +34,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Creates a new `V2XSignalWattPointType` from floating-point power value.
+    #[must_use] 
     pub fn new_with_f64_power(signal: i32, power: f64) -> Self {
         Self {
             signal,
@@ -42,6 +44,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Gets the signal value.
+    #[must_use] 
     pub fn signal(&self) -> i32 {
         self.signal
     }
@@ -53,6 +56,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Gets the power value.
+    #[must_use] 
     pub fn power(&self) -> Decimal {
         self.power
     }
@@ -64,6 +68,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Gets the custom data.
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -75,6 +80,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Sets the custom data using the builder pattern.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

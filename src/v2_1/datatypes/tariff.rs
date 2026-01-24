@@ -95,6 +95,7 @@ impl TariffType {
     /// # Returns
     ///
     /// A new instance of `TariffType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(tariff_id: String, currency: String) -> Self {
         Self {
             tariff_id,
@@ -122,6 +123,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_description(mut self, description: Vec<MessageContentType>) -> Self {
         self.description = Some(description);
         self
@@ -136,6 +138,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_energy(mut self, energy: TariffEnergyType) -> Self {
         self.energy = Some(energy);
         self
@@ -150,6 +153,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_valid_from(mut self, valid_from: DateTime<Utc>) -> Self {
         self.valid_from = Some(valid_from);
         self
@@ -164,6 +168,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_charging_time(mut self, charging_time: TariffTimeType) -> Self {
         self.charging_time = Some(charging_time);
         self
@@ -178,6 +183,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_idle_time(mut self, idle_time: TariffTimeType) -> Self {
         self.idle_time = Some(idle_time);
         self
@@ -192,6 +198,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_fixed_fee(mut self, fixed_fee: TariffFixedType) -> Self {
         self.fixed_fee = Some(fixed_fee);
         self
@@ -206,6 +213,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_reservation_time(mut self, reservation_time: TariffTimeType) -> Self {
         self.reservation_time = Some(reservation_time);
         self
@@ -220,6 +228,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_reservation_fixed(mut self, reservation_fixed: TariffFixedType) -> Self {
         self.reservation_fixed = Some(reservation_fixed);
         self
@@ -234,6 +243,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_min_cost(mut self, min_cost: PriceType) -> Self {
         self.min_cost = Some(min_cost);
         self
@@ -248,6 +258,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_max_cost(mut self, max_cost: PriceType) -> Self {
         self.max_cost = Some(max_cost);
         self
@@ -262,6 +273,7 @@ impl TariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -272,6 +284,7 @@ impl TariffType {
     /// # Returns
     ///
     /// The unique id of tariff
+    #[must_use] 
     pub fn tariff_id(&self) -> &str {
         &self.tariff_id
     }
@@ -295,6 +308,7 @@ impl TariffType {
     /// # Returns
     ///
     /// The currency code
+    #[must_use] 
     pub fn currency(&self) -> &str {
         &self.currency
     }
@@ -318,6 +332,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the description of the tariff in different languages
+    #[must_use] 
     pub fn description(&self) -> Option<&[MessageContentType]> {
         self.description.as_deref()
     }
@@ -341,6 +356,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the energy costs of the tariff
+    #[must_use] 
     pub fn energy(&self) -> Option<&TariffEnergyType> {
         self.energy.as_ref()
     }
@@ -364,6 +380,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional time when this tariff becomes active
+    #[must_use] 
     pub fn valid_from(&self) -> Option<DateTime<Utc>> {
         self.valid_from
     }
@@ -387,6 +404,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the charging time costs of the tariff
+    #[must_use] 
     pub fn charging_time(&self) -> Option<&TariffTimeType> {
         self.charging_time.as_ref()
     }
@@ -410,6 +428,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the idle time costs of the tariff
+    #[must_use] 
     pub fn idle_time(&self) -> Option<&TariffTimeType> {
         self.idle_time.as_ref()
     }
@@ -433,6 +452,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the fixed costs of the tariff
+    #[must_use] 
     pub fn fixed_fee(&self) -> Option<&TariffFixedType> {
         self.fixed_fee.as_ref()
     }
@@ -456,6 +476,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the reservation time costs of the tariff
+    #[must_use] 
     pub fn reservation_time(&self) -> Option<&TariffTimeType> {
         self.reservation_time.as_ref()
     }
@@ -479,6 +500,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the fixed costs for a reservation
+    #[must_use] 
     pub fn reservation_fixed(&self) -> Option<&TariffFixedType> {
         self.reservation_fixed.as_ref()
     }
@@ -505,6 +527,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the minimum cost for a charging session
+    #[must_use] 
     pub fn min_cost(&self) -> Option<&PriceType> {
         self.min_cost.as_ref()
     }
@@ -528,6 +551,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the maximum cost for a charging session
+    #[must_use] 
     pub fn max_cost(&self) -> Option<&PriceType> {
         self.max_cost.as_ref()
     }
@@ -551,6 +575,7 @@ impl TariffType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

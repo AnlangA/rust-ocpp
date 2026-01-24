@@ -37,11 +37,12 @@ pub struct AuthorizeRequest {
 impl AuthorizeRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(id_token: IdTokenType) -> Self {
         Self {
             id_token,
@@ -51,9 +52,9 @@ impl AuthorizeRequest {
         }
     }
 
-    /// Sets the id_token field.
+    /// Sets the `id_token` field.
     ///
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
@@ -75,9 +76,9 @@ impl AuthorizeRequest {
         self
     }
 
-    /// Sets the iso_15118_certificate_hash_data field.
+    /// Sets the `iso_15118_certificate_hash_data` field.
     ///
-    /// * `iso_15118_certificate_hash_data` - The iso_15118_certificate_hash_data field
+    /// * `iso_15118_certificate_hash_data` - The `iso_15118_certificate_hash_data` field
     ///
     /// # Returns
     ///
@@ -87,9 +88,9 @@ impl AuthorizeRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -99,11 +100,12 @@ impl AuthorizeRequest {
         self
     }
 
-    /// Gets a reference to the id_token field.
+    /// Gets a reference to the `id_token` field.
     ///
     /// # Returns
     ///
-    /// The id_token field
+    /// The `id_token` field
+    #[must_use] 
     pub fn get_id_token(&self) -> &IdTokenType {
         &self.id_token
     }
@@ -113,24 +115,27 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// *(2.1)* The X.509 certificate chain presented by EV and encoded in PEM format. Order of certificates in chain is from leaf up to (but excluding) root certificate. + Only needed in case of central contract validation when Charging Station cannot validate the contract certificate.
+    #[must_use] 
     pub fn get_certificate(&self) -> Option<&String> {
         self.certificate.as_ref()
     }
 
-    /// Gets a reference to the iso_15118_certificate_hash_data field.
+    /// Gets a reference to the `iso_15118_certificate_hash_data` field.
     ///
     /// # Returns
     ///
-    /// The iso_15118_certificate_hash_data field
+    /// The `iso_15118_certificate_hash_data` field
+    #[must_use] 
     pub fn get_iso_15118_certificate_hash_data(&self) -> Option<&Vec<OCSPRequestDataType>> {
         self.iso_15118_certificate_hash_data.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -142,30 +147,33 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_certificate(mut self, certificate: String) -> Self {
         self.certificate = Some(certificate);
         self
     }
 
-    /// Sets the iso_15118_certificate_hash_data field and returns self for builder pattern.
+    /// Sets the `iso_15118_certificate_hash_data` field and returns self for builder pattern.
     ///
-    /// * `iso_15118_certificate_hash_data` - The iso_15118_certificate_hash_data field
+    /// * `iso_15118_certificate_hash_data` - The `iso_15118_certificate_hash_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_iso_15118_certificate_hash_data(mut self, iso_15118_certificate_hash_data: Vec<OCSPRequestDataType>) -> Self {
         self.iso_15118_certificate_hash_data = Some(iso_15118_certificate_hash_data);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -181,7 +189,7 @@ pub struct AuthorizeResponse {
     #[validate(nested)]
     pub id_token_info: IdTokenInfoType,
 
-    /// Certificate status information. - if all certificates are valid: return 'Accepted'. - if one of the certificates was revoked, return 'CertificateRevoked'.
+    /// Certificate status information. - if all certificates are valid: return 'Accepted'. - if one of the certificates was revoked, return '`CertificateRevoked`'.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub certificate_status: Option<AuthorizeCertificateStatusEnumType>,
 
@@ -195,7 +203,7 @@ pub struct AuthorizeResponse {
     #[validate(nested)]
     pub tariff: Option<TariffType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -204,11 +212,12 @@ pub struct AuthorizeResponse {
 impl AuthorizeResponse {
     /// Creates a new instance of the struct.
     ///
-    /// * `id_token_info` - The id_token_info field
+    /// * `id_token_info` - The `id_token_info` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(id_token_info: IdTokenInfoType) -> Self {
         Self {
             id_token_info,
@@ -219,9 +228,9 @@ impl AuthorizeResponse {
         }
     }
 
-    /// Sets the id_token_info field.
+    /// Sets the `id_token_info` field.
     ///
-    /// * `id_token_info` - The id_token_info field
+    /// * `id_token_info` - The `id_token_info` field
     ///
     /// # Returns
     ///
@@ -231,9 +240,9 @@ impl AuthorizeResponse {
         self
     }
 
-    /// Sets the certificate_status field.
+    /// Sets the `certificate_status` field.
     ///
-    /// * `certificate_status` - The certificate_status field
+    /// * `certificate_status` - The `certificate_status` field
     ///
     /// # Returns
     ///
@@ -243,7 +252,7 @@ impl AuthorizeResponse {
         self
     }
 
-    /// Sets the allowed_energy_transfer field.
+    /// Sets the `allowed_energy_transfer` field.
     ///
     /// * `allowed_energy_transfer` - *(2.1)* List of allowed energy transfer modes the EV can choose from. If omitted this defaults to charging only.
     ///
@@ -267,9 +276,9 @@ impl AuthorizeResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -279,29 +288,32 @@ impl AuthorizeResponse {
         self
     }
 
-    /// Gets a reference to the id_token_info field.
+    /// Gets a reference to the `id_token_info` field.
     ///
     /// # Returns
     ///
-    /// The id_token_info field
+    /// The `id_token_info` field
+    #[must_use] 
     pub fn get_id_token_info(&self) -> &IdTokenInfoType {
         &self.id_token_info
     }
 
-    /// Gets a reference to the certificate_status field.
+    /// Gets a reference to the `certificate_status` field.
     ///
     /// # Returns
     ///
-    /// The certificate_status field
+    /// The `certificate_status` field
+    #[must_use] 
     pub fn get_certificate_status(&self) -> Option<&AuthorizeCertificateStatusEnumType> {
         self.certificate_status.as_ref()
     }
 
-    /// Gets a reference to the allowed_energy_transfer field.
+    /// Gets a reference to the `allowed_energy_transfer` field.
     ///
     /// # Returns
     ///
     /// *(2.1)* List of allowed energy transfer modes the EV can choose from. If omitted this defaults to charging only.
+    #[must_use] 
     pub fn get_allowed_energy_transfer(&self) -> Option<&Vec<EnergyTransferModeEnumType>> {
         self.allowed_energy_transfer.as_ref()
     }
@@ -311,38 +323,42 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// The tariff field
+    #[must_use] 
     pub fn get_tariff(&self) -> Option<&TariffType> {
         self.tariff.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the certificate_status field and returns self for builder pattern.
+    /// Sets the `certificate_status` field and returns self for builder pattern.
     ///
-    /// * `certificate_status` - The certificate_status field
+    /// * `certificate_status` - The `certificate_status` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_certificate_status(mut self, certificate_status: AuthorizeCertificateStatusEnumType) -> Self {
         self.certificate_status = Some(certificate_status);
         self
     }
 
-    /// Sets the allowed_energy_transfer field and returns self for builder pattern.
+    /// Sets the `allowed_energy_transfer` field and returns self for builder pattern.
     ///
     /// * `allowed_energy_transfer` - *(2.1)* List of allowed energy transfer modes the EV can choose from. If omitted this defaults to charging only.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_allowed_energy_transfer(mut self, allowed_energy_transfer: Vec<EnergyTransferModeEnumType>) -> Self {
         self.allowed_energy_transfer = Some(allowed_energy_transfer);
         self
@@ -355,18 +371,20 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_tariff(mut self, tariff: TariffType) -> Self {
         self.tariff = Some(tariff);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

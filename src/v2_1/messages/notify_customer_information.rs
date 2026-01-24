@@ -3,7 +3,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the NotifyCustomerInformation request.
+/// Request body for the `NotifyCustomerInformation` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyCustomerInformationRequest {
@@ -26,7 +26,7 @@ pub struct NotifyCustomerInformationRequest {
     #[validate(range(min = 0))]
     pub request_id: i32,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -43,6 +43,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(data: String, seq_no: i32, generated_at: DateTime<Utc>, request_id: i32) -> Self {
         Self {
             data,
@@ -78,7 +79,7 @@ impl NotifyCustomerInformationRequest {
         self
     }
 
-    /// Sets the seq_no field.
+    /// Sets the `seq_no` field.
     ///
     /// * `seq_no` - Sequence number of this message. First message starts at 0.
     ///
@@ -90,7 +91,7 @@ impl NotifyCustomerInformationRequest {
         self
     }
 
-    /// Sets the generated_at field.
+    /// Sets the `generated_at` field.
     ///
     /// * `generated_at` - Timestamp of the moment this message was generated at the Charging Station.
     ///
@@ -102,7 +103,7 @@ impl NotifyCustomerInformationRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
     /// * `request_id` - The Id of the request.
     ///
@@ -114,9 +115,9 @@ impl NotifyCustomerInformationRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -131,6 +132,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// (Part of) the requested data. No format specified in which the data is returned. Should be human readable.
+    #[must_use] 
     pub fn get_data(&self) -> &String {
         &self.data
     }
@@ -140,42 +142,47 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// “to be continued” indicator. Indicates whether another part of the monitoringData follows in an upcoming notifyMonitoringReportRequest message. Default value when omitted is false.
+    #[must_use] 
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
 
-    /// Gets a reference to the seq_no field.
+    /// Gets a reference to the `seq_no` field.
     ///
     /// # Returns
     ///
     /// Sequence number of this message. First message starts at 0.
+    #[must_use] 
     pub fn get_seq_no(&self) -> &i32 {
         &self.seq_no
     }
 
-    /// Gets a reference to the generated_at field.
+    /// Gets a reference to the `generated_at` field.
     ///
     /// # Returns
     ///
     /// Timestamp of the moment this message was generated at the Charging Station.
+    #[must_use] 
     pub fn get_generated_at(&self) -> &DateTime<Utc> {
         &self.generated_at
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
     /// The Id of the request.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -187,18 +194,20 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -206,11 +215,11 @@ impl NotifyCustomerInformationRequest {
 
 }
 
-/// Response body for the NotifyCustomerInformation response.
+/// Response body for the `NotifyCustomerInformation` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyCustomerInformationResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -229,15 +238,16 @@ impl NotifyCustomerInformationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -247,22 +257,24 @@ impl NotifyCustomerInformationResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

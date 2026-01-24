@@ -77,6 +77,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// A new instance of `DERCurveType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         curve_data: Vec<DERCurvePointsType>,
         priority: i32,
@@ -105,6 +106,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -119,6 +121,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_hysteresis(mut self, hysteresis: HysteresisType) -> Self {
         self.hysteresis = Some(hysteresis);
         self
@@ -133,6 +136,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_reactive_power_params(
         mut self,
         reactive_power_params: ReactivePowerParamsType,
@@ -150,6 +154,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_voltage_params(mut self, voltage_params: VoltageParamsType) -> Self {
         self.voltage_params = Some(voltage_params);
         self
@@ -164,6 +169,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_response_time(mut self, response_time: Decimal) -> Self {
         self.response_time = Some(response_time);
         self
@@ -178,6 +184,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_start_time(mut self, start_time: DateTime<Utc>) -> Self {
         self.start_time = Some(start_time);
         self
@@ -192,6 +199,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_duration(mut self, duration: Decimal) -> Self {
         self.duration = Some(duration);
         self
@@ -202,6 +210,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// A reference to the list of curve points
+    #[must_use] 
     pub fn curve_data(&self) -> &Vec<DERCurvePointsType> {
         &self.curve_data
     }
@@ -225,6 +234,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// The priority of the curve
+    #[must_use] 
     pub fn priority(&self) -> i32 {
         self.priority
     }
@@ -248,6 +258,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// The unit of the Y-axis values
+    #[must_use] 
     pub fn y_unit(&self) -> DERUnitEnumType {
         self.y_unit.clone()
     }
@@ -271,6 +282,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -294,6 +306,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// An optional reference to the hysteresis parameters
+    #[must_use] 
     pub fn hysteresis(&self) -> Option<&HysteresisType> {
         self.hysteresis.as_ref()
     }
@@ -317,6 +330,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// An optional reference to the reactive power parameters
+    #[must_use] 
     pub fn reactive_power_params(&self) -> Option<&ReactivePowerParamsType> {
         self.reactive_power_params.as_ref()
     }
@@ -343,6 +357,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// An optional reference to the voltage parameters
+    #[must_use] 
     pub fn voltage_params(&self) -> Option<&VoltageParamsType> {
         self.voltage_params.as_ref()
     }
@@ -366,6 +381,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// An optional reference to the response time
+    #[must_use] 
     pub fn response_time(&self) -> Option<Decimal> {
         self.response_time
     }
@@ -389,6 +405,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// An optional reference to the start time
+    #[must_use] 
     pub fn start_time(&self) -> Option<&DateTime<Utc>> {
         self.start_time.as_ref()
     }
@@ -412,6 +429,7 @@ impl DERCurveType {
     /// # Returns
     ///
     /// An optional reference to the duration
+    #[must_use] 
     pub fn duration(&self) -> Option<Decimal> {
         self.duration
     }

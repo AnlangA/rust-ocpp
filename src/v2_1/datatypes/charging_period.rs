@@ -4,7 +4,7 @@ use validator::Validate;
 
 use super::{cost_dimension::CostDimensionType, custom_data::CustomDataType};
 
-/// A ChargingPeriodType consists of a start time, and a list of possible values that influence this period,
+/// A `ChargingPeriodType` consists of a start time, and a list of possible values that influence this period,
 /// for example: amount of energy charged this period, maximum current during this period etc.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
@@ -41,6 +41,7 @@ impl ChargingPeriodType {
     /// # Returns
     ///
     /// A new instance of `ChargingPeriodType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(start_period: DateTime<Utc>, dimensions: Vec<CostDimensionType>) -> Self {
         Self {
             start_period,
@@ -59,6 +60,7 @@ impl ChargingPeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_tariff_id(mut self, tariff_id: String) -> Self {
         self.tariff_id = Some(tariff_id);
         self
@@ -73,6 +75,7 @@ impl ChargingPeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -83,6 +86,7 @@ impl ChargingPeriodType {
     /// # Returns
     ///
     /// The start timestamp of the charging period
+    #[must_use] 
     pub fn start_period(&self) -> &DateTime<Utc> {
         &self.start_period
     }
@@ -106,6 +110,7 @@ impl ChargingPeriodType {
     /// # Returns
     ///
     /// A reference to the list of dimensions that influence this period
+    #[must_use] 
     pub fn dimensions(&self) -> &Vec<CostDimensionType> {
         self.dimensions
             .as_ref()
@@ -131,6 +136,7 @@ impl ChargingPeriodType {
     /// # Returns
     ///
     /// An optional reference to the tariff ID
+    #[must_use] 
     pub fn tariff_id(&self) -> Option<&String> {
         self.tariff_id.as_ref()
     }
@@ -154,6 +160,7 @@ impl ChargingPeriodType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

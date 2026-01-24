@@ -11,16 +11,21 @@ static REGEX: OnceLock<Regex> = OnceLock::new();
 /// # identfierString
 /// This is a case-insensitive dataType and can only contain characters from the following
 /// character set: `a-z`, `A-Z`, `0-9`, `'*'`, `'-'`, `'_'`, `'='`, `':'`, `'+'`, `'|'`, `'@'`, `'.'`
+///
+/// # Panics
+///
+/// Will panic if the regex pattern fails to compile (this should never happen as the pattern is constant)
+///
+/// # Errors
+///
+/// Returns `ValidationError` if the input string contains characters outside the allowed set
 pub fn validate_identifier_string(s: &str) -> Result<(), ValidationError> {
     // regex for identifierString as defined by the specification
     let res = REGEX
         .get_or_init(|| Regex::new(r"^[a-zA-Z0-9*+=:|@._-]*$").unwrap())
         .is_match(s);
 
-    match res {
-        true => Ok(()),
-        false => Err(ValidationError::new("Not a valid identifierString")),
-    }
+    if res { Ok(()) } else { Err(ValidationError::new("Not a valid identifierString")) }
 }
 
 /// Validates that a discharge limit is non-positive (less than or equal to zero).
@@ -31,7 +36,11 @@ pub fn validate_identifier_string(s: &str) -> Result<(), ValidationError> {
 ///
 /// # Returns
 ///
-/// Returns Ok(()) if the value is less than or equal to zero, otherwise returns Err
+/// Returns Ok(()) if the value is less than or equal to zero
+///
+/// # Errors
+///
+/// Returns `ValidationError` if the value is greater than zero
 pub fn validate_discharge_limit(value: &Decimal) -> Result<(), ValidationError> {
     if *value > Decimal::ZERO {
         let mut error = ValidationError::new("discharge_limit_must_be_non_positive");

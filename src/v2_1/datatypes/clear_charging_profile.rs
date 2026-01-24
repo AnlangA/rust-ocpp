@@ -4,7 +4,7 @@ use validator::Validate;
 use super::custom_data::CustomDataType;
 use crate::v2_1::enumerations::ChargingProfilePurposeEnumType;
 
-/// A ClearChargingProfileType is a filter for charging profiles to be cleared by ClearChargingProfileRequest.
+/// A `ClearChargingProfileType` is a filter for charging profiles to be cleared by `ClearChargingProfileRequest`.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ClearChargingProfileType {
@@ -39,6 +39,7 @@ impl ClearChargingProfileType {
     /// # Returns
     ///
     /// A new instance of `ClearChargingProfileType` with all fields set to `None`
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
@@ -57,6 +58,7 @@ impl ClearChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -71,6 +73,7 @@ impl ClearChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_charging_profile_purpose(
         mut self,
         charging_profile_purpose: ChargingProfilePurposeEnumType,
@@ -88,6 +91,7 @@ impl ClearChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_stack_level(mut self, stack_level: i32) -> Self {
         self.stack_level = Some(stack_level);
         self
@@ -102,6 +106,7 @@ impl ClearChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -112,6 +117,7 @@ impl ClearChargingProfileType {
     /// # Returns
     ///
     /// An optional EVSE ID
+    #[must_use] 
     pub fn evse_id(&self) -> Option<i32> {
         self.evse_id
     }
@@ -135,6 +141,7 @@ impl ClearChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the charging profile purpose
+    #[must_use] 
     pub fn charging_profile_purpose(&self) -> Option<&ChargingProfilePurposeEnumType> {
         self.charging_profile_purpose.as_ref()
     }
@@ -161,6 +168,7 @@ impl ClearChargingProfileType {
     /// # Returns
     ///
     /// An optional stack level
+    #[must_use] 
     pub fn stack_level(&self) -> Option<i32> {
         self.stack_level
     }
@@ -184,6 +192,7 @@ impl ClearChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

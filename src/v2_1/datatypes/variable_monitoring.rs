@@ -18,7 +18,7 @@ pub struct VariableMonitoringType {
     pub transaction: bool,
 
     /// Required. Value for threshold or delta monitoring.
-    /// For Periodic or PeriodicClockAligned this is the interval in seconds.
+    /// For Periodic or `PeriodicClockAligned` this is the interval in seconds.
     #[serde(with = "rust_decimal::serde::arbitrary_precision")]
     pub value: Decimal,
 
@@ -55,6 +55,7 @@ impl VariableMonitoringType {
     /// # Returns
     ///
     /// A new `VariableMonitoringType` instance with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         id: i32,
         transaction: bool,
@@ -83,6 +84,7 @@ impl VariableMonitoringType {
     /// # Returns
     ///
     /// The modified `VariableMonitoringType` instance
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -93,6 +95,7 @@ impl VariableMonitoringType {
     /// # Returns
     ///
     /// The ID of the monitor
+    #[must_use] 
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -116,6 +119,7 @@ impl VariableMonitoringType {
     /// # Returns
     ///
     /// The transaction flag indicating if the monitor is only active during a transaction
+    #[must_use] 
     pub fn transaction(&self) -> bool {
         self.transaction
     }
@@ -139,6 +143,7 @@ impl VariableMonitoringType {
     /// # Returns
     ///
     /// The value for threshold or delta of the monitor
+    #[must_use] 
     pub fn value(&self) -> &Decimal {
         &self.value
     }
@@ -162,6 +167,7 @@ impl VariableMonitoringType {
     /// # Returns
     ///
     /// The monitor type of the variable
+    #[must_use] 
     pub fn type_(&self) -> &MonitorEnumType {
         &self.type_
     }
@@ -185,6 +191,7 @@ impl VariableMonitoringType {
     /// # Returns
     ///
     /// The severity that will be assigned to an event that is triggered by this monitor
+    #[must_use] 
     pub fn severity(&self) -> i32 {
         self.severity
     }
@@ -208,6 +215,7 @@ impl VariableMonitoringType {
     /// # Returns
     ///
     /// The event notification type of the message
+    #[must_use] 
     pub fn event_notification_type(&self) -> &EventNotificationEnumType {
         &self.event_notification_type
     }
@@ -234,6 +242,7 @@ impl VariableMonitoringType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

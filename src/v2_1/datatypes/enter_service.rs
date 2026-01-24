@@ -3,7 +3,7 @@ use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Parameters for the EnterService DER control function.
+/// Parameters for the `EnterService` DER control function.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct EnterServiceType {
@@ -71,6 +71,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// A new instance of `EnterServiceType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         priority: i32,
         high_voltage: Decimal,
@@ -100,6 +101,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// Self for builder pattern chaining
+    #[must_use] 
     pub fn with_delay(mut self, delay: Decimal) -> Self {
         self.delay = Some(delay);
         self
@@ -114,6 +116,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// Self for builder pattern chaining
+    #[must_use] 
     pub fn with_random_delay(mut self, random_delay: Decimal) -> Self {
         self.random_delay = Some(random_delay);
         self
@@ -128,6 +131,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// Self for builder pattern chaining
+    #[must_use] 
     pub fn with_ramp_rate(mut self, ramp_rate: Decimal) -> Self {
         self.ramp_rate = Some(ramp_rate);
         self
@@ -142,6 +146,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -152,6 +157,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The priority of setting (0=highest)
+    #[must_use] 
     pub fn priority(&self) -> i32 {
         self.priority
     }
@@ -175,6 +181,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service voltage high
+    #[must_use] 
     pub fn high_voltage(&self) -> Decimal {
         self.high_voltage
     }
@@ -198,6 +205,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service voltage low
+    #[must_use] 
     pub fn low_voltage(&self) -> Decimal {
         self.low_voltage
     }
@@ -221,6 +229,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service frequency high
+    #[must_use] 
     pub fn high_freq(&self) -> Decimal {
         self.high_freq
     }
@@ -244,6 +253,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service frequency low
+    #[must_use] 
     pub fn low_freq(&self) -> Decimal {
         self.low_freq
     }
@@ -267,6 +277,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service delay
+    #[must_use] 
     pub fn delay(&self) -> Option<Decimal> {
         self.delay
     }
@@ -290,6 +301,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service randomized delay
+    #[must_use] 
     pub fn random_delay(&self) -> Option<Decimal> {
         self.random_delay
     }
@@ -313,6 +325,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service ramp rate in seconds
+    #[must_use] 
     pub fn ramp_rate(&self) -> Option<Decimal> {
         self.ramp_rate
     }
@@ -336,6 +349,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

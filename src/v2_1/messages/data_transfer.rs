@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use validator::Validate;
 
-/// Request body for the DataTransfer request.
+/// Request body for the `DataTransfer` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct DataTransferRequest {
@@ -34,6 +34,7 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(vendor_id: String) -> Self {
         Self {
             message_id: None,
@@ -43,7 +44,7 @@ impl DataTransferRequest {
         }
     }
 
-    /// Sets the message_id field.
+    /// Sets the `message_id` field.
     ///
     /// * `message_id` - May be used to indicate a specific message or implementation.
     ///
@@ -67,7 +68,7 @@ impl DataTransferRequest {
         self
     }
 
-    /// Sets the vendor_id field.
+    /// Sets the `vendor_id` field.
     ///
     /// * `vendor_id` - This identifies the Vendor specific implementation
     ///
@@ -79,9 +80,9 @@ impl DataTransferRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -91,11 +92,12 @@ impl DataTransferRequest {
         self
     }
 
-    /// Gets a reference to the message_id field.
+    /// Gets a reference to the `message_id` field.
     ///
     /// # Returns
     ///
     /// May be used to indicate a specific message or implementation.
+    #[must_use] 
     pub fn get_message_id(&self) -> Option<&String> {
         self.message_id.as_ref()
     }
@@ -105,35 +107,39 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// Data without specified length or format. This needs to be decided by both parties (Open to implementation).
+    #[must_use] 
     pub fn get_data(&self) -> Option<&Value> {
         self.data.as_ref()
     }
 
-    /// Gets a reference to the vendor_id field.
+    /// Gets a reference to the `vendor_id` field.
     ///
     /// # Returns
     ///
     /// This identifies the Vendor specific implementation
+    #[must_use] 
     pub fn get_vendor_id(&self) -> &String {
         &self.vendor_id
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the message_id field and returns self for builder pattern.
+    /// Sets the `message_id` field and returns self for builder pattern.
     ///
     /// * `message_id` - May be used to indicate a specific message or implementation.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_message_id(mut self, message_id: String) -> Self {
         self.message_id = Some(message_id);
         self
@@ -146,18 +152,20 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_data(mut self, data: Value) -> Self {
         self.data = Some(data);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -165,7 +173,7 @@ impl DataTransferRequest {
 
 }
 
-/// Response body for the DataTransfer response.
+/// Response body for the `DataTransfer` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct DataTransferResponse {
@@ -192,6 +200,7 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: DataTransferStatusEnumType) -> Self {
         Self {
             status,
@@ -213,9 +222,9 @@ impl DataTransferResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -237,9 +246,9 @@ impl DataTransferResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -254,15 +263,17 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &DataTransferStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -272,26 +283,29 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// Data without specified length or format, in response to request.
+    #[must_use] 
     pub fn get_data(&self) -> Option<&Value> {
         self.data.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -304,18 +318,20 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_data(mut self, data: Value) -> Self {
         self.data = Some(data);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

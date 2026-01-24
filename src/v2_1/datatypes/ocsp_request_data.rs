@@ -38,7 +38,7 @@ impl OCSPRequestDataType {
     ///
     /// # Arguments
     ///
-    /// * `hash_algorithm` - The hash algorithm used to calculate HashValue
+    /// * `hash_algorithm` - The hash algorithm used to calculate `HashValue`
     /// * `issuer_name_hash` - The hash value of the Issuer DN
     /// * `issuer_key_hash` - The hash value of the Issuer Public Key
     /// * `serial_number` - The serial number of the certificate
@@ -47,6 +47,7 @@ impl OCSPRequestDataType {
     /// # Returns
     ///
     /// A new instance of `OCSPRequestDataType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         hash_algorithm: HashAlgorithmEnumType,
         issuer_name_hash: String,
@@ -73,6 +74,7 @@ impl OCSPRequestDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -82,7 +84,8 @@ impl OCSPRequestDataType {
     ///
     /// # Returns
     ///
-    /// The hash algorithm used to calculate HashValue
+    /// The hash algorithm used to calculate `HashValue`
+    #[must_use] 
     pub fn hash_algorithm(&self) -> &HashAlgorithmEnumType {
         &self.hash_algorithm
     }
@@ -91,7 +94,7 @@ impl OCSPRequestDataType {
     ///
     /// # Arguments
     ///
-    /// * `hash_algorithm` - The hash algorithm used to calculate HashValue
+    /// * `hash_algorithm` - The hash algorithm used to calculate `HashValue`
     ///
     /// # Returns
     ///
@@ -106,6 +109,7 @@ impl OCSPRequestDataType {
     /// # Returns
     ///
     /// The hash value of the Issuer DN
+    #[must_use] 
     pub fn issuer_name_hash(&self) -> &str {
         &self.issuer_name_hash
     }
@@ -129,6 +133,7 @@ impl OCSPRequestDataType {
     /// # Returns
     ///
     /// The hash value of the Issuer Public Key
+    #[must_use] 
     pub fn issuer_key_hash(&self) -> &str {
         &self.issuer_key_hash
     }
@@ -152,6 +157,7 @@ impl OCSPRequestDataType {
     /// # Returns
     ///
     /// The serial number of the certificate
+    #[must_use] 
     pub fn serial_number(&self) -> &str {
         &self.serial_number
     }
@@ -175,6 +181,7 @@ impl OCSPRequestDataType {
     /// # Returns
     ///
     /// The responder URL
+    #[must_use] 
     pub fn responder_url(&self) -> &str {
         &self.responder_url
     }
@@ -198,6 +205,7 @@ impl OCSPRequestDataType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

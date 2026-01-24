@@ -3,12 +3,12 @@ use validator::Validate;
 
 use super::{custom_data::CustomDataType, sales_tariff_entry::SalesTariffEntryType};
 
-/// A SalesTariff provided by a Mobility Operator (EMSP).
+/// A `SalesTariff` provided by a Mobility Operator (EMSP).
 /// NOTE: This dataType is based on dataTypes from ISO 15118-2.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SalesTariffType {
-    /// Required. SalesTariff identifier used to identify one sales tariff.
+    /// Required. `SalesTariff` identifier used to identify one sales tariff.
     /// An SAID remains a unique identifier for one schedule throughout a charging session.
     #[validate(range(min = 0))]
     pub id: i32,
@@ -18,7 +18,7 @@ pub struct SalesTariffType {
     #[validate(length(max = 32))]
     pub sales_tariff_description: Option<String>,
 
-    /// Optional. Defines the overall number of distinct price levels used across all provided SalesTariff elements.
+    /// Optional. Defines the overall number of distinct price levels used across all provided `SalesTariff` elements.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0))]
     pub num_e_price_levels: Option<i32>,
@@ -38,12 +38,13 @@ impl SalesTariffType {
     ///
     /// # Arguments
     ///
-    /// * `id` - SalesTariff identifier used to identify one sales tariff
+    /// * `id` - `SalesTariff` identifier used to identify one sales tariff
     /// * `sales_tariff_entry` - List of sales tariff entries
     ///
     /// # Returns
     ///
     /// A new instance of `SalesTariffType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(id: i32, sales_tariff_entry: Vec<SalesTariffEntryType>) -> Self {
         Self {
             custom_data: None,
@@ -63,6 +64,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -77,12 +79,13 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_sales_tariff_description(mut self, description: String) -> Self {
         self.sales_tariff_description = Some(description);
         self
     }
 
-    /// Sets the number of price levels used across all provided SalesTariff elements.
+    /// Sets the number of price levels used across all provided `SalesTariff` elements.
     ///
     /// # Arguments
     ///
@@ -91,6 +94,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_num_e_price_levels(mut self, num_e_price_levels: i32) -> Self {
         self.num_e_price_levels = Some(num_e_price_levels);
         self
@@ -101,6 +105,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// The sales tariff identifier
+    #[must_use] 
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -109,7 +114,7 @@ impl SalesTariffType {
     ///
     /// # Arguments
     ///
-    /// * `id` - SalesTariff identifier
+    /// * `id` - `SalesTariff` identifier
     ///
     /// # Returns
     ///
@@ -124,6 +129,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// An optional human readable title/description of the sales tariff
+    #[must_use] 
     pub fn sales_tariff_description(&self) -> Option<&str> {
         self.sales_tariff_description.as_deref()
     }
@@ -146,7 +152,8 @@ impl SalesTariffType {
     ///
     /// # Returns
     ///
-    /// An optional number of distinct price levels used across all provided SalesTariff elements
+    /// An optional number of distinct price levels used across all provided `SalesTariff` elements
+    #[must_use] 
     pub fn num_e_price_levels(&self) -> Option<i32> {
         self.num_e_price_levels
     }
@@ -170,6 +177,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// A reference to the list of sales tariff entries
+    #[must_use] 
     pub fn sales_tariff_entry(&self) -> &[SalesTariffEntryType] {
         &self.sales_tariff_entry
     }
@@ -196,6 +204,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

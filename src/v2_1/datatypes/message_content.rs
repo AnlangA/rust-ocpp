@@ -62,6 +62,7 @@ impl MessageContentType {
     /// )
     /// .with_language("en".to_string());
     /// ```
+    #[must_use] 
     pub fn new(content: String, format: MessageFormatEnumType) -> Self {
         Self {
             content,
@@ -83,6 +84,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// A new instance of `MessageContentType` with optional fields set to `None`
+    #[must_use] 
     pub fn builder(content: String, format: MessageFormatEnumType) -> Self {
         Self::new(content, format)
     }
@@ -96,6 +98,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_language(mut self, language: String) -> Self {
         self.language = Some(language);
         self
@@ -126,6 +129,7 @@ impl MessageContentType {
     /// .with_language("en".to_string())
     /// .with_custom_data(custom_data);
     /// ```
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -136,6 +140,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// The message contents as a string slice
+    #[must_use] 
     pub fn content(&self) -> &str {
         &self.content
     }
@@ -159,6 +164,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// A reference to the format of the message
+    #[must_use] 
     pub fn format(&self) -> &MessageFormatEnumType {
         &self.format
     }
@@ -182,6 +188,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// An optional reference to the language identifier of the message content
+    #[must_use] 
     pub fn language(&self) -> Option<&str> {
         self.language.as_deref()
     }
@@ -205,6 +212,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

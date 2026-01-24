@@ -94,6 +94,7 @@ impl MessageInfoType {
     ///     Utc::now()
     /// );
     /// ```
+    #[must_use] 
     pub fn new(
         id: i32,
         priority: MessagePriorityEnumType,
@@ -126,6 +127,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// A new instance of `MessageInfoType` with optional fields set to `None`
+    #[must_use] 
     pub fn builder(
         id: i32,
         priority: MessagePriorityEnumType,
@@ -143,6 +145,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_end_timestamp(mut self, end_timestamp: DateTime<Utc>) -> Self {
         self.end_timestamp = Some(end_timestamp);
         self
@@ -157,6 +160,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_state(mut self, state: MessageStateEnumType) -> Self {
         self.state = Some(state);
         self
@@ -171,6 +175,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_transaction_id(mut self, transaction_id: String) -> Self {
         self.transaction_id = Some(transaction_id);
         self
@@ -185,6 +190,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_message(mut self, message: MessageContentType) -> Self {
         self.message = Some(message);
         self
@@ -199,6 +205,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_display(mut self, display: ComponentType) -> Self {
         self.display = Some(display);
         self
@@ -213,6 +220,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_message_extra(mut self, message_extra: Vec<MessageContentType>) -> Self {
         self.message_extra = message_extra;
         self
@@ -227,6 +235,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -237,6 +246,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// The identifier that identifies this message
+    #[must_use] 
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -260,6 +270,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// The priority with which this message should be shown
+    #[must_use] 
     pub fn priority(&self) -> &MessagePriorityEnumType {
         &self.priority
     }
@@ -283,6 +294,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the current state of this message
+    #[must_use] 
     pub fn state(&self) -> Option<&MessageStateEnumType> {
         self.state.as_ref()
     }
@@ -306,6 +318,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// The date and time at which this message was received
+    #[must_use] 
     pub fn start_timestamp(&self) -> &DateTime<Utc> {
         &self.start_timestamp
     }
@@ -329,6 +342,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the date and time at which this message should be removed
+    #[must_use] 
     pub fn end_timestamp(&self) -> Option<&DateTime<Utc>> {
         self.end_timestamp.as_ref()
     }
@@ -352,6 +366,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the transaction Id for which this message is intended
+    #[must_use] 
     pub fn transaction_id(&self) -> Option<&str> {
         self.transaction_id.as_deref()
     }
@@ -375,6 +390,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the message details for a specific user
+    #[must_use] 
     pub fn message(&self) -> Option<&MessageContentType> {
         self.message.as_ref()
     }
@@ -398,6 +414,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the display component that this message concerns
+    #[must_use] 
     pub fn display(&self) -> Option<&ComponentType> {
         self.display.as_ref()
     }
@@ -421,6 +438,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// A reference to the additional message details
+    #[must_use] 
     pub fn message_extra(&self) -> &[MessageContentType] {
         &self.message_extra
     }
@@ -444,6 +462,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

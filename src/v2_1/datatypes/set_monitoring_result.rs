@@ -7,7 +7,7 @@ use super::{
 };
 use crate::v2_1::enumerations::{MonitorEnumType, SetMonitoringStatusEnumType};
 
-/// Class to hold result of SetVariableMonitoring request.
+/// Class to hold result of `SetVariableMonitoring` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SetMonitoringResultType {
@@ -22,8 +22,8 @@ pub struct SetMonitoringResultType {
     #[validate(nested)]
     pub variable: VariableType,
 
-    /// Id given to the VariableMonitor by the Charging Station. The Id is only returned when status is accepted.
-    /// Installed VariableMonitors should have unique id's but the id's of removed Installed monitors
+    /// Id given to the `VariableMonitor` by the Charging Station. The Id is only returned when status is accepted.
+    /// Installed `VariableMonitors` should have unique id's but the id's of removed Installed monitors
     /// should have unique id's but the id's of removed monitors MAY be reused.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0))]
@@ -85,6 +85,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// A new instance of `SetMonitoringResultType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         status: SetMonitoringStatusEnumType,
         component: ComponentType,
@@ -113,6 +114,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_id(mut self, id: i32) -> Self {
         self.id = Some(id);
         self
@@ -127,6 +129,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -141,6 +144,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -155,6 +159,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_type(mut self, type_: MonitorEnumType) -> Self {
         self.type_ = type_;
         self
@@ -169,6 +174,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_severity(mut self, severity: i32) -> Self {
         self.severity = severity;
         self
@@ -179,6 +185,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// The status indicating whether the Charging Station accepts the monitoring request
+    #[must_use] 
     pub fn status(&self) -> &SetMonitoringStatusEnumType {
         &self.status
     }
@@ -202,6 +209,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// A reference to the component for which the monitoring status is returned
+    #[must_use] 
     pub fn component(&self) -> &ComponentType {
         &self.component
     }
@@ -225,6 +233,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// A reference to the variable for which the monitoring status is returned
+    #[must_use] 
     pub fn variable(&self) -> &VariableType {
         &self.variable
     }
@@ -248,6 +257,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// The optional id of the monitor that was set
+    #[must_use] 
     pub fn id(&self) -> Option<i32> {
         self.id
     }
@@ -271,6 +281,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// The type of monitor that was set
+    #[must_use] 
     pub fn type_(&self) -> &MonitorEnumType {
         &self.type_
     }
@@ -294,6 +305,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// The severity that will be assigned to an event triggered by this monitor
+    #[must_use] 
     pub fn severity(&self) -> i32 {
         self.severity
     }
@@ -317,6 +329,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// An optional reference to detailed status information
+    #[must_use] 
     pub fn status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -340,6 +353,7 @@ impl SetMonitoringResultType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

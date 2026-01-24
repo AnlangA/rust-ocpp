@@ -32,6 +32,7 @@ impl GradientGetType {
     /// # Returns
     ///
     /// A new `GradientGetType` instance with optional fields set to `None`
+    #[must_use] 
     pub fn new(gradient: GradientType, id: String) -> Self {
         Self {
             custom_data: None,
@@ -49,6 +50,7 @@ impl GradientGetType {
     /// # Returns
     ///
     /// The modified `GradientGetType` instance
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -59,6 +61,7 @@ impl GradientGetType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -82,6 +85,7 @@ impl GradientGetType {
     /// # Returns
     ///
     /// A reference to the gradient settings
+    #[must_use] 
     pub fn gradient(&self) -> &GradientType {
         &self.gradient
     }
@@ -105,6 +109,7 @@ impl GradientGetType {
     /// # Returns
     ///
     /// A reference to the id of the setting
+    #[must_use] 
     pub fn id(&self) -> &str {
         &self.id
     }

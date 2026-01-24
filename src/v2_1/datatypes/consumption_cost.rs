@@ -34,6 +34,7 @@ impl ConsumptionCostType {
     /// # Returns
     ///
     /// A new instance of `ConsumptionCostType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(start_value: Decimal, cost: Vec<CostType>) -> Self {
         Self {
             start_value,
@@ -51,6 +52,7 @@ impl ConsumptionCostType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -61,6 +63,7 @@ impl ConsumptionCostType {
     /// # Returns
     ///
     /// The lowest level of consumption that defines the starting point of this consumption block
+    #[must_use] 
     pub fn start_value(&self) -> Decimal {
         self.start_value
     }
@@ -84,6 +87,7 @@ impl ConsumptionCostType {
     /// # Returns
     ///
     /// A reference to the list of costs associated with this consumption block
+    #[must_use] 
     pub fn cost(&self) -> &[CostType] {
         &self.cost
     }
@@ -107,6 +111,7 @@ impl ConsumptionCostType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

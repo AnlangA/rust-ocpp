@@ -45,6 +45,7 @@ impl ClearTariffsResultType {
     /// # Returns
     ///
     /// A new instance of `ClearTariffsResultType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(status: TariffClearStatusEnumType) -> Self {
         Self {
             status,
@@ -63,6 +64,7 @@ impl ClearTariffsResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_tariff_id(mut self, tariff_id: String) -> Self {
         self.tariff_id = Some(tariff_id);
         self
@@ -77,6 +79,7 @@ impl ClearTariffsResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -91,6 +94,7 @@ impl ClearTariffsResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -101,6 +105,7 @@ impl ClearTariffsResultType {
     /// # Returns
     ///
     /// The status indicating whether the tariff was cleared
+    #[must_use] 
     pub fn status(&self) -> &TariffClearStatusEnumType {
         &self.status
     }
@@ -124,6 +129,7 @@ impl ClearTariffsResultType {
     /// # Returns
     ///
     /// An optional reference to the ID of tariff for which status is reported
+    #[must_use] 
     pub fn tariff_id(&self) -> Option<&str> {
         self.tariff_id.as_deref()
     }
@@ -147,6 +153,7 @@ impl ClearTariffsResultType {
     /// # Returns
     ///
     /// An optional reference to the element providing more information about the status
+    #[must_use] 
     pub fn status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -170,6 +177,7 @@ impl ClearTariffsResultType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

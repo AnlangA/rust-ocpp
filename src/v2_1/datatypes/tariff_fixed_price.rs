@@ -32,6 +32,7 @@ impl TariffFixedPriceType {
     /// # Returns
     ///
     /// A new instance of `TariffFixedPriceType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(price_fixed: Decimal) -> Self {
         Self {
             price_fixed,
@@ -49,6 +50,7 @@ impl TariffFixedPriceType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_conditions(mut self, conditions: TariffConditionsFixedType) -> Self {
         self.conditions = Some(conditions);
         self
@@ -63,6 +65,7 @@ impl TariffFixedPriceType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -73,6 +76,7 @@ impl TariffFixedPriceType {
     /// # Returns
     ///
     /// The fixed price for this element
+    #[must_use] 
     pub fn price_fixed(&self) -> Decimal {
         self.price_fixed
     }
@@ -96,6 +100,7 @@ impl TariffFixedPriceType {
     /// # Returns
     ///
     /// An optional reference to the conditions when this tariff element applies
+    #[must_use] 
     pub fn conditions(&self) -> Option<&TariffConditionsFixedType> {
         self.conditions.as_ref()
     }
@@ -119,6 +124,7 @@ impl TariffFixedPriceType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

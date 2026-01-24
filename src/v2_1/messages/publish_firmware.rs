@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::GenericStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the PublishFirmware request.
+/// Request body for the `PublishFirmware` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct PublishFirmwareRequest {
@@ -29,7 +29,7 @@ pub struct PublishFirmwareRequest {
     #[validate(range(min = 0))]
     pub retry_interval: Option<i32>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -45,6 +45,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(location: String, checksum: String, request_id: i32) -> Self {
         Self {
             location,
@@ -92,7 +93,7 @@ impl PublishFirmwareRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
     /// * `request_id` - The Id of the request.
     ///
@@ -104,7 +105,7 @@ impl PublishFirmwareRequest {
         self
     }
 
-    /// Sets the retry_interval field.
+    /// Sets the `retry_interval` field.
     ///
     /// * `retry_interval` - The interval in seconds after which a retry may be attempted. If this field is not present, it is left to Charging Station to decide how long to wait between attempts.
     ///
@@ -116,9 +117,9 @@ impl PublishFirmwareRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -133,6 +134,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// This contains a string containing a URI pointing to a location from which to retrieve the firmware.
+    #[must_use] 
     pub fn get_location(&self) -> &String {
         &self.location
     }
@@ -142,6 +144,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// This specifies how many times Charging Station must retry to download the firmware before giving up. If this field is not present, it is left to Charging Station to decide how many times it wants to retry. If the value is 0, it means: no retries.
+    #[must_use] 
     pub fn get_retries(&self) -> Option<&i32> {
         self.retries.as_ref()
     }
@@ -151,33 +154,37 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// The MD5 checksum over the entire firmware file as a hexadecimal string of length 32.
+    #[must_use] 
     pub fn get_checksum(&self) -> &String {
         &self.checksum
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
     /// The Id of the request.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
 
-    /// Gets a reference to the retry_interval field.
+    /// Gets a reference to the `retry_interval` field.
     ///
     /// # Returns
     ///
     /// The interval in seconds after which a retry may be attempted. If this field is not present, it is left to Charging Station to decide how long to wait between attempts.
+    #[must_use] 
     pub fn get_retry_interval(&self) -> Option<&i32> {
         self.retry_interval.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -189,30 +196,33 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_retries(mut self, retries: i32) -> Self {
         self.retries = Some(retries);
         self
     }
 
-    /// Sets the retry_interval field and returns self for builder pattern.
+    /// Sets the `retry_interval` field and returns self for builder pattern.
     ///
     /// * `retry_interval` - The interval in seconds after which a retry may be attempted. If this field is not present, it is left to Charging Station to decide how long to wait between attempts.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_retry_interval(mut self, retry_interval: i32) -> Self {
         self.retry_interval = Some(retry_interval);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -220,7 +230,7 @@ impl PublishFirmwareRequest {
 
 }
 
-/// Response body for the PublishFirmware response.
+/// Response body for the `PublishFirmware` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct PublishFirmwareResponse {
@@ -231,7 +241,7 @@ pub struct PublishFirmwareResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -245,6 +255,7 @@ impl PublishFirmwareResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -265,9 +276,9 @@ impl PublishFirmwareResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -277,9 +288,9 @@ impl PublishFirmwareResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -294,47 +305,52 @@ impl PublishFirmwareResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

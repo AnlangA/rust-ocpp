@@ -5,14 +5,14 @@ use validator::Validate;
 use super::custom_data::CustomDataType;
 
 /// Charging parameters for ISO 15118-20, also supporting V2X charging/discharging.
-/// All values are greater or equal to zero, with the exception of EVMinEnergyRequest, EVMaxEnergyRequest, EVTargetEnergyRequest, EVMinV2XEnergyRequest and EVMaxV2XEnergyRequest.
+/// All values are greater or equal to zero, with the exception of `EVMinEnergyRequest`, `EVMaxEnergyRequest`, `EVTargetEnergyRequest`, `EVMinV2XEnergyRequest` and `EVMaxV2XEnergyRequest`.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct V2XChargingParametersType {
     /// Minimum charge power in W, defined by max(EV, EVSE).
     /// This field represents the sum of all phases, unless values are provided for L2 and L3, in which case this field represents phase L1.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMinimumChargePower
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMinimumChargePower`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -22,7 +22,7 @@ pub struct V2XChargingParametersType {
 
     /// Minimum charge power on phase L2 in W, defined by max(EV, EVSE).
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMinimumChargePower_L2
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMinimumChargePower_L2`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -32,7 +32,7 @@ pub struct V2XChargingParametersType {
 
     /// Minimum charge power on phase L3 in W, defined by max(EV, EVSE).
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMinimumChargePower_L3
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMinimumChargePower_L3`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -42,10 +42,10 @@ pub struct V2XChargingParametersType {
 
     /// Maximum charge (absorbed) power in W, defined by min(EV, EVSE) at unity power factor.
     /// This field represents the sum of all phases, unless values are provided for L2 and L3, in which case this field represents phase L1.
-    /// It corresponds to the ChaWMax attribute in the IEC 61850.
-    /// It is usually equivalent to the rated apparent power of the EV when discharging (ChaVAMax) in IEC 61850.
+    /// It corresponds to the `ChaWMax` attribute in the IEC 61850.
+    /// It is usually equivalent to the rated apparent power of the EV when discharging (`ChaVAMax`) in IEC 61850.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMaximumChargePower
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMaximumChargePower`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -55,7 +55,7 @@ pub struct V2XChargingParametersType {
 
     /// Maximum charge power on phase L2 in W, defined by min(EV, EVSE)
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMaximumChargePower_L2
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMaximumChargePower_L2`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -65,7 +65,7 @@ pub struct V2XChargingParametersType {
 
     /// Maximum charge power on phase L3 in W, defined by min(EV, EVSE)
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMaximumChargePower_L3
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMaximumChargePower_L3`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -75,10 +75,10 @@ pub struct V2XChargingParametersType {
 
     /// Minimum discharge (injected) power in W, defined by max(EV, EVSE) at unity power factor. Value >= 0.
     /// This field represents the sum of all phases, unless values are provided for L2 and L3, in which case this field represents phase L1.
-    /// It corresponds to the WMax attribute in the IEC 61850.
-    /// It is usually equivalent to the rated apparent power of the EV when discharging (VAMax attribute in the IEC 61850).
+    /// It corresponds to the `WMax` attribute in the IEC 61850.
+    /// It is usually equivalent to the rated apparent power of the EV when discharging (`VAMax` attribute in the IEC 61850).
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMinimumDischargePower
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMinimumDischargePower`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -88,7 +88,7 @@ pub struct V2XChargingParametersType {
 
     /// Minimum discharge power on phase L2 in W, defined by max(EV, EVSE). Value >= 0.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMinimumDischargePower_L2
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMinimumDischargePower_L2`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -98,7 +98,7 @@ pub struct V2XChargingParametersType {
 
     /// Minimum discharge power on phase L3 in W, defined by max(EV, EVSE). Value >= 0.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMinimumDischargePower_L3
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMinimumDischargePower_L3`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -109,7 +109,7 @@ pub struct V2XChargingParametersType {
     /// Maximum discharge (injected) power in W, defined by min(EV, EVSE) at unity power factor. Value >= 0.
     /// This field represents the sum of all phases, unless values are provided for L2 and L3, in which case this field represents phase L1.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMaximumDischargePower
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMaximumDischargePower`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -119,7 +119,7 @@ pub struct V2XChargingParametersType {
 
     /// Maximum discharge power on phase L2 in W, defined by min(EV, EVSE). Value >= 0.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMaximumDischargePowe_L2
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMaximumDischargePowe_L2`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -129,7 +129,7 @@ pub struct V2XChargingParametersType {
 
     /// Maximum discharge power on phase L3 in W, defined by min(EV, EVSE). Value >= 0.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_AC/DC_CPDReqEnergyTransferModeType: EVMaximumDischargePower_L3
+    /// *ISO 15118-20*: `BPT_AC/DC_CPDReqEnergyTransferModeType`: `EVMaximumDischargePower_L3`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -139,7 +139,7 @@ pub struct V2XChargingParametersType {
 
     /// Minimum charge current in A, defined by max(EV, EVSE)
     /// Relates to:
-    /// *ISO 15118-20*: BPT_DC_CPDReqEnergyTransferModeType: EVMinimumChargeCurrent
+    /// *ISO 15118-20*: `BPT_DC_CPDReqEnergyTransferModeType`: `EVMinimumChargeCurrent`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -149,7 +149,7 @@ pub struct V2XChargingParametersType {
 
     /// Maximum charge current in A, defined by min(EV, EVSE)
     /// Relates to:
-    /// *ISO 15118-20*: BPT_DC_CPDReqEnergyTransferModeType: EVMaximumChargeCurrent
+    /// *ISO 15118-20*: `BPT_DC_CPDReqEnergyTransferModeType`: `EVMaximumChargeCurrent`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -159,7 +159,7 @@ pub struct V2XChargingParametersType {
 
     /// Minimum discharge current in A, defined by max(EV, EVSE). Value >= 0.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_DC_CPDReqEnergyTransferModeType: EVMinimumDischargeCurrent
+    /// *ISO 15118-20*: `BPT_DC_CPDReqEnergyTransferModeType`: `EVMinimumDischargeCurrent`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -169,7 +169,7 @@ pub struct V2XChargingParametersType {
 
     /// Maximum discharge current in A, defined by min(EV, EVSE). Value >= 0.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_DC_CPDReqEnergyTransferModeType: EVMaximumDischargeCurrent
+    /// *ISO 15118-20*: `BPT_DC_CPDReqEnergyTransferModeType`: `EVMaximumDischargeCurrent`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -179,7 +179,7 @@ pub struct V2XChargingParametersType {
 
     /// Minimum voltage in V, defined by max(EV, EVSE)
     /// Relates to:
-    /// *ISO 15118-20*: BPT_DC_CPDReqEnergyTransferModeType: EVMinimumVoltage
+    /// *ISO 15118-20*: `BPT_DC_CPDReqEnergyTransferModeType`: `EVMinimumVoltage`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -189,7 +189,7 @@ pub struct V2XChargingParametersType {
 
     /// Maximum voltage in V, defined by min(EV, EVSE)
     /// Relates to:
-    /// *ISO 15118-20*: BPT_DC_CPDReqEnergyTransferModeType: EVMaximumVoltage
+    /// *ISO 15118-20*: `BPT_DC_CPDReqEnergyTransferModeType`: `EVMaximumVoltage`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -199,7 +199,7 @@ pub struct V2XChargingParametersType {
 
     /// Energy to requested state of charge in Wh
     /// Relates to:
-    /// *ISO 15118-20*: Dynamic/Scheduled_SEReqControlModeType: EVTargetEnergyRequest
+    /// *ISO 15118-20*: `Dynamic/Scheduled_SEReqControlModeType`: `EVTargetEnergyRequest`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -209,7 +209,7 @@ pub struct V2XChargingParametersType {
 
     /// Energy to minimum allowed state of charge in Wh
     /// Relates to:
-    /// *ISO 15118-20*: Dynamic/Scheduled_SEReqControlModeType: EVMinimumEnergyRequest
+    /// *ISO 15118-20*: `Dynamic/Scheduled_SEReqControlModeType`: `EVMinimumEnergyRequest`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -219,7 +219,7 @@ pub struct V2XChargingParametersType {
 
     /// Energy to maximum state of charge in Wh
     /// Relates to:
-    /// *ISO 15118-20*: Dynamic/Scheduled_SEReqControlModeType: EVMaximumEnergyRequest
+    /// *ISO 15118-20*: `Dynamic/Scheduled_SEReqControlModeType`: `EVMaximumEnergyRequest`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -230,7 +230,7 @@ pub struct V2XChargingParametersType {
     /// Energy (in Wh) to minimum state of charge for cycling (V2X) activity.
     /// Positive value means that current state of charge is below V2X range.
     /// Relates to:
-    /// *ISO 15118-20*: Dynamic_SEReqControlModeType: EVMinimumV2XEnergyRequest
+    /// *ISO 15118-20*: `Dynamic_SEReqControlModeType`: `EVMinimumV2XEnergyRequest`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -241,7 +241,7 @@ pub struct V2XChargingParametersType {
     /// Energy (in Wh) to maximum state of charge for cycling (V2X) activity.
     /// Negative value indicates that current state of charge is above V2X range.
     /// Relates to:
-    /// *ISO 15118-20*: Dynamic_SEReqControlModeType: EVMaximumV2XEnergyRequest
+    /// *ISO 15118-20*: `Dynamic_SEReqControlModeType`: `EVMaximumV2XEnergyRequest`
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -251,7 +251,7 @@ pub struct V2XChargingParametersType {
 
     /// Target state of charge at departure as percentage.
     /// Relates to:
-    /// *ISO 15118-20*: BPT_DC_CPDReqEnergyTransferModeType: TargetSOC
+    /// *ISO 15118-20*: `BPT_DC_CPDReqEnergyTransferModeType`: `TargetSOC`
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0, max = 100))]
     pub target_so_c: Option<i32>,
@@ -264,6 +264,7 @@ pub struct V2XChargingParametersType {
 
 impl V2XChargingParametersType {
     /// Creates a new empty `V2XChargingParametersType` with all fields set to `None`.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             min_charge_power: None,
@@ -295,6 +296,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum charge power.
+    #[must_use] 
     pub fn min_charge_power(&self) -> Option<Decimal> {
         self.min_charge_power
     }
@@ -306,6 +308,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum charge power on phase L2.
+    #[must_use] 
     pub fn min_charge_power_l2(&self) -> Option<Decimal> {
         self.min_charge_power_l2
     }
@@ -317,6 +320,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum charge power on phase L3.
+    #[must_use] 
     pub fn min_charge_power_l3(&self) -> Option<Decimal> {
         self.min_charge_power_l3
     }
@@ -328,6 +332,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum charge power.
+    #[must_use] 
     pub fn max_charge_power(&self) -> Option<Decimal> {
         self.max_charge_power
     }
@@ -339,6 +344,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum charge power on phase L2.
+    #[must_use] 
     pub fn max_charge_power_l2(&self) -> Option<Decimal> {
         self.max_charge_power_l2
     }
@@ -350,6 +356,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum charge power on phase L3.
+    #[must_use] 
     pub fn max_charge_power_l3(&self) -> Option<Decimal> {
         self.max_charge_power_l3
     }
@@ -361,6 +368,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum discharge power.
+    #[must_use] 
     pub fn min_discharge_power(&self) -> Option<Decimal> {
         self.min_discharge_power
     }
@@ -372,6 +380,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum discharge power on phase L2.
+    #[must_use] 
     pub fn min_discharge_power_l2(&self) -> Option<Decimal> {
         self.min_discharge_power_l2
     }
@@ -383,6 +392,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum discharge power on phase L3.
+    #[must_use] 
     pub fn min_discharge_power_l3(&self) -> Option<Decimal> {
         self.min_discharge_power_l3
     }
@@ -394,6 +404,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum discharge power.
+    #[must_use] 
     pub fn max_discharge_power(&self) -> Option<Decimal> {
         self.max_discharge_power
     }
@@ -405,6 +416,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum discharge power on phase L2.
+    #[must_use] 
     pub fn max_discharge_power_l2(&self) -> Option<Decimal> {
         self.max_discharge_power_l2
     }
@@ -416,6 +428,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum discharge power on phase L3.
+    #[must_use] 
     pub fn max_discharge_power_l3(&self) -> Option<Decimal> {
         self.max_discharge_power_l3
     }
@@ -427,6 +440,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum charge current.
+    #[must_use] 
     pub fn min_charge_current(&self) -> Option<Decimal> {
         self.min_charge_current
     }
@@ -438,6 +452,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum charge current.
+    #[must_use] 
     pub fn max_charge_current(&self) -> Option<Decimal> {
         self.max_charge_current
     }
@@ -449,6 +464,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum discharge current.
+    #[must_use] 
     pub fn min_discharge_current(&self) -> Option<Decimal> {
         self.min_discharge_current
     }
@@ -460,6 +476,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum discharge current.
+    #[must_use] 
     pub fn max_discharge_current(&self) -> Option<Decimal> {
         self.max_discharge_current
     }
@@ -471,6 +488,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum voltage.
+    #[must_use] 
     pub fn min_voltage(&self) -> Option<Decimal> {
         self.min_voltage
     }
@@ -482,6 +500,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum voltage.
+    #[must_use] 
     pub fn max_voltage(&self) -> Option<Decimal> {
         self.max_voltage
     }
@@ -493,6 +512,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the target energy request.
+    #[must_use] 
     pub fn ev_target_energy_request(&self) -> Option<Decimal> {
         self.ev_target_energy_request
     }
@@ -504,6 +524,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum energy request.
+    #[must_use] 
     pub fn ev_min_energy_request(&self) -> Option<Decimal> {
         self.ev_min_energy_request
     }
@@ -515,6 +536,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum energy request.
+    #[must_use] 
     pub fn ev_max_energy_request(&self) -> Option<Decimal> {
         self.ev_max_energy_request
     }
@@ -526,6 +548,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum V2X energy request.
+    #[must_use] 
     pub fn ev_min_v2x_energy_request(&self) -> Option<Decimal> {
         self.ev_min_v2x_energy_request
     }
@@ -537,6 +560,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum V2X energy request.
+    #[must_use] 
     pub fn ev_max_v2x_energy_request(&self) -> Option<Decimal> {
         self.ev_max_v2x_energy_request
     }
@@ -547,18 +571,20 @@ impl V2XChargingParametersType {
         self
     }
 
-    /// Gets the target SoC.
+    /// Gets the target `SoC`.
+    #[must_use] 
     pub fn target_so_c(&self) -> Option<i32> {
         self.target_so_c
     }
 
-    /// Sets the target SoC.
+    /// Sets the target `SoC`.
     pub fn set_target_so_c(&mut self, value: Option<i32>) -> &mut Self {
         self.target_so_c = value;
         self
     }
 
     /// Gets the custom data.
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -572,150 +598,175 @@ impl V2XChargingParametersType {
     // Builder pattern methods
 
     /// Sets the minimum charge power using the builder pattern.
+    #[must_use] 
     pub fn with_min_charge_power(mut self, value: Decimal) -> Self {
         self.min_charge_power = Some(value);
         self
     }
 
     /// Sets the minimum charge power on phase L2 using the builder pattern.
+    #[must_use] 
     pub fn with_min_charge_power_l2(mut self, value: Decimal) -> Self {
         self.min_charge_power_l2 = Some(value);
         self
     }
 
     /// Sets the minimum charge power on phase L3 using the builder pattern.
+    #[must_use] 
     pub fn with_min_charge_power_l3(mut self, value: Decimal) -> Self {
         self.min_charge_power_l3 = Some(value);
         self
     }
 
     /// Sets the maximum charge power using the builder pattern.
+    #[must_use] 
     pub fn with_max_charge_power(mut self, value: Decimal) -> Self {
         self.max_charge_power = Some(value);
         self
     }
 
     /// Sets the maximum charge power on phase L2 using the builder pattern.
+    #[must_use] 
     pub fn with_max_charge_power_l2(mut self, value: Decimal) -> Self {
         self.max_charge_power_l2 = Some(value);
         self
     }
 
     /// Sets the maximum charge power on phase L3 using the builder pattern.
+    #[must_use] 
     pub fn with_max_charge_power_l3(mut self, value: Decimal) -> Self {
         self.max_charge_power_l3 = Some(value);
         self
     }
 
     /// Sets the minimum discharge power using the builder pattern.
+    #[must_use] 
     pub fn with_min_discharge_power(mut self, value: Decimal) -> Self {
         self.min_discharge_power = Some(value);
         self
     }
 
     /// Sets the minimum discharge power on phase L2 using the builder pattern.
+    #[must_use] 
     pub fn with_min_discharge_power_l2(mut self, value: Decimal) -> Self {
         self.min_discharge_power_l2 = Some(value);
         self
     }
 
     /// Sets the minimum discharge power on phase L3 using the builder pattern.
+    #[must_use] 
     pub fn with_min_discharge_power_l3(mut self, value: Decimal) -> Self {
         self.min_discharge_power_l3 = Some(value);
         self
     }
 
     /// Sets the maximum discharge power using the builder pattern.
+    #[must_use] 
     pub fn with_max_discharge_power(mut self, value: Decimal) -> Self {
         self.max_discharge_power = Some(value);
         self
     }
 
     /// Sets the maximum discharge power on phase L2 using the builder pattern.
+    #[must_use] 
     pub fn with_max_discharge_power_l2(mut self, value: Decimal) -> Self {
         self.max_discharge_power_l2 = Some(value);
         self
     }
 
     /// Sets the maximum discharge power on phase L3 using the builder pattern.
+    #[must_use] 
     pub fn with_max_discharge_power_l3(mut self, value: Decimal) -> Self {
         self.max_discharge_power_l3 = Some(value);
         self
     }
 
     /// Sets the minimum charge current using the builder pattern.
+    #[must_use] 
     pub fn with_min_charge_current(mut self, value: Decimal) -> Self {
         self.min_charge_current = Some(value);
         self
     }
 
     /// Sets the maximum charge current using the builder pattern.
+    #[must_use] 
     pub fn with_max_charge_current(mut self, value: Decimal) -> Self {
         self.max_charge_current = Some(value);
         self
     }
 
     /// Sets the minimum discharge current using the builder pattern.
+    #[must_use] 
     pub fn with_min_discharge_current(mut self, value: Decimal) -> Self {
         self.min_discharge_current = Some(value);
         self
     }
 
     /// Sets the maximum discharge current using the builder pattern.
+    #[must_use] 
     pub fn with_max_discharge_current(mut self, value: Decimal) -> Self {
         self.max_discharge_current = Some(value);
         self
     }
 
     /// Sets the minimum voltage using the builder pattern.
+    #[must_use] 
     pub fn with_min_voltage(mut self, value: Decimal) -> Self {
         self.min_voltage = Some(value);
         self
     }
 
     /// Sets the maximum voltage using the builder pattern.
+    #[must_use] 
     pub fn with_max_voltage(mut self, value: Decimal) -> Self {
         self.max_voltage = Some(value);
         self
     }
 
     /// Sets the target energy request using the builder pattern.
+    #[must_use] 
     pub fn with_ev_target_energy_request(mut self, value: Decimal) -> Self {
         self.ev_target_energy_request = Some(value);
         self
     }
 
     /// Sets the minimum energy request using the builder pattern.
+    #[must_use] 
     pub fn with_ev_min_energy_request(mut self, value: Decimal) -> Self {
         self.ev_min_energy_request = Some(value);
         self
     }
 
     /// Sets the maximum energy request using the builder pattern.
+    #[must_use] 
     pub fn with_ev_max_energy_request(mut self, value: Decimal) -> Self {
         self.ev_max_energy_request = Some(value);
         self
     }
 
     /// Sets the minimum V2X energy request using the builder pattern.
+    #[must_use] 
     pub fn with_ev_min_v2x_energy_request(mut self, value: Decimal) -> Self {
         self.ev_min_v2x_energy_request = Some(value);
         self
     }
 
     /// Sets the maximum V2X energy request using the builder pattern.
+    #[must_use] 
     pub fn with_ev_max_v2x_energy_request(mut self, value: Decimal) -> Self {
         self.ev_max_v2x_energy_request = Some(value);
         self
     }
 
-    /// Sets the target SoC using the builder pattern.
+    /// Sets the target `SoC` using the builder pattern.
+    #[must_use] 
     pub fn with_target_so_c(mut self, value: i32) -> Self {
         self.target_so_c = Some(value);
         self
     }
 
     /// Sets the custom data using the builder pattern.
+    #[must_use] 
     pub fn with_custom_data(mut self, value: CustomDataType) -> Self {
         self.custom_data = Some(value);
         self

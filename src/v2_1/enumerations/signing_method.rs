@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::fmt;
 
-/// Standardized values for the signingMethod in a SignedMeterValueType.
+/// Standardized values for the signingMethod in a `SignedMeterValueType`.
 /// The algorithm, curve, key length and hash algorithm information is for documentation only
 /// and not part of the standardized value.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -40,6 +40,7 @@ pub enum StandardSigningMethodEnumType {
 }
 
 impl SigningMethodEnumType {
+    #[must_use] 
     pub fn as_str(&self) -> &str {
         match self {
             Self::Standard(s) => match s {

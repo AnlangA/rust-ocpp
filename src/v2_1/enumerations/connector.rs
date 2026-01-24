@@ -25,10 +25,10 @@ pub enum StandardConnectorEnumType {
     /// Combined Charging System 2 (captive cabled) a.k.a. Combo 2
     #[serde(rename = "cCCS2")]
     CCCS2,
-    /// ChaoJi (captive cabled) a.k.a. CHAdeMO 3.0
+    /// `ChaoJi` (captive cabled) a.k.a. `CHAdeMO` 3.0
     #[serde(rename = "cChaoJi")]
     CChaoJi,
-    /// JARI G105-1993 (captive cabled) a.k.a. CHAdeMO (captive cabled)
+    /// JARI G105-1993 (captive cabled) a.k.a. `CHAdeMO` (captive cabled)
     #[serde(rename = "cG105")]
     CG105,
     /// GB/T 20234.3 DC connector (captive cabled)
@@ -43,7 +43,7 @@ pub enum StandardConnectorEnumType {
     /// North American Charging Standard J3400 (captive cabled)
     #[serde(rename = "cNACS")]
     CNACS,
-    /// Tesla MagicDock with built-in NACS to CCS1 adapter (captive cabled)
+    /// Tesla `MagicDock` with built-in NACS to CCS1 adapter (captive cabled)
     #[serde(rename = "cNACS-CCS1")]
     CNACSCCS1,
     /// Omni Port with build-in CCS1 to NACS adapter (captive cabled)
@@ -115,6 +115,7 @@ pub enum StandardConnectorEnumType {
 }
 
 impl ConnectorEnumType {
+    #[must_use] 
     pub fn as_str(&self) -> &str {
         match self {
             Self::Standard(s) => match s {

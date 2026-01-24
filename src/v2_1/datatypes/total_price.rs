@@ -32,6 +32,7 @@ impl Default for TotalPriceType {
 
 impl TotalPriceType {
     /// Creates a new empty `TotalPriceType` with all fields set to `None`.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             excl_tax: None,
@@ -41,6 +42,7 @@ impl TotalPriceType {
     }
 
     /// Creates a new `TotalPriceType` with the excluding tax value.
+    #[must_use] 
     pub fn new_excl_tax(excl_tax: Decimal) -> Self {
         Self {
             excl_tax: Some(excl_tax),
@@ -50,6 +52,7 @@ impl TotalPriceType {
     }
 
     /// Creates a new `TotalPriceType` with the including tax value.
+    #[must_use] 
     pub fn new_incl_tax(incl_tax: Decimal) -> Self {
         Self {
             excl_tax: None,
@@ -59,6 +62,7 @@ impl TotalPriceType {
     }
 
     /// Gets the excluding tax value.
+    #[must_use] 
     pub fn excl_tax(&self) -> Option<Decimal> {
         self.excl_tax
     }
@@ -72,6 +76,7 @@ impl TotalPriceType {
     }
 
     /// Gets the including tax value.
+    #[must_use] 
     pub fn incl_tax(&self) -> Option<Decimal> {
         self.incl_tax
     }
@@ -85,6 +90,7 @@ impl TotalPriceType {
     }
 
     /// Gets a reference to the custom data, if present.
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -100,6 +106,7 @@ impl TotalPriceType {
     /// Sets the excluding tax value using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_excl_tax(mut self, excl_tax: Decimal) -> Self {
         self.excl_tax = Some(excl_tax);
         self
@@ -108,6 +115,7 @@ impl TotalPriceType {
     /// Sets the including tax value using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_incl_tax(mut self, incl_tax: Decimal) -> Self {
         self.incl_tax = Some(incl_tax);
         self
@@ -116,6 +124,7 @@ impl TotalPriceType {
     /// Sets the custom data using the builder pattern.
     ///
     /// Returns the modified instance.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

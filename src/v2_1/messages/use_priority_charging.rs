@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::PriorityChargingStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the UsePriorityCharging request.
+/// Request body for the `UsePriorityCharging` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct UsePriorityChargingRequest {
@@ -28,6 +28,7 @@ impl UsePriorityChargingRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(transaction_id: String, activate: bool) -> Self {
         Self {
             transaction_id,
@@ -36,7 +37,7 @@ impl UsePriorityChargingRequest {
         }
     }
 
-    /// Sets the transaction_id field.
+    /// Sets the `transaction_id` field.
     ///
     /// * `transaction_id` - The transaction for which priority charging is requested.
     ///
@@ -60,9 +61,9 @@ impl UsePriorityChargingRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -72,11 +73,12 @@ impl UsePriorityChargingRequest {
         self
     }
 
-    /// Gets a reference to the transaction_id field.
+    /// Gets a reference to the `transaction_id` field.
     ///
     /// # Returns
     ///
     /// The transaction for which priority charging is requested.
+    #[must_use] 
     pub fn get_transaction_id(&self) -> &String {
         &self.transaction_id
     }
@@ -86,26 +88,29 @@ impl UsePriorityChargingRequest {
     /// # Returns
     ///
     /// True to request priority charging. False to request stopping priority charging.
+    #[must_use] 
     pub fn get_activate(&self) -> &bool {
         &self.activate
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -113,7 +118,7 @@ impl UsePriorityChargingRequest {
 
 }
 
-/// Response body for the UsePriorityCharging response.
+/// Response body for the `UsePriorityCharging` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct UsePriorityChargingResponse {
@@ -136,6 +141,7 @@ impl UsePriorityChargingResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: PriorityChargingStatusEnumType) -> Self {
         Self {
             status,
@@ -156,9 +162,9 @@ impl UsePriorityChargingResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -168,9 +174,9 @@ impl UsePriorityChargingResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -185,47 +191,52 @@ impl UsePriorityChargingResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &PriorityChargingStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

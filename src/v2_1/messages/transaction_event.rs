@@ -15,7 +15,7 @@ use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the TransactionEvent request.
+/// Request body for the `TransactionEvent` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct TransactionEventRequest {
@@ -43,7 +43,7 @@ pub struct TransactionEventRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub offline: Option<bool>,
 
-    /// If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used as follows: + 1: The numberPhases in the currently used ChargingSchedule. + 2: The number of phases provided via device management.
+    /// If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used as follows: + 1: The numberPhases in the currently used `ChargingSchedule`. + 2: The number of phases provided via device management.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0, max = 3))]
     pub number_of_phases_used: Option<i32>,
@@ -83,15 +83,16 @@ pub struct TransactionEventRequest {
 impl TransactionEventRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `event_type` - The event_type field
+    /// * `event_type` - The `event_type` field
     /// * `timestamp` - The date and time at which this transaction event occurred.
-    /// * `trigger_reason` - The trigger_reason field
+    /// * `trigger_reason` - The `trigger_reason` field
     /// * `seq_no` - Incremental sequence number, helps with determining if all messages of a transaction have been received.
-    /// * `transaction_info` - The transaction_info field
+    /// * `transaction_info` - The `transaction_info` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(event_type: TransactionEventEnumType, timestamp: DateTime<Utc>, trigger_reason: TriggerReasonEnumType, seq_no: i32, transaction_info: TransactionType) -> Self {
         Self {
             cost_details: None,
@@ -113,9 +114,9 @@ impl TransactionEventRequest {
         }
     }
 
-    /// Sets the cost_details field.
+    /// Sets the `cost_details` field.
     ///
-    /// * `cost_details` - The cost_details field
+    /// * `cost_details` - The `cost_details` field
     ///
     /// # Returns
     ///
@@ -125,9 +126,9 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the event_type field.
+    /// Sets the `event_type` field.
     ///
-    /// * `event_type` - The event_type field
+    /// * `event_type` - The `event_type` field
     ///
     /// # Returns
     ///
@@ -137,9 +138,9 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the meter_value field.
+    /// Sets the `meter_value` field.
     ///
-    /// * `meter_value` - The meter_value field
+    /// * `meter_value` - The `meter_value` field
     ///
     /// # Returns
     ///
@@ -161,9 +162,9 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the trigger_reason field.
+    /// Sets the `trigger_reason` field.
     ///
-    /// * `trigger_reason` - The trigger_reason field
+    /// * `trigger_reason` - The `trigger_reason` field
     ///
     /// # Returns
     ///
@@ -173,7 +174,7 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the seq_no field.
+    /// Sets the `seq_no` field.
     ///
     /// * `seq_no` - Incremental sequence number, helps with determining if all messages of a transaction have been received.
     ///
@@ -197,9 +198,9 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the number_of_phases_used field.
+    /// Sets the `number_of_phases_used` field.
     ///
-    /// * `number_of_phases_used` - If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used as follows: + 1: The numberPhases in the currently used ChargingSchedule. + 2: The number of phases provided via device management.
+    /// * `number_of_phases_used` - If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used as follows: + 1: The numberPhases in the currently used `ChargingSchedule`. + 2: The number of phases provided via device management.
     ///
     /// # Returns
     ///
@@ -209,7 +210,7 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the cable_max_current field.
+    /// Sets the `cable_max_current` field.
     ///
     /// * `cable_max_current` - The maximum current of the connected cable in Ampere (A).
     ///
@@ -221,7 +222,7 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the reservation_id field.
+    /// Sets the `reservation_id` field.
     ///
     /// * `reservation_id` - This contains the Id of the reservation that terminates as a result of this transaction.
     ///
@@ -233,9 +234,9 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the preconditioning_status field.
+    /// Sets the `preconditioning_status` field.
     ///
-    /// * `preconditioning_status` - The preconditioning_status field
+    /// * `preconditioning_status` - The `preconditioning_status` field
     ///
     /// # Returns
     ///
@@ -245,7 +246,7 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the evse_sleep field.
+    /// Sets the `evse_sleep` field.
     ///
     /// * `evse_sleep` - *(2.1)* True when EVSE electronics are in sleep mode for this transaction. Default value (when absent) is false.
     ///
@@ -257,9 +258,9 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the transaction_info field.
+    /// Sets the `transaction_info` field.
     ///
-    /// * `transaction_info` - The transaction_info field
+    /// * `transaction_info` - The `transaction_info` field
     ///
     /// # Returns
     ///
@@ -281,9 +282,9 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the id_token field.
+    /// Sets the `id_token` field.
     ///
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
@@ -293,9 +294,9 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -305,29 +306,32 @@ impl TransactionEventRequest {
         self
     }
 
-    /// Gets a reference to the cost_details field.
+    /// Gets a reference to the `cost_details` field.
     ///
     /// # Returns
     ///
-    /// The cost_details field
+    /// The `cost_details` field
+    #[must_use] 
     pub fn get_cost_details(&self) -> Option<&CostDetailsType> {
         self.cost_details.as_ref()
     }
 
-    /// Gets a reference to the event_type field.
+    /// Gets a reference to the `event_type` field.
     ///
     /// # Returns
     ///
-    /// The event_type field
+    /// The `event_type` field
+    #[must_use] 
     pub fn get_event_type(&self) -> &TransactionEventEnumType {
         &self.event_type
     }
 
-    /// Gets a reference to the meter_value field.
+    /// Gets a reference to the `meter_value` field.
     ///
     /// # Returns
     ///
-    /// The meter_value field
+    /// The `meter_value` field
+    #[must_use] 
     pub fn get_meter_value(&self) -> Option<&Vec<MeterValueType>> {
         self.meter_value.as_ref()
     }
@@ -337,24 +341,27 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The date and time at which this transaction event occurred.
+    #[must_use] 
     pub fn get_timestamp(&self) -> &DateTime<Utc> {
         &self.timestamp
     }
 
-    /// Gets a reference to the trigger_reason field.
+    /// Gets a reference to the `trigger_reason` field.
     ///
     /// # Returns
     ///
-    /// The trigger_reason field
+    /// The `trigger_reason` field
+    #[must_use] 
     pub fn get_trigger_reason(&self) -> &TriggerReasonEnumType {
         &self.trigger_reason
     }
 
-    /// Gets a reference to the seq_no field.
+    /// Gets a reference to the `seq_no` field.
     ///
     /// # Returns
     ///
     /// Incremental sequence number, helps with determining if all messages of a transaction have been received.
+    #[must_use] 
     pub fn get_seq_no(&self) -> &i32 {
         &self.seq_no
     }
@@ -364,60 +371,67 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Indication that this transaction event happened when the Charging Station was offline. Default = false, meaning: the event occurred when the Charging Station was online.
+    #[must_use] 
     pub fn get_offline(&self) -> Option<&bool> {
         self.offline.as_ref()
     }
 
-    /// Gets a reference to the number_of_phases_used field.
+    /// Gets a reference to the `number_of_phases_used` field.
     ///
     /// # Returns
     ///
-    /// If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used as follows: + 1: The numberPhases in the currently used ChargingSchedule. + 2: The number of phases provided via device management.
+    /// If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used as follows: + 1: The numberPhases in the currently used `ChargingSchedule`. + 2: The number of phases provided via device management.
+    #[must_use] 
     pub fn get_number_of_phases_used(&self) -> Option<&i32> {
         self.number_of_phases_used.as_ref()
     }
 
-    /// Gets a reference to the cable_max_current field.
+    /// Gets a reference to the `cable_max_current` field.
     ///
     /// # Returns
     ///
     /// The maximum current of the connected cable in Ampere (A).
+    #[must_use] 
     pub fn get_cable_max_current(&self) -> Option<&i32> {
         self.cable_max_current.as_ref()
     }
 
-    /// Gets a reference to the reservation_id field.
+    /// Gets a reference to the `reservation_id` field.
     ///
     /// # Returns
     ///
     /// This contains the Id of the reservation that terminates as a result of this transaction.
+    #[must_use] 
     pub fn get_reservation_id(&self) -> Option<&i32> {
         self.reservation_id.as_ref()
     }
 
-    /// Gets a reference to the preconditioning_status field.
+    /// Gets a reference to the `preconditioning_status` field.
     ///
     /// # Returns
     ///
-    /// The preconditioning_status field
+    /// The `preconditioning_status` field
+    #[must_use] 
     pub fn get_preconditioning_status(&self) -> Option<&PreconditioningStatusEnumType> {
         self.preconditioning_status.as_ref()
     }
 
-    /// Gets a reference to the evse_sleep field.
+    /// Gets a reference to the `evse_sleep` field.
     ///
     /// # Returns
     ///
     /// *(2.1)* True when EVSE electronics are in sleep mode for this transaction. Default value (when absent) is false.
+    #[must_use] 
     pub fn get_evse_sleep(&self) -> Option<&bool> {
         self.evse_sleep.as_ref()
     }
 
-    /// Gets a reference to the transaction_info field.
+    /// Gets a reference to the `transaction_info` field.
     ///
     /// # Returns
     ///
-    /// The transaction_info field
+    /// The `transaction_info` field
+    #[must_use] 
     pub fn get_transaction_info(&self) -> &TransactionType {
         &self.transaction_info
     }
@@ -427,47 +441,52 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The evse field
+    #[must_use] 
     pub fn get_evse(&self) -> Option<&EVSEType> {
         self.evse.as_ref()
     }
 
-    /// Gets a reference to the id_token field.
+    /// Gets a reference to the `id_token` field.
     ///
     /// # Returns
     ///
-    /// The id_token field
+    /// The `id_token` field
+    #[must_use] 
     pub fn get_id_token(&self) -> Option<&IdTokenType> {
         self.id_token.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the cost_details field and returns self for builder pattern.
+    /// Sets the `cost_details` field and returns self for builder pattern.
     ///
-    /// * `cost_details` - The cost_details field
+    /// * `cost_details` - The `cost_details` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_cost_details(mut self, cost_details: CostDetailsType) -> Self {
         self.cost_details = Some(cost_details);
         self
     }
 
-    /// Sets the meter_value field and returns self for builder pattern.
+    /// Sets the `meter_value` field and returns self for builder pattern.
     ///
-    /// * `meter_value` - The meter_value field
+    /// * `meter_value` - The `meter_value` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_meter_value(mut self, meter_value: Vec<MeterValueType>) -> Self {
         self.meter_value = Some(meter_value);
         self
@@ -480,66 +499,72 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_offline(mut self, offline: bool) -> Self {
         self.offline = Some(offline);
         self
     }
 
-    /// Sets the number_of_phases_used field and returns self for builder pattern.
+    /// Sets the `number_of_phases_used` field and returns self for builder pattern.
     ///
-    /// * `number_of_phases_used` - If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used as follows: + 1: The numberPhases in the currently used ChargingSchedule. + 2: The number of phases provided via device management.
+    /// * `number_of_phases_used` - If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used as follows: + 1: The numberPhases in the currently used `ChargingSchedule`. + 2: The number of phases provided via device management.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_number_of_phases_used(mut self, number_of_phases_used: i32) -> Self {
         self.number_of_phases_used = Some(number_of_phases_used);
         self
     }
 
-    /// Sets the cable_max_current field and returns self for builder pattern.
+    /// Sets the `cable_max_current` field and returns self for builder pattern.
     ///
     /// * `cable_max_current` - The maximum current of the connected cable in Ampere (A).
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_cable_max_current(mut self, cable_max_current: i32) -> Self {
         self.cable_max_current = Some(cable_max_current);
         self
     }
 
-    /// Sets the reservation_id field and returns self for builder pattern.
+    /// Sets the `reservation_id` field and returns self for builder pattern.
     ///
     /// * `reservation_id` - This contains the Id of the reservation that terminates as a result of this transaction.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_reservation_id(mut self, reservation_id: i32) -> Self {
         self.reservation_id = Some(reservation_id);
         self
     }
 
-    /// Sets the preconditioning_status field and returns self for builder pattern.
+    /// Sets the `preconditioning_status` field and returns self for builder pattern.
     ///
-    /// * `preconditioning_status` - The preconditioning_status field
+    /// * `preconditioning_status` - The `preconditioning_status` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_preconditioning_status(mut self, preconditioning_status: PreconditioningStatusEnumType) -> Self {
         self.preconditioning_status = Some(preconditioning_status);
         self
     }
 
-    /// Sets the evse_sleep field and returns self for builder pattern.
+    /// Sets the `evse_sleep` field and returns self for builder pattern.
     ///
     /// * `evse_sleep` - *(2.1)* True when EVSE electronics are in sleep mode for this transaction. Default value (when absent) is false.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse_sleep(mut self, evse_sleep: bool) -> Self {
         self.evse_sleep = Some(evse_sleep);
         self
@@ -552,30 +577,33 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse(mut self, evse: EVSEType) -> Self {
         self.evse = Some(evse);
         self
     }
 
-    /// Sets the id_token field and returns self for builder pattern.
+    /// Sets the `id_token` field and returns self for builder pattern.
     ///
-    /// * `id_token` - The id_token field
+    /// * `id_token` - The `id_token` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_id_token(mut self, id_token: IdTokenType) -> Self {
         self.id_token = Some(id_token);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -956,15 +984,15 @@ mod tests {
     }
 }
 
-/// Response body for the TransactionEvent response.
+/// Response body for the `TransactionEvent` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct TransactionEventResponse {
-    /// When _eventType_ of TransactionEventRequest is Updated, then this value contains the running cost. When _eventType_ of TransactionEventRequest is Ended, then this contains the final total cost of this transaction, including taxes, in the currency configured with the Configuration Variable: Currency. Absence of this value does not imply that the transaction was free. To indicate a free transaction, the CSMS SHALL send a value of 0.00.
+    /// When _eventType_ of `TransactionEventRequest` is Updated, then this value contains the running cost. When _eventType_ of `TransactionEventRequest` is Ended, then this contains the final total cost of this transaction, including taxes, in the currency configured with the Configuration Variable: Currency. Absence of this value does not imply that the transaction was free. To indicate a free transaction, the CSMS SHALL send a value of 0.00.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub total_cost: Option<Decimal>,
 
-    /// Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; is temporarily, so it may not be set in the &lt;&lt;cmn_idtokeninfotype,IdTokenInfoType&gt;&gt; afterwards. Also the chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; has a higher priority than the one in &lt;&lt;cmn_idtokeninfotype,IdTokenInfoType&gt;&gt;.
+    /// Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; is temporarily, so it may not be set in the &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt; afterwards. Also the chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; has a higher priority than the one in &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt;.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub charging_priority: Option<i32>,
 
@@ -1003,6 +1031,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             total_cost: None,
@@ -1015,9 +1044,9 @@ impl TransactionEventResponse {
         }
     }
 
-    /// Sets the total_cost field.
+    /// Sets the `total_cost` field.
     ///
-    /// * `total_cost` - When _eventType_ of TransactionEventRequest is Updated, then this value contains the running cost. When _eventType_ of TransactionEventRequest is Ended, then this contains the final total cost of this transaction, including taxes, in the currency configured with the Configuration Variable: Currency. Absence of this value does not imply that the transaction was free. To indicate a free transaction, the CSMS SHALL send a value of 0.00.
+    /// * `total_cost` - When _eventType_ of `TransactionEventRequest` is Updated, then this value contains the running cost. When _eventType_ of `TransactionEventRequest` is Ended, then this contains the final total cost of this transaction, including taxes, in the currency configured with the Configuration Variable: Currency. Absence of this value does not imply that the transaction was free. To indicate a free transaction, the CSMS SHALL send a value of 0.00.
     ///
     /// # Returns
     ///
@@ -1027,9 +1056,9 @@ impl TransactionEventResponse {
         self
     }
 
-    /// Sets the charging_priority field.
+    /// Sets the `charging_priority` field.
     ///
-    /// * `charging_priority` - Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; is temporarily, so it may not be set in the &lt;&lt;cmn_idtokeninfotype,IdTokenInfoType&gt;&gt; afterwards. Also the chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; has a higher priority than the one in &lt;&lt;cmn_idtokeninfotype,IdTokenInfoType&gt;&gt;.
+    /// * `charging_priority` - Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; is temporarily, so it may not be set in the &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt; afterwards. Also the chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; has a higher priority than the one in &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt;.
     ///
     /// # Returns
     ///
@@ -1039,9 +1068,9 @@ impl TransactionEventResponse {
         self
     }
 
-    /// Sets the id_token_info field.
+    /// Sets the `id_token_info` field.
     ///
-    /// * `id_token_info` - The id_token_info field
+    /// * `id_token_info` - The `id_token_info` field
     ///
     /// # Returns
     ///
@@ -1051,9 +1080,9 @@ impl TransactionEventResponse {
         self
     }
 
-    /// Sets the transaction_limit field.
+    /// Sets the `transaction_limit` field.
     ///
-    /// * `transaction_limit` - The transaction_limit field
+    /// * `transaction_limit` - The `transaction_limit` field
     ///
     /// # Returns
     ///
@@ -1063,9 +1092,9 @@ impl TransactionEventResponse {
         self
     }
 
-    /// Sets the updated_personal_message field.
+    /// Sets the `updated_personal_message` field.
     ///
-    /// * `updated_personal_message` - The updated_personal_message field
+    /// * `updated_personal_message` - The `updated_personal_message` field
     ///
     /// # Returns
     ///
@@ -1075,9 +1104,9 @@ impl TransactionEventResponse {
         self
     }
 
-    /// Sets the updated_personal_message_extra field.
+    /// Sets the `updated_personal_message_extra` field.
     ///
-    /// * `updated_personal_message_extra` - The updated_personal_message_extra field
+    /// * `updated_personal_message_extra` - The `updated_personal_message_extra` field
     ///
     /// # Returns
     ///
@@ -1087,9 +1116,9 @@ impl TransactionEventResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -1099,148 +1128,162 @@ impl TransactionEventResponse {
         self
     }
 
-    /// Gets a reference to the total_cost field.
+    /// Gets a reference to the `total_cost` field.
     ///
     /// # Returns
     ///
-    /// When _eventType_ of TransactionEventRequest is Updated, then this value contains the running cost. When _eventType_ of TransactionEventRequest is Ended, then this contains the final total cost of this transaction, including taxes, in the currency configured with the Configuration Variable: Currency. Absence of this value does not imply that the transaction was free. To indicate a free transaction, the CSMS SHALL send a value of 0.00.
+    /// When _eventType_ of `TransactionEventRequest` is Updated, then this value contains the running cost. When _eventType_ of `TransactionEventRequest` is Ended, then this contains the final total cost of this transaction, including taxes, in the currency configured with the Configuration Variable: Currency. Absence of this value does not imply that the transaction was free. To indicate a free transaction, the CSMS SHALL send a value of 0.00.
+    #[must_use] 
     pub fn get_total_cost(&self) -> Option<&Decimal> {
         self.total_cost.as_ref()
     }
 
-    /// Gets a reference to the charging_priority field.
+    /// Gets a reference to the `charging_priority` field.
     ///
     /// # Returns
     ///
-    /// Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; is temporarily, so it may not be set in the &lt;&lt;cmn_idtokeninfotype,IdTokenInfoType&gt;&gt; afterwards. Also the chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; has a higher priority than the one in &lt;&lt;cmn_idtokeninfotype,IdTokenInfoType&gt;&gt;.
+    /// Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; is temporarily, so it may not be set in the &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt; afterwards. Also the chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; has a higher priority than the one in &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt;.
+    #[must_use] 
     pub fn get_charging_priority(&self) -> Option<&i32> {
         self.charging_priority.as_ref()
     }
 
-    /// Gets a reference to the id_token_info field.
+    /// Gets a reference to the `id_token_info` field.
     ///
     /// # Returns
     ///
-    /// The id_token_info field
+    /// The `id_token_info` field
+    #[must_use] 
     pub fn get_id_token_info(&self) -> Option<&IdTokenInfoType> {
         self.id_token_info.as_ref()
     }
 
-    /// Gets a reference to the transaction_limit field.
+    /// Gets a reference to the `transaction_limit` field.
     ///
     /// # Returns
     ///
-    /// The transaction_limit field
+    /// The `transaction_limit` field
+    #[must_use] 
     pub fn get_transaction_limit(&self) -> Option<&TransactionLimitType> {
         self.transaction_limit.as_ref()
     }
 
-    /// Gets a reference to the updated_personal_message field.
+    /// Gets a reference to the `updated_personal_message` field.
     ///
     /// # Returns
     ///
-    /// The updated_personal_message field
+    /// The `updated_personal_message` field
+    #[must_use] 
     pub fn get_updated_personal_message(&self) -> Option<&MessageContentType> {
         self.updated_personal_message.as_ref()
     }
 
-    /// Gets a reference to the updated_personal_message_extra field.
+    /// Gets a reference to the `updated_personal_message_extra` field.
     ///
     /// # Returns
     ///
-    /// The updated_personal_message_extra field
+    /// The `updated_personal_message_extra` field
+    #[must_use] 
     pub fn get_updated_personal_message_extra(&self) -> Option<&Vec<MessageContentType>> {
         self.updated_personal_message_extra.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the total_cost field and returns self for builder pattern.
+    /// Sets the `total_cost` field and returns self for builder pattern.
     ///
-    /// * `total_cost` - When _eventType_ of TransactionEventRequest is Updated, then this value contains the running cost. When _eventType_ of TransactionEventRequest is Ended, then this contains the final total cost of this transaction, including taxes, in the currency configured with the Configuration Variable: Currency. Absence of this value does not imply that the transaction was free. To indicate a free transaction, the CSMS SHALL send a value of 0.00.
+    /// * `total_cost` - When _eventType_ of `TransactionEventRequest` is Updated, then this value contains the running cost. When _eventType_ of `TransactionEventRequest` is Ended, then this contains the final total cost of this transaction, including taxes, in the currency configured with the Configuration Variable: Currency. Absence of this value does not imply that the transaction was free. To indicate a free transaction, the CSMS SHALL send a value of 0.00.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_total_cost(mut self, total_cost: Decimal) -> Self {
         self.total_cost = Some(total_cost);
         self
     }
 
-    /// Sets the charging_priority field and returns self for builder pattern.
+    /// Sets the `charging_priority` field and returns self for builder pattern.
     ///
-    /// * `charging_priority` - Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; is temporarily, so it may not be set in the &lt;&lt;cmn_idtokeninfotype,IdTokenInfoType&gt;&gt; afterwards. Also the chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; has a higher priority than the one in &lt;&lt;cmn_idtokeninfotype,IdTokenInfoType&gt;&gt;.
+    /// * `charging_priority` - Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; is temporarily, so it may not be set in the &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt; afterwards. Also the chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; has a higher priority than the one in &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt;.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_charging_priority(mut self, charging_priority: i32) -> Self {
         self.charging_priority = Some(charging_priority);
         self
     }
 
-    /// Sets the id_token_info field and returns self for builder pattern.
+    /// Sets the `id_token_info` field and returns self for builder pattern.
     ///
-    /// * `id_token_info` - The id_token_info field
+    /// * `id_token_info` - The `id_token_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_id_token_info(mut self, id_token_info: IdTokenInfoType) -> Self {
         self.id_token_info = Some(id_token_info);
         self
     }
 
-    /// Sets the transaction_limit field and returns self for builder pattern.
+    /// Sets the `transaction_limit` field and returns self for builder pattern.
     ///
-    /// * `transaction_limit` - The transaction_limit field
+    /// * `transaction_limit` - The `transaction_limit` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_transaction_limit(mut self, transaction_limit: TransactionLimitType) -> Self {
         self.transaction_limit = Some(transaction_limit);
         self
     }
 
-    /// Sets the updated_personal_message field and returns self for builder pattern.
+    /// Sets the `updated_personal_message` field and returns self for builder pattern.
     ///
-    /// * `updated_personal_message` - The updated_personal_message field
+    /// * `updated_personal_message` - The `updated_personal_message` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_updated_personal_message(mut self, updated_personal_message: MessageContentType) -> Self {
         self.updated_personal_message = Some(updated_personal_message);
         self
     }
 
-    /// Sets the updated_personal_message_extra field and returns self for builder pattern.
+    /// Sets the `updated_personal_message_extra` field and returns self for builder pattern.
     ///
-    /// * `updated_personal_message_extra` - The updated_personal_message_extra field
+    /// * `updated_personal_message_extra` - The `updated_personal_message_extra` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_updated_personal_message_extra(mut self, updated_personal_message_extra: Vec<MessageContentType>) -> Self {
         self.updated_personal_message_extra = Some(updated_personal_message_extra);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

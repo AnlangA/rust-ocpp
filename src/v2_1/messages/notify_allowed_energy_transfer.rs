@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::{EnergyTransferModeEnumType, NotifyAllowedEnergyT
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the NotifyAllowedEnergyTransfer request.
+/// Request body for the `NotifyAllowedEnergyTransfer` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyAllowedEnergyTransferRequest {
@@ -29,6 +29,7 @@ impl NotifyAllowedEnergyTransferRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(transaction_id: String, allowed_energy_transfer: Vec<EnergyTransferModeEnumType>) -> Self {
         Self {
             transaction_id,
@@ -37,7 +38,7 @@ impl NotifyAllowedEnergyTransferRequest {
         }
     }
 
-    /// Sets the transaction_id field.
+    /// Sets the `transaction_id` field.
     ///
     /// * `transaction_id` - The transaction for which the allowed energy transfer is allowed.
     ///
@@ -49,7 +50,7 @@ impl NotifyAllowedEnergyTransferRequest {
         self
     }
 
-    /// Sets the allowed_energy_transfer field.
+    /// Sets the `allowed_energy_transfer` field.
     ///
     /// * `allowed_energy_transfer` - Modes of energy transfer that are accepted by CSMS.
     ///
@@ -61,9 +62,9 @@ impl NotifyAllowedEnergyTransferRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -73,40 +74,44 @@ impl NotifyAllowedEnergyTransferRequest {
         self
     }
 
-    /// Gets a reference to the transaction_id field.
+    /// Gets a reference to the `transaction_id` field.
     ///
     /// # Returns
     ///
     /// The transaction for which the allowed energy transfer is allowed.
+    #[must_use] 
     pub fn get_transaction_id(&self) -> &String {
         &self.transaction_id
     }
 
-    /// Gets a reference to the allowed_energy_transfer field.
+    /// Gets a reference to the `allowed_energy_transfer` field.
     ///
     /// # Returns
     ///
     /// Modes of energy transfer that are accepted by CSMS.
+    #[must_use] 
     pub fn get_allowed_energy_transfer(&self) -> &Vec<EnergyTransferModeEnumType> {
         &self.allowed_energy_transfer
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -114,7 +119,7 @@ impl NotifyAllowedEnergyTransferRequest {
 
 }
 
-/// Response body for the NotifyAllowedEnergyTransfer response.
+/// Response body for the `NotifyAllowedEnergyTransfer` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyAllowedEnergyTransferResponse {
@@ -137,6 +142,7 @@ impl NotifyAllowedEnergyTransferResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: NotifyAllowedEnergyTransferStatusEnumType) -> Self {
         Self {
             status,
@@ -157,9 +163,9 @@ impl NotifyAllowedEnergyTransferResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -169,9 +175,9 @@ impl NotifyAllowedEnergyTransferResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -186,47 +192,52 @@ impl NotifyAllowedEnergyTransferResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &NotifyAllowedEnergyTransferStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

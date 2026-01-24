@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::PublishFirmwareStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the PublishFirmwareStatusNotification request.
+/// Request body for the `PublishFirmwareStatusNotification` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct PublishFirmwareStatusNotificationRequest {
@@ -14,7 +14,7 @@ pub struct PublishFirmwareStatusNotificationRequest {
     #[validate(length(min = 1))]
     pub location: Option<Vec<String>>,
 
-    /// The request id that was provided in the PublishFirmwareRequest which triggered this action.
+    /// The request id that was provided in the `PublishFirmwareRequest` which triggered this action.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0))]
     pub request_id: Option<i32>,
@@ -24,7 +24,7 @@ pub struct PublishFirmwareStatusNotificationRequest {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -38,6 +38,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: PublishFirmwareStatusEnumType) -> Self {
         Self {
             status,
@@ -72,9 +73,9 @@ impl PublishFirmwareStatusNotificationRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
-    /// * `request_id` - The request id that was provided in the PublishFirmwareRequest which triggered this action.
+    /// * `request_id` - The request id that was provided in the `PublishFirmwareRequest` which triggered this action.
     ///
     /// # Returns
     ///
@@ -84,9 +85,9 @@ impl PublishFirmwareStatusNotificationRequest {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -96,9 +97,9 @@ impl PublishFirmwareStatusNotificationRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -113,6 +114,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &PublishFirmwareStatusEnumType {
         &self.status
     }
@@ -122,33 +124,37 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Required if status is Published. Can be multiple URI’s, if the Local Controller supports e.g. HTTP, HTTPS, and FTP.
+    #[must_use] 
     pub fn get_location(&self) -> Option<&Vec<String>> {
         self.location.as_ref()
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
-    /// The request id that was provided in the PublishFirmwareRequest which triggered this action.
+    /// The request id that was provided in the `PublishFirmwareRequest` which triggered this action.
+    #[must_use] 
     pub fn get_request_id(&self) -> Option<&i32> {
         self.request_id.as_ref()
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -160,42 +166,46 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_location(mut self, location: Vec<String>) -> Self {
         self.location = Some(location);
         self
     }
 
-    /// Sets the request_id field and returns self for builder pattern.
+    /// Sets the `request_id` field and returns self for builder pattern.
     ///
-    /// * `request_id` - The request id that was provided in the PublishFirmwareRequest which triggered this action.
+    /// * `request_id` - The request id that was provided in the `PublishFirmwareRequest` which triggered this action.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_request_id(mut self, request_id: i32) -> Self {
         self.request_id = Some(request_id);
         self
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -203,11 +213,11 @@ impl PublishFirmwareStatusNotificationRequest {
 
 }
 
-/// Response body for the PublishFirmwareStatusNotification response.
+/// Response body for the `PublishFirmwareStatusNotification` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct PublishFirmwareStatusNotificationResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -226,15 +236,16 @@ impl PublishFirmwareStatusNotificationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -244,22 +255,24 @@ impl PublishFirmwareStatusNotificationResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

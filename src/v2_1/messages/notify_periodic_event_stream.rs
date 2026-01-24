@@ -3,7 +3,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// NotifyPeriodicEventStream message structure.
+/// `NotifyPeriodicEventStream` message structure.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyPeriodicEventStream {
@@ -22,7 +22,7 @@ pub struct NotifyPeriodicEventStream {
     /// Base timestamp to add to time offset of values.
     pub basetime: DateTime<Utc>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -39,6 +39,7 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(data: Vec<StreamDataElementType>, id: i32, pending: i32, basetime: DateTime<Utc>) -> Self {
         Self {
             data,
@@ -97,9 +98,9 @@ impl NotifyPeriodicEventStream {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -114,6 +115,7 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// The data field
+    #[must_use] 
     pub fn get_data(&self) -> &Vec<StreamDataElementType> {
         &self.data
     }
@@ -123,6 +125,7 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// Id of stream.
+    #[must_use] 
     pub fn get_id(&self) -> &i32 {
         &self.id
     }
@@ -132,6 +135,7 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// Number of data elements still pending to be sent.
+    #[must_use] 
     pub fn get_pending(&self) -> &i32 {
         &self.pending
     }
@@ -141,26 +145,29 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// Base timestamp to add to time offset of values.
+    #[must_use] 
     pub fn get_basetime(&self) -> &DateTime<Utc> {
         &self.basetime
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

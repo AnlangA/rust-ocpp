@@ -53,6 +53,7 @@ impl VPNType {
     /// # Returns
     ///
     /// A new instance of `VPNType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         server: String,
         user: String,
@@ -80,6 +81,7 @@ impl VPNType {
     /// # Returns
     ///
     /// Self for method chaining
+    #[must_use] 
     pub fn with_group(mut self, group: String) -> Self {
         self.group = Some(group);
         self
@@ -94,6 +96,7 @@ impl VPNType {
     /// # Returns
     ///
     /// Self for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -104,6 +107,7 @@ impl VPNType {
     /// # Returns
     ///
     /// A reference to the VPN server address
+    #[must_use] 
     pub fn server(&self) -> &str {
         &self.server
     }
@@ -127,6 +131,7 @@ impl VPNType {
     /// # Returns
     ///
     /// A reference to the VPN user
+    #[must_use] 
     pub fn user(&self) -> &str {
         &self.user
     }
@@ -150,6 +155,7 @@ impl VPNType {
     /// # Returns
     ///
     /// An optional reference to the VPN group
+    #[must_use] 
     pub fn group(&self) -> Option<&str> {
         self.group.as_deref()
     }
@@ -173,6 +179,7 @@ impl VPNType {
     /// # Returns
     ///
     /// A reference to the VPN password
+    #[must_use] 
     pub fn password(&self) -> &str {
         &self.password
     }
@@ -196,6 +203,7 @@ impl VPNType {
     /// # Returns
     ///
     /// A reference to the VPN shared secret
+    #[must_use] 
     pub fn key(&self) -> &str {
         &self.key
     }
@@ -219,6 +227,7 @@ impl VPNType {
     /// # Returns
     ///
     /// A reference to the VPN type
+    #[must_use] 
     pub fn type_(&self) -> &VPNEnumType {
         &self.type_
     }
@@ -242,6 +251,7 @@ impl VPNType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

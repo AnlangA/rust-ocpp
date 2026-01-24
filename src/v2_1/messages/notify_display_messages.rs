@@ -2,7 +2,7 @@ use crate::v2_1::datatypes::{CustomDataType, MessageInfoType};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the NotifyDisplayMessages request.
+/// Request body for the `NotifyDisplayMessages` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyDisplayMessagesRequest {
@@ -15,11 +15,11 @@ pub struct NotifyDisplayMessagesRequest {
     /// The id of the &lt;&lt;getdisplaymessagesrequest,GetDisplayMessagesRequest&gt;&gt; that requested this message.
     pub request_id: i32,
 
-    /// "to be continued" indicator. Indicates whether another part of the report follows in an upcoming NotifyDisplayMessagesRequest message. Default value when omitted is false.
+    /// "to be continued" indicator. Indicates whether another part of the report follows in an upcoming `NotifyDisplayMessagesRequest` message. Default value when omitted is false.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub tbc: Option<bool>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -33,6 +33,7 @@ impl NotifyDisplayMessagesRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(request_id: i32) -> Self {
         Self {
             message_info: None,
@@ -42,9 +43,9 @@ impl NotifyDisplayMessagesRequest {
         }
     }
 
-    /// Sets the message_info field.
+    /// Sets the `message_info` field.
     ///
-    /// * `message_info` - The message_info field
+    /// * `message_info` - The `message_info` field
     ///
     /// # Returns
     ///
@@ -54,7 +55,7 @@ impl NotifyDisplayMessagesRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
     /// * `request_id` - The id of the &lt;&lt;getdisplaymessagesrequest,GetDisplayMessagesRequest&gt;&gt; that requested this message.
     ///
@@ -68,7 +69,7 @@ impl NotifyDisplayMessagesRequest {
 
     /// Sets the tbc field.
     ///
-    /// * `tbc` - "to be continued" indicator. Indicates whether another part of the report follows in an upcoming NotifyDisplayMessagesRequest message. Default value when omitted is false.
+    /// * `tbc` - "to be continued" indicator. Indicates whether another part of the report follows in an upcoming `NotifyDisplayMessagesRequest` message. Default value when omitted is false.
     ///
     /// # Returns
     ///
@@ -78,9 +79,9 @@ impl NotifyDisplayMessagesRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -90,20 +91,22 @@ impl NotifyDisplayMessagesRequest {
         self
     }
 
-    /// Gets a reference to the message_info field.
+    /// Gets a reference to the `message_info` field.
     ///
     /// # Returns
     ///
-    /// The message_info field
+    /// The `message_info` field
+    #[must_use] 
     pub fn get_message_info(&self) -> Option<&Vec<MessageInfoType>> {
         self.message_info.as_ref()
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
     /// The id of the &lt;&lt;getdisplaymessagesrequest,GetDisplayMessagesRequest&gt;&gt; that requested this message.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -112,27 +115,30 @@ impl NotifyDisplayMessagesRequest {
     ///
     /// # Returns
     ///
-    /// "to be continued" indicator. Indicates whether another part of the report follows in an upcoming NotifyDisplayMessagesRequest message. Default value when omitted is false.
+    /// "to be continued" indicator. Indicates whether another part of the report follows in an upcoming `NotifyDisplayMessagesRequest` message. Default value when omitted is false.
+    #[must_use] 
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the message_info field and returns self for builder pattern.
+    /// Sets the `message_info` field and returns self for builder pattern.
     ///
-    /// * `message_info` - The message_info field
+    /// * `message_info` - The `message_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_message_info(mut self, message_info: Vec<MessageInfoType>) -> Self {
         self.message_info = Some(message_info);
         self
@@ -140,23 +146,25 @@ impl NotifyDisplayMessagesRequest {
 
     /// Sets the tbc field and returns self for builder pattern.
     ///
-    /// * `tbc` - "to be continued" indicator. Indicates whether another part of the report follows in an upcoming NotifyDisplayMessagesRequest message. Default value when omitted is false.
+    /// * `tbc` - "to be continued" indicator. Indicates whether another part of the report follows in an upcoming `NotifyDisplayMessagesRequest` message. Default value when omitted is false.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -164,11 +172,11 @@ impl NotifyDisplayMessagesRequest {
 
 }
 
-/// Response body for the NotifyDisplayMessages response.
+/// Response body for the `NotifyDisplayMessages` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyDisplayMessagesResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -187,15 +195,16 @@ impl NotifyDisplayMessagesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -205,22 +214,24 @@ impl NotifyDisplayMessagesResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

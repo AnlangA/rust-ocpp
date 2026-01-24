@@ -18,12 +18,12 @@ pub struct SignedMeterValueType {
     pub encoding_method: String,
 
     /// Optional. *(2.1)* Method used to create the digital signature. Optional, if already included in _signedMeterData_.
-    /// Standard values for this are defined in Appendix as SigningMethodEnumStringType.
+    /// Standard values for this are defined in Appendix as `SigningMethodEnumStringType`.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 50))]
     pub signing_method: Option<String>,
 
-    /// Optional. *(2.1)* Base64 encoded, sending depends on configuration variable _PublicKeyWithSignedMeterValue_.
+    /// Optional. *(2.1)* Base64 encoded, sending depends on configuration variable _`PublicKeyWithSignedMeterValue`_.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 2500))]
     pub public_key: Option<String>,
@@ -45,6 +45,7 @@ impl SignedMeterValueType {
     /// # Returns
     ///
     /// A new instance of `SignedMeterValueType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(signed_meter_data: String, encoding_method: String) -> Self {
         Self {
             signed_meter_data,
@@ -64,6 +65,7 @@ impl SignedMeterValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_signing_method(mut self, signing_method: String) -> Self {
         self.signing_method = Some(signing_method);
         self
@@ -78,6 +80,7 @@ impl SignedMeterValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_public_key(mut self, public_key: String) -> Self {
         self.public_key = Some(public_key);
         self
@@ -92,6 +95,7 @@ impl SignedMeterValueType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -102,6 +106,7 @@ impl SignedMeterValueType {
     /// # Returns
     ///
     /// The Base64 encoded signed data from the meter
+    #[must_use] 
     pub fn signed_meter_data(&self) -> &str {
         &self.signed_meter_data
     }
@@ -125,6 +130,7 @@ impl SignedMeterValueType {
     /// # Returns
     ///
     /// The format used by the energy meter to encode the meter data
+    #[must_use] 
     pub fn encoding_method(&self) -> &str {
         &self.encoding_method
     }
@@ -148,6 +154,7 @@ impl SignedMeterValueType {
     /// # Returns
     ///
     /// An optional reference to the method used to create the digital signature
+    #[must_use] 
     pub fn signing_method(&self) -> Option<&str> {
         self.signing_method.as_deref()
     }
@@ -171,6 +178,7 @@ impl SignedMeterValueType {
     /// # Returns
     ///
     /// An optional reference to the Base64 encoded public key
+    #[must_use] 
     pub fn public_key(&self) -> Option<&str> {
         self.public_key.as_deref()
     }
@@ -194,6 +202,7 @@ impl SignedMeterValueType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

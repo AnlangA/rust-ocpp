@@ -4,11 +4,11 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the NotifyDERAlarm request.
+/// Request body for the `NotifyDERAlarm` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyDERAlarmRequest {
-    /// Name of DER control, e.g. LFMustTrip
+    /// Name of DER control, e.g. `LFMustTrip`
     pub control_type: DERControlEnumType,
 
     /// Type of grid event that caused this
@@ -27,7 +27,7 @@ pub struct NotifyDERAlarmRequest {
     #[validate(length(max = 200))]
     pub extra_info: Option<String>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -36,12 +36,13 @@ pub struct NotifyDERAlarmRequest {
 impl NotifyDERAlarmRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `control_type` - The control_type field
+    /// * `control_type` - The `control_type` field
     /// * `timestamp` - Time of start or end of alarm.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(control_type: DERControlEnumType, timestamp: DateTime<Utc>) -> Self {
         Self {
             control_type,
@@ -53,9 +54,9 @@ impl NotifyDERAlarmRequest {
         }
     }
 
-    /// Sets the control_type field.
+    /// Sets the `control_type` field.
     ///
-    /// * `control_type` - The control_type field
+    /// * `control_type` - The `control_type` field
     ///
     /// # Returns
     ///
@@ -65,9 +66,9 @@ impl NotifyDERAlarmRequest {
         self
     }
 
-    /// Sets the grid_event_fault field.
+    /// Sets the `grid_event_fault` field.
     ///
-    /// * `grid_event_fault` - The grid_event_fault field
+    /// * `grid_event_fault` - The `grid_event_fault` field
     ///
     /// # Returns
     ///
@@ -77,7 +78,7 @@ impl NotifyDERAlarmRequest {
         self
     }
 
-    /// Sets the alarm_ended field.
+    /// Sets the `alarm_ended` field.
     ///
     /// * `alarm_ended` - True when error condition has ended. Absent or false when alarm has started.
     ///
@@ -101,7 +102,7 @@ impl NotifyDERAlarmRequest {
         self
     }
 
-    /// Sets the extra_info field.
+    /// Sets the `extra_info` field.
     ///
     /// * `extra_info` - Optional info provided by EV.
     ///
@@ -113,9 +114,9 @@ impl NotifyDERAlarmRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -125,29 +126,32 @@ impl NotifyDERAlarmRequest {
         self
     }
 
-    /// Gets a reference to the control_type field.
+    /// Gets a reference to the `control_type` field.
     ///
     /// # Returns
     ///
-    /// The control_type field
+    /// The `control_type` field
+    #[must_use] 
     pub fn get_control_type(&self) -> &DERControlEnumType {
         &self.control_type
     }
 
-    /// Gets a reference to the grid_event_fault field.
+    /// Gets a reference to the `grid_event_fault` field.
     ///
     /// # Returns
     ///
-    /// The grid_event_fault field
+    /// The `grid_event_fault` field
+    #[must_use] 
     pub fn get_grid_event_fault(&self) -> Option<&GridEventFaultEnumType> {
         self.grid_event_fault.as_ref()
     }
 
-    /// Gets a reference to the alarm_ended field.
+    /// Gets a reference to the `alarm_ended` field.
     ///
     /// # Returns
     ///
     /// True when error condition has ended. Absent or false when alarm has started.
+    #[must_use] 
     pub fn get_alarm_ended(&self) -> Option<&bool> {
         self.alarm_ended.as_ref()
     }
@@ -157,71 +161,78 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// Time of start or end of alarm.
+    #[must_use] 
     pub fn get_timestamp(&self) -> &DateTime<Utc> {
         &self.timestamp
     }
 
-    /// Gets a reference to the extra_info field.
+    /// Gets a reference to the `extra_info` field.
     ///
     /// # Returns
     ///
     /// Optional info provided by EV.
+    #[must_use] 
     pub fn get_extra_info(&self) -> Option<&String> {
         self.extra_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the grid_event_fault field and returns self for builder pattern.
+    /// Sets the `grid_event_fault` field and returns self for builder pattern.
     ///
-    /// * `grid_event_fault` - The grid_event_fault field
+    /// * `grid_event_fault` - The `grid_event_fault` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_grid_event_fault(mut self, grid_event_fault: GridEventFaultEnumType) -> Self {
         self.grid_event_fault = Some(grid_event_fault);
         self
     }
 
-    /// Sets the alarm_ended field and returns self for builder pattern.
+    /// Sets the `alarm_ended` field and returns self for builder pattern.
     ///
     /// * `alarm_ended` - True when error condition has ended. Absent or false when alarm has started.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_alarm_ended(mut self, alarm_ended: bool) -> Self {
         self.alarm_ended = Some(alarm_ended);
         self
     }
 
-    /// Sets the extra_info field and returns self for builder pattern.
+    /// Sets the `extra_info` field and returns self for builder pattern.
     ///
     /// * `extra_info` - Optional info provided by EV.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_extra_info(mut self, extra_info: String) -> Self {
         self.extra_info = Some(extra_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -229,11 +240,11 @@ impl NotifyDERAlarmRequest {
 
 }
 
-/// Response body for the NotifyDERAlarm response.
+/// Response body for the `NotifyDERAlarm` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyDERAlarmResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -252,15 +263,16 @@ impl NotifyDERAlarmResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -270,22 +282,24 @@ impl NotifyDERAlarmResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

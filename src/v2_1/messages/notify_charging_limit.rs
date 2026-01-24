@@ -2,11 +2,11 @@ use crate::v2_1::datatypes::{ChargingLimitType, ChargingScheduleType, CustomData
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the NotifyChargingLimit request.
+/// Request body for the `NotifyChargingLimit` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyChargingLimitRequest {
-    /// Charging schedule structure defines a list of charging periods, as used in: NotifyEVChargingScheduleRequest and ChargingProfileType. When used in a NotifyEVChargingScheduleRequest only _duration_ and _chargingSchedulePeriod_ are relevant and _chargingRateUnit_ must be 'W'.
+    /// Charging schedule structure defines a list of charging periods, as used in: `NotifyEVChargingScheduleRequest` and `ChargingProfileType`. When used in a `NotifyEVChargingScheduleRequest` only _duration_ and _chargingSchedulePeriod_ are relevant and _chargingRateUnit_ must be 'W'.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(min = 1))]
     #[validate(nested)]
@@ -20,7 +20,7 @@ pub struct NotifyChargingLimitRequest {
     #[validate(nested)]
     pub charging_limit: ChargingLimitType,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -29,11 +29,12 @@ pub struct NotifyChargingLimitRequest {
 impl NotifyChargingLimitRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `charging_limit` - The charging_limit field
+    /// * `charging_limit` - The `charging_limit` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(charging_limit: ChargingLimitType) -> Self {
         Self {
             charging_schedule: None,
@@ -43,9 +44,9 @@ impl NotifyChargingLimitRequest {
         }
     }
 
-    /// Sets the charging_schedule field.
+    /// Sets the `charging_schedule` field.
     ///
-    /// * `charging_schedule` - The charging_schedule field
+    /// * `charging_schedule` - The `charging_schedule` field
     ///
     /// # Returns
     ///
@@ -55,7 +56,7 @@ impl NotifyChargingLimitRequest {
         self
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - The EVSE to which the charging limit is set. If absent or when zero, it applies to the entire Charging Station.
     ///
@@ -67,9 +68,9 @@ impl NotifyChargingLimitRequest {
         self
     }
 
-    /// Sets the charging_limit field.
+    /// Sets the `charging_limit` field.
     ///
-    /// * `charging_limit` - The charging_limit field
+    /// * `charging_limit` - The `charging_limit` field
     ///
     /// # Returns
     ///
@@ -79,9 +80,9 @@ impl NotifyChargingLimitRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -91,73 +92,80 @@ impl NotifyChargingLimitRequest {
         self
     }
 
-    /// Gets a reference to the charging_schedule field.
+    /// Gets a reference to the `charging_schedule` field.
     ///
     /// # Returns
     ///
-    /// The charging_schedule field
+    /// The `charging_schedule` field
+    #[must_use] 
     pub fn get_charging_schedule(&self) -> Option<&Vec<ChargingScheduleType>> {
         self.charging_schedule.as_ref()
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// The EVSE to which the charging limit is set. If absent or when zero, it applies to the entire Charging Station.
+    #[must_use] 
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
 
-    /// Gets a reference to the charging_limit field.
+    /// Gets a reference to the `charging_limit` field.
     ///
     /// # Returns
     ///
-    /// The charging_limit field
+    /// The `charging_limit` field
+    #[must_use] 
     pub fn get_charging_limit(&self) -> &ChargingLimitType {
         &self.charging_limit
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the charging_schedule field and returns self for builder pattern.
+    /// Sets the `charging_schedule` field and returns self for builder pattern.
     ///
-    /// * `charging_schedule` - The charging_schedule field
+    /// * `charging_schedule` - The `charging_schedule` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_charging_schedule(mut self, charging_schedule: Vec<ChargingScheduleType>) -> Self {
         self.charging_schedule = Some(charging_schedule);
         self
     }
 
-    /// Sets the evse_id field and returns self for builder pattern.
+    /// Sets the `evse_id` field and returns self for builder pattern.
     ///
     /// * `evse_id` - The EVSE to which the charging limit is set. If absent or when zero, it applies to the entire Charging Station.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -165,11 +173,11 @@ impl NotifyChargingLimitRequest {
 
 }
 
-/// Response body for the NotifyChargingLimit response.
+/// Response body for the `NotifyChargingLimit` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct NotifyChargingLimitResponse {
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -188,15 +196,16 @@ impl NotifyChargingLimitResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -206,22 +215,24 @@ impl NotifyChargingLimitResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

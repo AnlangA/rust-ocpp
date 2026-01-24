@@ -9,12 +9,12 @@ use crate::v2_1::{
     },
 };
 
-/// A ChargingProfile consists of 1 to 3 ChargingSchedules with a list of ChargingSchedulePeriods,
+/// A `ChargingProfile` consists of 1 to 3 `ChargingSchedules` with a list of `ChargingSchedulePeriods`,
 /// describing the amount of power or current that can be delivered per time interval.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ChargingProfileType {
-    /// Id of ChargingProfile. Unique within charging station. Id can have a negative value.
+    /// Id of `ChargingProfile`. Unique within charging station. Id can have a negative value.
     /// This is useful to distinguish charging profiles from an external actor (external constraints)
     /// from charging profiles received from CSMS.
     pub id: i32,
@@ -44,7 +44,7 @@ pub struct ChargingProfileType {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub valid_to: Option<DateTime<Utc>>,
 
-    /// SHALL only be included if ChargingProfilePurpose is set to TxProfile.
+    /// SHALL only be included if `ChargingProfilePurpose` is set to `TxProfile`.
     /// The transactionId is used to match the profile to a specific transaction.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 36))]
@@ -58,11 +58,11 @@ pub struct ChargingProfileType {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub invalid_after_offline_duration: Option<bool>,
 
-    /// Interval in seconds after receipt of last update, when to request a profile update by sending a PullDynamicScheduleUpdateRequest message.\r\n    A value of 0 or no value means that no update interval applies. +\r\n    Only relevant in a dynamic charging profile.
+    /// Interval in seconds after receipt of last update, when to request a profile update by sending a `PullDynamicScheduleUpdateRequest` message.\r\n    A value of 0 or no value means that no update interval applies. +\r\n    Only relevant in a dynamic charging profile.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub dyn_update_interval: Option<i32>,
 
-    /// Time at which limits or setpoints in this charging profile were last updated by a PullDynamicScheduleUpdateRequest or UpdateDynamicScheduleRequest or by an external actor. Only relevant in a dynamic charging profile.
+    /// Time at which limits or setpoints in this charging profile were last updated by a `PullDynamicScheduleUpdateRequest` or `UpdateDynamicScheduleRequest` or by an external actor. Only relevant in a dynamic charging profile.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub dyn_update_time: Option<DateTime<Utc>>,
 
@@ -76,7 +76,7 @@ pub struct ChargingProfileType {
     /// schedule negotiation, it supports at most three schedules
     /// with associated tariff to choose from. Having multiple
     /// chargingSchedules is only allowed for charging profiles of
-    /// purpose TxProfile in the context of an ISO 15118
+    /// purpose `TxProfile` in the context of an ISO 15118
     /// charging session. For ISO 15118 Dynamic Control Mode
     /// only one chargingSchedule shall be provided.
     #[validate(length(min = 1, max = 3), nested)]
@@ -92,7 +92,7 @@ impl ChargingProfileType {
     ///
     /// # Arguments
     ///
-    /// * `id` - Id of ChargingProfile
+    /// * `id` - Id of `ChargingProfile`
     /// * `stack_level` - Value determining level in hierarchy stack of profiles
     /// * `charging_profile_purpose` - Defines the purpose of the schedule transferred by this profile
     /// * `charging_profile_kind` - Indicates the kind of schedule
@@ -101,6 +101,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// A new instance of `ChargingProfileType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         id: i32,
         stack_level: i32,
@@ -136,6 +137,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_recurrency_kind(mut self, recurrency_kind: RecurrencyKindEnumType) -> Self {
         self.recurrency_kind = Some(recurrency_kind);
         self
@@ -150,6 +152,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_valid_from(mut self, valid_from: DateTime<Utc>) -> Self {
         self.valid_from = Some(valid_from);
         self
@@ -164,6 +167,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_valid_to(mut self, valid_to: DateTime<Utc>) -> Self {
         self.valid_to = Some(valid_to);
         self
@@ -178,6 +182,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_transaction_id(mut self, transaction_id: String) -> Self {
         self.transaction_id = Some(transaction_id);
         self
@@ -192,6 +197,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -202,6 +208,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// The ID of the charging profile
+    #[must_use] 
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -225,6 +232,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// The stack level value
+    #[must_use] 
     pub fn stack_level(&self) -> i32 {
         self.stack_level
     }
@@ -248,6 +256,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// The purpose of the schedule transferred by this profile
+    #[must_use] 
     pub fn charging_profile_purpose(&self) -> &ChargingProfilePurposeEnumType {
         &self.charging_profile_purpose
     }
@@ -274,6 +283,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// The kind of schedule
+    #[must_use] 
     pub fn charging_profile_kind(&self) -> &ChargingProfileKindEnumType {
         &self.charging_profile_kind
     }
@@ -300,6 +310,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the recurrency kind
+    #[must_use] 
     pub fn recurrency_kind(&self) -> Option<&RecurrencyKindEnumType> {
         self.recurrency_kind.as_ref()
     }
@@ -326,6 +337,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the time at which the profile starts to be valid
+    #[must_use] 
     pub fn valid_from(&self) -> Option<&DateTime<Utc>> {
         self.valid_from.as_ref()
     }
@@ -349,6 +361,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the time at which the profile stops to be valid
+    #[must_use] 
     pub fn valid_to(&self) -> Option<&DateTime<Utc>> {
         self.valid_to.as_ref()
     }
@@ -372,6 +385,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// A reference to the charging schedule
+    #[must_use] 
     pub fn charging_schedule(&self) -> &Vec<ChargingScheduleType> {
         &self.charging_schedule
     }
@@ -398,6 +412,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the transaction ID
+    #[must_use] 
     pub fn transaction_id(&self) -> Option<&String> {
         self.transaction_id.as_ref()
     }
@@ -421,6 +436,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -8,7 +8,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// The AbsolutePriceScheduleType is modeled after the same type that is defined in ISO 15118-20,
+/// The `AbsolutePriceScheduleType` is modeled after the same type that is defined in ISO 15118-20,
 /// such that if it is supplied by an EMSP as a signed EXI message, the conversion from EXI to JSON
 /// (in OCPP) and back to EXI (for ISO 15118-20) does not change the digest and therefore does not
 /// invalidate the signature.
@@ -39,7 +39,7 @@ pub struct AbsolutePriceScheduleType {
     pub language: String,
 
     /// A string in URN notation which shall uniquely identify an algorithm that defines how to compute
-    /// an energy fee sum for a specific power profile based on the EnergyFee information from the PriceRule elements.
+    /// an energy fee sum for a specific power profile based on the `EnergyFee` information from the `PriceRule` elements.
     #[validate(length(max = 2000))]
     pub price_algorithm: String,
 
@@ -83,7 +83,7 @@ impl AbsolutePriceScheduleType {
     ///
     /// # Arguments
     ///
-    /// * `time_anchor` - Starting point of price schedule as DateTime<Utc>
+    /// * `time_anchor` - Starting point of price schedule as `DateTime`<Utc>
     /// * `price_schedule_id` - Unique ID of price schedule
     /// * `currency` - Currency according to ISO 4217
     /// * `language` - Language used for human readable strings based on ISO 639
@@ -93,6 +93,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A new instance of `AbsolutePriceScheduleType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         time_anchor: DateTime<Utc>,
         price_schedule_id: i32,
@@ -132,6 +133,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A new instance of `AbsolutePriceScheduleType` with optional fields set to `None`
+    #[must_use] 
     pub fn new_from_str(
         time_anchor_str: &str,
         price_schedule_id: i32,
@@ -164,6 +166,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_price_schedule_description(mut self, description: String) -> Self {
         self.price_schedule_description = Some(description);
         self
@@ -178,6 +181,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_price_algorithm(mut self, price_algorithm: String) -> Self {
         self.price_algorithm = price_algorithm;
         self
@@ -192,6 +196,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_minimum_cost(mut self, minimum_cost: RationalNumberType) -> Self {
         self.minimum_cost = Some(minimum_cost);
         self
@@ -206,6 +211,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_maximum_cost(mut self, maximum_cost: RationalNumberType) -> Self {
         self.maximum_cost = Some(maximum_cost);
         self
@@ -220,6 +226,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_tax_rules(mut self, tax_rules: Vec<TaxRuleType>) -> Self {
         self.tax_rules = Some(tax_rules);
         self
@@ -234,6 +241,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_overstay_rule_list(mut self, overstay_rule_list: OverstayRuleListType) -> Self {
         self.overstay_rule_list = Some(overstay_rule_list);
         self
@@ -248,6 +256,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_additional_selected_services(
         mut self,
         additional_selected_services: Vec<AdditionalSelectedServicesType>,
@@ -265,6 +274,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -274,7 +284,8 @@ impl AbsolutePriceScheduleType {
     ///
     /// # Returns
     ///
-    /// A reference to the time anchor as DateTime<Utc>
+    /// A reference to the time anchor as `DateTime`<Utc>
+    #[must_use] 
     pub fn time_anchor(&self) -> &DateTime<Utc> {
         &self.time_anchor
     }
@@ -284,6 +295,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// The time anchor formatted as an RFC3339 string with 'Z' timezone format
+    #[must_use] 
     pub fn time_anchor_str(&self) -> String {
         // Format with 'Z' instead of '+00:00' for UTC timezone
         self.time_anchor.format("%Y-%m-%dT%H:%M:%SZ").to_string()
@@ -305,11 +317,11 @@ impl AbsolutePriceScheduleType {
         self
     }
 
-    /// Sets the time anchor directly with a DateTime<Utc> value.
+    /// Sets the time anchor directly with a `DateTime`<Utc> value.
     ///
     /// # Arguments
     ///
-    /// * `time_anchor` - Starting point of price schedule as DateTime<Utc>
+    /// * `time_anchor` - Starting point of price schedule as `DateTime`<Utc>
     ///
     /// # Returns
     ///
@@ -324,6 +336,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// The unique ID of the price schedule
+    #[must_use] 
     pub fn price_schedule_id(&self) -> i32 {
         self.price_schedule_id
     }
@@ -347,6 +360,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// An optional reference to the price schedule description
+    #[must_use] 
     pub fn price_schedule_description(&self) -> Option<&String> {
         self.price_schedule_description.as_ref()
     }
@@ -370,6 +384,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A reference to the currency code
+    #[must_use] 
     pub fn currency(&self) -> &String {
         &self.currency
     }
@@ -393,6 +408,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A reference to the language code
+    #[must_use] 
     pub fn language(&self) -> &String {
         &self.language
     }
@@ -416,6 +432,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A reference to the price algorithm
+    #[must_use] 
     pub fn price_algorithm(&self) -> &String {
         &self.price_algorithm
     }
@@ -439,6 +456,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A reference to the price rule stacks
+    #[must_use] 
     pub fn price_rule_stacks(&self) -> &Vec<PriceRuleStackType> {
         &self.price_rule_stacks
     }
@@ -465,6 +483,7 @@ impl AbsolutePriceScheduleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

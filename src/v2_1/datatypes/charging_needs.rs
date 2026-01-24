@@ -25,7 +25,7 @@ pub struct ChargingNeedsType {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub control_mode: Option<ControlModeEnumType>,
 
-    /// Value of EVCC indicates that EV determines min/target SOC and departure time. +\r\nA value of EVCC_SECC indicates that charging station or CSMS may also update min/target SOC and departure time. +\r\n*ISO 15118-20:* +\r\nServiceSelectionReq(SelectedEnergyTransferService)
+    /// Value of EVCC indicates that EV determines min/target SOC and departure time. +\r\nA value of `EVCC_SECC` indicates that charging station or CSMS may also update min/target SOC and departure time. +\r\n*ISO 15118-20:* +\r\nServiceSelectionReq(SelectedEnergyTransferService)
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mobility_needs_mode: Option<MobilityNeedsModeEnumType>,
 
@@ -33,7 +33,7 @@ pub struct ChargingNeedsType {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub departure_time: Option<DateTime<Utc>>,
 
-    /// Charging parameters for ISO 15118-20, also supporting V2X charging/discharging.+\r\nAll values are greater or equal to zero, with the exception of EVMinEnergyRequest, EVMaxEnergyRequest, EVTargetEnergyRequest, EVMinV2XEnergyRequest and EVMaxV2XEnergyRequest.
+    /// Charging parameters for ISO 15118-20, also supporting V2X charging/discharging.+\r\nAll values are greater or equal to zero, with the exception of `EVMinEnergyRequest`, `EVMaxEnergyRequest`, `EVTargetEnergyRequest`, `EVMinV2XEnergyRequest` and `EVMaxV2XEnergyRequest`.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub v2x_charging_parameters: Option<V2XChargingParametersType>,
 
@@ -49,7 +49,7 @@ pub struct ChargingNeedsType {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub ev_energy_offer: Option<EVEnergyOfferType>,
 
-    /// DERChargingParametersType is used in ChargingNeedsType during an ISO 15118-20 session for AC_BPT_DER to report the inverter settings related to DER control that were agreed between EVSE and EV.\r\n\r\nFields starting with \"ev\" contain values from the EV.\r\nOther fields contain a value that is supported by both EV and EVSE.\r\n\r\nDERChargingParametersType type is only relevant in case of an ISO 15118-20 AC_BPT_DER/AC_DER charging session.
+    /// `DERChargingParametersType` is used in `ChargingNeedsType` during an ISO 15118-20 session for `AC_BPT_DER` to report the inverter settings related to DER control that were agreed between EVSE and EV.\r\n\r\nFields starting with \"ev\" contain values from the EV.\r\nOther fields contain a value that is supported by both EV and EVSE.\r\n\r\nDERChargingParametersType type is only relevant in case of an ISO 15118-20 `AC_BPT_DER/AC_DER` charging session.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub der_charging_parameters: Option<DERChargingParametersType>,
 
@@ -69,6 +69,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// A new instance of `ChargingNeedsType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(requested_energy_transfer: EnergyTransferModeEnumType) -> Self {
         Self {
             requested_energy_transfer,
@@ -94,6 +95,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_departure_time(mut self, departure_time: DateTime<Utc>) -> Self {
         self.departure_time = Some(departure_time);
         self
@@ -108,6 +110,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_ac_charging_parameters(
         mut self,
         ac_charging_parameters: ACChargingParametersType,
@@ -125,6 +128,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_dc_charging_parameters(
         mut self,
         dc_charging_parameters: DCChargingParametersType,
@@ -142,6 +146,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -152,6 +157,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// The mode of energy transfer requested by the EV
+    #[must_use] 
     pub fn requested_energy_transfer(&self) -> &EnergyTransferModeEnumType {
         &self.requested_energy_transfer
     }
@@ -178,6 +184,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// An optional reference to the estimated departure time of the EV
+    #[must_use] 
     pub fn departure_time(&self) -> Option<&DateTime<Utc>> {
         self.departure_time.as_ref()
     }
@@ -201,6 +208,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// An optional reference to the EV AC charging parameters
+    #[must_use] 
     pub fn ac_charging_parameters(&self) -> Option<&ACChargingParametersType> {
         self.ac_charging_parameters.as_ref()
     }
@@ -227,6 +235,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// An optional reference to the EV DC charging parameters
+    #[must_use] 
     pub fn dc_charging_parameters(&self) -> Option<&DCChargingParametersType> {
         self.dc_charging_parameters.as_ref()
     }
@@ -253,6 +262,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

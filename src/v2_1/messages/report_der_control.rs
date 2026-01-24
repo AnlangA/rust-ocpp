@@ -11,7 +11,7 @@ use crate::v2_1::datatypes::{
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the ReportDERControl request.
+/// Request body for the `ReportDERControl` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ReportDERControlRequest {
@@ -55,7 +55,7 @@ pub struct ReportDERControlRequest {
     #[validate(nested)]
     pub limit_max_discharge: Option<Vec<LimitMaxDischargeGetType>>,
 
-    /// RequestId from GetDERControlRequest.
+    /// `RequestId` from `GetDERControlRequest`.
     #[validate(range(min = 0))]
     pub request_id: i32,
 
@@ -71,11 +71,12 @@ pub struct ReportDERControlRequest {
 impl ReportDERControlRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `request_id` - RequestId from GetDERControlRequest.
+    /// * `request_id` - `RequestId` from `GetDERControlRequest`.
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(request_id: i32) -> Self {
         Self {
             curve: None,
@@ -104,9 +105,9 @@ impl ReportDERControlRequest {
         self
     }
 
-    /// Sets the enter_service field.
+    /// Sets the `enter_service` field.
     ///
-    /// * `enter_service` - The enter_service field
+    /// * `enter_service` - The `enter_service` field
     ///
     /// # Returns
     ///
@@ -116,9 +117,9 @@ impl ReportDERControlRequest {
         self
     }
 
-    /// Sets the fixed_pf_absorb field.
+    /// Sets the `fixed_pf_absorb` field.
     ///
-    /// * `fixed_pf_absorb` - The fixed_pf_absorb field
+    /// * `fixed_pf_absorb` - The `fixed_pf_absorb` field
     ///
     /// # Returns
     ///
@@ -128,9 +129,9 @@ impl ReportDERControlRequest {
         self
     }
 
-    /// Sets the fixed_pf_inject field.
+    /// Sets the `fixed_pf_inject` field.
     ///
-    /// * `fixed_pf_inject` - The fixed_pf_inject field
+    /// * `fixed_pf_inject` - The `fixed_pf_inject` field
     ///
     /// # Returns
     ///
@@ -140,9 +141,9 @@ impl ReportDERControlRequest {
         self
     }
 
-    /// Sets the fixed_var field.
+    /// Sets the `fixed_var` field.
     ///
-    /// * `fixed_var` - The fixed_var field
+    /// * `fixed_var` - The `fixed_var` field
     ///
     /// # Returns
     ///
@@ -152,9 +153,9 @@ impl ReportDERControlRequest {
         self
     }
 
-    /// Sets the freq_droop field.
+    /// Sets the `freq_droop` field.
     ///
-    /// * `freq_droop` - The freq_droop field
+    /// * `freq_droop` - The `freq_droop` field
     ///
     /// # Returns
     ///
@@ -176,9 +177,9 @@ impl ReportDERControlRequest {
         self
     }
 
-    /// Sets the limit_max_discharge field.
+    /// Sets the `limit_max_discharge` field.
     ///
-    /// * `limit_max_discharge` - The limit_max_discharge field
+    /// * `limit_max_discharge` - The `limit_max_discharge` field
     ///
     /// # Returns
     ///
@@ -188,9 +189,9 @@ impl ReportDERControlRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
-    /// * `request_id` - RequestId from GetDERControlRequest.
+    /// * `request_id` - `RequestId` from `GetDERControlRequest`.
     ///
     /// # Returns
     ///
@@ -212,9 +213,9 @@ impl ReportDERControlRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -229,51 +230,57 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The curve field
+    #[must_use] 
     pub fn get_curve(&self) -> Option<&Vec<DERCurveGetType>> {
         self.curve.as_ref()
     }
 
-    /// Gets a reference to the enter_service field.
+    /// Gets a reference to the `enter_service` field.
     ///
     /// # Returns
     ///
-    /// The enter_service field
+    /// The `enter_service` field
+    #[must_use] 
     pub fn get_enter_service(&self) -> Option<&Vec<EnterServiceGetType>> {
         self.enter_service.as_ref()
     }
 
-    /// Gets a reference to the fixed_pf_absorb field.
+    /// Gets a reference to the `fixed_pf_absorb` field.
     ///
     /// # Returns
     ///
-    /// The fixed_pf_absorb field
+    /// The `fixed_pf_absorb` field
+    #[must_use] 
     pub fn get_fixed_pf_absorb(&self) -> Option<&Vec<FixedPFGetType>> {
         self.fixed_pf_absorb.as_ref()
     }
 
-    /// Gets a reference to the fixed_pf_inject field.
+    /// Gets a reference to the `fixed_pf_inject` field.
     ///
     /// # Returns
     ///
-    /// The fixed_pf_inject field
+    /// The `fixed_pf_inject` field
+    #[must_use] 
     pub fn get_fixed_pf_inject(&self) -> Option<&Vec<FixedPFGetType>> {
         self.fixed_pf_inject.as_ref()
     }
 
-    /// Gets a reference to the fixed_var field.
+    /// Gets a reference to the `fixed_var` field.
     ///
     /// # Returns
     ///
-    /// The fixed_var field
+    /// The `fixed_var` field
+    #[must_use] 
     pub fn get_fixed_var(&self) -> Option<&Vec<FixedVarGetType>> {
         self.fixed_var.as_ref()
     }
 
-    /// Gets a reference to the freq_droop field.
+    /// Gets a reference to the `freq_droop` field.
     ///
     /// # Returns
     ///
-    /// The freq_droop field
+    /// The `freq_droop` field
+    #[must_use] 
     pub fn get_freq_droop(&self) -> Option<&Vec<FreqDroopGetType>> {
         self.freq_droop.as_ref()
     }
@@ -283,24 +290,27 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The gradient field
+    #[must_use] 
     pub fn get_gradient(&self) -> Option<&Vec<GradientGetType>> {
         self.gradient.as_ref()
     }
 
-    /// Gets a reference to the limit_max_discharge field.
+    /// Gets a reference to the `limit_max_discharge` field.
     ///
     /// # Returns
     ///
-    /// The limit_max_discharge field
+    /// The `limit_max_discharge` field
+    #[must_use] 
     pub fn get_limit_max_discharge(&self) -> Option<&Vec<LimitMaxDischargeGetType>> {
         self.limit_max_discharge.as_ref()
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
-    /// RequestId from GetDERControlRequest.
+    /// `RequestId` from `GetDERControlRequest`.
+    #[must_use] 
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -310,15 +320,17 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// To Be Continued. Default value when omitted: false. + False indicates that there are no further messages as part of this report.
+    #[must_use] 
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -330,66 +342,72 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_curve(mut self, curve: Vec<DERCurveGetType>) -> Self {
         self.curve = Some(curve);
         self
     }
 
-    /// Sets the enter_service field and returns self for builder pattern.
+    /// Sets the `enter_service` field and returns self for builder pattern.
     ///
-    /// * `enter_service` - The enter_service field
+    /// * `enter_service` - The `enter_service` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_enter_service(mut self, enter_service: Vec<EnterServiceGetType>) -> Self {
         self.enter_service = Some(enter_service);
         self
     }
 
-    /// Sets the fixed_pf_absorb field and returns self for builder pattern.
+    /// Sets the `fixed_pf_absorb` field and returns self for builder pattern.
     ///
-    /// * `fixed_pf_absorb` - The fixed_pf_absorb field
+    /// * `fixed_pf_absorb` - The `fixed_pf_absorb` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_fixed_pf_absorb(mut self, fixed_pf_absorb: Vec<FixedPFGetType>) -> Self {
         self.fixed_pf_absorb = Some(fixed_pf_absorb);
         self
     }
 
-    /// Sets the fixed_pf_inject field and returns self for builder pattern.
+    /// Sets the `fixed_pf_inject` field and returns self for builder pattern.
     ///
-    /// * `fixed_pf_inject` - The fixed_pf_inject field
+    /// * `fixed_pf_inject` - The `fixed_pf_inject` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_fixed_pf_inject(mut self, fixed_pf_inject: Vec<FixedPFGetType>) -> Self {
         self.fixed_pf_inject = Some(fixed_pf_inject);
         self
     }
 
-    /// Sets the fixed_var field and returns self for builder pattern.
+    /// Sets the `fixed_var` field and returns self for builder pattern.
     ///
-    /// * `fixed_var` - The fixed_var field
+    /// * `fixed_var` - The `fixed_var` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_fixed_var(mut self, fixed_var: Vec<FixedVarGetType>) -> Self {
         self.fixed_var = Some(fixed_var);
         self
     }
 
-    /// Sets the freq_droop field and returns self for builder pattern.
+    /// Sets the `freq_droop` field and returns self for builder pattern.
     ///
-    /// * `freq_droop` - The freq_droop field
+    /// * `freq_droop` - The `freq_droop` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_freq_droop(mut self, freq_droop: Vec<FreqDroopGetType>) -> Self {
         self.freq_droop = Some(freq_droop);
         self
@@ -402,18 +420,20 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_gradient(mut self, gradient: Vec<GradientGetType>) -> Self {
         self.gradient = Some(gradient);
         self
     }
 
-    /// Sets the limit_max_discharge field and returns self for builder pattern.
+    /// Sets the `limit_max_discharge` field and returns self for builder pattern.
     ///
-    /// * `limit_max_discharge` - The limit_max_discharge field
+    /// * `limit_max_discharge` - The `limit_max_discharge` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_limit_max_discharge(mut self, limit_max_discharge: Vec<LimitMaxDischargeGetType>) -> Self {
         self.limit_max_discharge = Some(limit_max_discharge);
         self
@@ -426,18 +446,20 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -445,7 +467,7 @@ impl ReportDERControlRequest {
 
 }
 
-/// Response body for the ReportDERControl response.
+/// Response body for the `ReportDERControl` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ReportDERControlResponse {
@@ -467,15 +489,16 @@ impl ReportDERControlResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new() -> Self {
         Self {
             custom_data: None,
         }
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -485,22 +508,24 @@ impl ReportDERControlResponse {
         self
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

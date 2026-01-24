@@ -30,6 +30,7 @@ impl RelativeTimeIntervalType {
     /// # Returns
     ///
     /// A new `RelativeTimeIntervalType` instance with optional fields set to `None`
+    #[must_use] 
     pub fn new(start: i32, duration: i32) -> Self {
         Self {
             custom_data: None,
@@ -42,7 +43,8 @@ impl RelativeTimeIntervalType {
     ///
     /// # Returns
     ///
-    /// A new `RelativeTimeIntervalType` instance with start=0, duration=0, and custom_data=None
+    /// A new `RelativeTimeIntervalType` instance with start=0, duration=0, and `custom_data=None`
+    #[must_use] 
     pub fn new_default() -> Self {
         Self {
             custom_data: None,
@@ -60,6 +62,7 @@ impl RelativeTimeIntervalType {
     /// # Returns
     ///
     /// The modified `RelativeTimeIntervalType` instance
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -70,6 +73,7 @@ impl RelativeTimeIntervalType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -93,6 +97,7 @@ impl RelativeTimeIntervalType {
     /// # Returns
     ///
     /// The start of the interval, in seconds from NOW
+    #[must_use] 
     pub fn start(&self) -> i32 {
         self.start
     }
@@ -116,6 +121,7 @@ impl RelativeTimeIntervalType {
     /// # Returns
     ///
     /// The duration of the interval, in seconds
+    #[must_use] 
     pub fn duration(&self) -> i32 {
         self.duration
     }

@@ -42,6 +42,7 @@ impl AdditionalSelectedServicesType {
     /// # Panics
     ///
     /// Panics if `service_name` is longer than 80 characters
+    #[must_use] 
     pub fn new(service_fee: RationalNumberType, service_name: String) -> Self {
         assert!(
             service_name.len() <= 80,
@@ -64,6 +65,7 @@ impl AdditionalSelectedServicesType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -83,6 +85,7 @@ impl AdditionalSelectedServicesType {
     /// # Returns
     ///
     /// A reference to the service fee as a rational number
+    #[must_use] 
     pub fn service_fee(&self) -> &RationalNumberType {
         &self.service_fee
     }
@@ -106,6 +109,7 @@ impl AdditionalSelectedServicesType {
     /// # Returns
     ///
     /// The service name as a string
+    #[must_use] 
     pub fn service_name(&self) -> &str {
         &self.service_name
     }
@@ -137,6 +141,7 @@ impl AdditionalSelectedServicesType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

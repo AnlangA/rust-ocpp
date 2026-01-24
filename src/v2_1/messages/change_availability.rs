@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::{ChangeAvailabilityStatusEnumType, OperationalSta
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the ChangeAvailability request.
+/// Request body for the `ChangeAvailability` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ChangeAvailabilityRequest {
@@ -21,11 +21,12 @@ pub struct ChangeAvailabilityRequest {
 impl ChangeAvailabilityRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `operational_status` - The operational_status field
+    /// * `operational_status` - The `operational_status` field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(operational_status: OperationalStatusEnumType) -> Self {
         Self {
             evse: None,
@@ -46,9 +47,9 @@ impl ChangeAvailabilityRequest {
         self
     }
 
-    /// Sets the operational_status field.
+    /// Sets the `operational_status` field.
     ///
-    /// * `operational_status` - The operational_status field
+    /// * `operational_status` - The `operational_status` field
     ///
     /// # Returns
     ///
@@ -58,9 +59,9 @@ impl ChangeAvailabilityRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -75,24 +76,27 @@ impl ChangeAvailabilityRequest {
     /// # Returns
     ///
     /// The evse field
+    #[must_use] 
     pub fn get_evse(&self) -> Option<&EVSEType> {
         self.evse.as_ref()
     }
 
-    /// Gets a reference to the operational_status field.
+    /// Gets a reference to the `operational_status` field.
     ///
     /// # Returns
     ///
-    /// The operational_status field
+    /// The `operational_status` field
+    #[must_use] 
     pub fn get_operational_status(&self) -> &OperationalStatusEnumType {
         &self.operational_status
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -104,18 +108,20 @@ impl ChangeAvailabilityRequest {
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_evse(mut self, evse: EVSEType) -> Self {
         self.evse = Some(evse);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -123,7 +129,7 @@ impl ChangeAvailabilityRequest {
 
 }
 
-/// Response body for the ChangeAvailability response.
+/// Response body for the `ChangeAvailability` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ChangeAvailabilityResponse {
@@ -146,6 +152,7 @@ impl ChangeAvailabilityResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: ChangeAvailabilityStatusEnumType) -> Self {
         Self {
             status,
@@ -166,9 +173,9 @@ impl ChangeAvailabilityResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -178,9 +185,9 @@ impl ChangeAvailabilityResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -195,47 +202,52 @@ impl ChangeAvailabilityResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &ChangeAvailabilityStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

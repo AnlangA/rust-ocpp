@@ -11,12 +11,12 @@ use crate::v2_1::{
     enumerations::ChargingRateUnitEnumType,
 };
 
-/// Charging schedule structure defines a list of charging periods, as used in: NotifyEVChargingScheduleRequest and ChargingProfileType.
-/// When used in a NotifyEVChargingScheduleRequest only duration and chargingSchedulePeriod are relevant and chargingRateUnit must be 'W'.
+/// Charging schedule structure defines a list of charging periods, as used in: `NotifyEVChargingScheduleRequest` and `ChargingProfileType`.
+/// When used in a `NotifyEVChargingScheduleRequest` only duration and chargingSchedulePeriod are relevant and chargingRateUnit must be 'W'.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ChargingScheduleType {
-    /// Identifies the ChargingSchedule.
+    /// Identifies the `ChargingSchedule`.
     pub id: i32,
 
     /// Starting point of an absolute schedule or recurring schedule.
@@ -40,7 +40,7 @@ pub struct ChargingScheduleType {
     )]
     pub min_charging_rate: Option<Decimal>,
 
-    /// *(2.1)* Power tolerance when following EVPowerProfile.
+    /// *(2.1)* Power tolerance when following `EVPowerProfile`.
     #[serde(
         with = "rust_decimal::serde::arbitrary_precision_option",
         skip_serializing_if = "Option::is_none",
@@ -48,7 +48,7 @@ pub struct ChargingScheduleType {
     )]
     pub power_tolerance: Option<Decimal>,
 
-    /// *(2.1)* Power tolerance when following EVPowerProfile.
+    /// *(2.1)* Power tolerance when following `EVPowerProfile`.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = "0"))]
     pub signature_id: Option<i32>,
@@ -58,11 +58,11 @@ pub struct ChargingScheduleType {
     #[validate(length(max = 88))]
     pub digest_value: Option<String>,
 
-    /// *(2.1)* Defaults to false. When true, disregard time zone offset in dateTime fields of  _ChargingScheduleType_ and use unqualified local time at Charging Station instead.\r\n This allows the same `Absolute` or `Recurring` charging profile to be used in both summer and winter time.
+    /// *(2.1)* Defaults to false. When true, disregard time zone offset in dateTime fields of  _`ChargingScheduleType`_ and use unqualified local time at Charging Station instead.\r\n This allows the same `Absolute` or `Recurring` charging profile to be used in both summer and winter time.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub use_local_time: Option<bool>,
 
-    /// *(2.1)* Defaults to 0. When _randomizedDelay_ not equals zero, then the start of each &lt;&lt;cmn_chargingscheduleperiodtype,ChargingSchedulePeriodType&gt;&gt; is delayed by a randomly chosen number of seconds between 0 and _randomizedDelay_.  Only allowed for TxProfile and TxDefaultProfile.
+    /// *(2.1)* Defaults to 0. When _randomizedDelay_ not equals zero, then the start of each &lt;&lt;`cmn_chargingscheduleperiodtype,ChargingSchedulePeriodType`&gt;&gt; is delayed by a randomly chosen number of seconds between 0 and _randomizedDelay_.  Only allowed for `TxProfile` and `TxDefaultProfile`.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = "0"))]
     pub randomized_delay: Option<i32>,
@@ -87,7 +87,7 @@ pub struct ChargingScheduleType {
     #[validate(nested)]
     pub price_level_schedule: Option<PriceLevelScheduleType>,
 
-    /// 2.1) When present and SoC of EV is greater than or equal to soc, then charging limit or setpoint will be capped to the value of limit.
+    /// 2.1) When present and `SoC` of EV is greater than or equal to soc, then charging limit or setpoint will be capped to the value of limit.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub limit_at_so_c: Option<LimitAtSoCType>,
@@ -103,13 +103,14 @@ impl ChargingScheduleType {
     ///
     /// # Arguments
     ///
-    /// * `id` - Identifies the ChargingSchedule
+    /// * `id` - Identifies the `ChargingSchedule`
     /// * `charging_rate_unit` - The unit of measure in which limits and setpoints are expressed
     /// * `charging_schedule_period` - List of charging periods
     ///
     /// # Returns
     ///
     /// A new instance of `ChargingScheduleType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         id: i32,
         charging_rate_unit: ChargingRateUnitEnumType,
@@ -144,6 +145,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_start_schedule(mut self, start_schedule: DateTime<Utc>) -> Self {
         self.start_schedule = Some(start_schedule);
         self
@@ -158,6 +160,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_duration(mut self, duration: i32) -> Self {
         self.duration = Some(duration);
         self
@@ -172,6 +175,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -182,6 +186,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// The ID of the charging schedule
+    #[must_use] 
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -190,7 +195,7 @@ impl ChargingScheduleType {
     ///
     /// # Arguments
     ///
-    /// * `id` - Identifies the ChargingSchedule
+    /// * `id` - Identifies the `ChargingSchedule`
     ///
     /// # Returns
     ///
@@ -205,6 +210,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// An optional reference to the start schedule
+    #[must_use] 
     pub fn start_schedule(&self) -> Option<&DateTime<Utc>> {
         self.start_schedule.as_ref()
     }
@@ -228,6 +234,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// An optional duration of the charging schedule in seconds
+    #[must_use] 
     pub fn duration(&self) -> Option<i32> {
         self.duration
     }
@@ -251,6 +258,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// The unit of measure in which limits and setpoints are expressed
+    #[must_use] 
     pub fn charging_rate_unit(&self) -> &ChargingRateUnitEnumType {
         &self.charging_rate_unit
     }
@@ -277,6 +285,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// A reference to the list of charging periods
+    #[must_use] 
     pub fn charging_schedule_period(&self) -> &Vec<ChargingSchedulePeriodType> {
         &self.charging_schedule_period
     }
@@ -303,6 +312,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

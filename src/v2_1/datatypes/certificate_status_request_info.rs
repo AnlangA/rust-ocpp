@@ -62,6 +62,7 @@ impl CertificateStatusRequestInfoType {
     /// # Returns
     ///
     /// A new instance of `CertificateStatusRequestInfoType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         certificate_hash_data: CertificateHashDataType,
         source: CertificateStatusSourceEnumType,
@@ -84,6 +85,7 @@ impl CertificateStatusRequestInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -94,6 +96,7 @@ impl CertificateStatusRequestInfoType {
     /// # Returns
     ///
     /// A reference to the certificate hash data
+    #[must_use] 
     pub fn certificate_hash_data(&self) -> &CertificateHashDataType {
         &self.certificate_hash_data
     }
@@ -120,6 +123,7 @@ impl CertificateStatusRequestInfoType {
     /// # Returns
     ///
     /// The source of the certificate status information
+    #[must_use] 
     pub fn source(&self) -> &CertificateStatusSourceEnumType {
         &self.source
     }
@@ -143,6 +147,7 @@ impl CertificateStatusRequestInfoType {
     /// # Returns
     ///
     /// A reference to the URLs of the certificate status source
+    #[must_use] 
     pub fn urls(&self) -> &Vec<String> {
         &self.urls
     }
@@ -166,6 +171,7 @@ impl CertificateStatusRequestInfoType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

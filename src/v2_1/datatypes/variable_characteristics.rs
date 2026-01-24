@@ -20,7 +20,7 @@ pub struct VariableCharacteristicsType {
     pub min_limit: Option<f64>,
 
     /// Maximum possible value of this variable. When the datatype of this Variable is String,
-    /// OptionList, SequenceList or MemberList, this field defines the maximum length of the (CSV) string.
+    /// `OptionList`, `SequenceList` or `MemberList`, this field defines the maximum length of the (CSV) string.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_limit: Option<f64>,
 
@@ -28,7 +28,7 @@ pub struct VariableCharacteristicsType {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max_elements: Option<i32>,
 
-    /// Mandatory when _dataType_ = OptionList, MemberList or SequenceList. In that case _valuesList_
+    /// Mandatory when _dataType_ = `OptionList`, `MemberList` or `SequenceList`. In that case _valuesList_
     /// specifies the allowed values for the type.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(length(max = 1000))]
@@ -54,6 +54,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// A new `VariableCharacteristicsType` instance with optional fields set to `None`
+    #[must_use] 
     pub fn new(data_type: DataEnumType, supports_monitoring: bool) -> Self {
         Self {
             unit: None,
@@ -76,12 +77,13 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
+    #[must_use] 
     pub fn with_unit(mut self, unit: String) -> Self {
         self.unit = Some(unit);
         self
     }
 
-    /// Sets the min_limit field.
+    /// Sets the `min_limit` field.
     ///
     /// # Arguments
     ///
@@ -90,12 +92,13 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
+    #[must_use] 
     pub fn with_min_limit(mut self, min_limit: f64) -> Self {
         self.min_limit = Some(min_limit);
         self
     }
 
-    /// Sets the max_limit field.
+    /// Sets the `max_limit` field.
     ///
     /// # Arguments
     ///
@@ -104,12 +107,13 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
+    #[must_use] 
     pub fn with_max_limit(mut self, max_limit: f64) -> Self {
         self.max_limit = Some(max_limit);
         self
     }
 
-    /// Sets the max_elements field.
+    /// Sets the `max_elements` field.
     ///
     /// # Arguments
     ///
@@ -118,20 +122,22 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
+    #[must_use] 
     pub fn with_max_elements(mut self, max_elements: i32) -> Self {
         self.max_elements = Some(max_elements);
         self
     }
 
-    /// Sets the values_list field.
+    /// Sets the `values_list` field.
     ///
     /// # Arguments
     ///
-    /// * `values_list` - Allowed values for OptionList, MemberList or SequenceList types
+    /// * `values_list` - Allowed values for `OptionList`, `MemberList` or `SequenceList` types
     ///
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
+    #[must_use] 
     pub fn with_values_list(mut self, values_list: String) -> Self {
         self.values_list = Some(values_list);
         self
@@ -146,6 +152,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -156,6 +163,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional reference to the unit of the variable
+    #[must_use] 
     pub fn unit(&self) -> Option<&String> {
         self.unit.as_ref()
     }
@@ -179,6 +187,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The data type of this variable
+    #[must_use] 
     pub fn data_type(&self) -> &DataEnumType {
         &self.data_type
     }
@@ -202,6 +211,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional minimum possible value of this variable
+    #[must_use] 
     pub fn min_limit(&self) -> Option<f64> {
         self.min_limit
     }
@@ -225,6 +235,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional maximum possible value of this variable
+    #[must_use] 
     pub fn max_limit(&self) -> Option<f64> {
         self.max_limit
     }
@@ -248,6 +259,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional maximum number of elements from valuesList that are supported
+    #[must_use] 
     pub fn max_elements(&self) -> Option<i32> {
         self.max_elements
     }
@@ -271,6 +283,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional reference to the allowed values for special list types
+    #[must_use] 
     pub fn values_list(&self) -> Option<&String> {
         self.values_list.as_ref()
     }
@@ -294,6 +307,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// Flag indicating if this variable supports monitoring
+    #[must_use] 
     pub fn supports_monitoring(&self) -> bool {
         self.supports_monitoring
     }
@@ -317,6 +331,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -9,8 +9,8 @@ use crate::v2_1::enumerations::APNAuthenticationEnumType;
 /// NOTE: When asking a GSM modem to dial in, it is possible to specify which mobile operator should be used.
 /// This can be done with the mobile country code (MCC) in combination with a mobile network code (MNC).
 /// Example: If your preferred network is Vodafone Netherlands, the MCC=204 and the MNC=04 which means
-/// the key PreferredNetwork = 20404 Some modems allows to specify a preferred network, which means,
-/// if this network is not available, a different network is used. If you specify UseOnlyPreferredNetwork
+/// the key `PreferredNetwork` = 20404 Some modems allows to specify a preferred network, which means,
+/// if this network is not available, a different network is used. If you specify `UseOnlyPreferredNetwork`
 /// and this network is not available, the modem will not dial in.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
@@ -62,6 +62,7 @@ impl APNType {
     /// # Returns
     ///
     /// A new instance of `APNType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(apn: String, apn_authentication: APNAuthenticationEnumType) -> Self {
         Self {
             custom_data: None,
@@ -84,6 +85,7 @@ impl APNType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -98,6 +100,7 @@ impl APNType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_apn_user_name(mut self, apn_user_name: String) -> Self {
         self.apn_user_name = Some(apn_user_name);
         self
@@ -112,6 +115,7 @@ impl APNType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_apn_password(mut self, apn_password: String) -> Self {
         self.apn_password = Some(apn_password);
         self
@@ -126,6 +130,7 @@ impl APNType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_sim_pin(mut self, sim_pin: i32) -> Self {
         self.sim_pin = Some(sim_pin);
         self
@@ -140,6 +145,7 @@ impl APNType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_preferred_network(mut self, preferred_network: String) -> Self {
         self.preferred_network = Some(preferred_network);
         self
@@ -154,6 +160,7 @@ impl APNType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_use_only_preferred_network(mut self, use_only_preferred_network: bool) -> Self {
         self.use_only_preferred_network = Some(use_only_preferred_network);
         self
@@ -164,6 +171,7 @@ impl APNType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -187,6 +195,7 @@ impl APNType {
     /// # Returns
     ///
     /// The Access Point Name as a string
+    #[must_use] 
     pub fn apn(&self) -> &str {
         &self.apn
     }
@@ -210,6 +219,7 @@ impl APNType {
     /// # Returns
     ///
     /// An optional reference to the APN username
+    #[must_use] 
     pub fn apn_user_name(&self) -> Option<&String> {
         self.apn_user_name.as_ref()
     }
@@ -233,6 +243,7 @@ impl APNType {
     /// # Returns
     ///
     /// An optional reference to the APN password
+    #[must_use] 
     pub fn apn_password(&self) -> Option<&String> {
         self.apn_password.as_ref()
     }
@@ -256,6 +267,7 @@ impl APNType {
     /// # Returns
     ///
     /// An optional SIM card PIN code
+    #[must_use] 
     pub fn sim_pin(&self) -> Option<i32> {
         self.sim_pin
     }
@@ -279,6 +291,7 @@ impl APNType {
     /// # Returns
     ///
     /// An optional reference to the preferred network
+    #[must_use] 
     pub fn preferred_network(&self) -> Option<&String> {
         self.preferred_network.as_ref()
     }
@@ -302,6 +315,7 @@ impl APNType {
     /// # Returns
     ///
     /// An optional boolean indicating whether to use only the preferred network
+    #[must_use] 
     pub fn use_only_preferred_network(&self) -> Option<bool> {
         self.use_only_preferred_network
     }
@@ -328,6 +342,7 @@ impl APNType {
     /// # Returns
     ///
     /// The APN authentication method
+    #[must_use] 
     pub fn apn_authentication(&self) -> APNAuthenticationEnumType {
         self.apn_authentication.clone()
     }

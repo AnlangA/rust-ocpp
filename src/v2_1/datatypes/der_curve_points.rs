@@ -11,7 +11,7 @@ pub struct DERCurvePointsType {
     #[serde(with = "rust_decimal::serde::arbitrary_precision")]
     pub x: Decimal,
 
-    /// The data value of the Y-axis (dependent) variable, depending on the DERUnitEnumType of the curve.
+    /// The data value of the Y-axis (dependent) variable, depending on the `DERUnitEnumType` of the curve.
     /// If y is power factor, then a positive value means DER is absorbing reactive power (under-excited),
     /// a negative value when DER is injecting reactive power (over-excited).
     #[serde(with = "rust_decimal::serde::arbitrary_precision")]
@@ -34,6 +34,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// A new instance of `DERCurvePointsType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(x: Decimal, y: Decimal) -> Self {
         Self {
             x,
@@ -51,6 +52,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -61,6 +63,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// The X-axis value
+    #[must_use] 
     pub fn x(&self) -> Decimal {
         self.x
     }
@@ -84,6 +87,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// The Y-axis value
+    #[must_use] 
     pub fn y(&self) -> Decimal {
         self.y
     }
@@ -107,6 +111,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

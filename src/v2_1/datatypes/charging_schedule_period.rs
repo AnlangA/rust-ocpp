@@ -10,17 +10,17 @@ use serde::{Deserialize, Serialize};
 use validator::{Validate, ValidationError};
 
 /// Charging schedule period structure defines a time period in a charging schedule.
-/// It is used in: CompositeScheduleType and in ChargingScheduleType.
-/// When used in a NotifyEVChargingScheduleRequest only startPeriod, limit, limit_L2, limit_L3 are relevant.
+/// It is used in: `CompositeScheduleType` and in `ChargingScheduleType`.
+/// When used in a `NotifyEVChargingScheduleRequest` only startPeriod, limit, `limit_L2`, `limit_L3` are relevant.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct ChargingSchedulePeriodType {
     /// Start of the period, in seconds from the start of schedule.
-    /// The value of StartPeriod also defines the stop time of the previous period.
+    /// The value of `StartPeriod` also defines the stop time of the previous period.
     pub start_period: i32,
 
-    /// Optional only when not required by the operationMode, as in CentralSetpoint, ExternalSetpoint,
-    /// ExternalLimits, LocalFrequency, LocalLoadBalancing.
+    /// Optional only when not required by the operationMode, as in `CentralSetpoint`, `ExternalSetpoint`,
+    /// `ExternalLimits`, `LocalFrequency`, `LocalLoadBalancing`.
     /// Charging rate limit during the schedule period, in the applicable chargingRateUnit.
     /// This SHOULD be a non-negative value; a negative value is only supported for backwards compatibility
     /// with older systems that use a negative value to specify a discharging limit.
@@ -54,7 +54,7 @@ pub struct ChargingSchedulePeriodType {
     pub number_phases: Option<i32>,
 
     /// Values: 1..3, Used if numberPhases=1 and if the EVSE is capable of switching the phase connected to the EV,
-    /// i.e. ACPhaseSwitchingSupported is defined and true. It's not allowed unless both conditions above are true.
+    /// i.e. `ACPhaseSwitchingSupported` is defined and true. It's not allowed unless both conditions above are true.
     /// If both conditions are true, and phaseToUse is omitted, the Charging Station / EVSE will make the selection on its own.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 1, max = 3))]
@@ -187,6 +187,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// A new instance of `ChargingSchedulePeriodType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(start_period: i32, limit: Decimal) -> Self {
         Self {
             start_period,
@@ -224,6 +225,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// A new instance of `ChargingSchedulePeriodType` with optional fields set to `None`
+    #[must_use] 
     pub fn new_from_f64(start_period: i32, limit: f64) -> Self {
         Self::new(
             start_period,
@@ -240,6 +242,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_limit_l2(mut self, limit_l2: Decimal) -> Self {
         self.limit_l2 = Some(limit_l2);
         self
@@ -254,6 +257,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_limit_l2_f64(self, limit_l2: f64) -> Self {
         self.with_limit_l2(Decimal::from_f64(limit_l2).unwrap_or(Decimal::ZERO))
     }
@@ -267,6 +271,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_limit_l3(mut self, limit_l3: Decimal) -> Self {
         self.limit_l3 = Some(limit_l3);
         self
@@ -281,6 +286,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_limit_l3_f64(self, limit_l3: f64) -> Self {
         self.with_limit_l3(Decimal::from_f64(limit_l3).unwrap_or(Decimal::ZERO))
     }
@@ -294,6 +300,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_discharge_limit(mut self, discharge_limit: Decimal) -> Self {
         self.discharge_limit = Some(discharge_limit);
         self
@@ -308,6 +315,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_discharge_limit_f64(self, discharge_limit: f64) -> Self {
         self.with_discharge_limit(Decimal::from_f64(discharge_limit).unwrap_or(Decimal::ZERO))
     }
@@ -321,6 +329,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_discharge_limit_l2(mut self, discharge_limit_l2: Decimal) -> Self {
         self.discharge_limit_l2 = Some(discharge_limit_l2);
         self
@@ -335,6 +344,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_discharge_limit_l2_f64(self, discharge_limit_l2: f64) -> Self {
         self.with_discharge_limit_l2(Decimal::from_f64(discharge_limit_l2).unwrap_or(Decimal::ZERO))
     }
@@ -348,6 +358,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_discharge_limit_l3(mut self, discharge_limit_l3: Decimal) -> Self {
         self.discharge_limit_l3 = Some(discharge_limit_l3);
         self
@@ -362,6 +373,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_discharge_limit_l3_f64(self, discharge_limit_l3: f64) -> Self {
         self.with_discharge_limit_l3(Decimal::from_f64(discharge_limit_l3).unwrap_or(Decimal::ZERO))
     }
@@ -375,6 +387,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_number_phases(mut self, number_phases: i32) -> Self {
         self.number_phases = Some(number_phases);
         self
@@ -389,6 +402,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_phase_to_use(mut self, phase_to_use: i32) -> Self {
         self.phase_to_use = Some(phase_to_use);
         self
@@ -403,6 +417,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -413,6 +428,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// The start of the period, in seconds from the start of schedule
+    #[must_use] 
     pub fn start_period(&self) -> i32 {
         self.start_period
     }
@@ -436,6 +452,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// The charging rate limit during the schedule period
+    #[must_use] 
     pub fn limit(&self) -> &Decimal {
         &self.limit
     }
@@ -459,6 +476,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// An optional charging rate limit for the second phase
+    #[must_use] 
     pub fn limit_l2(&self) -> Option<&Decimal> {
         self.limit_l2.as_ref()
     }
@@ -482,6 +500,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// An optional charging rate limit for the third phase
+    #[must_use] 
     pub fn limit_l3(&self) -> Option<&Decimal> {
         self.limit_l3.as_ref()
     }
@@ -505,6 +524,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// An optional discharge limit
+    #[must_use] 
     pub fn discharge_limit(&self) -> Option<&Decimal> {
         self.discharge_limit.as_ref()
     }
@@ -528,6 +548,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// An optional discharge limit for phase L2
+    #[must_use] 
     pub fn discharge_limit_l2(&self) -> Option<&Decimal> {
         self.discharge_limit_l2.as_ref()
     }
@@ -551,6 +572,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// An optional discharge limit for phase L3
+    #[must_use] 
     pub fn discharge_limit_l3(&self) -> Option<&Decimal> {
         self.discharge_limit_l3.as_ref()
     }
@@ -574,6 +596,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// An optional number of phases that can be used for charging
+    #[must_use] 
     pub fn number_phases(&self) -> Option<i32> {
         self.number_phases
     }
@@ -597,6 +620,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// An optional phase to use
+    #[must_use] 
     pub fn phase_to_use(&self) -> Option<i32> {
         self.phase_to_use
     }
@@ -620,6 +644,7 @@ impl ChargingSchedulePeriodType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

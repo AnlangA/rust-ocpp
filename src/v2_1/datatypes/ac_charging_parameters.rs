@@ -11,26 +11,26 @@ use validator::Validate;
 pub struct ACChargingParametersType {
     /// Amount of energy requested (in Wh). This includes energy required for preconditioning.
     /// Relates to:
-    /// *ISO 15118-2*: AC_EVChargeParameterType: EAmount
-    /// *ISO 15118-20*: Dynamic/Scheduled_SEReqControlModeType: EVTargetEnergyRequest
+    /// *ISO 15118-2*: `AC_EVChargeParameterType`: `EAmount`
+    /// *ISO 15118-20*: `Dynamic/Scheduled_SEReqControlModeType`: `EVTargetEnergyRequest`
     #[serde(with = "rust_decimal::serde::arbitrary_precision")]
     pub energy_amount: Decimal,
 
     /// Minimum current (amps) supported by the electric vehicle (per phase).
     /// Relates to:
-    /// *ISO 15118-2*: AC_EVChargeParameterType: EVMinCurrent
+    /// *ISO 15118-2*: `AC_EVChargeParameterType`: `EVMinCurrent`
     #[serde(with = "rust_decimal::serde::arbitrary_precision")]
     pub ev_min_current: Decimal,
 
     /// Maximum current (amps) supported by the electric vehicle (per phase). Includes cable capacity.
     /// Relates to:
-    /// *ISO 15118-2*: AC_EVChargeParameterType: EVMaxCurrent
+    /// *ISO 15118-2*: `AC_EVChargeParameterType`: `EVMaxCurrent`
     #[serde(with = "rust_decimal::serde::arbitrary_precision")]
     pub ev_max_current: Decimal,
 
     /// Maximum voltage supported by the electric vehicle.
     /// Relates to:
-    /// *ISO 15118-2*: AC_EVChargeParameterType: EVMaxVoltage
+    /// *ISO 15118-2*: `AC_EVChargeParameterType`: `EVMaxVoltage`
     #[serde(with = "rust_decimal::serde::arbitrary_precision")]
     pub ev_max_voltage: Decimal,
 
@@ -53,6 +53,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// A new instance of `ACChargingParametersType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(
         energy_amount: Decimal,
         ev_min_current: Decimal,
@@ -80,6 +81,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// A new instance of `ACChargingParametersType` with optional fields set to `None`
+    #[must_use] 
     pub fn new_from_f64(
         energy_amount: f64,
         ev_min_current: f64,
@@ -104,6 +106,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -114,6 +117,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// The amount of energy requested (in Wh)
+    #[must_use] 
     pub fn energy_amount(&self) -> &Decimal {
         &self.energy_amount
     }
@@ -151,6 +155,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// The minimum current (amps) supported by the electric vehicle (per phase)
+    #[must_use] 
     pub fn ev_min_current(&self) -> &Decimal {
         &self.ev_min_current
     }
@@ -188,6 +193,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// The maximum current (amps) supported by the electric vehicle (per phase)
+    #[must_use] 
     pub fn ev_max_current(&self) -> &Decimal {
         &self.ev_max_current
     }
@@ -225,6 +231,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// The maximum voltage supported by the electric vehicle
+    #[must_use] 
     pub fn ev_max_voltage(&self) -> &Decimal {
         &self.ev_max_voltage
     }
@@ -262,6 +269,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

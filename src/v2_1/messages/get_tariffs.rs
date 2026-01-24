@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::TariffGetStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the GetTariffs request.
+/// Request body for the `GetTariffs` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTariffsRequest {
@@ -24,6 +24,7 @@ impl GetTariffsRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(evse_id: i32) -> Self {
         Self {
             evse_id,
@@ -31,7 +32,7 @@ impl GetTariffsRequest {
         }
     }
 
-    /// Sets the evse_id field.
+    /// Sets the `evse_id` field.
     ///
     /// * `evse_id` - EVSE id to get tariff from. When _evseId_ = 0, this gets tariffs from all EVSEs.
     ///
@@ -43,9 +44,9 @@ impl GetTariffsRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -55,31 +56,34 @@ impl GetTariffsRequest {
         self
     }
 
-    /// Gets a reference to the evse_id field.
+    /// Gets a reference to the `evse_id` field.
     ///
     /// # Returns
     ///
     /// EVSE id to get tariff from. When _evseId_ = 0, this gets tariffs from all EVSEs.
+    #[must_use] 
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -87,7 +91,7 @@ impl GetTariffsRequest {
 
 }
 
-/// Response body for the GetTariffs response.
+/// Response body for the `GetTariffs` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct GetTariffsResponse {
@@ -115,6 +119,7 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: TariffGetStatusEnumType) -> Self {
         Self {
             status,
@@ -136,9 +141,9 @@ impl GetTariffsResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -148,9 +153,9 @@ impl GetTariffsResponse {
         self
     }
 
-    /// Sets the tariff_assignments field.
+    /// Sets the `tariff_assignments` field.
     ///
-    /// * `tariff_assignments` - The tariff_assignments field
+    /// * `tariff_assignments` - The `tariff_assignments` field
     ///
     /// # Returns
     ///
@@ -160,9 +165,9 @@ impl GetTariffsResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -177,68 +182,75 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &TariffGetStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the tariff_assignments field.
+    /// Gets a reference to the `tariff_assignments` field.
     ///
     /// # Returns
     ///
-    /// The tariff_assignments field
+    /// The `tariff_assignments` field
+    #[must_use] 
     pub fn get_tariff_assignments(&self) -> Option<&Vec<TariffAssignmentType>> {
         self.tariff_assignments.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the tariff_assignments field and returns self for builder pattern.
+    /// Sets the `tariff_assignments` field and returns self for builder pattern.
     ///
-    /// * `tariff_assignments` - The tariff_assignments field
+    /// * `tariff_assignments` - The `tariff_assignments` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_tariff_assignments(mut self, tariff_assignments: Vec<TariffAssignmentType>) -> Self {
         self.tariff_assignments = Some(tariff_assignments);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

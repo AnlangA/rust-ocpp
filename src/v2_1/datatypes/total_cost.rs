@@ -67,6 +67,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// A new instance of `TotalCostType` with optional fields set to `None`
+    #[must_use] 
     pub fn new(currency: String, type_of_cost: TariffCostEnumType, total: TotalPriceType) -> Self {
         Self {
             currency,
@@ -91,6 +92,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -105,6 +107,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_fixed(mut self, fixed: PriceType) -> Self {
         self.fixed = Some(fixed);
         self
@@ -119,6 +122,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_energy(mut self, energy: PriceType) -> Self {
         self.energy = Some(energy);
         self
@@ -133,6 +137,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_charging_time(mut self, charging_time: PriceType) -> Self {
         self.charging_time = Some(charging_time);
         self
@@ -147,6 +152,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_idle_time(mut self, idle_time: PriceType) -> Self {
         self.idle_time = Some(idle_time);
         self
@@ -161,6 +167,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_reservation_time(mut self, reservation_time: PriceType) -> Self {
         self.reservation_time = Some(reservation_time);
         self
@@ -175,6 +182,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// Self reference for method chaining
+    #[must_use] 
     pub fn with_reservation_fixed(mut self, reservation_fixed: PriceType) -> Self {
         self.reservation_fixed = Some(reservation_fixed);
         self
@@ -185,6 +193,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// The currency of the costs in ISO 4217 Code
+    #[must_use] 
     pub fn currency(&self) -> &str {
         &self.currency
     }
@@ -208,6 +217,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// The type of cost
+    #[must_use] 
     pub fn type_of_cost(&self) -> &TariffCostEnumType {
         &self.type_of_cost
     }
@@ -231,6 +241,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// A reference to the total cost including and/or excluding tax
+    #[must_use] 
     pub fn total(&self) -> &TotalPriceType {
         &self.total
     }
@@ -254,6 +265,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// An optional reference to the fixed costs per transaction
+    #[must_use] 
     pub fn fixed(&self) -> Option<&PriceType> {
         self.fixed.as_ref()
     }
@@ -277,6 +289,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// An optional reference to the energy costs per transaction
+    #[must_use] 
     pub fn energy(&self) -> Option<&PriceType> {
         self.energy.as_ref()
     }
@@ -300,6 +313,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// An optional reference to the time cost per transaction
+    #[must_use] 
     pub fn charging_time(&self) -> Option<&PriceType> {
         self.charging_time.as_ref()
     }
@@ -323,6 +337,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// An optional reference to the idle time cost per transaction
+    #[must_use] 
     pub fn idle_time(&self) -> Option<&PriceType> {
         self.idle_time.as_ref()
     }
@@ -346,6 +361,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// An optional reference to the reservation time cost per transaction
+    #[must_use] 
     pub fn reservation_time(&self) -> Option<&PriceType> {
         self.reservation_time.as_ref()
     }
@@ -369,6 +385,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// An optional reference to the fixed reservation costs per transaction
+    #[must_use] 
     pub fn reservation_fixed(&self) -> Option<&PriceType> {
         self.reservation_fixed.as_ref()
     }
@@ -392,6 +409,7 @@ impl TotalCostType {
     /// # Returns
     ///
     /// An optional reference to the custom data
+    #[must_use] 
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

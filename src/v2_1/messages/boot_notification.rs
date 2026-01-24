@@ -4,7 +4,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the BootNotification request.
+/// Request body for the `BootNotification` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct BootNotificationRequest {
@@ -15,7 +15,7 @@ pub struct BootNotificationRequest {
     /// This contains the reason for sending this message to the CSMS.
     pub reason: BootReasonEnumType,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -24,12 +24,13 @@ pub struct BootNotificationRequest {
 impl BootNotificationRequest {
     /// Creates a new instance of the struct.
     ///
-    /// * `charging_station` - The charging_station field
+    /// * `charging_station` - The `charging_station` field
     /// * `reason` - The reason field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(charging_station: ChargingStationType, reason: BootReasonEnumType) -> Self {
         Self {
             charging_station,
@@ -38,9 +39,9 @@ impl BootNotificationRequest {
         }
     }
 
-    /// Sets the charging_station field.
+    /// Sets the `charging_station` field.
     ///
-    /// * `charging_station` - The charging_station field
+    /// * `charging_station` - The `charging_station` field
     ///
     /// # Returns
     ///
@@ -62,9 +63,9 @@ impl BootNotificationRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -74,11 +75,12 @@ impl BootNotificationRequest {
         self
     }
 
-    /// Gets a reference to the charging_station field.
+    /// Gets a reference to the `charging_station` field.
     ///
     /// # Returns
     ///
-    /// The charging_station field
+    /// The `charging_station` field
+    #[must_use] 
     pub fn get_charging_station(&self) -> &ChargingStationType {
         &self.charging_station
     }
@@ -88,26 +90,29 @@ impl BootNotificationRequest {
     /// # Returns
     ///
     /// The reason field
+    #[must_use] 
     pub fn get_reason(&self) -> &BootReasonEnumType {
         &self.reason
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -115,14 +120,14 @@ impl BootNotificationRequest {
 
 }
 
-/// Response body for the BootNotification response.
+/// Response body for the `BootNotification` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct BootNotificationResponse {
     /// This contains the CSMS’s current time.
     pub current_time: DateTime<Utc>,
 
-    /// When &lt;&lt;cmn_registrationstatusenumtype,Status&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next BootNotification request.
+    /// When &lt;&lt;`cmn_registrationstatusenumtype,Status`&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next `BootNotification` request.
     pub interval: i32,
 
     /// This contains whether the Charging Station has been registered within the CSMS.
@@ -133,7 +138,7 @@ pub struct BootNotificationResponse {
     #[validate(nested)]
     pub status_info: Option<StatusInfoType>,
 
-    /// This class does not get 'AdditionalProperties = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
+    /// This class does not get '`AdditionalProperties` = false' in the schema generation, so it can be extended with arbitrary JSON properties to allow adding custom data.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
@@ -143,12 +148,13 @@ impl BootNotificationResponse {
     /// Creates a new instance of the struct.
     ///
     /// * `current_time` - This contains the CSMS’s current time.
-    /// * `interval` - When &lt;&lt;cmn_registrationstatusenumtype,Status&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next BootNotification request.
+    /// * `interval` - When &lt;&lt;`cmn_registrationstatusenumtype,Status`&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next `BootNotification` request.
     /// * `status` - The status field
     ///
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(current_time: DateTime<Utc>, interval: i32, status: RegistrationStatusEnumType) -> Self {
         Self {
             current_time,
@@ -159,7 +165,7 @@ impl BootNotificationResponse {
         }
     }
 
-    /// Sets the current_time field.
+    /// Sets the `current_time` field.
     ///
     /// * `current_time` - This contains the CSMS’s current time.
     ///
@@ -173,7 +179,7 @@ impl BootNotificationResponse {
 
     /// Sets the interval field.
     ///
-    /// * `interval` - When &lt;&lt;cmn_registrationstatusenumtype,Status&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next BootNotification request.
+    /// * `interval` - When &lt;&lt;`cmn_registrationstatusenumtype,Status`&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next `BootNotification` request.
     ///
     /// # Returns
     ///
@@ -195,9 +201,9 @@ impl BootNotificationResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -207,9 +213,9 @@ impl BootNotificationResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -219,11 +225,12 @@ impl BootNotificationResponse {
         self
     }
 
-    /// Gets a reference to the current_time field.
+    /// Gets a reference to the `current_time` field.
     ///
     /// # Returns
     ///
     /// This contains the CSMS’s current time.
+    #[must_use] 
     pub fn get_current_time(&self) -> &DateTime<Utc> {
         &self.current_time
     }
@@ -232,7 +239,8 @@ impl BootNotificationResponse {
     ///
     /// # Returns
     ///
-    /// When &lt;&lt;cmn_registrationstatusenumtype,Status&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next BootNotification request.
+    /// When &lt;&lt;`cmn_registrationstatusenumtype,Status`&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next `BootNotification` request.
+    #[must_use] 
     pub fn get_interval(&self) -> &i32 {
         &self.interval
     }
@@ -242,47 +250,52 @@ impl BootNotificationResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &RegistrationStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

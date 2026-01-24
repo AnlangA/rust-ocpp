@@ -3,7 +3,7 @@ use crate::v2_1::enumerations::{CertificateSigningUseEnumType, GenericStatusEnum
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-/// Request body for the SignCertificate request.
+/// Request body for the `SignCertificate` request.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SignCertificateRequest {
@@ -18,7 +18,7 @@ pub struct SignCertificateRequest {
     #[validate(nested)]
     pub hash_root_certificate: Option<CertificateHashDataType>,
 
-    /// *(2.1)* RequestId to match this message with the CertificateSignedRequest.
+    /// *(2.1)* `RequestId` to match this message with the `CertificateSignedRequest`.
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(range(min = 0))]
     pub request_id: Option<i32>,
@@ -36,6 +36,7 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(csr: String) -> Self {
         Self {
             csr,
@@ -58,9 +59,9 @@ impl SignCertificateRequest {
         self
     }
 
-    /// Sets the certificate_type field.
+    /// Sets the `certificate_type` field.
     ///
-    /// * `certificate_type` - The certificate_type field
+    /// * `certificate_type` - The `certificate_type` field
     ///
     /// # Returns
     ///
@@ -70,9 +71,9 @@ impl SignCertificateRequest {
         self
     }
 
-    /// Sets the hash_root_certificate field.
+    /// Sets the `hash_root_certificate` field.
     ///
-    /// * `hash_root_certificate` - The hash_root_certificate field
+    /// * `hash_root_certificate` - The `hash_root_certificate` field
     ///
     /// # Returns
     ///
@@ -82,9 +83,9 @@ impl SignCertificateRequest {
         self
     }
 
-    /// Sets the request_id field.
+    /// Sets the `request_id` field.
     ///
-    /// * `request_id` - *(2.1)* RequestId to match this message with the CertificateSignedRequest.
+    /// * `request_id` - *(2.1)* `RequestId` to match this message with the `CertificateSignedRequest`.
     ///
     /// # Returns
     ///
@@ -94,9 +95,9 @@ impl SignCertificateRequest {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -111,89 +112,98 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// The Charging Station SHALL send the public key in form of a Certificate Signing Request (CSR) as described in RFC 2986 [22] and then PEM encoded, using the &lt;&lt;signcertificaterequest,SignCertificateRequest&gt;&gt; message.
+    #[must_use] 
     pub fn get_csr(&self) -> &String {
         &self.csr
     }
 
-    /// Gets a reference to the certificate_type field.
+    /// Gets a reference to the `certificate_type` field.
     ///
     /// # Returns
     ///
-    /// The certificate_type field
+    /// The `certificate_type` field
+    #[must_use] 
     pub fn get_certificate_type(&self) -> Option<&CertificateSigningUseEnumType> {
         self.certificate_type.as_ref()
     }
 
-    /// Gets a reference to the hash_root_certificate field.
+    /// Gets a reference to the `hash_root_certificate` field.
     ///
     /// # Returns
     ///
-    /// The hash_root_certificate field
+    /// The `hash_root_certificate` field
+    #[must_use] 
     pub fn get_hash_root_certificate(&self) -> Option<&CertificateHashDataType> {
         self.hash_root_certificate.as_ref()
     }
 
-    /// Gets a reference to the request_id field.
+    /// Gets a reference to the `request_id` field.
     ///
     /// # Returns
     ///
-    /// *(2.1)* RequestId to match this message with the CertificateSignedRequest.
+    /// *(2.1)* `RequestId` to match this message with the `CertificateSignedRequest`.
+    #[must_use] 
     pub fn get_request_id(&self) -> Option<&i32> {
         self.request_id.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the certificate_type field and returns self for builder pattern.
+    /// Sets the `certificate_type` field and returns self for builder pattern.
     ///
-    /// * `certificate_type` - The certificate_type field
+    /// * `certificate_type` - The `certificate_type` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_certificate_type(mut self, certificate_type: CertificateSigningUseEnumType) -> Self {
         self.certificate_type = Some(certificate_type);
         self
     }
 
-    /// Sets the hash_root_certificate field and returns self for builder pattern.
+    /// Sets the `hash_root_certificate` field and returns self for builder pattern.
     ///
-    /// * `hash_root_certificate` - The hash_root_certificate field
+    /// * `hash_root_certificate` - The `hash_root_certificate` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_hash_root_certificate(mut self, hash_root_certificate: CertificateHashDataType) -> Self {
         self.hash_root_certificate = Some(hash_root_certificate);
         self
     }
 
-    /// Sets the request_id field and returns self for builder pattern.
+    /// Sets the `request_id` field and returns self for builder pattern.
     ///
-    /// * `request_id` - *(2.1)* RequestId to match this message with the CertificateSignedRequest.
+    /// * `request_id` - *(2.1)* `RequestId` to match this message with the `CertificateSignedRequest`.
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_request_id(mut self, request_id: i32) -> Self {
         self.request_id = Some(request_id);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -201,7 +211,7 @@ impl SignCertificateRequest {
 
 }
 
-/// Response body for the SignCertificate response.
+/// Response body for the `SignCertificate` response.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize, Validate)]
 #[serde(rename_all = "camelCase")]
 pub struct SignCertificateResponse {
@@ -224,6 +234,7 @@ impl SignCertificateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
+    #[must_use] 
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -244,9 +255,9 @@ impl SignCertificateResponse {
         self
     }
 
-    /// Sets the status_info field.
+    /// Sets the `status_info` field.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
@@ -256,9 +267,9 @@ impl SignCertificateResponse {
         self
     }
 
-    /// Sets the custom_data field.
+    /// Sets the `custom_data` field.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
@@ -273,47 +284,52 @@ impl SignCertificateResponse {
     /// # Returns
     ///
     /// The status field
+    #[must_use] 
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
 
-    /// Gets a reference to the status_info field.
+    /// Gets a reference to the `status_info` field.
     ///
     /// # Returns
     ///
-    /// The status_info field
+    /// The `status_info` field
+    #[must_use] 
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
 
-    /// Gets a reference to the custom_data field.
+    /// Gets a reference to the `custom_data` field.
     ///
     /// # Returns
     ///
-    /// The custom_data field
+    /// The `custom_data` field
+    #[must_use] 
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
 
-    /// Sets the status_info field and returns self for builder pattern.
+    /// Sets the `status_info` field and returns self for builder pattern.
     ///
-    /// * `status_info` - The status_info field
+    /// * `status_info` - The `status_info` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
     }
 
-    /// Sets the custom_data field and returns self for builder pattern.
+    /// Sets the `custom_data` field and returns self for builder pattern.
     ///
-    /// * `custom_data` - The custom_data field
+    /// * `custom_data` - The `custom_data` field
     ///
     /// # Returns
     ///
     /// Self with the field set.
+    #[must_use] 
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
