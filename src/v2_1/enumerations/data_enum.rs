@@ -1,18 +1,14 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[derive(Default)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "lowercase")]
 pub enum DataEnumType {
-    #[serde(rename = "string")]
     #[default]
     String,
-    #[serde(rename = "decimal")]
     Decimal,
-    #[serde(rename = "integer")]
     Integer,
     #[serde(rename = "dateTime")]
     DateTime,
-    #[serde(rename = "boolean")]
     Boolean,
     #[serde(rename = "OptionList")]
     OptionList,

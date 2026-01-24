@@ -761,7 +761,7 @@ mod tests {
     fn test_with_methods() {
         let der_controls = vec![DERControlEnumType::FreqDroop];
         let islanding_methods = vec![
-            IslandingDetectionEnumType::RoCoF,
+            IslandingDetectionEnumType::Rocof,
             IslandingDetectionEnumType::UvpOvp,
         ];
 
@@ -797,7 +797,7 @@ mod tests {
             DERControlEnumType::FixedVar,
         ];
         let custom_data = CustomDataType::new("VendorX".to_string());
-        let islanding_methods = vec![IslandingDetectionEnumType::RoCoF];
+        let islanding_methods = vec![IslandingDetectionEnumType::Rocof];
 
         let mut params = DERChargingParametersType::new(der_controls1.clone());
 
