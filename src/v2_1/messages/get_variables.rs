@@ -24,7 +24,7 @@ impl GetVariablesRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(get_variable_data: Vec<GetVariableDataType>) -> Self {
         Self {
             get_variable_data,
@@ -39,7 +39,10 @@ impl GetVariablesRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_get_variable_data(&mut self, get_variable_data: Vec<GetVariableDataType>) -> &mut Self {
+    pub fn set_get_variable_data(
+        &mut self,
+        get_variable_data: Vec<GetVariableDataType>,
+    ) -> &mut Self {
         self.get_variable_data = get_variable_data;
         self
     }
@@ -61,7 +64,7 @@ impl GetVariablesRequest {
     /// # Returns
     ///
     /// The `get_variable_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_get_variable_data(&self) -> &Vec<GetVariableDataType> {
         &self.get_variable_data
     }
@@ -71,7 +74,7 @@ impl GetVariablesRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -83,12 +86,11 @@ impl GetVariablesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetVariables` response.
@@ -113,7 +115,7 @@ impl GetVariablesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(get_variable_result: Vec<GetVariableResultType>) -> Self {
         Self {
             get_variable_result,
@@ -128,7 +130,10 @@ impl GetVariablesResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_get_variable_result(&mut self, get_variable_result: Vec<GetVariableResultType>) -> &mut Self {
+    pub fn set_get_variable_result(
+        &mut self,
+        get_variable_result: Vec<GetVariableResultType>,
+    ) -> &mut Self {
         self.get_variable_result = get_variable_result;
         self
     }
@@ -150,7 +155,7 @@ impl GetVariablesResponse {
     /// # Returns
     ///
     /// The `get_variable_result` field
-    #[must_use] 
+    #[must_use]
     pub fn get_get_variable_result(&self) -> &Vec<GetVariableResultType> {
         &self.get_variable_result
     }
@@ -160,7 +165,7 @@ impl GetVariablesResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -172,25 +177,24 @@ impl GetVariablesResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::v2_1::datatypes::{ComponentType, VariableType, StatusInfoType};
+    use crate::v2_1::datatypes::{ComponentType, StatusInfoType, VariableType};
     use crate::v2_1::enumerations::{AttributeEnumType, GetVariableStatusEnumType};
     use serde_json;
 
     // Helper function to create test GetVariableDataType
     fn create_test_get_variable_data() -> GetVariableDataType {
-        let component = ComponentType::new("Connector".to_string())
-            .with_instance("Main".to_string());
+        let component =
+            ComponentType::new("Connector".to_string()).with_instance("Main".to_string());
         let variable = VariableType::new("CurrentLimit".to_string());
         GetVariableDataType::new(component, variable)
     }
@@ -204,12 +208,12 @@ mod tests {
     }
 
     // Tests for GetVariablesRequest
-    
+
     #[test]
     fn test_get_variables_request_new() {
         let get_variable_data = vec![create_test_get_variable_data()];
         let request = GetVariablesRequest::new(get_variable_data.clone());
-        
+
         assert_eq!(request.get_variable_data.len(), 1);
         assert_eq!(request.get_variable_data[0].component.name, "Connector");
         assert_eq!(request.get_variable_data[0].variable.name, "CurrentLimit");
@@ -221,22 +225,25 @@ mod tests {
         let get_variable_data = vec![create_test_get_variable_data()];
         let request = GetVariablesRequest::new(get_variable_data)
             .with_custom_data(CustomDataType::new("TestVendor".to_string()));
-        
+
         assert!(request.custom_data.is_some());
-        assert_eq!(request.custom_data.as_ref().unwrap().vendor_id, "TestVendor");
+        assert_eq!(
+            request.custom_data.as_ref().unwrap().vendor_id,
+            "TestVendor"
+        );
     }
 
     #[test]
     fn test_get_variables_request_setters() {
         let mut request = GetVariablesRequest::new(vec![create_test_get_variable_data()]);
-        
+
         let new_data = vec![
             create_test_get_variable_data(),
-            create_test_get_variable_data()
+            create_test_get_variable_data(),
         ];
         request.set_get_variable_data(new_data);
         request.set_custom_data(Some(CustomDataType::new("NewVendor".to_string())));
-        
+
         assert_eq!(request.get_variable_data.len(), 2);
         assert_eq!(request.custom_data.as_ref().unwrap().vendor_id, "NewVendor");
     }
@@ -246,7 +253,7 @@ mod tests {
         let get_variable_data = vec![create_test_get_variable_data()];
         let request = GetVariablesRequest::new(get_variable_data.clone())
             .with_custom_data(CustomDataType::new("TestVendor".to_string()));
-        
+
         assert_eq!(request.get_get_variable_data().len(), 1);
         assert_eq!(request.get_custom_data().unwrap().vendor_id, "TestVendor");
     }
@@ -255,10 +262,10 @@ mod tests {
     fn test_get_variables_request_serialization() {
         let get_variable_data = vec![create_test_get_variable_data()];
         let request = GetVariablesRequest::new(get_variable_data);
-        
+
         let json = serde_json::to_string(&request).unwrap();
         let parsed: GetVariablesRequest = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(request, parsed);
     }
 
@@ -275,19 +282,22 @@ mod tests {
                 }
             }]
         }"#;
-        
+
         let request: GetVariablesRequest = serde_json::from_str(json).unwrap();
-        
+
         assert_eq!(request.get_variable_data.len(), 1);
         assert_eq!(request.get_variable_data[0].component.name, "Connector");
-        assert_eq!(request.get_variable_data[0].component.instance, Some("Main".to_string()));
+        assert_eq!(
+            request.get_variable_data[0].component.instance,
+            Some("Main".to_string())
+        );
         assert_eq!(request.get_variable_data[0].variable.name, "CurrentLimit");
     }
 
     #[test]
     fn test_get_variables_request_validation_empty_vector() {
         let request = GetVariablesRequest::new(vec![]);
-        
+
         assert!(request.validate().is_err());
     }
 
@@ -296,39 +306,53 @@ mod tests {
         let data = vec![
             GetVariableDataType::new(
                 ComponentType::new("Connector".to_string()),
-                VariableType::new("CurrentLimit".to_string())
+                VariableType::new("CurrentLimit".to_string()),
             ),
             GetVariableDataType::new(
                 ComponentType::new("Meter".to_string()),
-                VariableType::new("Energy".to_string())
-            ).with_attribute_type(AttributeEnumType::Actual),
+                VariableType::new("Energy".to_string()),
+            )
+            .with_attribute_type(AttributeEnumType::Actual),
             GetVariableDataType::new(
                 ComponentType::new("Controller".to_string()),
-                VariableType::new("Enabled".to_string())
-            ).with_attribute_type(AttributeEnumType::Target)
+                VariableType::new("Enabled".to_string()),
+            )
+            .with_attribute_type(AttributeEnumType::Target),
         ];
-        
+
         let request = GetVariablesRequest::new(data);
-        
+
         assert_eq!(request.get_variable_data.len(), 3);
         assert_eq!(request.get_variable_data[0].component.name, "Connector");
         assert_eq!(request.get_variable_data[1].component.name, "Meter");
         assert_eq!(request.get_variable_data[2].component.name, "Controller");
-        assert_eq!(request.get_variable_data[1].attribute_type, Some(AttributeEnumType::Actual));
-        assert_eq!(request.get_variable_data[2].attribute_type, Some(AttributeEnumType::Target));
+        assert_eq!(
+            request.get_variable_data[1].attribute_type,
+            Some(AttributeEnumType::Actual)
+        );
+        assert_eq!(
+            request.get_variable_data[2].attribute_type,
+            Some(AttributeEnumType::Target)
+        );
     }
 
     // Tests for GetVariablesResponse
-    
+
     #[test]
     fn test_get_variables_response_new() {
         let get_variable_result = vec![create_test_get_variable_result()];
         let response = GetVariablesResponse::new(get_variable_result.clone());
-        
+
         assert_eq!(response.get_variable_result.len(), 1);
         assert_eq!(response.get_variable_result[0].component.name, "Connector");
-        assert_eq!(response.get_variable_result[0].variable.name, "CurrentLimit");
-        assert_eq!(response.get_variable_result[0].attribute_status, GetVariableStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_variable_result[0].variable.name,
+            "CurrentLimit"
+        );
+        assert_eq!(
+            response.get_variable_result[0].attribute_status,
+            GetVariableStatusEnumType::Accepted
+        );
         assert_eq!(response.custom_data, None);
     }
 
@@ -337,24 +361,30 @@ mod tests {
         let get_variable_result = vec![create_test_get_variable_result()];
         let response = GetVariablesResponse::new(get_variable_result)
             .with_custom_data(CustomDataType::new("TestVendor".to_string()));
-        
+
         assert!(response.custom_data.is_some());
-        assert_eq!(response.custom_data.as_ref().unwrap().vendor_id, "TestVendor");
+        assert_eq!(
+            response.custom_data.as_ref().unwrap().vendor_id,
+            "TestVendor"
+        );
     }
 
     #[test]
     fn test_get_variables_response_setters() {
         let mut response = GetVariablesResponse::new(vec![create_test_get_variable_result()]);
-        
+
         let new_results = vec![
             create_test_get_variable_result(),
-            create_test_get_variable_result()
+            create_test_get_variable_result(),
         ];
         response.set_get_variable_result(new_results);
         response.set_custom_data(Some(CustomDataType::new("NewVendor".to_string())));
-        
+
         assert_eq!(response.get_variable_result.len(), 2);
-        assert_eq!(response.custom_data.as_ref().unwrap().vendor_id, "NewVendor");
+        assert_eq!(
+            response.custom_data.as_ref().unwrap().vendor_id,
+            "NewVendor"
+        );
     }
 
     #[test]
@@ -362,7 +392,7 @@ mod tests {
         let get_variable_result = vec![create_test_get_variable_result()];
         let response = GetVariablesResponse::new(get_variable_result.clone())
             .with_custom_data(CustomDataType::new("TestVendor".to_string()));
-        
+
         assert_eq!(response.get_get_variable_result().len(), 1);
         assert_eq!(response.get_custom_data().unwrap().vendor_id, "TestVendor");
     }
@@ -371,10 +401,10 @@ mod tests {
     fn test_get_variables_response_serialization() {
         let get_variable_result = vec![create_test_get_variable_result()];
         let response = GetVariablesResponse::new(get_variable_result);
-        
+
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetVariablesResponse = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(response, parsed);
     }
 
@@ -392,20 +422,29 @@ mod tests {
                 "attributeValue": "32"
             }]
         }"#;
-        
+
         let response: GetVariablesResponse = serde_json::from_str(json).unwrap();
-        
+
         assert_eq!(response.get_variable_result.len(), 1);
         assert_eq!(response.get_variable_result[0].component.name, "Connector");
-        assert_eq!(response.get_variable_result[0].variable.name, "CurrentLimit");
-        assert_eq!(response.get_variable_result[0].attribute_status, GetVariableStatusEnumType::Accepted);
-        assert_eq!(response.get_variable_result[0].attribute_value, Some("32".to_string()));
+        assert_eq!(
+            response.get_variable_result[0].variable.name,
+            "CurrentLimit"
+        );
+        assert_eq!(
+            response.get_variable_result[0].attribute_status,
+            GetVariableStatusEnumType::Accepted
+        );
+        assert_eq!(
+            response.get_variable_result[0].attribute_value,
+            Some("32".to_string())
+        );
     }
 
     #[test]
     fn test_get_variables_response_validation_empty_vector() {
         let response = GetVariablesResponse::new(vec![]);
-        
+
         assert!(response.validate().is_err());
     }
 
@@ -415,77 +454,126 @@ mod tests {
             GetVariableResultType::new(
                 ComponentType::new("Connector".to_string()),
                 VariableType::new("CurrentLimit".to_string()),
-                GetVariableStatusEnumType::Accepted
-            ).with_attribute_value("32".to_string()),
+                GetVariableStatusEnumType::Accepted,
+            )
+            .with_attribute_value("32".to_string()),
             GetVariableResultType::new(
                 ComponentType::new("Meter".to_string()),
                 VariableType::new("Energy".to_string()),
-                GetVariableStatusEnumType::Rejected
+                GetVariableStatusEnumType::Rejected,
             ),
             GetVariableResultType::new(
                 ComponentType::new("Controller".to_string()),
                 VariableType::new("Enabled".to_string()),
-                GetVariableStatusEnumType::UnknownVariable
-            )
+                GetVariableStatusEnumType::UnknownVariable,
+            ),
         ];
-        
+
         let response = GetVariablesResponse::new(results);
-        
+
         assert_eq!(response.get_variable_result.len(), 3);
-        assert_eq!(response.get_variable_result[0].attribute_status, GetVariableStatusEnumType::Accepted);
-        assert_eq!(response.get_variable_result[0].attribute_value, Some("32".to_string()));
-        assert_eq!(response.get_variable_result[1].attribute_status, GetVariableStatusEnumType::Rejected);
+        assert_eq!(
+            response.get_variable_result[0].attribute_status,
+            GetVariableStatusEnumType::Accepted
+        );
+        assert_eq!(
+            response.get_variable_result[0].attribute_value,
+            Some("32".to_string())
+        );
+        assert_eq!(
+            response.get_variable_result[1].attribute_status,
+            GetVariableStatusEnumType::Rejected
+        );
         assert_eq!(response.get_variable_result[1].attribute_value, None);
-        assert_eq!(response.get_variable_result[2].attribute_status, GetVariableStatusEnumType::UnknownVariable);
+        assert_eq!(
+            response.get_variable_result[2].attribute_status,
+            GetVariableStatusEnumType::UnknownVariable
+        );
     }
 
     #[test]
     fn test_get_variables_request_json_round_trip_with_all_fields() {
-        let data = vec![
-            GetVariableDataType::new(
-                ComponentType::new("Connector".to_string()).with_instance("1".to_string()),
-                VariableType::new("CurrentLimit".to_string())
-            ).with_attribute_type(AttributeEnumType::Actual)
-                .with_custom_data(CustomDataType::new("DataVendor".to_string()))
-        ];
-        
+        let data = vec![GetVariableDataType::new(
+            ComponentType::new("Connector".to_string()).with_instance("1".to_string()),
+            VariableType::new("CurrentLimit".to_string()),
+        )
+        .with_attribute_type(AttributeEnumType::Actual)
+        .with_custom_data(CustomDataType::new("DataVendor".to_string()))];
+
         let request = GetVariablesRequest::new(data)
             .with_custom_data(CustomDataType::new("RequestVendor".to_string()));
-        
+
         let json = serde_json::to_string(&request).unwrap();
         let parsed: GetVariablesRequest = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(request, parsed);
-        assert_eq!(parsed.get_variable_data[0].attribute_type, Some(AttributeEnumType::Actual));
-        assert_eq!(parsed.get_variable_data[0].custom_data.as_ref().unwrap().vendor_id, "DataVendor");
-        assert_eq!(parsed.custom_data.as_ref().unwrap().vendor_id, "RequestVendor");
+        assert_eq!(
+            parsed.get_variable_data[0].attribute_type,
+            Some(AttributeEnumType::Actual)
+        );
+        assert_eq!(
+            parsed.get_variable_data[0]
+                .custom_data
+                .as_ref()
+                .unwrap()
+                .vendor_id,
+            "DataVendor"
+        );
+        assert_eq!(
+            parsed.custom_data.as_ref().unwrap().vendor_id,
+            "RequestVendor"
+        );
     }
 
     #[test]
     fn test_get_variables_response_json_round_trip_with_all_fields() {
-        let results = vec![
-            GetVariableResultType::new(
-                ComponentType::new("Connector".to_string()),
-                VariableType::new("CurrentLimit".to_string()),
-                GetVariableStatusEnumType::Accepted
-            ).with_attribute_type(AttributeEnumType::Actual)
-                .with_attribute_value("32".to_string())
-                .with_attribute_status_info(StatusInfoType::new("Success".to_string())
-                    .with_additional_info("Variable retrieved successfully".to_string()))
-                .with_custom_data(CustomDataType::new("ResultVendor".to_string()))
-        ];
-        
+        let results = vec![GetVariableResultType::new(
+            ComponentType::new("Connector".to_string()),
+            VariableType::new("CurrentLimit".to_string()),
+            GetVariableStatusEnumType::Accepted,
+        )
+        .with_attribute_type(AttributeEnumType::Actual)
+        .with_attribute_value("32".to_string())
+        .with_attribute_status_info(
+            StatusInfoType::new("Success".to_string())
+                .with_additional_info("Variable retrieved successfully".to_string()),
+        )
+        .with_custom_data(CustomDataType::new("ResultVendor".to_string()))];
+
         let response = GetVariablesResponse::new(results)
             .with_custom_data(CustomDataType::new("ResponseVendor".to_string()));
-        
+
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetVariablesResponse = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(response, parsed);
-        assert_eq!(parsed.get_variable_result[0].attribute_type, Some(AttributeEnumType::Actual));
-        assert_eq!(parsed.get_variable_result[0].attribute_value, Some("32".to_string()));
-        assert_eq!(parsed.get_variable_result[0].attribute_status_info.as_ref().unwrap().reason_code, "Success");
-        assert_eq!(parsed.get_variable_result[0].custom_data.as_ref().unwrap().vendor_id, "ResultVendor");
-        assert_eq!(parsed.custom_data.as_ref().unwrap().vendor_id, "ResponseVendor");
+        assert_eq!(
+            parsed.get_variable_result[0].attribute_type,
+            Some(AttributeEnumType::Actual)
+        );
+        assert_eq!(
+            parsed.get_variable_result[0].attribute_value,
+            Some("32".to_string())
+        );
+        assert_eq!(
+            parsed.get_variable_result[0]
+                .attribute_status_info
+                .as_ref()
+                .unwrap()
+                .reason_code,
+            "Success"
+        );
+        assert_eq!(
+            parsed.get_variable_result[0]
+                .custom_data
+                .as_ref()
+                .unwrap()
+                .vendor_id,
+            "ResultVendor"
+        );
+        assert_eq!(
+            parsed.custom_data.as_ref().unwrap().vendor_id,
+            "ResponseVendor"
+        );
     }
 }

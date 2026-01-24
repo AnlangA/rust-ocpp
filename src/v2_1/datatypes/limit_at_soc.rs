@@ -32,7 +32,7 @@ impl LimitAtSoCType {
     /// # Returns
     ///
     /// A new instance of `LimitAtSoCType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(soc: i32, limit: Decimal) -> Self {
         Self {
             soc,
@@ -50,7 +50,7 @@ impl LimitAtSoCType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -61,7 +61,7 @@ impl LimitAtSoCType {
     /// # Returns
     ///
     /// The State of Charge at which power limit becomes active
-    #[must_use] 
+    #[must_use]
     pub fn soc(&self) -> i32 {
         self.soc
     }
@@ -85,7 +85,7 @@ impl LimitAtSoCType {
     /// # Returns
     ///
     /// The maximum power level when power limit is active
-    #[must_use] 
+    #[must_use]
     pub fn limit(&self) -> &Decimal {
         &self.limit
     }
@@ -109,7 +109,7 @@ impl LimitAtSoCType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

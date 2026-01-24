@@ -39,8 +39,13 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
-    pub fn new(data: Vec<StreamDataElementType>, id: i32, pending: i32, basetime: DateTime<Utc>) -> Self {
+    #[must_use]
+    pub fn new(
+        data: Vec<StreamDataElementType>,
+        id: i32,
+        pending: i32,
+        basetime: DateTime<Utc>,
+    ) -> Self {
         Self {
             data,
             id,
@@ -115,7 +120,7 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// The data field
-    #[must_use] 
+    #[must_use]
     pub fn get_data(&self) -> &Vec<StreamDataElementType> {
         &self.data
     }
@@ -125,7 +130,7 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// Id of stream.
-    #[must_use] 
+    #[must_use]
     pub fn get_id(&self) -> &i32 {
         &self.id
     }
@@ -135,7 +140,7 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// Number of data elements still pending to be sent.
-    #[must_use] 
+    #[must_use]
     pub fn get_pending(&self) -> &i32 {
         &self.pending
     }
@@ -145,7 +150,7 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// Base timestamp to add to time offset of values.
-    #[must_use] 
+    #[must_use]
     pub fn get_basetime(&self) -> &DateTime<Utc> {
         &self.basetime
     }
@@ -155,7 +160,7 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -167,12 +172,11 @@ impl NotifyPeriodicEventStream {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -180,8 +184,8 @@ mod tests {
     use super::*;
     use chrono::Utc;
     use rust_decimal::Decimal;
-    use std::str::FromStr;
     use serde_json;
+    use std::str::FromStr;
     use validator::Validate;
 
     fn create_test_custom_data() -> CustomDataType {
@@ -189,7 +193,10 @@ mod tests {
     }
 
     fn create_test_stream_data_element() -> StreamDataElementType {
-        StreamDataElementType::new(Decimal::from_str("123.45").unwrap(), "test_value".to_string())
+        StreamDataElementType::new(
+            Decimal::from_str("123.45").unwrap(),
+            "test_value".to_string(),
+        )
     }
 
     fn create_test_notify_periodic_event_stream() -> NotifyPeriodicEventStream {
@@ -219,7 +226,8 @@ mod tests {
         let stream = create_test_notify_periodic_event_stream();
 
         let json = serde_json::to_string(&stream).expect("Failed to serialize");
-        let deserialized: NotifyPeriodicEventStream = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: NotifyPeriodicEventStream =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(stream, deserialized);
     }
@@ -268,15 +276,19 @@ mod tests {
     #[test]
     fn test_notify_periodic_event_stream_set_methods() {
         let mut stream = create_test_notify_periodic_event_stream();
-        let new_data = vec![create_test_stream_data_element(), create_test_stream_data_element()];
+        let new_data = vec![
+            create_test_stream_data_element(),
+            create_test_stream_data_element(),
+        ];
         let new_id = 99;
         let new_pending = 20;
         let new_basetime = Utc::now();
 
-        stream.set_data(new_data.clone())
-              .set_id(new_id)
-              .set_pending(new_pending)
-              .set_basetime(new_basetime);
+        stream
+            .set_data(new_data.clone())
+            .set_id(new_id)
+            .set_pending(new_pending)
+            .set_basetime(new_basetime);
 
         assert_eq!(stream.data, new_data);
         assert_eq!(stream.id, new_id);
@@ -298,8 +310,8 @@ mod tests {
     #[test]
     fn test_notify_periodic_event_stream_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let stream = create_test_notify_periodic_event_stream()
-            .with_custom_data(custom_data.clone());
+        let stream =
+            create_test_notify_periodic_event_stream().with_custom_data(custom_data.clone());
 
         assert_eq!(stream.custom_data, Some(custom_data));
         assert_eq!(stream.get_custom_data(), stream.custom_data.as_ref());
@@ -351,8 +363,14 @@ mod tests {
     fn test_notify_periodic_event_stream_with_multiple_data_elements() {
         let data = vec![
             create_test_stream_data_element(),
-            StreamDataElementType::new(Decimal::from_str("456.78").unwrap(), "another_value".to_string()),
-            StreamDataElementType::new(Decimal::from_str("789.01").unwrap(), "third_value".to_string()),
+            StreamDataElementType::new(
+                Decimal::from_str("456.78").unwrap(),
+                "another_value".to_string(),
+            ),
+            StreamDataElementType::new(
+                Decimal::from_str("789.01").unwrap(),
+                "third_value".to_string(),
+            ),
         ];
         let basetime = Utc::now();
         let stream = NotifyPeriodicEventStream::new(data.clone(), 1, 5, basetime);
@@ -361,7 +379,8 @@ mod tests {
         assert!(stream.validate().is_ok());
 
         let json = serde_json::to_string(&stream).expect("Failed to serialize");
-        let deserialized: NotifyPeriodicEventStream = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: NotifyPeriodicEventStream =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(stream, deserialized);
     }
 }

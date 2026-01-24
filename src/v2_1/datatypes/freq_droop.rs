@@ -74,7 +74,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// A new instance of `FreqDroopType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         priority: i32,
         over_freq: Decimal,
@@ -105,7 +105,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_start_time(mut self, start_time: DateTime<Utc>) -> Self {
         self.start_time = Some(start_time);
         self
@@ -120,7 +120,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_duration(mut self, duration: Decimal) -> Self {
         self.duration = Some(duration);
         self
@@ -135,7 +135,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -146,7 +146,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// The priority of setting (0=highest)
-    #[must_use] 
+    #[must_use]
     pub fn priority(&self) -> i32 {
         self.priority
     }
@@ -170,7 +170,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// The over-frequency start of droop
-    #[must_use] 
+    #[must_use]
     pub fn over_freq(&self) -> Decimal {
         self.over_freq
     }
@@ -194,7 +194,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// The under-frequency start of droop
-    #[must_use] 
+    #[must_use]
     pub fn under_freq(&self) -> Decimal {
         self.under_freq
     }
@@ -218,7 +218,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// The over-frequency droop per unit, oFDroop
-    #[must_use] 
+    #[must_use]
     pub fn over_droop(&self) -> Decimal {
         self.over_droop
     }
@@ -242,7 +242,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// The under-frequency droop per unit, uFDroop
-    #[must_use] 
+    #[must_use]
     pub fn under_droop(&self) -> Decimal {
         self.under_droop
     }
@@ -266,7 +266,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// The response time in seconds
-    #[must_use] 
+    #[must_use]
     pub fn response_time(&self) -> Decimal {
         self.response_time
     }
@@ -290,7 +290,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// An optional reference to the time when this setting becomes active
-    #[must_use] 
+    #[must_use]
     pub fn start_time(&self) -> Option<&DateTime<Utc>> {
         self.start_time.as_ref()
     }
@@ -314,7 +314,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// An optional reference to the duration in seconds that this setting is active
-    #[must_use] 
+    #[must_use]
     pub fn duration(&self) -> Option<Decimal> {
         self.duration
     }
@@ -338,7 +338,7 @@ impl FreqDroopType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

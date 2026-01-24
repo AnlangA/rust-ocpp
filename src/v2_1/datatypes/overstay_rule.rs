@@ -38,7 +38,7 @@ impl OverstayRuleType {
     /// # Returns
     ///
     /// A new instance of `OverstayRuleType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         start_time: i32,
         overstay_fee_period: i32,
@@ -62,7 +62,7 @@ impl OverstayRuleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -77,7 +77,7 @@ impl OverstayRuleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_overstay_rule_description(mut self, description: String) -> Self {
         self.overstay_rule_description = Some(description);
         self
@@ -88,7 +88,7 @@ impl OverstayRuleType {
     /// # Returns
     ///
     /// The time in seconds after trigger of the parent Overstay Rules for this particular fee to apply
-    #[must_use] 
+    #[must_use]
     pub fn start_time(&self) -> i32 {
         self.start_time
     }
@@ -112,7 +112,7 @@ impl OverstayRuleType {
     /// # Returns
     ///
     /// The time till overstay will be reapplied in seconds
-    #[must_use] 
+    #[must_use]
     pub fn overstay_fee_period(&self) -> i32 {
         self.overstay_fee_period
     }
@@ -136,7 +136,7 @@ impl OverstayRuleType {
     /// # Returns
     ///
     /// The fee applied for overstaying
-    #[must_use] 
+    #[must_use]
     pub fn overstay_fee(&self) -> &RationalNumberType {
         &self.overstay_fee
     }
@@ -160,7 +160,7 @@ impl OverstayRuleType {
     /// # Returns
     ///
     /// An optional reference to the human readable string identifying the overstay rule
-    #[must_use] 
+    #[must_use]
     pub fn overstay_rule_description(&self) -> Option<&String> {
         self.overstay_rule_description.as_ref()
     }
@@ -184,7 +184,7 @@ impl OverstayRuleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

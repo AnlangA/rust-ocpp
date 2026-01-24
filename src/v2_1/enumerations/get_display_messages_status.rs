@@ -9,4 +9,3 @@ pub enum GetDisplayMessagesStatusEnumType {
     Accepted,
     Unknown,
 }
-

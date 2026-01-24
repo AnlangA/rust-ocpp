@@ -11,4 +11,3 @@ pub enum DERControlStatusEnumType {
     NotSupported,
     NotFound,
 }
-

@@ -40,7 +40,7 @@ impl MonitoringDataType {
     /// # Returns
     ///
     /// A new instance of `MonitoringDataType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         component: ComponentType,
         variable: VariableType,
@@ -63,7 +63,7 @@ impl MonitoringDataType {
     /// # Returns
     ///
     /// Self for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -74,7 +74,7 @@ impl MonitoringDataType {
     /// # Returns
     ///
     /// A reference to the component for which a variable is monitored
-    #[must_use] 
+    #[must_use]
     pub fn component(&self) -> &ComponentType {
         &self.component
     }
@@ -98,7 +98,7 @@ impl MonitoringDataType {
     /// # Returns
     ///
     /// A reference to the variable that is monitored
-    #[must_use] 
+    #[must_use]
     pub fn variable(&self) -> &VariableType {
         &self.variable
     }
@@ -122,7 +122,7 @@ impl MonitoringDataType {
     /// # Returns
     ///
     /// A reference to the vector of variable monitoring types
-    #[must_use] 
+    #[must_use]
     pub fn variable_monitoring(&self) -> &Vec<VariableMonitoringType> {
         &self.variable_monitoring
     }
@@ -149,7 +149,7 @@ impl MonitoringDataType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -30,7 +30,7 @@ impl BootNotificationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(charging_station: ChargingStationType, reason: BootReasonEnumType) -> Self {
         Self {
             charging_station,
@@ -80,7 +80,7 @@ impl BootNotificationRequest {
     /// # Returns
     ///
     /// The `charging_station` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_station(&self) -> &ChargingStationType {
         &self.charging_station
     }
@@ -90,7 +90,7 @@ impl BootNotificationRequest {
     /// # Returns
     ///
     /// The reason field
-    #[must_use] 
+    #[must_use]
     pub fn get_reason(&self) -> &BootReasonEnumType {
         &self.reason
     }
@@ -100,7 +100,7 @@ impl BootNotificationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -112,12 +112,11 @@ impl BootNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `BootNotification` response.
@@ -154,8 +153,12 @@ impl BootNotificationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
-    pub fn new(current_time: DateTime<Utc>, interval: i32, status: RegistrationStatusEnumType) -> Self {
+    #[must_use]
+    pub fn new(
+        current_time: DateTime<Utc>,
+        interval: i32,
+        status: RegistrationStatusEnumType,
+    ) -> Self {
         Self {
             current_time,
             interval,
@@ -230,7 +233,7 @@ impl BootNotificationResponse {
     /// # Returns
     ///
     /// This contains the CSMS’s current time.
-    #[must_use] 
+    #[must_use]
     pub fn get_current_time(&self) -> &DateTime<Utc> {
         &self.current_time
     }
@@ -240,7 +243,7 @@ impl BootNotificationResponse {
     /// # Returns
     ///
     /// When &lt;&lt;`cmn_registrationstatusenumtype,Status`&gt;&gt; is Accepted, this contains the heartbeat interval in seconds. If the CSMS returns something other than Accepted, the value of the interval field indicates the minimum wait time before sending a next `BootNotification` request.
-    #[must_use] 
+    #[must_use]
     pub fn get_interval(&self) -> &i32 {
         &self.interval
     }
@@ -250,7 +253,7 @@ impl BootNotificationResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &RegistrationStatusEnumType {
         &self.status
     }
@@ -260,7 +263,7 @@ impl BootNotificationResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -270,7 +273,7 @@ impl BootNotificationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -282,7 +285,7 @@ impl BootNotificationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -295,12 +298,11 @@ impl BootNotificationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -345,7 +347,8 @@ mod tests {
         let request = BootNotificationRequest::new(charging_station, reason);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: BootNotificationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BootNotificationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -365,7 +368,8 @@ mod tests {
     #[test]
     fn test_boot_notification_request_set_methods() {
         let charging_station = create_test_charging_station();
-        let new_charging_station = ChargingStationType::new("NewModel".to_string(), "NewVendor".to_string());
+        let new_charging_station =
+            ChargingStationType::new("NewModel".to_string(), "NewVendor".to_string());
         let reason = BootReasonEnumType::PowerUp;
         let new_reason = BootReasonEnumType::FirmwareUpdate;
         let custom_data = CustomDataType::new("TestVendor".to_string());
@@ -437,7 +441,8 @@ mod tests {
         let response = BootNotificationResponse::new(current_time, interval, status);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: BootNotificationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BootNotificationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -538,11 +543,12 @@ mod tests {
         let reason = BootReasonEnumType::PowerUp;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = BootNotificationRequest::new(charging_station, reason)
-            .with_custom_data(custom_data);
+        let request =
+            BootNotificationRequest::new(charging_station, reason).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: BootNotificationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BootNotificationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -561,7 +567,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: BootNotificationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BootNotificationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -570,9 +577,10 @@ mod tests {
     #[test]
     fn test_boot_notification_request_charging_station_validation() {
         // Test with charging station that has validation constraints
-        let charging_station = ChargingStationType::new("TestModel".to_string(), "TestVendor".to_string())
-            .with_serial_number("SN123456".to_string())
-            .with_firmware_version("1.0.0".to_string());
+        let charging_station =
+            ChargingStationType::new("TestModel".to_string(), "TestVendor".to_string())
+                .with_serial_number("SN123456".to_string())
+                .with_firmware_version("1.0.0".to_string());
 
         let reason = BootReasonEnumType::PowerUp;
         let request = BootNotificationRequest::new(charging_station, reason);
@@ -605,23 +613,28 @@ mod tests {
     fn test_boot_notification_request_with_complex_charging_station() {
         use crate::v2_1::datatypes::ModemType;
 
-        let modem = ModemType::new("1234567890123456789".to_string(), "123456789012345".to_string());
-        let charging_station = ChargingStationType::new("ComplexModel".to_string(), "ComplexVendor".to_string())
-            .with_serial_number("COMPLEX_SN_123".to_string())
-            .with_firmware_version("2.1.0".to_string())
-            .with_modem(modem);
+        let modem = ModemType::new(
+            "1234567890123456789".to_string(),
+            "123456789012345".to_string(),
+        );
+        let charging_station =
+            ChargingStationType::new("ComplexModel".to_string(), "ComplexVendor".to_string())
+                .with_serial_number("COMPLEX_SN_123".to_string())
+                .with_firmware_version("2.1.0".to_string())
+                .with_modem(modem);
 
         let reason = BootReasonEnumType::FirmwareUpdate;
         let custom_data = CustomDataType::new("ComplexVendor".to_string());
 
-        let request = BootNotificationRequest::new(charging_station, reason)
-            .with_custom_data(custom_data);
+        let request =
+            BootNotificationRequest::new(charging_station, reason).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
 
         // Test serialization with complex data
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: BootNotificationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BootNotificationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 }

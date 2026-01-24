@@ -34,7 +34,7 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(vendor_id: String) -> Self {
         Self {
             message_id: None,
@@ -97,7 +97,7 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// May be used to indicate a specific message or implementation.
-    #[must_use] 
+    #[must_use]
     pub fn get_message_id(&self) -> Option<&String> {
         self.message_id.as_ref()
     }
@@ -107,7 +107,7 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// Data without specified length or format. This needs to be decided by both parties (Open to implementation).
-    #[must_use] 
+    #[must_use]
     pub fn get_data(&self) -> Option<&Value> {
         self.data.as_ref()
     }
@@ -117,7 +117,7 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// This identifies the Vendor specific implementation
-    #[must_use] 
+    #[must_use]
     pub fn get_vendor_id(&self) -> &String {
         &self.vendor_id
     }
@@ -127,7 +127,7 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -139,7 +139,7 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_message_id(mut self, message_id: String) -> Self {
         self.message_id = Some(message_id);
         self
@@ -152,7 +152,7 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_data(mut self, data: Value) -> Self {
         self.data = Some(data);
         self
@@ -165,12 +165,11 @@ impl DataTransferRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `DataTransfer` response.
@@ -200,7 +199,7 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: DataTransferStatusEnumType) -> Self {
         Self {
             status,
@@ -263,7 +262,7 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &DataTransferStatusEnumType {
         &self.status
     }
@@ -273,7 +272,7 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -283,7 +282,7 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// Data without specified length or format, in response to request.
-    #[must_use] 
+    #[must_use]
     pub fn get_data(&self) -> Option<&Value> {
         self.data.as_ref()
     }
@@ -293,7 +292,7 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -305,7 +304,7 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -318,7 +317,7 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_data(mut self, data: Value) -> Self {
         self.data = Some(data);
         self
@@ -331,12 +330,11 @@ impl DataTransferResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -369,8 +367,8 @@ mod tests {
         let vendor_id = "TestVendor123".to_string();
         let message_id = "msg_001".to_string();
 
-        let request = DataTransferRequest::new(vendor_id.clone())
-            .with_message_id(message_id.clone());
+        let request =
+            DataTransferRequest::new(vendor_id.clone()).with_message_id(message_id.clone());
 
         assert_eq!(request.vendor_id, vendor_id);
         assert_eq!(request.message_id, Some(message_id));
@@ -383,8 +381,7 @@ mod tests {
         let vendor_id = "TestVendor123".to_string();
         let data = serde_json::json!("test_data_payload");
 
-        let request = DataTransferRequest::new(vendor_id.clone())
-            .with_data(data.clone());
+        let request = DataTransferRequest::new(vendor_id.clone()).with_data(data.clone());
 
         assert_eq!(request.vendor_id, vendor_id);
         assert_eq!(request.message_id, None);
@@ -397,8 +394,8 @@ mod tests {
         let vendor_id = "TestVendor123".to_string();
         let custom_data = create_test_custom_data();
 
-        let request = DataTransferRequest::new(vendor_id.clone())
-            .with_custom_data(custom_data.clone());
+        let request =
+            DataTransferRequest::new(vendor_id.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(request.vendor_id, vendor_id);
         assert_eq!(request.message_id, None);
@@ -415,10 +412,11 @@ mod tests {
         let data = serde_json::json!("new_data_payload");
         let custom_data = create_test_custom_data();
 
-        request.set_vendor_id(new_vendor_id.clone())
-               .set_message_id(Some(message_id.clone()))
-               .set_data(Some(data.clone()))
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_vendor_id(new_vendor_id.clone())
+            .set_message_id(Some(message_id.clone()))
+            .set_data(Some(data.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.vendor_id, new_vendor_id);
         assert_eq!(request.message_id, Some(message_id));
@@ -449,8 +447,7 @@ mod tests {
         let vendor_id = "SerializationVendor".to_string();
         let message_id = "msg_serialize".to_string();
 
-        let request = DataTransferRequest::new(vendor_id)
-            .with_message_id(message_id);
+        let request = DataTransferRequest::new(vendor_id).with_message_id(message_id);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: DataTransferRequest =
@@ -474,8 +471,7 @@ mod tests {
         let vendor_id = "ValidVendor".to_string();
         let long_message_id = "a".repeat(51); // Max is 50
 
-        let request = DataTransferRequest::new(vendor_id)
-            .with_message_id(long_message_id);
+        let request = DataTransferRequest::new(vendor_id).with_message_id(long_message_id);
 
         let validation_result = request.validate();
         assert!(validation_result.is_err());
@@ -487,8 +483,7 @@ mod tests {
         // This test is no longer relevant since data is Value type, not String
         let data = serde_json::json!("any_data");
 
-        let request = DataTransferRequest::new(vendor_id)
-            .with_data(data);
+        let request = DataTransferRequest::new(vendor_id).with_data(data);
 
         let validation_result = request.validate();
         assert!(validation_result.is_ok());
@@ -525,8 +520,8 @@ mod tests {
         let status = DataTransferStatusEnumType::Rejected;
         let status_info = create_test_status_info();
 
-        let response = DataTransferResponse::new(status.clone())
-            .with_status_info(status_info.clone());
+        let response =
+            DataTransferResponse::new(status.clone()).with_status_info(status_info.clone());
 
         assert_eq!(response.status, status);
         assert_eq!(response.status_info, Some(status_info));
@@ -539,8 +534,7 @@ mod tests {
         let status = DataTransferStatusEnumType::Accepted;
         let data = serde_json::json!("response_data_payload");
 
-        let response = DataTransferResponse::new(status.clone())
-            .with_data(data.clone());
+        let response = DataTransferResponse::new(status.clone()).with_data(data.clone());
 
         assert_eq!(response.status, status);
         assert_eq!(response.status_info, None);
@@ -553,8 +547,8 @@ mod tests {
         let status = DataTransferStatusEnumType::UnknownMessageId;
         let custom_data = create_test_custom_data();
 
-        let response = DataTransferResponse::new(status.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            DataTransferResponse::new(status.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(response.status, status);
         assert_eq!(response.status_info, None);
@@ -571,10 +565,11 @@ mod tests {
         let data = serde_json::json!("setter_test_data");
         let custom_data = create_test_custom_data();
 
-        response.set_status(new_status.clone())
-                .set_status_info(Some(status_info.clone()))
-                .set_data(Some(data.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(new_status.clone())
+            .set_status_info(Some(status_info.clone()))
+            .set_data(Some(data.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, new_status);
         assert_eq!(response.status_info, Some(status_info));
@@ -605,8 +600,7 @@ mod tests {
         let status = DataTransferStatusEnumType::UnknownMessageId;
         let data = serde_json::json!("serialization_test_data");
 
-        let response = DataTransferResponse::new(status)
-            .with_data(data);
+        let response = DataTransferResponse::new(status).with_data(data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: DataTransferResponse =
@@ -621,8 +615,7 @@ mod tests {
         // This test is no longer relevant since data is Value type, not String
         let data = serde_json::json!("any_data");
 
-        let response = DataTransferResponse::new(status)
-            .with_data(data);
+        let response = DataTransferResponse::new(status).with_data(data);
 
         let validation_result = response.validate();
         assert!(validation_result.is_ok());
@@ -633,8 +626,7 @@ mod tests {
         let status = DataTransferStatusEnumType::Accepted;
         let data = serde_json::json!("any_data_value");
 
-        let response = DataTransferResponse::new(status)
-            .with_data(data);
+        let response = DataTransferResponse::new(status).with_data(data);
 
         let validation_result = response.validate();
         assert!(validation_result.is_ok());
@@ -712,28 +704,31 @@ mod tests {
         assert!(request_max.validate().is_ok());
 
         // Test with empty message ID
-        let request_empty_msg = DataTransferRequest::new("Vendor".to_string())
-            .with_message_id("".to_string());
+        let request_empty_msg =
+            DataTransferRequest::new("Vendor".to_string()).with_message_id("".to_string());
         assert_eq!(request_empty_msg.message_id, Some("".to_string()));
         assert!(request_empty_msg.validate().is_ok());
 
         // Test with maximum length message ID
         let max_message_id = "a".repeat(50);
-        let request_max_msg = DataTransferRequest::new("Vendor".to_string())
-            .with_message_id(max_message_id.clone());
+        let request_max_msg =
+            DataTransferRequest::new("Vendor".to_string()).with_message_id(max_message_id.clone());
         assert_eq!(request_max_msg.message_id, Some(max_message_id));
         assert!(request_max_msg.validate().is_ok());
 
         // Test with empty data
-        let request_empty_data = DataTransferRequest::new("Vendor".to_string())
-            .with_data(serde_json::json!(null));
+        let request_empty_data =
+            DataTransferRequest::new("Vendor".to_string()).with_data(serde_json::json!(null));
         assert_eq!(request_empty_data.data, Some(serde_json::json!(null)));
         assert!(request_empty_data.validate().is_ok());
 
         // Test with any data value
         let request_any_data = DataTransferRequest::new("Vendor".to_string())
             .with_data(serde_json::json!({"key": "value"}));
-        assert_eq!(request_any_data.data, Some(serde_json::json!({"key": "value"})));
+        assert_eq!(
+            request_any_data.data,
+            Some(serde_json::json!({"key": "value"}))
+        );
         assert!(request_any_data.validate().is_ok());
     }
 
@@ -748,7 +743,10 @@ mod tests {
         // Test with any data value
         let response_any_data = DataTransferResponse::new(DataTransferStatusEnumType::Accepted)
             .with_data(serde_json::json!({"key": "value"}));
-        assert_eq!(response_any_data.data, Some(serde_json::json!({"key": "value"})));
+        assert_eq!(
+            response_any_data.data,
+            Some(serde_json::json!({"key": "value"}))
+        );
         assert!(response_any_data.validate().is_ok());
     }
 

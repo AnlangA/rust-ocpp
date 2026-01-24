@@ -24,7 +24,7 @@ impl SetMonitoringLevelRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(severity: i32) -> Self {
         Self {
             severity,
@@ -61,7 +61,7 @@ impl SetMonitoringLevelRequest {
     /// # Returns
     ///
     /// The Charging Station SHALL only report events with a severity number lower than or equal to this severity. The severity range is 0-9, with 0 as the highest and 9 as the lowest severity level.  The severity levels have the following meaning: + *0-Danger* + Indicates lives are potentially in danger. Urgent attention is needed and action should be taken immediately. + *1-Hardware Failure* + Indicates that the Charging Station is unable to continue regular operations due to Hardware issues. Action is required. + *2-System Failure* + Indicates that the Charging Station is unable to continue regular operations due to software or minor hardware issues. Action is required. + *3-Critical* + Indicates a critical error. Action is required. + *4-Error* + Indicates a non-urgent error. Action is required. + *5-Alert* + Indicates an alert event. Default severity for any type of monitoring event.  + *6-Warning* + Indicates a warning event. Action may be required. + *7-Notice* + Indicates an unusual event. No immediate action is required. + *8-Informational* + Indicates a regular operational event. May be used for reporting, measuring throughput, etc. No action is required. + *9-Debug* + Indicates information useful to developers for debugging, not useful during operations.
-    #[must_use] 
+    #[must_use]
     pub fn get_severity(&self) -> &i32 {
         &self.severity
     }
@@ -71,7 +71,7 @@ impl SetMonitoringLevelRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -83,12 +83,11 @@ impl SetMonitoringLevelRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SetMonitoringLevel` response.
@@ -114,7 +113,7 @@ impl SetMonitoringLevelResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -164,7 +163,7 @@ impl SetMonitoringLevelResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -174,7 +173,7 @@ impl SetMonitoringLevelResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -184,7 +183,7 @@ impl SetMonitoringLevelResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -196,7 +195,7 @@ impl SetMonitoringLevelResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -209,12 +208,11 @@ impl SetMonitoringLevelResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -235,7 +233,8 @@ mod tests {
         let request = SetMonitoringLevelRequest::new(3);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetMonitoringLevelRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetMonitoringLevelRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(json.contains("\"severity\":3"));
@@ -257,8 +256,7 @@ mod tests {
     #[test]
     fn test_set_monitoring_level_request_builder_pattern() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetMonitoringLevelRequest::new(7)
-            .with_custom_data(custom_data.clone());
+        let request = SetMonitoringLevelRequest::new(7).with_custom_data(custom_data.clone());
 
         assert_eq!(request.severity, 7);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -269,8 +267,9 @@ mod tests {
         let mut request = SetMonitoringLevelRequest::new(0);
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        request.set_severity(9)
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_severity(9)
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.severity, 9);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -279,8 +278,7 @@ mod tests {
     #[test]
     fn test_set_monitoring_level_request_getters() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetMonitoringLevelRequest::new(4)
-            .with_custom_data(custom_data.clone());
+        let request = SetMonitoringLevelRequest::new(4).with_custom_data(custom_data.clone());
 
         assert_eq!(*request.get_severity(), 4);
         assert_eq!(request.get_custom_data(), Some(&custom_data));
@@ -299,7 +297,8 @@ mod tests {
         let response = SetMonitoringLevelResponse::new(GenericStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetMonitoringLevelResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetMonitoringLevelResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(json.contains("\"status\":\"Rejected\""));
@@ -324,9 +323,10 @@ mod tests {
         let status_info = StatusInfoType::new("Updated status".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        response.set_status(GenericStatusEnumType::Rejected)
-                .set_status_info(Some(status_info.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(GenericStatusEnumType::Rejected)
+            .set_status_info(Some(status_info.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, GenericStatusEnumType::Rejected);
         assert_eq!(response.status_info, Some(status_info));
@@ -350,7 +350,7 @@ mod tests {
     fn test_set_monitoring_level_edge_cases() {
         // Test boundary severity levels
         let danger_level = SetMonitoringLevelRequest::new(0); // Danger
-        let debug_level = SetMonitoringLevelRequest::new(9);  // Debug
+        let debug_level = SetMonitoringLevelRequest::new(9); // Debug
 
         assert!(danger_level.validate().is_ok());
         assert!(debug_level.validate().is_ok());

@@ -33,7 +33,7 @@ impl EVPowerScheduleType {
     /// # Returns
     ///
     /// A new instance of `EVPowerScheduleType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         time_anchor: DateTime<Utc>,
         ev_power_schedule_entries: Vec<EVPowerScheduleEntryType>,
@@ -54,7 +54,7 @@ impl EVPowerScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -65,7 +65,7 @@ impl EVPowerScheduleType {
     /// # Returns
     ///
     /// A reference to the starting point in time of the `EVEnergyOffer`
-    #[must_use] 
+    #[must_use]
     pub fn time_anchor(&self) -> &DateTime<Utc> {
         &self.time_anchor
     }
@@ -89,7 +89,7 @@ impl EVPowerScheduleType {
     /// # Returns
     ///
     /// A reference to the list of power schedule entries
-    #[must_use] 
+    #[must_use]
     pub fn ev_power_schedule_entries(&self) -> &Vec<EVPowerScheduleEntryType> {
         &self.ev_power_schedule_entries
     }
@@ -116,7 +116,7 @@ impl EVPowerScheduleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

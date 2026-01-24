@@ -32,7 +32,7 @@ impl ComponentVariableType {
     /// # Returns
     ///
     /// A new instance of `ComponentVariableType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(component: ComponentType) -> Self {
         Self {
             component,
@@ -50,7 +50,7 @@ impl ComponentVariableType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -65,7 +65,7 @@ impl ComponentVariableType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_variable(mut self, variable: VariableType) -> Self {
         self.variable = Some(variable);
         self
@@ -76,7 +76,7 @@ impl ComponentVariableType {
     /// # Returns
     ///
     /// A reference to the component
-    #[must_use] 
+    #[must_use]
     pub fn component(&self) -> &ComponentType {
         &self.component
     }
@@ -100,7 +100,7 @@ impl ComponentVariableType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -124,7 +124,7 @@ impl ComponentVariableType {
     /// # Returns
     ///
     /// An optional reference to the variable
-    #[must_use] 
+    #[must_use]
     pub fn variable(&self) -> Option<&VariableType> {
         self.variable.as_ref()
     }

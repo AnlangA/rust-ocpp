@@ -12,4 +12,3 @@ pub enum AttributeEnumType {
     MinSet,
     MaxSet,
 }
-

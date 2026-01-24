@@ -13,4 +13,3 @@ pub enum ControlModeEnumType {
     ScheduledControl,
     DynamicControl,
 }
-

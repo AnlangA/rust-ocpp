@@ -43,7 +43,7 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32, seq_no: i32, generated_at: DateTime<Utc>) -> Self {
         Self {
             monitor: None,
@@ -132,7 +132,7 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// The monitor field
-    #[must_use] 
+    #[must_use]
     pub fn get_monitor(&self) -> Option<&Vec<MonitoringDataType>> {
         self.monitor.as_ref()
     }
@@ -142,7 +142,7 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// The id of the `GetMonitoringRequest` that requested this report.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -152,7 +152,7 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// “to be continued” indicator. Indicates whether another part of the monitoringData follows in an upcoming notifyMonitoringReportRequest message. Default value when omitted is false.
-    #[must_use] 
+    #[must_use]
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
@@ -162,7 +162,7 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// Sequence number of this message. First message starts at 0.
-    #[must_use] 
+    #[must_use]
     pub fn get_seq_no(&self) -> &i32 {
         &self.seq_no
     }
@@ -172,7 +172,7 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// Timestamp of the moment this message was generated at the Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_generated_at(&self) -> &DateTime<Utc> {
         &self.generated_at
     }
@@ -182,7 +182,7 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -194,7 +194,7 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_monitor(mut self, monitor: Vec<MonitoringDataType>) -> Self {
         self.monitor = Some(monitor);
         self
@@ -207,7 +207,7 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
@@ -220,12 +220,11 @@ impl NotifyMonitoringReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyMonitoringReport` response.
@@ -251,11 +250,9 @@ impl NotifyMonitoringReportResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -275,7 +272,7 @@ impl NotifyMonitoringReportResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -287,19 +284,18 @@ impl NotifyMonitoringReportResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::v2_1::datatypes::{ComponentType, VariableType, VariableMonitoringType};
-    use crate::v2_1::enumerations::{MonitorEnumType, EventNotificationEnumType};
+    use crate::v2_1::datatypes::{ComponentType, VariableMonitoringType, VariableType};
+    use crate::v2_1::enumerations::{EventNotificationEnumType, MonitorEnumType};
     use chrono::Utc;
     use rust_decimal_macros::dec;
     use serde_json;
@@ -311,7 +307,8 @@ mod tests {
 
     fn create_test_monitoring_data() -> MonitoringDataType {
         let component = ComponentType::new("Connector".to_string());
-        let variable = VariableType::new_with_instance("Temperature".to_string(), "Outlet".to_string());
+        let variable =
+            VariableType::new_with_instance("Temperature".to_string(), "Outlet".to_string());
         let variable_monitoring = vec![VariableMonitoringType::new(
             1,
             false,
@@ -498,8 +495,7 @@ mod tests {
     #[test]
     fn test_notify_monitoring_report_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = NotifyMonitoringReportResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyMonitoringReportResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -517,8 +513,7 @@ mod tests {
     #[test]
     fn test_notify_monitoring_report_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = NotifyMonitoringReportResponse::new()
-            .with_custom_data(custom_data);
+        let response = NotifyMonitoringReportResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: NotifyMonitoringReportResponse =

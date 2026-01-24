@@ -43,7 +43,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(data: String, seq_no: i32, generated_at: DateTime<Utc>, request_id: i32) -> Self {
         Self {
             data,
@@ -132,7 +132,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// (Part of) the requested data. No format specified in which the data is returned. Should be human readable.
-    #[must_use] 
+    #[must_use]
     pub fn get_data(&self) -> &String {
         &self.data
     }
@@ -142,7 +142,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// “to be continued” indicator. Indicates whether another part of the monitoringData follows in an upcoming notifyMonitoringReportRequest message. Default value when omitted is false.
-    #[must_use] 
+    #[must_use]
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
@@ -152,7 +152,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// Sequence number of this message. First message starts at 0.
-    #[must_use] 
+    #[must_use]
     pub fn get_seq_no(&self) -> &i32 {
         &self.seq_no
     }
@@ -162,7 +162,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// Timestamp of the moment this message was generated at the Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_generated_at(&self) -> &DateTime<Utc> {
         &self.generated_at
     }
@@ -172,7 +172,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// The Id of the request.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -182,7 +182,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -194,7 +194,7 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
@@ -207,12 +207,11 @@ impl NotifyCustomerInformationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyCustomerInformation` response.
@@ -238,11 +237,9 @@ impl NotifyCustomerInformationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -262,7 +259,7 @@ impl NotifyCustomerInformationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -274,12 +271,11 @@ impl NotifyCustomerInformationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -300,12 +296,8 @@ mod tests {
         let generated_at = Utc::now();
         let request_id = 123;
 
-        let request = NotifyCustomerInformationRequest::new(
-            data.clone(),
-            seq_no,
-            generated_at,
-            request_id,
-        );
+        let request =
+            NotifyCustomerInformationRequest::new(data.clone(), seq_no, generated_at, request_id);
 
         assert_eq!(request.get_data(), &data);
         assert_eq!(request.get_seq_no(), &seq_no);
@@ -322,12 +314,7 @@ mod tests {
         let generated_at = Utc::now();
         let request_id = 123;
 
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        );
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: NotifyCustomerInformationRequest =
@@ -343,12 +330,7 @@ mod tests {
         let generated_at = Utc::now();
         let request_id = 123;
 
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        );
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id);
 
         assert!(request.validate().is_ok());
     }
@@ -360,12 +342,7 @@ mod tests {
         let generated_at = Utc::now();
         let request_id = 123;
 
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        );
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id);
 
         assert!(request.validate().is_err());
     }
@@ -377,12 +354,7 @@ mod tests {
         let generated_at = Utc::now();
         let request_id = 123;
 
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        );
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id);
 
         assert!(request.validate().is_err());
     }
@@ -394,12 +366,7 @@ mod tests {
         let generated_at = Utc::now();
         let request_id = -1; // Invalid negative value
 
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        );
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id);
 
         assert!(request.validate().is_err());
     }
@@ -411,12 +378,8 @@ mod tests {
         let generated_at = Utc::now();
         let request_id = 123;
 
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        ).with_tbc(true);
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id)
+            .with_tbc(true);
 
         assert_eq!(request.get_tbc(), Some(&true));
     }
@@ -429,12 +392,8 @@ mod tests {
         let request_id = 123;
         let custom_data = create_test_custom_data();
 
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        ).with_custom_data(custom_data.clone());
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id)
+            .with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -446,12 +405,8 @@ mod tests {
         let generated_at = Utc::now();
         let request_id = 123;
 
-        let mut request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        );
+        let mut request =
+            NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id);
 
         let new_data = "Updated customer data".to_string();
         let new_seq_no = 2;
@@ -483,14 +438,10 @@ mod tests {
         let request_id = 123;
         let custom_data = create_test_custom_data();
 
-        let request = NotifyCustomerInformationRequest::new(
-            data.clone(),
-            seq_no,
-            generated_at,
-            request_id,
-        )
-        .with_tbc(true)
-        .with_custom_data(custom_data.clone());
+        let request =
+            NotifyCustomerInformationRequest::new(data.clone(), seq_no, generated_at, request_id)
+                .with_tbc(true)
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_data(), &data);
         assert_eq!(request.get_tbc(), Some(&true));
@@ -505,14 +456,9 @@ mod tests {
         let request_id = 123;
         let custom_data = create_test_custom_data();
 
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        )
-        .with_tbc(true)
-        .with_custom_data(custom_data);
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id)
+            .with_tbc(true)
+            .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: NotifyCustomerInformationRequest =
@@ -550,8 +496,8 @@ mod tests {
     #[test]
     fn test_notify_customer_information_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = NotifyCustomerInformationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response =
+            NotifyCustomerInformationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -570,8 +516,8 @@ mod tests {
     fn test_notify_customer_information_response_builder_pattern() {
         let custom_data = create_test_custom_data();
 
-        let response = NotifyCustomerInformationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response =
+            NotifyCustomerInformationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -579,8 +525,7 @@ mod tests {
     #[test]
     fn test_notify_customer_information_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = NotifyCustomerInformationResponse::new()
-            .with_custom_data(custom_data);
+        let response = NotifyCustomerInformationResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: NotifyCustomerInformationResponse =
@@ -608,23 +553,13 @@ mod tests {
         let generated_at = Utc::now();
         let request_id = 0; // Minimum valid value
 
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        );
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id);
 
         assert!(request.validate().is_ok());
 
         // Test with maximum valid data length
         let data = "x".repeat(512); // Maximum allowed length
-        let request = NotifyCustomerInformationRequest::new(
-            data,
-            seq_no,
-            generated_at,
-            request_id,
-        );
+        let request = NotifyCustomerInformationRequest::new(data, seq_no, generated_at, request_id);
 
         assert!(request.validate().is_ok());
     }

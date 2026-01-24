@@ -10,4 +10,3 @@ pub enum EventTriggerEnumType {
     Delta,
     Periodic,
 }
-

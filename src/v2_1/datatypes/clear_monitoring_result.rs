@@ -38,7 +38,7 @@ impl ClearMonitoringResultType {
     /// # Returns
     ///
     /// A new instance of `ClearMonitoringResultType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(status: ClearMonitoringStatusEnumType, id: i32) -> Self {
         Self {
             status,
@@ -57,7 +57,7 @@ impl ClearMonitoringResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -72,7 +72,7 @@ impl ClearMonitoringResultType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -83,7 +83,7 @@ impl ClearMonitoringResultType {
     /// # Returns
     ///
     /// The result of the clear request for this monitor
-    #[must_use] 
+    #[must_use]
     pub fn status(&self) -> &ClearMonitoringStatusEnumType {
         &self.status
     }
@@ -107,7 +107,7 @@ impl ClearMonitoringResultType {
     /// # Returns
     ///
     /// The ID of the monitor of which a clear was requested
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -131,7 +131,7 @@ impl ClearMonitoringResultType {
     /// # Returns
     ///
     /// An optional reference to the element providing more information about the status
-    #[must_use] 
+    #[must_use]
     pub fn status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -155,7 +155,7 @@ impl ClearMonitoringResultType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

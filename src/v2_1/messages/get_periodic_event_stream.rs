@@ -25,11 +25,9 @@ impl GetPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -49,7 +47,7 @@ impl GetPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -61,12 +59,11 @@ impl GetPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetPeriodicEventStream` response.
@@ -98,7 +95,7 @@ impl GetPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             constant_stream_data: None,
@@ -113,7 +110,10 @@ impl GetPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_constant_stream_data(&mut self, constant_stream_data: Option<Vec<ConstantStreamDataType>>) -> &mut Self {
+    pub fn set_constant_stream_data(
+        &mut self,
+        constant_stream_data: Option<Vec<ConstantStreamDataType>>,
+    ) -> &mut Self {
         self.constant_stream_data = constant_stream_data;
         self
     }
@@ -135,7 +135,7 @@ impl GetPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// The `constant_stream_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_constant_stream_data(&self) -> Option<&Vec<ConstantStreamDataType>> {
         self.constant_stream_data.as_ref()
     }
@@ -145,7 +145,7 @@ impl GetPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -157,8 +157,11 @@ impl GetPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_constant_stream_data(mut self, constant_stream_data: Vec<ConstantStreamDataType>) -> Self {
+    #[must_use]
+    pub fn with_constant_stream_data(
+        mut self,
+        constant_stream_data: Vec<ConstantStreamDataType>,
+    ) -> Self {
         self.constant_stream_data = Some(constant_stream_data);
         self
     }
@@ -170,12 +173,11 @@ impl GetPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -190,11 +192,7 @@ mod tests {
     fn create_test_constant_stream_data() -> ConstantStreamDataType {
         use crate::v2_1::datatypes::PeriodicEventStreamParamsType;
         let params = PeriodicEventStreamParamsType::new(60, 10);
-        ConstantStreamDataType::new(
-            1,
-            params,
-            100,
-        )
+        ConstantStreamDataType::new(1, params, 100)
     }
 
     // Tests for GetPeriodicEventStreamRequest
@@ -209,8 +207,7 @@ mod tests {
     #[test]
     fn test_get_periodic_event_stream_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = GetPeriodicEventStreamRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = GetPeriodicEventStreamRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.custom_data, Some(custom_data));
     }
@@ -228,8 +225,7 @@ mod tests {
     #[test]
     fn test_get_periodic_event_stream_request_getters() {
         let custom_data = create_test_custom_data();
-        let request = GetPeriodicEventStreamRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = GetPeriodicEventStreamRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -254,8 +250,7 @@ mod tests {
     #[test]
     fn test_get_periodic_event_stream_request_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let request = GetPeriodicEventStreamRequest::new()
-            .with_custom_data(custom_data);
+        let request = GetPeriodicEventStreamRequest::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).unwrap();
         let parsed: GetPeriodicEventStreamRequest = serde_json::from_str(&json).unwrap();
@@ -277,8 +272,8 @@ mod tests {
     #[test]
     fn test_get_periodic_event_stream_response_with_constant_stream_data() {
         let stream_data = vec![create_test_constant_stream_data()];
-        let response = GetPeriodicEventStreamResponse::new()
-            .with_constant_stream_data(stream_data.clone());
+        let response =
+            GetPeriodicEventStreamResponse::new().with_constant_stream_data(stream_data.clone());
 
         assert_eq!(response.constant_stream_data, Some(stream_data));
         assert_eq!(response.custom_data, None);
@@ -287,8 +282,7 @@ mod tests {
     #[test]
     fn test_get_periodic_event_stream_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = GetPeriodicEventStreamResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = GetPeriodicEventStreamResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.constant_stream_data, None);
         assert_eq!(response.custom_data, Some(custom_data));
@@ -353,8 +347,8 @@ mod tests {
         let stream_data2 = ConstantStreamDataType::new(2, params2, 102);
         let stream_data = vec![stream_data1, stream_data2];
 
-        let response = GetPeriodicEventStreamResponse::new()
-            .with_constant_stream_data(stream_data.clone());
+        let response =
+            GetPeriodicEventStreamResponse::new().with_constant_stream_data(stream_data.clone());
 
         assert_eq!(response.constant_stream_data, Some(stream_data));
         assert!(response.validate().is_ok());

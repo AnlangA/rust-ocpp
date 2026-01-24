@@ -36,7 +36,7 @@ impl UpdateFirmwareRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32, firmware: FirmwareType) -> Self {
         Self {
             retries: None,
@@ -112,7 +112,7 @@ impl UpdateFirmwareRequest {
     /// # Returns
     ///
     /// This specifies how many times Charging Station must retry to download the firmware before giving up. If this field is not present, it is left to Charging Station to decide how many times it wants to retry. If the value is 0, it means: no retries.
-    #[must_use] 
+    #[must_use]
     pub fn get_retries(&self) -> Option<&i32> {
         self.retries.as_ref()
     }
@@ -122,7 +122,7 @@ impl UpdateFirmwareRequest {
     /// # Returns
     ///
     /// The interval in seconds after which a retry may be attempted. If this field is not present, it is left to Charging Station to decide how long to wait between attempts.
-    #[must_use] 
+    #[must_use]
     pub fn get_retry_interval(&self) -> Option<&i32> {
         self.retry_interval.as_ref()
     }
@@ -132,7 +132,7 @@ impl UpdateFirmwareRequest {
     /// # Returns
     ///
     /// The Id of this request
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -142,7 +142,7 @@ impl UpdateFirmwareRequest {
     /// # Returns
     ///
     /// The firmware field
-    #[must_use] 
+    #[must_use]
     pub fn get_firmware(&self) -> &FirmwareType {
         &self.firmware
     }
@@ -152,7 +152,7 @@ impl UpdateFirmwareRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -164,7 +164,7 @@ impl UpdateFirmwareRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_retries(mut self, retries: i32) -> Self {
         self.retries = Some(retries);
         self
@@ -177,7 +177,7 @@ impl UpdateFirmwareRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_retry_interval(mut self, retry_interval: i32) -> Self {
         self.retry_interval = Some(retry_interval);
         self
@@ -190,12 +190,11 @@ impl UpdateFirmwareRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `UpdateFirmware` response.
@@ -221,7 +220,7 @@ impl UpdateFirmwareResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: UpdateFirmwareStatusEnumType) -> Self {
         Self {
             status,
@@ -271,7 +270,7 @@ impl UpdateFirmwareResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &UpdateFirmwareStatusEnumType {
         &self.status
     }
@@ -281,7 +280,7 @@ impl UpdateFirmwareResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -291,7 +290,7 @@ impl UpdateFirmwareResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -303,7 +302,7 @@ impl UpdateFirmwareResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -316,12 +315,11 @@ impl UpdateFirmwareResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -360,7 +358,8 @@ mod tests {
         let request = UpdateFirmwareRequest::new(456, firmware);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: UpdateFirmwareRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UpdateFirmwareRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -376,8 +375,7 @@ mod tests {
     #[test]
     fn test_update_firmware_request_with_retries() {
         let firmware = create_test_firmware();
-        let request = UpdateFirmwareRequest::new(101, firmware)
-            .with_retries(3);
+        let request = UpdateFirmwareRequest::new(101, firmware).with_retries(3);
 
         assert_eq!(request.get_retries(), Some(&3));
     }
@@ -385,8 +383,7 @@ mod tests {
     #[test]
     fn test_update_firmware_request_with_retry_interval() {
         let firmware = create_test_firmware();
-        let request = UpdateFirmwareRequest::new(202, firmware)
-            .with_retry_interval(60);
+        let request = UpdateFirmwareRequest::new(202, firmware).with_retry_interval(60);
 
         assert_eq!(request.get_retry_interval(), Some(&60));
     }
@@ -395,8 +392,8 @@ mod tests {
     fn test_update_firmware_request_with_custom_data() {
         let firmware = create_test_firmware();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = UpdateFirmwareRequest::new(303, firmware)
-            .with_custom_data(custom_data.clone());
+        let request =
+            UpdateFirmwareRequest::new(303, firmware).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -460,8 +457,7 @@ mod tests {
     #[test]
     fn test_update_firmware_request_zero_retries() {
         let firmware = create_test_firmware();
-        let request = UpdateFirmwareRequest::new(1, firmware)
-            .with_retries(0);
+        let request = UpdateFirmwareRequest::new(1, firmware).with_retries(0);
 
         assert_eq!(request.get_retries(), Some(&0));
         assert!(request.validate().is_ok());
@@ -492,7 +488,8 @@ mod tests {
         let response = UpdateFirmwareResponse::new(UpdateFirmwareStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: UpdateFirmwareResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UpdateFirmwareResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -516,8 +513,9 @@ mod tests {
     #[test]
     fn test_update_firmware_response_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = UpdateFirmwareResponse::new(UpdateFirmwareStatusEnumType::InvalidCertificate)
-            .with_custom_data(custom_data.clone());
+        let response =
+            UpdateFirmwareResponse::new(UpdateFirmwareStatusEnumType::InvalidCertificate)
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -534,7 +532,10 @@ mod tests {
             .set_status_info(Some(status_info.clone()))
             .set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.get_status(), &UpdateFirmwareStatusEnumType::RevokedCertificate);
+        assert_eq!(
+            response.get_status(),
+            &UpdateFirmwareStatusEnumType::RevokedCertificate
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -564,12 +565,13 @@ mod tests {
 
         for status in status_types {
             let response = UpdateFirmwareResponse::new(status.clone());
-            
+
             assert_eq!(response.get_status(), &status);
             assert!(response.validate().is_ok());
 
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: UpdateFirmwareResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: UpdateFirmwareResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -584,7 +586,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: UpdateFirmwareRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UpdateFirmwareRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -594,12 +597,14 @@ mod tests {
     fn test_update_firmware_response_json_round_trip() {
         let status_info = StatusInfoType::new("Details".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = UpdateFirmwareResponse::new(UpdateFirmwareStatusEnumType::InvalidCertificate)
-            .with_status_info(status_info)
-            .with_custom_data(custom_data);
+        let response =
+            UpdateFirmwareResponse::new(UpdateFirmwareStatusEnumType::InvalidCertificate)
+                .with_status_info(status_info)
+                .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: UpdateFirmwareResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UpdateFirmwareResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -627,7 +632,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &UpdateFirmwareStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &UpdateFirmwareStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
         assert!(response.validate().is_ok());
@@ -637,8 +645,7 @@ mod tests {
     fn test_update_firmware_request_with_custom_data_validation() {
         let firmware = create_test_firmware();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = UpdateFirmwareRequest::new(777, firmware)
-            .with_custom_data(custom_data);
+        let request = UpdateFirmwareRequest::new(777, firmware).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
     }

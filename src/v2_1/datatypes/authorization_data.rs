@@ -35,7 +35,7 @@ impl AuthorizationData {
     /// # Returns
     ///
     /// A new instance of `AuthorizationData` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(id_token: IdTokenType, id_token_info: IdTokenInfoType) -> Self {
         Self {
             custom_data: None,
@@ -53,7 +53,7 @@ impl AuthorizationData {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -64,7 +64,7 @@ impl AuthorizationData {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -88,7 +88,7 @@ impl AuthorizationData {
     /// # Returns
     ///
     /// A reference to the identifier token
-    #[must_use] 
+    #[must_use]
     pub fn id_token(&self) -> &IdTokenType {
         &self.id_token
     }
@@ -112,7 +112,7 @@ impl AuthorizationData {
     /// # Returns
     ///
     /// A reference to the identifier token information
-    #[must_use] 
+    #[must_use]
     pub fn id_token_info(&self) -> &IdTokenInfoType {
         &self.id_token_info
     }

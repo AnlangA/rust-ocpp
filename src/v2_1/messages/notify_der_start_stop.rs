@@ -38,7 +38,7 @@ impl NotifyDERStartStopRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(control_id: String, started: bool, timestamp: DateTime<Utc>) -> Self {
         Self {
             control_id,
@@ -114,7 +114,7 @@ impl NotifyDERStartStopRequest {
     /// # Returns
     ///
     /// Id of the started or stopped DER control. Corresponds to the _controlId_ of the `SetDERControlRequest`.
-    #[must_use] 
+    #[must_use]
     pub fn get_control_id(&self) -> &String {
         &self.control_id
     }
@@ -124,7 +124,7 @@ impl NotifyDERStartStopRequest {
     /// # Returns
     ///
     /// True if DER control has started. False if it has ended.
-    #[must_use] 
+    #[must_use]
     pub fn get_started(&self) -> &bool {
         &self.started
     }
@@ -134,7 +134,7 @@ impl NotifyDERStartStopRequest {
     /// # Returns
     ///
     /// Time of start or end of event.
-    #[must_use] 
+    #[must_use]
     pub fn get_timestamp(&self) -> &DateTime<Utc> {
         &self.timestamp
     }
@@ -144,7 +144,7 @@ impl NotifyDERStartStopRequest {
     /// # Returns
     ///
     /// List of controlIds that are superseded as a result of this control starting.
-    #[must_use] 
+    #[must_use]
     pub fn get_superseded_ids(&self) -> Option<&Vec<String>> {
         self.superseded_ids.as_ref()
     }
@@ -154,7 +154,7 @@ impl NotifyDERStartStopRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -166,7 +166,7 @@ impl NotifyDERStartStopRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_superseded_ids(mut self, superseded_ids: Vec<String>) -> Self {
         self.superseded_ids = Some(superseded_ids);
         self
@@ -179,12 +179,11 @@ impl NotifyDERStartStopRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyDERStartStop` response.
@@ -210,11 +209,9 @@ impl NotifyDERStartStopResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -234,7 +231,7 @@ impl NotifyDERStartStopResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -246,12 +243,11 @@ impl NotifyDERStartStopResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -271,11 +267,7 @@ mod tests {
         let started = true;
         let timestamp = Utc::now();
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id.clone(),
-            started,
-            timestamp,
-        );
+        let request = NotifyDERStartStopRequest::new(control_id.clone(), started, timestamp);
 
         assert_eq!(request.get_control_id(), &control_id);
         assert_eq!(request.get_started(), &started);
@@ -290,11 +282,7 @@ mod tests {
         let started = true;
         let timestamp = Utc::now();
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id,
-            started,
-            timestamp,
-        );
+        let request = NotifyDERStartStopRequest::new(control_id, started, timestamp);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: NotifyDERStartStopRequest =
@@ -309,11 +297,7 @@ mod tests {
         let started = true;
         let timestamp = Utc::now();
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id,
-            started,
-            timestamp,
-        );
+        let request = NotifyDERStartStopRequest::new(control_id, started, timestamp);
 
         assert!(request.validate().is_ok());
     }
@@ -324,11 +308,7 @@ mod tests {
         let started = true;
         let timestamp = Utc::now();
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id,
-            started,
-            timestamp,
-        );
+        let request = NotifyDERStartStopRequest::new(control_id, started, timestamp);
 
         assert!(request.validate().is_err());
     }
@@ -340,11 +320,8 @@ mod tests {
         let timestamp = Utc::now();
         let superseded_ids = vec![]; // Empty vector violates min length of 1
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id,
-            started,
-            timestamp,
-        ).with_superseded_ids(superseded_ids);
+        let request = NotifyDERStartStopRequest::new(control_id, started, timestamp)
+            .with_superseded_ids(superseded_ids);
 
         assert!(request.validate().is_err());
     }
@@ -356,11 +333,8 @@ mod tests {
         let timestamp = Utc::now();
         let superseded_ids = (0..25).map(|i| format!("control{}", i)).collect(); // Exceeds max length of 24
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id,
-            started,
-            timestamp,
-        ).with_superseded_ids(superseded_ids);
+        let request = NotifyDERStartStopRequest::new(control_id, started, timestamp)
+            .with_superseded_ids(superseded_ids);
 
         assert!(request.validate().is_err());
     }
@@ -373,13 +347,9 @@ mod tests {
         let superseded_ids = vec!["control1".to_string(), "control2".to_string()];
         let custom_data = create_test_custom_data();
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id.clone(),
-            started,
-            timestamp,
-        )
-        .with_superseded_ids(superseded_ids.clone())
-        .with_custom_data(custom_data.clone());
+        let request = NotifyDERStartStopRequest::new(control_id.clone(), started, timestamp)
+            .with_superseded_ids(superseded_ids.clone())
+            .with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_control_id(), &control_id);
         assert_eq!(request.get_started(), &started);
@@ -394,11 +364,7 @@ mod tests {
         let started = true;
         let timestamp = Utc::now();
 
-        let mut request = NotifyDERStartStopRequest::new(
-            control_id,
-            started,
-            timestamp,
-        );
+        let mut request = NotifyDERStartStopRequest::new(control_id, started, timestamp);
 
         let new_control_id = "newcontrol456".to_string();
         let new_started = false;
@@ -428,13 +394,9 @@ mod tests {
         let superseded_ids = vec!["control1".to_string()];
         let custom_data = create_test_custom_data();
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id.clone(),
-            started,
-            timestamp,
-        )
-        .with_superseded_ids(superseded_ids.clone())
-        .with_custom_data(custom_data.clone());
+        let request = NotifyDERStartStopRequest::new(control_id.clone(), started, timestamp)
+            .with_superseded_ids(superseded_ids.clone())
+            .with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_control_id(), &control_id);
         assert_eq!(request.get_started(), &started);
@@ -450,13 +412,9 @@ mod tests {
         let superseded_ids = vec!["control1".to_string(), "control2".to_string()];
         let custom_data = create_test_custom_data();
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id,
-            started,
-            timestamp,
-        )
-        .with_superseded_ids(superseded_ids)
-        .with_custom_data(custom_data);
+        let request = NotifyDERStartStopRequest::new(control_id, started, timestamp)
+            .with_superseded_ids(superseded_ids)
+            .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: NotifyDERStartStopRequest =
@@ -473,33 +431,23 @@ mod tests {
         let started = true;
         let timestamp = Utc::now();
 
-        let request = NotifyDERStartStopRequest::new(
-            control_id.clone(),
-            started,
-            timestamp,
-        );
+        let request = NotifyDERStartStopRequest::new(control_id.clone(), started, timestamp);
 
         assert_eq!(request.get_control_id(), &control_id);
         assert!(request.validate().is_ok());
 
         // Test with minimum valid superseded_ids length
         let superseded_ids = vec!["control1".to_string()]; // Minimum length of 1
-        let request = NotifyDERStartStopRequest::new(
-            "control123".to_string(),
-            started,
-            timestamp,
-        ).with_superseded_ids(superseded_ids.clone());
+        let request = NotifyDERStartStopRequest::new("control123".to_string(), started, timestamp)
+            .with_superseded_ids(superseded_ids.clone());
 
         assert_eq!(request.get_superseded_ids(), Some(&superseded_ids));
         assert!(request.validate().is_ok());
 
         // Test with maximum valid superseded_ids length
         let superseded_ids = (0..24).map(|i| format!("control{}", i)).collect::<Vec<_>>(); // Maximum length of 24
-        let request = NotifyDERStartStopRequest::new(
-            "control123".to_string(),
-            started,
-            timestamp,
-        ).with_superseded_ids(superseded_ids.clone());
+        let request = NotifyDERStartStopRequest::new("control123".to_string(), started, timestamp)
+            .with_superseded_ids(superseded_ids.clone());
 
         assert_eq!(request.get_superseded_ids(), Some(&superseded_ids));
         assert!(request.validate().is_ok());
@@ -533,8 +481,7 @@ mod tests {
     #[test]
     fn test_notify_der_start_stop_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = NotifyDERStartStopResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyDERStartStopResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -553,8 +500,7 @@ mod tests {
     fn test_notify_der_start_stop_response_builder_pattern() {
         let custom_data = create_test_custom_data();
 
-        let response = NotifyDERStartStopResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyDERStartStopResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -562,8 +508,7 @@ mod tests {
     #[test]
     fn test_notify_der_start_stop_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = NotifyDERStartStopResponse::new()
-            .with_custom_data(custom_data);
+        let response = NotifyDERStartStopResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: NotifyDERStartStopResponse =

@@ -25,11 +25,9 @@ impl GetLocalListVersionRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -49,7 +47,7 @@ impl GetLocalListVersionRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -61,12 +59,11 @@ impl GetLocalListVersionRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetLocalListVersion` response.
@@ -96,7 +93,7 @@ impl GetLocalListVersionResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(version_number: i32) -> Self {
         Self {
             version_number,
@@ -133,7 +130,7 @@ impl GetLocalListVersionResponse {
     /// # Returns
     ///
     /// This contains the current version number of the local authorization list in the Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_version_number(&self) -> &i32 {
         &self.version_number
     }
@@ -143,7 +140,7 @@ impl GetLocalListVersionResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -155,12 +152,11 @@ impl GetLocalListVersionResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -184,8 +180,7 @@ mod tests {
     #[test]
     fn test_get_local_list_version_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = GetLocalListVersionRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = GetLocalListVersionRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.custom_data, Some(custom_data));
     }
@@ -203,8 +198,7 @@ mod tests {
     #[test]
     fn test_get_local_list_version_request_getters() {
         let custom_data = create_test_custom_data();
-        let request = GetLocalListVersionRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = GetLocalListVersionRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -229,8 +223,7 @@ mod tests {
     #[test]
     fn test_get_local_list_version_request_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let request = GetLocalListVersionRequest::new()
-            .with_custom_data(custom_data);
+        let request = GetLocalListVersionRequest::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).unwrap();
         let parsed: GetLocalListVersionRequest = serde_json::from_str(&json).unwrap();
@@ -252,8 +245,7 @@ mod tests {
     #[test]
     fn test_get_local_list_version_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = GetLocalListVersionResponse::new(123)
-            .with_custom_data(custom_data.clone());
+        let response = GetLocalListVersionResponse::new(123).with_custom_data(custom_data.clone());
 
         assert_eq!(response.version_number, 123);
         assert_eq!(response.custom_data, Some(custom_data));
@@ -274,8 +266,7 @@ mod tests {
     #[test]
     fn test_get_local_list_version_response_getters() {
         let custom_data = create_test_custom_data();
-        let response = GetLocalListVersionResponse::new(555)
-            .with_custom_data(custom_data.clone());
+        let response = GetLocalListVersionResponse::new(555).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_version_number(), &555);
         assert_eq!(response.get_custom_data(), Some(&custom_data));
@@ -308,8 +299,7 @@ mod tests {
     #[test]
     fn test_get_local_list_version_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = GetLocalListVersionResponse::new(777)
-            .with_custom_data(custom_data);
+        let response = GetLocalListVersionResponse::new(777).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetLocalListVersionResponse = serde_json::from_str(&json).unwrap();

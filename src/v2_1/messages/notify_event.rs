@@ -38,7 +38,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(generated_at: DateTime<Utc>, seq_no: i32, event_data: Vec<EventDataType>) -> Self {
         Self {
             generated_at,
@@ -114,7 +114,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// Timestamp of the moment this message was generated at the Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_generated_at(&self) -> &DateTime<Utc> {
         &self.generated_at
     }
@@ -124,7 +124,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// “to be continued” indicator. Indicates whether another part of the report follows in an upcoming notifyEventRequest message. Default value when omitted is false.
-    #[must_use] 
+    #[must_use]
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
@@ -134,7 +134,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// Sequence number of this message. First message starts at 0.
-    #[must_use] 
+    #[must_use]
     pub fn get_seq_no(&self) -> &i32 {
         &self.seq_no
     }
@@ -144,7 +144,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// The `event_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_event_data(&self) -> &Vec<EventDataType> {
         &self.event_data
     }
@@ -154,7 +154,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -166,7 +166,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
@@ -179,7 +179,7 @@ impl NotifyEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -209,7 +209,7 @@ impl NotifyEventResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self { custom_data: None }
     }
@@ -231,7 +231,7 @@ impl NotifyEventResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -243,7 +243,7 @@ impl NotifyEventResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

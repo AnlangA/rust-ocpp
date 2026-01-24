@@ -26,11 +26,9 @@ impl ClearCacheRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -50,7 +48,7 @@ impl ClearCacheRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -62,12 +60,11 @@ impl ClearCacheRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ClearCache` response.
@@ -96,7 +93,7 @@ impl ClearCacheResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: ClearCacheStatusEnumType) -> Self {
         Self {
             status,
@@ -146,7 +143,7 @@ impl ClearCacheResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &ClearCacheStatusEnumType {
         &self.status
     }
@@ -156,7 +153,7 @@ impl ClearCacheResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -166,7 +163,7 @@ impl ClearCacheResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -178,7 +175,7 @@ impl ClearCacheResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -191,12 +188,11 @@ impl ClearCacheResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -228,7 +224,8 @@ mod tests {
         let request = ClearCacheRequest::new();
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ClearCacheRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearCacheRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -237,8 +234,7 @@ mod tests {
     fn test_clear_cache_request_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = ClearCacheRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = ClearCacheRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -278,7 +274,8 @@ mod tests {
         let response = ClearCacheResponse::new(status);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ClearCacheResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearCacheResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -288,8 +285,7 @@ mod tests {
         let status = ClearCacheStatusEnumType::Accepted;
         let status_info = create_test_status_info();
 
-        let response = ClearCacheResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response = ClearCacheResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
     }
@@ -299,8 +295,7 @@ mod tests {
         let status = ClearCacheStatusEnumType::Accepted;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = ClearCacheResponse::new(status)
-            .with_custom_data(custom_data.clone());
+        let response = ClearCacheResponse::new(status).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -357,11 +352,11 @@ mod tests {
     fn test_clear_cache_request_json_round_trip() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = ClearCacheRequest::new()
-            .with_custom_data(custom_data);
+        let request = ClearCacheRequest::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ClearCacheRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearCacheRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -378,7 +373,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ClearCacheResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearCacheResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -387,18 +383,19 @@ mod tests {
     #[test]
     fn test_clear_cache_response_with_detailed_status_info() {
         let status = ClearCacheStatusEnumType::Rejected;
-        let status_info = StatusInfoType::new("CacheNotCleared".to_string())
-            .with_additional_info("Cache could not be cleared due to ongoing transactions".to_string());
+        let status_info = StatusInfoType::new("CacheNotCleared".to_string()).with_additional_info(
+            "Cache could not be cleared due to ongoing transactions".to_string(),
+        );
 
-        let response = ClearCacheResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response = ClearCacheResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert!(response.validate().is_ok());
 
         // Test serialization
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ClearCacheResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearCacheResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
@@ -406,8 +403,7 @@ mod tests {
     fn test_clear_cache_request_clear_optional_fields() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut request = ClearCacheRequest::new()
-            .with_custom_data(custom_data);
+        let mut request = ClearCacheRequest::new().with_custom_data(custom_data);
 
         // Verify custom data is set
         assert!(request.get_custom_data().is_some());
@@ -446,19 +442,22 @@ mod tests {
         let custom_data = CustomDataType::new("CacheVendor".to_string())
             .with_property("cache_type".to_string(), json!("authorization"))
             .with_property("force_clear".to_string(), json!(true))
-            .with_property("metadata".to_string(), json!({
-                "requested_by": "operator",
-                "reason": "security_update"
-            }));
+            .with_property(
+                "metadata".to_string(),
+                json!({
+                    "requested_by": "operator",
+                    "reason": "security_update"
+                }),
+            );
 
-        let request = ClearCacheRequest::new()
-            .with_custom_data(custom_data);
+        let request = ClearCacheRequest::new().with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
 
         // Test serialization with complex custom data
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ClearCacheRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearCacheRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -466,18 +465,29 @@ mod tests {
     fn test_clear_cache_response_status_semantics() {
         // Test Accepted status - cache was successfully cleared
         let accepted_response = ClearCacheResponse::new(ClearCacheStatusEnumType::Accepted)
-            .with_status_info(StatusInfoType::new("Success".to_string())
-                .with_additional_info("Authorization cache cleared successfully".to_string()));
+            .with_status_info(
+                StatusInfoType::new("Success".to_string())
+                    .with_additional_info("Authorization cache cleared successfully".to_string()),
+            );
 
-        assert_eq!(accepted_response.get_status(), &ClearCacheStatusEnumType::Accepted);
+        assert_eq!(
+            accepted_response.get_status(),
+            &ClearCacheStatusEnumType::Accepted
+        );
         assert!(accepted_response.validate().is_ok());
 
         // Test Rejected status - cache could not be cleared
         let rejected_response = ClearCacheResponse::new(ClearCacheStatusEnumType::Rejected)
-            .with_status_info(StatusInfoType::new("CacheInUse".to_string())
-                .with_additional_info("Cache cannot be cleared while transactions are active".to_string()));
+            .with_status_info(
+                StatusInfoType::new("CacheInUse".to_string()).with_additional_info(
+                    "Cache cannot be cleared while transactions are active".to_string(),
+                ),
+            );
 
-        assert_eq!(rejected_response.get_status(), &ClearCacheStatusEnumType::Rejected);
+        assert_eq!(
+            rejected_response.get_status(),
+            &ClearCacheStatusEnumType::Rejected
+        );
         assert!(rejected_response.validate().is_ok());
     }
 
@@ -491,7 +501,8 @@ mod tests {
 
         // Test serialization of minimal request
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ClearCacheRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearCacheRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -507,7 +518,8 @@ mod tests {
 
         // Test serialization of minimal response
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ClearCacheResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearCacheResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
@@ -527,24 +539,27 @@ mod tests {
         let scenarios = vec![
             (
                 ClearCacheStatusEnumType::Accepted,
-                StatusInfoType::new("CacheCleared".to_string())
-                    .with_additional_info("All cached authorization data has been removed".to_string())
+                StatusInfoType::new("CacheCleared".to_string()).with_additional_info(
+                    "All cached authorization data has been removed".to_string(),
+                ),
             ),
             (
                 ClearCacheStatusEnumType::Rejected,
-                StatusInfoType::new("NotSupported".to_string())
-                    .with_additional_info("Cache clearing is not supported in current mode".to_string())
+                StatusInfoType::new("NotSupported".to_string()).with_additional_info(
+                    "Cache clearing is not supported in current mode".to_string(),
+                ),
             ),
             (
                 ClearCacheStatusEnumType::Rejected,
-                StatusInfoType::new("SystemBusy".to_string())
-                    .with_additional_info("System is too busy to clear cache at this time".to_string())
+                StatusInfoType::new("SystemBusy".to_string()).with_additional_info(
+                    "System is too busy to clear cache at this time".to_string(),
+                ),
             ),
         ];
 
         for (status, status_info) in scenarios {
-            let response = ClearCacheResponse::new(status.clone())
-                .with_status_info(status_info.clone());
+            let response =
+                ClearCacheResponse::new(status.clone()).with_status_info(status_info.clone());
 
             assert_eq!(response.get_status(), &status);
             assert_eq!(response.get_status_info(), Some(&status_info));
@@ -552,7 +567,8 @@ mod tests {
 
             // Test serialization
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: ClearCacheResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: ClearCacheResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -562,8 +578,7 @@ mod tests {
         // Test that builder pattern works correctly
         let custom_data = CustomDataType::new("BuilderVendor".to_string());
 
-        let request = ClearCacheRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = ClearCacheRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
         assert!(request.validate().is_ok());
@@ -601,7 +616,10 @@ mod tests {
     #[test]
     fn test_clear_cache_response_status_only() {
         // Test response with only status field (minimal case)
-        for status in [ClearCacheStatusEnumType::Accepted, ClearCacheStatusEnumType::Rejected] {
+        for status in [
+            ClearCacheStatusEnumType::Accepted,
+            ClearCacheStatusEnumType::Rejected,
+        ] {
             let response = ClearCacheResponse::new(status.clone());
 
             assert_eq!(response.get_status(), &status);
@@ -611,7 +629,8 @@ mod tests {
 
             // Test JSON serialization includes only status
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: ClearCacheResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: ClearCacheResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }

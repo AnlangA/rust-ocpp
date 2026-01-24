@@ -581,10 +581,7 @@ fn validate_cancel_reservation_response() -> Result<(), Box<dyn std::error::Erro
 fn test_valid_heartbeat_request() -> Result<(), Box<dyn std::error::Error>> {
     // Test empty request (no required fields)
     let instance = serde_json::json!({});
-    assert!(validate_schema_instance(
-        "HeartbeatRequest.json",
-        instance
-    )?);
+    assert!(validate_schema_instance("HeartbeatRequest.json", instance)?);
 
     // Test with optional custom data
     let instance = serde_json::json!({
@@ -592,10 +589,7 @@ fn test_valid_heartbeat_request() -> Result<(), Box<dyn std::error::Error>> {
             "vendorId": "TestVendor"
         }
     });
-    assert!(validate_schema_instance(
-        "HeartbeatRequest.json",
-        instance
-    )?);
+    assert!(validate_schema_instance("HeartbeatRequest.json", instance)?);
     Ok(())
 }
 
@@ -890,10 +884,7 @@ fn test_valid_reset_request() -> Result<(), Box<dyn std::error::Error>> {
         "type": "OnIdle",
         "evseId": 1
     });
-    assert!(validate_schema_instance(
-        "ResetRequest.json",
-        instance
-    )?);
+    assert!(validate_schema_instance("ResetRequest.json", instance)?);
 
     // Test with optional customData
     let instance = serde_json::json!({
@@ -902,10 +893,7 @@ fn test_valid_reset_request() -> Result<(), Box<dyn std::error::Error>> {
             "vendorId": "TestVendor"
         }
     });
-    assert!(validate_schema_instance(
-        "ResetRequest.json",
-        instance
-    )?);
+    assert!(validate_schema_instance("ResetRequest.json", instance)?);
     Ok(())
 }
 
@@ -914,10 +902,7 @@ fn test_valid_reset_response() -> Result<(), Box<dyn std::error::Error>> {
     let instance = serde_json::json!({
         "status": "Accepted"
     });
-    assert!(validate_schema_instance(
-        "ResetResponse.json",
-        instance
-    )?);
+    assert!(validate_schema_instance("ResetResponse.json", instance)?);
 
     // Test with optional customData
     let instance = serde_json::json!({
@@ -926,10 +911,7 @@ fn test_valid_reset_response() -> Result<(), Box<dyn std::error::Error>> {
             "vendorId": "TestVendor"
         }
     });
-    assert!(validate_schema_instance(
-        "ResetResponse.json",
-        instance
-    )?);
+    assert!(validate_schema_instance("ResetResponse.json", instance)?);
     Ok(())
 }
 
@@ -937,10 +919,7 @@ fn test_valid_reset_response() -> Result<(), Box<dyn std::error::Error>> {
 fn test_invalid_reset_request() -> Result<(), Box<dyn std::error::Error>> {
     // Test with missing required type field
     let instance = serde_json::json!({});
-    assert!(!validate_schema_instance(
-        "ResetRequest.json",
-        instance
-    )?);
+    assert!(!validate_schema_instance("ResetRequest.json", instance)?);
     Ok(())
 }
 

@@ -34,7 +34,7 @@ impl GetChargingProfilesRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32, charging_profile: ChargingProfileCriterionType) -> Self {
         Self {
             request_id,
@@ -75,7 +75,10 @@ impl GetChargingProfilesRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_charging_profile(&mut self, charging_profile: ChargingProfileCriterionType) -> &mut Self {
+    pub fn set_charging_profile(
+        &mut self,
+        charging_profile: ChargingProfileCriterionType,
+    ) -> &mut Self {
         self.charging_profile = charging_profile;
         self
     }
@@ -97,7 +100,7 @@ impl GetChargingProfilesRequest {
     /// # Returns
     ///
     /// Reference identification that is to be used by the Charging Station in the &lt;&lt;reportchargingprofilesrequest, `ReportChargingProfilesRequest`&gt;&gt; when provided.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -107,7 +110,7 @@ impl GetChargingProfilesRequest {
     /// # Returns
     ///
     /// For which EVSE installed charging profiles SHALL be reported. If 0, only charging profiles installed on the Charging Station itself (the grid connection) SHALL be reported. If omitted, all installed charging profiles SHALL be reported. + Reported charging profiles SHALL match the criteria in field _chargingProfile_.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -117,7 +120,7 @@ impl GetChargingProfilesRequest {
     /// # Returns
     ///
     /// The `charging_profile` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_profile(&self) -> &ChargingProfileCriterionType {
         &self.charging_profile
     }
@@ -127,7 +130,7 @@ impl GetChargingProfilesRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -139,7 +142,7 @@ impl GetChargingProfilesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -152,12 +155,11 @@ impl GetChargingProfilesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetChargingProfiles` response.
@@ -185,7 +187,7 @@ impl GetChargingProfilesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GetChargingProfileStatusEnumType) -> Self {
         Self {
             status,
@@ -235,7 +237,7 @@ impl GetChargingProfilesResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GetChargingProfileStatusEnumType {
         &self.status
     }
@@ -245,7 +247,7 @@ impl GetChargingProfilesResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -255,7 +257,7 @@ impl GetChargingProfilesResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -267,7 +269,7 @@ impl GetChargingProfilesResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -280,12 +282,11 @@ impl GetChargingProfilesResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -321,8 +322,8 @@ mod tests {
     #[test]
     fn test_get_charging_profiles_request_with_evse_id() {
         let charging_profile = create_test_charging_profile_criterion();
-        let request = GetChargingProfilesRequest::new(456, charging_profile.clone())
-            .with_evse_id(1);
+        let request =
+            GetChargingProfilesRequest::new(456, charging_profile.clone()).with_evse_id(1);
 
         assert_eq!(request.request_id, 456);
         assert_eq!(request.evse_id, Some(1));
@@ -441,10 +442,14 @@ mod tests {
     #[test]
     fn test_get_charging_profiles_response_with_status_info() {
         let status_info = create_test_status_info();
-        let response = GetChargingProfilesResponse::new(GetChargingProfileStatusEnumType::NoProfiles)
-            .with_status_info(status_info.clone());
+        let response =
+            GetChargingProfilesResponse::new(GetChargingProfileStatusEnumType::NoProfiles)
+                .with_status_info(status_info.clone());
 
-        assert_eq!(response.status, GetChargingProfileStatusEnumType::NoProfiles);
+        assert_eq!(
+            response.status,
+            GetChargingProfileStatusEnumType::NoProfiles
+        );
         assert_eq!(response.status_info, Some(status_info));
         assert_eq!(response.custom_data, None);
     }
@@ -465,12 +470,16 @@ mod tests {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        let mut response = GetChargingProfilesResponse::new(GetChargingProfileStatusEnumType::Accepted);
+        let mut response =
+            GetChargingProfilesResponse::new(GetChargingProfileStatusEnumType::Accepted);
         response.set_status(GetChargingProfileStatusEnumType::NoProfiles);
         response.set_status_info(Some(status_info.clone()));
         response.set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.status, GetChargingProfileStatusEnumType::NoProfiles);
+        assert_eq!(
+            response.status,
+            GetChargingProfileStatusEnumType::NoProfiles
+        );
         assert_eq!(response.status_info, Some(status_info));
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -483,7 +492,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &GetChargingProfileStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &GetChargingProfileStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -523,9 +535,10 @@ mod tests {
     fn test_get_charging_profiles_response_json_round_trip() {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
-        let response = GetChargingProfilesResponse::new(GetChargingProfileStatusEnumType::NoProfiles)
-            .with_status_info(status_info)
-            .with_custom_data(custom_data);
+        let response =
+            GetChargingProfilesResponse::new(GetChargingProfileStatusEnumType::NoProfiles)
+                .with_status_info(status_info)
+                .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetChargingProfilesResponse = serde_json::from_str(&json).unwrap();

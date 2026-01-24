@@ -34,7 +34,7 @@ impl SecurityEventNotificationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(type_: String, timestamp: DateTime<Utc>) -> Self {
         Self {
             type_,
@@ -97,7 +97,7 @@ impl SecurityEventNotificationRequest {
     /// # Returns
     ///
     /// Type of the security event. This value should be taken from the Security events list.
-    #[must_use] 
+    #[must_use]
     pub fn get_type_(&self) -> &String {
         &self.type_
     }
@@ -107,7 +107,7 @@ impl SecurityEventNotificationRequest {
     /// # Returns
     ///
     /// Date and time at which the event occurred.
-    #[must_use] 
+    #[must_use]
     pub fn get_timestamp(&self) -> &DateTime<Utc> {
         &self.timestamp
     }
@@ -117,7 +117,7 @@ impl SecurityEventNotificationRequest {
     /// # Returns
     ///
     /// Additional information about the occurred security event.
-    #[must_use] 
+    #[must_use]
     pub fn get_tech_info(&self) -> Option<&String> {
         self.tech_info.as_ref()
     }
@@ -127,7 +127,7 @@ impl SecurityEventNotificationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -139,7 +139,7 @@ impl SecurityEventNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tech_info(mut self, tech_info: String) -> Self {
         self.tech_info = Some(tech_info);
         self
@@ -152,12 +152,11 @@ impl SecurityEventNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SecurityEventNotification` response.
@@ -183,11 +182,9 @@ impl SecurityEventNotificationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -207,7 +204,7 @@ impl SecurityEventNotificationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -219,12 +216,11 @@ impl SecurityEventNotificationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -236,7 +232,8 @@ mod tests {
     #[test]
     fn test_security_event_notification_request_new() {
         let timestamp = Utc::now();
-        let request = SecurityEventNotificationRequest::new("FirmwareMismatch".to_string(), timestamp);
+        let request =
+            SecurityEventNotificationRequest::new("FirmwareMismatch".to_string(), timestamp);
 
         assert_eq!(request.type_, "FirmwareMismatch");
         assert_eq!(request.timestamp, timestamp);
@@ -246,12 +243,16 @@ mod tests {
 
     #[test]
     fn test_security_event_notification_request_serialization() {
-        let timestamp = DateTime::parse_from_rfc3339("2023-01-01T12:00:00Z").unwrap().with_timezone(&Utc);
-        let request = SecurityEventNotificationRequest::new("InvalidCertificate".to_string(), timestamp)
-            .with_tech_info("Certificate validation failed".to_string());
+        let timestamp = DateTime::parse_from_rfc3339("2023-01-01T12:00:00Z")
+            .unwrap()
+            .with_timezone(&Utc);
+        let request =
+            SecurityEventNotificationRequest::new("InvalidCertificate".to_string(), timestamp)
+                .with_tech_info("Certificate validation failed".to_string());
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SecurityEventNotificationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SecurityEventNotificationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(json.contains("\"type\":\"InvalidCertificate\""));
@@ -263,7 +264,8 @@ mod tests {
         let timestamp = Utc::now();
 
         // Test valid request
-        let valid_request = SecurityEventNotificationRequest::new("ValidEvent".to_string(), timestamp);
+        let valid_request =
+            SecurityEventNotificationRequest::new("ValidEvent".to_string(), timestamp);
         assert!(valid_request.validate().is_ok());
 
         // Test invalid type (too long)
@@ -271,7 +273,8 @@ mod tests {
         assert!(invalid_request.validate().is_err());
 
         // Test invalid tech_info (too long)
-        invalid_request = SecurityEventNotificationRequest::new("ValidEvent".to_string(), timestamp);
+        invalid_request =
+            SecurityEventNotificationRequest::new("ValidEvent".to_string(), timestamp);
         invalid_request.tech_info = Some("a".repeat(256));
         assert!(invalid_request.validate().is_err());
     }
@@ -285,7 +288,10 @@ mod tests {
             .with_custom_data(custom_data.clone());
 
         assert_eq!(request.type_, "SecurityLog");
-        assert_eq!(request.tech_info, Some("Unauthorized access attempt".to_string()));
+        assert_eq!(
+            request.tech_info,
+            Some("Unauthorized access attempt".to_string())
+        );
         assert_eq!(request.custom_data, Some(custom_data));
     }
 
@@ -293,13 +299,15 @@ mod tests {
     fn test_security_event_notification_request_setters() {
         let timestamp1 = Utc::now();
         let timestamp2 = timestamp1 + chrono::Duration::hours(1);
-        let mut request = SecurityEventNotificationRequest::new("InitialEvent".to_string(), timestamp1);
+        let mut request =
+            SecurityEventNotificationRequest::new("InitialEvent".to_string(), timestamp1);
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        request.set_type_("UpdatedEvent".to_string())
-               .set_timestamp(timestamp2)
-               .set_tech_info(Some("Updated info".to_string()))
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_type_("UpdatedEvent".to_string())
+            .set_timestamp(timestamp2)
+            .set_tech_info(Some("Updated info".to_string()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.type_, "UpdatedEvent");
         assert_eq!(request.timestamp, timestamp2);
@@ -332,7 +340,8 @@ mod tests {
         let response = SecurityEventNotificationResponse::new();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SecurityEventNotificationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SecurityEventNotificationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -340,8 +349,8 @@ mod tests {
     #[test]
     fn test_security_event_notification_response_builder_pattern() {
         let custom_data = CustomDataType::new("test_vendor".to_string());
-        let response = SecurityEventNotificationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response =
+            SecurityEventNotificationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -358,8 +367,8 @@ mod tests {
     #[test]
     fn test_security_event_notification_response_getters() {
         let custom_data = CustomDataType::new("test_vendor".to_string());
-        let response = SecurityEventNotificationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response =
+            SecurityEventNotificationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }

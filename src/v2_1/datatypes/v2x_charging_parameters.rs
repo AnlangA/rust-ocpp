@@ -264,7 +264,7 @@ pub struct V2XChargingParametersType {
 
 impl V2XChargingParametersType {
     /// Creates a new empty `V2XChargingParametersType` with all fields set to `None`.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             min_charge_power: None,
@@ -296,7 +296,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum charge power.
-    #[must_use] 
+    #[must_use]
     pub fn min_charge_power(&self) -> Option<Decimal> {
         self.min_charge_power
     }
@@ -308,7 +308,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum charge power on phase L2.
-    #[must_use] 
+    #[must_use]
     pub fn min_charge_power_l2(&self) -> Option<Decimal> {
         self.min_charge_power_l2
     }
@@ -320,7 +320,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum charge power on phase L3.
-    #[must_use] 
+    #[must_use]
     pub fn min_charge_power_l3(&self) -> Option<Decimal> {
         self.min_charge_power_l3
     }
@@ -332,7 +332,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum charge power.
-    #[must_use] 
+    #[must_use]
     pub fn max_charge_power(&self) -> Option<Decimal> {
         self.max_charge_power
     }
@@ -344,7 +344,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum charge power on phase L2.
-    #[must_use] 
+    #[must_use]
     pub fn max_charge_power_l2(&self) -> Option<Decimal> {
         self.max_charge_power_l2
     }
@@ -356,7 +356,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum charge power on phase L3.
-    #[must_use] 
+    #[must_use]
     pub fn max_charge_power_l3(&self) -> Option<Decimal> {
         self.max_charge_power_l3
     }
@@ -368,7 +368,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum discharge power.
-    #[must_use] 
+    #[must_use]
     pub fn min_discharge_power(&self) -> Option<Decimal> {
         self.min_discharge_power
     }
@@ -380,7 +380,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum discharge power on phase L2.
-    #[must_use] 
+    #[must_use]
     pub fn min_discharge_power_l2(&self) -> Option<Decimal> {
         self.min_discharge_power_l2
     }
@@ -392,7 +392,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum discharge power on phase L3.
-    #[must_use] 
+    #[must_use]
     pub fn min_discharge_power_l3(&self) -> Option<Decimal> {
         self.min_discharge_power_l3
     }
@@ -404,7 +404,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum discharge power.
-    #[must_use] 
+    #[must_use]
     pub fn max_discharge_power(&self) -> Option<Decimal> {
         self.max_discharge_power
     }
@@ -416,7 +416,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum discharge power on phase L2.
-    #[must_use] 
+    #[must_use]
     pub fn max_discharge_power_l2(&self) -> Option<Decimal> {
         self.max_discharge_power_l2
     }
@@ -428,7 +428,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum discharge power on phase L3.
-    #[must_use] 
+    #[must_use]
     pub fn max_discharge_power_l3(&self) -> Option<Decimal> {
         self.max_discharge_power_l3
     }
@@ -440,7 +440,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum charge current.
-    #[must_use] 
+    #[must_use]
     pub fn min_charge_current(&self) -> Option<Decimal> {
         self.min_charge_current
     }
@@ -452,7 +452,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum charge current.
-    #[must_use] 
+    #[must_use]
     pub fn max_charge_current(&self) -> Option<Decimal> {
         self.max_charge_current
     }
@@ -464,7 +464,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum discharge current.
-    #[must_use] 
+    #[must_use]
     pub fn min_discharge_current(&self) -> Option<Decimal> {
         self.min_discharge_current
     }
@@ -476,7 +476,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum discharge current.
-    #[must_use] 
+    #[must_use]
     pub fn max_discharge_current(&self) -> Option<Decimal> {
         self.max_discharge_current
     }
@@ -488,7 +488,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum voltage.
-    #[must_use] 
+    #[must_use]
     pub fn min_voltage(&self) -> Option<Decimal> {
         self.min_voltage
     }
@@ -500,7 +500,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum voltage.
-    #[must_use] 
+    #[must_use]
     pub fn max_voltage(&self) -> Option<Decimal> {
         self.max_voltage
     }
@@ -512,7 +512,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the target energy request.
-    #[must_use] 
+    #[must_use]
     pub fn ev_target_energy_request(&self) -> Option<Decimal> {
         self.ev_target_energy_request
     }
@@ -524,7 +524,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum energy request.
-    #[must_use] 
+    #[must_use]
     pub fn ev_min_energy_request(&self) -> Option<Decimal> {
         self.ev_min_energy_request
     }
@@ -536,7 +536,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum energy request.
-    #[must_use] 
+    #[must_use]
     pub fn ev_max_energy_request(&self) -> Option<Decimal> {
         self.ev_max_energy_request
     }
@@ -548,7 +548,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the minimum V2X energy request.
-    #[must_use] 
+    #[must_use]
     pub fn ev_min_v2x_energy_request(&self) -> Option<Decimal> {
         self.ev_min_v2x_energy_request
     }
@@ -560,7 +560,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the maximum V2X energy request.
-    #[must_use] 
+    #[must_use]
     pub fn ev_max_v2x_energy_request(&self) -> Option<Decimal> {
         self.ev_max_v2x_energy_request
     }
@@ -572,7 +572,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the target `SoC`.
-    #[must_use] 
+    #[must_use]
     pub fn target_so_c(&self) -> Option<i32> {
         self.target_so_c
     }
@@ -584,7 +584,7 @@ impl V2XChargingParametersType {
     }
 
     /// Gets the custom data.
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -598,175 +598,175 @@ impl V2XChargingParametersType {
     // Builder pattern methods
 
     /// Sets the minimum charge power using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_min_charge_power(mut self, value: Decimal) -> Self {
         self.min_charge_power = Some(value);
         self
     }
 
     /// Sets the minimum charge power on phase L2 using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_min_charge_power_l2(mut self, value: Decimal) -> Self {
         self.min_charge_power_l2 = Some(value);
         self
     }
 
     /// Sets the minimum charge power on phase L3 using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_min_charge_power_l3(mut self, value: Decimal) -> Self {
         self.min_charge_power_l3 = Some(value);
         self
     }
 
     /// Sets the maximum charge power using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_charge_power(mut self, value: Decimal) -> Self {
         self.max_charge_power = Some(value);
         self
     }
 
     /// Sets the maximum charge power on phase L2 using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_charge_power_l2(mut self, value: Decimal) -> Self {
         self.max_charge_power_l2 = Some(value);
         self
     }
 
     /// Sets the maximum charge power on phase L3 using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_charge_power_l3(mut self, value: Decimal) -> Self {
         self.max_charge_power_l3 = Some(value);
         self
     }
 
     /// Sets the minimum discharge power using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_min_discharge_power(mut self, value: Decimal) -> Self {
         self.min_discharge_power = Some(value);
         self
     }
 
     /// Sets the minimum discharge power on phase L2 using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_min_discharge_power_l2(mut self, value: Decimal) -> Self {
         self.min_discharge_power_l2 = Some(value);
         self
     }
 
     /// Sets the minimum discharge power on phase L3 using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_min_discharge_power_l3(mut self, value: Decimal) -> Self {
         self.min_discharge_power_l3 = Some(value);
         self
     }
 
     /// Sets the maximum discharge power using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_discharge_power(mut self, value: Decimal) -> Self {
         self.max_discharge_power = Some(value);
         self
     }
 
     /// Sets the maximum discharge power on phase L2 using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_discharge_power_l2(mut self, value: Decimal) -> Self {
         self.max_discharge_power_l2 = Some(value);
         self
     }
 
     /// Sets the maximum discharge power on phase L3 using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_discharge_power_l3(mut self, value: Decimal) -> Self {
         self.max_discharge_power_l3 = Some(value);
         self
     }
 
     /// Sets the minimum charge current using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_min_charge_current(mut self, value: Decimal) -> Self {
         self.min_charge_current = Some(value);
         self
     }
 
     /// Sets the maximum charge current using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_charge_current(mut self, value: Decimal) -> Self {
         self.max_charge_current = Some(value);
         self
     }
 
     /// Sets the minimum discharge current using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_min_discharge_current(mut self, value: Decimal) -> Self {
         self.min_discharge_current = Some(value);
         self
     }
 
     /// Sets the maximum discharge current using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_discharge_current(mut self, value: Decimal) -> Self {
         self.max_discharge_current = Some(value);
         self
     }
 
     /// Sets the minimum voltage using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_min_voltage(mut self, value: Decimal) -> Self {
         self.min_voltage = Some(value);
         self
     }
 
     /// Sets the maximum voltage using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_voltage(mut self, value: Decimal) -> Self {
         self.max_voltage = Some(value);
         self
     }
 
     /// Sets the target energy request using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_target_energy_request(mut self, value: Decimal) -> Self {
         self.ev_target_energy_request = Some(value);
         self
     }
 
     /// Sets the minimum energy request using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_min_energy_request(mut self, value: Decimal) -> Self {
         self.ev_min_energy_request = Some(value);
         self
     }
 
     /// Sets the maximum energy request using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_max_energy_request(mut self, value: Decimal) -> Self {
         self.ev_max_energy_request = Some(value);
         self
     }
 
     /// Sets the minimum V2X energy request using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_min_v2x_energy_request(mut self, value: Decimal) -> Self {
         self.ev_min_v2x_energy_request = Some(value);
         self
     }
 
     /// Sets the maximum V2X energy request using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_max_v2x_energy_request(mut self, value: Decimal) -> Self {
         self.ev_max_v2x_energy_request = Some(value);
         self
     }
 
     /// Sets the target `SoC` using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_target_so_c(mut self, value: i32) -> Self {
         self.target_so_c = Some(value);
         self
     }
 
     /// Sets the custom data using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, value: CustomDataType) -> Self {
         self.custom_data = Some(value);
         self

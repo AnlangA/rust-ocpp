@@ -24,7 +24,7 @@ impl GetTariffsRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(evse_id: i32) -> Self {
         Self {
             evse_id,
@@ -61,7 +61,7 @@ impl GetTariffsRequest {
     /// # Returns
     ///
     /// EVSE id to get tariff from. When _evseId_ = 0, this gets tariffs from all EVSEs.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -71,7 +71,7 @@ impl GetTariffsRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -83,12 +83,11 @@ impl GetTariffsRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetTariffs` response.
@@ -119,7 +118,7 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: TariffGetStatusEnumType) -> Self {
         Self {
             status,
@@ -160,7 +159,10 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_tariff_assignments(&mut self, tariff_assignments: Option<Vec<TariffAssignmentType>>) -> &mut Self {
+    pub fn set_tariff_assignments(
+        &mut self,
+        tariff_assignments: Option<Vec<TariffAssignmentType>>,
+    ) -> &mut Self {
         self.tariff_assignments = tariff_assignments;
         self
     }
@@ -182,7 +184,7 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &TariffGetStatusEnumType {
         &self.status
     }
@@ -192,7 +194,7 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -202,7 +204,7 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// The `tariff_assignments` field
-    #[must_use] 
+    #[must_use]
     pub fn get_tariff_assignments(&self) -> Option<&Vec<TariffAssignmentType>> {
         self.tariff_assignments.as_ref()
     }
@@ -212,7 +214,7 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -224,7 +226,7 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -237,8 +239,11 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_tariff_assignments(mut self, tariff_assignments: Vec<TariffAssignmentType>) -> Self {
+    #[must_use]
+    pub fn with_tariff_assignments(
+        mut self,
+        tariff_assignments: Vec<TariffAssignmentType>,
+    ) -> Self {
         self.tariff_assignments = Some(tariff_assignments);
         self
     }
@@ -250,12 +255,11 @@ impl GetTariffsResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -273,10 +277,7 @@ mod tests {
     }
 
     fn create_test_tariff_assignment() -> TariffAssignmentType {
-        TariffAssignmentType::new(
-            "TestTariff".to_string(),
-            Utc::now(),
-        )
+        TariffAssignmentType::new("TestTariff".to_string(), Utc::now())
     }
 
     // Tests for GetTariffsRequest
@@ -292,8 +293,7 @@ mod tests {
     #[test]
     fn test_get_tariffs_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = GetTariffsRequest::new(1)
-            .with_custom_data(custom_data.clone());
+        let request = GetTariffsRequest::new(1).with_custom_data(custom_data.clone());
 
         assert_eq!(request.evse_id, 1);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -314,8 +314,7 @@ mod tests {
     #[test]
     fn test_get_tariffs_request_getters() {
         let custom_data = create_test_custom_data();
-        let request = GetTariffsRequest::new(3)
-            .with_custom_data(custom_data.clone());
+        let request = GetTariffsRequest::new(3).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_evse_id(), &3);
         assert_eq!(request.get_custom_data(), Some(&custom_data));
@@ -356,8 +355,7 @@ mod tests {
     #[test]
     fn test_get_tariffs_request_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let request = GetTariffsRequest::new(5)
-            .with_custom_data(custom_data);
+        let request = GetTariffsRequest::new(5).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).unwrap();
         let parsed: GetTariffsRequest = serde_json::from_str(&json).unwrap();

@@ -38,7 +38,7 @@ impl ComponentType {
     /// # Returns
     ///
     /// A new instance of `ComponentType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(name: String) -> Self {
         Self {
             name,
@@ -57,7 +57,7 @@ impl ComponentType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -72,7 +72,7 @@ impl ComponentType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_evse(mut self, evse: EVSEType) -> Self {
         self.evse = Some(evse);
         self
@@ -87,7 +87,7 @@ impl ComponentType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_instance(mut self, instance: String) -> Self {
         self.instance = Some(instance);
         self
@@ -98,7 +98,7 @@ impl ComponentType {
     /// # Returns
     ///
     /// A reference to the name of the component
-    #[must_use] 
+    #[must_use]
     pub fn name(&self) -> &str {
         &self.name
     }
@@ -122,7 +122,7 @@ impl ComponentType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -146,7 +146,7 @@ impl ComponentType {
     /// # Returns
     ///
     /// An optional reference to the EVSE
-    #[must_use] 
+    #[must_use]
     pub fn evse(&self) -> Option<&EVSEType> {
         self.evse.as_ref()
     }
@@ -170,7 +170,7 @@ impl ComponentType {
     /// # Returns
     ///
     /// An optional reference to the instance name
-    #[must_use] 
+    #[must_use]
     pub fn instance(&self) -> Option<&str> {
         self.instance.as_deref()
     }

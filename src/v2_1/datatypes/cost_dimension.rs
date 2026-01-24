@@ -33,7 +33,7 @@ impl CostDimensionType {
     /// # Returns
     ///
     /// A new instance of `CostDimensionType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(type_: CostDimensionEnumType, volume: f64) -> Self {
         Self {
             type_,
@@ -51,7 +51,7 @@ impl CostDimensionType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -62,7 +62,7 @@ impl CostDimensionType {
     /// # Returns
     ///
     /// The type of cost dimension
-    #[must_use] 
+    #[must_use]
     pub fn r#type(&self) -> &CostDimensionEnumType {
         &self.type_
     }
@@ -86,7 +86,7 @@ impl CostDimensionType {
     /// # Returns
     ///
     /// The volume of the dimension consumed
-    #[must_use] 
+    #[must_use]
     pub fn volume(&self) -> f64 {
         self.volume.try_into().unwrap_or_default()
     }
@@ -110,7 +110,7 @@ impl CostDimensionType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

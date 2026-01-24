@@ -31,7 +31,7 @@ impl CertificateSignedRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(certificate_chain: String) -> Self {
         Self {
             certificate_chain,
@@ -60,7 +60,10 @@ impl CertificateSignedRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_certificate_type(&mut self, certificate_type: Option<CertificateSigningUseEnumType>) -> &mut Self {
+    pub fn set_certificate_type(
+        &mut self,
+        certificate_type: Option<CertificateSigningUseEnumType>,
+    ) -> &mut Self {
         self.certificate_type = certificate_type;
         self
     }
@@ -94,7 +97,7 @@ impl CertificateSignedRequest {
     /// # Returns
     ///
     /// The signed PEM encoded X.509 certificate. This SHALL also contain the necessary sub CA certificates, when applicable. The order of the bundle follows the certificate chain, starting from the leaf certificate.  The Configuration Variable &lt;&lt;configkey-max-certificate-chain-size,MaxCertificateChainSize&gt;&gt; can be used to limit the maximum size of this field.
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_chain(&self) -> &String {
         &self.certificate_chain
     }
@@ -104,7 +107,7 @@ impl CertificateSignedRequest {
     /// # Returns
     ///
     /// The `certificate_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_type(&self) -> Option<&CertificateSigningUseEnumType> {
         self.certificate_type.as_ref()
     }
@@ -114,7 +117,7 @@ impl CertificateSignedRequest {
     /// # Returns
     ///
     /// *(2.1)* `RequestId` to correlate this message with the `SignCertificateRequest`.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> Option<&i32> {
         self.request_id.as_ref()
     }
@@ -124,7 +127,7 @@ impl CertificateSignedRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -136,8 +139,11 @@ impl CertificateSignedRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_certificate_type(mut self, certificate_type: CertificateSigningUseEnumType) -> Self {
+    #[must_use]
+    pub fn with_certificate_type(
+        mut self,
+        certificate_type: CertificateSigningUseEnumType,
+    ) -> Self {
         self.certificate_type = Some(certificate_type);
         self
     }
@@ -149,7 +155,7 @@ impl CertificateSignedRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_request_id(mut self, request_id: i32) -> Self {
         self.request_id = Some(request_id);
         self
@@ -162,12 +168,11 @@ impl CertificateSignedRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `CertificateSigned` response.
@@ -193,7 +198,7 @@ impl CertificateSignedResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: CertificateSignedStatusEnumType) -> Self {
         Self {
             status,
@@ -243,7 +248,7 @@ impl CertificateSignedResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &CertificateSignedStatusEnumType {
         &self.status
     }
@@ -253,7 +258,7 @@ impl CertificateSignedResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -263,7 +268,7 @@ impl CertificateSignedResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -275,7 +280,7 @@ impl CertificateSignedResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -288,12 +293,11 @@ impl CertificateSignedResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -341,8 +345,7 @@ mod tests {
     fn test_certificate_signed_request_with_negative_request_id() {
         let certificate_chain = create_test_certificate_chain();
         // Negative request_id is allowed per schema (no minimum constraint)
-        let request = CertificateSignedRequest::new(certificate_chain)
-            .with_request_id(-1);
+        let request = CertificateSignedRequest::new(certificate_chain).with_request_id(-1);
 
         assert_eq!(request.get_request_id(), Some(&-1));
         assert!(request.validate().is_ok());
@@ -354,7 +357,8 @@ mod tests {
         let request = CertificateSignedRequest::new(certificate_chain);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CertificateSignedRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CertificateSignedRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -375,8 +379,7 @@ mod tests {
         let certificate_chain = create_test_certificate_chain();
         let request_id = 123;
 
-        let request = CertificateSignedRequest::new(certificate_chain)
-            .with_request_id(request_id);
+        let request = CertificateSignedRequest::new(certificate_chain).with_request_id(request_id);
 
         assert_eq!(request.get_request_id(), Some(&request_id));
     }
@@ -386,8 +389,8 @@ mod tests {
         let certificate_chain = create_test_certificate_chain();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = CertificateSignedRequest::new(certificate_chain)
-            .with_custom_data(custom_data.clone());
+        let request =
+            CertificateSignedRequest::new(certificate_chain).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -395,7 +398,8 @@ mod tests {
     #[test]
     fn test_certificate_signed_request_set_methods() {
         let certificate_chain = create_test_certificate_chain();
-        let new_certificate_chain = "-----BEGIN CERTIFICATE-----\nNEW_CERT_DATA\n-----END CERTIFICATE-----".to_string();
+        let new_certificate_chain =
+            "-----BEGIN CERTIFICATE-----\nNEW_CERT_DATA\n-----END CERTIFICATE-----".to_string();
         let certificate_type = CertificateSigningUseEnumType::V2GCertificate;
         let request_id = 456;
         let custom_data = CustomDataType::new("TestVendor".to_string());
@@ -437,14 +441,13 @@ mod tests {
         let certificate_chain = create_test_certificate_chain();
 
         // Test with minimum valid request_id
-        let request = CertificateSignedRequest::new(certificate_chain.clone())
-            .with_request_id(0);
+        let request = CertificateSignedRequest::new(certificate_chain.clone()).with_request_id(0);
         assert_eq!(request.get_request_id(), Some(&0));
         assert!(request.validate().is_ok());
 
         // Test with large request_id
-        let request = CertificateSignedRequest::new(certificate_chain.clone())
-            .with_request_id(i32::MAX);
+        let request =
+            CertificateSignedRequest::new(certificate_chain.clone()).with_request_id(i32::MAX);
         assert_eq!(request.get_request_id(), Some(&i32::MAX));
         assert!(request.validate().is_ok());
 
@@ -479,7 +482,8 @@ mod tests {
         let response = CertificateSignedResponse::new(status);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: CertificateSignedResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CertificateSignedResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -489,8 +493,7 @@ mod tests {
         let status = CertificateSignedStatusEnumType::Accepted;
         let status_info = create_test_status_info();
 
-        let response = CertificateSignedResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response = CertificateSignedResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
     }
@@ -500,8 +503,7 @@ mod tests {
         let status = CertificateSignedStatusEnumType::Accepted;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = CertificateSignedResponse::new(status)
-            .with_custom_data(custom_data.clone());
+        let response = CertificateSignedResponse::new(status).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -567,7 +569,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CertificateSignedRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CertificateSignedRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -584,7 +587,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: CertificateSignedResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CertificateSignedResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -594,17 +598,19 @@ mod tests {
     fn test_certificate_signed_response_with_detailed_status_info() {
         let status = CertificateSignedStatusEnumType::Rejected;
         let status_info = StatusInfoType::new("InvalidCertificate".to_string())
-            .with_additional_info("The provided certificate chain is invalid or corrupted".to_string());
+            .with_additional_info(
+                "The provided certificate chain is invalid or corrupted".to_string(),
+            );
 
-        let response = CertificateSignedResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response = CertificateSignedResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert!(response.validate().is_ok());
 
         // Test serialization
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: CertificateSignedResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CertificateSignedResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
@@ -665,19 +671,23 @@ mod tests {
         let custom_data = CustomDataType::new("CertificateVendor".to_string())
             .with_property("issuer".to_string(), json!("Test CA"))
             .with_property("validity".to_string(), json!("365 days"))
-            .with_property("metadata".to_string(), json!({
-                "algorithm": "RSA-2048",
-                "purpose": "charging_station_auth"
-            }));
+            .with_property(
+                "metadata".to_string(),
+                json!({
+                    "algorithm": "RSA-2048",
+                    "purpose": "charging_station_auth"
+                }),
+            );
 
-        let request = CertificateSignedRequest::new(certificate_chain)
-            .with_custom_data(custom_data);
+        let request =
+            CertificateSignedRequest::new(certificate_chain).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
 
         // Test serialization with complex custom data
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CertificateSignedRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CertificateSignedRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -705,19 +715,31 @@ mod tests {
     #[test]
     fn test_certificate_signed_response_status_semantics() {
         // Test Accepted status - certificate was successfully processed
-        let accepted_response = CertificateSignedResponse::new(CertificateSignedStatusEnumType::Accepted)
-            .with_status_info(StatusInfoType::new("Success".to_string())
-                .with_additional_info("Certificate installed successfully".to_string()));
+        let accepted_response =
+            CertificateSignedResponse::new(CertificateSignedStatusEnumType::Accepted)
+                .with_status_info(
+                    StatusInfoType::new("Success".to_string())
+                        .with_additional_info("Certificate installed successfully".to_string()),
+                );
 
-        assert_eq!(accepted_response.get_status(), &CertificateSignedStatusEnumType::Accepted);
+        assert_eq!(
+            accepted_response.get_status(),
+            &CertificateSignedStatusEnumType::Accepted
+        );
         assert!(accepted_response.validate().is_ok());
 
         // Test Rejected status - certificate was rejected
-        let rejected_response = CertificateSignedResponse::new(CertificateSignedStatusEnumType::Rejected)
-            .with_status_info(StatusInfoType::new("InvalidCertificate".to_string())
-                .with_additional_info("Certificate validation failed".to_string()));
+        let rejected_response =
+            CertificateSignedResponse::new(CertificateSignedStatusEnumType::Rejected)
+                .with_status_info(
+                    StatusInfoType::new("InvalidCertificate".to_string())
+                        .with_additional_info("Certificate validation failed".to_string()),
+                );
 
-        assert_eq!(rejected_response.get_status(), &CertificateSignedStatusEnumType::Rejected);
+        assert_eq!(
+            rejected_response.get_status(),
+            &CertificateSignedStatusEnumType::Rejected
+        );
         assert!(rejected_response.validate().is_ok());
     }
 
@@ -735,7 +757,8 @@ mod tests {
 
         // Test serialization of minimal request
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CertificateSignedRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CertificateSignedRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -744,14 +767,18 @@ mod tests {
         // Test minimal valid response (only required fields)
         let response = CertificateSignedResponse::new(CertificateSignedStatusEnumType::Accepted);
 
-        assert_eq!(response.get_status(), &CertificateSignedStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &CertificateSignedStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), None);
         assert_eq!(response.get_custom_data(), None);
         assert!(response.validate().is_ok());
 
         // Test serialization of minimal response
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: CertificateSignedResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CertificateSignedResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
@@ -776,7 +803,8 @@ mod tests {
 
         // Test serialization with all fields
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CertificateSignedRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CertificateSignedRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 }

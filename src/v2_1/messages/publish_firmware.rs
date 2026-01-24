@@ -45,7 +45,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(location: String, checksum: String, request_id: i32) -> Self {
         Self {
             location,
@@ -134,7 +134,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// This contains a string containing a URI pointing to a location from which to retrieve the firmware.
-    #[must_use] 
+    #[must_use]
     pub fn get_location(&self) -> &String {
         &self.location
     }
@@ -144,7 +144,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// This specifies how many times Charging Station must retry to download the firmware before giving up. If this field is not present, it is left to Charging Station to decide how many times it wants to retry. If the value is 0, it means: no retries.
-    #[must_use] 
+    #[must_use]
     pub fn get_retries(&self) -> Option<&i32> {
         self.retries.as_ref()
     }
@@ -154,7 +154,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// The MD5 checksum over the entire firmware file as a hexadecimal string of length 32.
-    #[must_use] 
+    #[must_use]
     pub fn get_checksum(&self) -> &String {
         &self.checksum
     }
@@ -164,7 +164,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// The Id of the request.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -174,7 +174,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// The interval in seconds after which a retry may be attempted. If this field is not present, it is left to Charging Station to decide how long to wait between attempts.
-    #[must_use] 
+    #[must_use]
     pub fn get_retry_interval(&self) -> Option<&i32> {
         self.retry_interval.as_ref()
     }
@@ -184,7 +184,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -196,7 +196,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_retries(mut self, retries: i32) -> Self {
         self.retries = Some(retries);
         self
@@ -209,7 +209,7 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_retry_interval(mut self, retry_interval: i32) -> Self {
         self.retry_interval = Some(retry_interval);
         self
@@ -222,12 +222,11 @@ impl PublishFirmwareRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `PublishFirmware` response.
@@ -255,7 +254,7 @@ impl PublishFirmwareResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -305,7 +304,7 @@ impl PublishFirmwareResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -315,7 +314,7 @@ impl PublishFirmwareResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -325,7 +324,7 @@ impl PublishFirmwareResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -337,7 +336,7 @@ impl PublishFirmwareResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -350,12 +349,11 @@ impl PublishFirmwareResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -405,7 +403,8 @@ mod tests {
         let request = create_test_publish_firmware_request();
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: PublishFirmwareRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: PublishFirmwareRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -489,11 +488,12 @@ mod tests {
         let new_checksum = "1234567890abcdef1234567890abcdef".to_string();
         let new_request_id = 999;
 
-        request.set_location(new_location.clone())
-               .set_checksum(new_checksum.clone())
-               .set_request_id(new_request_id)
-               .set_retries(Some(5))
-               .set_retry_interval(Some(300));
+        request
+            .set_location(new_location.clone())
+            .set_checksum(new_checksum.clone())
+            .set_request_id(new_request_id)
+            .set_retries(Some(5))
+            .set_retry_interval(Some(300));
 
         assert_eq!(request.location, new_location);
         assert_eq!(request.checksum, new_checksum);
@@ -615,7 +615,8 @@ mod tests {
         let response = create_test_publish_firmware_response();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: PublishFirmwareResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: PublishFirmwareResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -632,8 +633,9 @@ mod tests {
         let new_status = GenericStatusEnumType::Rejected;
         let status_info = create_test_status_info();
 
-        response.set_status(new_status.clone())
-                .set_status_info(Some(status_info.clone()));
+        response
+            .set_status(new_status.clone())
+            .set_status_info(Some(status_info.clone()));
 
         assert_eq!(response.status, new_status);
         assert_eq!(response.status_info, Some(status_info));
@@ -708,12 +710,14 @@ mod tests {
 
         // Test request round trip
         let request_json = serde_json::to_string(&request).expect("Failed to serialize request");
-        let request_deserialized: PublishFirmwareRequest = serde_json::from_str(&request_json).expect("Failed to deserialize request");
+        let request_deserialized: PublishFirmwareRequest =
+            serde_json::from_str(&request_json).expect("Failed to deserialize request");
         assert_eq!(request, request_deserialized);
 
         // Test response round trip
         let response_json = serde_json::to_string(&response).expect("Failed to serialize response");
-        let response_deserialized: PublishFirmwareResponse = serde_json::from_str(&response_json).expect("Failed to deserialize response");
+        let response_deserialized: PublishFirmwareResponse =
+            serde_json::from_str(&response_json).expect("Failed to deserialize response");
         assert_eq!(response, response_deserialized);
     }
 

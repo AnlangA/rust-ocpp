@@ -35,7 +35,7 @@ impl ChargingLimitType {
     /// # Returns
     ///
     /// A new instance of `ChargingLimitType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(charging_limit_source: ChargingLimitSourceEnumType) -> Self {
         Self {
             charging_limit_source,
@@ -54,7 +54,7 @@ impl ChargingLimitType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_local_generation(mut self, is_local_generation: bool) -> Self {
         self.is_local_generation = Some(is_local_generation);
         self
@@ -69,7 +69,7 @@ impl ChargingLimitType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_grid_critical(mut self, is_grid_critical: bool) -> Self {
         self.is_grid_critical = Some(is_grid_critical);
         self
@@ -84,7 +84,7 @@ impl ChargingLimitType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -95,7 +95,7 @@ impl ChargingLimitType {
     /// # Returns
     ///
     /// The source of the charging limit
-    #[must_use] 
+    #[must_use]
     pub fn charging_limit_source(&self) -> &ChargingLimitSourceEnumType {
         &self.charging_limit_source
     }
@@ -122,7 +122,7 @@ impl ChargingLimitType {
     /// # Returns
     ///
     /// An optional boolean indicating if the limit concerns local generation
-    #[must_use] 
+    #[must_use]
     pub fn is_local_generation(&self) -> Option<bool> {
         self.is_local_generation
     }
@@ -146,7 +146,7 @@ impl ChargingLimitType {
     /// # Returns
     ///
     /// An optional boolean indicating if the charging limit is critical for the grid
-    #[must_use] 
+    #[must_use]
     pub fn is_grid_critical(&self) -> Option<bool> {
         self.is_grid_critical
     }
@@ -170,7 +170,7 @@ impl ChargingLimitType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

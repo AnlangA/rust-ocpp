@@ -33,7 +33,7 @@ impl NotifyDisplayMessagesRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32) -> Self {
         Self {
             message_info: None,
@@ -96,7 +96,7 @@ impl NotifyDisplayMessagesRequest {
     /// # Returns
     ///
     /// The `message_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_message_info(&self) -> Option<&Vec<MessageInfoType>> {
         self.message_info.as_ref()
     }
@@ -106,7 +106,7 @@ impl NotifyDisplayMessagesRequest {
     /// # Returns
     ///
     /// The id of the &lt;&lt;getdisplaymessagesrequest,GetDisplayMessagesRequest&gt;&gt; that requested this message.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -116,7 +116,7 @@ impl NotifyDisplayMessagesRequest {
     /// # Returns
     ///
     /// "to be continued" indicator. Indicates whether another part of the report follows in an upcoming `NotifyDisplayMessagesRequest` message. Default value when omitted is false.
-    #[must_use] 
+    #[must_use]
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
@@ -126,7 +126,7 @@ impl NotifyDisplayMessagesRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -138,7 +138,7 @@ impl NotifyDisplayMessagesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_message_info(mut self, message_info: Vec<MessageInfoType>) -> Self {
         self.message_info = Some(message_info);
         self
@@ -151,7 +151,7 @@ impl NotifyDisplayMessagesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
@@ -164,12 +164,11 @@ impl NotifyDisplayMessagesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyDisplayMessages` response.
@@ -195,11 +194,9 @@ impl NotifyDisplayMessagesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -219,7 +216,7 @@ impl NotifyDisplayMessagesResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -231,12 +228,11 @@ impl NotifyDisplayMessagesResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -252,12 +248,8 @@ mod tests {
     }
 
     fn create_test_message_info() -> MessageInfoType {
-        MessageInfoType::new(
-            1,
-            MessagePriorityEnumType::AlwaysFront,
-            Utc::now(),
-        )
-        .with_state(MessageStateEnumType::Idle)
+        MessageInfoType::new(1, MessagePriorityEnumType::AlwaysFront, Utc::now())
+            .with_state(MessageStateEnumType::Idle)
     }
 
     #[test]
@@ -308,8 +300,7 @@ mod tests {
         let request_id = 123;
         let message_info = vec![]; // Empty vector violates min length of 1
 
-        let request = NotifyDisplayMessagesRequest::new(request_id)
-            .with_message_info(message_info);
+        let request = NotifyDisplayMessagesRequest::new(request_id).with_message_info(message_info);
 
         assert!(request.validate().is_err());
     }
@@ -394,16 +385,12 @@ mod tests {
         let request_id = 123;
         let message_info = vec![
             create_test_message_info(),
-            MessageInfoType::new(
-                2,
-                MessagePriorityEnumType::InFront,
-                Utc::now(),
-            )
-            .with_state(MessageStateEnumType::Charging),
+            MessageInfoType::new(2, MessagePriorityEnumType::InFront, Utc::now())
+                .with_state(MessageStateEnumType::Charging),
         ];
 
-        let request = NotifyDisplayMessagesRequest::new(request_id)
-            .with_message_info(message_info.clone());
+        let request =
+            NotifyDisplayMessagesRequest::new(request_id).with_message_info(message_info.clone());
 
         assert_eq!(request.get_message_info(), Some(&message_info));
         assert!(request.validate().is_ok());
@@ -421,8 +408,8 @@ mod tests {
 
         // Test with minimum valid message_info length
         let message_info = vec![create_test_message_info()]; // Minimum length of 1
-        let request = NotifyDisplayMessagesRequest::new(request_id)
-            .with_message_info(message_info.clone());
+        let request =
+            NotifyDisplayMessagesRequest::new(request_id).with_message_info(message_info.clone());
 
         assert_eq!(request.get_message_info(), Some(&message_info));
         assert!(request.validate().is_ok());
@@ -456,8 +443,7 @@ mod tests {
     #[test]
     fn test_notify_display_messages_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = NotifyDisplayMessagesResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyDisplayMessagesResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -476,8 +462,7 @@ mod tests {
     fn test_notify_display_messages_response_builder_pattern() {
         let custom_data = create_test_custom_data();
 
-        let response = NotifyDisplayMessagesResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyDisplayMessagesResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -485,8 +470,7 @@ mod tests {
     #[test]
     fn test_notify_display_messages_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = NotifyDisplayMessagesResponse::new()
-            .with_custom_data(custom_data);
+        let response = NotifyDisplayMessagesResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: NotifyDisplayMessagesResponse =

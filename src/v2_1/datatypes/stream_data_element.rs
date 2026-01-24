@@ -34,7 +34,7 @@ impl StreamDataElementType {
     /// # Returns
     ///
     /// A new instance of `StreamDataElementType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(offset: Decimal, value: String) -> Self {
         Self {
             offset,
@@ -52,7 +52,7 @@ impl StreamDataElementType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -63,7 +63,7 @@ impl StreamDataElementType {
     /// # Returns
     ///
     /// The offset relative to basetime of this message
-    #[must_use] 
+    #[must_use]
     pub fn offset(&self) -> Decimal {
         self.offset
     }
@@ -87,7 +87,7 @@ impl StreamDataElementType {
     /// # Returns
     ///
     /// The value
-    #[must_use] 
+    #[must_use]
     pub fn value(&self) -> &str {
         &self.value
     }
@@ -111,7 +111,7 @@ impl StreamDataElementType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

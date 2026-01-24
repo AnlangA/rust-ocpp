@@ -1,9 +1,4 @@
-use crate::v2_1::datatypes::{
-    ChargingProfileType,
-    CustomDataType,
-    IdTokenType,
-    StatusInfoType,
-};
+use crate::v2_1::datatypes::{ChargingProfileType, CustomDataType, IdTokenType, StatusInfoType};
 use crate::v2_1::enumerations::RequestStartStopStatusEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
@@ -45,7 +40,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(id_token: IdTokenType, remote_start_id: i32) -> Self {
         Self {
             evse_id: None,
@@ -112,7 +107,10 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_charging_profile(&mut self, charging_profile: Option<ChargingProfileType>) -> &mut Self {
+    pub fn set_charging_profile(
+        &mut self,
+        charging_profile: Option<ChargingProfileType>,
+    ) -> &mut Self {
         self.charging_profile = charging_profile;
         self
     }
@@ -134,7 +132,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// Number of the EVSE on which to start the transaction. `EvseId` SHALL be &gt; 0
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -144,7 +142,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// The `group_id_token` field
-    #[must_use] 
+    #[must_use]
     pub fn get_group_id_token(&self) -> Option<&IdTokenType> {
         self.group_id_token.as_ref()
     }
@@ -154,7 +152,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// The `id_token` field
-    #[must_use] 
+    #[must_use]
     pub fn get_id_token(&self) -> &IdTokenType {
         &self.id_token
     }
@@ -164,7 +162,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// Id given by the server to this start request. The Charging Station will return this in the &lt;&lt;transactioneventrequest, `TransactionEventRequest`&gt;&gt;, letting the server know which transaction was started for this request. Use to start a transaction.
-    #[must_use] 
+    #[must_use]
     pub fn get_remote_start_id(&self) -> &i32 {
         &self.remote_start_id
     }
@@ -174,7 +172,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// The `charging_profile` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_profile(&self) -> Option<&ChargingProfileType> {
         self.charging_profile.as_ref()
     }
@@ -184,7 +182,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -196,7 +194,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -209,7 +207,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_group_id_token(mut self, group_id_token: IdTokenType) -> Self {
         self.group_id_token = Some(group_id_token);
         self
@@ -222,7 +220,7 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_charging_profile(mut self, charging_profile: ChargingProfileType) -> Self {
         self.charging_profile = Some(charging_profile);
         self
@@ -235,12 +233,11 @@ impl RequestStartTransactionRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `StartTransaction` response.
@@ -274,7 +271,7 @@ impl RequestStartTransactionResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: RequestStartStopStatusEnumType) -> Self {
         Self {
             status,
@@ -337,7 +334,7 @@ impl RequestStartTransactionResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &RequestStartStopStatusEnumType {
         &self.status
     }
@@ -347,7 +344,7 @@ impl RequestStartTransactionResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -357,7 +354,7 @@ impl RequestStartTransactionResponse {
     /// # Returns
     ///
     /// When the transaction was already started by the Charging Station before the `RequestStartTransactionRequest` was received, for example: cable plugged in first. This contains the transactionId of the already started transaction.
-    #[must_use] 
+    #[must_use]
     pub fn get_transaction_id(&self) -> Option<&String> {
         self.transaction_id.as_ref()
     }
@@ -367,7 +364,7 @@ impl RequestStartTransactionResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -379,7 +376,7 @@ impl RequestStartTransactionResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -392,7 +389,7 @@ impl RequestStartTransactionResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_transaction_id(mut self, transaction_id: String) -> Self {
         self.transaction_id = Some(transaction_id);
         self
@@ -405,19 +402,23 @@ impl RequestStartTransactionResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::v2_1::datatypes::{ChargingProfileType, ChargingScheduleType, IdTokenType, StatusInfoType};
-    use crate::v2_1::enumerations::{ChargingProfileKindEnumType, ChargingProfilePurposeEnumType, ChargingRateUnitEnumType, RequestStartStopStatusEnumType};
+    use crate::v2_1::datatypes::{
+        ChargingProfileType, ChargingScheduleType, IdTokenType, StatusInfoType,
+    };
+    use crate::v2_1::enumerations::{
+        ChargingProfileKindEnumType, ChargingProfilePurposeEnumType, ChargingRateUnitEnumType,
+        RequestStartStopStatusEnumType,
+    };
     use serde_json;
     use validator::Validate;
 
@@ -434,17 +435,13 @@ mod tests {
     }
 
     fn create_test_charging_profile() -> ChargingProfileType {
-        let schedule = ChargingScheduleType::new(
-            1,
-            ChargingRateUnitEnumType::W,
-            vec![]
-        );
+        let schedule = ChargingScheduleType::new(1, ChargingRateUnitEnumType::W, vec![]);
         ChargingProfileType::new(
             1,
             0,
             ChargingProfilePurposeEnumType::TxProfile,
             ChargingProfileKindEnumType::Absolute,
-            vec![schedule]
+            vec![schedule],
         )
     }
 
@@ -559,7 +556,8 @@ mod tests {
 
     #[test]
     fn test_request_start_transaction_response_new() {
-        let response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
+        let response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
 
         assert_eq!(response.status, RequestStartStopStatusEnumType::Accepted);
         assert!(response.status_info.is_none());
@@ -569,17 +567,21 @@ mod tests {
 
     #[test]
     fn test_request_start_transaction_response_serialization() {
-        let response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Rejected)
-            .with_status_info(create_test_status_info())
-            .with_transaction_id("tx-12345".to_string())
-            .with_custom_data(create_test_custom_data());
+        let response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Rejected)
+                .with_status_info(create_test_status_info())
+                .with_transaction_id("tx-12345".to_string())
+                .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: RequestStartTransactionResponse =
             serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
-        assert_eq!(deserialized.status, RequestStartStopStatusEnumType::Rejected);
+        assert_eq!(
+            deserialized.status,
+            RequestStartStopStatusEnumType::Rejected
+        );
         assert!(deserialized.status_info.is_some());
         assert_eq!(deserialized.transaction_id, Some("tx-12345".to_string()));
         assert!(deserialized.custom_data.is_some());
@@ -587,13 +589,15 @@ mod tests {
 
     #[test]
     fn test_request_start_transaction_response_validation() {
-        let valid_response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
+        let valid_response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
         assert!(valid_response.validate().is_ok());
 
-        let response_with_all_fields = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Rejected)
-            .with_status_info(create_test_status_info())
-            .with_transaction_id("tx-67890".to_string())
-            .with_custom_data(create_test_custom_data());
+        let response_with_all_fields =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Rejected)
+                .with_status_info(create_test_status_info())
+                .with_transaction_id("tx-67890".to_string())
+                .with_custom_data(create_test_custom_data());
         assert!(response_with_all_fields.validate().is_ok());
 
         // Test transaction_id length validation (max 36 characters)
@@ -612,10 +616,11 @@ mod tests {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        let response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
-            .with_status_info(status_info.clone())
-            .with_transaction_id("tx-abc123".to_string())
-            .with_custom_data(custom_data.clone());
+        let response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
+                .with_status_info(status_info.clone())
+                .with_transaction_id("tx-abc123".to_string())
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(response.status, RequestStartStopStatusEnumType::Accepted);
         assert_eq!(response.status_info, Some(status_info));
@@ -625,7 +630,8 @@ mod tests {
 
     #[test]
     fn test_request_start_transaction_response_setters_getters() {
-        let mut response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
+        let mut response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
@@ -636,19 +642,33 @@ mod tests {
         response.set_custom_data(Some(custom_data.clone()));
 
         // Test getters
-        assert_eq!(*response.get_status(), RequestStartStopStatusEnumType::Rejected);
+        assert_eq!(
+            *response.get_status(),
+            RequestStartStopStatusEnumType::Rejected
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
-        assert_eq!(response.get_transaction_id(), Some(&"tx-xyz789".to_string()));
+        assert_eq!(
+            response.get_transaction_id(),
+            Some(&"tx-xyz789".to_string())
+        );
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
 
     #[test]
     fn test_request_start_transaction_response_enum_variants() {
-        let accepted_response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
-        assert_eq!(accepted_response.status, RequestStartStopStatusEnumType::Accepted);
+        let accepted_response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
+        assert_eq!(
+            accepted_response.status,
+            RequestStartStopStatusEnumType::Accepted
+        );
 
-        let rejected_response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Rejected);
-        assert_eq!(rejected_response.status, RequestStartStopStatusEnumType::Rejected);
+        let rejected_response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Rejected);
+        assert_eq!(
+            rejected_response.status,
+            RequestStartStopStatusEnumType::Rejected
+        );
     }
 
     #[test]
@@ -664,8 +684,7 @@ mod tests {
         assert!(large_request.validate().is_ok());
 
         // Test minimum valid evse_id
-        let min_evse_request = RequestStartTransactionRequest::new(id_token, 1)
-            .with_evse_id(1);
+        let min_evse_request = RequestStartTransactionRequest::new(id_token, 1).with_evse_id(1);
         assert!(min_evse_request.validate().is_ok());
     }
 
@@ -687,10 +706,11 @@ mod tests {
 
         assert_eq!(original_request, parsed_request);
 
-        let original_response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
-            .with_status_info(create_test_status_info())
-            .with_transaction_id("tx-round-trip".to_string())
-            .with_custom_data(create_test_custom_data());
+        let original_response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
+                .with_status_info(create_test_status_info())
+                .with_transaction_id("tx-round-trip".to_string())
+                .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&original_response).expect("Failed to serialize response");
         let parsed_response: RequestStartTransactionResponse =
@@ -728,14 +748,16 @@ mod tests {
     fn test_request_start_transaction_transaction_id_edge_cases() {
         // Test maximum valid transaction_id length (36 characters)
         let max_transaction_id = "a".repeat(36);
-        let response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
-            .with_transaction_id(max_transaction_id.clone());
+        let response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
+                .with_transaction_id(max_transaction_id.clone());
         assert!(response.validate().is_ok());
         assert_eq!(response.transaction_id, Some(max_transaction_id));
 
         // Test empty transaction_id
-        let empty_response = RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
-            .with_transaction_id("".to_string());
+        let empty_response =
+            RequestStartTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
+                .with_transaction_id("".to_string());
         assert!(empty_response.validate().is_ok());
     }
 }

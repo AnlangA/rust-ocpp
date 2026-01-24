@@ -30,7 +30,7 @@ impl ResetRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(type_: ResetEnumType) -> Self {
         Self {
             type_,
@@ -80,7 +80,7 @@ impl ResetRequest {
     /// # Returns
     ///
     /// The type_ field
-    #[must_use] 
+    #[must_use]
     pub fn get_type_(&self) -> &ResetEnumType {
         &self.type_
     }
@@ -90,7 +90,7 @@ impl ResetRequest {
     /// # Returns
     ///
     /// This contains the ID of a specific EVSE that needs to be reset, instead of the entire Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -100,7 +100,7 @@ impl ResetRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -112,7 +112,7 @@ impl ResetRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -125,12 +125,11 @@ impl ResetRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the Reset response.
@@ -159,7 +158,7 @@ impl ResetResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: ResetStatusEnumType) -> Self {
         Self {
             status,
@@ -209,7 +208,7 @@ impl ResetResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &ResetStatusEnumType {
         &self.status
     }
@@ -219,7 +218,7 @@ impl ResetResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -229,7 +228,7 @@ impl ResetResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -241,7 +240,7 @@ impl ResetResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -254,12 +253,11 @@ impl ResetResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -278,11 +276,11 @@ mod tests {
 
     #[test]
     fn test_reset_request_serialization() {
-        let request = ResetRequest::new(ResetEnumType::OnIdle)
-            .with_evse_id(1);
+        let request = ResetRequest::new(ResetEnumType::OnIdle).with_evse_id(1);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ResetRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ResetRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(json.contains("\"type\":\"OnIdle\""));
@@ -315,9 +313,10 @@ mod tests {
         let mut request = ResetRequest::new(ResetEnumType::OnIdle);
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        request.set_type_(ResetEnumType::Immediate)
-               .set_evse_id(Some(3))
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_type_(ResetEnumType::Immediate)
+            .set_evse_id(Some(3))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.type_, ResetEnumType::Immediate);
         assert_eq!(request.evse_id, Some(3));
@@ -349,7 +348,8 @@ mod tests {
         let response = ResetResponse::new(ResetStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ResetResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ResetResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(json.contains("\"status\":\"Rejected\""));
@@ -370,8 +370,9 @@ mod tests {
         let mut response = ResetResponse::new(ResetStatusEnumType::Accepted);
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        response.set_status(ResetStatusEnumType::Rejected)
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(ResetStatusEnumType::Rejected)
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, ResetStatusEnumType::Rejected);
         assert_eq!(response.custom_data, Some(custom_data));
@@ -390,8 +391,7 @@ mod tests {
     #[test]
     fn test_reset_request_edge_cases() {
         // Test with zero evse_id (should be valid)
-        let request = ResetRequest::new(ResetEnumType::Immediate)
-            .with_evse_id(0);
+        let request = ResetRequest::new(ResetEnumType::Immediate).with_evse_id(0);
         assert!(request.validate().is_ok());
 
         // Test without optional fields

@@ -31,7 +31,7 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(requested_message: MessageTriggerEnumType) -> Self {
         Self {
             evse: None,
@@ -60,7 +60,10 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_requested_message(&mut self, requested_message: MessageTriggerEnumType) -> &mut Self {
+    pub fn set_requested_message(
+        &mut self,
+        requested_message: MessageTriggerEnumType,
+    ) -> &mut Self {
         self.requested_message = requested_message;
         self
     }
@@ -94,7 +97,7 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// The evse field
-    #[must_use] 
+    #[must_use]
     pub fn get_evse(&self) -> Option<&EVSEType> {
         self.evse.as_ref()
     }
@@ -104,7 +107,7 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// The `requested_message` field
-    #[must_use] 
+    #[must_use]
     pub fn get_requested_message(&self) -> &MessageTriggerEnumType {
         &self.requested_message
     }
@@ -114,7 +117,7 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// *(2.1)* When _requestedMessage_ = `CustomTrigger` this will trigger sending the corresponding message in field _customTrigger_, if supported by Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_trigger(&self) -> Option<&String> {
         self.custom_trigger.as_ref()
     }
@@ -124,7 +127,7 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -136,7 +139,7 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse(mut self, evse: EVSEType) -> Self {
         self.evse = Some(evse);
         self
@@ -149,7 +152,7 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_trigger(mut self, custom_trigger: String) -> Self {
         self.custom_trigger = Some(custom_trigger);
         self
@@ -162,12 +165,11 @@ impl TriggerMessageRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `TriggerMessage` response.
@@ -193,7 +195,7 @@ impl TriggerMessageResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: TriggerMessageStatusEnumType) -> Self {
         Self {
             status,
@@ -243,7 +245,7 @@ impl TriggerMessageResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &TriggerMessageStatusEnumType {
         &self.status
     }
@@ -253,7 +255,7 @@ impl TriggerMessageResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -263,7 +265,7 @@ impl TriggerMessageResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -275,7 +277,7 @@ impl TriggerMessageResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -288,12 +290,11 @@ impl TriggerMessageResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -326,7 +327,8 @@ mod tests {
         let request = TriggerMessageRequest::new(MessageTriggerEnumType::StatusNotification);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: TriggerMessageRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: TriggerMessageRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -379,7 +381,10 @@ mod tests {
             .set_custom_trigger(Some(custom_trigger.clone()))
             .set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(request.get_requested_message(), &MessageTriggerEnumType::TransactionEvent);
+        assert_eq!(
+            request.get_requested_message(),
+            &MessageTriggerEnumType::TransactionEvent
+        );
         assert_eq!(request.get_evse(), Some(&evse));
         assert_eq!(request.get_custom_trigger(), Some(&custom_trigger));
         assert_eq!(request.get_custom_data(), Some(&custom_data));
@@ -436,12 +441,13 @@ mod tests {
 
         for message_type in message_types {
             let request = TriggerMessageRequest::new(message_type.clone());
-            
+
             assert_eq!(request.get_requested_message(), &message_type);
             assert!(request.validate().is_ok());
 
             let json = serde_json::to_string(&request).expect("Failed to serialize");
-            let deserialized: TriggerMessageRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: TriggerMessageRequest =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(request, deserialized);
         }
     }
@@ -463,7 +469,8 @@ mod tests {
         let response = TriggerMessageResponse::new(TriggerMessageStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: TriggerMessageResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: TriggerMessageResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -505,7 +512,10 @@ mod tests {
             .set_status_info(Some(status_info.clone()))
             .set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.get_status(), &TriggerMessageStatusEnumType::NotImplemented);
+        assert_eq!(
+            response.get_status(),
+            &TriggerMessageStatusEnumType::NotImplemented
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -533,12 +543,13 @@ mod tests {
 
         for status in status_types {
             let response = TriggerMessageResponse::new(status.clone());
-            
+
             assert_eq!(response.get_status(), &status);
             assert!(response.validate().is_ok());
 
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: TriggerMessageResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: TriggerMessageResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -554,7 +565,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: TriggerMessageRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: TriggerMessageRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -569,7 +581,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: TriggerMessageResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: TriggerMessageResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -578,10 +591,13 @@ mod tests {
     #[test]
     fn test_trigger_message_request_with_meter_values_and_evse() {
         let evse = create_test_evse();
-        let request = TriggerMessageRequest::new(MessageTriggerEnumType::MeterValues)
-            .with_evse(evse.clone());
+        let request =
+            TriggerMessageRequest::new(MessageTriggerEnumType::MeterValues).with_evse(evse.clone());
 
-        assert_eq!(request.get_requested_message(), &MessageTriggerEnumType::MeterValues);
+        assert_eq!(
+            request.get_requested_message(),
+            &MessageTriggerEnumType::MeterValues
+        );
         assert_eq!(request.get_evse(), Some(&evse));
         assert!(request.validate().is_ok());
     }
@@ -595,7 +611,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &TriggerMessageStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &TriggerMessageStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
         assert!(response.validate().is_ok());

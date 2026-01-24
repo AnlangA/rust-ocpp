@@ -1,15 +1,10 @@
 use crate::v2_1::datatypes::{
-    CostDetailsType, 
-    CustomDataType, 
-    EVSEType, 
-    IdTokenInfoType, 
-    IdTokenType, 
-    MessageContentType, 
-    MeterValueType, 
-    TransactionLimitType, 
-    TransactionType,
+    CostDetailsType, CustomDataType, EVSEType, IdTokenInfoType, IdTokenType, MessageContentType,
+    MeterValueType, TransactionLimitType, TransactionType,
 };
-use crate::v2_1::enumerations::{PreconditioningStatusEnumType, TransactionEventEnumType, TriggerReasonEnumType};
+use crate::v2_1::enumerations::{
+    PreconditioningStatusEnumType, TransactionEventEnumType, TriggerReasonEnumType,
+};
 use chrono::{DateTime, Utc};
 use rust_decimal::Decimal;
 use serde::{Deserialize, Serialize};
@@ -92,8 +87,14 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
-    pub fn new(event_type: TransactionEventEnumType, timestamp: DateTime<Utc>, trigger_reason: TriggerReasonEnumType, seq_no: i32, transaction_info: TransactionType) -> Self {
+    #[must_use]
+    pub fn new(
+        event_type: TransactionEventEnumType,
+        timestamp: DateTime<Utc>,
+        trigger_reason: TriggerReasonEnumType,
+        seq_no: i32,
+        transaction_info: TransactionType,
+    ) -> Self {
         Self {
             cost_details: None,
             event_type,
@@ -241,7 +242,10 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_preconditioning_status(&mut self, preconditioning_status: Option<PreconditioningStatusEnumType>) -> &mut Self {
+    pub fn set_preconditioning_status(
+        &mut self,
+        preconditioning_status: Option<PreconditioningStatusEnumType>,
+    ) -> &mut Self {
         self.preconditioning_status = preconditioning_status;
         self
     }
@@ -311,7 +315,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The `cost_details` field
-    #[must_use] 
+    #[must_use]
     pub fn get_cost_details(&self) -> Option<&CostDetailsType> {
         self.cost_details.as_ref()
     }
@@ -321,7 +325,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The `event_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_event_type(&self) -> &TransactionEventEnumType {
         &self.event_type
     }
@@ -331,7 +335,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The `meter_value` field
-    #[must_use] 
+    #[must_use]
     pub fn get_meter_value(&self) -> Option<&Vec<MeterValueType>> {
         self.meter_value.as_ref()
     }
@@ -341,7 +345,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The date and time at which this transaction event occurred.
-    #[must_use] 
+    #[must_use]
     pub fn get_timestamp(&self) -> &DateTime<Utc> {
         &self.timestamp
     }
@@ -351,7 +355,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The `trigger_reason` field
-    #[must_use] 
+    #[must_use]
     pub fn get_trigger_reason(&self) -> &TriggerReasonEnumType {
         &self.trigger_reason
     }
@@ -361,7 +365,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Incremental sequence number, helps with determining if all messages of a transaction have been received.
-    #[must_use] 
+    #[must_use]
     pub fn get_seq_no(&self) -> &i32 {
         &self.seq_no
     }
@@ -371,7 +375,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Indication that this transaction event happened when the Charging Station was offline. Default = false, meaning: the event occurred when the Charging Station was online.
-    #[must_use] 
+    #[must_use]
     pub fn get_offline(&self) -> Option<&bool> {
         self.offline.as_ref()
     }
@@ -381,7 +385,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// If the Charging Station is able to report the number of phases used, then it SHALL provide it. When omitted the CSMS may be able to determine the number of phases used as follows: + 1: The numberPhases in the currently used `ChargingSchedule`. + 2: The number of phases provided via device management.
-    #[must_use] 
+    #[must_use]
     pub fn get_number_of_phases_used(&self) -> Option<&i32> {
         self.number_of_phases_used.as_ref()
     }
@@ -391,7 +395,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The maximum current of the connected cable in Ampere (A).
-    #[must_use] 
+    #[must_use]
     pub fn get_cable_max_current(&self) -> Option<&i32> {
         self.cable_max_current.as_ref()
     }
@@ -401,7 +405,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// This contains the Id of the reservation that terminates as a result of this transaction.
-    #[must_use] 
+    #[must_use]
     pub fn get_reservation_id(&self) -> Option<&i32> {
         self.reservation_id.as_ref()
     }
@@ -411,7 +415,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The `preconditioning_status` field
-    #[must_use] 
+    #[must_use]
     pub fn get_preconditioning_status(&self) -> Option<&PreconditioningStatusEnumType> {
         self.preconditioning_status.as_ref()
     }
@@ -421,7 +425,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// *(2.1)* True when EVSE electronics are in sleep mode for this transaction. Default value (when absent) is false.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_sleep(&self) -> Option<&bool> {
         self.evse_sleep.as_ref()
     }
@@ -431,7 +435,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The `transaction_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_transaction_info(&self) -> &TransactionType {
         &self.transaction_info
     }
@@ -441,7 +445,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The evse field
-    #[must_use] 
+    #[must_use]
     pub fn get_evse(&self) -> Option<&EVSEType> {
         self.evse.as_ref()
     }
@@ -451,7 +455,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The `id_token` field
-    #[must_use] 
+    #[must_use]
     pub fn get_id_token(&self) -> Option<&IdTokenType> {
         self.id_token.as_ref()
     }
@@ -461,7 +465,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -473,7 +477,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_cost_details(mut self, cost_details: CostDetailsType) -> Self {
         self.cost_details = Some(cost_details);
         self
@@ -486,7 +490,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_meter_value(mut self, meter_value: Vec<MeterValueType>) -> Self {
         self.meter_value = Some(meter_value);
         self
@@ -499,7 +503,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_offline(mut self, offline: bool) -> Self {
         self.offline = Some(offline);
         self
@@ -512,7 +516,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_number_of_phases_used(mut self, number_of_phases_used: i32) -> Self {
         self.number_of_phases_used = Some(number_of_phases_used);
         self
@@ -525,7 +529,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_cable_max_current(mut self, cable_max_current: i32) -> Self {
         self.cable_max_current = Some(cable_max_current);
         self
@@ -538,7 +542,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_reservation_id(mut self, reservation_id: i32) -> Self {
         self.reservation_id = Some(reservation_id);
         self
@@ -551,8 +555,11 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_preconditioning_status(mut self, preconditioning_status: PreconditioningStatusEnumType) -> Self {
+    #[must_use]
+    pub fn with_preconditioning_status(
+        mut self,
+        preconditioning_status: PreconditioningStatusEnumType,
+    ) -> Self {
         self.preconditioning_status = Some(preconditioning_status);
         self
     }
@@ -564,7 +571,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_sleep(mut self, evse_sleep: bool) -> Self {
         self.evse_sleep = Some(evse_sleep);
         self
@@ -577,7 +584,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse(mut self, evse: EVSEType) -> Self {
         self.evse = Some(evse);
         self
@@ -590,7 +597,7 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_id_token(mut self, id_token: IdTokenType) -> Self {
         self.id_token = Some(id_token);
         self
@@ -603,12 +610,11 @@ impl TransactionEventRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -664,7 +670,8 @@ mod tests {
         );
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: TransactionEventRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: TransactionEventRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -796,7 +803,8 @@ mod tests {
             assert!(request.validate().is_ok());
 
             let json = serde_json::to_string(&request).expect("Failed to serialize");
-            let deserialized: TransactionEventRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: TransactionEventRequest =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(request, deserialized);
         }
     }
@@ -817,7 +825,8 @@ mod tests {
         let response = TransactionEventResponse::new();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: TransactionEventResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: TransactionEventResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -832,8 +841,7 @@ mod tests {
     #[test]
     fn test_transaction_event_response_with_total_cost() {
         let total_cost = Decimal::new(2550, 2); // 25.50
-        let response = TransactionEventResponse::new()
-            .with_total_cost(total_cost);
+        let response = TransactionEventResponse::new().with_total_cost(total_cost);
 
         assert_eq!(response.get_total_cost(), Some(&total_cost));
     }
@@ -841,8 +849,7 @@ mod tests {
     #[test]
     fn test_transaction_event_response_with_charging_priority() {
         let priority = 5;
-        let response = TransactionEventResponse::new()
-            .with_charging_priority(priority);
+        let response = TransactionEventResponse::new().with_charging_priority(priority);
 
         assert_eq!(response.get_charging_priority(), Some(&priority));
     }
@@ -850,8 +857,7 @@ mod tests {
     #[test]
     fn test_transaction_event_response_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = TransactionEventResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = TransactionEventResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -891,7 +897,8 @@ mod tests {
         .with_number_of_phases_used(3);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: TransactionEventRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: TransactionEventRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -907,7 +914,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: TransactionEventResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: TransactionEventResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -916,7 +924,8 @@ mod tests {
     #[test]
     fn test_transaction_event_response_empty_json() {
         let json = "{}";
-        let response: TransactionEventResponse = serde_json::from_str(json).expect("Failed to deserialize");
+        let response: TransactionEventResponse =
+            serde_json::from_str(json).expect("Failed to deserialize");
 
         assert_eq!(response.get_total_cost(), None);
         assert_eq!(response.get_charging_priority(), None);
@@ -960,14 +969,12 @@ mod tests {
 
     #[test]
     fn test_transaction_event_response_charging_priority_range() {
-        let response = TransactionEventResponse::new()
-            .with_charging_priority(9); // Max priority
+        let response = TransactionEventResponse::new().with_charging_priority(9); // Max priority
 
         assert_eq!(response.get_charging_priority(), Some(&9));
         assert!(response.validate().is_ok());
 
-        let response = TransactionEventResponse::new()
-            .with_charging_priority(-9); // Min priority
+        let response = TransactionEventResponse::new().with_charging_priority(-9); // Min priority
 
         assert_eq!(response.get_charging_priority(), Some(&-9));
         assert!(response.validate().is_ok());
@@ -976,8 +983,7 @@ mod tests {
     #[test]
     fn test_transaction_event_response_zero_cost() {
         let zero_cost = Decimal::new(0, 0); // 0.00 for free transaction
-        let response = TransactionEventResponse::new()
-            .with_total_cost(zero_cost);
+        let response = TransactionEventResponse::new().with_total_cost(zero_cost);
 
         assert_eq!(response.get_total_cost(), Some(&zero_cost));
         assert!(response.validate().is_ok());
@@ -1031,7 +1037,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             total_cost: None,
@@ -1087,7 +1093,10 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_transaction_limit(&mut self, transaction_limit: Option<TransactionLimitType>) -> &mut Self {
+    pub fn set_transaction_limit(
+        &mut self,
+        transaction_limit: Option<TransactionLimitType>,
+    ) -> &mut Self {
         self.transaction_limit = transaction_limit;
         self
     }
@@ -1099,7 +1108,10 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_updated_personal_message(&mut self, updated_personal_message: Option<MessageContentType>) -> &mut Self {
+    pub fn set_updated_personal_message(
+        &mut self,
+        updated_personal_message: Option<MessageContentType>,
+    ) -> &mut Self {
         self.updated_personal_message = updated_personal_message;
         self
     }
@@ -1111,7 +1123,10 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_updated_personal_message_extra(&mut self, updated_personal_message_extra: Option<Vec<MessageContentType>>) -> &mut Self {
+    pub fn set_updated_personal_message_extra(
+        &mut self,
+        updated_personal_message_extra: Option<Vec<MessageContentType>>,
+    ) -> &mut Self {
         self.updated_personal_message_extra = updated_personal_message_extra;
         self
     }
@@ -1133,7 +1148,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// When _eventType_ of `TransactionEventRequest` is Updated, then this value contains the running cost. When _eventType_ of `TransactionEventRequest` is Ended, then this contains the final total cost of this transaction, including taxes, in the currency configured with the Configuration Variable: Currency. Absence of this value does not imply that the transaction was free. To indicate a free transaction, the CSMS SHALL send a value of 0.00.
-    #[must_use] 
+    #[must_use]
     pub fn get_total_cost(&self) -> Option<&Decimal> {
         self.total_cost.as_ref()
     }
@@ -1143,7 +1158,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// Priority from a business point of view. Default priority is 0, The range is from -9 to 9. Higher values indicate a higher priority. The chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; is temporarily, so it may not be set in the &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt; afterwards. Also the chargingPriority in &lt;&lt;transactioneventresponse,TransactionEventResponse&gt;&gt; has a higher priority than the one in &lt;&lt;`cmn_idtokeninfotype,IdTokenInfoType`&gt;&gt;.
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_priority(&self) -> Option<&i32> {
         self.charging_priority.as_ref()
     }
@@ -1153,7 +1168,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// The `id_token_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_id_token_info(&self) -> Option<&IdTokenInfoType> {
         self.id_token_info.as_ref()
     }
@@ -1163,7 +1178,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// The `transaction_limit` field
-    #[must_use] 
+    #[must_use]
     pub fn get_transaction_limit(&self) -> Option<&TransactionLimitType> {
         self.transaction_limit.as_ref()
     }
@@ -1173,7 +1188,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// The `updated_personal_message` field
-    #[must_use] 
+    #[must_use]
     pub fn get_updated_personal_message(&self) -> Option<&MessageContentType> {
         self.updated_personal_message.as_ref()
     }
@@ -1183,7 +1198,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// The `updated_personal_message_extra` field
-    #[must_use] 
+    #[must_use]
     pub fn get_updated_personal_message_extra(&self) -> Option<&Vec<MessageContentType>> {
         self.updated_personal_message_extra.as_ref()
     }
@@ -1193,7 +1208,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -1205,7 +1220,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_total_cost(mut self, total_cost: Decimal) -> Self {
         self.total_cost = Some(total_cost);
         self
@@ -1218,7 +1233,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_charging_priority(mut self, charging_priority: i32) -> Self {
         self.charging_priority = Some(charging_priority);
         self
@@ -1231,7 +1246,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_id_token_info(mut self, id_token_info: IdTokenInfoType) -> Self {
         self.id_token_info = Some(id_token_info);
         self
@@ -1244,7 +1259,7 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_transaction_limit(mut self, transaction_limit: TransactionLimitType) -> Self {
         self.transaction_limit = Some(transaction_limit);
         self
@@ -1257,8 +1272,11 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_updated_personal_message(mut self, updated_personal_message: MessageContentType) -> Self {
+    #[must_use]
+    pub fn with_updated_personal_message(
+        mut self,
+        updated_personal_message: MessageContentType,
+    ) -> Self {
         self.updated_personal_message = Some(updated_personal_message);
         self
     }
@@ -1270,8 +1288,11 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_updated_personal_message_extra(mut self, updated_personal_message_extra: Vec<MessageContentType>) -> Self {
+    #[must_use]
+    pub fn with_updated_personal_message_extra(
+        mut self,
+        updated_personal_message_extra: Vec<MessageContentType>,
+    ) -> Self {
         self.updated_personal_message_extra = Some(updated_personal_message_extra);
         self
     }
@@ -1283,10 +1304,9 @@ impl TransactionEventResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }

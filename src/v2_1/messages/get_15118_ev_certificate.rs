@@ -44,8 +44,12 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
-    pub fn new(iso_15118_schema_version: String, action: CertificateActionEnumType, exi_request: String) -> Self {
+    #[must_use]
+    pub fn new(
+        iso_15118_schema_version: String,
+        action: CertificateActionEnumType,
+        exi_request: String,
+    ) -> Self {
         Self {
             iso_15118_schema_version,
             action,
@@ -99,7 +103,10 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_maximum_contract_certificate_chains(&mut self, maximum_contract_certificate_chains: Option<i32>) -> &mut Self {
+    pub fn set_maximum_contract_certificate_chains(
+        &mut self,
+        maximum_contract_certificate_chains: Option<i32>,
+    ) -> &mut Self {
         self.maximum_contract_certificate_chains = maximum_contract_certificate_chains;
         self
     }
@@ -111,7 +118,10 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_prioritized_emai_ds(&mut self, prioritized_emai_ds: Option<Vec<String>>) -> &mut Self {
+    pub fn set_prioritized_emai_ds(
+        &mut self,
+        prioritized_emai_ds: Option<Vec<String>>,
+    ) -> &mut Self {
         self.prioritized_emai_ds = prioritized_emai_ds;
         self
     }
@@ -133,7 +143,7 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// Schema version currently used for the 15118 session between EV and Charging Station. Needed for parsing of the EXI stream by the CSMS.
-    #[must_use] 
+    #[must_use]
     pub fn get_iso_15118_schema_version(&self) -> &String {
         &self.iso_15118_schema_version
     }
@@ -143,7 +153,7 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// The action field
-    #[must_use] 
+    #[must_use]
     pub fn get_action(&self) -> &CertificateActionEnumType {
         &self.action
     }
@@ -153,7 +163,7 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// *(2.1)* Raw `CertificateInstallationReq` request from EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 11000. If a longer _exiRequest_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateRequest.exiRequest" ].
-    #[must_use] 
+    #[must_use]
     pub fn get_exi_request(&self) -> &String {
         &self.exi_request
     }
@@ -163,7 +173,7 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// *(2.1)* Absent during ISO 15118-2 session. Required during ISO 15118-20 session. + Maximum number of contracts that EV wants to install.
-    #[must_use] 
+    #[must_use]
     pub fn get_maximum_contract_certificate_chains(&self) -> Option<&i32> {
         self.maximum_contract_certificate_chains.as_ref()
     }
@@ -173,7 +183,7 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// *(2.1)*  Absent during ISO 15118-2 session. Optional during ISO 15118-20 session. List of EMAIDs for which contract certificates must be requested first, in case there are more certificates than allowed by _maximumContractCertificateChains_.
-    #[must_use] 
+    #[must_use]
     pub fn get_prioritized_emai_ds(&self) -> Option<&Vec<String>> {
         self.prioritized_emai_ds.as_ref()
     }
@@ -183,7 +193,7 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -195,8 +205,11 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_maximum_contract_certificate_chains(mut self, maximum_contract_certificate_chains: i32) -> Self {
+    #[must_use]
+    pub fn with_maximum_contract_certificate_chains(
+        mut self,
+        maximum_contract_certificate_chains: i32,
+    ) -> Self {
         self.maximum_contract_certificate_chains = Some(maximum_contract_certificate_chains);
         self
     }
@@ -208,7 +221,7 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_prioritized_emai_ds(mut self, prioritized_emai_ds: Vec<String>) -> Self {
         self.prioritized_emai_ds = Some(prioritized_emai_ds);
         self
@@ -221,12 +234,11 @@ impl Get15118EVCertificateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `Get15118EVCertificate` response.
@@ -265,7 +277,7 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: Iso15118EVCertificateStatusEnumType, exi_response: String) -> Self {
         Self {
             status,
@@ -341,7 +353,7 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &Iso15118EVCertificateStatusEnumType {
         &self.status
     }
@@ -351,7 +363,7 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -361,7 +373,7 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// *(2/1)* Raw `CertificateInstallationRes` response for the EV, Base64 encoded. + Extended to support ISO 15118-20 certificates. The minimum supported length is 17000. If a longer _exiResponse_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "Get15118EVCertificateResponse.exiResponse" ].
-    #[must_use] 
+    #[must_use]
     pub fn get_exi_response(&self) -> &String {
         &self.exi_response
     }
@@ -371,7 +383,7 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// *(2.1)* Number of contracts that can be retrieved with additional requests.
-    #[must_use] 
+    #[must_use]
     pub fn get_remaining_contracts(&self) -> Option<&i32> {
         self.remaining_contracts.as_ref()
     }
@@ -381,7 +393,7 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -393,7 +405,7 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -406,7 +418,7 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_remaining_contracts(mut self, remaining_contracts: i32) -> Self {
         self.remaining_contracts = Some(remaining_contracts);
         self
@@ -419,12 +431,11 @@ impl Get15118EVCertificateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -433,16 +444,19 @@ mod tests {
     use serde_json;
 
     // Tests for Get15118EVCertificateRequest
-    
+
     #[test]
     fn test_get_15118_ev_certificate_request_new() {
         let request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Install,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         );
-        
-        assert_eq!(request.iso_15118_schema_version, "urn:iso:15118:2:2013:MsgDef");
+
+        assert_eq!(
+            request.iso_15118_schema_version,
+            "urn:iso:15118:2:2013:MsgDef"
+        );
         assert_eq!(request.action, CertificateActionEnumType::Install);
         assert_eq!(request.exi_request, "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==");
         assert_eq!(request.maximum_contract_certificate_chains, None);
@@ -455,14 +469,23 @@ mod tests {
         let request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Update,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         )
         .with_maximum_contract_certificate_chains(5)
-        .with_prioritized_emai_ds(vec!["DE-ABC-123456".to_string(), "DE-XYZ-789012".to_string()])
+        .with_prioritized_emai_ds(vec![
+            "DE-ABC-123456".to_string(),
+            "DE-XYZ-789012".to_string(),
+        ])
         .with_custom_data(CustomDataType::new("Vendor".to_string()));
-        
+
         assert_eq!(request.maximum_contract_certificate_chains, Some(5));
-        assert_eq!(request.prioritized_emai_ds, Some(vec!["DE-ABC-123456".to_string(), "DE-XYZ-789012".to_string()]));
+        assert_eq!(
+            request.prioritized_emai_ds,
+            Some(vec![
+                "DE-ABC-123456".to_string(),
+                "DE-XYZ-789012".to_string()
+            ])
+        );
         assert!(request.custom_data.is_some());
     }
 
@@ -471,21 +494,27 @@ mod tests {
         let mut request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Install,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         );
-        
+
         request.set_iso_15118_schema_version("urn:iso:15118:20:2022:MsgDef".to_string());
         request.set_action(CertificateActionEnumType::Update);
         request.set_exi_request("bmV3X2V4aV9yZXF1ZXN0".to_string());
         request.set_maximum_contract_certificate_chains(Some(10));
         request.set_prioritized_emai_ds(Some(vec!["EMAID1".to_string()]));
         request.set_custom_data(Some(CustomDataType::new("TestVendor".to_string())));
-        
-        assert_eq!(request.iso_15118_schema_version, "urn:iso:15118:20:2022:MsgDef");
+
+        assert_eq!(
+            request.iso_15118_schema_version,
+            "urn:iso:15118:20:2022:MsgDef"
+        );
         assert_eq!(request.action, CertificateActionEnumType::Update);
         assert_eq!(request.exi_request, "bmV3X2V4aV9yZXF1ZXN0");
         assert_eq!(request.maximum_contract_certificate_chains, Some(10));
-        assert_eq!(request.prioritized_emai_ds, Some(vec!["EMAID1".to_string()]));
+        assert_eq!(
+            request.prioritized_emai_ds,
+            Some(vec!["EMAID1".to_string()])
+        );
         assert!(request.custom_data.is_some());
     }
 
@@ -494,16 +523,25 @@ mod tests {
         let request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Install,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         )
         .with_maximum_contract_certificate_chains(3)
         .with_prioritized_emai_ds(vec!["EMAID1".to_string()]);
-        
-        assert_eq!(request.get_iso_15118_schema_version(), "urn:iso:15118:2:2013:MsgDef");
+
+        assert_eq!(
+            request.get_iso_15118_schema_version(),
+            "urn:iso:15118:2:2013:MsgDef"
+        );
         assert_eq!(*request.get_action(), CertificateActionEnumType::Install);
-        assert_eq!(request.get_exi_request(), "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==");
+        assert_eq!(
+            request.get_exi_request(),
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ=="
+        );
         assert_eq!(request.get_maximum_contract_certificate_chains(), Some(&3));
-        assert_eq!(request.get_prioritized_emai_ds(), Some(&vec!["EMAID1".to_string()]));
+        assert_eq!(
+            request.get_prioritized_emai_ds(),
+            Some(&vec!["EMAID1".to_string()])
+        );
         assert_eq!(request.get_custom_data(), None);
     }
 
@@ -512,12 +550,12 @@ mod tests {
         let request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Install,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         );
-        
+
         let json = serde_json::to_string(&request).unwrap();
         let parsed: Get15118EVCertificateRequest = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(request, parsed);
     }
 
@@ -530,14 +568,23 @@ mod tests {
             "maximumContractCertificateChains": 5,
             "prioritizedEmaiDs": ["DE-ABC-123456", "DE-XYZ-789012"]
         }"#;
-        
+
         let request: Get15118EVCertificateRequest = serde_json::from_str(json).unwrap();
-        
-        assert_eq!(request.iso_15118_schema_version, "urn:iso:15118:2:2013:MsgDef");
+
+        assert_eq!(
+            request.iso_15118_schema_version,
+            "urn:iso:15118:2:2013:MsgDef"
+        );
         assert_eq!(request.action, CertificateActionEnumType::Install);
         assert_eq!(request.exi_request, "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==");
         assert_eq!(request.maximum_contract_certificate_chains, Some(5));
-        assert_eq!(request.prioritized_emai_ds, Some(vec!["DE-ABC-123456".to_string(), "DE-XYZ-789012".to_string()]));
+        assert_eq!(
+            request.prioritized_emai_ds,
+            Some(vec![
+                "DE-ABC-123456".to_string(),
+                "DE-XYZ-789012".to_string()
+            ])
+        );
     }
 
     #[test]
@@ -545,9 +592,9 @@ mod tests {
         let request = Get15118EVCertificateRequest::new(
             "a".repeat(51), // 51 characters, exceeds max length of 50
             CertificateActionEnumType::Install,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         );
-        
+
         assert!(request.validate().is_err());
     }
 
@@ -556,9 +603,9 @@ mod tests {
         let request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Install,
-            "a".repeat(11001) // 11001 characters, exceeds max length of 11000
+            "a".repeat(11001), // 11001 characters, exceeds max length of 11000
         );
-        
+
         assert!(request.validate().is_err());
     }
 
@@ -567,10 +614,10 @@ mod tests {
         let mut request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Install,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         );
         request.set_maximum_contract_certificate_chains(Some(-1));
-        
+
         assert!(request.validate().is_err());
     }
 
@@ -579,10 +626,10 @@ mod tests {
         let mut request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Install,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         );
         request.set_prioritized_emai_ds(Some(vec![])); // Empty vector, min length is 1
-        
+
         assert!(request.validate().is_err());
     }
 
@@ -591,24 +638,27 @@ mod tests {
         let mut request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Install,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         );
         let emai_ds: Vec<String> = (0..9).map(|i| format!("EMAID{}", i)).collect(); // 9 items, max is 8
         request.set_prioritized_emai_ds(Some(emai_ds));
-        
+
         assert!(request.validate().is_err());
     }
 
     // Tests for Get15118EVCertificateResponse
-    
+
     #[test]
     fn test_get_15118_ev_certificate_response_new() {
         let response = Get15118EVCertificateResponse::new(
             Iso15118EVCertificateStatusEnumType::Accepted,
-            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string()
+            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string(),
         );
-        
-        assert_eq!(response.status, Iso15118EVCertificateStatusEnumType::Accepted);
+
+        assert_eq!(
+            response.status,
+            Iso15118EVCertificateStatusEnumType::Accepted
+        );
         assert_eq!(response.exi_response, "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=");
         assert_eq!(response.status_info, None);
         assert_eq!(response.remaining_contracts, None);
@@ -619,13 +669,15 @@ mod tests {
     fn test_get_15118_ev_certificate_response_with_optional_fields() {
         let response = Get15118EVCertificateResponse::new(
             Iso15118EVCertificateStatusEnumType::Accepted,
-            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string()
+            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string(),
         )
-        .with_status_info(StatusInfoType::new("Success".to_string())
-            .with_additional_info("Certificate installed successfully".to_string()))
+        .with_status_info(
+            StatusInfoType::new("Success".to_string())
+                .with_additional_info("Certificate installed successfully".to_string()),
+        )
         .with_remaining_contracts(3)
         .with_custom_data(CustomDataType::new("Vendor".to_string()));
-        
+
         assert!(response.status_info.is_some());
         assert_eq!(response.remaining_contracts, Some(3));
         assert!(response.custom_data.is_some());
@@ -635,15 +687,15 @@ mod tests {
     fn test_get_15118_ev_certificate_response_setters() {
         let mut response = Get15118EVCertificateResponse::new(
             Iso15118EVCertificateStatusEnumType::Accepted,
-            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string()
+            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string(),
         );
-        
+
         response.set_status(Iso15118EVCertificateStatusEnumType::Failed);
         response.set_exi_response("bmV3X2V4aV9yZXNwb25zZQ==".to_string());
         response.set_status_info(Some(StatusInfoType::new("Error".to_string())));
         response.set_remaining_contracts(Some(5));
         response.set_custom_data(Some(CustomDataType::new("TestVendor".to_string())));
-        
+
         assert_eq!(response.status, Iso15118EVCertificateStatusEnumType::Failed);
         assert_eq!(response.exi_response, "bmV3X2V4aV9yZXNwb25zZQ==");
         assert!(response.status_info.is_some());
@@ -655,12 +707,18 @@ mod tests {
     fn test_get_15118_ev_certificate_response_getters() {
         let response = Get15118EVCertificateResponse::new(
             Iso15118EVCertificateStatusEnumType::Accepted,
-            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string()
+            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string(),
         )
         .with_remaining_contracts(2);
-        
-        assert_eq!(*response.get_status(), Iso15118EVCertificateStatusEnumType::Accepted);
-        assert_eq!(response.get_exi_response(), "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=");
+
+        assert_eq!(
+            *response.get_status(),
+            Iso15118EVCertificateStatusEnumType::Accepted
+        );
+        assert_eq!(
+            response.get_exi_response(),
+            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U="
+        );
         assert_eq!(response.get_status_info(), None);
         assert_eq!(response.get_remaining_contracts(), Some(&2));
         assert_eq!(response.get_custom_data(), None);
@@ -670,12 +728,12 @@ mod tests {
     fn test_get_15118_ev_certificate_response_serialization() {
         let response = Get15118EVCertificateResponse::new(
             Iso15118EVCertificateStatusEnumType::Accepted,
-            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string()
+            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string(),
         );
-        
+
         let json = serde_json::to_string(&response).unwrap();
         let parsed: Get15118EVCertificateResponse = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(response, parsed);
     }
 
@@ -686,10 +744,13 @@ mod tests {
             "exiResponse": "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=",
             "remainingContracts": 2
         }"#;
-        
+
         let response: Get15118EVCertificateResponse = serde_json::from_str(json).unwrap();
-        
-        assert_eq!(response.status, Iso15118EVCertificateStatusEnumType::Accepted);
+
+        assert_eq!(
+            response.status,
+            Iso15118EVCertificateStatusEnumType::Accepted
+        );
         assert_eq!(response.exi_response, "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=");
         assert_eq!(response.remaining_contracts, Some(2));
     }
@@ -698,9 +759,9 @@ mod tests {
     fn test_get_15118_ev_certificate_response_validation_exi_response_too_long() {
         let response = Get15118EVCertificateResponse::new(
             Iso15118EVCertificateStatusEnumType::Accepted,
-            "a".repeat(17001) // 17001 characters, exceeds max length of 17000
+            "a".repeat(17001), // 17001 characters, exceeds max length of 17000
         );
-        
+
         assert!(response.validate().is_err());
     }
 
@@ -708,10 +769,10 @@ mod tests {
     fn test_get_15118_ev_certificate_response_validation_negative_remaining_contracts() {
         let mut response = Get15118EVCertificateResponse::new(
             Iso15118EVCertificateStatusEnumType::Accepted,
-            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string()
+            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string(),
         );
         response.set_remaining_contracts(Some(-1));
-        
+
         assert!(response.validate().is_err());
     }
 
@@ -722,11 +783,11 @@ mod tests {
             Iso15118EVCertificateStatusEnumType::Accepted,
             Iso15118EVCertificateStatusEnumType::Failed,
         ];
-        
+
         for status in statuses {
             let response = Get15118EVCertificateResponse::new(
                 status.clone(),
-                "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string()
+                "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string(),
             );
             assert_eq!(response.status, status);
         }
@@ -739,12 +800,12 @@ mod tests {
             CertificateActionEnumType::Install,
             CertificateActionEnumType::Update,
         ];
-        
+
         for action in actions {
             let request = Get15118EVCertificateRequest::new(
                 "urn:iso:15118:2:2013:MsgDef".to_string(),
                 action.clone(),
-                "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+                "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
             );
             assert_eq!(request.action, action);
         }
@@ -755,18 +816,21 @@ mod tests {
         let request = Get15118EVCertificateRequest::new(
             "urn:iso:15118:2:2013:MsgDef".to_string(),
             CertificateActionEnumType::Install,
-            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string()
+            "YmFzZTY0X2VuY29kZWRfZXhhbXBsZQ==".to_string(),
         )
         .with_maximum_contract_certificate_chains(5)
         .with_prioritized_emai_ds(vec!["EMAID1".to_string(), "EMAID2".to_string()])
         .with_custom_data(CustomDataType::new("TestVendor".to_string()));
-        
+
         let json = serde_json::to_string(&request).unwrap();
         let parsed: Get15118EVCertificateRequest = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(request, parsed);
         assert_eq!(parsed.maximum_contract_certificate_chains, Some(5));
-        assert_eq!(parsed.prioritized_emai_ds, Some(vec!["EMAID1".to_string(), "EMAID2".to_string()]));
+        assert_eq!(
+            parsed.prioritized_emai_ds,
+            Some(vec!["EMAID1".to_string(), "EMAID2".to_string()])
+        );
         assert_eq!(parsed.custom_data.as_ref().unwrap().vendor_id, "TestVendor");
     }
 
@@ -774,16 +838,17 @@ mod tests {
     fn test_get_15118_ev_certificate_response_json_round_trip_with_all_fields() {
         let response = Get15118EVCertificateResponse::new(
             Iso15118EVCertificateStatusEnumType::Accepted,
-            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string()
+            "YmFzZTY0X2VuY29kZWRfcmVzcG9uc2U=".to_string(),
         )
-        .with_status_info(StatusInfoType::new("Success".to_string())
-            .with_additional_info("All good".to_string()))
+        .with_status_info(
+            StatusInfoType::new("Success".to_string()).with_additional_info("All good".to_string()),
+        )
         .with_remaining_contracts(3)
         .with_custom_data(CustomDataType::new("TestVendor".to_string()));
-        
+
         let json = serde_json::to_string(&response).unwrap();
         let parsed: Get15118EVCertificateResponse = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(response, parsed);
         assert_eq!(parsed.remaining_contracts, Some(3));
         assert_eq!(parsed.status_info.as_ref().unwrap().reason_code, "Success");

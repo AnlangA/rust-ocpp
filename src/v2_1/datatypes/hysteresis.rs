@@ -61,7 +61,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// A new instance of `HysteresisType` with all fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             hysteresis_high: None,
@@ -81,7 +81,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_hysteresis_high(mut self, hysteresis_high: Decimal) -> Self {
         self.hysteresis_high = Some(hysteresis_high);
         self
@@ -96,7 +96,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_hysteresis_low(mut self, hysteresis_low: Decimal) -> Self {
         self.hysteresis_low = Some(hysteresis_low);
         self
@@ -111,7 +111,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_hysteresis_delay(mut self, hysteresis_delay: Decimal) -> Self {
         self.hysteresis_delay = Some(hysteresis_delay);
         self
@@ -126,7 +126,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_hysteresis_gradient(mut self, hysteresis_gradient: Decimal) -> Self {
         self.hysteresis_gradient = Some(hysteresis_gradient);
         self
@@ -141,7 +141,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -152,7 +152,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// An optional reference to the hysteresis high value
-    #[must_use] 
+    #[must_use]
     pub fn hysteresis_high(&self) -> Option<&Decimal> {
         self.hysteresis_high.as_ref()
     }
@@ -176,7 +176,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// An optional reference to the hysteresis low value
-    #[must_use] 
+    #[must_use]
     pub fn hysteresis_low(&self) -> Option<&Decimal> {
         self.hysteresis_low.as_ref()
     }
@@ -200,7 +200,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// An optional reference to the hysteresis delay
-    #[must_use] 
+    #[must_use]
     pub fn hysteresis_delay(&self) -> Option<&Decimal> {
         self.hysteresis_delay.as_ref()
     }
@@ -224,7 +224,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// An optional reference to the hysteresis gradient
-    #[must_use] 
+    #[must_use]
     pub fn hysteresis_gradient(&self) -> Option<&Decimal> {
         self.hysteresis_gradient.as_ref()
     }
@@ -248,7 +248,7 @@ impl HysteresisType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

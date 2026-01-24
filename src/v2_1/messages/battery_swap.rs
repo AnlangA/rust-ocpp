@@ -40,8 +40,13 @@ impl BatterySwapRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
-    pub fn new(battery_data: Vec<BatteryDataType>, event_type: BatterySwapEventEnumType, id_token: IdTokenType, request_id: i32) -> Self {
+    #[must_use]
+    pub fn new(
+        battery_data: Vec<BatteryDataType>,
+        event_type: BatterySwapEventEnumType,
+        id_token: IdTokenType,
+        request_id: i32,
+    ) -> Self {
         Self {
             battery_data,
             event_type,
@@ -116,7 +121,7 @@ impl BatterySwapRequest {
     /// # Returns
     ///
     /// The `battery_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_battery_data(&self) -> &Vec<BatteryDataType> {
         &self.battery_data
     }
@@ -126,7 +131,7 @@ impl BatterySwapRequest {
     /// # Returns
     ///
     /// The `event_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_event_type(&self) -> &BatterySwapEventEnumType {
         &self.event_type
     }
@@ -136,7 +141,7 @@ impl BatterySwapRequest {
     /// # Returns
     ///
     /// The `id_token` field
-    #[must_use] 
+    #[must_use]
     pub fn get_id_token(&self) -> &IdTokenType {
         &self.id_token
     }
@@ -146,7 +151,7 @@ impl BatterySwapRequest {
     /// # Returns
     ///
     /// `RequestId` to correlate BatteryIn/Out events and optional `RequestBatterySwapRequest`.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -156,7 +161,7 @@ impl BatterySwapRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -168,12 +173,11 @@ impl BatterySwapRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `BatterySwap` response.
@@ -199,11 +203,9 @@ impl BatterySwapResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -223,7 +225,7 @@ impl BatterySwapResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -235,12 +237,11 @@ impl BatterySwapResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -332,7 +333,8 @@ mod tests {
         let request = BatterySwapRequest::new(battery_data, event_type, id_token, request_id);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: BatterySwapRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BatterySwapRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -435,7 +437,8 @@ mod tests {
         let id_token = create_test_id_token();
         let request_id = 123;
 
-        let request = BatterySwapRequest::new(battery_data.clone(), event_type, id_token, request_id);
+        let request =
+            BatterySwapRequest::new(battery_data.clone(), event_type, id_token, request_id);
 
         assert_eq!(request.get_battery_data().len(), 3);
         assert_eq!(request.get_battery_data(), &battery_data);
@@ -459,12 +462,7 @@ mod tests {
         assert!(request.validate().is_ok());
 
         // Test with large request_id
-        let request = BatterySwapRequest::new(
-            battery_data,
-            event_type,
-            id_token,
-            i32::MAX,
-        );
+        let request = BatterySwapRequest::new(battery_data, event_type, id_token, i32::MAX);
         assert_eq!(request.get_request_id(), &i32::MAX);
         assert!(request.validate().is_ok());
     }
@@ -488,7 +486,8 @@ mod tests {
         let response = BatterySwapResponse::new();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: BatterySwapResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BatterySwapResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -497,8 +496,7 @@ mod tests {
     fn test_battery_swap_response_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = BatterySwapResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = BatterySwapResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -526,7 +524,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: BatterySwapRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BatterySwapRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -536,11 +535,11 @@ mod tests {
     fn test_battery_swap_response_json_round_trip() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = BatterySwapResponse::new()
-            .with_custom_data(custom_data);
+        let response = BatterySwapResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: BatterySwapResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BatterySwapResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -569,8 +568,7 @@ mod tests {
     fn test_battery_swap_response_clear_optional_fields() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut response = BatterySwapResponse::new()
-            .with_custom_data(custom_data);
+        let mut response = BatterySwapResponse::new().with_custom_data(custom_data);
 
         // Verify custom data is set
         assert!(response.get_custom_data().is_some());
@@ -588,17 +586,15 @@ mod tests {
             .with_property("region".to_string(), json!("EU"))
             .with_property("warranty".to_string(), json!("5 years"));
 
-        let battery_data = vec![
-            BatteryDataType::new(
-                1,
-                "BAT123456".to_string(),
-                Decimal::new(750, 1), // 75.0%
-                Decimal::new(850, 1), // 85.0%
-                Utc::now(),
-            )
-            .with_vendor_info("Vendor specific battery info".to_string())
-            .with_custom_data(custom_data),
-        ];
+        let battery_data = vec![BatteryDataType::new(
+            1,
+            "BAT123456".to_string(),
+            Decimal::new(750, 1), // 75.0%
+            Decimal::new(850, 1), // 85.0%
+            Utc::now(),
+        )
+        .with_vendor_info("Vendor specific battery info".to_string())
+        .with_custom_data(custom_data)];
 
         let event_type = BatterySwapEventEnumType::BatteryIn;
         let id_token = create_test_id_token();
@@ -610,7 +606,8 @@ mod tests {
 
         // Test serialization with complex data
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: BatterySwapRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BatterySwapRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -636,7 +633,8 @@ mod tests {
 
         // Test serialization
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: BatterySwapRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BatterySwapRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -652,11 +650,14 @@ mod tests {
         let custom_data = CustomDataType::new("SwapVendor".to_string())
             .with_property("station_id".to_string(), json!("STATION_001"))
             .with_property("operator".to_string(), json!("John Doe"))
-            .with_property("metadata".to_string(), json!({
-                "swap_duration": 120,
-                "temperature": 25.5,
-                "humidity": 60
-            }));
+            .with_property(
+                "metadata".to_string(),
+                json!({
+                    "swap_duration": 120,
+                    "temperature": 25.5,
+                    "humidity": 60
+                }),
+            );
 
         let request = BatterySwapRequest::new(battery_data, event_type, id_token, request_id)
             .with_custom_data(custom_data);
@@ -665,7 +666,8 @@ mod tests {
 
         // Test serialization with complex custom data
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: BatterySwapRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: BatterySwapRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 }

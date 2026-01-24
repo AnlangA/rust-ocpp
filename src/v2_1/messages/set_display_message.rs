@@ -23,7 +23,7 @@ impl SetDisplayMessageRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(message: MessageInfoType) -> Self {
         Self {
             message,
@@ -60,7 +60,7 @@ impl SetDisplayMessageRequest {
     /// # Returns
     ///
     /// The message field
-    #[must_use] 
+    #[must_use]
     pub fn get_message(&self) -> &MessageInfoType {
         &self.message
     }
@@ -70,7 +70,7 @@ impl SetDisplayMessageRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -82,12 +82,11 @@ impl SetDisplayMessageRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SetDisplayMessage` response.
@@ -113,7 +112,7 @@ impl SetDisplayMessageResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: DisplayMessageStatusEnumType) -> Self {
         Self {
             status,
@@ -163,7 +162,7 @@ impl SetDisplayMessageResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &DisplayMessageStatusEnumType {
         &self.status
     }
@@ -173,7 +172,7 @@ impl SetDisplayMessageResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -183,7 +182,7 @@ impl SetDisplayMessageResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -195,7 +194,7 @@ impl SetDisplayMessageResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -208,19 +207,20 @@ impl SetDisplayMessageResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::v2_1::datatypes::{CustomDataType, MessageInfoType, StatusInfoType};
-    use crate::v2_1::enumerations::{DisplayMessageStatusEnumType, MessagePriorityEnumType, MessageStateEnumType};
+    use crate::v2_1::enumerations::{
+        DisplayMessageStatusEnumType, MessagePriorityEnumType, MessageStateEnumType,
+    };
     use chrono::Utc;
 
     fn create_test_message() -> MessageInfoType {
@@ -243,7 +243,8 @@ mod tests {
         let request = SetDisplayMessageRequest::new(message);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetDisplayMessageRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetDisplayMessageRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(json.contains("\"message\""));
@@ -260,8 +261,8 @@ mod tests {
     fn test_set_display_message_request_builder_pattern() {
         let message = create_test_message();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetDisplayMessageRequest::new(message.clone())
-            .with_custom_data(custom_data.clone());
+        let request =
+            SetDisplayMessageRequest::new(message.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(request.message, message);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -275,8 +276,9 @@ mod tests {
         let mut request = SetDisplayMessageRequest::new(message1);
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        request.set_message(message2.clone())
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_message(message2.clone())
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.message, message2);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -286,8 +288,8 @@ mod tests {
     fn test_set_display_message_request_getters() {
         let message = create_test_message();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetDisplayMessageRequest::new(message.clone())
-            .with_custom_data(custom_data.clone());
+        let request =
+            SetDisplayMessageRequest::new(message.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(*request.get_message(), message);
         assert_eq!(request.get_custom_data(), Some(&custom_data));
@@ -306,7 +308,8 @@ mod tests {
         let response = SetDisplayMessageResponse::new(DisplayMessageStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetDisplayMessageResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetDisplayMessageResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(json.contains("\"status\":\"Rejected\""));
@@ -316,11 +319,15 @@ mod tests {
     fn test_set_display_message_response_builder_pattern() {
         let status_info = StatusInfoType::new("Message conflict".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = SetDisplayMessageResponse::new(DisplayMessageStatusEnumType::NotSupportedMessageFormat)
-            .with_status_info(status_info.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            SetDisplayMessageResponse::new(DisplayMessageStatusEnumType::NotSupportedMessageFormat)
+                .with_status_info(status_info.clone())
+                .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.status, DisplayMessageStatusEnumType::NotSupportedMessageFormat);
+        assert_eq!(
+            response.status,
+            DisplayMessageStatusEnumType::NotSupportedMessageFormat
+        );
         assert_eq!(response.status_info, Some(status_info));
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -331,9 +338,10 @@ mod tests {
         let status_info = StatusInfoType::new("Updated status".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        response.set_status(DisplayMessageStatusEnumType::Rejected)
-                .set_status_info(Some(status_info.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(DisplayMessageStatusEnumType::Rejected)
+            .set_status_info(Some(status_info.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, DisplayMessageStatusEnumType::Rejected);
         assert_eq!(response.status_info, Some(status_info));
@@ -348,7 +356,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(*response.get_status(), DisplayMessageStatusEnumType::Accepted);
+        assert_eq!(
+            *response.get_status(),
+            DisplayMessageStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -356,12 +367,9 @@ mod tests {
     #[test]
     fn test_set_display_message_edge_cases() {
         // Test with different message priorities and states
-        let high_priority_message = MessageInfoType::new(
-            999,
-            MessagePriorityEnumType::AlwaysFront,
-            Utc::now()
-        )
-        .with_state(MessageStateEnumType::Faulted);
+        let high_priority_message =
+            MessageInfoType::new(999, MessagePriorityEnumType::AlwaysFront, Utc::now())
+                .with_state(MessageStateEnumType::Faulted);
 
         let request = SetDisplayMessageRequest::new(high_priority_message);
         assert!(request.validate().is_ok());

@@ -32,7 +32,7 @@ impl TariffEnergyPriceType {
     /// # Returns
     ///
     /// A new instance of `TariffEnergyPriceType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(price_kwh: Decimal) -> Self {
         Self {
             price_kwh,
@@ -50,7 +50,7 @@ impl TariffEnergyPriceType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_conditions(mut self, conditions: TariffConditionsType) -> Self {
         self.conditions = Some(conditions);
         self
@@ -65,7 +65,7 @@ impl TariffEnergyPriceType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -76,7 +76,7 @@ impl TariffEnergyPriceType {
     /// # Returns
     ///
     /// The price per kWh (excl. tax) for this element
-    #[must_use] 
+    #[must_use]
     pub fn price_kwh(&self) -> Decimal {
         self.price_kwh
     }
@@ -100,7 +100,7 @@ impl TariffEnergyPriceType {
     /// # Returns
     ///
     /// An optional reference to the conditions when this tariff element applies
-    #[must_use] 
+    #[must_use]
     pub fn conditions(&self) -> Option<&TariffConditionsType> {
         self.conditions.as_ref()
     }
@@ -124,7 +124,7 @@ impl TariffEnergyPriceType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

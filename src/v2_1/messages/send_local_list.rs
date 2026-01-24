@@ -30,7 +30,7 @@ impl SendLocalListRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(version_number: i32, update_type: UpdateEnumType) -> Self {
         Self {
             local_authorization_list: None,
@@ -47,7 +47,10 @@ impl SendLocalListRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_local_authorization_list(&mut self, local_authorization_list: Option<Vec<AuthorizationData>>) -> &mut Self {
+    pub fn set_local_authorization_list(
+        &mut self,
+        local_authorization_list: Option<Vec<AuthorizationData>>,
+    ) -> &mut Self {
         self.local_authorization_list = local_authorization_list;
         self
     }
@@ -93,7 +96,7 @@ impl SendLocalListRequest {
     /// # Returns
     ///
     /// The `local_authorization_list` field
-    #[must_use] 
+    #[must_use]
     pub fn get_local_authorization_list(&self) -> Option<&Vec<AuthorizationData>> {
         self.local_authorization_list.as_ref()
     }
@@ -103,7 +106,7 @@ impl SendLocalListRequest {
     /// # Returns
     ///
     /// In case of a full update this is the version number of the full list. In case of a differential update it is the version number of the list after the update has been applied.
-    #[must_use] 
+    #[must_use]
     pub fn get_version_number(&self) -> &i32 {
         &self.version_number
     }
@@ -113,7 +116,7 @@ impl SendLocalListRequest {
     /// # Returns
     ///
     /// The `update_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_update_type(&self) -> &UpdateEnumType {
         &self.update_type
     }
@@ -123,7 +126,7 @@ impl SendLocalListRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -135,8 +138,11 @@ impl SendLocalListRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_local_authorization_list(mut self, local_authorization_list: Vec<AuthorizationData>) -> Self {
+    #[must_use]
+    pub fn with_local_authorization_list(
+        mut self,
+        local_authorization_list: Vec<AuthorizationData>,
+    ) -> Self {
         self.local_authorization_list = Some(local_authorization_list);
         self
     }
@@ -148,12 +154,11 @@ impl SendLocalListRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SendLocalList` response.
@@ -182,7 +187,7 @@ impl SendLocalListResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: SendLocalListStatusEnumType) -> Self {
         Self {
             status,
@@ -232,7 +237,7 @@ impl SendLocalListResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &SendLocalListStatusEnumType {
         &self.status
     }
@@ -242,7 +247,7 @@ impl SendLocalListResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -252,7 +257,7 @@ impl SendLocalListResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -264,7 +269,7 @@ impl SendLocalListResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -277,19 +282,22 @@ impl SendLocalListResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::v2_1::datatypes::{AuthorizationData, CustomDataType, IdTokenType, IdTokenInfoType, StatusInfoType};
-    use crate::v2_1::enumerations::{AuthorizationStatusEnumType, SendLocalListStatusEnumType, UpdateEnumType};
+    use crate::v2_1::datatypes::{
+        AuthorizationData, CustomDataType, IdTokenInfoType, IdTokenType, StatusInfoType,
+    };
+    use crate::v2_1::enumerations::{
+        AuthorizationStatusEnumType, SendLocalListStatusEnumType, UpdateEnumType,
+    };
 
     #[test]
     fn test_send_local_list_request_new() {
@@ -309,7 +317,8 @@ mod tests {
             .with_local_authorization_list(vec![auth_data]);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SendLocalListRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SendLocalListRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(json.contains("\"versionNumber\":2"));
@@ -352,10 +361,11 @@ mod tests {
         let auth_data = AuthorizationData::new(id_token, id_token_info);
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        request.set_version_number(4)
-               .set_update_type(UpdateEnumType::Differential)
-               .set_local_authorization_list(Some(vec![auth_data.clone()]))
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_version_number(4)
+            .set_update_type(UpdateEnumType::Differential)
+            .set_local_authorization_list(Some(vec![auth_data.clone()]))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.version_number, 4);
         assert_eq!(request.update_type, UpdateEnumType::Differential);
@@ -375,7 +385,10 @@ mod tests {
 
         assert_eq!(*request.get_version_number(), 5);
         assert_eq!(*request.get_update_type(), UpdateEnumType::Full);
-        assert_eq!(request.get_local_authorization_list(), Some(&vec![auth_data]));
+        assert_eq!(
+            request.get_local_authorization_list(),
+            Some(&vec![auth_data])
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -392,7 +405,8 @@ mod tests {
         let response = SendLocalListResponse::new(SendLocalListStatusEnumType::Failed);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SendLocalListResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SendLocalListResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(json.contains("\"status\":\"Failed\""));
@@ -406,7 +420,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.status, SendLocalListStatusEnumType::VersionMismatch);
+        assert_eq!(
+            response.status,
+            SendLocalListStatusEnumType::VersionMismatch
+        );
         assert_eq!(response.status_info, Some(status_info));
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -417,9 +434,10 @@ mod tests {
         let status_info = StatusInfoType::new("Updated reason".to_string());
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        response.set_status(SendLocalListStatusEnumType::Failed)
-                .set_status_info(Some(status_info.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(SendLocalListStatusEnumType::Failed)
+            .set_status_info(Some(status_info.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, SendLocalListStatusEnumType::Failed);
         assert_eq!(response.status_info, Some(status_info));
@@ -434,7 +452,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(*response.get_status(), SendLocalListStatusEnumType::Accepted);
+        assert_eq!(
+            *response.get_status(),
+            SendLocalListStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }

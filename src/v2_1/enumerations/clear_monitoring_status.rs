@@ -10,4 +10,3 @@ pub enum ClearMonitoringStatusEnumType {
     Rejected,
     NotFound,
 }
-

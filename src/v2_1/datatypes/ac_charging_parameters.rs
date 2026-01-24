@@ -53,7 +53,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// A new instance of `ACChargingParametersType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         energy_amount: Decimal,
         ev_min_current: Decimal,
@@ -81,7 +81,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// A new instance of `ACChargingParametersType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new_from_f64(
         energy_amount: f64,
         ev_min_current: f64,
@@ -106,7 +106,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -117,7 +117,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// The amount of energy requested (in Wh)
-    #[must_use] 
+    #[must_use]
     pub fn energy_amount(&self) -> &Decimal {
         &self.energy_amount
     }
@@ -155,7 +155,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// The minimum current (amps) supported by the electric vehicle (per phase)
-    #[must_use] 
+    #[must_use]
     pub fn ev_min_current(&self) -> &Decimal {
         &self.ev_min_current
     }
@@ -193,7 +193,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// The maximum current (amps) supported by the electric vehicle (per phase)
-    #[must_use] 
+    #[must_use]
     pub fn ev_max_current(&self) -> &Decimal {
         &self.ev_max_current
     }
@@ -231,7 +231,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// The maximum voltage supported by the electric vehicle
-    #[must_use] 
+    #[must_use]
     pub fn ev_max_voltage(&self) -> &Decimal {
         &self.ev_max_voltage
     }
@@ -269,7 +269,7 @@ impl ACChargingParametersType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

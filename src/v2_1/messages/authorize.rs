@@ -1,9 +1,5 @@
 use crate::v2_1::datatypes::{
-    CustomDataType,
-    IdTokenInfoType,
-    IdTokenType,
-    OCSPRequestDataType,
-    TariffType,
+    CustomDataType, IdTokenInfoType, IdTokenType, OCSPRequestDataType, TariffType,
 };
 use crate::v2_1::enumerations::{AuthorizeCertificateStatusEnumType, EnergyTransferModeEnumType};
 use serde::{Deserialize, Serialize};
@@ -42,7 +38,7 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(id_token: IdTokenType) -> Self {
         Self {
             id_token,
@@ -83,7 +79,10 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_iso_15118_certificate_hash_data(&mut self, iso_15118_certificate_hash_data: Option<Vec<OCSPRequestDataType>>) -> &mut Self {
+    pub fn set_iso_15118_certificate_hash_data(
+        &mut self,
+        iso_15118_certificate_hash_data: Option<Vec<OCSPRequestDataType>>,
+    ) -> &mut Self {
         self.iso_15118_certificate_hash_data = iso_15118_certificate_hash_data;
         self
     }
@@ -105,7 +104,7 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// The `id_token` field
-    #[must_use] 
+    #[must_use]
     pub fn get_id_token(&self) -> &IdTokenType {
         &self.id_token
     }
@@ -115,7 +114,7 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// *(2.1)* The X.509 certificate chain presented by EV and encoded in PEM format. Order of certificates in chain is from leaf up to (but excluding) root certificate. + Only needed in case of central contract validation when Charging Station cannot validate the contract certificate.
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate(&self) -> Option<&String> {
         self.certificate.as_ref()
     }
@@ -125,7 +124,7 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// The `iso_15118_certificate_hash_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_iso_15118_certificate_hash_data(&self) -> Option<&Vec<OCSPRequestDataType>> {
         self.iso_15118_certificate_hash_data.as_ref()
     }
@@ -135,7 +134,7 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -147,7 +146,7 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_certificate(mut self, certificate: String) -> Self {
         self.certificate = Some(certificate);
         self
@@ -160,8 +159,11 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_iso_15118_certificate_hash_data(mut self, iso_15118_certificate_hash_data: Vec<OCSPRequestDataType>) -> Self {
+    #[must_use]
+    pub fn with_iso_15118_certificate_hash_data(
+        mut self,
+        iso_15118_certificate_hash_data: Vec<OCSPRequestDataType>,
+    ) -> Self {
         self.iso_15118_certificate_hash_data = Some(iso_15118_certificate_hash_data);
         self
     }
@@ -173,12 +175,11 @@ impl AuthorizeRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the Authorize response.
@@ -217,7 +218,7 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(id_token_info: IdTokenInfoType) -> Self {
         Self {
             id_token_info,
@@ -247,7 +248,10 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_certificate_status(&mut self, certificate_status: Option<AuthorizeCertificateStatusEnumType>) -> &mut Self {
+    pub fn set_certificate_status(
+        &mut self,
+        certificate_status: Option<AuthorizeCertificateStatusEnumType>,
+    ) -> &mut Self {
         self.certificate_status = certificate_status;
         self
     }
@@ -259,7 +263,10 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_allowed_energy_transfer(&mut self, allowed_energy_transfer: Option<Vec<EnergyTransferModeEnumType>>) -> &mut Self {
+    pub fn set_allowed_energy_transfer(
+        &mut self,
+        allowed_energy_transfer: Option<Vec<EnergyTransferModeEnumType>>,
+    ) -> &mut Self {
         self.allowed_energy_transfer = allowed_energy_transfer;
         self
     }
@@ -293,7 +300,7 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// The `id_token_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_id_token_info(&self) -> &IdTokenInfoType {
         &self.id_token_info
     }
@@ -303,7 +310,7 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// The `certificate_status` field
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_status(&self) -> Option<&AuthorizeCertificateStatusEnumType> {
         self.certificate_status.as_ref()
     }
@@ -313,7 +320,7 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// *(2.1)* List of allowed energy transfer modes the EV can choose from. If omitted this defaults to charging only.
-    #[must_use] 
+    #[must_use]
     pub fn get_allowed_energy_transfer(&self) -> Option<&Vec<EnergyTransferModeEnumType>> {
         self.allowed_energy_transfer.as_ref()
     }
@@ -323,7 +330,7 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// The tariff field
-    #[must_use] 
+    #[must_use]
     pub fn get_tariff(&self) -> Option<&TariffType> {
         self.tariff.as_ref()
     }
@@ -333,7 +340,7 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -345,8 +352,11 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_certificate_status(mut self, certificate_status: AuthorizeCertificateStatusEnumType) -> Self {
+    #[must_use]
+    pub fn with_certificate_status(
+        mut self,
+        certificate_status: AuthorizeCertificateStatusEnumType,
+    ) -> Self {
         self.certificate_status = Some(certificate_status);
         self
     }
@@ -358,8 +368,11 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_allowed_energy_transfer(mut self, allowed_energy_transfer: Vec<EnergyTransferModeEnumType>) -> Self {
+    #[must_use]
+    pub fn with_allowed_energy_transfer(
+        mut self,
+        allowed_energy_transfer: Vec<EnergyTransferModeEnumType>,
+    ) -> Self {
         self.allowed_energy_transfer = Some(allowed_energy_transfer);
         self
     }
@@ -371,7 +384,7 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tariff(mut self, tariff: TariffType) -> Self {
         self.tariff = Some(tariff);
         self
@@ -384,19 +397,20 @@ impl AuthorizeResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::v2_1::enumerations::{AuthorizationStatusEnumType, EnergyTransferModeEnumType, HashAlgorithmEnumType};
     use crate::v2_1::datatypes::OCSPRequestDataType;
+    use crate::v2_1::enumerations::{
+        AuthorizationStatusEnumType, EnergyTransferModeEnumType, HashAlgorithmEnumType,
+    };
     use serde_json;
     use validator::Validate;
 
@@ -442,8 +456,7 @@ mod tests {
         let id_token = create_test_id_token();
         let certificate = "-----BEGIN CERTIFICATE-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...\n-----END CERTIFICATE-----".to_string();
 
-        let request = AuthorizeRequest::new(id_token)
-            .with_certificate(certificate.clone());
+        let request = AuthorizeRequest::new(id_token).with_certificate(certificate.clone());
 
         assert_eq!(request.get_certificate(), Some(&certificate));
     }
@@ -464,10 +477,13 @@ mod tests {
         let id_token = create_test_id_token();
         let ocsp_data = vec![create_test_ocsp_request_data()];
 
-        let request = AuthorizeRequest::new(id_token)
-            .with_iso_15118_certificate_hash_data(ocsp_data.clone());
+        let request =
+            AuthorizeRequest::new(id_token).with_iso_15118_certificate_hash_data(ocsp_data.clone());
 
-        assert_eq!(request.get_iso_15118_certificate_hash_data(), Some(&ocsp_data));
+        assert_eq!(
+            request.get_iso_15118_certificate_hash_data(),
+            Some(&ocsp_data)
+        );
     }
 
     #[test]
@@ -502,7 +518,8 @@ mod tests {
         let request = AuthorizeRequest::new(id_token);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: AuthorizeRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AuthorizeRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -521,7 +538,10 @@ mod tests {
 
         assert_eq!(request.get_id_token(), &id_token);
         assert_eq!(request.get_certificate(), Some(&certificate));
-        assert_eq!(request.get_iso_15118_certificate_hash_data(), Some(&ocsp_data));
+        assert_eq!(
+            request.get_iso_15118_certificate_hash_data(),
+            Some(&ocsp_data)
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -543,7 +563,10 @@ mod tests {
 
         assert_eq!(request.get_id_token(), &new_id_token);
         assert_eq!(request.get_certificate(), Some(&certificate));
-        assert_eq!(request.get_iso_15118_certificate_hash_data(), Some(&ocsp_data));
+        assert_eq!(
+            request.get_iso_15118_certificate_hash_data(),
+            Some(&ocsp_data)
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -589,7 +612,10 @@ mod tests {
         let response = AuthorizeResponse::new(id_token_info)
             .with_allowed_energy_transfer(energy_transfer.clone());
 
-        assert_eq!(response.get_allowed_energy_transfer(), Some(&energy_transfer));
+        assert_eq!(
+            response.get_allowed_energy_transfer(),
+            Some(&energy_transfer)
+        );
     }
 
     #[test]
@@ -613,7 +639,8 @@ mod tests {
         let response = AuthorizeResponse::new(id_token_info);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: AuthorizeResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AuthorizeResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -632,7 +659,10 @@ mod tests {
 
         assert_eq!(response.get_id_token_info(), &id_token_info);
         assert_eq!(response.get_certificate_status(), Some(&certificate_status));
-        assert_eq!(response.get_allowed_energy_transfer(), Some(&energy_transfer));
+        assert_eq!(
+            response.get_allowed_energy_transfer(),
+            Some(&energy_transfer)
+        );
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
 
@@ -654,7 +684,10 @@ mod tests {
 
         assert_eq!(response.get_id_token_info(), &new_id_token_info);
         assert_eq!(response.get_certificate_status(), Some(&certificate_status));
-        assert_eq!(response.get_allowed_energy_transfer(), Some(&energy_transfer));
+        assert_eq!(
+            response.get_allowed_energy_transfer(),
+            Some(&energy_transfer)
+        );
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
 
@@ -671,7 +704,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: AuthorizeRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AuthorizeRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -690,7 +724,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: AuthorizeResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AuthorizeResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -732,13 +767,13 @@ mod tests {
     fn test_authorize_request_all_setters() {
         let id_token = create_test_id_token();
         let mut request = AuthorizeRequest::new(id_token.clone());
-        
+
         let new_id_token = IdTokenType::new("NEWTOKEN".to_string(), "RFID".to_string());
         let certificate = "test_certificate".to_string();
         let ocsp_data = vec![create_test_ocsp_request_data()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        // Test all setter methods  
+        // Test all setter methods
         request.set_id_token(new_id_token.clone());
         request.set_certificate(Some(certificate.clone()));
         request.set_iso_15118_certificate_hash_data(Some(ocsp_data.clone()));
@@ -746,7 +781,10 @@ mod tests {
 
         assert_eq!(request.get_id_token(), &new_id_token);
         assert_eq!(request.get_certificate(), Some(&certificate));
-        assert_eq!(request.get_iso_15118_certificate_hash_data(), Some(&ocsp_data));
+        assert_eq!(
+            request.get_iso_15118_certificate_hash_data(),
+            Some(&ocsp_data)
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -768,7 +806,10 @@ mod tests {
 
         assert_eq!(response.get_id_token_info(), &new_id_token_info);
         assert_eq!(response.get_certificate_status(), Some(&certificate_status));
-        assert_eq!(response.get_allowed_energy_transfer(), Some(&energy_transfer));
+        assert_eq!(
+            response.get_allowed_energy_transfer(),
+            Some(&energy_transfer)
+        );
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
 
@@ -823,7 +864,7 @@ mod tests {
         let certificate = "chain_certificate".to_string();
         let ocsp_data = vec![create_test_ocsp_request_data()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
+
         let mut request = AuthorizeRequest::new(id_token);
         let result = request
             .set_id_token(new_id_token.clone())
@@ -834,7 +875,10 @@ mod tests {
         // Verify chaining returns self
         assert_eq!(result.get_id_token(), &new_id_token);
         assert_eq!(result.get_certificate(), Some(&certificate));
-        assert_eq!(result.get_iso_15118_certificate_hash_data(), Some(&ocsp_data));
+        assert_eq!(
+            result.get_iso_15118_certificate_hash_data(),
+            Some(&ocsp_data)
+        );
         assert_eq!(result.get_custom_data(), Some(&custom_data));
     }
 
@@ -845,7 +889,7 @@ mod tests {
         let certificate_status = AuthorizeCertificateStatusEnumType::SignatureError;
         let energy_transfer = vec![EnergyTransferModeEnumType::ACThreePhase];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
+
         let mut response = AuthorizeResponse::new(id_token_info);
         let result = response
             .set_id_token_info(new_id_token_info.clone())
@@ -864,14 +908,16 @@ mod tests {
     fn test_authorize_partial_json_deserialization() {
         // Test request with only required fields
         let json = r#"{"idToken":{"idToken":"4F62C4E0123456789","type":"ISO14443"}}"#;
-        let deserialized: AuthorizeRequest = serde_json::from_str(json).expect("Failed to deserialize");
+        let deserialized: AuthorizeRequest =
+            serde_json::from_str(json).expect("Failed to deserialize");
         assert_eq!(deserialized.get_certificate(), None);
         assert_eq!(deserialized.get_iso_15118_certificate_hash_data(), None);
         assert_eq!(deserialized.get_custom_data(), None);
 
         // Test response with only required fields
         let json = r#"{"idTokenInfo":{"status":"Accepted"}}"#;
-        let deserialized: AuthorizeResponse = serde_json::from_str(json).expect("Failed to deserialize");
+        let deserialized: AuthorizeResponse =
+            serde_json::from_str(json).expect("Failed to deserialize");
         assert_eq!(deserialized.get_certificate_status(), None);
         assert_eq!(deserialized.get_allowed_energy_transfer(), None);
         assert_eq!(deserialized.get_custom_data(), None);
@@ -881,11 +927,10 @@ mod tests {
     fn test_authorize_response_with_tariff_builder_pattern() {
         let id_token_info = create_test_id_token_info();
         let tariff = TariffType::new("TARIFF_001".to_string(), "USD".to_string());
-        
+
         // Test with_tariff builder method
-        let response = AuthorizeResponse::new(id_token_info)
-            .with_tariff(tariff.clone());
-        
+        let response = AuthorizeResponse::new(id_token_info).with_tariff(tariff.clone());
+
         assert_eq!(response.get_tariff(), Some(&tariff));
         assert!(response.validate().is_ok());
     }
@@ -896,13 +941,13 @@ mod tests {
         let tariff = TariffType::new("TARIFF_002".to_string(), "EUR".to_string());
         let certificate_status = AuthorizeCertificateStatusEnumType::Accepted;
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
+
         // Test with_tariff method chaining with other methods
         let response = AuthorizeResponse::new(id_token_info)
             .with_certificate_status(certificate_status.clone())
             .with_tariff(tariff.clone())
             .with_custom_data(custom_data.clone());
-        
+
         assert_eq!(response.get_tariff(), Some(&tariff));
         assert_eq!(response.get_certificate_status(), Some(&certificate_status));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
@@ -913,13 +958,13 @@ mod tests {
     fn test_authorize_response_tariff_setter_method() {
         let mut response = AuthorizeResponse::new(create_test_id_token_info());
         let tariff = TariffType::new("TARIFF_003".to_string(), "GBP".to_string());
-        
+
         // Test set_tariff method
         response.set_tariff(Some(tariff.clone()));
-        
+
         assert_eq!(response.get_tariff(), Some(&tariff));
         assert!(response.validate().is_ok());
-        
+
         // Test clearing tariff
         response.set_tariff(None);
         assert_eq!(response.get_tariff(), None);

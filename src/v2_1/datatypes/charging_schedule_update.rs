@@ -121,7 +121,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// A new instance of `ChargingScheduleUpdateType` with all fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             custom_data: None,
@@ -149,7 +149,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_limit(mut self, limit: f32) -> Self {
         self.limit = Some(limit);
         self
@@ -164,7 +164,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_limit_l2(mut self, limit_l2: f32) -> Self {
         self.limit_l2 = Some(limit_l2);
         self
@@ -179,7 +179,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_limit_l3(mut self, limit_l3: f32) -> Self {
         self.limit_l3 = Some(limit_l3);
         self
@@ -194,7 +194,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -205,7 +205,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional charging rate limit
-    #[must_use] 
+    #[must_use]
     pub fn limit(&self) -> Option<f32> {
         self.limit
     }
@@ -229,7 +229,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional charging rate limit on phase L2
-    #[must_use] 
+    #[must_use]
     pub fn limit_l2(&self) -> Option<f32> {
         self.limit_l2
     }
@@ -253,7 +253,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional charging rate limit on phase L3
-    #[must_use] 
+    #[must_use]
     pub fn limit_l3(&self) -> Option<f32> {
         self.limit_l3
     }
@@ -277,7 +277,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -301,7 +301,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional discharge limit
-    #[must_use] 
+    #[must_use]
     pub fn discharge_limit(&self) -> Option<&Decimal> {
         self.discharge_limit.as_ref()
     }
@@ -329,7 +329,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_discharge_limit(mut self, discharge_limit: Decimal) -> Self {
         self.discharge_limit = Some(discharge_limit);
         self
@@ -340,7 +340,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional discharge limit for phase L2
-    #[must_use] 
+    #[must_use]
     pub fn discharge_limit_l2(&self) -> Option<&Decimal> {
         self.discharge_limit_l2.as_ref()
     }
@@ -368,7 +368,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_discharge_limit_l2(mut self, discharge_limit_l2: Decimal) -> Self {
         self.discharge_limit_l2 = Some(discharge_limit_l2);
         self
@@ -379,7 +379,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional discharge limit for phase L3
-    #[must_use] 
+    #[must_use]
     pub fn discharge_limit_l3(&self) -> Option<&Decimal> {
         self.discharge_limit_l3.as_ref()
     }
@@ -407,7 +407,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_discharge_limit_l3(mut self, discharge_limit_l3: Decimal) -> Self {
         self.discharge_limit_l3 = Some(discharge_limit_l3);
         self
@@ -418,7 +418,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional setpoint
-    #[must_use] 
+    #[must_use]
     pub fn setpoint(&self) -> Option<&Decimal> {
         self.setpoint.as_ref()
     }
@@ -446,7 +446,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_setpoint(mut self, setpoint: Decimal) -> Self {
         self.setpoint = Some(setpoint);
         self
@@ -457,7 +457,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional setpoint for phase L2
-    #[must_use] 
+    #[must_use]
     pub fn setpoint_l2(&self) -> Option<&Decimal> {
         self.setpoint_l2.as_ref()
     }
@@ -485,7 +485,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_setpoint_l2(mut self, setpoint_l2: Decimal) -> Self {
         self.setpoint_l2 = Some(setpoint_l2);
         self
@@ -496,7 +496,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional setpoint for phase L3
-    #[must_use] 
+    #[must_use]
     pub fn setpoint_l3(&self) -> Option<&Decimal> {
         self.setpoint_l3.as_ref()
     }
@@ -524,7 +524,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_setpoint_l3(mut self, setpoint_l3: Decimal) -> Self {
         self.setpoint_l3 = Some(setpoint_l3);
         self
@@ -535,7 +535,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional reactive power setpoint
-    #[must_use] 
+    #[must_use]
     pub fn setpoint_reactive(&self) -> Option<&Decimal> {
         self.setpoint_reactive.as_ref()
     }
@@ -563,7 +563,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_setpoint_reactive(mut self, setpoint_reactive: Decimal) -> Self {
         self.setpoint_reactive = Some(setpoint_reactive);
         self
@@ -574,7 +574,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional reactive power setpoint for phase L2
-    #[must_use] 
+    #[must_use]
     pub fn setpoint_reactive_l2(&self) -> Option<&Decimal> {
         self.setpoint_reactive_l2.as_ref()
     }
@@ -602,7 +602,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_setpoint_reactive_l2(mut self, setpoint_reactive_l2: Decimal) -> Self {
         self.setpoint_reactive_l2 = Some(setpoint_reactive_l2);
         self
@@ -613,7 +613,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// An optional reactive power setpoint for phase L3
-    #[must_use] 
+    #[must_use]
     pub fn setpoint_reactive_l3(&self) -> Option<&Decimal> {
         self.setpoint_reactive_l3.as_ref()
     }
@@ -641,7 +641,7 @@ impl ChargingScheduleUpdateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_setpoint_reactive_l3(mut self, setpoint_reactive_l3: Decimal) -> Self {
         self.setpoint_reactive_l3 = Some(setpoint_reactive_l3);
         self

@@ -29,7 +29,7 @@ impl CostUpdatedRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(total_cost: Decimal, transaction_id: String) -> Self {
         Self {
             total_cost,
@@ -79,7 +79,7 @@ impl CostUpdatedRequest {
     /// # Returns
     ///
     /// Current total cost, based on the information known by the CSMS, of the transaction including taxes. In the currency configured with the configuration Variable: [&lt;&lt;configkey-currency, Currency&gt;&gt;]
-    #[must_use] 
+    #[must_use]
     pub fn get_total_cost(&self) -> &Decimal {
         &self.total_cost
     }
@@ -89,7 +89,7 @@ impl CostUpdatedRequest {
     /// # Returns
     ///
     /// Transaction Id of the transaction the current cost are asked for.
-    #[must_use] 
+    #[must_use]
     pub fn get_transaction_id(&self) -> &String {
         &self.transaction_id
     }
@@ -99,7 +99,7 @@ impl CostUpdatedRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -111,12 +111,11 @@ impl CostUpdatedRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `CostUpdated` response.
@@ -142,11 +141,9 @@ impl CostUpdatedResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -166,7 +163,7 @@ impl CostUpdatedResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -178,12 +175,11 @@ impl CostUpdatedResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -220,7 +216,8 @@ mod tests {
         let request = CostUpdatedRequest::new(total_cost, transaction_id);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CostUpdatedRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CostUpdatedRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -280,11 +277,12 @@ mod tests {
         let transaction_id = "TXN_ROUND_TRIP".to_string();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = CostUpdatedRequest::new(total_cost, transaction_id)
-            .with_custom_data(custom_data);
+        let request =
+            CostUpdatedRequest::new(total_cost, transaction_id).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CostUpdatedRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CostUpdatedRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -294,11 +292,11 @@ mod tests {
     fn test_cost_updated_request_decimal_precision() {
         // Test with various decimal precisions
         let costs = vec![
-            Decimal::new(1, 0),      // 1
-            Decimal::new(10, 1),     // 1.0
-            Decimal::new(100, 2),    // 1.00
-            Decimal::new(1234, 3),   // 1.234
-            Decimal::new(12345, 4),  // 1.2345
+            Decimal::new(1, 0),     // 1
+            Decimal::new(10, 1),    // 1.0
+            Decimal::new(100, 2),   // 1.00
+            Decimal::new(1234, 3),  // 1.234
+            Decimal::new(12345, 4), // 1.2345
         ];
 
         for (i, cost) in costs.iter().enumerate() {
@@ -315,8 +313,8 @@ mod tests {
         let transaction_id = "TXN_CLEAR".to_string();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut request = CostUpdatedRequest::new(total_cost, transaction_id)
-            .with_custom_data(custom_data);
+        let mut request =
+            CostUpdatedRequest::new(total_cost, transaction_id).with_custom_data(custom_data);
 
         // Verify custom data is set
         assert!(request.get_custom_data().is_some());
@@ -365,11 +363,11 @@ mod tests {
         let total_cost = Decimal::new(1500, 2);
         let transaction_id = "TXN_CHAIN".to_string();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
+
         let mut request = CostUpdatedRequest::new(total_cost, transaction_id);
         let new_cost = Decimal::new(3000, 2);
         let new_transaction_id = "TXN_CHAINED".to_string();
-        
+
         let result = request
             .set_total_cost(new_cost)
             .set_transaction_id(new_transaction_id.clone())
@@ -384,7 +382,7 @@ mod tests {
     #[test]
     fn test_cost_updated_response_method_chaining() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
+
         let mut response = CostUpdatedResponse::new();
         let result = response.set_custom_data(Some(custom_data.clone()));
 
@@ -395,8 +393,7 @@ mod tests {
     #[test]
     fn test_cost_updated_response_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = CostUpdatedResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = CostUpdatedResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
         assert!(response.validate().is_ok());
@@ -407,7 +404,7 @@ mod tests {
         let total_cost = Decimal::new(100, 2);
         let max_transaction_id = "x".repeat(36); // Exactly max length
         let request = CostUpdatedRequest::new(total_cost, max_transaction_id.clone());
-        
+
         assert_eq!(request.get_transaction_id(), &max_transaction_id);
         assert!(request.validate().is_ok());
     }
@@ -417,7 +414,7 @@ mod tests {
         let total_cost = Decimal::new(100, 2);
         let empty_transaction_id = "".to_string(); // Valid: min 0 chars
         let request = CostUpdatedRequest::new(total_cost, empty_transaction_id.clone());
-        
+
         assert_eq!(request.get_transaction_id(), &empty_transaction_id);
         assert!(request.validate().is_ok());
     }
@@ -428,7 +425,7 @@ mod tests {
         let negative_cost = Decimal::new(-500, 2); // -5.00
         let transaction_id = "TXN_REFUND".to_string();
         let request = CostUpdatedRequest::new(negative_cost, transaction_id);
-        
+
         assert_eq!(request.get_total_cost(), &negative_cost);
         assert!(request.validate().is_ok());
     }
@@ -439,7 +436,7 @@ mod tests {
         let large_cost = Decimal::new(999999999, 2); // 9999999.99
         let transaction_id = "TXN_LARGE".to_string();
         let request = CostUpdatedRequest::new(large_cost, transaction_id);
-        
+
         assert_eq!(request.get_total_cost(), &large_cost);
         assert!(request.validate().is_ok());
     }
@@ -448,14 +445,16 @@ mod tests {
     fn test_cost_updated_partial_json_deserialization() {
         // Test request with only required fields
         let json = r#"{"totalCost":"12.50","transactionId":"TXN123"}"#;
-        let deserialized: CostUpdatedRequest = serde_json::from_str(json).expect("Failed to deserialize");
+        let deserialized: CostUpdatedRequest =
+            serde_json::from_str(json).expect("Failed to deserialize");
         assert_eq!(deserialized.get_total_cost(), &Decimal::new(1250, 2));
         assert_eq!(deserialized.get_transaction_id(), "TXN123");
         assert_eq!(deserialized.get_custom_data(), None);
 
         // Test response with no fields (empty object)
         let json = r#"{}"#;
-        let deserialized: CostUpdatedResponse = serde_json::from_str(json).expect("Failed to deserialize");
+        let deserialized: CostUpdatedResponse =
+            serde_json::from_str(json).expect("Failed to deserialize");
         assert_eq!(deserialized.get_custom_data(), None);
     }
 
@@ -463,7 +462,8 @@ mod tests {
     fn test_cost_updated_response_json_serialization() {
         let response = CostUpdatedResponse::new();
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: CostUpdatedResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CostUpdatedResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 }

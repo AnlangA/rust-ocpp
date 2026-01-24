@@ -54,7 +54,7 @@ impl FixedVarType {
     /// # Returns
     ///
     /// A new instance of `FixedVarType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(priority: i32, var: f64) -> Self {
         Self {
             priority,
@@ -75,7 +75,7 @@ impl FixedVarType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -86,7 +86,7 @@ impl FixedVarType {
     /// # Returns
     ///
     /// The priority of setting (0=highest)
-    #[must_use] 
+    #[must_use]
     pub fn priority(&self) -> i32 {
         self.priority
     }
@@ -110,7 +110,7 @@ impl FixedVarType {
     /// # Returns
     ///
     /// The fixed `VAr` value in `VAr`
-    #[must_use] 
+    #[must_use]
     pub fn var(&self) -> f64 {
         self.setpoint.to_f64().unwrap_or_default()
     }
@@ -134,7 +134,7 @@ impl FixedVarType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -33,7 +33,7 @@ impl GetCompositeScheduleRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(duration: i32, evse_id: i32) -> Self {
         Self {
             duration,
@@ -62,7 +62,10 @@ impl GetCompositeScheduleRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_charging_rate_unit(&mut self, charging_rate_unit: Option<ChargingRateUnitEnumType>) -> &mut Self {
+    pub fn set_charging_rate_unit(
+        &mut self,
+        charging_rate_unit: Option<ChargingRateUnitEnumType>,
+    ) -> &mut Self {
         self.charging_rate_unit = charging_rate_unit;
         self
     }
@@ -96,7 +99,7 @@ impl GetCompositeScheduleRequest {
     /// # Returns
     ///
     /// Length of the requested schedule in seconds.
-    #[must_use] 
+    #[must_use]
     pub fn get_duration(&self) -> &i32 {
         &self.duration
     }
@@ -106,7 +109,7 @@ impl GetCompositeScheduleRequest {
     /// # Returns
     ///
     /// The `charging_rate_unit` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_rate_unit(&self) -> Option<&ChargingRateUnitEnumType> {
         self.charging_rate_unit.as_ref()
     }
@@ -116,7 +119,7 @@ impl GetCompositeScheduleRequest {
     /// # Returns
     ///
     /// The ID of the EVSE for which the schedule is requested. When evseid=0, the Charging Station will calculate the expected consumption for the grid connection.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -126,7 +129,7 @@ impl GetCompositeScheduleRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -138,7 +141,7 @@ impl GetCompositeScheduleRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_charging_rate_unit(mut self, charging_rate_unit: ChargingRateUnitEnumType) -> Self {
         self.charging_rate_unit = Some(charging_rate_unit);
         self
@@ -151,12 +154,11 @@ impl GetCompositeScheduleRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetCompositeSchedule` response.
@@ -189,7 +191,7 @@ impl GetCompositeScheduleResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -252,7 +254,7 @@ impl GetCompositeScheduleResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -262,7 +264,7 @@ impl GetCompositeScheduleResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -272,7 +274,7 @@ impl GetCompositeScheduleResponse {
     /// # Returns
     ///
     /// The schedule field
-    #[must_use] 
+    #[must_use]
     pub fn get_schedule(&self) -> Option<&CompositeScheduleType> {
         self.schedule.as_ref()
     }
@@ -282,7 +284,7 @@ impl GetCompositeScheduleResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -294,7 +296,7 @@ impl GetCompositeScheduleResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -307,7 +309,7 @@ impl GetCompositeScheduleResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_schedule(mut self, schedule: CompositeScheduleType) -> Self {
         self.schedule = Some(schedule);
         self
@@ -320,12 +322,11 @@ impl GetCompositeScheduleResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -374,15 +375,18 @@ mod tests {
 
         assert_eq!(request.duration, 7200);
         assert_eq!(request.evse_id, 2);
-        assert_eq!(request.charging_rate_unit, Some(ChargingRateUnitEnumType::W));
+        assert_eq!(
+            request.charging_rate_unit,
+            Some(ChargingRateUnitEnumType::W)
+        );
         assert_eq!(request.custom_data, None);
     }
 
     #[test]
     fn test_get_composite_schedule_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = GetCompositeScheduleRequest::new(1800, 0)
-            .with_custom_data(custom_data.clone());
+        let request =
+            GetCompositeScheduleRequest::new(1800, 0).with_custom_data(custom_data.clone());
 
         assert_eq!(request.duration, 1800);
         assert_eq!(request.evse_id, 0);
@@ -402,7 +406,10 @@ mod tests {
 
         assert_eq!(request.duration, 7200);
         assert_eq!(request.evse_id, 3);
-        assert_eq!(request.charging_rate_unit, Some(ChargingRateUnitEnumType::A));
+        assert_eq!(
+            request.charging_rate_unit,
+            Some(ChargingRateUnitEnumType::A)
+        );
         assert_eq!(request.custom_data, Some(custom_data));
     }
 
@@ -415,7 +422,10 @@ mod tests {
 
         assert_eq!(request.get_duration(), &3600);
         assert_eq!(request.get_evse_id(), &1);
-        assert_eq!(request.get_charging_rate_unit(), Some(&ChargingRateUnitEnumType::W));
+        assert_eq!(
+            request.get_charging_rate_unit(),
+            Some(&ChargingRateUnitEnumType::W)
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -453,14 +463,11 @@ mod tests {
 
     #[test]
     fn test_get_composite_schedule_request_all_charging_rate_units() {
-        let units = vec![
-            ChargingRateUnitEnumType::A,
-            ChargingRateUnitEnumType::W,
-        ];
+        let units = vec![ChargingRateUnitEnumType::A, ChargingRateUnitEnumType::W];
 
         for unit in units {
-            let request = GetCompositeScheduleRequest::new(3600, 1)
-                .with_charging_rate_unit(unit.clone());
+            let request =
+                GetCompositeScheduleRequest::new(3600, 1).with_charging_rate_unit(unit.clone());
             assert_eq!(request.charging_rate_unit, Some(unit));
             assert!(request.validate().is_ok());
         }

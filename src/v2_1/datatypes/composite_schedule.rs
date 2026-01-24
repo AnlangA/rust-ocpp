@@ -48,7 +48,7 @@ impl CompositeScheduleType {
     /// # Returns
     ///
     /// A new instance of `CompositeScheduleType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         evse_id: i32,
         duration: i32,
@@ -75,7 +75,7 @@ impl CompositeScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -86,7 +86,7 @@ impl CompositeScheduleType {
     /// # Returns
     ///
     /// The ID of the EVSE for which the schedule is requested
-    #[must_use] 
+    #[must_use]
     pub fn evse_id(&self) -> i32 {
         self.evse_id
     }
@@ -110,7 +110,7 @@ impl CompositeScheduleType {
     /// # Returns
     ///
     /// Duration of the schedule in seconds
-    #[must_use] 
+    #[must_use]
     pub fn duration(&self) -> i32 {
         self.duration
     }
@@ -134,7 +134,7 @@ impl CompositeScheduleType {
     /// # Returns
     ///
     /// A reference to the date and time at which the schedule becomes active
-    #[must_use] 
+    #[must_use]
     pub fn schedule_start(&self) -> &DateTime<Utc> {
         &self.schedule_start
     }
@@ -158,7 +158,7 @@ impl CompositeScheduleType {
     /// # Returns
     ///
     /// The unit of measure in which limits and setpoints are expressed
-    #[must_use] 
+    #[must_use]
     pub fn charging_rate_unit(&self) -> &ChargingRateUnitEnumType {
         &self.charging_rate_unit
     }
@@ -185,7 +185,7 @@ impl CompositeScheduleType {
     /// # Returns
     ///
     /// A reference to the list of charging periods
-    #[must_use] 
+    #[must_use]
     pub fn charging_schedule_period(&self) -> &[ChargingSchedulePeriodType] {
         &self.charging_schedule_period
     }
@@ -212,7 +212,7 @@ impl CompositeScheduleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

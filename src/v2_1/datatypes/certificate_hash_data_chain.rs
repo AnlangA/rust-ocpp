@@ -41,7 +41,7 @@ impl CertificateHashDataChainType {
     /// # Returns
     ///
     /// A new instance of `CertificateHashDataChainType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         certificate_hash_data: CertificateHashDataType,
         certificate_type: GetCertificateIdUseEnumType,
@@ -63,7 +63,7 @@ impl CertificateHashDataChainType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_child_certificate_hash_data(
         mut self,
         child_certificate_hash_data: Vec<CertificateHashDataType>,
@@ -81,7 +81,7 @@ impl CertificateHashDataChainType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -92,7 +92,7 @@ impl CertificateHashDataChainType {
     /// # Returns
     ///
     /// A reference to the certificate hash data
-    #[must_use] 
+    #[must_use]
     pub fn certificate_hash_data(&self) -> &CertificateHashDataType {
         &self.certificate_hash_data
     }
@@ -119,7 +119,7 @@ impl CertificateHashDataChainType {
     /// # Returns
     ///
     /// The type of the requested certificate(s)
-    #[must_use] 
+    #[must_use]
     pub fn certificate_type(&self) -> &GetCertificateIdUseEnumType {
         &self.certificate_type
     }
@@ -146,7 +146,7 @@ impl CertificateHashDataChainType {
     /// # Returns
     ///
     /// An optional reference to the child certificate hash data
-    #[must_use] 
+    #[must_use]
     pub fn child_certificate_hash_data(&self) -> Option<&Vec<CertificateHashDataType>> {
         self.child_certificate_hash_data.as_ref()
     }
@@ -173,7 +173,7 @@ impl CertificateHashDataChainType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

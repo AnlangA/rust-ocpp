@@ -24,7 +24,7 @@ impl RequestStopTransactionRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(transaction_id: String) -> Self {
         Self {
             transaction_id,
@@ -61,7 +61,7 @@ impl RequestStopTransactionRequest {
     /// # Returns
     ///
     /// The identifier of the transaction which the Charging Station is requested to stop.
-    #[must_use] 
+    #[must_use]
     pub fn get_transaction_id(&self) -> &String {
         &self.transaction_id
     }
@@ -71,7 +71,7 @@ impl RequestStopTransactionRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -83,12 +83,11 @@ impl RequestStopTransactionRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `StopTransaction` response.
@@ -117,7 +116,7 @@ impl RequestStopTransactionResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: RequestStartStopStatusEnumType) -> Self {
         Self {
             status,
@@ -167,7 +166,7 @@ impl RequestStopTransactionResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &RequestStartStopStatusEnumType {
         &self.status
     }
@@ -177,7 +176,7 @@ impl RequestStopTransactionResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -187,7 +186,7 @@ impl RequestStopTransactionResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -199,7 +198,7 @@ impl RequestStopTransactionResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -212,12 +211,11 @@ impl RequestStopTransactionResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -304,7 +302,8 @@ mod tests {
 
     #[test]
     fn test_request_stop_transaction_response_new() {
-        let response = RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
+        let response =
+            RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
 
         assert_eq!(response.status, RequestStartStopStatusEnumType::Accepted);
         assert!(response.status_info.is_none());
@@ -313,28 +312,34 @@ mod tests {
 
     #[test]
     fn test_request_stop_transaction_response_serialization() {
-        let response = RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Rejected)
-            .with_status_info(create_test_status_info())
-            .with_custom_data(create_test_custom_data());
+        let response =
+            RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Rejected)
+                .with_status_info(create_test_status_info())
+                .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: RequestStopTransactionResponse =
             serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
-        assert_eq!(deserialized.status, RequestStartStopStatusEnumType::Rejected);
+        assert_eq!(
+            deserialized.status,
+            RequestStartStopStatusEnumType::Rejected
+        );
         assert!(deserialized.status_info.is_some());
         assert!(deserialized.custom_data.is_some());
     }
 
     #[test]
     fn test_request_stop_transaction_response_validation() {
-        let valid_response = RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
+        let valid_response =
+            RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
         assert!(valid_response.validate().is_ok());
 
-        let response_with_all_fields = RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Rejected)
-            .with_status_info(create_test_status_info())
-            .with_custom_data(create_test_custom_data());
+        let response_with_all_fields =
+            RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Rejected)
+                .with_status_info(create_test_status_info())
+                .with_custom_data(create_test_custom_data());
         assert!(response_with_all_fields.validate().is_ok());
     }
 
@@ -343,9 +348,10 @@ mod tests {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        let response = RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
-            .with_status_info(status_info.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
+                .with_status_info(status_info.clone())
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(response.status, RequestStartStopStatusEnumType::Accepted);
         assert_eq!(response.status_info, Some(status_info));
@@ -354,7 +360,8 @@ mod tests {
 
     #[test]
     fn test_request_stop_transaction_response_setters_getters() {
-        let mut response = RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
+        let mut response =
+            RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
@@ -364,18 +371,29 @@ mod tests {
         response.set_custom_data(Some(custom_data.clone()));
 
         // Test getters
-        assert_eq!(*response.get_status(), RequestStartStopStatusEnumType::Rejected);
+        assert_eq!(
+            *response.get_status(),
+            RequestStartStopStatusEnumType::Rejected
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
 
     #[test]
     fn test_request_stop_transaction_response_enum_variants() {
-        let accepted_response = RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
-        assert_eq!(accepted_response.status, RequestStartStopStatusEnumType::Accepted);
+        let accepted_response =
+            RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted);
+        assert_eq!(
+            accepted_response.status,
+            RequestStartStopStatusEnumType::Accepted
+        );
 
-        let rejected_response = RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Rejected);
-        assert_eq!(rejected_response.status, RequestStartStopStatusEnumType::Rejected);
+        let rejected_response =
+            RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Rejected);
+        assert_eq!(
+            rejected_response.status,
+            RequestStartStopStatusEnumType::Rejected
+        );
     }
 
     #[test]
@@ -389,9 +407,10 @@ mod tests {
 
         assert_eq!(original_request, parsed_request);
 
-        let original_response = RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
-            .with_status_info(create_test_status_info())
-            .with_custom_data(create_test_custom_data());
+        let original_response =
+            RequestStopTransactionResponse::new(RequestStartStopStatusEnumType::Accepted)
+                .with_status_info(create_test_status_info())
+                .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&original_response).expect("Failed to serialize response");
         let parsed_response: RequestStopTransactionResponse =

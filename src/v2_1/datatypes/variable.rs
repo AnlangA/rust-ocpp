@@ -24,7 +24,7 @@ pub struct VariableType {
 
 impl VariableType {
     /// Creates a new `VariableType` with required name field.
-    #[must_use] 
+    #[must_use]
     pub fn new(name: String) -> Self {
         Self {
             name,
@@ -34,7 +34,7 @@ impl VariableType {
     }
 
     /// Creates a new `VariableType` with name and instance.
-    #[must_use] 
+    #[must_use]
     pub fn new_with_instance(name: String, instance: String) -> Self {
         Self {
             name,
@@ -44,7 +44,7 @@ impl VariableType {
     }
 
     /// Gets the name.
-    #[must_use] 
+    #[must_use]
     pub fn name(&self) -> &str {
         &self.name
     }
@@ -56,7 +56,7 @@ impl VariableType {
     }
 
     /// Gets the instance.
-    #[must_use] 
+    #[must_use]
     pub fn instance(&self) -> Option<&str> {
         self.instance.as_deref()
     }
@@ -68,7 +68,7 @@ impl VariableType {
     }
 
     /// Gets the custom data.
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -80,14 +80,14 @@ impl VariableType {
     }
 
     /// Sets the instance using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_instance(mut self, instance: String) -> Self {
         self.instance = Some(instance);
         self
     }
 
     /// Sets the custom data using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

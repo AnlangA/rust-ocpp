@@ -14,4 +14,3 @@ pub enum DERUnitEnumType {
     PctVarAvail,
     PctEffectiveV,
 }
-

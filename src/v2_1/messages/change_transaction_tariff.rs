@@ -28,7 +28,7 @@ impl ChangeTransactionTariffRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(tariff: TariffType, transaction_id: String) -> Self {
         Self {
             tariff,
@@ -78,7 +78,7 @@ impl ChangeTransactionTariffRequest {
     /// # Returns
     ///
     /// The tariff field
-    #[must_use] 
+    #[must_use]
     pub fn get_tariff(&self) -> &TariffType {
         &self.tariff
     }
@@ -88,7 +88,7 @@ impl ChangeTransactionTariffRequest {
     /// # Returns
     ///
     /// Transaction id for new tariff.
-    #[must_use] 
+    #[must_use]
     pub fn get_transaction_id(&self) -> &String {
         &self.transaction_id
     }
@@ -98,7 +98,7 @@ impl ChangeTransactionTariffRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -110,12 +110,11 @@ impl ChangeTransactionTariffRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ChangeTransactionTariff` response.
@@ -141,7 +140,7 @@ impl ChangeTransactionTariffResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: TariffChangeStatusEnumType) -> Self {
         Self {
             status,
@@ -191,7 +190,7 @@ impl ChangeTransactionTariffResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &TariffChangeStatusEnumType {
         &self.status
     }
@@ -201,7 +200,7 @@ impl ChangeTransactionTariffResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -211,7 +210,7 @@ impl ChangeTransactionTariffResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -223,7 +222,7 @@ impl ChangeTransactionTariffResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -236,12 +235,11 @@ impl ChangeTransactionTariffResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -289,18 +287,17 @@ mod tests {
 
     #[test]
     fn test_change_transaction_tariff_request_setters() {
-        let mut request = ChangeTransactionTariffRequest::new(
-            create_test_tariff(),
-            "tx-12345".to_string()
-        );
+        let mut request =
+            ChangeTransactionTariffRequest::new(create_test_tariff(), "tx-12345".to_string());
 
         let new_tariff = TariffType::new("new-tariff-456".to_string(), "EUR".to_string());
         let new_transaction_id = "tx-67890".to_string();
         let custom_data = create_test_custom_data();
 
-        request.set_tariff(new_tariff.clone())
-               .set_transaction_id(new_transaction_id.clone())
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_tariff(new_tariff.clone())
+            .set_transaction_id(new_transaction_id.clone())
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.tariff, new_tariff);
         assert_eq!(request.transaction_id, new_transaction_id);
@@ -396,15 +393,17 @@ mod tests {
 
     #[test]
     fn test_change_transaction_tariff_response_setters() {
-        let mut response = ChangeTransactionTariffResponse::new(TariffChangeStatusEnumType::Accepted);
+        let mut response =
+            ChangeTransactionTariffResponse::new(TariffChangeStatusEnumType::Accepted);
 
         let new_status = TariffChangeStatusEnumType::Rejected;
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        response.set_status(new_status.clone())
-                .set_status_info(Some(status_info.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(new_status.clone())
+            .set_status_info(Some(status_info.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, new_status);
         assert_eq!(response.status_info, Some(status_info));

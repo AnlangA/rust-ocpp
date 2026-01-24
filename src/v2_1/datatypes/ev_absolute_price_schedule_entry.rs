@@ -32,7 +32,7 @@ impl EVAbsolutePriceScheduleEntryType {
     /// # Returns
     ///
     /// A new instance of `EVAbsolutePriceScheduleEntryType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(duration: i32, ev_price_rules: Vec<EVPriceRuleType>) -> Self {
         Self {
             duration,
@@ -52,7 +52,7 @@ impl EVAbsolutePriceScheduleEntryType {
     /// # Returns
     ///
     /// A new instance of `EVAbsolutePriceScheduleEntryType` with a single price rule
-    #[must_use] 
+    #[must_use]
     pub fn new_with_single_price(duration: i32, energy_fee: f64, power_range_start: f64) -> Self {
         let price_rule = EVPriceRuleType::new(energy_fee, power_range_start);
         Self::new(duration, vec![price_rule])
@@ -67,7 +67,7 @@ impl EVAbsolutePriceScheduleEntryType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -78,7 +78,7 @@ impl EVAbsolutePriceScheduleEntryType {
     /// # Returns
     ///
     /// The duration of the schedule entry in seconds
-    #[must_use] 
+    #[must_use]
     pub fn duration(&self) -> i32 {
         self.duration
     }
@@ -102,7 +102,7 @@ impl EVAbsolutePriceScheduleEntryType {
     /// # Returns
     ///
     /// A reference to the vector of price rules
-    #[must_use] 
+    #[must_use]
     pub fn ev_price_rules(&self) -> &Vec<EVPriceRuleType> {
         &self.ev_price_rules
     }
@@ -140,7 +140,7 @@ impl EVAbsolutePriceScheduleEntryType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -38,7 +38,7 @@ impl GradientType {
     /// # Returns
     ///
     /// A new `GradientType` instance with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(priority: i32, gradient: Decimal, soft_gradient: Decimal) -> Self {
         Self {
             custom_data: None,
@@ -59,7 +59,7 @@ impl GradientType {
     /// # Returns
     ///
     /// A new `GradientType` instance with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new_from_f64(priority: i32, gradient: f64, soft_gradient: f64) -> Self {
         Self {
             custom_data: None,
@@ -78,7 +78,7 @@ impl GradientType {
     /// # Returns
     ///
     /// The modified `GradientType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -89,7 +89,7 @@ impl GradientType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -113,7 +113,7 @@ impl GradientType {
     /// # Returns
     ///
     /// The priority of setting (0=highest)
-    #[must_use] 
+    #[must_use]
     pub fn priority(&self) -> i32 {
         self.priority
     }
@@ -137,7 +137,7 @@ impl GradientType {
     /// # Returns
     ///
     /// The default ramp rate in seconds
-    #[must_use] 
+    #[must_use]
     pub fn gradient(&self) -> Decimal {
         self.gradient
     }
@@ -175,7 +175,7 @@ impl GradientType {
     /// # Returns
     ///
     /// The soft-start ramp rate in seconds
-    #[must_use] 
+    #[must_use]
     pub fn soft_gradient(&self) -> Decimal {
         self.soft_gradient
     }

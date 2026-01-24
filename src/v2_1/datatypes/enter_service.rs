@@ -71,7 +71,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// A new instance of `EnterServiceType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         priority: i32,
         high_voltage: Decimal,
@@ -101,7 +101,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// Self for builder pattern chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_delay(mut self, delay: Decimal) -> Self {
         self.delay = Some(delay);
         self
@@ -116,7 +116,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// Self for builder pattern chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_random_delay(mut self, random_delay: Decimal) -> Self {
         self.random_delay = Some(random_delay);
         self
@@ -131,7 +131,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// Self for builder pattern chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_ramp_rate(mut self, ramp_rate: Decimal) -> Self {
         self.ramp_rate = Some(ramp_rate);
         self
@@ -146,7 +146,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -157,7 +157,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The priority of setting (0=highest)
-    #[must_use] 
+    #[must_use]
     pub fn priority(&self) -> i32 {
         self.priority
     }
@@ -181,7 +181,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service voltage high
-    #[must_use] 
+    #[must_use]
     pub fn high_voltage(&self) -> Decimal {
         self.high_voltage
     }
@@ -205,7 +205,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service voltage low
-    #[must_use] 
+    #[must_use]
     pub fn low_voltage(&self) -> Decimal {
         self.low_voltage
     }
@@ -229,7 +229,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service frequency high
-    #[must_use] 
+    #[must_use]
     pub fn high_freq(&self) -> Decimal {
         self.high_freq
     }
@@ -253,7 +253,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service frequency low
-    #[must_use] 
+    #[must_use]
     pub fn low_freq(&self) -> Decimal {
         self.low_freq
     }
@@ -277,7 +277,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service delay
-    #[must_use] 
+    #[must_use]
     pub fn delay(&self) -> Option<Decimal> {
         self.delay
     }
@@ -301,7 +301,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service randomized delay
-    #[must_use] 
+    #[must_use]
     pub fn random_delay(&self) -> Option<Decimal> {
         self.random_delay
     }
@@ -325,7 +325,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// The enter service ramp rate in seconds
-    #[must_use] 
+    #[must_use]
     pub fn ramp_rate(&self) -> Option<Decimal> {
         self.ramp_rate
     }
@@ -349,7 +349,7 @@ impl EnterServiceType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -385,16 +385,11 @@ mod tests {
         let random_delay = Decimal::from_str("2.0").unwrap();
         let ramp_rate = Decimal::from_str("10.0").unwrap();
 
-        let enter_service = EnterServiceType::new(
-            priority,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate);
+        let enter_service =
+            EnterServiceType::new(priority, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate);
 
         assert_eq!(enter_service.priority(), priority);
         assert_eq!(enter_service.high_voltage(), high_voltage);
@@ -419,17 +414,12 @@ mod tests {
         let ramp_rate = Decimal::from_str("10.0").unwrap();
         let custom_data = CustomDataType::new("VendorX".to_string());
 
-        let enter_service = EnterServiceType::new(
-            priority,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate)
-        .with_custom_data(custom_data.clone());
+        let enter_service =
+            EnterServiceType::new(priority, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate)
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(enter_service.priority(), priority);
         assert_eq!(enter_service.high_voltage(), high_voltage);
@@ -513,16 +503,11 @@ mod tests {
         let random_delay = Decimal::from_str("2.0").unwrap();
         let ramp_rate = Decimal::from_str("10.0").unwrap();
 
-        let valid_enter_service = EnterServiceType::new(
-            priority,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate);
+        let valid_enter_service =
+            EnterServiceType::new(priority, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate);
 
         // 验证有效实例应该通过
         assert!(valid_enter_service.validate().is_ok());
@@ -551,17 +536,12 @@ mod tests {
         let too_long_vendor_id = "X".repeat(256); // 超过255字符限制
         let invalid_custom_data = CustomDataType::new(too_long_vendor_id);
 
-        let enter_service_with_invalid_custom_data = EnterServiceType::new(
-            priority,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate)
-        .with_custom_data(invalid_custom_data);
+        let enter_service_with_invalid_custom_data =
+            EnterServiceType::new(priority, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate)
+                .with_custom_data(invalid_custom_data);
 
         // 验证应该失败，因为custom_data无效
         let validation_result = enter_service_with_invalid_custom_data.validate();
@@ -587,17 +567,12 @@ mod tests {
             .with_property("version".to_string(), json!("1.0"));
 
         // 创建完整的EnterServiceType实例
-        let enter_service = EnterServiceType::new(
-            priority,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate)
-        .with_custom_data(custom_data);
+        let enter_service =
+            EnterServiceType::new(priority, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate)
+                .with_custom_data(custom_data);
 
         // 序列化为JSON
         let serialized = serde_json::to_string(&enter_service).unwrap();

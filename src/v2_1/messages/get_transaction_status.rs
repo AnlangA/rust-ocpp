@@ -30,7 +30,7 @@ impl GetTransactionStatusRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             transaction_id: None,
@@ -67,7 +67,7 @@ impl GetTransactionStatusRequest {
     /// # Returns
     ///
     /// The Id of the transaction for which the status is requested.
-    #[must_use] 
+    #[must_use]
     pub fn get_transaction_id(&self) -> Option<&String> {
         self.transaction_id.as_ref()
     }
@@ -77,7 +77,7 @@ impl GetTransactionStatusRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -89,7 +89,7 @@ impl GetTransactionStatusRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_transaction_id(mut self, transaction_id: String) -> Self {
         self.transaction_id = Some(transaction_id);
         self
@@ -102,12 +102,11 @@ impl GetTransactionStatusRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetTransactionStatus` response.
@@ -135,7 +134,7 @@ impl GetTransactionStatusResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(messages_in_queue: bool) -> Self {
         Self {
             ongoing_indicator: None,
@@ -185,7 +184,7 @@ impl GetTransactionStatusResponse {
     /// # Returns
     ///
     /// Whether the transaction is still ongoing.
-    #[must_use] 
+    #[must_use]
     pub fn get_ongoing_indicator(&self) -> Option<&bool> {
         self.ongoing_indicator.as_ref()
     }
@@ -195,7 +194,7 @@ impl GetTransactionStatusResponse {
     /// # Returns
     ///
     /// Whether there are still message to be delivered.
-    #[must_use] 
+    #[must_use]
     pub fn get_messages_in_queue(&self) -> &bool {
         &self.messages_in_queue
     }
@@ -205,7 +204,7 @@ impl GetTransactionStatusResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -217,7 +216,7 @@ impl GetTransactionStatusResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_ongoing_indicator(mut self, ongoing_indicator: bool) -> Self {
         self.ongoing_indicator = Some(ongoing_indicator);
         self
@@ -230,12 +229,11 @@ impl GetTransactionStatusResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -259,8 +257,7 @@ mod tests {
 
     #[test]
     fn test_get_transaction_status_request_with_transaction_id() {
-        let request = GetTransactionStatusRequest::new()
-            .with_transaction_id("txn_123".to_string());
+        let request = GetTransactionStatusRequest::new().with_transaction_id("txn_123".to_string());
 
         assert_eq!(request.transaction_id, Some("txn_123".to_string()));
         assert_eq!(request.custom_data, None);
@@ -269,8 +266,7 @@ mod tests {
     #[test]
     fn test_get_transaction_status_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = GetTransactionStatusRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = GetTransactionStatusRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.transaction_id, None);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -328,8 +324,7 @@ mod tests {
     #[test]
     fn test_get_transaction_status_request_validation_max_transaction_id() {
         let max_transaction_id = "a".repeat(36); // Exactly at max length
-        let request = GetTransactionStatusRequest::new()
-            .with_transaction_id(max_transaction_id);
+        let request = GetTransactionStatusRequest::new().with_transaction_id(max_transaction_id);
 
         assert!(request.validate().is_ok());
     }
@@ -361,8 +356,7 @@ mod tests {
 
     #[test]
     fn test_get_transaction_status_response_with_ongoing_indicator() {
-        let response = GetTransactionStatusResponse::new(false)
-            .with_ongoing_indicator(true);
+        let response = GetTransactionStatusResponse::new(false).with_ongoing_indicator(true);
 
         assert_eq!(response.messages_in_queue, false);
         assert_eq!(response.ongoing_indicator, Some(true));
@@ -372,8 +366,8 @@ mod tests {
     #[test]
     fn test_get_transaction_status_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = GetTransactionStatusResponse::new(true)
-            .with_custom_data(custom_data.clone());
+        let response =
+            GetTransactionStatusResponse::new(true).with_custom_data(custom_data.clone());
 
         assert_eq!(response.messages_in_queue, true);
         assert_eq!(response.ongoing_indicator, None);

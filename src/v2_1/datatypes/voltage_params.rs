@@ -53,7 +53,7 @@ impl VoltageParamsType {
     /// # Returns
     ///
     /// A new instance of `VoltageParamsType` with all fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             hv10_min_mean_value: None,
@@ -72,7 +72,7 @@ impl VoltageParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_hv10_min_mean_value(mut self, hv10_min_mean_value: Decimal) -> Self {
         self.hv10_min_mean_value = Some(hv10_min_mean_value);
         self
@@ -87,7 +87,7 @@ impl VoltageParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_hv10_min_mean_trip_delay(mut self, hv10_min_mean_trip_delay: Decimal) -> Self {
         self.hv10_min_mean_trip_delay = Some(hv10_min_mean_trip_delay);
         self
@@ -102,7 +102,7 @@ impl VoltageParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_power_during_cessation(
         mut self,
         power_during_cessation: PowerDuringCessationEnumType,
@@ -120,7 +120,7 @@ impl VoltageParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -131,7 +131,7 @@ impl VoltageParamsType {
     /// # Returns
     ///
     /// The voltage threshold for the 10 min time window mean value monitoring
-    #[must_use] 
+    #[must_use]
     pub fn hv10_min_mean_value(&self) -> Option<&Decimal> {
         self.hv10_min_mean_value.as_ref()
     }
@@ -155,7 +155,7 @@ impl VoltageParamsType {
     /// # Returns
     ///
     /// The time for which the voltage is allowed to stay above the 10 min mean value
-    #[must_use] 
+    #[must_use]
     pub fn hv10_min_mean_trip_delay(&self) -> Option<&Decimal> {
         self.hv10_min_mean_trip_delay.as_ref()
     }
@@ -182,7 +182,7 @@ impl VoltageParamsType {
     /// # Returns
     ///
     /// The power behavior during cessation
-    #[must_use] 
+    #[must_use]
     pub fn power_during_cessation(&self) -> Option<&PowerDuringCessationEnumType> {
         self.power_during_cessation.as_ref()
     }
@@ -209,7 +209,7 @@ impl VoltageParamsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

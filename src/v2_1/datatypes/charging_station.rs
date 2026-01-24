@@ -48,7 +48,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// A new instance of `ChargingStationType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(model: String, vendor_name: String) -> Self {
         Self {
             model,
@@ -69,7 +69,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_serial_number(mut self, serial_number: String) -> Self {
         self.serial_number = Some(serial_number);
         self
@@ -84,7 +84,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_firmware_version(mut self, firmware_version: String) -> Self {
         self.firmware_version = Some(firmware_version);
         self
@@ -99,7 +99,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_modem(mut self, modem: ModemType) -> Self {
         self.modem = Some(modem);
         self
@@ -114,7 +114,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -125,7 +125,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// A reference to the model of the device
-    #[must_use] 
+    #[must_use]
     pub fn model(&self) -> &str {
         &self.model
     }
@@ -149,7 +149,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// A reference to the vendor name
-    #[must_use] 
+    #[must_use]
     pub fn vendor_name(&self) -> &str {
         &self.vendor_name
     }
@@ -173,7 +173,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// An optional reference to the serial number
-    #[must_use] 
+    #[must_use]
     pub fn serial_number(&self) -> Option<&str> {
         self.serial_number.as_deref()
     }
@@ -197,7 +197,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// An optional reference to the firmware version
-    #[must_use] 
+    #[must_use]
     pub fn firmware_version(&self) -> Option<&str> {
         self.firmware_version.as_deref()
     }
@@ -221,7 +221,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// An optional reference to the modem
-    #[must_use] 
+    #[must_use]
     pub fn modem(&self) -> Option<&ModemType> {
         self.modem.as_ref()
     }
@@ -245,7 +245,7 @@ impl ChargingStationType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

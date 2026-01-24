@@ -27,7 +27,7 @@ impl NotifyWebPaymentStartedRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(evse_id: i32, timeout: i32) -> Self {
         Self {
             evse_id,
@@ -77,7 +77,7 @@ impl NotifyWebPaymentStartedRequest {
     /// # Returns
     ///
     /// EVSE id for which transaction is requested.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -87,7 +87,7 @@ impl NotifyWebPaymentStartedRequest {
     /// # Returns
     ///
     /// Timeout value in seconds after which no result of web payment process (e.g. QR code scanning) is to be expected anymore.
-    #[must_use] 
+    #[must_use]
     pub fn get_timeout(&self) -> &i32 {
         &self.timeout
     }
@@ -97,7 +97,7 @@ impl NotifyWebPaymentStartedRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -109,12 +109,11 @@ impl NotifyWebPaymentStartedRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyWebPaymentStarted` response.
@@ -139,11 +138,9 @@ impl NotifyWebPaymentStartedResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -163,7 +160,7 @@ impl NotifyWebPaymentStartedResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -175,12 +172,11 @@ impl NotifyWebPaymentStartedResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -218,7 +214,8 @@ mod tests {
         let request = create_test_notify_web_payment_started_request();
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: NotifyWebPaymentStartedRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: NotifyWebPaymentStartedRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -245,8 +242,7 @@ mod tests {
         let new_evse_id = 10;
         let new_timeout = 900;
 
-        request.set_evse_id(new_evse_id)
-               .set_timeout(new_timeout);
+        request.set_evse_id(new_evse_id).set_timeout(new_timeout);
 
         assert_eq!(request.evse_id, new_evse_id);
         assert_eq!(request.timeout, new_timeout);
@@ -264,8 +260,8 @@ mod tests {
     #[test]
     fn test_notify_web_payment_started_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = create_test_notify_web_payment_started_request()
-            .with_custom_data(custom_data.clone());
+        let request =
+            create_test_notify_web_payment_started_request().with_custom_data(custom_data.clone());
 
         assert_eq!(request.custom_data, Some(custom_data));
         assert_eq!(request.get_custom_data(), request.custom_data.as_ref());
@@ -334,7 +330,8 @@ mod tests {
         let response = create_test_notify_web_payment_started_response();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: NotifyWebPaymentStartedResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: NotifyWebPaymentStartedResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -363,8 +360,8 @@ mod tests {
     #[test]
     fn test_notify_web_payment_started_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = create_test_notify_web_payment_started_response()
-            .with_custom_data(custom_data.clone());
+        let response =
+            create_test_notify_web_payment_started_response().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
         assert_eq!(response.get_custom_data(), response.custom_data.as_ref());
@@ -384,19 +381,21 @@ mod tests {
     #[test]
     fn test_notify_web_payment_started_round_trip_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = create_test_notify_web_payment_started_request()
-            .with_custom_data(custom_data.clone());
-        let response = create_test_notify_web_payment_started_response()
-            .with_custom_data(custom_data);
+        let request =
+            create_test_notify_web_payment_started_request().with_custom_data(custom_data.clone());
+        let response =
+            create_test_notify_web_payment_started_response().with_custom_data(custom_data);
 
         // Test request round trip
         let request_json = serde_json::to_string(&request).expect("Failed to serialize request");
-        let request_deserialized: NotifyWebPaymentStartedRequest = serde_json::from_str(&request_json).expect("Failed to deserialize request");
+        let request_deserialized: NotifyWebPaymentStartedRequest =
+            serde_json::from_str(&request_json).expect("Failed to deserialize request");
         assert_eq!(request, request_deserialized);
 
         // Test response round trip
         let response_json = serde_json::to_string(&response).expect("Failed to serialize response");
-        let response_deserialized: NotifyWebPaymentStartedResponse = serde_json::from_str(&response_json).expect("Failed to deserialize response");
+        let response_deserialized: NotifyWebPaymentStartedResponse =
+            serde_json::from_str(&response_json).expect("Failed to deserialize response");
         assert_eq!(response, response_deserialized);
     }
 
@@ -412,7 +411,8 @@ mod tests {
 
             // Test serialization preserves EVSE ID
             let json = serde_json::to_string(&request).expect("Failed to serialize");
-            let deserialized: NotifyWebPaymentStartedRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: NotifyWebPaymentStartedRequest =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(request.evse_id, deserialized.evse_id);
         }
     }

@@ -1,6 +1,6 @@
 use crate::v2_1::datatypes::{CustomDataType, StatusInfoType};
-use crate::v2_1::enumerations::DERControlEnumType;
 use crate::v2_1::enumerations::der_control::DERControlStatusEnumType;
+use crate::v2_1::enumerations::DERControlEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
@@ -33,7 +33,7 @@ impl ClearDERControlRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(is_default: bool) -> Self {
         Self {
             is_default,
@@ -96,7 +96,7 @@ impl ClearDERControlRequest {
     /// # Returns
     ///
     /// True: clearing default DER controls. False: clearing scheduled controls.
-    #[must_use] 
+    #[must_use]
     pub fn get_is_default(&self) -> &bool {
         &self.is_default
     }
@@ -106,7 +106,7 @@ impl ClearDERControlRequest {
     /// # Returns
     ///
     /// The `control_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_control_type(&self) -> Option<&DERControlEnumType> {
         self.control_type.as_ref()
     }
@@ -116,7 +116,7 @@ impl ClearDERControlRequest {
     /// # Returns
     ///
     /// Id of control setting to clear. When omitted all settings for _controlType_ are cleared.
-    #[must_use] 
+    #[must_use]
     pub fn get_control_id(&self) -> Option<&String> {
         self.control_id.as_ref()
     }
@@ -126,7 +126,7 @@ impl ClearDERControlRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -138,7 +138,7 @@ impl ClearDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_control_type(mut self, control_type: DERControlEnumType) -> Self {
         self.control_type = Some(control_type);
         self
@@ -151,7 +151,7 @@ impl ClearDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_control_id(mut self, control_id: String) -> Self {
         self.control_id = Some(control_id);
         self
@@ -164,12 +164,11 @@ impl ClearDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ClearDERControl` response.
@@ -198,7 +197,7 @@ impl ClearDERControlResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: DERControlStatusEnumType) -> Self {
         Self {
             status,
@@ -248,7 +247,7 @@ impl ClearDERControlResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &DERControlStatusEnumType {
         &self.status
     }
@@ -258,7 +257,7 @@ impl ClearDERControlResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -268,7 +267,7 @@ impl ClearDERControlResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -280,7 +279,7 @@ impl ClearDERControlResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -293,12 +292,11 @@ impl ClearDERControlResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -331,8 +329,8 @@ mod tests {
         let is_default = false;
         let control_type = DERControlEnumType::FreqWatt;
 
-        let request = ClearDERControlRequest::new(is_default)
-            .with_control_type(control_type.clone());
+        let request =
+            ClearDERControlRequest::new(is_default).with_control_type(control_type.clone());
 
         assert_eq!(request.is_default, is_default);
         assert_eq!(request.control_type, Some(control_type));
@@ -345,8 +343,7 @@ mod tests {
         let is_default = true;
         let control_id = "control-123".to_string();
 
-        let request = ClearDERControlRequest::new(is_default)
-            .with_control_id(control_id.clone());
+        let request = ClearDERControlRequest::new(is_default).with_control_id(control_id.clone());
 
         assert_eq!(request.is_default, is_default);
         assert_eq!(request.control_type, None);
@@ -359,8 +356,7 @@ mod tests {
         let is_default = false;
         let custom_data = create_test_custom_data();
 
-        let request = ClearDERControlRequest::new(is_default)
-            .with_custom_data(custom_data.clone());
+        let request = ClearDERControlRequest::new(is_default).with_custom_data(custom_data.clone());
 
         assert_eq!(request.is_default, is_default);
         assert_eq!(request.control_type, None);
@@ -377,10 +373,11 @@ mod tests {
         let control_id = "control-456".to_string();
         let custom_data = create_test_custom_data();
 
-        request.set_is_default(new_is_default)
-               .set_control_type(Some(control_type.clone()))
-               .set_control_id(Some(control_id.clone()))
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_is_default(new_is_default)
+            .set_control_type(Some(control_type.clone()))
+            .set_control_id(Some(control_id.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.is_default, new_is_default);
         assert_eq!(request.control_type, Some(control_type));
@@ -411,8 +408,7 @@ mod tests {
         let is_default = false;
         let control_type = DERControlEnumType::WattVar;
 
-        let request = ClearDERControlRequest::new(is_default)
-            .with_control_type(control_type);
+        let request = ClearDERControlRequest::new(is_default).with_control_type(control_type);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: ClearDERControlRequest =
@@ -426,8 +422,7 @@ mod tests {
         let is_default = true;
         let long_control_id = "a".repeat(37); // Max is 36
 
-        let request = ClearDERControlRequest::new(is_default)
-            .with_control_id(long_control_id);
+        let request = ClearDERControlRequest::new(is_default).with_control_id(long_control_id);
 
         let validation_result = request.validate();
         assert!(validation_result.is_err());
@@ -438,8 +433,7 @@ mod tests {
         let is_default = true;
         let control_id = "control-123".to_string();
 
-        let request = ClearDERControlRequest::new(is_default)
-            .with_control_id(control_id);
+        let request = ClearDERControlRequest::new(is_default).with_control_id(control_id);
 
         let validation_result = request.validate();
         assert!(validation_result.is_ok());
@@ -479,8 +473,7 @@ mod tests {
         ];
 
         for control_type in control_types {
-            let request = ClearDERControlRequest::new(true)
-                .with_control_type(control_type.clone());
+            let request = ClearDERControlRequest::new(true).with_control_type(control_type.clone());
 
             assert_eq!(request.control_type, Some(control_type));
 
@@ -508,8 +501,8 @@ mod tests {
         let status = DERControlStatusEnumType::Rejected;
         let status_info = create_test_status_info();
 
-        let response = ClearDERControlResponse::new(status.clone())
-            .with_status_info(status_info.clone());
+        let response =
+            ClearDERControlResponse::new(status.clone()).with_status_info(status_info.clone());
 
         assert_eq!(response.status, status);
         assert_eq!(response.status_info, Some(status_info));
@@ -521,8 +514,8 @@ mod tests {
         let status = DERControlStatusEnumType::NotSupported;
         let custom_data = create_test_custom_data();
 
-        let response = ClearDERControlResponse::new(status.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            ClearDERControlResponse::new(status.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(response.status, status);
         assert_eq!(response.status_info, None);
@@ -537,9 +530,10 @@ mod tests {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        response.set_status(new_status.clone())
-                .set_status_info(Some(status_info.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(new_status.clone())
+            .set_status_info(Some(status_info.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, new_status);
         assert_eq!(response.status_info, Some(status_info));

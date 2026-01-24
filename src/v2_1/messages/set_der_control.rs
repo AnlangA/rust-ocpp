@@ -1,16 +1,9 @@
 use crate::v2_1::datatypes::{
-    CustomDataType,
-    DERCurveType,
-    EnterServiceType,
-    FixedPFType,
-    FixedVarType,
-    FreqDroopType,
-    GradientType,
-    LimitMaxDischargeType,
-    StatusInfoType,
+    CustomDataType, DERCurveType, EnterServiceType, FixedPFType, FixedVarType, FreqDroopType,
+    GradientType, LimitMaxDischargeType, StatusInfoType,
 };
-use crate::v2_1::enumerations::DERControlEnumType;
 use crate::v2_1::enumerations::der_control::DERControlStatusEnumType;
+use crate::v2_1::enumerations::DERControlEnumType;
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
@@ -74,7 +67,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(is_default: bool, control_id: String, control_type: DERControlEnumType) -> Self {
         Self {
             is_default,
@@ -219,7 +212,10 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_limit_max_discharge(&mut self, limit_max_discharge: Option<LimitMaxDischargeType>) -> &mut Self {
+    pub fn set_limit_max_discharge(
+        &mut self,
+        limit_max_discharge: Option<LimitMaxDischargeType>,
+    ) -> &mut Self {
         self.limit_max_discharge = limit_max_discharge;
         self
     }
@@ -241,7 +237,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// True if this is a default DER control
-    #[must_use] 
+    #[must_use]
     pub fn get_is_default(&self) -> &bool {
         &self.is_default
     }
@@ -251,7 +247,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Unique id of this control, e.g. UUID
-    #[must_use] 
+    #[must_use]
     pub fn get_control_id(&self) -> &String {
         &self.control_id
     }
@@ -261,7 +257,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The `control_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_control_type(&self) -> &DERControlEnumType {
         &self.control_type
     }
@@ -271,7 +267,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The curve field
-    #[must_use] 
+    #[must_use]
     pub fn get_curve(&self) -> Option<&DERCurveType> {
         self.curve.as_ref()
     }
@@ -281,7 +277,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The `enter_service` field
-    #[must_use] 
+    #[must_use]
     pub fn get_enter_service(&self) -> Option<&EnterServiceType> {
         self.enter_service.as_ref()
     }
@@ -291,7 +287,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The `fixed_pf_absorb` field
-    #[must_use] 
+    #[must_use]
     pub fn get_fixed_pf_absorb(&self) -> Option<&FixedPFType> {
         self.fixed_pf_absorb.as_ref()
     }
@@ -301,7 +297,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The `fixed_pf_inject` field
-    #[must_use] 
+    #[must_use]
     pub fn get_fixed_pf_inject(&self) -> Option<&FixedPFType> {
         self.fixed_pf_inject.as_ref()
     }
@@ -311,7 +307,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The `fixed_var` field
-    #[must_use] 
+    #[must_use]
     pub fn get_fixed_var(&self) -> Option<&FixedVarType> {
         self.fixed_var.as_ref()
     }
@@ -321,7 +317,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The `freq_droop` field
-    #[must_use] 
+    #[must_use]
     pub fn get_freq_droop(&self) -> Option<&FreqDroopType> {
         self.freq_droop.as_ref()
     }
@@ -331,7 +327,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The gradient field
-    #[must_use] 
+    #[must_use]
     pub fn get_gradient(&self) -> Option<&GradientType> {
         self.gradient.as_ref()
     }
@@ -341,7 +337,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The `limit_max_discharge` field
-    #[must_use] 
+    #[must_use]
     pub fn get_limit_max_discharge(&self) -> Option<&LimitMaxDischargeType> {
         self.limit_max_discharge.as_ref()
     }
@@ -351,7 +347,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -363,7 +359,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_curve(mut self, curve: DERCurveType) -> Self {
         self.curve = Some(curve);
         self
@@ -376,7 +372,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_enter_service(mut self, enter_service: EnterServiceType) -> Self {
         self.enter_service = Some(enter_service);
         self
@@ -389,7 +385,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_fixed_pf_absorb(mut self, fixed_pf_absorb: FixedPFType) -> Self {
         self.fixed_pf_absorb = Some(fixed_pf_absorb);
         self
@@ -402,7 +398,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_fixed_pf_inject(mut self, fixed_pf_inject: FixedPFType) -> Self {
         self.fixed_pf_inject = Some(fixed_pf_inject);
         self
@@ -415,7 +411,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_fixed_var(mut self, fixed_var: FixedVarType) -> Self {
         self.fixed_var = Some(fixed_var);
         self
@@ -428,7 +424,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_freq_droop(mut self, freq_droop: FreqDroopType) -> Self {
         self.freq_droop = Some(freq_droop);
         self
@@ -441,7 +437,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_gradient(mut self, gradient: GradientType) -> Self {
         self.gradient = Some(gradient);
         self
@@ -454,7 +450,7 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_limit_max_discharge(mut self, limit_max_discharge: LimitMaxDischargeType) -> Self {
         self.limit_max_discharge = Some(limit_max_discharge);
         self
@@ -467,12 +463,11 @@ impl SetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SetDERControl` response.
@@ -503,7 +498,7 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: DERControlStatusEnumType) -> Self {
         Self {
             status,
@@ -566,7 +561,7 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &DERControlStatusEnumType {
         &self.status
     }
@@ -576,7 +571,7 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -586,7 +581,7 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// List of controlIds that are superseded as a result of setting this control.
-    #[must_use] 
+    #[must_use]
     pub fn get_superseded_ids(&self) -> Option<&Vec<String>> {
         self.superseded_ids.as_ref()
     }
@@ -596,7 +591,7 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -608,7 +603,7 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -621,7 +616,7 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_superseded_ids(mut self, superseded_ids: Vec<String>) -> Self {
         self.superseded_ids = Some(superseded_ids);
         self
@@ -634,23 +629,26 @@ impl SetDERControlResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::v2_1::datatypes::{CustomDataType, StatusInfoType};
-    use crate::v2_1::enumerations::{DERControlEnumType, der_control::DERControlStatusEnumType};
+    use crate::v2_1::enumerations::{der_control::DERControlStatusEnumType, DERControlEnumType};
 
     #[test]
     fn test_set_der_control_request_new() {
-        let request = SetDERControlRequest::new(true, "test-control-id".to_string(), DERControlEnumType::EnterService);
+        let request = SetDERControlRequest::new(
+            true,
+            "test-control-id".to_string(),
+            DERControlEnumType::EnterService,
+        );
 
         assert_eq!(request.is_default, true);
         assert_eq!(request.control_id, "test-control-id");
@@ -668,10 +666,12 @@ mod tests {
 
     #[test]
     fn test_set_der_control_request_serialization() {
-        let request = SetDERControlRequest::new(false, "uuid-123".to_string(), DERControlEnumType::FreqDroop);
+        let request =
+            SetDERControlRequest::new(false, "uuid-123".to_string(), DERControlEnumType::FreqDroop);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetDERControlRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetDERControlRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(json.contains("\"isDefault\":false"));
@@ -682,19 +682,28 @@ mod tests {
     #[test]
     fn test_set_der_control_request_validation() {
         // Test valid request
-        let valid_request = SetDERControlRequest::new(true, "valid-id".to_string(), DERControlEnumType::EnterService);
+        let valid_request = SetDERControlRequest::new(
+            true,
+            "valid-id".to_string(),
+            DERControlEnumType::EnterService,
+        );
         assert!(valid_request.validate().is_ok());
 
         // Test invalid request with control_id too long
-        let invalid_request = SetDERControlRequest::new(true, "a".repeat(37), DERControlEnumType::EnterService);
+        let invalid_request =
+            SetDERControlRequest::new(true, "a".repeat(37), DERControlEnumType::EnterService);
         assert!(invalid_request.validate().is_err());
     }
 
     #[test]
     fn test_set_der_control_request_builder_pattern() {
         let custom_data = CustomDataType::new("test_vendor".to_string());
-        let request = SetDERControlRequest::new(true, "builder-test".to_string(), DERControlEnumType::EnterService)
-            .with_custom_data(custom_data.clone());
+        let request = SetDERControlRequest::new(
+            true,
+            "builder-test".to_string(),
+            DERControlEnumType::EnterService,
+        )
+        .with_custom_data(custom_data.clone());
 
         assert_eq!(request.is_default, true);
         assert_eq!(request.control_id, "builder-test");
@@ -704,13 +713,18 @@ mod tests {
 
     #[test]
     fn test_set_der_control_request_setters() {
-        let mut request = SetDERControlRequest::new(false, "initial".to_string(), DERControlEnumType::EnterService);
+        let mut request = SetDERControlRequest::new(
+            false,
+            "initial".to_string(),
+            DERControlEnumType::EnterService,
+        );
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        request.set_is_default(true)
-               .set_control_id("updated".to_string())
-               .set_control_type(DERControlEnumType::FreqDroop)
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_is_default(true)
+            .set_control_id("updated".to_string())
+            .set_control_type(DERControlEnumType::FreqDroop)
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.is_default, true);
         assert_eq!(request.control_id, "updated");
@@ -721,12 +735,19 @@ mod tests {
     #[test]
     fn test_set_der_control_request_getters() {
         let custom_data = CustomDataType::new("test_vendor".to_string());
-        let request = SetDERControlRequest::new(true, "getter-test".to_string(), DERControlEnumType::EnterService)
-            .with_custom_data(custom_data.clone());
+        let request = SetDERControlRequest::new(
+            true,
+            "getter-test".to_string(),
+            DERControlEnumType::EnterService,
+        )
+        .with_custom_data(custom_data.clone());
 
         assert_eq!(*request.get_is_default(), true);
         assert_eq!(request.get_control_id(), &"getter-test".to_string());
-        assert_eq!(*request.get_control_type(), DERControlEnumType::EnterService);
+        assert_eq!(
+            *request.get_control_type(),
+            DERControlEnumType::EnterService
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -744,7 +765,8 @@ mod tests {
         let response = SetDERControlResponse::new(DERControlStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetDERControlResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetDERControlResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(json.contains("\"status\":\"rejected\""));
@@ -773,10 +795,11 @@ mod tests {
         let superseded_ids = vec!["superseded-1".to_string()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        response.set_status(DERControlStatusEnumType::Rejected)
-                .set_status_info(Some(status_info.clone()))
-                .set_superseded_ids(Some(superseded_ids.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(DERControlStatusEnumType::Rejected)
+            .set_status_info(Some(status_info.clone()))
+            .set_superseded_ids(Some(superseded_ids.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, DERControlStatusEnumType::Rejected);
         assert_eq!(response.status_info, Some(status_info));
@@ -804,7 +827,11 @@ mod tests {
     fn test_set_der_control_edge_cases() {
         // Test with maximum allowed control_id length
         let max_control_id = "a".repeat(36);
-        let request = SetDERControlRequest::new(true, max_control_id.clone(), DERControlEnumType::EnterService);
+        let request = SetDERControlRequest::new(
+            true,
+            max_control_id.clone(),
+            DERControlEnumType::EnterService,
+        );
         assert!(request.validate().is_ok());
         assert_eq!(request.control_id, max_control_id);
 

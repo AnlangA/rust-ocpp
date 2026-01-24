@@ -23,7 +23,7 @@ impl ClosePeriodicEventStreamRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(id: i32) -> Self {
         Self {
             id,
@@ -60,7 +60,7 @@ impl ClosePeriodicEventStreamRequest {
     /// # Returns
     ///
     /// Id of stream to close.
-    #[must_use] 
+    #[must_use]
     pub fn get_id(&self) -> &i32 {
         &self.id
     }
@@ -70,7 +70,7 @@ impl ClosePeriodicEventStreamRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -82,12 +82,11 @@ impl ClosePeriodicEventStreamRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ClosePeriodicEventStream` response.
@@ -112,11 +111,9 @@ impl ClosePeriodicEventStreamResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -136,7 +133,7 @@ impl ClosePeriodicEventStreamResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -148,12 +145,11 @@ impl ClosePeriodicEventStreamResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -180,8 +176,8 @@ mod tests {
         let id = 456;
         let custom_data = create_test_custom_data();
 
-        let request = ClosePeriodicEventStreamRequest::new(id)
-            .with_custom_data(custom_data.clone());
+        let request =
+            ClosePeriodicEventStreamRequest::new(id).with_custom_data(custom_data.clone());
 
         assert_eq!(request.id, id);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -194,8 +190,9 @@ mod tests {
         let new_id = 789;
         let custom_data = create_test_custom_data();
 
-        request.set_id(new_id)
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_id(new_id)
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.id, new_id);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -206,8 +203,8 @@ mod tests {
         let id = 101;
         let custom_data = create_test_custom_data();
 
-        let request = ClosePeriodicEventStreamRequest::new(id)
-            .with_custom_data(custom_data.clone());
+        let request =
+            ClosePeriodicEventStreamRequest::new(id).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_id(), &id);
         assert_eq!(request.get_custom_data(), Some(&custom_data));
@@ -274,8 +271,8 @@ mod tests {
     fn test_close_periodic_event_stream_response_with_custom_data() {
         let custom_data = create_test_custom_data();
 
-        let response = ClosePeriodicEventStreamResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response =
+            ClosePeriodicEventStreamResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -295,8 +292,8 @@ mod tests {
     fn test_close_periodic_event_stream_response_getters() {
         let custom_data = create_test_custom_data();
 
-        let response = ClosePeriodicEventStreamResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response =
+            ClosePeriodicEventStreamResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -325,8 +322,8 @@ mod tests {
         let id = 303;
         let custom_data = create_test_custom_data();
 
-        let request = ClosePeriodicEventStreamRequest::new(id)
-            .with_custom_data(custom_data.clone());
+        let request =
+            ClosePeriodicEventStreamRequest::new(id).with_custom_data(custom_data.clone());
 
         assert_eq!(request.id, id);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -336,8 +333,8 @@ mod tests {
     fn test_close_periodic_event_stream_response_builder_pattern() {
         let custom_data = create_test_custom_data();
 
-        let response = ClosePeriodicEventStreamResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response =
+            ClosePeriodicEventStreamResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -355,11 +352,12 @@ mod tests {
 
         // Test request with custom data
         let custom_data = create_test_custom_data();
-        let request_with_data = ClosePeriodicEventStreamRequest::new(505)
-            .with_custom_data(custom_data.clone());
+        let request_with_data =
+            ClosePeriodicEventStreamRequest::new(505).with_custom_data(custom_data.clone());
         assert_eq!(request_with_data.custom_data, Some(custom_data));
 
-        let json_with_data = serde_json::to_string(&request_with_data).expect("Failed to serialize");
+        let json_with_data =
+            serde_json::to_string(&request_with_data).expect("Failed to serialize");
         let deserialized_with_data: ClosePeriodicEventStreamRequest =
             serde_json::from_str(&json_with_data).expect("Failed to deserialize");
         assert_eq!(request_with_data, deserialized_with_data);
@@ -378,11 +376,12 @@ mod tests {
 
         // Test response with custom data
         let custom_data = create_test_custom_data();
-        let response_with_data = ClosePeriodicEventStreamResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response_with_data =
+            ClosePeriodicEventStreamResponse::new().with_custom_data(custom_data.clone());
         assert_eq!(response_with_data.custom_data, Some(custom_data));
 
-        let json_with_data = serde_json::to_string(&response_with_data).expect("Failed to serialize");
+        let json_with_data =
+            serde_json::to_string(&response_with_data).expect("Failed to serialize");
         let deserialized_with_data: ClosePeriodicEventStreamResponse =
             serde_json::from_str(&json_with_data).expect("Failed to deserialize");
         assert_eq!(response_with_data, deserialized_with_data);

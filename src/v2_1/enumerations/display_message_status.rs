@@ -14,4 +14,3 @@ pub enum DisplayMessageStatusEnumType {
     UnknownTransaction,
     LanguageNotSupported,
 }
-

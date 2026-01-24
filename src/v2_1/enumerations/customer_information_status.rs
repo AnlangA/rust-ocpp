@@ -10,4 +10,3 @@ pub enum CustomerInformationStatusEnumType {
     Rejected,
     Invalid,
 }
-

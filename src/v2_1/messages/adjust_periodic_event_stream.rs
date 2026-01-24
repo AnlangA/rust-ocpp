@@ -28,7 +28,7 @@ impl AdjustPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(id: i32, params: PeriodicEventStreamParamsType) -> Self {
         Self {
             id,
@@ -78,7 +78,7 @@ impl AdjustPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// The id field
-    #[must_use] 
+    #[must_use]
     pub fn get_id(&self) -> &i32 {
         &self.id
     }
@@ -88,7 +88,7 @@ impl AdjustPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// The params field
-    #[must_use] 
+    #[must_use]
     pub fn get_params(&self) -> &PeriodicEventStreamParamsType {
         &self.params
     }
@@ -98,7 +98,7 @@ impl AdjustPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -110,12 +110,11 @@ impl AdjustPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `AdjustPeriodicEventStream` response.
@@ -144,7 +143,7 @@ impl AdjustPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -194,7 +193,7 @@ impl AdjustPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -204,7 +203,7 @@ impl AdjustPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -214,7 +213,7 @@ impl AdjustPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -226,7 +225,7 @@ impl AdjustPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -239,12 +238,11 @@ impl AdjustPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -297,7 +295,8 @@ mod tests {
         let request = AdjustPeriodicEventStreamRequest::new(id, params);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: AdjustPeriodicEventStreamRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AdjustPeriodicEventStreamRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -308,8 +307,8 @@ mod tests {
         let params = create_test_params();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = AdjustPeriodicEventStreamRequest::new(id, params)
-            .with_custom_data(custom_data.clone());
+        let request =
+            AdjustPeriodicEventStreamRequest::new(id, params).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -357,8 +356,7 @@ mod tests {
     fn test_adjust_periodic_event_stream_request_with_complex_params() {
         let id = 123;
         let custom_data = CustomDataType::new("ParamsVendor".to_string());
-        let params = PeriodicEventStreamParamsType::new(3600, 100)
-            .with_custom_data(custom_data);
+        let params = PeriodicEventStreamParamsType::new(3600, 100).with_custom_data(custom_data);
 
         let request = AdjustPeriodicEventStreamRequest::new(id, params);
 
@@ -366,7 +364,8 @@ mod tests {
 
         // Test serialization with complex data
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: AdjustPeriodicEventStreamRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AdjustPeriodicEventStreamRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -394,7 +393,8 @@ mod tests {
         let response = AdjustPeriodicEventStreamResponse::new(status);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: AdjustPeriodicEventStreamResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AdjustPeriodicEventStreamResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -404,8 +404,8 @@ mod tests {
         let status = GenericStatusEnumType::Accepted;
         let status_info = create_test_status_info();
 
-        let response = AdjustPeriodicEventStreamResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response =
+            AdjustPeriodicEventStreamResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
     }
@@ -415,8 +415,8 @@ mod tests {
         let status = GenericStatusEnumType::Accepted;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = AdjustPeriodicEventStreamResponse::new(status)
-            .with_custom_data(custom_data.clone());
+        let response =
+            AdjustPeriodicEventStreamResponse::new(status).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -475,11 +475,12 @@ mod tests {
         let params = create_test_params();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = AdjustPeriodicEventStreamRequest::new(id, params)
-            .with_custom_data(custom_data);
+        let request =
+            AdjustPeriodicEventStreamRequest::new(id, params).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: AdjustPeriodicEventStreamRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AdjustPeriodicEventStreamRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -496,7 +497,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: AdjustPeriodicEventStreamResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AdjustPeriodicEventStreamResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -520,18 +522,20 @@ mod tests {
     #[test]
     fn test_adjust_periodic_event_stream_response_with_detailed_status_info() {
         let status = GenericStatusEnumType::Rejected;
-        let status_info = StatusInfoType::new("InvalidParams".to_string())
-            .with_additional_info("The provided parameters are invalid for this stream".to_string());
+        let status_info = StatusInfoType::new("InvalidParams".to_string()).with_additional_info(
+            "The provided parameters are invalid for this stream".to_string(),
+        );
 
-        let response = AdjustPeriodicEventStreamResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response =
+            AdjustPeriodicEventStreamResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert!(response.validate().is_ok());
 
         // Test serialization
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: AdjustPeriodicEventStreamResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AdjustPeriodicEventStreamResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
@@ -541,8 +545,8 @@ mod tests {
         let params = create_test_params();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut request = AdjustPeriodicEventStreamRequest::new(id, params)
-            .with_custom_data(custom_data);
+        let mut request =
+            AdjustPeriodicEventStreamRequest::new(id, params).with_custom_data(custom_data);
 
         // Verify custom data is set
         assert!(request.get_custom_data().is_some());

@@ -27,7 +27,7 @@ impl SetNetworkProfileRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(configuration_slot: i32, connection_data: NetworkConnectionProfileType) -> Self {
         Self {
             configuration_slot,
@@ -55,7 +55,10 @@ impl SetNetworkProfileRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_connection_data(&mut self, connection_data: NetworkConnectionProfileType) -> &mut Self {
+    pub fn set_connection_data(
+        &mut self,
+        connection_data: NetworkConnectionProfileType,
+    ) -> &mut Self {
         self.connection_data = connection_data;
         self
     }
@@ -77,7 +80,7 @@ impl SetNetworkProfileRequest {
     /// # Returns
     ///
     /// Slot in which the configuration should be stored.
-    #[must_use] 
+    #[must_use]
     pub fn get_configuration_slot(&self) -> &i32 {
         &self.configuration_slot
     }
@@ -87,7 +90,7 @@ impl SetNetworkProfileRequest {
     /// # Returns
     ///
     /// The `connection_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_connection_data(&self) -> &NetworkConnectionProfileType {
         &self.connection_data
     }
@@ -97,7 +100,7 @@ impl SetNetworkProfileRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -109,12 +112,11 @@ impl SetNetworkProfileRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SetNetworkProfile` response.
@@ -140,7 +142,7 @@ impl SetNetworkProfileResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: SetNetworkProfileStatusEnumType) -> Self {
         Self {
             status,
@@ -190,7 +192,7 @@ impl SetNetworkProfileResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &SetNetworkProfileStatusEnumType {
         &self.status
     }
@@ -200,7 +202,7 @@ impl SetNetworkProfileResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -210,7 +212,7 @@ impl SetNetworkProfileResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -222,7 +224,7 @@ impl SetNetworkProfileResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -235,12 +237,11 @@ impl SetNetworkProfileResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -279,7 +280,8 @@ mod tests {
         let request = SetNetworkProfileRequest::new(1, connection_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetNetworkProfileRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetNetworkProfileRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -296,8 +298,8 @@ mod tests {
     fn test_set_network_profile_request_with_custom_data() {
         let connection_data = create_test_network_profile();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetNetworkProfileRequest::new(1, connection_data)
-            .with_custom_data(custom_data.clone());
+        let request =
+            SetNetworkProfileRequest::new(1, connection_data).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -325,8 +327,8 @@ mod tests {
         let connection_data = create_test_network_profile();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = SetNetworkProfileRequest::new(1, connection_data)
-            .with_custom_data(custom_data.clone());
+        let request =
+            SetNetworkProfileRequest::new(1, connection_data).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -346,7 +348,8 @@ mod tests {
         let response = SetNetworkProfileResponse::new(SetNetworkProfileStatusEnumType::Accepted);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetNetworkProfileResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetNetworkProfileResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -381,14 +384,18 @@ mod tests {
         let status_info = StatusInfoType::new("Failed".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut response = SetNetworkProfileResponse::new(SetNetworkProfileStatusEnumType::Accepted);
+        let mut response =
+            SetNetworkProfileResponse::new(SetNetworkProfileStatusEnumType::Accepted);
 
         response
             .set_status(SetNetworkProfileStatusEnumType::Failed)
             .set_status_info(Some(status_info.clone()))
             .set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.get_status(), &SetNetworkProfileStatusEnumType::Failed);
+        assert_eq!(
+            response.get_status(),
+            &SetNetworkProfileStatusEnumType::Failed
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -410,11 +417,12 @@ mod tests {
     fn test_set_network_profile_request_json_round_trip() {
         let connection_data = create_test_network_profile();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetNetworkProfileRequest::new(1, connection_data)
-            .with_custom_data(custom_data);
+        let request =
+            SetNetworkProfileRequest::new(1, connection_data).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetNetworkProfileRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetNetworkProfileRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -429,7 +437,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetNetworkProfileResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetNetworkProfileResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -458,7 +467,8 @@ mod tests {
             assert!(response.validate().is_ok());
 
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: SetNetworkProfileResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: SetNetworkProfileResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -467,8 +477,8 @@ mod tests {
     fn test_set_network_profile_request_with_custom_data_validation() {
         let connection_data = create_test_network_profile();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetNetworkProfileRequest::new(1, connection_data)
-            .with_custom_data(custom_data);
+        let request =
+            SetNetworkProfileRequest::new(1, connection_data).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
     }
@@ -482,7 +492,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &SetNetworkProfileStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &SetNetworkProfileStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
         assert!(response.validate().is_ok());

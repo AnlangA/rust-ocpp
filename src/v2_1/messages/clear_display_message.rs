@@ -25,7 +25,7 @@ impl ClearDisplayMessageRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(id: i32) -> Self {
         Self {
             id,
@@ -62,7 +62,7 @@ impl ClearDisplayMessageRequest {
     /// # Returns
     ///
     /// Id of the message that SHALL be removed from the Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_id(&self) -> &i32 {
         &self.id
     }
@@ -72,7 +72,7 @@ impl ClearDisplayMessageRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -84,12 +84,11 @@ impl ClearDisplayMessageRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ClearDisplayMessage` response.
@@ -118,7 +117,7 @@ impl ClearDisplayMessageResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: ClearMessageStatusEnumType) -> Self {
         Self {
             status,
@@ -168,7 +167,7 @@ impl ClearDisplayMessageResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &ClearMessageStatusEnumType {
         &self.status
     }
@@ -178,7 +177,7 @@ impl ClearDisplayMessageResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -188,7 +187,7 @@ impl ClearDisplayMessageResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -200,7 +199,7 @@ impl ClearDisplayMessageResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -213,12 +212,11 @@ impl ClearDisplayMessageResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -245,7 +243,8 @@ mod tests {
     fn test_clear_display_message_request_serialization() {
         let request = ClearDisplayMessageRequest::new(456);
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ClearDisplayMessageRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearDisplayMessageRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -276,8 +275,7 @@ mod tests {
     #[test]
     fn test_clear_display_message_request_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = ClearDisplayMessageRequest::new(789)
-            .with_custom_data(custom_data.clone());
+        let request = ClearDisplayMessageRequest::new(789).with_custom_data(custom_data.clone());
         assert_eq!(request.get_custom_data(), Some(&custom_data));
         assert!(request.validate().is_ok());
     }
@@ -286,8 +284,8 @@ mod tests {
     fn test_clear_display_message_response_with_status_info() {
         let status = ClearMessageStatusEnumType::Unknown;
         let status_info = StatusInfoType::new("NotFound".to_string());
-        let response = ClearDisplayMessageResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response =
+            ClearDisplayMessageResponse::new(status).with_status_info(status_info.clone());
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert!(response.validate().is_ok());
     }
@@ -298,7 +296,8 @@ mod tests {
             .with_custom_data(CustomDataType::new("TestVendor".to_string()));
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ClearDisplayMessageRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearDisplayMessageRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
 
@@ -306,7 +305,8 @@ mod tests {
             .with_status_info(StatusInfoType::new("Success".to_string()));
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ClearDisplayMessageResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearDisplayMessageResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
     }
@@ -376,7 +376,7 @@ mod tests {
     #[test]
     fn test_clear_display_message_request_method_chaining() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
+
         let mut request = ClearDisplayMessageRequest::new(100);
         let result = request
             .set_id(200)
@@ -391,7 +391,7 @@ mod tests {
     fn test_clear_display_message_response_method_chaining() {
         let status_info = StatusInfoType::new("TestInfo".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
+
         let mut response = ClearDisplayMessageResponse::new(ClearMessageStatusEnumType::Accepted);
         let result = response
             .set_status(ClearMessageStatusEnumType::Unknown)
@@ -421,7 +421,7 @@ mod tests {
     fn test_clear_display_message_response_with_all_custom_data() {
         let status_info = StatusInfoType::new("DetailedInfo".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
+
         let response = ClearDisplayMessageResponse::new(ClearMessageStatusEnumType::Unknown)
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
@@ -436,14 +436,19 @@ mod tests {
     fn test_clear_display_message_partial_json_deserialization() {
         // Test request with only required fields
         let json = r#"{"id":42}"#;
-        let deserialized: ClearDisplayMessageRequest = serde_json::from_str(json).expect("Failed to deserialize");
+        let deserialized: ClearDisplayMessageRequest =
+            serde_json::from_str(json).expect("Failed to deserialize");
         assert_eq!(deserialized.get_id(), &42);
         assert_eq!(deserialized.get_custom_data(), None);
 
         // Test response with only required fields
         let json = r#"{"status":"Accepted"}"#;
-        let deserialized: ClearDisplayMessageResponse = serde_json::from_str(json).expect("Failed to deserialize");
-        assert_eq!(deserialized.get_status(), &ClearMessageStatusEnumType::Accepted);
+        let deserialized: ClearDisplayMessageResponse =
+            serde_json::from_str(json).expect("Failed to deserialize");
+        assert_eq!(
+            deserialized.get_status(),
+            &ClearMessageStatusEnumType::Accepted
+        );
         assert_eq!(deserialized.get_status_info(), None);
         assert_eq!(deserialized.get_custom_data(), None);
     }

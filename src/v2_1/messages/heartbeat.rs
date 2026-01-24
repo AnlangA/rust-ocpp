@@ -26,11 +26,9 @@ impl HeartbeatRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -50,7 +48,7 @@ impl HeartbeatRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -62,12 +60,11 @@ impl HeartbeatRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the Heartbeat response.
@@ -97,7 +94,7 @@ impl HeartbeatResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(current_time: DateTime<Utc>) -> Self {
         Self {
             current_time,
@@ -134,7 +131,7 @@ impl HeartbeatResponse {
     /// # Returns
     ///
     /// Contains the current time of the CSMS.
-    #[must_use] 
+    #[must_use]
     pub fn get_current_time(&self) -> &DateTime<Utc> {
         &self.current_time
     }
@@ -144,7 +141,7 @@ impl HeartbeatResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -156,12 +153,11 @@ impl HeartbeatResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -183,7 +179,8 @@ mod tests {
         let request = HeartbeatRequest::new();
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: HeartbeatRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: HeartbeatRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -216,8 +213,7 @@ mod tests {
     #[test]
     fn test_heartbeat_request_builder_pattern() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = HeartbeatRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = HeartbeatRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -237,7 +233,8 @@ mod tests {
         let response = HeartbeatResponse::new(current_time);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: HeartbeatResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: HeartbeatResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -254,8 +251,7 @@ mod tests {
     fn test_heartbeat_response_with_custom_data() {
         let current_time = Utc::now();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = HeartbeatResponse::new(current_time)
-            .with_custom_data(custom_data.clone());
+        let response = HeartbeatResponse::new(current_time).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -281,8 +277,7 @@ mod tests {
         let current_time = Utc::now();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = HeartbeatResponse::new(current_time)
-            .with_custom_data(custom_data.clone());
+        let response = HeartbeatResponse::new(current_time).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -293,7 +288,8 @@ mod tests {
         let request = HeartbeatRequest::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: HeartbeatRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: HeartbeatRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -303,11 +299,11 @@ mod tests {
     fn test_heartbeat_response_json_round_trip() {
         let current_time = Utc::now();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = HeartbeatResponse::new(current_time)
-            .with_custom_data(custom_data);
+        let response = HeartbeatResponse::new(current_time).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: HeartbeatResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: HeartbeatResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -326,8 +322,7 @@ mod tests {
     fn test_heartbeat_response_with_custom_data_validation() {
         let current_time = Utc::now();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = HeartbeatResponse::new(current_time)
-            .with_custom_data(custom_data);
+        let response = HeartbeatResponse::new(current_time).with_custom_data(custom_data);
 
         assert!(response.validate().is_ok());
     }

@@ -29,7 +29,7 @@ impl CustomDataType {
     /// # Returns
     ///
     /// A new instance of `CustomDataType` with empty additional properties
-    #[must_use] 
+    #[must_use]
     pub fn new(vendor_id: String) -> Self {
         Self {
             vendor_id,
@@ -47,7 +47,7 @@ impl CustomDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_property(mut self, key: String, value: Value) -> Self {
         self.additional_properties.insert(key, value);
         self
@@ -58,7 +58,7 @@ impl CustomDataType {
     /// # Returns
     ///
     /// A reference to the vendor-specific identifier
-    #[must_use] 
+    #[must_use]
     pub fn vendor_id(&self) -> &str {
         &self.vendor_id
     }
@@ -82,7 +82,7 @@ impl CustomDataType {
     /// # Returns
     ///
     /// A reference to the additional vendor-specific properties
-    #[must_use] 
+    #[must_use]
     pub fn additional_properties(&self) -> &HashMap<String, Value> {
         &self.additional_properties
     }

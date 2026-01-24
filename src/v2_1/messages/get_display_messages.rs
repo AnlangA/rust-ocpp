@@ -1,5 +1,7 @@
 use crate::v2_1::datatypes::{CustomDataType, StatusInfoType};
-use crate::v2_1::enumerations::{GetDisplayMessagesStatusEnumType, MessagePriorityEnumType, MessageStateEnumType};
+use crate::v2_1::enumerations::{
+    GetDisplayMessagesStatusEnumType, MessagePriorityEnumType, MessageStateEnumType,
+};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
@@ -37,7 +39,7 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32) -> Self {
         Self {
             id: None,
@@ -113,7 +115,7 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// If provided the Charging Station shall return Display Messages of the given ids. This field SHALL NOT contain more ids than set in &lt;&lt;configkey-number-of-display-messages,NumberOfDisplayMessages.maxLimit&gt;&gt;
-    #[must_use] 
+    #[must_use]
     pub fn get_id(&self) -> Option<&Vec<i32>> {
         self.id.as_ref()
     }
@@ -123,7 +125,7 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// The Id of this request.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -133,7 +135,7 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// The priority field
-    #[must_use] 
+    #[must_use]
     pub fn get_priority(&self) -> Option<&MessagePriorityEnumType> {
         self.priority.as_ref()
     }
@@ -143,7 +145,7 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// The state field
-    #[must_use] 
+    #[must_use]
     pub fn get_state(&self) -> Option<&MessageStateEnumType> {
         self.state.as_ref()
     }
@@ -153,7 +155,7 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -165,7 +167,7 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_id(mut self, id: Vec<i32>) -> Self {
         self.id = Some(id);
         self
@@ -178,7 +180,7 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_priority(mut self, priority: MessagePriorityEnumType) -> Self {
         self.priority = Some(priority);
         self
@@ -191,7 +193,7 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_state(mut self, state: MessageStateEnumType) -> Self {
         self.state = Some(state);
         self
@@ -204,12 +206,11 @@ impl GetDisplayMessagesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetDisplayMessages` response.
@@ -237,7 +238,7 @@ impl GetDisplayMessagesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GetDisplayMessagesStatusEnumType) -> Self {
         Self {
             status,
@@ -287,7 +288,7 @@ impl GetDisplayMessagesResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GetDisplayMessagesStatusEnumType {
         &self.status
     }
@@ -297,7 +298,7 @@ impl GetDisplayMessagesResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -307,7 +308,7 @@ impl GetDisplayMessagesResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -319,7 +320,7 @@ impl GetDisplayMessagesResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -332,12 +333,11 @@ impl GetDisplayMessagesResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -369,8 +369,7 @@ mod tests {
     #[test]
     fn test_get_display_messages_request_with_id() {
         let ids = vec![1, 2, 3];
-        let request = GetDisplayMessagesRequest::new(456)
-            .with_id(ids.clone());
+        let request = GetDisplayMessagesRequest::new(456).with_id(ids.clone());
 
         assert_eq!(request.id, Some(ids));
         assert_eq!(request.request_id, 456);
@@ -381,8 +380,8 @@ mod tests {
 
     #[test]
     fn test_get_display_messages_request_with_priority() {
-        let request = GetDisplayMessagesRequest::new(789)
-            .with_priority(MessagePriorityEnumType::AlwaysFront);
+        let request =
+            GetDisplayMessagesRequest::new(789).with_priority(MessagePriorityEnumType::AlwaysFront);
 
         assert_eq!(request.id, None);
         assert_eq!(request.request_id, 789);
@@ -393,8 +392,8 @@ mod tests {
 
     #[test]
     fn test_get_display_messages_request_with_state() {
-        let request = GetDisplayMessagesRequest::new(999)
-            .with_state(MessageStateEnumType::Charging);
+        let request =
+            GetDisplayMessagesRequest::new(999).with_state(MessageStateEnumType::Charging);
 
         assert_eq!(request.id, None);
         assert_eq!(request.request_id, 999);
@@ -406,8 +405,7 @@ mod tests {
     #[test]
     fn test_get_display_messages_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = GetDisplayMessagesRequest::new(111)
-            .with_custom_data(custom_data.clone());
+        let request = GetDisplayMessagesRequest::new(111).with_custom_data(custom_data.clone());
 
         assert_eq!(request.id, None);
         assert_eq!(request.request_id, 111);
@@ -447,7 +445,10 @@ mod tests {
 
         assert_eq!(request.get_id(), Some(&ids));
         assert_eq!(request.get_request_id(), &555);
-        assert_eq!(request.get_priority(), Some(&MessagePriorityEnumType::NormalCycle));
+        assert_eq!(
+            request.get_priority(),
+            Some(&MessagePriorityEnumType::NormalCycle)
+        );
         assert_eq!(request.get_state(), Some(&MessageStateEnumType::Idle));
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -496,8 +497,7 @@ mod tests {
         ];
 
         for priority in priorities {
-            let request = GetDisplayMessagesRequest::new(123)
-                .with_priority(priority.clone());
+            let request = GetDisplayMessagesRequest::new(123).with_priority(priority.clone());
             assert_eq!(request.priority, Some(priority));
             assert!(request.validate().is_ok());
         }
@@ -515,8 +515,7 @@ mod tests {
         ];
 
         for state in states {
-            let request = GetDisplayMessagesRequest::new(123)
-                .with_state(state.clone());
+            let request = GetDisplayMessagesRequest::new(123).with_state(state.clone());
             assert_eq!(request.state, Some(state));
             assert!(request.validate().is_ok());
         }
@@ -577,7 +576,8 @@ mod tests {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        let mut response = GetDisplayMessagesResponse::new(GetDisplayMessagesStatusEnumType::Accepted);
+        let mut response =
+            GetDisplayMessagesResponse::new(GetDisplayMessagesStatusEnumType::Accepted);
         response.set_status(GetDisplayMessagesStatusEnumType::Unknown);
         response.set_status_info(Some(status_info.clone()));
         response.set_custom_data(Some(custom_data.clone()));
@@ -595,7 +595,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &GetDisplayMessagesStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &GetDisplayMessagesStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }

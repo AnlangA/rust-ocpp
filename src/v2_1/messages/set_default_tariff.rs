@@ -28,7 +28,7 @@ impl SetDefaultTariffRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(evse_id: i32, tariff: TariffType) -> Self {
         Self {
             evse_id,
@@ -78,7 +78,7 @@ impl SetDefaultTariffRequest {
     /// # Returns
     ///
     /// EVSE that tariff applies to. When _evseId_ = 0, then tarriff applies to all EVSEs.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -88,7 +88,7 @@ impl SetDefaultTariffRequest {
     /// # Returns
     ///
     /// The tariff field
-    #[must_use] 
+    #[must_use]
     pub fn get_tariff(&self) -> &TariffType {
         &self.tariff
     }
@@ -98,7 +98,7 @@ impl SetDefaultTariffRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -110,12 +110,11 @@ impl SetDefaultTariffRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SetDefaultTariff` response.
@@ -144,7 +143,7 @@ impl SetDefaultTariffResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: TariffSetStatusEnumType) -> Self {
         Self {
             status,
@@ -194,7 +193,7 @@ impl SetDefaultTariffResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &TariffSetStatusEnumType {
         &self.status
     }
@@ -204,7 +203,7 @@ impl SetDefaultTariffResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -214,7 +213,7 @@ impl SetDefaultTariffResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -226,7 +225,7 @@ impl SetDefaultTariffResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -239,12 +238,11 @@ impl SetDefaultTariffResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -273,7 +271,8 @@ mod tests {
         let request = SetDefaultTariffRequest::new(2, tariff);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetDefaultTariffRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetDefaultTariffRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(json.contains("\"evseId\":2"));
@@ -296,8 +295,8 @@ mod tests {
     fn test_set_default_tariff_request_builder_pattern() {
         let tariff = create_test_tariff();
         let custom_data = CustomDataType::new("test_vendor".to_string());
-        let request = SetDefaultTariffRequest::new(3, tariff.clone())
-            .with_custom_data(custom_data.clone());
+        let request =
+            SetDefaultTariffRequest::new(3, tariff.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(request.evse_id, 3);
         assert_eq!(request.tariff, tariff);
@@ -311,9 +310,10 @@ mod tests {
         let mut request = SetDefaultTariffRequest::new(1, tariff1);
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        request.set_evse_id(4)
-               .set_tariff(tariff2.clone())
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_evse_id(4)
+            .set_tariff(tariff2.clone())
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.evse_id, 4);
         assert_eq!(request.tariff, tariff2);
@@ -324,8 +324,8 @@ mod tests {
     fn test_set_default_tariff_request_getters() {
         let tariff = create_test_tariff();
         let custom_data = CustomDataType::new("test_vendor".to_string());
-        let request = SetDefaultTariffRequest::new(5, tariff.clone())
-            .with_custom_data(custom_data.clone());
+        let request =
+            SetDefaultTariffRequest::new(5, tariff.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(*request.get_evse_id(), 5);
         assert_eq!(*request.get_tariff(), tariff);
@@ -345,7 +345,8 @@ mod tests {
         let response = SetDefaultTariffResponse::new(TariffSetStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetDefaultTariffResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetDefaultTariffResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(json.contains("\"status\":\"Rejected\""));
@@ -370,9 +371,10 @@ mod tests {
         let status_info = StatusInfoType::new("Updated status".to_string());
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        response.set_status(TariffSetStatusEnumType::Rejected)
-                .set_status_info(Some(status_info.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(TariffSetStatusEnumType::Rejected)
+            .set_status_info(Some(status_info.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, TariffSetStatusEnumType::Rejected);
         assert_eq!(response.status_info, Some(status_info));

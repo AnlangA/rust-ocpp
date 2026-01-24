@@ -29,7 +29,7 @@ impl AFRRSignalRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(timestamp: DateTime<Utc>, signal: i32) -> Self {
         Self {
             timestamp,
@@ -79,7 +79,7 @@ impl AFRRSignalRequest {
     /// # Returns
     ///
     /// Time when signal becomes active.
-    #[must_use] 
+    #[must_use]
     pub fn get_timestamp(&self) -> &DateTime<Utc> {
         &self.timestamp
     }
@@ -89,7 +89,7 @@ impl AFRRSignalRequest {
     /// # Returns
     ///
     /// Value of signal in _v2xSignalWattCurve_.
-    #[must_use] 
+    #[must_use]
     pub fn get_signal(&self) -> &i32 {
         &self.signal
     }
@@ -99,7 +99,7 @@ impl AFRRSignalRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -111,12 +111,11 @@ impl AFRRSignalRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `AFRRSignal` response.
@@ -144,7 +143,7 @@ impl AFRRSignalResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -194,7 +193,7 @@ impl AFRRSignalResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -204,7 +203,7 @@ impl AFRRSignalResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -214,7 +213,7 @@ impl AFRRSignalResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -226,7 +225,7 @@ impl AFRRSignalResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -239,12 +238,11 @@ impl AFRRSignalResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -289,7 +287,8 @@ mod tests {
         let request = AFRRSignalRequest::new(timestamp, signal);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: AFRRSignalRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AFRRSignalRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -300,8 +299,8 @@ mod tests {
         let signal = 1000;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = AFRRSignalRequest::new(timestamp, signal)
-            .with_custom_data(custom_data.clone());
+        let request =
+            AFRRSignalRequest::new(timestamp, signal).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -365,7 +364,8 @@ mod tests {
 
         // Test serialization preserves timestamp precision
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: AFRRSignalRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AFRRSignalRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request.get_timestamp(), deserialized.get_timestamp());
     }
 
@@ -393,7 +393,8 @@ mod tests {
         let response = AFRRSignalResponse::new(status);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: AFRRSignalResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AFRRSignalResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -403,8 +404,7 @@ mod tests {
         let status = GenericStatusEnumType::Accepted;
         let status_info = create_test_status_info();
 
-        let response = AFRRSignalResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response = AFRRSignalResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
     }
@@ -414,8 +414,7 @@ mod tests {
         let status = GenericStatusEnumType::Accepted;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = AFRRSignalResponse::new(status)
-            .with_custom_data(custom_data.clone());
+        let response = AFRRSignalResponse::new(status).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -474,11 +473,11 @@ mod tests {
         let signal = 1000;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = AFRRSignalRequest::new(timestamp, signal)
-            .with_custom_data(custom_data);
+        let request = AFRRSignalRequest::new(timestamp, signal).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: AFRRSignalRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AFRRSignalRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -495,7 +494,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: AFRRSignalResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AFRRSignalResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -504,18 +504,19 @@ mod tests {
     #[test]
     fn test_afrr_signal_response_with_detailed_status_info() {
         let status = GenericStatusEnumType::Rejected;
-        let status_info = StatusInfoType::new("InvalidSignal".to_string())
-            .with_additional_info("The provided signal value is outside acceptable range".to_string());
+        let status_info = StatusInfoType::new("InvalidSignal".to_string()).with_additional_info(
+            "The provided signal value is outside acceptable range".to_string(),
+        );
 
-        let response = AFRRSignalResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response = AFRRSignalResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert!(response.validate().is_ok());
 
         // Test serialization
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: AFRRSignalResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AFRRSignalResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
@@ -525,8 +526,7 @@ mod tests {
         let signal = 1000;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut request = AFRRSignalRequest::new(timestamp, signal)
-            .with_custom_data(custom_data);
+        let mut request = AFRRSignalRequest::new(timestamp, signal).with_custom_data(custom_data);
 
         // Verify custom data is set
         assert!(request.get_custom_data().is_some());
@@ -567,19 +567,22 @@ mod tests {
         let custom_data = CustomDataType::new("AFRRVendor".to_string())
             .with_property("region".to_string(), json!("EU"))
             .with_property("priority".to_string(), json!(5))
-            .with_property("metadata".to_string(), json!({
-                "source": "grid_operator",
-                "version": "2.1"
-            }));
+            .with_property(
+                "metadata".to_string(),
+                json!({
+                    "source": "grid_operator",
+                    "version": "2.1"
+                }),
+            );
 
-        let request = AFRRSignalRequest::new(timestamp, signal)
-            .with_custom_data(custom_data);
+        let request = AFRRSignalRequest::new(timestamp, signal).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
 
         // Test serialization with complex custom data
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: AFRRSignalRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: AFRRSignalRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 

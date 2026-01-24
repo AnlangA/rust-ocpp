@@ -28,7 +28,7 @@ impl UsePriorityChargingRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(transaction_id: String, activate: bool) -> Self {
         Self {
             transaction_id,
@@ -78,7 +78,7 @@ impl UsePriorityChargingRequest {
     /// # Returns
     ///
     /// The transaction for which priority charging is requested.
-    #[must_use] 
+    #[must_use]
     pub fn get_transaction_id(&self) -> &String {
         &self.transaction_id
     }
@@ -88,7 +88,7 @@ impl UsePriorityChargingRequest {
     /// # Returns
     ///
     /// True to request priority charging. False to request stopping priority charging.
-    #[must_use] 
+    #[must_use]
     pub fn get_activate(&self) -> &bool {
         &self.activate
     }
@@ -98,7 +98,7 @@ impl UsePriorityChargingRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -110,12 +110,11 @@ impl UsePriorityChargingRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `UsePriorityCharging` response.
@@ -141,7 +140,7 @@ impl UsePriorityChargingResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: PriorityChargingStatusEnumType) -> Self {
         Self {
             status,
@@ -191,7 +190,7 @@ impl UsePriorityChargingResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &PriorityChargingStatusEnumType {
         &self.status
     }
@@ -201,7 +200,7 @@ impl UsePriorityChargingResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -211,7 +210,7 @@ impl UsePriorityChargingResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -223,7 +222,7 @@ impl UsePriorityChargingResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -236,12 +235,11 @@ impl UsePriorityChargingResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -270,7 +268,8 @@ mod tests {
         let request = UsePriorityChargingRequest::new("transaction456".to_string(), false);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: UsePriorityChargingRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UsePriorityChargingRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -333,7 +332,8 @@ mod tests {
     #[test]
     fn test_use_priority_charging_request_activate_deactivate() {
         let request_activate = UsePriorityChargingRequest::new("txn_activate".to_string(), true);
-        let request_deactivate = UsePriorityChargingRequest::new("txn_deactivate".to_string(), false);
+        let request_deactivate =
+            UsePriorityChargingRequest::new("txn_deactivate".to_string(), false);
 
         assert_eq!(request_activate.get_activate(), &true);
         assert_eq!(request_deactivate.get_activate(), &false);
@@ -358,7 +358,8 @@ mod tests {
         let response = UsePriorityChargingResponse::new(PriorityChargingStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: UsePriorityChargingResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UsePriorityChargingResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -393,14 +394,18 @@ mod tests {
         let status_info = StatusInfoType::new("Error".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut response = UsePriorityChargingResponse::new(PriorityChargingStatusEnumType::Accepted);
+        let mut response =
+            UsePriorityChargingResponse::new(PriorityChargingStatusEnumType::Accepted);
 
         response
             .set_status(PriorityChargingStatusEnumType::NoProfile)
             .set_status_info(Some(status_info.clone()))
             .set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.get_status(), &PriorityChargingStatusEnumType::NoProfile);
+        assert_eq!(
+            response.get_status(),
+            &PriorityChargingStatusEnumType::NoProfile
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -428,12 +433,13 @@ mod tests {
 
         for status in status_types {
             let response = UsePriorityChargingResponse::new(status.clone());
-            
+
             assert_eq!(response.get_status(), &status);
             assert!(response.validate().is_ok());
 
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: UsePriorityChargingResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: UsePriorityChargingResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -445,7 +451,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: UsePriorityChargingRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UsePriorityChargingRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -460,7 +467,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: UsePriorityChargingResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UsePriorityChargingResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -475,7 +483,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &PriorityChargingStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &PriorityChargingStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
         assert!(response.validate().is_ok());

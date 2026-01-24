@@ -74,7 +74,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// A new instance of `IdTokenInfoType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(status: AuthorizationStatusEnumType) -> Self {
         Self {
             status,
@@ -99,7 +99,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_cache_expiry_date_time(mut self, cache_expiry_date_time: DateTime<Utc>) -> Self {
         self.cache_expiry_date_time = Some(cache_expiry_date_time);
         self
@@ -114,7 +114,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_charging_priority(mut self, charging_priority: i8) -> Self {
         self.charging_priority = Some(charging_priority);
         self
@@ -129,7 +129,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_language1(mut self, language1: String) -> Self {
         self.language1 = Some(language1);
         self
@@ -144,7 +144,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_language2(mut self, language2: String) -> Self {
         self.language2 = Some(language2);
         self
@@ -159,7 +159,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: Vec<i32>) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -174,7 +174,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_group_id_token(mut self, group_id_token: IdTokenType) -> Self {
         self.group_id_token = Some(group_id_token);
         self
@@ -189,7 +189,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_personal_message(mut self, personal_message: MessageContentType) -> Self {
         self.personal_message = Some(personal_message);
         self
@@ -204,7 +204,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -219,7 +219,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -230,7 +230,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// The authorization status
-    #[must_use] 
+    #[must_use]
     pub fn status(&self) -> &AuthorizationStatusEnumType {
         &self.status
     }
@@ -254,7 +254,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// An optional reference to the cache expiry date time
-    #[must_use] 
+    #[must_use]
     pub fn cache_expiry_date_time(&self) -> Option<&DateTime<Utc>> {
         self.cache_expiry_date_time.as_ref()
     }
@@ -281,7 +281,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// An optional charging priority value (-9 to 9)
-    #[must_use] 
+    #[must_use]
     pub fn charging_priority(&self) -> Option<i8> {
         self.charging_priority
     }
@@ -305,7 +305,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// An optional reference to the first language code
-    #[must_use] 
+    #[must_use]
     pub fn language1(&self) -> Option<&str> {
         self.language1.as_deref()
     }
@@ -329,7 +329,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// An optional reference to the second language code
-    #[must_use] 
+    #[must_use]
     pub fn language2(&self) -> Option<&str> {
         self.language2.as_deref()
     }
@@ -353,7 +353,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// An optional reference to the vector of EVSE IDs
-    #[must_use] 
+    #[must_use]
     pub fn evse_id(&self) -> Option<&Vec<i32>> {
         self.evse_id.as_ref()
     }
@@ -377,7 +377,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// An optional reference to the identifier for authorization and load profile
-    #[must_use] 
+    #[must_use]
     pub fn group_id_token(&self) -> Option<&IdTokenType> {
         self.group_id_token.as_ref()
     }
@@ -401,7 +401,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// An optional reference to the identifier for the user profile
-    #[must_use] 
+    #[must_use]
     pub fn personal_message(&self) -> Option<&MessageContentType> {
         self.personal_message.as_ref()
     }
@@ -428,7 +428,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// An optional reference to information about authorization status
-    #[must_use] 
+    #[must_use]
     pub fn status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -452,7 +452,7 @@ impl IdTokenInfoType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -506,11 +506,9 @@ mod tests {
 
         let id_token = IdTokenType::new("4F62C4E0123456789".to_string(), "ISO14443".to_string());
 
-        let message_content = MessageContentType::new(
-            "Welcome User!".to_string(),
-            MessageFormatEnumType::ASCII,
-        )
-        .with_language("en".to_string());
+        let message_content =
+            MessageContentType::new("Welcome User!".to_string(), MessageFormatEnumType::ASCII)
+                .with_language("en".to_string());
 
         let evse_ids = vec![1, 2, 3];
 
@@ -549,11 +547,9 @@ mod tests {
 
         let id_token = IdTokenType::new("4F62C4E0123456789".to_string(), "ISO14443".to_string());
 
-        let message_content = MessageContentType::new(
-            "Welcome User!".to_string(),
-            MessageFormatEnumType::ASCII,
-        )
-        .with_language("en".to_string());
+        let message_content =
+            MessageContentType::new("Welcome User!".to_string(), MessageFormatEnumType::ASCII)
+                .with_language("en".to_string());
 
         let evse_ids = vec![1, 2, 3];
 

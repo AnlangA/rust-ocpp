@@ -40,7 +40,7 @@ impl AdditionalInfoType {
     /// # Returns
     ///
     /// A new instance of `AdditionalInfoType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(additional_id_token: String, type_: String) -> Self {
         Self {
             additional_id_token,
@@ -58,7 +58,7 @@ impl AdditionalInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -69,7 +69,7 @@ impl AdditionalInfoType {
     /// # Returns
     ///
     /// The additional ID token as a string
-    #[must_use] 
+    #[must_use]
     pub fn additional_id_token(&self) -> &str {
         &self.additional_id_token
     }
@@ -93,7 +93,7 @@ impl AdditionalInfoType {
     /// # Returns
     ///
     /// The type of the additional ID token as a string
-    #[must_use] 
+    #[must_use]
     pub fn type_(&self) -> &str {
         &self.type_
     }
@@ -117,7 +117,7 @@ impl AdditionalInfoType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

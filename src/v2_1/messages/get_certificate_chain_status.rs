@@ -1,4 +1,6 @@
-use crate::v2_1::datatypes::{CertificateStatusRequestInfoType, CertificateStatusType, CustomDataType};
+use crate::v2_1::datatypes::{
+    CertificateStatusRequestInfoType, CertificateStatusType, CustomDataType,
+};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
@@ -25,7 +27,7 @@ impl GetCertificateChainStatusRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(certificate_status_requests: Vec<CertificateStatusRequestInfoType>) -> Self {
         Self {
             certificate_status_requests,
@@ -40,7 +42,10 @@ impl GetCertificateChainStatusRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_certificate_status_requests(&mut self, certificate_status_requests: Vec<CertificateStatusRequestInfoType>) -> &mut Self {
+    pub fn set_certificate_status_requests(
+        &mut self,
+        certificate_status_requests: Vec<CertificateStatusRequestInfoType>,
+    ) -> &mut Self {
         self.certificate_status_requests = certificate_status_requests;
         self
     }
@@ -62,7 +67,7 @@ impl GetCertificateChainStatusRequest {
     /// # Returns
     ///
     /// The `certificate_status_requests` field
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_status_requests(&self) -> &Vec<CertificateStatusRequestInfoType> {
         &self.certificate_status_requests
     }
@@ -72,7 +77,7 @@ impl GetCertificateChainStatusRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -84,12 +89,11 @@ impl GetCertificateChainStatusRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetCertificateChainStatus` response.
@@ -115,7 +119,7 @@ impl GetCertificateChainStatusResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(certificate_status: Vec<CertificateStatusType>) -> Self {
         Self {
             certificate_status,
@@ -130,7 +134,10 @@ impl GetCertificateChainStatusResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_certificate_status(&mut self, certificate_status: Vec<CertificateStatusType>) -> &mut Self {
+    pub fn set_certificate_status(
+        &mut self,
+        certificate_status: Vec<CertificateStatusType>,
+    ) -> &mut Self {
         self.certificate_status = certificate_status;
         self
     }
@@ -152,7 +159,7 @@ impl GetCertificateChainStatusResponse {
     /// # Returns
     ///
     /// The `certificate_status` field
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_status(&self) -> &Vec<CertificateStatusType> {
         &self.certificate_status
     }
@@ -162,7 +169,7 @@ impl GetCertificateChainStatusResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -174,19 +181,20 @@ impl GetCertificateChainStatusResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::v2_1::enumerations::{CertificateStatusEnumType, CertificateStatusSourceEnumType, HashAlgorithmEnumType};
     use crate::v2_1::datatypes::CertificateHashDataType;
+    use crate::v2_1::enumerations::{
+        CertificateStatusEnumType, CertificateStatusSourceEnumType, HashAlgorithmEnumType,
+    };
     use chrono::{TimeZone, Utc};
     use serde_json;
 
@@ -271,7 +279,10 @@ mod tests {
         let request = GetCertificateChainStatusRequest::new(cert_status_requests.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(request.get_certificate_status_requests(), &cert_status_requests);
+        assert_eq!(
+            request.get_certificate_status_requests(),
+            &cert_status_requests
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -374,18 +385,15 @@ mod tests {
     #[test]
     fn test_get_certificate_chain_status_response_setters() {
         let cert_status1 = vec![create_test_certificate_status()];
-        let cert_status2 = vec![
-            create_test_certificate_status(),
-            {
-                let next_update = Utc.with_ymd_and_hms(2024, 1, 1, 0, 0, 0).unwrap();
-                CertificateStatusType::new(
-                    create_test_certificate_hash_data(),
-                    CertificateStatusSourceEnumType::CRL,
-                    CertificateStatusEnumType::Revoked,
-                    next_update,
-                )
-            },
-        ];
+        let cert_status2 = vec![create_test_certificate_status(), {
+            let next_update = Utc.with_ymd_and_hms(2024, 1, 1, 0, 0, 0).unwrap();
+            CertificateStatusType::new(
+                create_test_certificate_hash_data(),
+                CertificateStatusSourceEnumType::CRL,
+                CertificateStatusEnumType::Revoked,
+                next_update,
+            )
+        }];
         let custom_data = create_test_custom_data();
 
         let mut response = GetCertificateChainStatusResponse::new(cert_status1);
@@ -462,21 +470,18 @@ mod tests {
 
     #[test]
     fn test_get_certificate_chain_status_response_json_round_trip() {
-        let cert_status = vec![
-            create_test_certificate_status(),
-            {
-                let next_update = Utc.with_ymd_and_hms(2024, 6, 15, 12, 0, 0).unwrap();
-                CertificateStatusType::new(
-                    create_test_certificate_hash_data(),
-                    CertificateStatusSourceEnumType::CRL,
-                    CertificateStatusEnumType::Unknown,
-                    next_update,
-                )
-            },
-        ];
+        let cert_status = vec![create_test_certificate_status(), {
+            let next_update = Utc.with_ymd_and_hms(2024, 6, 15, 12, 0, 0).unwrap();
+            CertificateStatusType::new(
+                create_test_certificate_hash_data(),
+                CertificateStatusSourceEnumType::CRL,
+                CertificateStatusEnumType::Unknown,
+                next_update,
+            )
+        }];
         let custom_data = create_test_custom_data();
-        let response = GetCertificateChainStatusResponse::new(cert_status)
-            .with_custom_data(custom_data);
+        let response =
+            GetCertificateChainStatusResponse::new(cert_status).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetCertificateChainStatusResponse = serde_json::from_str(&json).unwrap();

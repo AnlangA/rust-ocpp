@@ -40,7 +40,7 @@ impl LimitMaxDischargeGetType {
     /// # Returns
     ///
     /// A new instance of `LimitMaxDischargeGetType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         limit_max_discharge: LimitMaxDischargeType,
         id: String,
@@ -65,7 +65,7 @@ impl LimitMaxDischargeGetType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -76,7 +76,7 @@ impl LimitMaxDischargeGetType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -100,7 +100,7 @@ impl LimitMaxDischargeGetType {
     /// # Returns
     ///
     /// Reference to the limit max discharge settings
-    #[must_use] 
+    #[must_use]
     pub fn limit_max_discharge(&self) -> &LimitMaxDischargeType {
         &self.limit_max_discharge
     }
@@ -127,7 +127,7 @@ impl LimitMaxDischargeGetType {
     /// # Returns
     ///
     /// The ID of the setting
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> &str {
         &self.id
     }
@@ -151,7 +151,7 @@ impl LimitMaxDischargeGetType {
     /// # Returns
     ///
     /// True if this setting is superseded by a higher priority setting
-    #[must_use] 
+    #[must_use]
     pub fn is_superseded(&self) -> bool {
         self.is_superseded
     }
@@ -175,7 +175,7 @@ impl LimitMaxDischargeGetType {
     /// # Returns
     ///
     /// True if this is the default setting
-    #[must_use] 
+    #[must_use]
     pub fn is_default(&self) -> bool {
         self.is_default
     }

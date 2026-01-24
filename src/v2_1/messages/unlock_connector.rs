@@ -29,7 +29,7 @@ impl UnlockConnectorRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(evse_id: i32, connector_id: i32) -> Self {
         Self {
             evse_id,
@@ -79,7 +79,7 @@ impl UnlockConnectorRequest {
     /// # Returns
     ///
     /// This contains the identifier of the EVSE for which a connector needs to be unlocked.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -89,7 +89,7 @@ impl UnlockConnectorRequest {
     /// # Returns
     ///
     /// This contains the identifier of the connector that needs to be unlocked.
-    #[must_use] 
+    #[must_use]
     pub fn get_connector_id(&self) -> &i32 {
         &self.connector_id
     }
@@ -99,7 +99,7 @@ impl UnlockConnectorRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -111,12 +111,11 @@ impl UnlockConnectorRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `UnlockConnector` response.
@@ -142,7 +141,7 @@ impl UnlockConnectorResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: UnlockStatusEnumType) -> Self {
         Self {
             status,
@@ -192,7 +191,7 @@ impl UnlockConnectorResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &UnlockStatusEnumType {
         &self.status
     }
@@ -202,7 +201,7 @@ impl UnlockConnectorResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -212,7 +211,7 @@ impl UnlockConnectorResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -224,7 +223,7 @@ impl UnlockConnectorResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -237,12 +236,11 @@ impl UnlockConnectorResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -271,7 +269,8 @@ mod tests {
         let request = UnlockConnectorRequest::new(1, 1);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: UnlockConnectorRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UnlockConnectorRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -286,8 +285,7 @@ mod tests {
     #[test]
     fn test_unlock_connector_request_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = UnlockConnectorRequest::new(2, 3)
-            .with_custom_data(custom_data.clone());
+        let request = UnlockConnectorRequest::new(2, 3).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -312,8 +310,7 @@ mod tests {
     fn test_unlock_connector_request_builder_pattern() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = UnlockConnectorRequest::new(3, 2)
-            .with_custom_data(custom_data.clone());
+        let request = UnlockConnectorRequest::new(3, 2).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -367,7 +364,8 @@ mod tests {
         let response = UnlockConnectorResponse::new(UnlockStatusEnumType::UnlockFailed);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: UnlockConnectorResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UnlockConnectorResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -391,8 +389,9 @@ mod tests {
     #[test]
     fn test_unlock_connector_response_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = UnlockConnectorResponse::new(UnlockStatusEnumType::OngoingAuthorizedTransaction)
-            .with_custom_data(custom_data.clone());
+        let response =
+            UnlockConnectorResponse::new(UnlockStatusEnumType::OngoingAuthorizedTransaction)
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -409,7 +408,10 @@ mod tests {
             .set_status_info(Some(status_info.clone()))
             .set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.get_status(), &UnlockStatusEnumType::UnknownConnector);
+        assert_eq!(
+            response.get_status(),
+            &UnlockStatusEnumType::UnknownConnector
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -438,12 +440,13 @@ mod tests {
 
         for status in status_types {
             let response = UnlockConnectorResponse::new(status.clone());
-            
+
             assert_eq!(response.get_status(), &status);
             assert!(response.validate().is_ok());
 
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: UnlockConnectorResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: UnlockConnectorResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -451,11 +454,11 @@ mod tests {
     #[test]
     fn test_unlock_connector_request_json_round_trip() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = UnlockConnectorRequest::new(2, 1)
-            .with_custom_data(custom_data);
+        let request = UnlockConnectorRequest::new(2, 1).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: UnlockConnectorRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UnlockConnectorRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -470,7 +473,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: UnlockConnectorResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: UnlockConnectorResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -494,8 +498,7 @@ mod tests {
     #[test]
     fn test_unlock_connector_request_with_custom_data_validation() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = UnlockConnectorRequest::new(1, 1)
-            .with_custom_data(custom_data);
+        let request = UnlockConnectorRequest::new(1, 1).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
     }

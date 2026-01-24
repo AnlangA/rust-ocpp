@@ -1,12 +1,6 @@
 use crate::v2_1::datatypes::{
-    CustomDataType,
-    DERCurveGetType,
-    EnterServiceGetType,
-    FixedPFGetType,
-    FixedVarGetType,
-    FreqDroopGetType,
-    GradientGetType,
-    LimitMaxDischargeGetType,
+    CustomDataType, DERCurveGetType, EnterServiceGetType, FixedPFGetType, FixedVarGetType,
+    FreqDroopGetType, GradientGetType, LimitMaxDischargeGetType,
 };
 use serde::{Deserialize, Serialize};
 use validator::Validate;
@@ -76,7 +70,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32) -> Self {
         Self {
             curve: None,
@@ -112,7 +106,10 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_enter_service(&mut self, enter_service: Option<Vec<EnterServiceGetType>>) -> &mut Self {
+    pub fn set_enter_service(
+        &mut self,
+        enter_service: Option<Vec<EnterServiceGetType>>,
+    ) -> &mut Self {
         self.enter_service = enter_service;
         self
     }
@@ -124,7 +121,10 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_fixed_pf_absorb(&mut self, fixed_pf_absorb: Option<Vec<FixedPFGetType>>) -> &mut Self {
+    pub fn set_fixed_pf_absorb(
+        &mut self,
+        fixed_pf_absorb: Option<Vec<FixedPFGetType>>,
+    ) -> &mut Self {
         self.fixed_pf_absorb = fixed_pf_absorb;
         self
     }
@@ -136,7 +136,10 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_fixed_pf_inject(&mut self, fixed_pf_inject: Option<Vec<FixedPFGetType>>) -> &mut Self {
+    pub fn set_fixed_pf_inject(
+        &mut self,
+        fixed_pf_inject: Option<Vec<FixedPFGetType>>,
+    ) -> &mut Self {
         self.fixed_pf_inject = fixed_pf_inject;
         self
     }
@@ -184,7 +187,10 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_limit_max_discharge(&mut self, limit_max_discharge: Option<Vec<LimitMaxDischargeGetType>>) -> &mut Self {
+    pub fn set_limit_max_discharge(
+        &mut self,
+        limit_max_discharge: Option<Vec<LimitMaxDischargeGetType>>,
+    ) -> &mut Self {
         self.limit_max_discharge = limit_max_discharge;
         self
     }
@@ -230,7 +236,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The curve field
-    #[must_use] 
+    #[must_use]
     pub fn get_curve(&self) -> Option<&Vec<DERCurveGetType>> {
         self.curve.as_ref()
     }
@@ -240,7 +246,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The `enter_service` field
-    #[must_use] 
+    #[must_use]
     pub fn get_enter_service(&self) -> Option<&Vec<EnterServiceGetType>> {
         self.enter_service.as_ref()
     }
@@ -250,7 +256,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The `fixed_pf_absorb` field
-    #[must_use] 
+    #[must_use]
     pub fn get_fixed_pf_absorb(&self) -> Option<&Vec<FixedPFGetType>> {
         self.fixed_pf_absorb.as_ref()
     }
@@ -260,7 +266,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The `fixed_pf_inject` field
-    #[must_use] 
+    #[must_use]
     pub fn get_fixed_pf_inject(&self) -> Option<&Vec<FixedPFGetType>> {
         self.fixed_pf_inject.as_ref()
     }
@@ -270,7 +276,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The `fixed_var` field
-    #[must_use] 
+    #[must_use]
     pub fn get_fixed_var(&self) -> Option<&Vec<FixedVarGetType>> {
         self.fixed_var.as_ref()
     }
@@ -280,7 +286,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The `freq_droop` field
-    #[must_use] 
+    #[must_use]
     pub fn get_freq_droop(&self) -> Option<&Vec<FreqDroopGetType>> {
         self.freq_droop.as_ref()
     }
@@ -290,7 +296,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The gradient field
-    #[must_use] 
+    #[must_use]
     pub fn get_gradient(&self) -> Option<&Vec<GradientGetType>> {
         self.gradient.as_ref()
     }
@@ -300,7 +306,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The `limit_max_discharge` field
-    #[must_use] 
+    #[must_use]
     pub fn get_limit_max_discharge(&self) -> Option<&Vec<LimitMaxDischargeGetType>> {
         self.limit_max_discharge.as_ref()
     }
@@ -310,7 +316,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// `RequestId` from `GetDERControlRequest`.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -320,7 +326,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// To Be Continued. Default value when omitted: false. + False indicates that there are no further messages as part of this report.
-    #[must_use] 
+    #[must_use]
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
@@ -330,7 +336,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -342,7 +348,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_curve(mut self, curve: Vec<DERCurveGetType>) -> Self {
         self.curve = Some(curve);
         self
@@ -355,7 +361,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_enter_service(mut self, enter_service: Vec<EnterServiceGetType>) -> Self {
         self.enter_service = Some(enter_service);
         self
@@ -368,7 +374,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_fixed_pf_absorb(mut self, fixed_pf_absorb: Vec<FixedPFGetType>) -> Self {
         self.fixed_pf_absorb = Some(fixed_pf_absorb);
         self
@@ -381,7 +387,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_fixed_pf_inject(mut self, fixed_pf_inject: Vec<FixedPFGetType>) -> Self {
         self.fixed_pf_inject = Some(fixed_pf_inject);
         self
@@ -394,7 +400,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_fixed_var(mut self, fixed_var: Vec<FixedVarGetType>) -> Self {
         self.fixed_var = Some(fixed_var);
         self
@@ -407,7 +413,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_freq_droop(mut self, freq_droop: Vec<FreqDroopGetType>) -> Self {
         self.freq_droop = Some(freq_droop);
         self
@@ -420,7 +426,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_gradient(mut self, gradient: Vec<GradientGetType>) -> Self {
         self.gradient = Some(gradient);
         self
@@ -433,8 +439,11 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_limit_max_discharge(mut self, limit_max_discharge: Vec<LimitMaxDischargeGetType>) -> Self {
+    #[must_use]
+    pub fn with_limit_max_discharge(
+        mut self,
+        limit_max_discharge: Vec<LimitMaxDischargeGetType>,
+    ) -> Self {
         self.limit_max_discharge = Some(limit_max_discharge);
         self
     }
@@ -446,7 +455,7 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
@@ -459,12 +468,11 @@ impl ReportDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ReportDERControl` response.
@@ -489,11 +497,9 @@ impl ReportDERControlResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -513,7 +519,7 @@ impl ReportDERControlResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -525,12 +531,11 @@ impl ReportDERControlResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -544,7 +549,7 @@ mod tests {
     }
 
     fn create_test_der_curve() -> DERCurveGetType {
-        use crate::v2_1::datatypes::{DERCurveType, DERCurvePointsType};
+        use crate::v2_1::datatypes::{DERCurvePointsType, DERCurveType};
         use crate::v2_1::enumerations::{DERControlEnumType, DERUnitEnumType};
         use rust_decimal::prelude::*;
 
@@ -615,7 +620,7 @@ mod tests {
         let gradient = GradientType::new(
             1,
             Decimal::from_str("5.0").unwrap(),
-            Decimal::from_str("2.0").unwrap()
+            Decimal::from_str("2.0").unwrap(),
         );
         GradientGetType::new(gradient, "test_gradient".to_string())
     }
@@ -689,8 +694,7 @@ mod tests {
 
         // Test with maximum allowed vector lengths (24 items)
         let max_items = (0..24).map(|_| create_test_der_curve()).collect();
-        let max_request = ReportDERControlRequest::new(1)
-            .with_curve(max_items);
+        let max_request = ReportDERControlRequest::new(1).with_curve(max_items);
         assert!(max_request.validate().is_ok());
 
         // Test with too many items (25 items - should fail)
@@ -788,8 +792,7 @@ mod tests {
 
     #[test]
     fn test_report_der_control_response_serialization() {
-        let response = ReportDERControlResponse::new()
-            .with_custom_data(create_test_custom_data());
+        let response = ReportDERControlResponse::new().with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: ReportDERControlResponse =
@@ -804,16 +807,15 @@ mod tests {
         let valid_response = ReportDERControlResponse::new();
         assert!(valid_response.validate().is_ok());
 
-        let response_with_custom_data = ReportDERControlResponse::new()
-            .with_custom_data(create_test_custom_data());
+        let response_with_custom_data =
+            ReportDERControlResponse::new().with_custom_data(create_test_custom_data());
         assert!(response_with_custom_data.validate().is_ok());
     }
 
     #[test]
     fn test_report_der_control_response_builder_pattern() {
         let custom_data = create_test_custom_data();
-        let response = ReportDERControlResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = ReportDERControlResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -842,8 +844,7 @@ mod tests {
 
         // Test with minimum vector length (1 item)
         let min_items = vec![create_test_der_curve()];
-        let min_vector_request = ReportDERControlRequest::new(1)
-            .with_curve(min_items);
+        let min_vector_request = ReportDERControlRequest::new(1).with_curve(min_items);
         assert!(min_vector_request.validate().is_ok());
     }
 
@@ -877,8 +878,8 @@ mod tests {
 
         assert_eq!(original_request, parsed_request);
 
-        let original_response = ReportDERControlResponse::new()
-            .with_custom_data(create_test_custom_data());
+        let original_response =
+            ReportDERControlResponse::new().with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&original_response).expect("Failed to serialize response");
         let parsed_response: ReportDERControlResponse =
@@ -920,7 +921,10 @@ mod tests {
         assert_eq!(request.get_fixed_var(), Some(&fixed_var_data));
         assert_eq!(request.get_freq_droop(), Some(&freq_droop_data));
         assert_eq!(request.get_gradient(), Some(&gradient_data));
-        assert_eq!(request.get_limit_max_discharge(), Some(&limit_max_discharge_data));
+        assert_eq!(
+            request.get_limit_max_discharge(),
+            Some(&limit_max_discharge_data)
+        );
         assert_eq!(request.get_tbc(), Some(&true));
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }

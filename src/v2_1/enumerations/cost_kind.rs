@@ -10,4 +10,3 @@ pub enum CostKindEnumType {
     RelativePricePercentage,
     RenewableGenerationPercentage,
 }
-

@@ -36,7 +36,7 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(csr: String) -> Self {
         Self {
             csr,
@@ -66,7 +66,10 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_certificate_type(&mut self, certificate_type: Option<CertificateSigningUseEnumType>) -> &mut Self {
+    pub fn set_certificate_type(
+        &mut self,
+        certificate_type: Option<CertificateSigningUseEnumType>,
+    ) -> &mut Self {
         self.certificate_type = certificate_type;
         self
     }
@@ -78,7 +81,10 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_hash_root_certificate(&mut self, hash_root_certificate: Option<CertificateHashDataType>) -> &mut Self {
+    pub fn set_hash_root_certificate(
+        &mut self,
+        hash_root_certificate: Option<CertificateHashDataType>,
+    ) -> &mut Self {
         self.hash_root_certificate = hash_root_certificate;
         self
     }
@@ -112,7 +118,7 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// The Charging Station SHALL send the public key in form of a Certificate Signing Request (CSR) as described in RFC 2986 [22] and then PEM encoded, using the &lt;&lt;signcertificaterequest,SignCertificateRequest&gt;&gt; message.
-    #[must_use] 
+    #[must_use]
     pub fn get_csr(&self) -> &String {
         &self.csr
     }
@@ -122,7 +128,7 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// The `certificate_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_type(&self) -> Option<&CertificateSigningUseEnumType> {
         self.certificate_type.as_ref()
     }
@@ -132,7 +138,7 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// The `hash_root_certificate` field
-    #[must_use] 
+    #[must_use]
     pub fn get_hash_root_certificate(&self) -> Option<&CertificateHashDataType> {
         self.hash_root_certificate.as_ref()
     }
@@ -142,7 +148,7 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// *(2.1)* `RequestId` to match this message with the `CertificateSignedRequest`.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> Option<&i32> {
         self.request_id.as_ref()
     }
@@ -152,7 +158,7 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -164,8 +170,11 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_certificate_type(mut self, certificate_type: CertificateSigningUseEnumType) -> Self {
+    #[must_use]
+    pub fn with_certificate_type(
+        mut self,
+        certificate_type: CertificateSigningUseEnumType,
+    ) -> Self {
         self.certificate_type = Some(certificate_type);
         self
     }
@@ -177,8 +186,11 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_hash_root_certificate(mut self, hash_root_certificate: CertificateHashDataType) -> Self {
+    #[must_use]
+    pub fn with_hash_root_certificate(
+        mut self,
+        hash_root_certificate: CertificateHashDataType,
+    ) -> Self {
         self.hash_root_certificate = Some(hash_root_certificate);
         self
     }
@@ -190,7 +202,7 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_request_id(mut self, request_id: i32) -> Self {
         self.request_id = Some(request_id);
         self
@@ -203,12 +215,11 @@ impl SignCertificateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SignCertificate` response.
@@ -234,7 +245,7 @@ impl SignCertificateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -284,7 +295,7 @@ impl SignCertificateResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -294,7 +305,7 @@ impl SignCertificateResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -304,7 +315,7 @@ impl SignCertificateResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -316,7 +327,7 @@ impl SignCertificateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -329,19 +340,20 @@ impl SignCertificateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::v2_1::datatypes::{CertificateHashDataType, CustomDataType, StatusInfoType};
-    use crate::v2_1::enumerations::{CertificateSigningUseEnumType, GenericStatusEnumType, HashAlgorithmEnumType};
+    use crate::v2_1::enumerations::{
+        CertificateSigningUseEnumType, GenericStatusEnumType, HashAlgorithmEnumType,
+    };
     use serde_json;
     use validator::Validate;
 
@@ -374,7 +386,8 @@ mod tests {
         let request = SignCertificateRequest::new(csr);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SignCertificateRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SignCertificateRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -391,8 +404,8 @@ mod tests {
     fn test_sign_certificate_request_with_certificate_type() {
         let csr = "test_csr".to_string();
         let certificate_type = CertificateSigningUseEnumType::ChargingStationCertificate;
-        let request = SignCertificateRequest::new(csr)
-            .with_certificate_type(certificate_type.clone());
+        let request =
+            SignCertificateRequest::new(csr).with_certificate_type(certificate_type.clone());
 
         assert_eq!(request.get_certificate_type(), Some(&certificate_type));
     }
@@ -401,8 +414,8 @@ mod tests {
     fn test_sign_certificate_request_with_hash_root_certificate() {
         let csr = "test_csr".to_string();
         let hash_data = create_test_certificate_hash_data();
-        let request = SignCertificateRequest::new(csr)
-            .with_hash_root_certificate(hash_data.clone());
+        let request =
+            SignCertificateRequest::new(csr).with_hash_root_certificate(hash_data.clone());
 
         assert_eq!(request.get_hash_root_certificate(), Some(&hash_data));
     }
@@ -411,8 +424,7 @@ mod tests {
     fn test_sign_certificate_request_with_request_id() {
         let csr = "test_csr".to_string();
         let request_id = 123;
-        let request = SignCertificateRequest::new(csr)
-            .with_request_id(request_id);
+        let request = SignCertificateRequest::new(csr).with_request_id(request_id);
 
         assert_eq!(request.get_request_id(), Some(&request_id));
     }
@@ -421,8 +433,7 @@ mod tests {
     fn test_sign_certificate_request_with_custom_data() {
         let csr = "test_csr".to_string();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SignCertificateRequest::new(csr)
-            .with_custom_data(custom_data.clone());
+        let request = SignCertificateRequest::new(csr).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -489,7 +500,8 @@ mod tests {
         let response = SignCertificateResponse::new(GenericStatusEnumType::Accepted);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SignCertificateResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SignCertificateResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -562,7 +574,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SignCertificateRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SignCertificateRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -577,7 +590,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SignCertificateResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SignCertificateResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -594,12 +608,13 @@ mod tests {
         for cert_type in certificate_types {
             let request = SignCertificateRequest::new("test_csr".to_string())
                 .with_certificate_type(cert_type.clone());
-            
+
             assert_eq!(request.get_certificate_type(), Some(&cert_type));
             assert!(request.validate().is_ok());
 
             let json = serde_json::to_string(&request).expect("Failed to serialize");
-            let deserialized: SignCertificateRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: SignCertificateRequest =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(request, deserialized);
         }
     }
@@ -613,12 +628,13 @@ mod tests {
 
         for status in status_types {
             let response = SignCertificateResponse::new(status.clone());
-            
+
             assert_eq!(response.get_status(), &status);
             assert!(response.validate().is_ok());
 
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: SignCertificateResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: SignCertificateResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -638,16 +654,14 @@ mod tests {
 
     #[test]
     fn test_sign_certificate_request_negative_request_id_validation() {
-        let request = SignCertificateRequest::new("test_csr".to_string())
-            .with_request_id(-1);
+        let request = SignCertificateRequest::new("test_csr".to_string()).with_request_id(-1);
 
         assert!(request.validate().is_err());
     }
 
     #[test]
     fn test_sign_certificate_request_zero_request_id_validation() {
-        let request = SignCertificateRequest::new("test_csr".to_string())
-            .with_request_id(0);
+        let request = SignCertificateRequest::new("test_csr".to_string()).with_request_id(0);
 
         assert!(request.validate().is_ok());
     }

@@ -26,7 +26,7 @@ impl ChangeAvailabilityRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(operational_status: OperationalStatusEnumType) -> Self {
         Self {
             evse: None,
@@ -54,7 +54,10 @@ impl ChangeAvailabilityRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_operational_status(&mut self, operational_status: OperationalStatusEnumType) -> &mut Self {
+    pub fn set_operational_status(
+        &mut self,
+        operational_status: OperationalStatusEnumType,
+    ) -> &mut Self {
         self.operational_status = operational_status;
         self
     }
@@ -76,7 +79,7 @@ impl ChangeAvailabilityRequest {
     /// # Returns
     ///
     /// The evse field
-    #[must_use] 
+    #[must_use]
     pub fn get_evse(&self) -> Option<&EVSEType> {
         self.evse.as_ref()
     }
@@ -86,7 +89,7 @@ impl ChangeAvailabilityRequest {
     /// # Returns
     ///
     /// The `operational_status` field
-    #[must_use] 
+    #[must_use]
     pub fn get_operational_status(&self) -> &OperationalStatusEnumType {
         &self.operational_status
     }
@@ -96,7 +99,7 @@ impl ChangeAvailabilityRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -108,7 +111,7 @@ impl ChangeAvailabilityRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse(mut self, evse: EVSEType) -> Self {
         self.evse = Some(evse);
         self
@@ -121,12 +124,11 @@ impl ChangeAvailabilityRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ChangeAvailability` response.
@@ -152,7 +154,7 @@ impl ChangeAvailabilityResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: ChangeAvailabilityStatusEnumType) -> Self {
         Self {
             status,
@@ -202,7 +204,7 @@ impl ChangeAvailabilityResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &ChangeAvailabilityStatusEnumType {
         &self.status
     }
@@ -212,7 +214,7 @@ impl ChangeAvailabilityResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -222,7 +224,7 @@ impl ChangeAvailabilityResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -234,7 +236,7 @@ impl ChangeAvailabilityResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -247,12 +249,11 @@ impl ChangeAvailabilityResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -291,8 +292,7 @@ mod tests {
     fn test_change_availability_request_validation_with_evse() {
         let operational_status = OperationalStatusEnumType::Operative;
         let evse = create_test_evse();
-        let request = ChangeAvailabilityRequest::new(operational_status)
-            .with_evse(evse);
+        let request = ChangeAvailabilityRequest::new(operational_status).with_evse(evse);
 
         assert!(request.validate().is_ok());
     }
@@ -317,7 +317,8 @@ mod tests {
         let request = ChangeAvailabilityRequest::new(operational_status);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ChangeAvailabilityRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ChangeAvailabilityRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -327,8 +328,7 @@ mod tests {
         let operational_status = OperationalStatusEnumType::Operative;
         let evse = create_test_evse();
 
-        let request = ChangeAvailabilityRequest::new(operational_status)
-            .with_evse(evse.clone());
+        let request = ChangeAvailabilityRequest::new(operational_status).with_evse(evse.clone());
 
         assert_eq!(request.get_evse(), Some(&evse));
     }
@@ -385,8 +385,7 @@ mod tests {
             .with_connector_id(3)
             .with_custom_data(custom_data);
 
-        let request = ChangeAvailabilityRequest::new(operational_status)
-            .with_evse(evse.clone());
+        let request = ChangeAvailabilityRequest::new(operational_status).with_evse(evse.clone());
 
         assert_eq!(request.get_evse(), Some(&evse));
         assert!(request.validate().is_ok());
@@ -416,7 +415,8 @@ mod tests {
         let response = ChangeAvailabilityResponse::new(status);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ChangeAvailabilityResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ChangeAvailabilityResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -426,8 +426,8 @@ mod tests {
         let status = ChangeAvailabilityStatusEnumType::Accepted;
         let status_info = create_test_status_info();
 
-        let response = ChangeAvailabilityResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response =
+            ChangeAvailabilityResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
     }
@@ -437,8 +437,8 @@ mod tests {
         let status = ChangeAvailabilityStatusEnumType::Accepted;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = ChangeAvailabilityResponse::new(status)
-            .with_custom_data(custom_data.clone());
+        let response =
+            ChangeAvailabilityResponse::new(status).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -503,7 +503,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ChangeAvailabilityRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ChangeAvailabilityRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -520,7 +521,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ChangeAvailabilityResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ChangeAvailabilityResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -529,18 +531,20 @@ mod tests {
     #[test]
     fn test_change_availability_response_with_detailed_status_info() {
         let status = ChangeAvailabilityStatusEnumType::Rejected;
-        let status_info = StatusInfoType::new("EVSEBusy".to_string())
-            .with_additional_info("EVSE is currently in use and cannot be made inoperative".to_string());
+        let status_info = StatusInfoType::new("EVSEBusy".to_string()).with_additional_info(
+            "EVSE is currently in use and cannot be made inoperative".to_string(),
+        );
 
-        let response = ChangeAvailabilityResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response =
+            ChangeAvailabilityResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert!(response.validate().is_ok());
 
         // Test serialization
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ChangeAvailabilityResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ChangeAvailabilityResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
@@ -596,19 +600,23 @@ mod tests {
         let custom_data = CustomDataType::new("AvailabilityVendor".to_string())
             .with_property("reason".to_string(), json!("maintenance"))
             .with_property("duration".to_string(), json!("2 hours"))
-            .with_property("metadata".to_string(), json!({
-                "scheduled_by": "operator",
-                "priority": "high"
-            }));
+            .with_property(
+                "metadata".to_string(),
+                json!({
+                    "scheduled_by": "operator",
+                    "priority": "high"
+                }),
+            );
 
-        let request = ChangeAvailabilityRequest::new(operational_status)
-            .with_custom_data(custom_data);
+        let request =
+            ChangeAvailabilityRequest::new(operational_status).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
 
         // Test serialization with complex custom data
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ChangeAvailabilityRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ChangeAvailabilityRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -618,47 +626,67 @@ mod tests {
 
         // Test with EVSE ID 0 (minimum valid value)
         let evse_zero = EVSEType::new(0);
-        let request = ChangeAvailabilityRequest::new(operational_status.clone())
-            .with_evse(evse_zero);
+        let request =
+            ChangeAvailabilityRequest::new(operational_status.clone()).with_evse(evse_zero);
         assert!(request.validate().is_ok());
 
         // Test with large EVSE ID
         let evse_large = EVSEType::new(i32::MAX);
-        let request = ChangeAvailabilityRequest::new(operational_status.clone())
-            .with_evse(evse_large);
+        let request =
+            ChangeAvailabilityRequest::new(operational_status.clone()).with_evse(evse_large);
         assert!(request.validate().is_ok());
 
         // Test with EVSE without connector ID
         let evse_no_connector = EVSEType::new(1);
-        let request = ChangeAvailabilityRequest::new(operational_status)
-            .with_evse(evse_no_connector);
+        let request =
+            ChangeAvailabilityRequest::new(operational_status).with_evse(evse_no_connector);
         assert!(request.validate().is_ok());
     }
 
     #[test]
     fn test_change_availability_response_status_semantics() {
         // Test Accepted status - change was accepted and will be executed immediately
-        let accepted_response = ChangeAvailabilityResponse::new(ChangeAvailabilityStatusEnumType::Accepted)
-            .with_status_info(StatusInfoType::new("Success".to_string())
-                .with_additional_info("Availability change executed immediately".to_string()));
+        let accepted_response =
+            ChangeAvailabilityResponse::new(ChangeAvailabilityStatusEnumType::Accepted)
+                .with_status_info(
+                    StatusInfoType::new("Success".to_string()).with_additional_info(
+                        "Availability change executed immediately".to_string(),
+                    ),
+                );
 
-        assert_eq!(accepted_response.get_status(), &ChangeAvailabilityStatusEnumType::Accepted);
+        assert_eq!(
+            accepted_response.get_status(),
+            &ChangeAvailabilityStatusEnumType::Accepted
+        );
         assert!(accepted_response.validate().is_ok());
 
         // Test Rejected status - change was rejected
-        let rejected_response = ChangeAvailabilityResponse::new(ChangeAvailabilityStatusEnumType::Rejected)
-            .with_status_info(StatusInfoType::new("EVSEBusy".to_string())
-                .with_additional_info("EVSE is currently in use".to_string()));
+        let rejected_response =
+            ChangeAvailabilityResponse::new(ChangeAvailabilityStatusEnumType::Rejected)
+                .with_status_info(
+                    StatusInfoType::new("EVSEBusy".to_string())
+                        .with_additional_info("EVSE is currently in use".to_string()),
+                );
 
-        assert_eq!(rejected_response.get_status(), &ChangeAvailabilityStatusEnumType::Rejected);
+        assert_eq!(
+            rejected_response.get_status(),
+            &ChangeAvailabilityStatusEnumType::Rejected
+        );
         assert!(rejected_response.validate().is_ok());
 
         // Test Scheduled status - change was accepted but will be executed later
-        let scheduled_response = ChangeAvailabilityResponse::new(ChangeAvailabilityStatusEnumType::Scheduled)
-            .with_status_info(StatusInfoType::new("Scheduled".to_string())
-                .with_additional_info("Change will be executed when current transaction ends".to_string()));
+        let scheduled_response =
+            ChangeAvailabilityResponse::new(ChangeAvailabilityStatusEnumType::Scheduled)
+                .with_status_info(
+                    StatusInfoType::new("Scheduled".to_string()).with_additional_info(
+                        "Change will be executed when current transaction ends".to_string(),
+                    ),
+                );
 
-        assert_eq!(scheduled_response.get_status(), &ChangeAvailabilityStatusEnumType::Scheduled);
+        assert_eq!(
+            scheduled_response.get_status(),
+            &ChangeAvailabilityStatusEnumType::Scheduled
+        );
         assert!(scheduled_response.validate().is_ok());
     }
 
@@ -667,14 +695,18 @@ mod tests {
         // Test minimal valid request (only required fields)
         let request = ChangeAvailabilityRequest::new(OperationalStatusEnumType::Operative);
 
-        assert_eq!(request.get_operational_status(), &OperationalStatusEnumType::Operative);
+        assert_eq!(
+            request.get_operational_status(),
+            &OperationalStatusEnumType::Operative
+        );
         assert_eq!(request.get_evse(), None);
         assert_eq!(request.get_custom_data(), None);
         assert!(request.validate().is_ok());
 
         // Test serialization of minimal request
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ChangeAvailabilityRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ChangeAvailabilityRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -683,14 +715,18 @@ mod tests {
         // Test minimal valid response (only required fields)
         let response = ChangeAvailabilityResponse::new(ChangeAvailabilityStatusEnumType::Accepted);
 
-        assert_eq!(response.get_status(), &ChangeAvailabilityStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &ChangeAvailabilityStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), None);
         assert_eq!(response.get_custom_data(), None);
         assert!(response.validate().is_ok());
 
         // Test serialization of minimal response
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ChangeAvailabilityResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ChangeAvailabilityResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
@@ -712,20 +748,29 @@ mod tests {
 
         // Test serialization with all fields
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ChangeAvailabilityRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ChangeAvailabilityRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
     #[test]
     fn test_change_availability_operational_status_use_cases() {
         // Test Operative status - make EVSE available for charging
-        let operative_request = ChangeAvailabilityRequest::new(OperationalStatusEnumType::Operative);
-        assert_eq!(operative_request.get_operational_status(), &OperationalStatusEnumType::Operative);
+        let operative_request =
+            ChangeAvailabilityRequest::new(OperationalStatusEnumType::Operative);
+        assert_eq!(
+            operative_request.get_operational_status(),
+            &OperationalStatusEnumType::Operative
+        );
         assert!(operative_request.validate().is_ok());
 
         // Test Inoperative status - make EVSE unavailable for charging
-        let inoperative_request = ChangeAvailabilityRequest::new(OperationalStatusEnumType::Inoperative);
-        assert_eq!(inoperative_request.get_operational_status(), &OperationalStatusEnumType::Inoperative);
+        let inoperative_request =
+            ChangeAvailabilityRequest::new(OperationalStatusEnumType::Inoperative);
+        assert_eq!(
+            inoperative_request.get_operational_status(),
+            &OperationalStatusEnumType::Inoperative
+        );
         assert!(inoperative_request.validate().is_ok());
     }
 
@@ -740,8 +785,8 @@ mod tests {
 
         // Test targeting specific EVSE
         let evse = EVSEType::new(2);
-        let evse_request = ChangeAvailabilityRequest::new(operational_status.clone())
-            .with_evse(evse.clone());
+        let evse_request =
+            ChangeAvailabilityRequest::new(operational_status.clone()).with_evse(evse.clone());
         assert_eq!(evse_request.get_evse(), Some(&evse));
         assert!(evse_request.validate().is_ok());
 

@@ -11,4 +11,3 @@ pub enum DataTransferStatusEnumType {
     UnknownMessageId,
     UnknownVendorId,
 }
-

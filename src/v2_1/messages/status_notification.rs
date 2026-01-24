@@ -37,8 +37,13 @@ impl StatusNotificationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
-    pub fn new(timestamp: DateTime<Utc>, connector_status: ConnectorStatusEnumType, evse_id: i32, connector_id: i32) -> Self {
+    #[must_use]
+    pub fn new(
+        timestamp: DateTime<Utc>,
+        connector_status: ConnectorStatusEnumType,
+        evse_id: i32,
+        connector_id: i32,
+    ) -> Self {
         Self {
             timestamp,
             connector_status,
@@ -113,7 +118,7 @@ impl StatusNotificationRequest {
     /// # Returns
     ///
     /// The time for which the status is reported.
-    #[must_use] 
+    #[must_use]
     pub fn get_timestamp(&self) -> &DateTime<Utc> {
         &self.timestamp
     }
@@ -123,7 +128,7 @@ impl StatusNotificationRequest {
     /// # Returns
     ///
     /// The `connector_status` field
-    #[must_use] 
+    #[must_use]
     pub fn get_connector_status(&self) -> &ConnectorStatusEnumType {
         &self.connector_status
     }
@@ -133,7 +138,7 @@ impl StatusNotificationRequest {
     /// # Returns
     ///
     /// The id of the EVSE to which the connector belongs for which the the status is reported.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -143,7 +148,7 @@ impl StatusNotificationRequest {
     /// # Returns
     ///
     /// The id of the connector within the EVSE for which the status is reported.
-    #[must_use] 
+    #[must_use]
     pub fn get_connector_id(&self) -> &i32 {
         &self.connector_id
     }
@@ -153,7 +158,7 @@ impl StatusNotificationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -165,12 +170,11 @@ impl StatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `StatusNotification` response.
@@ -195,11 +199,9 @@ impl StatusNotificationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -219,7 +221,7 @@ impl StatusNotificationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -231,12 +233,11 @@ impl StatusNotificationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -256,7 +257,12 @@ mod tests {
         let connector_status = ConnectorStatusEnumType::Available;
         let evse_id = 1;
         let connector_id = 1;
-        let request = StatusNotificationRequest::new(timestamp, connector_status.clone(), evse_id, connector_id);
+        let request = StatusNotificationRequest::new(
+            timestamp,
+            connector_status.clone(),
+            evse_id,
+            connector_id,
+        );
 
         assert_eq!(request.get_timestamp(), &timestamp);
         assert_eq!(request.get_connector_status(), &connector_status);
@@ -268,10 +274,12 @@ mod tests {
     #[test]
     fn test_status_notification_request_serialization() {
         let timestamp = Utc::now();
-        let request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Occupied, 1, 1);
+        let request =
+            StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Occupied, 1, 1);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: StatusNotificationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: StatusNotificationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -279,7 +287,8 @@ mod tests {
     #[test]
     fn test_status_notification_request_validation() {
         let timestamp = Utc::now();
-        let request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 1, 1);
+        let request =
+            StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 1, 1);
 
         assert!(request.validate().is_ok());
     }
@@ -288,8 +297,9 @@ mod tests {
     fn test_status_notification_request_with_custom_data() {
         let timestamp = Utc::now();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Reserved, 2, 3)
-            .with_custom_data(custom_data.clone());
+        let request =
+            StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Reserved, 2, 3)
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -300,7 +310,8 @@ mod tests {
         let new_timestamp = Utc::now();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 1, 1);
+        let mut request =
+            StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 1, 1);
 
         request
             .set_timestamp(new_timestamp)
@@ -310,7 +321,10 @@ mod tests {
             .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.get_timestamp(), &new_timestamp);
-        assert_eq!(request.get_connector_status(), &ConnectorStatusEnumType::Faulted);
+        assert_eq!(
+            request.get_connector_status(),
+            &ConnectorStatusEnumType::Faulted
+        );
         assert_eq!(request.get_evse_id(), &5);
         assert_eq!(request.get_connector_id(), &10);
         assert_eq!(request.get_custom_data(), Some(&custom_data));
@@ -321,8 +335,9 @@ mod tests {
         let timestamp = Utc::now();
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Unavailable, 3, 2)
-            .with_custom_data(custom_data.clone());
+        let request =
+            StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Unavailable, 3, 2)
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -330,7 +345,8 @@ mod tests {
     #[test]
     fn test_status_notification_request_negative_evse_id_validation() {
         let timestamp = Utc::now();
-        let mut request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 1, 1);
+        let mut request =
+            StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 1, 1);
         request.set_evse_id(-1);
 
         assert!(request.validate().is_err());
@@ -339,7 +355,8 @@ mod tests {
     #[test]
     fn test_status_notification_request_negative_connector_id_validation() {
         let timestamp = Utc::now();
-        let mut request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 1, 1);
+        let mut request =
+            StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 1, 1);
         request.set_connector_id(-1);
 
         assert!(request.validate().is_err());
@@ -348,7 +365,8 @@ mod tests {
     #[test]
     fn test_status_notification_request_zero_ids_validation() {
         let timestamp = Utc::now();
-        let request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 0, 0);
+        let request =
+            StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 0, 0);
 
         assert!(request.validate().is_ok());
     }
@@ -366,12 +384,13 @@ mod tests {
 
         for status in statuses {
             let request = StatusNotificationRequest::new(timestamp, status.clone(), 1, 1);
-            
+
             assert_eq!(request.get_connector_status(), &status);
             assert!(request.validate().is_ok());
 
             let json = serde_json::to_string(&request).expect("Failed to serialize");
-            let deserialized: StatusNotificationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: StatusNotificationRequest =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(request, deserialized);
         }
     }
@@ -390,7 +409,8 @@ mod tests {
         let response = StatusNotificationResponse::new();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: StatusNotificationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: StatusNotificationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -405,8 +425,7 @@ mod tests {
     #[test]
     fn test_status_notification_response_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = StatusNotificationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = StatusNotificationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -424,8 +443,7 @@ mod tests {
     #[test]
     fn test_status_notification_response_builder_pattern() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = StatusNotificationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = StatusNotificationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -434,11 +452,13 @@ mod tests {
     fn test_status_notification_request_json_round_trip() {
         let timestamp = Utc::now();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Occupied, 2, 1)
-            .with_custom_data(custom_data);
+        let request =
+            StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Occupied, 2, 1)
+                .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: StatusNotificationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: StatusNotificationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -447,11 +467,11 @@ mod tests {
     #[test]
     fn test_status_notification_response_json_round_trip() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = StatusNotificationResponse::new()
-            .with_custom_data(custom_data);
+        let response = StatusNotificationResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: StatusNotificationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: StatusNotificationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -460,7 +480,8 @@ mod tests {
     #[test]
     fn test_status_notification_response_empty_json() {
         let json = "{}";
-        let response: StatusNotificationResponse = serde_json::from_str(json).expect("Failed to deserialize");
+        let response: StatusNotificationResponse =
+            serde_json::from_str(json).expect("Failed to deserialize");
 
         assert_eq!(response.get_custom_data(), None);
         assert!(response.validate().is_ok());
@@ -469,7 +490,12 @@ mod tests {
     #[test]
     fn test_status_notification_request_with_large_ids() {
         let timestamp = Utc::now();
-        let request = StatusNotificationRequest::new(timestamp, ConnectorStatusEnumType::Available, 999999, 888888);
+        let request = StatusNotificationRequest::new(
+            timestamp,
+            ConnectorStatusEnumType::Available,
+            999999,
+            888888,
+        );
 
         assert_eq!(request.get_evse_id(), &999999);
         assert_eq!(request.get_connector_id(), &888888);
@@ -479,8 +505,7 @@ mod tests {
     #[test]
     fn test_status_notification_response_with_custom_data_validation() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = StatusNotificationResponse::new()
-            .with_custom_data(custom_data);
+        let response = StatusNotificationResponse::new().with_custom_data(custom_data);
 
         assert!(response.validate().is_ok());
     }

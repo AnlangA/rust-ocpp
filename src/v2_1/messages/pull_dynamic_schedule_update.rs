@@ -24,7 +24,7 @@ impl PullDynamicScheduleUpdateRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(charging_profile_id: i32) -> Self {
         Self {
             charging_profile_id,
@@ -61,7 +61,7 @@ impl PullDynamicScheduleUpdateRequest {
     /// # Returns
     ///
     /// Id of charging profile to update.
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_profile_id(&self) -> &i32 {
         &self.charging_profile_id
     }
@@ -71,7 +71,7 @@ impl PullDynamicScheduleUpdateRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -83,12 +83,11 @@ impl PullDynamicScheduleUpdateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `PullDynamicScheduleUpdate` response.
@@ -120,7 +119,7 @@ impl PullDynamicScheduleUpdateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: ChargingProfileStatusEnumType) -> Self {
         Self {
             schedule_update: None,
@@ -137,7 +136,10 @@ impl PullDynamicScheduleUpdateResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_schedule_update(&mut self, schedule_update: Option<ChargingScheduleUpdateType>) -> &mut Self {
+    pub fn set_schedule_update(
+        &mut self,
+        schedule_update: Option<ChargingScheduleUpdateType>,
+    ) -> &mut Self {
         self.schedule_update = schedule_update;
         self
     }
@@ -183,7 +185,7 @@ impl PullDynamicScheduleUpdateResponse {
     /// # Returns
     ///
     /// The `schedule_update` field
-    #[must_use] 
+    #[must_use]
     pub fn get_schedule_update(&self) -> Option<&ChargingScheduleUpdateType> {
         self.schedule_update.as_ref()
     }
@@ -193,7 +195,7 @@ impl PullDynamicScheduleUpdateResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &ChargingProfileStatusEnumType {
         &self.status
     }
@@ -203,7 +205,7 @@ impl PullDynamicScheduleUpdateResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -213,7 +215,7 @@ impl PullDynamicScheduleUpdateResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -225,7 +227,7 @@ impl PullDynamicScheduleUpdateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_schedule_update(mut self, schedule_update: ChargingScheduleUpdateType) -> Self {
         self.schedule_update = Some(schedule_update);
         self
@@ -238,7 +240,7 @@ impl PullDynamicScheduleUpdateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -251,12 +253,11 @@ impl PullDynamicScheduleUpdateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -288,8 +289,8 @@ mod tests {
 
     #[test]
     fn test_pull_dynamic_schedule_update_request_serialization() {
-        let request = PullDynamicScheduleUpdateRequest::new(456)
-            .with_custom_data(create_test_custom_data());
+        let request =
+            PullDynamicScheduleUpdateRequest::new(456).with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: PullDynamicScheduleUpdateRequest =
@@ -316,8 +317,8 @@ mod tests {
     #[test]
     fn test_pull_dynamic_schedule_update_request_builder_pattern() {
         let custom_data = create_test_custom_data();
-        let request = PullDynamicScheduleUpdateRequest::new(789)
-            .with_custom_data(custom_data.clone());
+        let request =
+            PullDynamicScheduleUpdateRequest::new(789).with_custom_data(custom_data.clone());
 
         assert_eq!(request.charging_profile_id, 789);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -339,7 +340,8 @@ mod tests {
 
     #[test]
     fn test_pull_dynamic_schedule_update_response_new() {
-        let response = PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted);
+        let response =
+            PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted);
 
         assert_eq!(response.status, ChargingProfileStatusEnumType::Accepted);
         assert!(response.schedule_update.is_none());
@@ -349,10 +351,11 @@ mod tests {
 
     #[test]
     fn test_pull_dynamic_schedule_update_response_serialization() {
-        let response = PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Rejected)
-            .with_schedule_update(create_test_schedule_update())
-            .with_status_info(create_test_status_info())
-            .with_custom_data(create_test_custom_data());
+        let response =
+            PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Rejected)
+                .with_schedule_update(create_test_schedule_update())
+                .with_status_info(create_test_status_info())
+                .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: PullDynamicScheduleUpdateResponse =
@@ -367,13 +370,15 @@ mod tests {
 
     #[test]
     fn test_pull_dynamic_schedule_update_response_validation() {
-        let valid_response = PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted);
+        let valid_response =
+            PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted);
         assert!(valid_response.validate().is_ok());
 
-        let response_with_all_fields = PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Rejected)
-            .with_schedule_update(create_test_schedule_update())
-            .with_status_info(create_test_status_info())
-            .with_custom_data(create_test_custom_data());
+        let response_with_all_fields =
+            PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Rejected)
+                .with_schedule_update(create_test_schedule_update())
+                .with_status_info(create_test_status_info())
+                .with_custom_data(create_test_custom_data());
         assert!(response_with_all_fields.validate().is_ok());
     }
 
@@ -383,10 +388,11 @@ mod tests {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        let response = PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted)
-            .with_schedule_update(schedule_update.clone())
-            .with_status_info(status_info.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted)
+                .with_schedule_update(schedule_update.clone())
+                .with_status_info(status_info.clone())
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(response.status, ChargingProfileStatusEnumType::Accepted);
         assert_eq!(response.schedule_update, Some(schedule_update));
@@ -396,7 +402,8 @@ mod tests {
 
     #[test]
     fn test_pull_dynamic_schedule_update_response_setters_getters() {
-        let mut response = PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted);
+        let mut response =
+            PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted);
         let schedule_update = create_test_schedule_update();
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
@@ -408,7 +415,10 @@ mod tests {
         response.set_custom_data(Some(custom_data.clone()));
 
         // Test getters
-        assert_eq!(*response.get_status(), ChargingProfileStatusEnumType::Rejected);
+        assert_eq!(
+            *response.get_status(),
+            ChargingProfileStatusEnumType::Rejected
+        );
         assert_eq!(response.get_schedule_update(), Some(&schedule_update));
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
@@ -416,11 +426,19 @@ mod tests {
 
     #[test]
     fn test_pull_dynamic_schedule_update_response_enum_variants() {
-        let accepted_response = PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted);
-        assert_eq!(accepted_response.status, ChargingProfileStatusEnumType::Accepted);
+        let accepted_response =
+            PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted);
+        assert_eq!(
+            accepted_response.status,
+            ChargingProfileStatusEnumType::Accepted
+        );
 
-        let rejected_response = PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Rejected);
-        assert_eq!(rejected_response.status, ChargingProfileStatusEnumType::Rejected);
+        let rejected_response =
+            PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Rejected);
+        assert_eq!(
+            rejected_response.status,
+            ChargingProfileStatusEnumType::Rejected
+        );
     }
 
     #[test]
@@ -447,10 +465,11 @@ mod tests {
 
         assert_eq!(original_request, parsed_request);
 
-        let original_response = PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted)
-            .with_schedule_update(create_test_schedule_update())
-            .with_status_info(create_test_status_info())
-            .with_custom_data(create_test_custom_data());
+        let original_response =
+            PullDynamicScheduleUpdateResponse::new(ChargingProfileStatusEnumType::Accepted)
+                .with_schedule_update(create_test_schedule_update())
+                .with_status_info(create_test_status_info())
+                .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&original_response).expect("Failed to serialize response");
         let parsed_response: PullDynamicScheduleUpdateResponse =

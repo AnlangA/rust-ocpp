@@ -9,4 +9,3 @@ pub enum GenericStatusEnumType {
     Accepted,
     Rejected,
 }
-

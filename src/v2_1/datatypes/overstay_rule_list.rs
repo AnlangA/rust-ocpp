@@ -40,7 +40,7 @@ impl OverstayRuleListType {
     /// # Returns
     ///
     /// A new `OverstayRuleListType` instance with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(overstay_rule: Vec<OverstayRuleType>) -> Self {
         Self {
             custom_data: None,
@@ -59,7 +59,7 @@ impl OverstayRuleListType {
     /// # Returns
     ///
     /// The modified `OverstayRuleListType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -74,7 +74,7 @@ impl OverstayRuleListType {
     /// # Returns
     ///
     /// The modified `OverstayRuleListType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_overstay_power_threshold(
         mut self,
         overstay_power_threshold: RationalNumberType,
@@ -92,7 +92,7 @@ impl OverstayRuleListType {
     /// # Returns
     ///
     /// The modified `OverstayRuleListType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_overstay_time_threshold(mut self, overstay_time_threshold: i32) -> Self {
         self.overstay_time_threshold = Some(overstay_time_threshold);
         self
@@ -103,7 +103,7 @@ impl OverstayRuleListType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -113,7 +113,7 @@ impl OverstayRuleListType {
     /// # Returns
     ///
     /// A reference to the list of overstay rules
-    #[must_use] 
+    #[must_use]
     pub fn overstay_rule(&self) -> &Vec<OverstayRuleType> {
         &self.overstay_rule
     }
@@ -123,7 +123,7 @@ impl OverstayRuleListType {
     /// # Returns
     ///
     /// An optional reference to the overstay power threshold
-    #[must_use] 
+    #[must_use]
     pub fn overstay_power_threshold(&self) -> Option<&RationalNumberType> {
         self.overstay_power_threshold.as_ref()
     }
@@ -133,7 +133,7 @@ impl OverstayRuleListType {
     /// # Returns
     ///
     /// An optional reference to the overstay time threshold
-    #[must_use] 
+    #[must_use]
     pub fn overstay_time_threshold(&self) -> Option<&i32> {
         self.overstay_time_threshold.as_ref()
     }

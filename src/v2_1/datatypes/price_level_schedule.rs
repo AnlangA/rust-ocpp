@@ -48,7 +48,7 @@ impl PriceLevelScheduleType {
     /// # Returns
     ///
     /// A new instance of `PriceLevelScheduleType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         time_anchor: DateTime<Utc>,
         price_schedule_id: i32,
@@ -74,7 +74,7 @@ impl PriceLevelScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -89,7 +89,7 @@ impl PriceLevelScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_price_schedule_description(mut self, description: String) -> Self {
         self.price_schedule_description = Some(description);
         self
@@ -100,7 +100,7 @@ impl PriceLevelScheduleType {
     /// # Returns
     ///
     /// A reference to the starting point of this price schedule
-    #[must_use] 
+    #[must_use]
     pub fn time_anchor(&self) -> &DateTime<Utc> {
         &self.time_anchor
     }
@@ -124,7 +124,7 @@ impl PriceLevelScheduleType {
     /// # Returns
     ///
     /// The unique ID of this price schedule
-    #[must_use] 
+    #[must_use]
     pub fn price_schedule_id(&self) -> i32 {
         self.price_schedule_id
     }
@@ -148,7 +148,7 @@ impl PriceLevelScheduleType {
     /// # Returns
     ///
     /// The overall number of distinct price level elements
-    #[must_use] 
+    #[must_use]
     pub fn number_of_price_levels(&self) -> i32 {
         self.number_of_price_levels
     }
@@ -172,7 +172,7 @@ impl PriceLevelScheduleType {
     /// # Returns
     ///
     /// A reference to the list of price level schedule entries
-    #[must_use] 
+    #[must_use]
     pub fn price_level_schedule_entries(&self) -> &Vec<PriceLevelScheduleEntryType> {
         &self.price_level_schedule_entries
     }
@@ -199,7 +199,7 @@ impl PriceLevelScheduleType {
     /// # Returns
     ///
     /// An optional reference to the description of the price schedule
-    #[must_use] 
+    #[must_use]
     pub fn price_schedule_description(&self) -> Option<&String> {
         self.price_schedule_description.as_ref()
     }
@@ -223,7 +223,7 @@ impl PriceLevelScheduleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -34,7 +34,7 @@ impl LogStatusNotificationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: UploadLogStatusEnumType) -> Self {
         Self {
             status,
@@ -97,7 +97,7 @@ impl LogStatusNotificationRequest {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &UploadLogStatusEnumType {
         &self.status
     }
@@ -107,7 +107,7 @@ impl LogStatusNotificationRequest {
     /// # Returns
     ///
     /// The request id that was provided in `GetLogRequest` that started this log upload. This field is mandatory, unless the message was triggered by a `TriggerMessageRequest` AND there is no log upload ongoing.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> Option<&i32> {
         self.request_id.as_ref()
     }
@@ -117,7 +117,7 @@ impl LogStatusNotificationRequest {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -127,7 +127,7 @@ impl LogStatusNotificationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -139,7 +139,7 @@ impl LogStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_request_id(mut self, request_id: i32) -> Self {
         self.request_id = Some(request_id);
         self
@@ -152,7 +152,7 @@ impl LogStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -165,12 +165,11 @@ impl LogStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `LogStatusNotification` response.
@@ -196,11 +195,9 @@ impl LogStatusNotificationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -220,7 +217,7 @@ impl LogStatusNotificationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -232,12 +229,11 @@ impl LogStatusNotificationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -264,8 +260,7 @@ mod tests {
     #[test]
     fn test_log_status_notification_request_with_request_id() {
         let status = UploadLogStatusEnumType::UploadFailure;
-        let request = LogStatusNotificationRequest::new(status.clone())
-            .with_request_id(123);
+        let request = LogStatusNotificationRequest::new(status.clone()).with_request_id(123);
 
         assert_eq!(request.status, status);
         assert_eq!(request.request_id, Some(123));
@@ -276,8 +271,8 @@ mod tests {
     fn test_log_status_notification_request_with_custom_data() {
         let status = UploadLogStatusEnumType::Idle;
         let custom_data = create_test_custom_data();
-        let request = LogStatusNotificationRequest::new(status.clone())
-            .with_custom_data(custom_data.clone());
+        let request =
+            LogStatusNotificationRequest::new(status.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(request.status, status);
         assert_eq!(request.request_id, None);
@@ -388,8 +383,7 @@ mod tests {
     #[test]
     fn test_log_status_notification_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = LogStatusNotificationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = LogStatusNotificationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -407,8 +401,7 @@ mod tests {
     #[test]
     fn test_log_status_notification_response_getters() {
         let custom_data = create_test_custom_data();
-        let response = LogStatusNotificationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = LogStatusNotificationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -433,8 +426,7 @@ mod tests {
     #[test]
     fn test_log_status_notification_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = LogStatusNotificationResponse::new()
-            .with_custom_data(custom_data);
+        let response = LogStatusNotificationResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: LogStatusNotificationResponse = serde_json::from_str(&json).unwrap();

@@ -11,4 +11,3 @@ pub enum CertificateStatusEnumType {
     Unknown,
     Failed,
 }
-

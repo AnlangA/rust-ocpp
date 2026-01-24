@@ -13,4 +13,3 @@ pub enum GetCertificateIdUseEnumType {
     ManufacturerRootCertificate,
     OEMRootCertificate,
 }
-

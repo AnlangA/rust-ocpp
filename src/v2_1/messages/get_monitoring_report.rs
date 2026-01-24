@@ -35,7 +35,7 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32) -> Self {
         Self {
             component_variable: None,
@@ -52,7 +52,10 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_component_variable(&mut self, component_variable: Option<Vec<ComponentVariableType>>) -> &mut Self {
+    pub fn set_component_variable(
+        &mut self,
+        component_variable: Option<Vec<ComponentVariableType>>,
+    ) -> &mut Self {
         self.component_variable = component_variable;
         self
     }
@@ -76,7 +79,10 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_monitoring_criteria(&mut self, monitoring_criteria: Option<Vec<MonitoringCriterionEnumType>>) -> &mut Self {
+    pub fn set_monitoring_criteria(
+        &mut self,
+        monitoring_criteria: Option<Vec<MonitoringCriterionEnumType>>,
+    ) -> &mut Self {
         self.monitoring_criteria = monitoring_criteria;
         self
     }
@@ -98,7 +104,7 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// The `component_variable` field
-    #[must_use] 
+    #[must_use]
     pub fn get_component_variable(&self) -> Option<&Vec<ComponentVariableType>> {
         self.component_variable.as_ref()
     }
@@ -108,7 +114,7 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// The Id of the request.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -118,7 +124,7 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// This field contains criteria for components for which a monitoring report is requested
-    #[must_use] 
+    #[must_use]
     pub fn get_monitoring_criteria(&self) -> Option<&Vec<MonitoringCriterionEnumType>> {
         self.monitoring_criteria.as_ref()
     }
@@ -128,7 +134,7 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -140,8 +146,11 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_component_variable(mut self, component_variable: Vec<ComponentVariableType>) -> Self {
+    #[must_use]
+    pub fn with_component_variable(
+        mut self,
+        component_variable: Vec<ComponentVariableType>,
+    ) -> Self {
         self.component_variable = Some(component_variable);
         self
     }
@@ -153,8 +162,11 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_monitoring_criteria(mut self, monitoring_criteria: Vec<MonitoringCriterionEnumType>) -> Self {
+    #[must_use]
+    pub fn with_monitoring_criteria(
+        mut self,
+        monitoring_criteria: Vec<MonitoringCriterionEnumType>,
+    ) -> Self {
         self.monitoring_criteria = Some(monitoring_criteria);
         self
     }
@@ -166,12 +178,11 @@ impl GetMonitoringReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetMonitoringReport` response.
@@ -200,7 +211,7 @@ impl GetMonitoringReportResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericDeviceModelStatusEnumType) -> Self {
         Self {
             status,
@@ -250,7 +261,7 @@ impl GetMonitoringReportResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericDeviceModelStatusEnumType {
         &self.status
     }
@@ -260,7 +271,7 @@ impl GetMonitoringReportResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -270,7 +281,7 @@ impl GetMonitoringReportResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -282,7 +293,7 @@ impl GetMonitoringReportResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -295,12 +306,11 @@ impl GetMonitoringReportResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -318,11 +328,12 @@ mod tests {
     }
 
     fn create_test_component_variable() -> ComponentVariableType {
-        ComponentVariableType::new(
-            crate::v2_1::datatypes::ComponentType::new("TestComponent".to_string())
-        ).with_variable(
-            crate::v2_1::datatypes::VariableType::new("TestVariable".to_string())
-        )
+        ComponentVariableType::new(crate::v2_1::datatypes::ComponentType::new(
+            "TestComponent".to_string(),
+        ))
+        .with_variable(crate::v2_1::datatypes::VariableType::new(
+            "TestVariable".to_string(),
+        ))
     }
 
     // Tests for GetMonitoringReportRequest
@@ -340,8 +351,8 @@ mod tests {
     #[test]
     fn test_get_monitoring_report_request_with_monitoring_criteria() {
         let criteria = vec![MonitoringCriterionEnumType::ThresholdMonitoring];
-        let request = GetMonitoringReportRequest::new(456)
-            .with_monitoring_criteria(criteria.clone());
+        let request =
+            GetMonitoringReportRequest::new(456).with_monitoring_criteria(criteria.clone());
 
         assert_eq!(request.request_id, 456);
         assert_eq!(request.monitoring_criteria, Some(criteria));
@@ -352,8 +363,8 @@ mod tests {
     #[test]
     fn test_get_monitoring_report_request_with_component_variable() {
         let component_var = vec![create_test_component_variable()];
-        let request = GetMonitoringReportRequest::new(789)
-            .with_component_variable(component_var.clone());
+        let request =
+            GetMonitoringReportRequest::new(789).with_component_variable(component_var.clone());
 
         assert_eq!(request.request_id, 789);
         assert_eq!(request.monitoring_criteria, None);
@@ -364,8 +375,7 @@ mod tests {
     #[test]
     fn test_get_monitoring_report_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = GetMonitoringReportRequest::new(999)
-            .with_custom_data(custom_data.clone());
+        let request = GetMonitoringReportRequest::new(999).with_custom_data(custom_data.clone());
 
         assert_eq!(request.request_id, 999);
         assert_eq!(request.monitoring_criteria, None);
@@ -510,10 +520,14 @@ mod tests {
     #[test]
     fn test_get_monitoring_report_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = GetMonitoringReportResponse::new(GenericDeviceModelStatusEnumType::NotSupported)
-            .with_custom_data(custom_data.clone());
+        let response =
+            GetMonitoringReportResponse::new(GenericDeviceModelStatusEnumType::NotSupported)
+                .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.status, GenericDeviceModelStatusEnumType::NotSupported);
+        assert_eq!(
+            response.status,
+            GenericDeviceModelStatusEnumType::NotSupported
+        );
         assert_eq!(response.status_info, None);
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -523,12 +537,16 @@ mod tests {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        let mut response = GetMonitoringReportResponse::new(GenericDeviceModelStatusEnumType::Accepted);
+        let mut response =
+            GetMonitoringReportResponse::new(GenericDeviceModelStatusEnumType::Accepted);
         response.set_status(GenericDeviceModelStatusEnumType::EmptyResultSet);
         response.set_status_info(Some(status_info.clone()));
         response.set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.status, GenericDeviceModelStatusEnumType::EmptyResultSet);
+        assert_eq!(
+            response.status,
+            GenericDeviceModelStatusEnumType::EmptyResultSet
+        );
         assert_eq!(response.status_info, Some(status_info));
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -541,7 +559,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &GenericDeviceModelStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &GenericDeviceModelStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -583,9 +604,10 @@ mod tests {
     fn test_get_monitoring_report_response_json_round_trip() {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
-        let response = GetMonitoringReportResponse::new(GenericDeviceModelStatusEnumType::NotSupported)
-            .with_status_info(status_info)
-            .with_custom_data(custom_data);
+        let response =
+            GetMonitoringReportResponse::new(GenericDeviceModelStatusEnumType::NotSupported)
+                .with_status_info(status_info)
+                .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetMonitoringReportResponse = serde_json::from_str(&json).unwrap();

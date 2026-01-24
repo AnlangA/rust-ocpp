@@ -11,4 +11,3 @@ pub enum GenericDeviceModelStatusEnumType {
     NotSupported,
     EmptyResultSet,
 }
-

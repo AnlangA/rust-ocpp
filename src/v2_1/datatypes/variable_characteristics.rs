@@ -54,7 +54,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// A new `VariableCharacteristicsType` instance with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(data_type: DataEnumType, supports_monitoring: bool) -> Self {
         Self {
             unit: None,
@@ -77,7 +77,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_unit(mut self, unit: String) -> Self {
         self.unit = Some(unit);
         self
@@ -92,7 +92,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_min_limit(mut self, min_limit: f64) -> Self {
         self.min_limit = Some(min_limit);
         self
@@ -107,7 +107,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_max_limit(mut self, max_limit: f64) -> Self {
         self.max_limit = Some(max_limit);
         self
@@ -122,7 +122,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_max_elements(mut self, max_elements: i32) -> Self {
         self.max_elements = Some(max_elements);
         self
@@ -137,7 +137,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_values_list(mut self, values_list: String) -> Self {
         self.values_list = Some(values_list);
         self
@@ -152,7 +152,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The modified `VariableCharacteristicsType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -163,7 +163,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional reference to the unit of the variable
-    #[must_use] 
+    #[must_use]
     pub fn unit(&self) -> Option<&String> {
         self.unit.as_ref()
     }
@@ -187,7 +187,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// The data type of this variable
-    #[must_use] 
+    #[must_use]
     pub fn data_type(&self) -> &DataEnumType {
         &self.data_type
     }
@@ -211,7 +211,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional minimum possible value of this variable
-    #[must_use] 
+    #[must_use]
     pub fn min_limit(&self) -> Option<f64> {
         self.min_limit
     }
@@ -235,7 +235,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional maximum possible value of this variable
-    #[must_use] 
+    #[must_use]
     pub fn max_limit(&self) -> Option<f64> {
         self.max_limit
     }
@@ -259,7 +259,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional maximum number of elements from valuesList that are supported
-    #[must_use] 
+    #[must_use]
     pub fn max_elements(&self) -> Option<i32> {
         self.max_elements
     }
@@ -283,7 +283,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional reference to the allowed values for special list types
-    #[must_use] 
+    #[must_use]
     pub fn values_list(&self) -> Option<&String> {
         self.values_list.as_ref()
     }
@@ -307,7 +307,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// Flag indicating if this variable supports monitoring
-    #[must_use] 
+    #[must_use]
     pub fn supports_monitoring(&self) -> bool {
         self.supports_monitoring
     }
@@ -331,7 +331,7 @@ impl VariableCharacteristicsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

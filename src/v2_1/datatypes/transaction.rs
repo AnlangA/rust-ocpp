@@ -49,7 +49,7 @@ impl TransactionType {
     /// # Returns
     ///
     /// A new instance of `TransactionType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(transaction_id: String) -> Self {
         Self {
             transaction_id,
@@ -62,37 +62,37 @@ impl TransactionType {
     }
 
     /// Gets the transaction ID.
-    #[must_use] 
+    #[must_use]
     pub fn transaction_id(&self) -> &str {
         &self.transaction_id
     }
 
     /// Gets the charging state.
-    #[must_use] 
+    #[must_use]
     pub fn charging_state(&self) -> Option<&ChargingStateEnumType> {
         self.charging_state.as_ref()
     }
 
     /// Gets the time spent charging in seconds.
-    #[must_use] 
+    #[must_use]
     pub fn time_spent_charging(&self) -> Option<i32> {
         self.time_spent_charging
     }
 
     /// Gets the reason why the transaction was stopped.
-    #[must_use] 
+    #[must_use]
     pub fn stopped_reason(&self) -> Option<&ReasonEnumType> {
         self.stopped_reason.as_ref()
     }
 
     /// Gets the remote start request ID.
-    #[must_use] 
+    #[must_use]
     pub fn remote_start_id(&self) -> Option<i32> {
         self.remote_start_id
     }
 
     /// Gets the custom data.
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -165,7 +165,7 @@ impl TransactionType {
     /// # Returns
     ///
     /// Self with charging state set
-    #[must_use] 
+    #[must_use]
     pub fn with_charging_state(mut self, charging_state: ChargingStateEnumType) -> Self {
         self.charging_state = Some(charging_state);
         self
@@ -176,7 +176,7 @@ impl TransactionType {
     /// # Returns
     ///
     /// Self with time spent charging set
-    #[must_use] 
+    #[must_use]
     pub fn with_time_spent_charging(mut self, time_spent_charging: i32) -> Self {
         self.time_spent_charging = Some(time_spent_charging);
         self
@@ -187,7 +187,7 @@ impl TransactionType {
     /// # Returns
     ///
     /// Self with stopped reason set
-    #[must_use] 
+    #[must_use]
     pub fn with_stopped_reason(mut self, stopped_reason: ReasonEnumType) -> Self {
         self.stopped_reason = Some(stopped_reason);
         self
@@ -198,7 +198,7 @@ impl TransactionType {
     /// # Returns
     ///
     /// Self with remote start ID set
-    #[must_use] 
+    #[must_use]
     pub fn with_remote_start_id(mut self, remote_start_id: i32) -> Self {
         self.remote_start_id = Some(remote_start_id);
         self
@@ -209,7 +209,7 @@ impl TransactionType {
     /// # Returns
     ///
     /// Self with custom data set
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

@@ -43,7 +43,7 @@ impl SalesTariffEntryType {
     /// # Returns
     ///
     /// A new instance of `SalesTariffEntryType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(relative_time_interval: RelativeTimeIntervalType) -> Self {
         Self {
             relative_time_interval,
@@ -63,7 +63,7 @@ impl SalesTariffEntryType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_e_price_level(mut self, e_price_level: i32) -> Self {
         self.e_price_level = Some(e_price_level);
         self
@@ -78,7 +78,7 @@ impl SalesTariffEntryType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_consumption_cost(mut self, consumption_cost: Vec<ConsumptionCostType>) -> Self {
         self.consumption_cost = Some(consumption_cost);
         self
@@ -93,7 +93,7 @@ impl SalesTariffEntryType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -104,7 +104,7 @@ impl SalesTariffEntryType {
     /// # Returns
     ///
     /// A reference to the time and date at which the tariff becomes valid
-    #[must_use] 
+    #[must_use]
     pub fn relative_time_interval(&self) -> &RelativeTimeIntervalType {
         &self.relative_time_interval
     }
@@ -131,7 +131,7 @@ impl SalesTariffEntryType {
     /// # Returns
     ///
     /// An optional price level value
-    #[must_use] 
+    #[must_use]
     pub fn e_price_level(&self) -> Option<i32> {
         self.e_price_level
     }
@@ -155,7 +155,7 @@ impl SalesTariffEntryType {
     /// # Returns
     ///
     /// An optional reference to consumption cost per time interval
-    #[must_use] 
+    #[must_use]
     pub fn consumption_cost(&self) -> Option<&Vec<ConsumptionCostType>> {
         self.consumption_cost.as_ref()
     }
@@ -182,7 +182,7 @@ impl SalesTariffEntryType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

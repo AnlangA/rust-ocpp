@@ -32,7 +32,7 @@ impl EVPowerScheduleEntryType {
     /// # Returns
     ///
     /// A new instance of `EVPowerScheduleEntryType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(duration: i32, power: f64) -> Self {
         Self {
             duration,
@@ -50,7 +50,7 @@ impl EVPowerScheduleEntryType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -61,7 +61,7 @@ impl EVPowerScheduleEntryType {
     /// # Returns
     ///
     /// The duration of the schedule entry in seconds
-    #[must_use] 
+    #[must_use]
     pub fn duration(&self) -> i32 {
         self.duration
     }
@@ -85,7 +85,7 @@ impl EVPowerScheduleEntryType {
     /// # Returns
     ///
     /// The power in Watts (W) as a Decimal
-    #[must_use] 
+    #[must_use]
     pub fn power(&self) -> &Decimal {
         &self.power
     }
@@ -95,7 +95,7 @@ impl EVPowerScheduleEntryType {
     /// # Returns
     ///
     /// The power in Watts (W) as an f64, or 0.0 if conversion fails
-    #[must_use] 
+    #[must_use]
     pub fn power_as_f64(&self) -> f64 {
         self.power.to_f64().unwrap_or(0.0)
     }
@@ -133,7 +133,7 @@ impl EVPowerScheduleEntryType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

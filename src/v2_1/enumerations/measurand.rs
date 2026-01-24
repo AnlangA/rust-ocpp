@@ -1,5 +1,4 @@
-#[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq)]
-#[derive(Default)]
+#[derive(serde::Serialize, serde::Deserialize, Debug, Clone, PartialEq, Default)]
 pub enum MeasurandEnumType {
     #[serde(rename = "Current.Export")]
     CurrentExport,
@@ -115,4 +114,3 @@ pub enum MeasurandEnumType {
     #[serde(rename = "Voltage.Maximum")]
     VoltageMaximum,
 }
-

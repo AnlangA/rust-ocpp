@@ -30,7 +30,7 @@ impl RationalNumberType {
     /// # Returns
     ///
     /// A new instance of `RationalNumberType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(exponent: i32, value: i32) -> Self {
         Self {
             exponent,
@@ -48,7 +48,7 @@ impl RationalNumberType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -59,7 +59,7 @@ impl RationalNumberType {
     /// # Returns
     ///
     /// The exponent to base 10 (dec)
-    #[must_use] 
+    #[must_use]
     pub fn exponent(&self) -> i32 {
         self.exponent
     }
@@ -83,7 +83,7 @@ impl RationalNumberType {
     /// # Returns
     ///
     /// The value which shall be multiplied
-    #[must_use] 
+    #[must_use]
     pub fn value(&self) -> i32 {
         self.value
     }
@@ -107,7 +107,7 @@ impl RationalNumberType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

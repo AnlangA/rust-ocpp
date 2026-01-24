@@ -9,4 +9,3 @@ pub enum GetChargingProfileStatusEnumType {
     Accepted,
     NoProfiles,
 }
-

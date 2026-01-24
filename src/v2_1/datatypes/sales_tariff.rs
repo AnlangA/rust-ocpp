@@ -44,7 +44,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// A new instance of `SalesTariffType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(id: i32, sales_tariff_entry: Vec<SalesTariffEntryType>) -> Self {
         Self {
             custom_data: None,
@@ -64,7 +64,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -79,7 +79,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_sales_tariff_description(mut self, description: String) -> Self {
         self.sales_tariff_description = Some(description);
         self
@@ -94,7 +94,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_num_e_price_levels(mut self, num_e_price_levels: i32) -> Self {
         self.num_e_price_levels = Some(num_e_price_levels);
         self
@@ -105,7 +105,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// The sales tariff identifier
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -129,7 +129,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// An optional human readable title/description of the sales tariff
-    #[must_use] 
+    #[must_use]
     pub fn sales_tariff_description(&self) -> Option<&str> {
         self.sales_tariff_description.as_deref()
     }
@@ -153,7 +153,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// An optional number of distinct price levels used across all provided `SalesTariff` elements
-    #[must_use] 
+    #[must_use]
     pub fn num_e_price_levels(&self) -> Option<i32> {
         self.num_e_price_levels
     }
@@ -177,7 +177,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// A reference to the list of sales tariff entries
-    #[must_use] 
+    #[must_use]
     pub fn sales_tariff_entry(&self) -> &[SalesTariffEntryType] {
         &self.sales_tariff_entry
     }
@@ -204,7 +204,7 @@ impl SalesTariffType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

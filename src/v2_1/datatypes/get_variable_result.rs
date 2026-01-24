@@ -54,7 +54,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// A new `GetVariableResultType` instance with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         component: ComponentType,
         variable: VariableType,
@@ -80,7 +80,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// The modified `GetVariableResultType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -95,7 +95,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// The modified `GetVariableResultType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_attribute_type(mut self, attribute_type: AttributeEnumType) -> Self {
         self.attribute_type = Some(attribute_type);
         self
@@ -110,7 +110,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// The modified `GetVariableResultType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_attribute_value(mut self, attribute_value: String) -> Self {
         self.attribute_value = Some(attribute_value);
         self
@@ -125,7 +125,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// The modified `GetVariableResultType` instance
-    #[must_use] 
+    #[must_use]
     pub fn with_attribute_status_info(mut self, attribute_status_info: StatusInfoType) -> Self {
         self.attribute_status_info = Some(attribute_status_info);
         self
@@ -136,7 +136,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -160,7 +160,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// A reference to the component
-    #[must_use] 
+    #[must_use]
     pub fn component(&self) -> &ComponentType {
         &self.component
     }
@@ -184,7 +184,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// A reference to the variable
-    #[must_use] 
+    #[must_use]
     pub fn variable(&self) -> &VariableType {
         &self.variable
     }
@@ -208,7 +208,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// An optional reference to the attribute type
-    #[must_use] 
+    #[must_use]
     pub fn attribute_type(&self) -> Option<&AttributeEnumType> {
         self.attribute_type.as_ref()
     }
@@ -232,7 +232,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// An optional reference to the attribute value
-    #[must_use] 
+    #[must_use]
     pub fn attribute_value(&self) -> Option<&str> {
         self.attribute_value.as_deref()
     }
@@ -256,7 +256,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// The attribute status
-    #[must_use] 
+    #[must_use]
     pub fn attribute_status(&self) -> &GetVariableStatusEnumType {
         &self.attribute_status
     }
@@ -283,7 +283,7 @@ impl GetVariableResultType {
     /// # Returns
     ///
     /// An optional reference to the attribute status info
-    #[must_use] 
+    #[must_use]
     pub fn attribute_status_info(&self) -> Option<&StatusInfoType> {
         self.attribute_status_info.as_ref()
     }

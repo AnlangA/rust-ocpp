@@ -28,7 +28,7 @@ impl NotifyPriorityChargingRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(transaction_id: String, activated: bool) -> Self {
         Self {
             transaction_id,
@@ -78,7 +78,7 @@ impl NotifyPriorityChargingRequest {
     /// # Returns
     ///
     /// The transaction for which priority charging is requested.
-    #[must_use] 
+    #[must_use]
     pub fn get_transaction_id(&self) -> &String {
         &self.transaction_id
     }
@@ -88,7 +88,7 @@ impl NotifyPriorityChargingRequest {
     /// # Returns
     ///
     /// True if priority charging was activated. False if it has stopped using the priority charging profile.
-    #[must_use] 
+    #[must_use]
     pub fn get_activated(&self) -> &bool {
         &self.activated
     }
@@ -98,7 +98,7 @@ impl NotifyPriorityChargingRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -110,12 +110,11 @@ impl NotifyPriorityChargingRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyPriorityCharging` response.
@@ -141,11 +140,9 @@ impl NotifyPriorityChargingResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -165,7 +162,7 @@ impl NotifyPriorityChargingResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -177,12 +174,11 @@ impl NotifyPriorityChargingResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -220,7 +216,8 @@ mod tests {
         let request = create_test_notify_priority_charging_request();
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: NotifyPriorityChargingRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: NotifyPriorityChargingRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -248,8 +245,9 @@ mod tests {
         let new_transaction_id = "new_transaction_789".to_string();
         let new_activated = false;
 
-        request.set_transaction_id(new_transaction_id.clone())
-               .set_activated(new_activated);
+        request
+            .set_transaction_id(new_transaction_id.clone())
+            .set_activated(new_activated);
 
         assert_eq!(request.transaction_id, new_transaction_id);
         assert_eq!(request.activated, new_activated);
@@ -267,8 +265,8 @@ mod tests {
     #[test]
     fn test_notify_priority_charging_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = create_test_notify_priority_charging_request()
-            .with_custom_data(custom_data.clone());
+        let request =
+            create_test_notify_priority_charging_request().with_custom_data(custom_data.clone());
 
         assert_eq!(request.custom_data, Some(custom_data));
         assert_eq!(request.get_custom_data(), request.custom_data.as_ref());
@@ -326,7 +324,8 @@ mod tests {
         let response = create_test_notify_priority_charging_response();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: NotifyPriorityChargingResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: NotifyPriorityChargingResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -355,8 +354,8 @@ mod tests {
     #[test]
     fn test_notify_priority_charging_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = create_test_notify_priority_charging_response()
-            .with_custom_data(custom_data.clone());
+        let response =
+            create_test_notify_priority_charging_response().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
         assert_eq!(response.get_custom_data(), response.custom_data.as_ref());
@@ -389,19 +388,21 @@ mod tests {
     #[test]
     fn test_notify_priority_charging_round_trip_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = create_test_notify_priority_charging_request()
-            .with_custom_data(custom_data.clone());
-        let response = create_test_notify_priority_charging_response()
-            .with_custom_data(custom_data);
+        let request =
+            create_test_notify_priority_charging_request().with_custom_data(custom_data.clone());
+        let response =
+            create_test_notify_priority_charging_response().with_custom_data(custom_data);
 
         // Test request round trip
         let request_json = serde_json::to_string(&request).expect("Failed to serialize request");
-        let request_deserialized: NotifyPriorityChargingRequest = serde_json::from_str(&request_json).expect("Failed to deserialize request");
+        let request_deserialized: NotifyPriorityChargingRequest =
+            serde_json::from_str(&request_json).expect("Failed to deserialize request");
         assert_eq!(request, request_deserialized);
 
         // Test response round trip
         let response_json = serde_json::to_string(&response).expect("Failed to serialize response");
-        let response_deserialized: NotifyPriorityChargingResponse = serde_json::from_str(&response_json).expect("Failed to deserialize response");
+        let response_deserialized: NotifyPriorityChargingResponse =
+            serde_json::from_str(&response_json).expect("Failed to deserialize response");
         assert_eq!(response, response_deserialized);
     }
 }

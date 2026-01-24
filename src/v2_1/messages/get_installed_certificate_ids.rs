@@ -1,5 +1,7 @@
 use crate::v2_1::datatypes::{CertificateHashDataChainType, CustomDataType, StatusInfoType};
-use crate::v2_1::enumerations::{GetCertificateIdUseEnumType, GetInstalledCertificateStatusEnumType};
+use crate::v2_1::enumerations::{
+    GetCertificateIdUseEnumType, GetInstalledCertificateStatusEnumType,
+};
 use serde::{Deserialize, Serialize};
 use validator::Validate;
 
@@ -31,7 +33,7 @@ impl GetInstalledCertificateIdsRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             certificate_type: None,
@@ -46,7 +48,10 @@ impl GetInstalledCertificateIdsRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_certificate_type(&mut self, certificate_type: Option<Vec<GetCertificateIdUseEnumType>>) -> &mut Self {
+    pub fn set_certificate_type(
+        &mut self,
+        certificate_type: Option<Vec<GetCertificateIdUseEnumType>>,
+    ) -> &mut Self {
         self.certificate_type = certificate_type;
         self
     }
@@ -68,7 +73,7 @@ impl GetInstalledCertificateIdsRequest {
     /// # Returns
     ///
     /// Indicates the type of certificates requested. When omitted, all certificate types are requested.
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_type(&self) -> Option<&Vec<GetCertificateIdUseEnumType>> {
         self.certificate_type.as_ref()
     }
@@ -78,7 +83,7 @@ impl GetInstalledCertificateIdsRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -90,8 +95,11 @@ impl GetInstalledCertificateIdsRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_certificate_type(mut self, certificate_type: Vec<GetCertificateIdUseEnumType>) -> Self {
+    #[must_use]
+    pub fn with_certificate_type(
+        mut self,
+        certificate_type: Vec<GetCertificateIdUseEnumType>,
+    ) -> Self {
         self.certificate_type = Some(certificate_type);
         self
     }
@@ -103,12 +111,11 @@ impl GetInstalledCertificateIdsRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetInstalledCertificateIds` response.
@@ -142,7 +149,7 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GetInstalledCertificateStatusEnumType) -> Self {
         Self {
             status,
@@ -183,7 +190,10 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_certificate_hash_data_chain(&mut self, certificate_hash_data_chain: Option<Vec<CertificateHashDataChainType>>) -> &mut Self {
+    pub fn set_certificate_hash_data_chain(
+        &mut self,
+        certificate_hash_data_chain: Option<Vec<CertificateHashDataChainType>>,
+    ) -> &mut Self {
         self.certificate_hash_data_chain = certificate_hash_data_chain;
         self
     }
@@ -205,7 +215,7 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GetInstalledCertificateStatusEnumType {
         &self.status
     }
@@ -215,7 +225,7 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -225,7 +235,7 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// The `certificate_hash_data_chain` field
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_hash_data_chain(&self) -> Option<&Vec<CertificateHashDataChainType>> {
         self.certificate_hash_data_chain.as_ref()
     }
@@ -235,7 +245,7 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -247,7 +257,7 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -260,8 +270,11 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_certificate_hash_data_chain(mut self, certificate_hash_data_chain: Vec<CertificateHashDataChainType>) -> Self {
+    #[must_use]
+    pub fn with_certificate_hash_data_chain(
+        mut self,
+        certificate_hash_data_chain: Vec<CertificateHashDataChainType>,
+    ) -> Self {
         self.certificate_hash_data_chain = Some(certificate_hash_data_chain);
         self
     }
@@ -273,12 +286,11 @@ impl GetInstalledCertificateIdsResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -328,8 +340,8 @@ mod tests {
             GetCertificateIdUseEnumType::CSMSRootCertificate,
             GetCertificateIdUseEnumType::V2GRootCertificate,
         ];
-        let request = GetInstalledCertificateIdsRequest::new()
-            .with_certificate_type(cert_types.clone());
+        let request =
+            GetInstalledCertificateIdsRequest::new().with_certificate_type(cert_types.clone());
 
         assert_eq!(request.certificate_type, Some(cert_types));
         assert_eq!(request.custom_data, None);
@@ -338,8 +350,8 @@ mod tests {
     #[test]
     fn test_get_installed_certificate_ids_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = GetInstalledCertificateIdsRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request =
+            GetInstalledCertificateIdsRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.certificate_type, None);
         assert_eq!(request.custom_data, Some(custom_data));
@@ -436,9 +448,14 @@ mod tests {
 
     #[test]
     fn test_get_installed_certificate_ids_response_new() {
-        let response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted);
+        let response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        );
 
-        assert_eq!(response.status, GetInstalledCertificateStatusEnumType::Accepted);
+        assert_eq!(
+            response.status,
+            GetInstalledCertificateStatusEnumType::Accepted
+        );
         assert_eq!(response.status_info, None);
         assert_eq!(response.certificate_hash_data_chain, None);
         assert_eq!(response.custom_data, None);
@@ -447,10 +464,15 @@ mod tests {
     #[test]
     fn test_get_installed_certificate_ids_response_with_status_info() {
         let status_info = create_test_status_info();
-        let response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::NotFound)
-            .with_status_info(status_info.clone());
+        let response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::NotFound,
+        )
+        .with_status_info(status_info.clone());
 
-        assert_eq!(response.status, GetInstalledCertificateStatusEnumType::NotFound);
+        assert_eq!(
+            response.status,
+            GetInstalledCertificateStatusEnumType::NotFound
+        );
         assert_eq!(response.status_info, Some(status_info));
         assert_eq!(response.certificate_hash_data_chain, None);
         assert_eq!(response.custom_data, None);
@@ -459,10 +481,15 @@ mod tests {
     #[test]
     fn test_get_installed_certificate_ids_response_with_certificate_hash_data_chain() {
         let cert_chain = vec![create_test_certificate_hash_data_chain()];
-        let response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted)
-            .with_certificate_hash_data_chain(cert_chain.clone());
+        let response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        )
+        .with_certificate_hash_data_chain(cert_chain.clone());
 
-        assert_eq!(response.status, GetInstalledCertificateStatusEnumType::Accepted);
+        assert_eq!(
+            response.status,
+            GetInstalledCertificateStatusEnumType::Accepted
+        );
         assert_eq!(response.status_info, None);
         assert_eq!(response.certificate_hash_data_chain, Some(cert_chain));
         assert_eq!(response.custom_data, None);
@@ -471,10 +498,15 @@ mod tests {
     #[test]
     fn test_get_installed_certificate_ids_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted)
-            .with_custom_data(custom_data.clone());
+        let response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        )
+        .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.status, GetInstalledCertificateStatusEnumType::Accepted);
+        assert_eq!(
+            response.status,
+            GetInstalledCertificateStatusEnumType::Accepted
+        );
         assert_eq!(response.status_info, None);
         assert_eq!(response.certificate_hash_data_chain, None);
         assert_eq!(response.custom_data, Some(custom_data));
@@ -486,13 +518,18 @@ mod tests {
         let cert_chain = vec![create_test_certificate_hash_data_chain()];
         let custom_data = create_test_custom_data();
 
-        let mut response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted);
+        let mut response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        );
         response.set_status(GetInstalledCertificateStatusEnumType::NotFound);
         response.set_status_info(Some(status_info.clone()));
         response.set_certificate_hash_data_chain(Some(cert_chain.clone()));
         response.set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.status, GetInstalledCertificateStatusEnumType::NotFound);
+        assert_eq!(
+            response.status,
+            GetInstalledCertificateStatusEnumType::NotFound
+        );
         assert_eq!(response.status_info, Some(status_info));
         assert_eq!(response.certificate_hash_data_chain, Some(cert_chain));
         assert_eq!(response.custom_data, Some(custom_data));
@@ -503,20 +540,30 @@ mod tests {
         let status_info = create_test_status_info();
         let cert_chain = vec![create_test_certificate_hash_data_chain()];
         let custom_data = create_test_custom_data();
-        let response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted)
-            .with_status_info(status_info.clone())
-            .with_certificate_hash_data_chain(cert_chain.clone())
-            .with_custom_data(custom_data.clone());
+        let response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        )
+        .with_status_info(status_info.clone())
+        .with_certificate_hash_data_chain(cert_chain.clone())
+        .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &GetInstalledCertificateStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &GetInstalledCertificateStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
-        assert_eq!(response.get_certificate_hash_data_chain(), Some(&cert_chain));
+        assert_eq!(
+            response.get_certificate_hash_data_chain(),
+            Some(&cert_chain)
+        );
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
 
     #[test]
     fn test_get_installed_certificate_ids_response_serialization() {
-        let response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted);
+        let response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        );
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetInstalledCertificateIdsResponse = serde_json::from_str(&json).unwrap();
@@ -526,14 +573,18 @@ mod tests {
 
     #[test]
     fn test_get_installed_certificate_ids_response_validation() {
-        let response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted);
+        let response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        );
 
         assert!(response.validate().is_ok());
     }
 
     #[test]
     fn test_get_installed_certificate_ids_response_validation_empty_certificate_chain() {
-        let mut response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted);
+        let mut response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        );
         response.set_certificate_hash_data_chain(Some(vec![])); // Empty list should fail validation
 
         assert!(response.validate().is_err());
@@ -565,8 +616,10 @@ mod tests {
         );
         let cert_chains = vec![cert_chain1, cert_chain2];
 
-        let response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted)
-            .with_certificate_hash_data_chain(cert_chains.clone());
+        let response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        )
+        .with_certificate_hash_data_chain(cert_chains.clone());
 
         assert_eq!(response.certificate_hash_data_chain, Some(cert_chains));
         assert!(response.validate().is_ok());
@@ -577,10 +630,12 @@ mod tests {
         let status_info = create_test_status_info();
         let cert_chain = vec![create_test_certificate_hash_data_chain()];
         let custom_data = create_test_custom_data();
-        let response = GetInstalledCertificateIdsResponse::new(GetInstalledCertificateStatusEnumType::Accepted)
-            .with_status_info(status_info)
-            .with_certificate_hash_data_chain(cert_chain)
-            .with_custom_data(custom_data);
+        let response = GetInstalledCertificateIdsResponse::new(
+            GetInstalledCertificateStatusEnumType::Accepted,
+        )
+        .with_status_info(status_info)
+        .with_certificate_hash_data_chain(cert_chain)
+        .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetInstalledCertificateIdsResponse = serde_json::from_str(&json).unwrap();

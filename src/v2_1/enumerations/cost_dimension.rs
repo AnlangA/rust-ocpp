@@ -14,4 +14,3 @@ pub enum CostDimensionEnumType {
     IdleTime,
     ChargingTime,
 }
-

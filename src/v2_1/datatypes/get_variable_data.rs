@@ -38,7 +38,7 @@ impl GetVariableDataType {
     /// # Returns
     ///
     /// A new instance of `GetVariableDataType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(component: ComponentType, variable: VariableType) -> Self {
         Self {
             component,
@@ -57,7 +57,7 @@ impl GetVariableDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_attribute_type(mut self, attribute_type: AttributeEnumType) -> Self {
         self.attribute_type = Some(attribute_type);
         self
@@ -72,7 +72,7 @@ impl GetVariableDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -83,7 +83,7 @@ impl GetVariableDataType {
     /// # Returns
     ///
     /// A reference to the component for which the Variable is requested
-    #[must_use] 
+    #[must_use]
     pub fn component(&self) -> &ComponentType {
         &self.component
     }
@@ -107,7 +107,7 @@ impl GetVariableDataType {
     /// # Returns
     ///
     /// A reference to the variable for which the attribute value is requested
-    #[must_use] 
+    #[must_use]
     pub fn variable(&self) -> &VariableType {
         &self.variable
     }
@@ -131,7 +131,7 @@ impl GetVariableDataType {
     /// # Returns
     ///
     /// An optional reference to the attribute type for which the value is requested
-    #[must_use] 
+    #[must_use]
     pub fn attribute_type(&self) -> Option<&AttributeEnumType> {
         self.attribute_type.as_ref()
     }
@@ -155,7 +155,7 @@ impl GetVariableDataType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

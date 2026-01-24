@@ -23,7 +23,7 @@ impl GetCertificateStatusRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(ocsp_request_data: OCSPRequestDataType) -> Self {
         Self {
             ocsp_request_data,
@@ -60,7 +60,7 @@ impl GetCertificateStatusRequest {
     /// # Returns
     ///
     /// The `ocsp_request_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_ocsp_request_data(&self) -> &OCSPRequestDataType {
         &self.ocsp_request_data
     }
@@ -70,7 +70,7 @@ impl GetCertificateStatusRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -82,12 +82,11 @@ impl GetCertificateStatusRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetCertificateStatus` response.
@@ -118,7 +117,7 @@ impl GetCertificateStatusResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GetCertificateStatusEnumType) -> Self {
         Self {
             status,
@@ -181,7 +180,7 @@ impl GetCertificateStatusResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GetCertificateStatusEnumType {
         &self.status
     }
@@ -191,7 +190,7 @@ impl GetCertificateStatusResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -201,7 +200,7 @@ impl GetCertificateStatusResponse {
     /// # Returns
     ///
     /// *(2.1)* `OCSPResponse` class as defined in &lt;&lt;ref-ocpp_security_24, IETF RFC 6960&gt;&gt;. DER encoded (as defined in &lt;&lt;ref-ocpp_security_24, IETF RFC 6960&gt;&gt;), and then base64 encoded. MAY only be omitted when status is not Accepted. + The minimum supported length is 18000. If a longer _ocspResult_ is supported, then the supported length must be communicated in variable OCPPCommCtrlr.FieldLength[ "GetCertificateStatusResponse.ocspResult" ].
-    #[must_use] 
+    #[must_use]
     pub fn get_ocsp_result(&self) -> Option<&String> {
         self.ocsp_result.as_ref()
     }
@@ -211,7 +210,7 @@ impl GetCertificateStatusResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -223,7 +222,7 @@ impl GetCertificateStatusResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -236,7 +235,7 @@ impl GetCertificateStatusResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_ocsp_result(mut self, ocsp_result: String) -> Self {
         self.ocsp_result = Some(ocsp_result);
         self
@@ -249,12 +248,11 @@ impl GetCertificateStatusResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -357,8 +355,8 @@ mod tests {
     fn test_get_certificate_status_request_json_round_trip() {
         let ocsp_request_data = create_test_ocsp_request_data();
         let custom_data = create_test_custom_data();
-        let request = GetCertificateStatusRequest::new(ocsp_request_data)
-            .with_custom_data(custom_data);
+        let request =
+            GetCertificateStatusRequest::new(ocsp_request_data).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).unwrap();
         let parsed: GetCertificateStatusRequest = serde_json::from_str(&json).unwrap();
@@ -421,7 +419,8 @@ mod tests {
         let ocsp_result = "base64_encoded_ocsp_response".to_string();
         let custom_data = create_test_custom_data();
 
-        let mut response = GetCertificateStatusResponse::new(GetCertificateStatusEnumType::Accepted);
+        let mut response =
+            GetCertificateStatusResponse::new(GetCertificateStatusEnumType::Accepted);
         response.set_status(GetCertificateStatusEnumType::Failed);
         response.set_status_info(Some(status_info.clone()));
         response.set_ocsp_result(Some(ocsp_result.clone()));
@@ -443,7 +442,10 @@ mod tests {
             .with_ocsp_result(ocsp_result.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &GetCertificateStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &GetCertificateStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_ocsp_result(), Some(&ocsp_result));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
@@ -469,7 +471,8 @@ mod tests {
     #[test]
     fn test_get_certificate_status_response_validation_long_ocsp_result() {
         let long_ocsp_result = "a".repeat(18001); // Exceeds max length of 18000
-        let mut response = GetCertificateStatusResponse::new(GetCertificateStatusEnumType::Accepted);
+        let mut response =
+            GetCertificateStatusResponse::new(GetCertificateStatusEnumType::Accepted);
         response.set_ocsp_result(Some(long_ocsp_result));
 
         assert!(response.validate().is_err());
@@ -478,7 +481,8 @@ mod tests {
     #[test]
     fn test_get_certificate_status_response_validation_max_ocsp_result() {
         let max_ocsp_result = "a".repeat(18000); // Exactly at max length
-        let mut response = GetCertificateStatusResponse::new(GetCertificateStatusEnumType::Accepted);
+        let mut response =
+            GetCertificateStatusResponse::new(GetCertificateStatusEnumType::Accepted);
         response.set_ocsp_result(Some(max_ocsp_result));
 
         assert!(response.validate().is_ok());

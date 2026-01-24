@@ -110,7 +110,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// A new instance of `ChargingScheduleType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         id: i32,
         charging_rate_unit: ChargingRateUnitEnumType,
@@ -145,7 +145,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_start_schedule(mut self, start_schedule: DateTime<Utc>) -> Self {
         self.start_schedule = Some(start_schedule);
         self
@@ -160,7 +160,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_duration(mut self, duration: i32) -> Self {
         self.duration = Some(duration);
         self
@@ -175,7 +175,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -186,7 +186,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// The ID of the charging schedule
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -210,7 +210,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// An optional reference to the start schedule
-    #[must_use] 
+    #[must_use]
     pub fn start_schedule(&self) -> Option<&DateTime<Utc>> {
         self.start_schedule.as_ref()
     }
@@ -234,7 +234,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// An optional duration of the charging schedule in seconds
-    #[must_use] 
+    #[must_use]
     pub fn duration(&self) -> Option<i32> {
         self.duration
     }
@@ -258,7 +258,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// The unit of measure in which limits and setpoints are expressed
-    #[must_use] 
+    #[must_use]
     pub fn charging_rate_unit(&self) -> &ChargingRateUnitEnumType {
         &self.charging_rate_unit
     }
@@ -285,7 +285,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// A reference to the list of charging periods
-    #[must_use] 
+    #[must_use]
     pub fn charging_schedule_period(&self) -> &Vec<ChargingSchedulePeriodType> {
         &self.charging_schedule_period
     }
@@ -312,7 +312,7 @@ impl ChargingScheduleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

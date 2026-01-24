@@ -23,7 +23,7 @@ impl SetVariableMonitoringRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(set_monitoring_data: Vec<SetMonitoringDataType>) -> Self {
         Self {
             set_monitoring_data,
@@ -38,7 +38,10 @@ impl SetVariableMonitoringRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_set_monitoring_data(&mut self, set_monitoring_data: Vec<SetMonitoringDataType>) -> &mut Self {
+    pub fn set_set_monitoring_data(
+        &mut self,
+        set_monitoring_data: Vec<SetMonitoringDataType>,
+    ) -> &mut Self {
         self.set_monitoring_data = set_monitoring_data;
         self
     }
@@ -60,7 +63,7 @@ impl SetVariableMonitoringRequest {
     /// # Returns
     ///
     /// The `set_monitoring_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_set_monitoring_data(&self) -> &Vec<SetMonitoringDataType> {
         &self.set_monitoring_data
     }
@@ -70,7 +73,7 @@ impl SetVariableMonitoringRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -82,12 +85,11 @@ impl SetVariableMonitoringRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SetVariableMonitoring` response.
@@ -111,7 +113,7 @@ impl SetVariableMonitoringResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(set_monitoring_result: Vec<SetMonitoringResultType>) -> Self {
         Self {
             set_monitoring_result,
@@ -126,7 +128,10 @@ impl SetVariableMonitoringResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_set_monitoring_result(&mut self, set_monitoring_result: Vec<SetMonitoringResultType>) -> &mut Self {
+    pub fn set_set_monitoring_result(
+        &mut self,
+        set_monitoring_result: Vec<SetMonitoringResultType>,
+    ) -> &mut Self {
         self.set_monitoring_result = set_monitoring_result;
         self
     }
@@ -148,7 +153,7 @@ impl SetVariableMonitoringResponse {
     /// # Returns
     ///
     /// The `set_monitoring_result` field
-    #[must_use] 
+    #[must_use]
     pub fn get_set_monitoring_result(&self) -> &Vec<SetMonitoringResultType> {
         &self.set_monitoring_result
     }
@@ -158,7 +163,7 @@ impl SetVariableMonitoringResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -170,12 +175,11 @@ impl SetVariableMonitoringResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -221,8 +225,14 @@ mod tests {
         let request = SetVariableMonitoringRequest::new(monitoring_data.clone());
 
         assert_eq!(request.get_set_monitoring_data().len(), 1);
-        assert_eq!(request.get_set_monitoring_data()[0].component.name, "Connector");
-        assert_eq!(request.get_set_monitoring_data()[0].variable.name, "Current");
+        assert_eq!(
+            request.get_set_monitoring_data()[0].component.name,
+            "Connector"
+        );
+        assert_eq!(
+            request.get_set_monitoring_data()[0].variable.name,
+            "Current"
+        );
         assert_eq!(request.get_custom_data(), None);
     }
 
@@ -232,7 +242,8 @@ mod tests {
         let request = SetVariableMonitoringRequest::new(monitoring_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetVariableMonitoringRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariableMonitoringRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -291,20 +302,17 @@ mod tests {
 
     #[test]
     fn test_set_variable_monitoring_request_with_multiple_data() {
-        let data = vec![
-            create_test_monitoring_data(),
-            {
-                let component = ComponentType::new("EVSE".to_string());
-                let variable = VariableType::new("Power".to_string());
-                SetMonitoringDataType::new(
-                    Decimal::new(500, 0),
-                    MonitorEnumType::LowerThreshold,
-                    3,
-                    component,
-                    variable,
-                )
-            },
-        ];
+        let data = vec![create_test_monitoring_data(), {
+            let component = ComponentType::new("EVSE".to_string());
+            let variable = VariableType::new("Power".to_string());
+            SetMonitoringDataType::new(
+                Decimal::new(500, 0),
+                MonitorEnumType::LowerThreshold,
+                3,
+                component,
+                variable,
+            )
+        }];
 
         let request = SetVariableMonitoringRequest::new(data.clone());
 
@@ -322,8 +330,14 @@ mod tests {
         let response = SetVariableMonitoringResponse::new(monitoring_result.clone());
 
         assert_eq!(response.get_set_monitoring_result().len(), 1);
-        assert_eq!(response.get_set_monitoring_result()[0].component.name, "Connector");
-        assert_eq!(response.get_set_monitoring_result()[0].variable.name, "Current");
+        assert_eq!(
+            response.get_set_monitoring_result()[0].component.name,
+            "Connector"
+        );
+        assert_eq!(
+            response.get_set_monitoring_result()[0].variable.name,
+            "Current"
+        );
         assert_eq!(response.get_custom_data(), None);
     }
 
@@ -333,7 +347,8 @@ mod tests {
         let response = SetVariableMonitoringResponse::new(monitoring_result);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetVariableMonitoringResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariableMonitoringResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -392,27 +407,34 @@ mod tests {
 
     #[test]
     fn test_set_variable_monitoring_response_with_multiple_results() {
-        let results = vec![
-            create_test_monitoring_result(),
-            {
-                let component = ComponentType::new("EVSE".to_string());
-                let variable = VariableType::new("Power".to_string());
-                SetMonitoringResultType::new(
-                    SetMonitoringStatusEnumType::Rejected,
-                    component,
-                    variable,
-                    MonitorEnumType::Delta,
-                    4,
-                ).with_status_info(StatusInfoType::new("Rejected".to_string()))
-            },
-        ];
+        let results = vec![create_test_monitoring_result(), {
+            let component = ComponentType::new("EVSE".to_string());
+            let variable = VariableType::new("Power".to_string());
+            SetMonitoringResultType::new(
+                SetMonitoringStatusEnumType::Rejected,
+                component,
+                variable,
+                MonitorEnumType::Delta,
+                4,
+            )
+            .with_status_info(StatusInfoType::new("Rejected".to_string()))
+        }];
 
         let response = SetVariableMonitoringResponse::new(results.clone());
 
         assert_eq!(response.get_set_monitoring_result().len(), 2);
-        assert_eq!(response.get_set_monitoring_result()[1].component.name, "EVSE");
-        assert_eq!(response.get_set_monitoring_result()[1].variable.name, "Power");
-        assert_eq!(response.get_set_monitoring_result()[1].status, SetMonitoringStatusEnumType::Rejected);
+        assert_eq!(
+            response.get_set_monitoring_result()[1].component.name,
+            "EVSE"
+        );
+        assert_eq!(
+            response.get_set_monitoring_result()[1].variable.name,
+            "Power"
+        );
+        assert_eq!(
+            response.get_set_monitoring_result()[1].status,
+            SetMonitoringStatusEnumType::Rejected
+        );
         assert!(response.validate().is_ok());
     }
 
@@ -420,11 +442,12 @@ mod tests {
     fn test_set_variable_monitoring_request_json_round_trip() {
         let monitoring_data = vec![create_test_monitoring_data()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetVariableMonitoringRequest::new(monitoring_data)
-            .with_custom_data(custom_data);
+        let request =
+            SetVariableMonitoringRequest::new(monitoring_data).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetVariableMonitoringRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariableMonitoringRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -434,11 +457,12 @@ mod tests {
     fn test_set_variable_monitoring_response_json_round_trip() {
         let monitoring_result = vec![create_test_monitoring_result()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = SetVariableMonitoringResponse::new(monitoring_result)
-            .with_custom_data(custom_data);
+        let response =
+            SetVariableMonitoringResponse::new(monitoring_result).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetVariableMonitoringResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariableMonitoringResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -469,7 +493,8 @@ mod tests {
             assert!(request.validate().is_ok());
 
             let json = serde_json::to_string(&request).expect("Failed to serialize");
-            let deserialized: SetVariableMonitoringRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: SetVariableMonitoringRequest =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(request, deserialized);
         }
     }
@@ -500,7 +525,8 @@ mod tests {
             assert!(response.validate().is_ok());
 
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: SetVariableMonitoringResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: SetVariableMonitoringResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -509,8 +535,8 @@ mod tests {
     fn test_set_variable_monitoring_with_custom_data_validation() {
         let monitoring_data = vec![create_test_monitoring_data()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetVariableMonitoringRequest::new(monitoring_data)
-            .with_custom_data(custom_data);
+        let request =
+            SetVariableMonitoringRequest::new(monitoring_data).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
     }
@@ -537,7 +563,10 @@ mod tests {
             .with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_set_monitoring_result()[0].id, Some(123));
-        assert_eq!(response.get_set_monitoring_result()[0].status_info, Some(status_info));
+        assert_eq!(
+            response.get_set_monitoring_result()[0].status_info,
+            Some(status_info)
+        );
         assert_eq!(response.get_custom_data(), Some(&custom_data));
         assert!(response.validate().is_ok());
     }

@@ -38,7 +38,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: PublishFirmwareStatusEnumType) -> Self {
         Self {
             status,
@@ -114,7 +114,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &PublishFirmwareStatusEnumType {
         &self.status
     }
@@ -124,7 +124,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Required if status is Published. Can be multiple URI’s, if the Local Controller supports e.g. HTTP, HTTPS, and FTP.
-    #[must_use] 
+    #[must_use]
     pub fn get_location(&self) -> Option<&Vec<String>> {
         self.location.as_ref()
     }
@@ -134,7 +134,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// The request id that was provided in the `PublishFirmwareRequest` which triggered this action.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> Option<&i32> {
         self.request_id.as_ref()
     }
@@ -144,7 +144,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -154,7 +154,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -166,7 +166,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_location(mut self, location: Vec<String>) -> Self {
         self.location = Some(location);
         self
@@ -179,7 +179,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_request_id(mut self, request_id: i32) -> Self {
         self.request_id = Some(request_id);
         self
@@ -192,7 +192,7 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -205,12 +205,11 @@ impl PublishFirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `PublishFirmwareStatusNotification` response.
@@ -236,11 +235,9 @@ impl PublishFirmwareStatusNotificationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -260,7 +257,7 @@ impl PublishFirmwareStatusNotificationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -272,12 +269,11 @@ impl PublishFirmwareStatusNotificationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -294,11 +290,13 @@ mod tests {
         StatusInfoType::new("Test status info".to_string())
     }
 
-    fn create_test_publish_firmware_status_notification_request() -> PublishFirmwareStatusNotificationRequest {
+    fn create_test_publish_firmware_status_notification_request(
+    ) -> PublishFirmwareStatusNotificationRequest {
         PublishFirmwareStatusNotificationRequest::new(PublishFirmwareStatusEnumType::Published)
     }
 
-    fn create_test_publish_firmware_status_notification_response() -> PublishFirmwareStatusNotificationResponse {
+    fn create_test_publish_firmware_status_notification_response(
+    ) -> PublishFirmwareStatusNotificationResponse {
         PublishFirmwareStatusNotificationResponse::new()
     }
 
@@ -319,7 +317,8 @@ mod tests {
         let request = create_test_publish_firmware_status_notification_request();
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: PublishFirmwareStatusNotificationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: PublishFirmwareStatusNotificationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -356,13 +355,17 @@ mod tests {
     fn test_publish_firmware_status_notification_request_set_methods() {
         let mut request = create_test_publish_firmware_status_notification_request();
         let new_status = PublishFirmwareStatusEnumType::Published;
-        let locations = vec!["https://example.com/fw1.bin".to_string(), "https://example.com/fw2.bin".to_string()];
+        let locations = vec![
+            "https://example.com/fw1.bin".to_string(),
+            "https://example.com/fw2.bin".to_string(),
+        ];
         let status_info = create_test_status_info();
 
-        request.set_status(new_status.clone())
-               .set_location(Some(locations.clone()))
-               .set_request_id(Some(123))
-               .set_status_info(Some(status_info.clone()));
+        request
+            .set_status(new_status.clone())
+            .set_location(Some(locations.clone()))
+            .set_request_id(Some(123))
+            .set_status_info(Some(status_info.clone()));
 
         assert_eq!(request.status, new_status);
         assert_eq!(request.location, Some(locations));
@@ -422,14 +425,14 @@ mod tests {
     #[test]
     fn test_publish_firmware_status_notification_request_boundary_values() {
         // Test minimum valid request ID
-        let request_min = create_test_publish_firmware_status_notification_request()
-            .with_request_id(0);
+        let request_min =
+            create_test_publish_firmware_status_notification_request().with_request_id(0);
         assert!(request_min.validate().is_ok());
         assert_eq!(request_min.request_id, Some(0));
 
         // Test large valid request ID
-        let request_max = create_test_publish_firmware_status_notification_request()
-            .with_request_id(i32::MAX);
+        let request_max =
+            create_test_publish_firmware_status_notification_request().with_request_id(i32::MAX);
         assert!(request_max.validate().is_ok());
         assert_eq!(request_max.request_id, Some(i32::MAX));
     }
@@ -472,7 +475,8 @@ mod tests {
 
         // Test serialization preserves all locations
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: PublishFirmwareStatusNotificationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: PublishFirmwareStatusNotificationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -487,7 +491,8 @@ mod tests {
         let response = create_test_publish_firmware_status_notification_response();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: PublishFirmwareStatusNotificationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: PublishFirmwareStatusNotificationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }

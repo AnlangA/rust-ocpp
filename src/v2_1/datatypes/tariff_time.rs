@@ -34,7 +34,7 @@ impl TariffTimeType {
     /// # Returns
     ///
     /// A new instance of `TariffTimeType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(prices: Vec<TariffTimePriceType>) -> Self {
         Self {
             prices,
@@ -52,7 +52,7 @@ impl TariffTimeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_tax_rates(mut self, tax_rates: Vec<TaxRateType>) -> Self {
         self.tax_rates = Some(tax_rates);
         self
@@ -67,7 +67,7 @@ impl TariffTimeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -78,7 +78,7 @@ impl TariffTimeType {
     /// # Returns
     ///
     /// A reference to the list of time price elements
-    #[must_use] 
+    #[must_use]
     pub fn prices(&self) -> &Vec<TariffTimePriceType> {
         &self.prices
     }
@@ -102,7 +102,7 @@ impl TariffTimeType {
     /// # Returns
     ///
     /// An optional reference to the list of tax rates applicable to time
-    #[must_use] 
+    #[must_use]
     pub fn tax_rates(&self) -> Option<&Vec<TaxRateType>> {
         self.tax_rates.as_ref()
     }
@@ -126,7 +126,7 @@ impl TariffTimeType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

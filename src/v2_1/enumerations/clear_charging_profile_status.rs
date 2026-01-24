@@ -9,4 +9,3 @@ pub enum ClearChargingProfileStatusEnumType {
     Accepted,
     Unknown,
 }
-

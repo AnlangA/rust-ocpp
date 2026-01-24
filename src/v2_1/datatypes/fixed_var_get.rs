@@ -40,7 +40,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// A new instance of `FixedVarGetType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(fixed_var: FixedVarType, id: String, is_superseded: bool, is_default: bool) -> Self {
         Self {
             fixed_var,
@@ -60,7 +60,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -71,7 +71,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// A reference to the fixed `VAr` settings
-    #[must_use] 
+    #[must_use]
     pub fn fixed_var(&self) -> &FixedVarType {
         &self.fixed_var
     }
@@ -95,7 +95,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// A reference to the ID of the setting
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> &str {
         &self.id
     }
@@ -119,7 +119,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// True if this setting is superseded by a higher priority setting
-    #[must_use] 
+    #[must_use]
     pub fn is_superseded(&self) -> bool {
         self.is_superseded
     }
@@ -143,7 +143,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// True if setting is a default control
-    #[must_use] 
+    #[must_use]
     pub fn is_default(&self) -> bool {
         self.is_default
     }
@@ -167,7 +167,7 @@ impl FixedVarGetType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

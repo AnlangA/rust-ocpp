@@ -36,7 +36,7 @@ impl CostType {
     /// # Returns
     ///
     /// A new instance of `CostType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(cost_kind: CostKindEnumType, amount: i32) -> Self {
         Self {
             cost_kind,
@@ -55,7 +55,7 @@ impl CostType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_amount_multiplier(mut self, amount_multiplier: i8) -> Self {
         self.amount_multiplier = Some(amount_multiplier);
         self
@@ -70,7 +70,7 @@ impl CostType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -81,7 +81,7 @@ impl CostType {
     /// # Returns
     ///
     /// The kind of cost referred to in the message element amount
-    #[must_use] 
+    #[must_use]
     pub fn cost_kind(&self) -> &CostKindEnumType {
         &self.cost_kind
     }
@@ -105,7 +105,7 @@ impl CostType {
     /// # Returns
     ///
     /// The estimated or actual cost per kWh
-    #[must_use] 
+    #[must_use]
     pub fn amount(&self) -> i32 {
         self.amount
     }
@@ -129,7 +129,7 @@ impl CostType {
     /// # Returns
     ///
     /// An optional exponent to base 10 (dec) for the amount
-    #[must_use] 
+    #[must_use]
     pub fn amount_multiplier(&self) -> Option<i8> {
         self.amount_multiplier
     }
@@ -153,7 +153,7 @@ impl CostType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

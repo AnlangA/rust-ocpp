@@ -418,7 +418,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// A new instance of `DERChargingParametersType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(ev_supported_der_control: Vec<DERControlEnumType>) -> Self {
         Self {
             ev_supported_der_control,
@@ -475,7 +475,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -486,7 +486,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// A reference to the vector of DER control functions
-    #[must_use] 
+    #[must_use]
     pub fn ev_supported_der_control(&self) -> &Vec<DERControlEnumType> {
         &self.ev_supported_der_control
     }
@@ -513,7 +513,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -537,7 +537,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// An optional reference to the value
-    #[must_use] 
+    #[must_use]
     pub fn ev_over_excited_max_discharge_power(&self) -> Option<&Decimal> {
         self.ev_over_excited_max_discharge_power.as_ref()
     }
@@ -565,7 +565,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_over_excited_max_discharge_power(mut self, value: Decimal) -> Self {
         self.ev_over_excited_max_discharge_power = Some(value);
         self
@@ -576,7 +576,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// An optional reference to the value
-    #[must_use] 
+    #[must_use]
     pub fn ev_over_excited_power_factor(&self) -> Option<&Decimal> {
         self.ev_over_excited_power_factor.as_ref()
     }
@@ -604,7 +604,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_over_excited_power_factor(mut self, value: Decimal) -> Self {
         self.ev_over_excited_power_factor = Some(value);
         self
@@ -615,7 +615,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// An optional reference to the value
-    #[must_use] 
+    #[must_use]
     pub fn ev_under_excited_max_discharge_power(&self) -> Option<&Decimal> {
         self.ev_under_excited_max_discharge_power.as_ref()
     }
@@ -646,7 +646,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_under_excited_max_discharge_power(mut self, value: Decimal) -> Self {
         self.ev_under_excited_max_discharge_power = Some(value);
         self
@@ -657,7 +657,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// An optional reference to the value
-    #[must_use] 
+    #[must_use]
     pub fn ev_under_excited_power_factor(&self) -> Option<&Decimal> {
         self.ev_under_excited_power_factor.as_ref()
     }
@@ -685,7 +685,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_under_excited_power_factor(mut self, value: Decimal) -> Self {
         self.ev_under_excited_power_factor = Some(value);
         self
@@ -696,7 +696,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// An optional reference to the vector of islanding detection methods
-    #[must_use] 
+    #[must_use]
     pub fn ev_islanding_detection_method(&self) -> Option<&Vec<IslandingDetectionEnumType>> {
         self.ev_islanding_detection_method.as_ref()
     }
@@ -727,7 +727,7 @@ impl DERChargingParametersType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_ev_islanding_detection_method(
         mut self,
         value: Vec<IslandingDetectionEnumType>,

@@ -23,7 +23,7 @@ impl SetVariablesRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(set_variable_data: Vec<SetVariableDataType>) -> Self {
         Self {
             set_variable_data,
@@ -38,7 +38,10 @@ impl SetVariablesRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_set_variable_data(&mut self, set_variable_data: Vec<SetVariableDataType>) -> &mut Self {
+    pub fn set_set_variable_data(
+        &mut self,
+        set_variable_data: Vec<SetVariableDataType>,
+    ) -> &mut Self {
         self.set_variable_data = set_variable_data;
         self
     }
@@ -60,7 +63,7 @@ impl SetVariablesRequest {
     /// # Returns
     ///
     /// The `set_variable_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_set_variable_data(&self) -> &Vec<SetVariableDataType> {
         &self.set_variable_data
     }
@@ -70,7 +73,7 @@ impl SetVariablesRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -82,12 +85,11 @@ impl SetVariablesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SetVariables` response.
@@ -111,7 +113,7 @@ impl SetVariablesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(set_variable_result: Vec<SetVariableResultType>) -> Self {
         Self {
             set_variable_result,
@@ -126,7 +128,10 @@ impl SetVariablesResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_set_variable_result(&mut self, set_variable_result: Vec<SetVariableResultType>) -> &mut Self {
+    pub fn set_set_variable_result(
+        &mut self,
+        set_variable_result: Vec<SetVariableResultType>,
+    ) -> &mut Self {
         self.set_variable_result = set_variable_result;
         self
     }
@@ -148,7 +153,7 @@ impl SetVariablesResponse {
     /// # Returns
     ///
     /// The `set_variable_result` field
-    #[must_use] 
+    #[must_use]
     pub fn get_set_variable_result(&self) -> &Vec<SetVariableResultType> {
         &self.set_variable_result
     }
@@ -158,7 +163,7 @@ impl SetVariablesResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -170,12 +175,11 @@ impl SetVariablesResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -208,8 +212,14 @@ mod tests {
         let request = SetVariablesRequest::new(variable_data.clone());
 
         assert_eq!(request.get_set_variable_data().len(), 1);
-        assert_eq!(request.get_set_variable_data()[0].component.name, "Connector");
-        assert_eq!(request.get_set_variable_data()[0].variable.name, "CurrentLimit");
+        assert_eq!(
+            request.get_set_variable_data()[0].component.name,
+            "Connector"
+        );
+        assert_eq!(
+            request.get_set_variable_data()[0].variable.name,
+            "CurrentLimit"
+        );
         assert_eq!(request.get_set_variable_data()[0].attribute_value, "32");
         assert_eq!(request.get_custom_data(), None);
     }
@@ -220,7 +230,8 @@ mod tests {
         let request = SetVariablesRequest::new(variable_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetVariablesRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariablesRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -237,8 +248,7 @@ mod tests {
     fn test_set_variables_request_with_custom_data() {
         let variable_data = vec![create_test_variable_data()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetVariablesRequest::new(variable_data)
-            .with_custom_data(custom_data.clone());
+        let request = SetVariablesRequest::new(variable_data).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -264,8 +274,7 @@ mod tests {
         let variable_data = vec![create_test_variable_data()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = SetVariablesRequest::new(variable_data)
-            .with_custom_data(custom_data.clone());
+        let request = SetVariablesRequest::new(variable_data).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -279,21 +288,21 @@ mod tests {
 
     #[test]
     fn test_set_variables_request_with_multiple_data() {
-        let data = vec![
-            create_test_variable_data(),
-            {
-                let component = ComponentType::new("EVSE".to_string());
-                let variable = VariableType::new("PowerLimit".to_string());
-                SetVariableDataType::new(component, variable, "7400".to_string())
-                    .with_attribute_type(AttributeEnumType::Actual)
-            },
-        ];
+        let data = vec![create_test_variable_data(), {
+            let component = ComponentType::new("EVSE".to_string());
+            let variable = VariableType::new("PowerLimit".to_string());
+            SetVariableDataType::new(component, variable, "7400".to_string())
+                .with_attribute_type(AttributeEnumType::Actual)
+        }];
 
         let request = SetVariablesRequest::new(data.clone());
 
         assert_eq!(request.get_set_variable_data().len(), 2);
         assert_eq!(request.get_set_variable_data()[1].component.name, "EVSE");
-        assert_eq!(request.get_set_variable_data()[1].variable.name, "PowerLimit");
+        assert_eq!(
+            request.get_set_variable_data()[1].variable.name,
+            "PowerLimit"
+        );
         assert_eq!(request.get_set_variable_data()[1].attribute_value, "7400");
         assert!(request.validate().is_ok());
     }
@@ -306,9 +315,18 @@ mod tests {
         let response = SetVariablesResponse::new(variable_result.clone());
 
         assert_eq!(response.get_set_variable_result().len(), 1);
-        assert_eq!(response.get_set_variable_result()[0].component.name, "Connector");
-        assert_eq!(response.get_set_variable_result()[0].variable.name, "CurrentLimit");
-        assert_eq!(response.get_set_variable_result()[0].attribute_status, SetVariableStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_set_variable_result()[0].component.name,
+            "Connector"
+        );
+        assert_eq!(
+            response.get_set_variable_result()[0].variable.name,
+            "CurrentLimit"
+        );
+        assert_eq!(
+            response.get_set_variable_result()[0].attribute_status,
+            SetVariableStatusEnumType::Accepted
+        );
         assert_eq!(response.get_custom_data(), None);
     }
 
@@ -318,7 +336,8 @@ mod tests {
         let response = SetVariablesResponse::new(variable_result);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetVariablesResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariablesResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -335,8 +354,8 @@ mod tests {
     fn test_set_variables_response_with_custom_data() {
         let variable_result = vec![create_test_variable_result()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = SetVariablesResponse::new(variable_result)
-            .with_custom_data(custom_data.clone());
+        let response =
+            SetVariablesResponse::new(variable_result).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -362,8 +381,8 @@ mod tests {
         let variable_result = vec![create_test_variable_result()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = SetVariablesResponse::new(variable_result)
-            .with_custom_data(custom_data.clone());
+        let response =
+            SetVariablesResponse::new(variable_result).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -377,23 +396,26 @@ mod tests {
 
     #[test]
     fn test_set_variables_response_with_multiple_results() {
-        let results = vec![
-            create_test_variable_result(),
-            {
-                let component = ComponentType::new("EVSE".to_string());
-                let variable = VariableType::new("PowerLimit".to_string());
-                SetVariableResultType::new(component, variable, SetVariableStatusEnumType::Rejected)
-                    .with_attribute_type(AttributeEnumType::Actual)
-                    .with_attribute_status_info(StatusInfoType::new("Rejected".to_string()))
-            },
-        ];
+        let results = vec![create_test_variable_result(), {
+            let component = ComponentType::new("EVSE".to_string());
+            let variable = VariableType::new("PowerLimit".to_string());
+            SetVariableResultType::new(component, variable, SetVariableStatusEnumType::Rejected)
+                .with_attribute_type(AttributeEnumType::Actual)
+                .with_attribute_status_info(StatusInfoType::new("Rejected".to_string()))
+        }];
 
         let response = SetVariablesResponse::new(results.clone());
 
         assert_eq!(response.get_set_variable_result().len(), 2);
         assert_eq!(response.get_set_variable_result()[1].component.name, "EVSE");
-        assert_eq!(response.get_set_variable_result()[1].variable.name, "PowerLimit");
-        assert_eq!(response.get_set_variable_result()[1].attribute_status, SetVariableStatusEnumType::Rejected);
+        assert_eq!(
+            response.get_set_variable_result()[1].variable.name,
+            "PowerLimit"
+        );
+        assert_eq!(
+            response.get_set_variable_result()[1].attribute_status,
+            SetVariableStatusEnumType::Rejected
+        );
         assert!(response.validate().is_ok());
     }
 
@@ -401,11 +423,11 @@ mod tests {
     fn test_set_variables_request_json_round_trip() {
         let variable_data = vec![create_test_variable_data()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetVariablesRequest::new(variable_data)
-            .with_custom_data(custom_data);
+        let request = SetVariablesRequest::new(variable_data).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetVariablesRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariablesRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -415,11 +437,11 @@ mod tests {
     fn test_set_variables_response_json_round_trip() {
         let variable_result = vec![create_test_variable_result()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = SetVariablesResponse::new(variable_result)
-            .with_custom_data(custom_data);
+        let response = SetVariablesResponse::new(variable_result).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetVariablesResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariablesResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -437,14 +459,16 @@ mod tests {
         for attribute_type in attribute_types {
             let component = ComponentType::new("TestComponent".to_string());
             let variable = VariableType::new("TestVariable".to_string());
-            let variable_data = SetVariableDataType::new(component, variable, "test_value".to_string())
-                .with_attribute_type(attribute_type.clone());
+            let variable_data =
+                SetVariableDataType::new(component, variable, "test_value".to_string())
+                    .with_attribute_type(attribute_type.clone());
 
             let request = SetVariablesRequest::new(vec![variable_data]);
             assert!(request.validate().is_ok());
 
             let json = serde_json::to_string(&request).expect("Failed to serialize");
-            let deserialized: SetVariablesRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: SetVariablesRequest =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(request, deserialized);
         }
     }
@@ -469,7 +493,8 @@ mod tests {
             assert!(response.validate().is_ok());
 
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: SetVariablesResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: SetVariablesResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -484,7 +509,8 @@ mod tests {
         assert!(request.validate().is_ok());
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetVariablesRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariablesRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
         assert_eq!(deserialized.set_variable_data[0].attribute_value, "");
     }
@@ -493,8 +519,7 @@ mod tests {
     fn test_set_variables_with_custom_data_validation() {
         let variable_data = vec![create_test_variable_data()];
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = SetVariablesRequest::new(variable_data)
-            .with_custom_data(custom_data);
+        let request = SetVariablesRequest::new(variable_data).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
     }
@@ -506,16 +531,23 @@ mod tests {
         let status_info = StatusInfoType::new("Success".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let variable_result = SetVariableResultType::new(component, variable, SetVariableStatusEnumType::Accepted)
-            .with_attribute_type(AttributeEnumType::Actual)
-            .with_attribute_status_info(status_info.clone())
-            .with_custom_data(custom_data.clone());
+        let variable_result =
+            SetVariableResultType::new(component, variable, SetVariableStatusEnumType::Accepted)
+                .with_attribute_type(AttributeEnumType::Actual)
+                .with_attribute_status_info(status_info.clone())
+                .with_custom_data(custom_data.clone());
 
-        let response = SetVariablesResponse::new(vec![variable_result])
-            .with_custom_data(custom_data.clone());
+        let response =
+            SetVariablesResponse::new(vec![variable_result]).with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_set_variable_result()[0].attribute_type, Some(AttributeEnumType::Actual));
-        assert_eq!(response.get_set_variable_result()[0].attribute_status_info, Some(status_info));
+        assert_eq!(
+            response.get_set_variable_result()[0].attribute_type,
+            Some(AttributeEnumType::Actual)
+        );
+        assert_eq!(
+            response.get_set_variable_result()[0].attribute_status_info,
+            Some(status_info)
+        );
         assert_eq!(response.get_custom_data(), Some(&custom_data));
         assert!(response.validate().is_ok());
     }
@@ -531,8 +563,12 @@ mod tests {
         assert!(request.validate().is_ok());
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetVariablesRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetVariablesRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
-        assert_eq!(deserialized.set_variable_data[0].attribute_value, large_value);
+        assert_eq!(
+            deserialized.set_variable_data[0].attribute_value,
+            large_value
+        );
     }
 }

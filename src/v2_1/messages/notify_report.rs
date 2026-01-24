@@ -42,7 +42,7 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32, generated_at: DateTime<Utc>, seq_no: i32) -> Self {
         Self {
             request_id,
@@ -131,7 +131,7 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// The id of the `GetReportRequest`  or `GetBaseReportRequest` that requested this report
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -141,7 +141,7 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// Timestamp of the moment this message was generated at the Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_generated_at(&self) -> &DateTime<Utc> {
         &self.generated_at
     }
@@ -151,7 +151,7 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// The `report_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_report_data(&self) -> Option<&Vec<ReportDataType>> {
         self.report_data.as_ref()
     }
@@ -161,7 +161,7 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// “to be continued” indicator. Indicates whether another part of the report follows in an upcoming notifyReportRequest message. Default value when omitted is false.
-    #[must_use] 
+    #[must_use]
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
@@ -171,7 +171,7 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// Sequence number of this message. First message starts at 0.
-    #[must_use] 
+    #[must_use]
     pub fn get_seq_no(&self) -> &i32 {
         &self.seq_no
     }
@@ -181,7 +181,7 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -193,7 +193,7 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_report_data(mut self, report_data: Vec<ReportDataType>) -> Self {
         self.report_data = Some(report_data);
         self
@@ -206,7 +206,7 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
@@ -219,12 +219,11 @@ impl NotifyReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyReport` response.
@@ -250,11 +249,9 @@ impl NotifyReportResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -274,7 +271,7 @@ impl NotifyReportResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -286,18 +283,17 @@ impl NotifyReportResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::v2_1::datatypes::{ComponentType, VariableType, VariableAttributeType};
+    use crate::v2_1::datatypes::{ComponentType, VariableAttributeType, VariableType};
     use crate::v2_1::enumerations::{AttributeEnumType, MutabilityEnumType};
     use chrono::Utc;
     use serde_json;
@@ -349,7 +345,8 @@ mod tests {
         let request = create_test_notify_report_request();
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: NotifyReportRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: NotifyReportRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -399,11 +396,12 @@ mod tests {
         let new_seq_no = 10;
         let report_data = vec![create_test_report_data()];
 
-        request.set_request_id(new_request_id)
-               .set_generated_at(new_generated_at)
-               .set_seq_no(new_seq_no)
-               .set_report_data(Some(report_data.clone()))
-               .set_tbc(Some(true));
+        request
+            .set_request_id(new_request_id)
+            .set_generated_at(new_generated_at)
+            .set_seq_no(new_seq_no)
+            .set_report_data(Some(report_data.clone()))
+            .set_tbc(Some(true));
 
         assert_eq!(request.request_id, new_request_id);
         assert_eq!(request.generated_at, new_generated_at);
@@ -484,7 +482,8 @@ mod tests {
         let response = create_test_notify_report_response();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: NotifyReportResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: NotifyReportResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -513,8 +512,7 @@ mod tests {
     #[test]
     fn test_notify_report_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = create_test_notify_report_response()
-            .with_custom_data(custom_data.clone());
+        let response = create_test_notify_report_response().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
         assert_eq!(response.get_custom_data(), response.custom_data.as_ref());
@@ -566,14 +564,14 @@ mod tests {
             },
         ];
 
-        let request = create_test_notify_report_request()
-            .with_report_data(report_data.clone());
+        let request = create_test_notify_report_request().with_report_data(report_data.clone());
 
         assert_eq!(request.report_data, Some(report_data));
         assert!(request.validate().is_ok());
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: NotifyReportRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: NotifyReportRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 

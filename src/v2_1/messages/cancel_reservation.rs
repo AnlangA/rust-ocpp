@@ -24,7 +24,7 @@ impl CancelReservationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(reservation_id: i32) -> Self {
         Self {
             reservation_id,
@@ -61,7 +61,7 @@ impl CancelReservationRequest {
     /// # Returns
     ///
     /// Id of the reservation to cancel.
-    #[must_use] 
+    #[must_use]
     pub fn get_reservation_id(&self) -> &i32 {
         &self.reservation_id
     }
@@ -71,7 +71,7 @@ impl CancelReservationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -83,12 +83,11 @@ impl CancelReservationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `CancelReservation` response.
@@ -117,7 +116,7 @@ impl CancelReservationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: CancelReservationStatusEnumType) -> Self {
         Self {
             status,
@@ -167,7 +166,7 @@ impl CancelReservationResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &CancelReservationStatusEnumType {
         &self.status
     }
@@ -177,7 +176,7 @@ impl CancelReservationResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -187,7 +186,7 @@ impl CancelReservationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -199,7 +198,7 @@ impl CancelReservationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -212,12 +211,11 @@ impl CancelReservationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -261,7 +259,8 @@ mod tests {
         let request = CancelReservationRequest::new(reservation_id);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CancelReservationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CancelReservationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -271,8 +270,8 @@ mod tests {
         let reservation_id = 123;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = CancelReservationRequest::new(reservation_id)
-            .with_custom_data(custom_data.clone());
+        let request =
+            CancelReservationRequest::new(reservation_id).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -330,7 +329,8 @@ mod tests {
         let response = CancelReservationResponse::new(status);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: CancelReservationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CancelReservationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -340,8 +340,7 @@ mod tests {
         let status = CancelReservationStatusEnumType::Accepted;
         let status_info = create_test_status_info();
 
-        let response = CancelReservationResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response = CancelReservationResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
     }
@@ -351,8 +350,7 @@ mod tests {
         let status = CancelReservationStatusEnumType::Accepted;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = CancelReservationResponse::new(status)
-            .with_custom_data(custom_data.clone());
+        let response = CancelReservationResponse::new(status).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -410,11 +408,11 @@ mod tests {
         let reservation_id = 123;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let request = CancelReservationRequest::new(reservation_id)
-            .with_custom_data(custom_data);
+        let request = CancelReservationRequest::new(reservation_id).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CancelReservationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CancelReservationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -431,7 +429,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: CancelReservationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CancelReservationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -443,15 +442,15 @@ mod tests {
         let status_info = StatusInfoType::new("NoReservation".to_string())
             .with_additional_info("No active reservation found with the given ID".to_string());
 
-        let response = CancelReservationResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response = CancelReservationResponse::new(status).with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert!(response.validate().is_ok());
 
         // Test serialization
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: CancelReservationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CancelReservationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
@@ -460,8 +459,8 @@ mod tests {
         let reservation_id = 123;
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut request = CancelReservationRequest::new(reservation_id)
-            .with_custom_data(custom_data);
+        let mut request =
+            CancelReservationRequest::new(reservation_id).with_custom_data(custom_data);
 
         // Verify custom data is set
         assert!(request.get_custom_data().is_some());
@@ -501,19 +500,22 @@ mod tests {
         let custom_data = CustomDataType::new("ReservationVendor".to_string())
             .with_property("station_id".to_string(), json!("STATION_001"))
             .with_property("operator".to_string(), json!("John Doe"))
-            .with_property("metadata".to_string(), json!({
-                "cancel_reason": "user_request",
-                "timestamp": "2023-12-25T10:30:00Z"
-            }));
+            .with_property(
+                "metadata".to_string(),
+                json!({
+                    "cancel_reason": "user_request",
+                    "timestamp": "2023-12-25T10:30:00Z"
+                }),
+            );
 
-        let request = CancelReservationRequest::new(reservation_id)
-            .with_custom_data(custom_data);
+        let request = CancelReservationRequest::new(reservation_id).with_custom_data(custom_data);
 
         assert!(request.validate().is_ok());
 
         // Test serialization with complex custom data
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CancelReservationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CancelReservationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -532,19 +534,31 @@ mod tests {
     #[test]
     fn test_cancel_reservation_response_status_semantics() {
         // Test Accepted status - reservation was successfully cancelled
-        let accepted_response = CancelReservationResponse::new(CancelReservationStatusEnumType::Accepted)
-            .with_status_info(StatusInfoType::new("Success".to_string())
-                .with_additional_info("Reservation cancelled successfully".to_string()));
+        let accepted_response =
+            CancelReservationResponse::new(CancelReservationStatusEnumType::Accepted)
+                .with_status_info(
+                    StatusInfoType::new("Success".to_string())
+                        .with_additional_info("Reservation cancelled successfully".to_string()),
+                );
 
-        assert_eq!(accepted_response.get_status(), &CancelReservationStatusEnumType::Accepted);
+        assert_eq!(
+            accepted_response.get_status(),
+            &CancelReservationStatusEnumType::Accepted
+        );
         assert!(accepted_response.validate().is_ok());
 
         // Test Rejected status - reservation could not be cancelled
-        let rejected_response = CancelReservationResponse::new(CancelReservationStatusEnumType::Rejected)
-            .with_status_info(StatusInfoType::new("NoReservation".to_string())
-                .with_additional_info("No active reservation found".to_string()));
+        let rejected_response =
+            CancelReservationResponse::new(CancelReservationStatusEnumType::Rejected)
+                .with_status_info(
+                    StatusInfoType::new("NoReservation".to_string())
+                        .with_additional_info("No active reservation found".to_string()),
+                );
 
-        assert_eq!(rejected_response.get_status(), &CancelReservationStatusEnumType::Rejected);
+        assert_eq!(
+            rejected_response.get_status(),
+            &CancelReservationStatusEnumType::Rejected
+        );
         assert!(rejected_response.validate().is_ok());
     }
 
@@ -559,7 +573,8 @@ mod tests {
 
         // Test serialization of minimal request
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: CancelReservationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CancelReservationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -568,14 +583,18 @@ mod tests {
         // Test minimal valid response (only required fields)
         let response = CancelReservationResponse::new(CancelReservationStatusEnumType::Accepted);
 
-        assert_eq!(response.get_status(), &CancelReservationStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &CancelReservationStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), None);
         assert_eq!(response.get_custom_data(), None);
         assert!(response.validate().is_ok());
 
         // Test serialization of minimal response
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: CancelReservationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: CancelReservationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 }

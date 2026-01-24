@@ -42,7 +42,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(control_type: DERControlEnumType, timestamp: DateTime<Utc>) -> Self {
         Self {
             control_type,
@@ -73,7 +73,10 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_grid_event_fault(&mut self, grid_event_fault: Option<GridEventFaultEnumType>) -> &mut Self {
+    pub fn set_grid_event_fault(
+        &mut self,
+        grid_event_fault: Option<GridEventFaultEnumType>,
+    ) -> &mut Self {
         self.grid_event_fault = grid_event_fault;
         self
     }
@@ -131,7 +134,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// The `control_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_control_type(&self) -> &DERControlEnumType {
         &self.control_type
     }
@@ -141,7 +144,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// The `grid_event_fault` field
-    #[must_use] 
+    #[must_use]
     pub fn get_grid_event_fault(&self) -> Option<&GridEventFaultEnumType> {
         self.grid_event_fault.as_ref()
     }
@@ -151,7 +154,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// True when error condition has ended. Absent or false when alarm has started.
-    #[must_use] 
+    #[must_use]
     pub fn get_alarm_ended(&self) -> Option<&bool> {
         self.alarm_ended.as_ref()
     }
@@ -161,7 +164,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// Time of start or end of alarm.
-    #[must_use] 
+    #[must_use]
     pub fn get_timestamp(&self) -> &DateTime<Utc> {
         &self.timestamp
     }
@@ -171,7 +174,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// Optional info provided by EV.
-    #[must_use] 
+    #[must_use]
     pub fn get_extra_info(&self) -> Option<&String> {
         self.extra_info.as_ref()
     }
@@ -181,7 +184,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -193,7 +196,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_grid_event_fault(mut self, grid_event_fault: GridEventFaultEnumType) -> Self {
         self.grid_event_fault = Some(grid_event_fault);
         self
@@ -206,7 +209,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_alarm_ended(mut self, alarm_ended: bool) -> Self {
         self.alarm_ended = Some(alarm_ended);
         self
@@ -219,7 +222,7 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_extra_info(mut self, extra_info: String) -> Self {
         self.extra_info = Some(extra_info);
         self
@@ -232,12 +235,11 @@ impl NotifyDERAlarmRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyDERAlarm` response.
@@ -263,11 +265,9 @@ impl NotifyDERAlarmResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -287,7 +287,7 @@ impl NotifyDERAlarmResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -299,12 +299,11 @@ impl NotifyDERAlarmResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -363,8 +362,8 @@ mod tests {
         let timestamp = Utc::now();
         let extra_info = "x".repeat(201); // Exceeds max length of 200
 
-        let request = NotifyDERAlarmRequest::new(control_type, timestamp)
-            .with_extra_info(extra_info);
+        let request =
+            NotifyDERAlarmRequest::new(control_type, timestamp).with_extra_info(extra_info);
 
         assert!(request.validate().is_err());
     }
@@ -530,8 +529,8 @@ mod tests {
 
         // Test with maximum valid extra_info length
         let extra_info = "x".repeat(200); // Maximum allowed length
-        let request = NotifyDERAlarmRequest::new(control_type, timestamp)
-            .with_extra_info(extra_info.clone());
+        let request =
+            NotifyDERAlarmRequest::new(control_type, timestamp).with_extra_info(extra_info.clone());
 
         assert_eq!(request.get_extra_info(), Some(&extra_info));
         assert!(request.validate().is_ok());
@@ -565,8 +564,7 @@ mod tests {
     #[test]
     fn test_notify_der_alarm_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = NotifyDERAlarmResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyDERAlarmResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -585,8 +583,7 @@ mod tests {
     fn test_notify_der_alarm_response_builder_pattern() {
         let custom_data = create_test_custom_data();
 
-        let response = NotifyDERAlarmResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyDERAlarmResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -594,8 +591,7 @@ mod tests {
     #[test]
     fn test_notify_der_alarm_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = NotifyDERAlarmResponse::new()
-            .with_custom_data(custom_data);
+        let response = NotifyDERAlarmResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: NotifyDERAlarmResponse =

@@ -47,7 +47,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A new instance of `EVAbsolutePriceScheduleType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         time_anchor: DateTime<Utc>,
         currency: String,
@@ -72,7 +72,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -83,7 +83,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// The starting point in time of the `EVEnergyOffer`
-    #[must_use] 
+    #[must_use]
     pub fn time_anchor(&self) -> &DateTime<Utc> {
         &self.time_anchor
     }
@@ -107,7 +107,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// The currency code according to ISO 4217
-    #[must_use] 
+    #[must_use]
     pub fn currency(&self) -> &str {
         &self.currency
     }
@@ -131,7 +131,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// The ISO 15118-20 URN of price algorithm
-    #[must_use] 
+    #[must_use]
     pub fn price_algorithm(&self) -> &str {
         &self.price_algorithm
     }
@@ -155,7 +155,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// A reference to the list of price schedule entries
-    #[must_use] 
+    #[must_use]
     pub fn ev_absolute_price_schedule_entries(&self) -> &Vec<EVAbsolutePriceScheduleEntryType> {
         &self.ev_absolute_price_schedule_entries
     }
@@ -182,7 +182,7 @@ impl EVAbsolutePriceScheduleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

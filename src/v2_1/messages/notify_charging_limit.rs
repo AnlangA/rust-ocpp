@@ -34,7 +34,7 @@ impl NotifyChargingLimitRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(charging_limit: ChargingLimitType) -> Self {
         Self {
             charging_schedule: None,
@@ -51,7 +51,10 @@ impl NotifyChargingLimitRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_charging_schedule(&mut self, charging_schedule: Option<Vec<ChargingScheduleType>>) -> &mut Self {
+    pub fn set_charging_schedule(
+        &mut self,
+        charging_schedule: Option<Vec<ChargingScheduleType>>,
+    ) -> &mut Self {
         self.charging_schedule = charging_schedule;
         self
     }
@@ -97,7 +100,7 @@ impl NotifyChargingLimitRequest {
     /// # Returns
     ///
     /// The `charging_schedule` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_schedule(&self) -> Option<&Vec<ChargingScheduleType>> {
         self.charging_schedule.as_ref()
     }
@@ -107,7 +110,7 @@ impl NotifyChargingLimitRequest {
     /// # Returns
     ///
     /// The EVSE to which the charging limit is set. If absent or when zero, it applies to the entire Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -117,7 +120,7 @@ impl NotifyChargingLimitRequest {
     /// # Returns
     ///
     /// The `charging_limit` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_limit(&self) -> &ChargingLimitType {
         &self.charging_limit
     }
@@ -127,7 +130,7 @@ impl NotifyChargingLimitRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -139,7 +142,7 @@ impl NotifyChargingLimitRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_charging_schedule(mut self, charging_schedule: Vec<ChargingScheduleType>) -> Self {
         self.charging_schedule = Some(charging_schedule);
         self
@@ -152,7 +155,7 @@ impl NotifyChargingLimitRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -165,12 +168,11 @@ impl NotifyChargingLimitRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyChargingLimit` response.
@@ -196,11 +198,9 @@ impl NotifyChargingLimitResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -220,7 +220,7 @@ impl NotifyChargingLimitResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -232,20 +232,19 @@ impl NotifyChargingLimitResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::v2_1::datatypes::ChargingSchedulePeriodType;
-    use crate::v2_1::enumerations::{ChargingLimitSourceEnumType, ChargingRateUnitEnumType};
     use crate::v2_1::enumerations::charging_limit_source::StandardChargingLimitSourceEnumType;
+    use crate::v2_1::enumerations::{ChargingLimitSourceEnumType, ChargingRateUnitEnumType};
     use serde_json;
 
     fn create_test_custom_data() -> CustomDataType {
@@ -253,7 +252,9 @@ mod tests {
     }
 
     fn create_test_charging_limit() -> ChargingLimitType {
-        ChargingLimitType::new(ChargingLimitSourceEnumType::Standard(StandardChargingLimitSourceEnumType::EMS))
+        ChargingLimitType::new(ChargingLimitSourceEnumType::Standard(
+            StandardChargingLimitSourceEnumType::EMS,
+        ))
     }
 
     fn create_test_charging_schedule_period() -> ChargingSchedulePeriodType {
@@ -294,8 +295,7 @@ mod tests {
     #[test]
     fn test_notify_charging_limit_request_with_evse_id() {
         let charging_limit = create_test_charging_limit();
-        let request = NotifyChargingLimitRequest::new(charging_limit.clone())
-            .with_evse_id(1);
+        let request = NotifyChargingLimitRequest::new(charging_limit.clone()).with_evse_id(1);
 
         assert_eq!(request.charging_schedule, None);
         assert_eq!(request.evse_id, Some(1));
@@ -306,8 +306,7 @@ mod tests {
     #[test]
     fn test_notify_charging_limit_request_with_evse_id_zero() {
         let charging_limit = create_test_charging_limit();
-        let request = NotifyChargingLimitRequest::new(charging_limit.clone())
-            .with_evse_id(0);
+        let request = NotifyChargingLimitRequest::new(charging_limit.clone()).with_evse_id(0);
 
         assert_eq!(request.charging_schedule, None);
         assert_eq!(request.evse_id, Some(0));
@@ -331,7 +330,9 @@ mod tests {
     #[test]
     fn test_notify_charging_limit_request_setters() {
         let charging_limit1 = create_test_charging_limit();
-        let charging_limit2 = ChargingLimitType::new(ChargingLimitSourceEnumType::Standard(StandardChargingLimitSourceEnumType::SO));
+        let charging_limit2 = ChargingLimitType::new(ChargingLimitSourceEnumType::Standard(
+            StandardChargingLimitSourceEnumType::SO,
+        ));
         let charging_schedule = vec![create_test_charging_schedule()];
         let custom_data = create_test_custom_data();
 
@@ -461,8 +462,7 @@ mod tests {
     #[test]
     fn test_notify_charging_limit_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = NotifyChargingLimitResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyChargingLimitResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -480,8 +480,7 @@ mod tests {
     #[test]
     fn test_notify_charging_limit_response_getters() {
         let custom_data = create_test_custom_data();
-        let response = NotifyChargingLimitResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = NotifyChargingLimitResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -506,8 +505,7 @@ mod tests {
     #[test]
     fn test_notify_charging_limit_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = NotifyChargingLimitResponse::new()
-            .with_custom_data(custom_data);
+        let response = NotifyChargingLimitResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: NotifyChargingLimitResponse = serde_json::from_str(&json).unwrap();
@@ -519,8 +517,7 @@ mod tests {
     #[test]
     fn test_notify_charging_limit_response_clear_custom_data() {
         let custom_data = create_test_custom_data();
-        let mut response = NotifyChargingLimitResponse::new()
-            .with_custom_data(custom_data);
+        let mut response = NotifyChargingLimitResponse::new().with_custom_data(custom_data);
 
         assert!(response.custom_data.is_some());
 

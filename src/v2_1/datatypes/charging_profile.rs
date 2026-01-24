@@ -101,7 +101,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// A new instance of `ChargingProfileType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         id: i32,
         stack_level: i32,
@@ -137,7 +137,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_recurrency_kind(mut self, recurrency_kind: RecurrencyKindEnumType) -> Self {
         self.recurrency_kind = Some(recurrency_kind);
         self
@@ -152,7 +152,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_valid_from(mut self, valid_from: DateTime<Utc>) -> Self {
         self.valid_from = Some(valid_from);
         self
@@ -167,7 +167,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_valid_to(mut self, valid_to: DateTime<Utc>) -> Self {
         self.valid_to = Some(valid_to);
         self
@@ -182,7 +182,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_transaction_id(mut self, transaction_id: String) -> Self {
         self.transaction_id = Some(transaction_id);
         self
@@ -197,7 +197,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -208,7 +208,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// The ID of the charging profile
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -232,7 +232,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// The stack level value
-    #[must_use] 
+    #[must_use]
     pub fn stack_level(&self) -> i32 {
         self.stack_level
     }
@@ -256,7 +256,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// The purpose of the schedule transferred by this profile
-    #[must_use] 
+    #[must_use]
     pub fn charging_profile_purpose(&self) -> &ChargingProfilePurposeEnumType {
         &self.charging_profile_purpose
     }
@@ -283,7 +283,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// The kind of schedule
-    #[must_use] 
+    #[must_use]
     pub fn charging_profile_kind(&self) -> &ChargingProfileKindEnumType {
         &self.charging_profile_kind
     }
@@ -310,7 +310,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the recurrency kind
-    #[must_use] 
+    #[must_use]
     pub fn recurrency_kind(&self) -> Option<&RecurrencyKindEnumType> {
         self.recurrency_kind.as_ref()
     }
@@ -337,7 +337,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the time at which the profile starts to be valid
-    #[must_use] 
+    #[must_use]
     pub fn valid_from(&self) -> Option<&DateTime<Utc>> {
         self.valid_from.as_ref()
     }
@@ -361,7 +361,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the time at which the profile stops to be valid
-    #[must_use] 
+    #[must_use]
     pub fn valid_to(&self) -> Option<&DateTime<Utc>> {
         self.valid_to.as_ref()
     }
@@ -385,7 +385,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// A reference to the charging schedule
-    #[must_use] 
+    #[must_use]
     pub fn charging_schedule(&self) -> &Vec<ChargingScheduleType> {
         &self.charging_schedule
     }
@@ -412,7 +412,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the transaction ID
-    #[must_use] 
+    #[must_use]
     pub fn transaction_id(&self) -> Option<&String> {
         self.transaction_id.as_ref()
     }
@@ -436,7 +436,7 @@ impl ChargingProfileType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

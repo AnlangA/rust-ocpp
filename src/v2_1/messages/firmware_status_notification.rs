@@ -33,7 +33,7 @@ impl FirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: FirmwareStatusEnumType) -> Self {
         Self {
             status,
@@ -96,7 +96,7 @@ impl FirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &FirmwareStatusEnumType {
         &self.status
     }
@@ -106,7 +106,7 @@ impl FirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// The request id that was provided in the `UpdateFirmwareRequest` that started this firmware update. This field is mandatory, unless the message was triggered by a `TriggerMessageRequest` AND there is no firmware update ongoing.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> Option<&i32> {
         self.request_id.as_ref()
     }
@@ -116,7 +116,7 @@ impl FirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -126,7 +126,7 @@ impl FirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -138,7 +138,7 @@ impl FirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_request_id(mut self, request_id: i32) -> Self {
         self.request_id = Some(request_id);
         self
@@ -151,7 +151,7 @@ impl FirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -164,12 +164,11 @@ impl FirmwareStatusNotificationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `FirmwareStatusNotification` response.
@@ -195,11 +194,9 @@ impl FirmwareStatusNotificationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -219,7 +216,7 @@ impl FirmwareStatusNotificationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -231,12 +228,11 @@ impl FirmwareStatusNotificationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -278,8 +274,9 @@ mod tests {
     #[test]
     fn test_firmware_status_notification_request_with_status_info() {
         let status_info = create_test_status_info();
-        let request = FirmwareStatusNotificationRequest::new(FirmwareStatusEnumType::InstallationFailed)
-            .with_status_info(status_info.clone());
+        let request =
+            FirmwareStatusNotificationRequest::new(FirmwareStatusEnumType::InstallationFailed)
+                .with_status_info(status_info.clone());
 
         assert_eq!(request.status, FirmwareStatusEnumType::InstallationFailed);
         assert_eq!(request.request_id, None);
@@ -320,12 +317,16 @@ mod tests {
     fn test_firmware_status_notification_request_getters() {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
-        let request = FirmwareStatusNotificationRequest::new(FirmwareStatusEnumType::SignatureVerified)
-            .with_request_id(99999)
-            .with_status_info(status_info.clone())
-            .with_custom_data(custom_data.clone());
+        let request =
+            FirmwareStatusNotificationRequest::new(FirmwareStatusEnumType::SignatureVerified)
+                .with_request_id(99999)
+                .with_status_info(status_info.clone())
+                .with_custom_data(custom_data.clone());
 
-        assert_eq!(request.get_status(), &FirmwareStatusEnumType::SignatureVerified);
+        assert_eq!(
+            request.get_status(),
+            &FirmwareStatusEnumType::SignatureVerified
+        );
         assert_eq!(request.get_request_id(), Some(&99999));
         assert_eq!(request.get_status_info(), Some(&status_info));
         assert_eq!(request.get_custom_data(), Some(&custom_data));
@@ -333,8 +334,9 @@ mod tests {
 
     #[test]
     fn test_firmware_status_notification_request_serialization() {
-        let request = FirmwareStatusNotificationRequest::new(FirmwareStatusEnumType::DownloadFailed)
-            .with_request_id(123);
+        let request =
+            FirmwareStatusNotificationRequest::new(FirmwareStatusEnumType::DownloadFailed)
+                .with_request_id(123);
 
         let json = serde_json::to_string(&request).unwrap();
         let parsed: FirmwareStatusNotificationRequest = serde_json::from_str(&json).unwrap();
@@ -369,7 +371,8 @@ mod tests {
 
     #[test]
     fn test_firmware_status_notification_request_validation_negative_request_id() {
-        let mut request = FirmwareStatusNotificationRequest::new(FirmwareStatusEnumType::Downloaded);
+        let mut request =
+            FirmwareStatusNotificationRequest::new(FirmwareStatusEnumType::Downloaded);
         request.set_request_id(Some(-1));
 
         assert!(request.validate().is_err());
@@ -429,8 +432,8 @@ mod tests {
     #[test]
     fn test_firmware_status_notification_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = FirmwareStatusNotificationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response =
+            FirmwareStatusNotificationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -448,8 +451,8 @@ mod tests {
     #[test]
     fn test_firmware_status_notification_response_getters() {
         let custom_data = create_test_custom_data();
-        let response = FirmwareStatusNotificationResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response =
+            FirmwareStatusNotificationResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -486,8 +489,7 @@ mod tests {
     #[test]
     fn test_firmware_status_notification_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = FirmwareStatusNotificationResponse::new()
-            .with_custom_data(custom_data);
+        let response = FirmwareStatusNotificationResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: FirmwareStatusNotificationResponse = serde_json::from_str(&json).unwrap();

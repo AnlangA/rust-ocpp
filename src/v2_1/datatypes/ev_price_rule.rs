@@ -33,7 +33,7 @@ impl EVPriceRuleType {
     /// # Returns
     ///
     /// A new instance of `EVPriceRuleType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(energy_fee: f64, power_range_start: f64) -> Self {
         Self {
             energy_fee: Decimal::try_from(energy_fee).unwrap_or_default(),
@@ -51,7 +51,7 @@ impl EVPriceRuleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -62,7 +62,7 @@ impl EVPriceRuleType {
     /// # Returns
     ///
     /// The energy fee in the currency specified in `EVAbsolutePriceSchedule`
-    #[must_use] 
+    #[must_use]
     pub fn energy_fee(&self) -> &Decimal {
         &self.energy_fee
     }
@@ -72,7 +72,7 @@ impl EVPriceRuleType {
     /// # Returns
     ///
     /// The energy fee as an f64, or 0.0 if conversion fails
-    #[must_use] 
+    #[must_use]
     pub fn energy_fee_as_f64(&self) -> f64 {
         self.energy_fee.to_f64().unwrap_or(0.0)
     }
@@ -110,7 +110,7 @@ impl EVPriceRuleType {
     /// # Returns
     ///
     /// The start of the power range in Watts (W)
-    #[must_use] 
+    #[must_use]
     pub fn power_range_start(&self) -> &Decimal {
         &self.power_range_start
     }
@@ -120,7 +120,7 @@ impl EVPriceRuleType {
     /// # Returns
     ///
     /// The power range start as an f64, or 0.0 if conversion fails
-    #[must_use] 
+    #[must_use]
     pub fn power_range_start_as_f64(&self) -> f64 {
         self.power_range_start.to_f64().unwrap_or(0.0)
     }
@@ -158,7 +158,7 @@ impl EVPriceRuleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

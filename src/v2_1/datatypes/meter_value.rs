@@ -62,7 +62,7 @@ impl MeterValueType {
     ///
     /// This function will panic if `sampled_value` is empty, as the OCPP 2.1 specification
     /// requires at least one sampled value.
-    #[must_use] 
+    #[must_use]
     pub fn new(timestamp: DateTime<Utc>, sampled_value: Vec<SampledValueType>) -> Self {
         assert!(
             !sampled_value.is_empty(),
@@ -92,7 +92,7 @@ impl MeterValueType {
     ///
     /// This function will panic if `sampled_value` is empty, as the OCPP 2.1 specification
     /// requires at least one sampled value.
-    #[must_use] 
+    #[must_use]
     pub fn builder(timestamp: DateTime<Utc>, sampled_value: Vec<SampledValueType>) -> Self {
         Self::new(timestamp, sampled_value)
     }
@@ -120,7 +120,7 @@ impl MeterValueType {
     /// let meter_value = MeterValueType::new(Utc::now(), sampled_value)
     ///     .with_custom_data(custom_data);
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -131,7 +131,7 @@ impl MeterValueType {
     /// # Returns
     ///
     /// The timestamp for measured value(s)
-    #[must_use] 
+    #[must_use]
     pub fn timestamp(&self) -> DateTime<Utc> {
         self.timestamp
     }
@@ -155,7 +155,7 @@ impl MeterValueType {
     /// # Returns
     ///
     /// Reference to the vector of sampled values
-    #[must_use] 
+    #[must_use]
     pub fn sampled_value(&self) -> &[SampledValueType] {
         &self.sampled_value
     }
@@ -188,7 +188,7 @@ impl MeterValueType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

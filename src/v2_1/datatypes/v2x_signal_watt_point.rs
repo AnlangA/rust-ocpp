@@ -24,7 +24,7 @@ pub struct V2XSignalWattPointType {
 
 impl V2XSignalWattPointType {
     /// Creates a new `V2XSignalWattPointType` with the required fields.
-    #[must_use] 
+    #[must_use]
     pub fn new(signal: i32, power: Decimal) -> Self {
         Self {
             signal,
@@ -34,7 +34,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Creates a new `V2XSignalWattPointType` from floating-point power value.
-    #[must_use] 
+    #[must_use]
     pub fn new_with_f64_power(signal: i32, power: f64) -> Self {
         Self {
             signal,
@@ -44,7 +44,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Gets the signal value.
-    #[must_use] 
+    #[must_use]
     pub fn signal(&self) -> i32 {
         self.signal
     }
@@ -56,7 +56,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Gets the power value.
-    #[must_use] 
+    #[must_use]
     pub fn power(&self) -> Decimal {
         self.power
     }
@@ -68,7 +68,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Gets the custom data.
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -80,7 +80,7 @@ impl V2XSignalWattPointType {
     }
 
     /// Sets the custom data using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

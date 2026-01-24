@@ -64,7 +64,7 @@ impl AddressType {
     /// # Returns
     ///
     /// A new instance of `AddressType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(name: String, address1: String, city: String, country: String) -> Self {
         Self {
             name,
@@ -86,7 +86,7 @@ impl AddressType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_address2(mut self, address2: String) -> Self {
         self.address2 = Some(address2);
         self
@@ -101,7 +101,7 @@ impl AddressType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_postal_code(mut self, postal_code: String) -> Self {
         self.postal_code = Some(postal_code);
         self
@@ -116,7 +116,7 @@ impl AddressType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -127,7 +127,7 @@ impl AddressType {
     /// # Returns
     ///
     /// The name of person/company as a string
-    #[must_use] 
+    #[must_use]
     pub fn name(&self) -> &str {
         &self.name
     }
@@ -151,7 +151,7 @@ impl AddressType {
     /// # Returns
     ///
     /// The primary street address as a string
-    #[must_use] 
+    #[must_use]
     pub fn address1(&self) -> &str {
         &self.address1
     }
@@ -175,7 +175,7 @@ impl AddressType {
     /// # Returns
     ///
     /// An optional reference to the additional address information
-    #[must_use] 
+    #[must_use]
     pub fn address2(&self) -> Option<&String> {
         self.address2.as_ref()
     }
@@ -199,7 +199,7 @@ impl AddressType {
     /// # Returns
     ///
     /// The name of the city or locality as a string
-    #[must_use] 
+    #[must_use]
     pub fn city(&self) -> &str {
         &self.city
     }
@@ -223,7 +223,7 @@ impl AddressType {
     /// # Returns
     ///
     /// An optional reference to the ZIP or postal code
-    #[must_use] 
+    #[must_use]
     pub fn postal_code(&self) -> Option<&String> {
         self.postal_code.as_ref()
     }
@@ -247,7 +247,7 @@ impl AddressType {
     /// # Returns
     ///
     /// The name of the country as a string
-    #[must_use] 
+    #[must_use]
     pub fn country(&self) -> &str {
         &self.country
     }
@@ -271,7 +271,7 @@ impl AddressType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

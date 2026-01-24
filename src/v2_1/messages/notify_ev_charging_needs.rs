@@ -39,7 +39,7 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(evse_id: i32, charging_needs: ChargingNeedsType) -> Self {
         Self {
             evse_id,
@@ -115,7 +115,7 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// Defines the EVSE and connector to which the EV is connected. `EvseId` may not be 0.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -125,7 +125,7 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// Contains the maximum elements the EV supports for: + - ISO 15118-2: schedule tuples in `SASchedule` (both Pmax and Tariff). + - ISO 15118-20: `PowerScheduleEntry`, `PriceRule` and `PriceLevelScheduleEntries`.
-    #[must_use] 
+    #[must_use]
     pub fn get_max_schedule_tuples(&self) -> Option<&i32> {
         self.max_schedule_tuples.as_ref()
     }
@@ -135,7 +135,7 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// The `charging_needs` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_needs(&self) -> &ChargingNeedsType {
         &self.charging_needs
     }
@@ -145,7 +145,7 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// *(2.1)* Time when EV charging needs were received. + Field can be added when charging station was offline when charging needs were received.
-    #[must_use] 
+    #[must_use]
     pub fn get_timestamp(&self) -> Option<&DateTime<Utc>> {
         self.timestamp.as_ref()
     }
@@ -155,7 +155,7 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -167,7 +167,7 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_max_schedule_tuples(mut self, max_schedule_tuples: i32) -> Self {
         self.max_schedule_tuples = Some(max_schedule_tuples);
         self
@@ -180,7 +180,7 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_timestamp(mut self, timestamp: DateTime<Utc>) -> Self {
         self.timestamp = Some(timestamp);
         self
@@ -193,12 +193,11 @@ impl NotifyEVChargingNeedsRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyEVChargingNeeds` response.
@@ -226,7 +225,7 @@ impl NotifyEVChargingNeedsResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: NotifyEVChargingNeedsStatusEnumType) -> Self {
         Self {
             status,
@@ -276,7 +275,7 @@ impl NotifyEVChargingNeedsResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &NotifyEVChargingNeedsStatusEnumType {
         &self.status
     }
@@ -286,7 +285,7 @@ impl NotifyEVChargingNeedsResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -296,7 +295,7 @@ impl NotifyEVChargingNeedsResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -308,7 +307,7 @@ impl NotifyEVChargingNeedsResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -321,12 +320,11 @@ impl NotifyEVChargingNeedsResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -388,8 +386,8 @@ mod tests {
         let evse_id = 1;
         let charging_needs = create_test_charging_needs();
 
-        let request = NotifyEVChargingNeedsRequest::new(evse_id, charging_needs)
-            .with_max_schedule_tuples(-1); // Invalid negative value
+        let request =
+            NotifyEVChargingNeedsRequest::new(evse_id, charging_needs).with_max_schedule_tuples(-1); // Invalid negative value
 
         assert!(request.validate().is_err());
     }
@@ -409,7 +407,10 @@ mod tests {
 
         assert_eq!(request.get_evse_id(), &evse_id);
         assert_eq!(request.get_charging_needs(), &charging_needs);
-        assert_eq!(request.get_max_schedule_tuples(), Some(&max_schedule_tuples));
+        assert_eq!(
+            request.get_max_schedule_tuples(),
+            Some(&max_schedule_tuples)
+        );
         assert_eq!(request.get_timestamp(), Some(&timestamp));
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -436,7 +437,10 @@ mod tests {
 
         assert_eq!(request.get_evse_id(), &new_evse_id);
         assert_eq!(request.get_charging_needs(), &new_charging_needs);
-        assert_eq!(request.get_max_schedule_tuples(), Some(&max_schedule_tuples));
+        assert_eq!(
+            request.get_max_schedule_tuples(),
+            Some(&max_schedule_tuples)
+        );
         assert_eq!(request.get_timestamp(), Some(&timestamp));
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }

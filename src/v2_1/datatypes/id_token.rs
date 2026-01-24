@@ -40,7 +40,7 @@ impl IdTokenType {
     /// # Returns
     ///
     /// A new instance of `IdTokenType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(id_token: String, type_: String) -> Self {
         Self {
             id_token,
@@ -59,7 +59,7 @@ impl IdTokenType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_additional_info(mut self, additional_info: Vec<AdditionalInfoType>) -> Self {
         self.additional_info = Some(additional_info);
         self
@@ -74,7 +74,7 @@ impl IdTokenType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -85,7 +85,7 @@ impl IdTokenType {
     /// # Returns
     ///
     /// The ID token string
-    #[must_use] 
+    #[must_use]
     pub fn id_token(&self) -> &str {
         &self.id_token
     }
@@ -109,7 +109,7 @@ impl IdTokenType {
     /// # Returns
     ///
     /// The token type string
-    #[must_use] 
+    #[must_use]
     pub fn type_(&self) -> &str {
         &self.type_
     }
@@ -133,7 +133,7 @@ impl IdTokenType {
     /// # Returns
     ///
     /// An optional reference to the vector of additional information
-    #[must_use] 
+    #[must_use]
     pub fn additional_info(&self) -> Option<&Vec<AdditionalInfoType>> {
         self.additional_info.as_ref()
     }
@@ -160,7 +160,7 @@ impl IdTokenType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

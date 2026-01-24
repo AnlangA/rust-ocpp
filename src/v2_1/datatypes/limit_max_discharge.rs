@@ -57,7 +57,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// A new instance of `LimitMaxDischargeType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(priority: i32, pct_max_discharge_power: Decimal) -> Self {
         Self {
             priority,
@@ -78,7 +78,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -93,7 +93,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_start_time(mut self, start_time: DateTime<Utc>) -> Self {
         self.start_time = Some(start_time);
         self
@@ -108,7 +108,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_duration(mut self, duration: Decimal) -> Self {
         self.duration = Some(duration);
         self
@@ -123,7 +123,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_power_monitoring_must_trip(
         mut self,
         power_monitoring_must_trip: DERCurveType,
@@ -137,7 +137,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// The priority of setting (0=highest)
-    #[must_use] 
+    #[must_use]
     pub fn priority(&self) -> i32 {
         self.priority
     }
@@ -161,7 +161,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// The percentage (0 to 100) of the rated maximum discharge power of EV
-    #[must_use] 
+    #[must_use]
     pub fn pct_max_discharge_power(&self) -> &Decimal {
         &self.pct_max_discharge_power
     }
@@ -185,7 +185,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// An optional reference to the time when this setting becomes active
-    #[must_use] 
+    #[must_use]
     pub fn start_time(&self) -> Option<&DateTime<Utc>> {
         self.start_time.as_ref()
     }
@@ -209,7 +209,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// An optional reference to the duration in seconds that this setting is active
-    #[must_use] 
+    #[must_use]
     pub fn duration(&self) -> Option<&Decimal> {
         self.duration.as_ref()
     }
@@ -233,7 +233,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// An optional reference to the power monitoring must trip curve
-    #[must_use] 
+    #[must_use]
     pub fn power_monitoring_must_trip(&self) -> Option<&DERCurveType> {
         self.power_monitoring_must_trip.as_ref()
     }
@@ -260,7 +260,7 @@ impl LimitMaxDischargeType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -17,4 +17,3 @@ pub enum DataEnumType {
     #[serde(rename = "MemberList")]
     MemberList,
 }
-

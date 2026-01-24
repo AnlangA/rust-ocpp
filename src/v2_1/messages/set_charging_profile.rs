@@ -28,7 +28,7 @@ impl SetChargingProfileRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(evse_id: i32, charging_profile: ChargingProfileType) -> Self {
         Self {
             evse_id,
@@ -78,7 +78,7 @@ impl SetChargingProfileRequest {
     /// # Returns
     ///
     /// For `TxDefaultProfile` an evseId=0 applies the profile to each individual evse. For `ChargingStationMaxProfile` and `ChargingStationExternalConstraints` an evseId=0 contains an overal limit for the whole Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -88,7 +88,7 @@ impl SetChargingProfileRequest {
     /// # Returns
     ///
     /// The `charging_profile` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_profile(&self) -> &ChargingProfileType {
         &self.charging_profile
     }
@@ -98,7 +98,7 @@ impl SetChargingProfileRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -110,12 +110,11 @@ impl SetChargingProfileRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SetChargingProfile` response.
@@ -144,7 +143,7 @@ impl SetChargingProfileResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: ChargingProfileStatusEnumType) -> Self {
         Self {
             status,
@@ -194,7 +193,7 @@ impl SetChargingProfileResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &ChargingProfileStatusEnumType {
         &self.status
     }
@@ -204,7 +203,7 @@ impl SetChargingProfileResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -214,7 +213,7 @@ impl SetChargingProfileResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -226,7 +225,7 @@ impl SetChargingProfileResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -239,25 +238,37 @@ impl SetChargingProfileResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::v2_1::datatypes::{ChargingProfileType, ChargingScheduleType, ChargingSchedulePeriodType, CustomDataType, StatusInfoType};
-    use crate::v2_1::enumerations::{ChargingProfileKindEnumType, ChargingProfilePurposeEnumType, ChargingProfileStatusEnumType, ChargingRateUnitEnumType};
+    use crate::v2_1::datatypes::{
+        ChargingProfileType, ChargingSchedulePeriodType, ChargingScheduleType, CustomDataType,
+        StatusInfoType,
+    };
+    use crate::v2_1::enumerations::{
+        ChargingProfileKindEnumType, ChargingProfilePurposeEnumType, ChargingProfileStatusEnumType,
+        ChargingRateUnitEnumType,
+    };
     use rust_decimal_macros::dec;
 
     fn create_test_charging_profile() -> ChargingProfileType {
         let period = ChargingSchedulePeriodType::new(0, dec!(16.0));
-        let charging_schedule = ChargingScheduleType::new(1, ChargingRateUnitEnumType::A, vec![period]);
-        ChargingProfileType::new(1, 1, ChargingProfilePurposeEnumType::TxDefaultProfile, ChargingProfileKindEnumType::Absolute, vec![charging_schedule])
+        let charging_schedule =
+            ChargingScheduleType::new(1, ChargingRateUnitEnumType::A, vec![period]);
+        ChargingProfileType::new(
+            1,
+            1,
+            ChargingProfilePurposeEnumType::TxDefaultProfile,
+            ChargingProfileKindEnumType::Absolute,
+            vec![charging_schedule],
+        )
     }
 
     #[test]
@@ -276,7 +287,8 @@ mod tests {
         let request = SetChargingProfileRequest::new(2, charging_profile);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetChargingProfileRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetChargingProfileRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(json.contains("\"evseId\":2"));
@@ -314,9 +326,10 @@ mod tests {
         let mut request = SetChargingProfileRequest::new(1, charging_profile1);
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        request.set_evse_id(4)
-               .set_charging_profile(charging_profile2.clone())
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_evse_id(4)
+            .set_charging_profile(charging_profile2.clone())
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.evse_id, 4);
         assert_eq!(request.charging_profile, charging_profile2);
@@ -348,7 +361,8 @@ mod tests {
         let response = SetChargingProfileResponse::new(ChargingProfileStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetChargingProfileResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetChargingProfileResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(json.contains("\"status\":\"Rejected\""));
@@ -373,9 +387,10 @@ mod tests {
         let status_info = StatusInfoType::new("Updated status".to_string());
         let custom_data = CustomDataType::new("test_vendor".to_string());
 
-        response.set_status(ChargingProfileStatusEnumType::Rejected)
-                .set_status_info(Some(status_info.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(ChargingProfileStatusEnumType::Rejected)
+            .set_status_info(Some(status_info.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, ChargingProfileStatusEnumType::Rejected);
         assert_eq!(response.status_info, Some(status_info));
@@ -390,7 +405,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(*response.get_status(), ChargingProfileStatusEnumType::Accepted);
+        assert_eq!(
+            *response.get_status(),
+            ChargingProfileStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }

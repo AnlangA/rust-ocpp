@@ -34,7 +34,7 @@ impl ClearChargingProfileRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             charging_profile_id: None,
@@ -62,7 +62,10 @@ impl ClearChargingProfileRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_charging_profile_criteria(&mut self, charging_profile_criteria: Option<ClearChargingProfileType>) -> &mut Self {
+    pub fn set_charging_profile_criteria(
+        &mut self,
+        charging_profile_criteria: Option<ClearChargingProfileType>,
+    ) -> &mut Self {
         self.charging_profile_criteria = charging_profile_criteria;
         self
     }
@@ -84,7 +87,7 @@ impl ClearChargingProfileRequest {
     /// # Returns
     ///
     /// The Id of the charging profile to clear.
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_profile_id(&self) -> Option<&i32> {
         self.charging_profile_id.as_ref()
     }
@@ -94,7 +97,7 @@ impl ClearChargingProfileRequest {
     /// # Returns
     ///
     /// The `charging_profile_criteria` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_profile_criteria(&self) -> Option<&ClearChargingProfileType> {
         self.charging_profile_criteria.as_ref()
     }
@@ -104,7 +107,7 @@ impl ClearChargingProfileRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -116,7 +119,7 @@ impl ClearChargingProfileRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_charging_profile_id(mut self, charging_profile_id: i32) -> Self {
         self.charging_profile_id = Some(charging_profile_id);
         self
@@ -129,8 +132,11 @@ impl ClearChargingProfileRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_charging_profile_criteria(mut self, charging_profile_criteria: ClearChargingProfileType) -> Self {
+    #[must_use]
+    pub fn with_charging_profile_criteria(
+        mut self,
+        charging_profile_criteria: ClearChargingProfileType,
+    ) -> Self {
         self.charging_profile_criteria = Some(charging_profile_criteria);
         self
     }
@@ -142,12 +148,11 @@ impl ClearChargingProfileRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ClearChargingProfile` response.
@@ -176,7 +181,7 @@ impl ClearChargingProfileResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: ClearChargingProfileStatusEnumType) -> Self {
         Self {
             status,
@@ -226,7 +231,7 @@ impl ClearChargingProfileResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &ClearChargingProfileStatusEnumType {
         &self.status
     }
@@ -236,7 +241,7 @@ impl ClearChargingProfileResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -246,7 +251,7 @@ impl ClearChargingProfileResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -258,7 +263,7 @@ impl ClearChargingProfileResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -271,12 +276,11 @@ impl ClearChargingProfileResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -296,8 +300,7 @@ mod tests {
 
     #[test]
     fn test_clear_charging_profile_request_with_id() {
-        let request = ClearChargingProfileRequest::new()
-            .with_charging_profile_id(123);
+        let request = ClearChargingProfileRequest::new().with_charging_profile_id(123);
         assert_eq!(request.get_charging_profile_id(), Some(&123));
         assert!(request.validate().is_ok());
     }
@@ -313,7 +316,8 @@ mod tests {
     fn test_clear_charging_profile_request_serialization() {
         let request = ClearChargingProfileRequest::new();
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ClearChargingProfileRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearChargingProfileRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
     }
 
@@ -346,15 +350,15 @@ mod tests {
         let status = ClearChargingProfileStatusEnumType::Accepted;
         let response = ClearChargingProfileResponse::new(status);
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ClearChargingProfileResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearChargingProfileResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
     }
 
     #[test]
     fn test_clear_charging_profile_request_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let request = ClearChargingProfileRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = ClearChargingProfileRequest::new().with_custom_data(custom_data.clone());
         assert_eq!(request.get_custom_data(), Some(&custom_data));
         assert!(request.validate().is_ok());
     }
@@ -363,8 +367,8 @@ mod tests {
     fn test_clear_charging_profile_response_with_status_info() {
         let status = ClearChargingProfileStatusEnumType::Unknown;
         let status_info = StatusInfoType::new("NotFound".to_string());
-        let response = ClearChargingProfileResponse::new(status)
-            .with_status_info(status_info.clone());
+        let response =
+            ClearChargingProfileResponse::new(status).with_status_info(status_info.clone());
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert!(response.validate().is_ok());
     }
@@ -376,19 +380,22 @@ mod tests {
             .with_custom_data(CustomDataType::new("TestVendor".to_string()));
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: ClearChargingProfileRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearChargingProfileRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
     }
 
     #[test]
     fn test_clear_charging_profile_response_json_round_trip() {
-        let response = ClearChargingProfileResponse::new(ClearChargingProfileStatusEnumType::Unknown)
-            .with_status_info(StatusInfoType::new("ProfileNotFound".to_string()))
-            .with_custom_data(CustomDataType::new("TestVendor".to_string()));
+        let response =
+            ClearChargingProfileResponse::new(ClearChargingProfileStatusEnumType::Unknown)
+                .with_status_info(StatusInfoType::new("ProfileNotFound".to_string()))
+                .with_custom_data(CustomDataType::new("TestVendor".to_string()));
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: ClearChargingProfileResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: ClearChargingProfileResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
     }
@@ -411,7 +418,8 @@ mod tests {
 
     #[test]
     fn test_clear_charging_profile_response_all_setters() {
-        let mut response = ClearChargingProfileResponse::new(ClearChargingProfileStatusEnumType::Accepted);
+        let mut response =
+            ClearChargingProfileResponse::new(ClearChargingProfileStatusEnumType::Accepted);
         let status_info = StatusInfoType::new("Success".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
@@ -420,15 +428,17 @@ mod tests {
         response.set_status_info(Some(status_info.clone()));
         response.set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.get_status(), &ClearChargingProfileStatusEnumType::Unknown);
+        assert_eq!(
+            response.get_status(),
+            &ClearChargingProfileStatusEnumType::Unknown
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
 
     #[test]
     fn test_clear_charging_profile_request_validation_zero_id() {
-        let request = ClearChargingProfileRequest::new()
-            .with_charging_profile_id(0); // Valid: schema has no minimum constraint
+        let request = ClearChargingProfileRequest::new().with_charging_profile_id(0); // Valid: schema has no minimum constraint
         assert!(request.validate().is_ok());
     }
 
@@ -448,9 +458,10 @@ mod tests {
 
     #[test]
     fn test_clear_charging_profile_response_clear_fields() {
-        let mut response = ClearChargingProfileResponse::new(ClearChargingProfileStatusEnumType::Accepted)
-            .with_status_info(StatusInfoType::new("Success".to_string()))
-            .with_custom_data(CustomDataType::new("TestVendor".to_string()));
+        let mut response =
+            ClearChargingProfileResponse::new(ClearChargingProfileStatusEnumType::Accepted)
+                .with_status_info(StatusInfoType::new("Success".to_string()))
+                .with_custom_data(CustomDataType::new("TestVendor".to_string()));
 
         // Clear optional fields
         response.set_status_info(None);
@@ -463,9 +474,9 @@ mod tests {
     #[test]
     fn test_clear_charging_profile_request_with_criteria() {
         let criteria = ClearChargingProfileType::new();
-        let request = ClearChargingProfileRequest::new()
-            .with_charging_profile_criteria(criteria.clone());
-        
+        let request =
+            ClearChargingProfileRequest::new().with_charging_profile_criteria(criteria.clone());
+
         assert_eq!(request.get_charging_profile_criteria(), Some(&criteria));
         assert!(request.validate().is_ok());
     }
@@ -474,7 +485,7 @@ mod tests {
     fn test_clear_charging_profile_request_method_chaining() {
         let criteria = ClearChargingProfileType::new();
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
+
         let mut request = ClearChargingProfileRequest::new();
         let result = request
             .set_charging_profile_id(Some(999))
@@ -491,15 +502,19 @@ mod tests {
     fn test_clear_charging_profile_response_method_chaining() {
         let status_info = StatusInfoType::new("TestInfo".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
-        let mut response = ClearChargingProfileResponse::new(ClearChargingProfileStatusEnumType::Accepted);
+
+        let mut response =
+            ClearChargingProfileResponse::new(ClearChargingProfileStatusEnumType::Accepted);
         let result = response
             .set_status(ClearChargingProfileStatusEnumType::Unknown)
             .set_status_info(Some(status_info.clone()))
             .set_custom_data(Some(custom_data.clone()));
 
         // Verify chaining returns self
-        assert_eq!(result.get_status(), &ClearChargingProfileStatusEnumType::Unknown);
+        assert_eq!(
+            result.get_status(),
+            &ClearChargingProfileStatusEnumType::Unknown
+        );
         assert_eq!(result.get_status_info(), Some(&status_info));
         assert_eq!(result.get_custom_data(), Some(&custom_data));
     }
@@ -508,7 +523,8 @@ mod tests {
     fn test_clear_charging_profile_request_partial_json() {
         // Test with only required fields (none in this case)
         let json = r#"{}"#;
-        let deserialized: ClearChargingProfileRequest = serde_json::from_str(json).expect("Failed to deserialize");
+        let deserialized: ClearChargingProfileRequest =
+            serde_json::from_str(json).expect("Failed to deserialize");
         assert_eq!(deserialized.get_charging_profile_id(), None);
         assert_eq!(deserialized.get_charging_profile_criteria(), None);
         assert_eq!(deserialized.get_custom_data(), None);
@@ -518,8 +534,12 @@ mod tests {
     fn test_clear_charging_profile_response_partial_json() {
         // Test with only required fields
         let json = r#"{"status":"Accepted"}"#;
-        let deserialized: ClearChargingProfileResponse = serde_json::from_str(json).expect("Failed to deserialize");
-        assert_eq!(deserialized.get_status(), &ClearChargingProfileStatusEnumType::Accepted);
+        let deserialized: ClearChargingProfileResponse =
+            serde_json::from_str(json).expect("Failed to deserialize");
+        assert_eq!(
+            deserialized.get_status(),
+            &ClearChargingProfileStatusEnumType::Accepted
+        );
         assert_eq!(deserialized.get_status_info(), None);
         assert_eq!(deserialized.get_custom_data(), None);
     }

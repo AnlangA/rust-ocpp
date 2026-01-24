@@ -35,7 +35,7 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32) -> Self {
         Self {
             request_id,
@@ -111,7 +111,7 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// `RequestId` to be used in `ReportDERControlRequest`.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -121,7 +121,7 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// True: get a default DER control. False: get a scheduled control.
-    #[must_use] 
+    #[must_use]
     pub fn get_is_default(&self) -> Option<&bool> {
         self.is_default.as_ref()
     }
@@ -131,7 +131,7 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// The `control_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_control_type(&self) -> Option<&DERControlEnumType> {
         self.control_type.as_ref()
     }
@@ -141,7 +141,7 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// Id of setting to get. When omitted all settings for _controlType_ are retrieved.
-    #[must_use] 
+    #[must_use]
     pub fn get_control_id(&self) -> Option<&String> {
         self.control_id.as_ref()
     }
@@ -151,7 +151,7 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -163,7 +163,7 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_is_default(mut self, is_default: bool) -> Self {
         self.is_default = Some(is_default);
         self
@@ -176,7 +176,7 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_control_type(mut self, control_type: DERControlEnumType) -> Self {
         self.control_type = Some(control_type);
         self
@@ -189,7 +189,7 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_control_id(mut self, control_id: String) -> Self {
         self.control_id = Some(control_id);
         self
@@ -202,12 +202,11 @@ impl GetDERControlRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetDERControl` response.
@@ -233,7 +232,7 @@ impl GetDERControlResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: DERControlStatusEnumType) -> Self {
         Self {
             status,
@@ -283,7 +282,7 @@ impl GetDERControlResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &DERControlStatusEnumType {
         &self.status
     }
@@ -293,7 +292,7 @@ impl GetDERControlResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -303,7 +302,7 @@ impl GetDERControlResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -315,7 +314,7 @@ impl GetDERControlResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -328,12 +327,11 @@ impl GetDERControlResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -364,8 +362,7 @@ mod tests {
 
     #[test]
     fn test_get_der_control_request_with_is_default() {
-        let request = GetDERControlRequest::new(456)
-            .with_is_default(true);
+        let request = GetDERControlRequest::new(456).with_is_default(true);
 
         assert_eq!(request.request_id, 456);
         assert_eq!(request.is_default, Some(true));
@@ -376,8 +373,8 @@ mod tests {
 
     #[test]
     fn test_get_der_control_request_with_control_type() {
-        let request = GetDERControlRequest::new(789)
-            .with_control_type(DERControlEnumType::FreqWatt);
+        let request =
+            GetDERControlRequest::new(789).with_control_type(DERControlEnumType::FreqWatt);
 
         assert_eq!(request.request_id, 789);
         assert_eq!(request.is_default, None);
@@ -388,8 +385,7 @@ mod tests {
 
     #[test]
     fn test_get_der_control_request_with_control_id() {
-        let request = GetDERControlRequest::new(999)
-            .with_control_id("control_123".to_string());
+        let request = GetDERControlRequest::new(999).with_control_id("control_123".to_string());
 
         assert_eq!(request.request_id, 999);
         assert_eq!(request.is_default, None);
@@ -401,8 +397,7 @@ mod tests {
     #[test]
     fn test_get_der_control_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = GetDERControlRequest::new(111)
-            .with_custom_data(custom_data.clone());
+        let request = GetDERControlRequest::new(111).with_custom_data(custom_data.clone());
 
         assert_eq!(request.request_id, 111);
         assert_eq!(request.is_default, None);
@@ -440,7 +435,10 @@ mod tests {
 
         assert_eq!(request.get_request_id(), &555);
         assert_eq!(request.get_is_default(), Some(&true));
-        assert_eq!(request.get_control_type(), Some(&DERControlEnumType::PowerLimitation));
+        assert_eq!(
+            request.get_control_type(),
+            Some(&DERControlEnumType::PowerLimitation)
+        );
         assert_eq!(request.get_control_id(), Some(&"control_789".to_string()));
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
@@ -524,8 +522,7 @@ mod tests {
         ];
 
         for control_type in control_types {
-            let request = GetDERControlRequest::new(123)
-                .with_control_type(control_type.clone());
+            let request = GetDERControlRequest::new(123).with_control_type(control_type.clone());
             assert_eq!(request.control_type, Some(control_type));
             assert!(request.validate().is_ok());
         }

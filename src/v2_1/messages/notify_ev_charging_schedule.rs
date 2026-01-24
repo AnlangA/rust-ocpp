@@ -43,8 +43,12 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
-    pub fn new(time_base: DateTime<Utc>, charging_schedule: ChargingScheduleType, evse_id: i32) -> Self {
+    #[must_use]
+    pub fn new(
+        time_base: DateTime<Utc>,
+        charging_schedule: ChargingScheduleType,
+        evse_id: i32,
+    ) -> Self {
         Self {
             time_base,
             charging_schedule,
@@ -98,7 +102,10 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_selected_charging_schedule_id(&mut self, selected_charging_schedule_id: Option<i32>) -> &mut Self {
+    pub fn set_selected_charging_schedule_id(
+        &mut self,
+        selected_charging_schedule_id: Option<i32>,
+    ) -> &mut Self {
         self.selected_charging_schedule_id = selected_charging_schedule_id;
         self
     }
@@ -110,7 +117,10 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_power_tolerance_acceptance(&mut self, power_tolerance_acceptance: Option<bool>) -> &mut Self {
+    pub fn set_power_tolerance_acceptance(
+        &mut self,
+        power_tolerance_acceptance: Option<bool>,
+    ) -> &mut Self {
         self.power_tolerance_acceptance = power_tolerance_acceptance;
         self
     }
@@ -132,7 +142,7 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// Periods contained in the charging profile are relative to this point in time.
-    #[must_use] 
+    #[must_use]
     pub fn get_time_base(&self) -> &DateTime<Utc> {
         &self.time_base
     }
@@ -142,7 +152,7 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// The `charging_schedule` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_schedule(&self) -> &ChargingScheduleType {
         &self.charging_schedule
     }
@@ -152,7 +162,7 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// The charging schedule contained in this notification applies to an EVSE. `EvseId` must be &gt; 0.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -162,7 +172,7 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// *(2.1)* Id  of the _chargingSchedule_ that EV selected from the provided `ChargingProfile`.
-    #[must_use] 
+    #[must_use]
     pub fn get_selected_charging_schedule_id(&self) -> Option<&i32> {
         self.selected_charging_schedule_id.as_ref()
     }
@@ -172,7 +182,7 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// *(2.1)* True when power tolerance is accepted by EV. This value is taken from EVPowerProfile.PowerToleranceAcceptance in the ISO 15118-20 `PowerDeliverReq` message..
-    #[must_use] 
+    #[must_use]
     pub fn get_power_tolerance_acceptance(&self) -> Option<&bool> {
         self.power_tolerance_acceptance.as_ref()
     }
@@ -182,7 +192,7 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -194,8 +204,11 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_selected_charging_schedule_id(mut self, selected_charging_schedule_id: i32) -> Self {
+    #[must_use]
+    pub fn with_selected_charging_schedule_id(
+        mut self,
+        selected_charging_schedule_id: i32,
+    ) -> Self {
         self.selected_charging_schedule_id = Some(selected_charging_schedule_id);
         self
     }
@@ -207,7 +220,7 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_power_tolerance_acceptance(mut self, power_tolerance_acceptance: bool) -> Self {
         self.power_tolerance_acceptance = Some(power_tolerance_acceptance);
         self
@@ -220,12 +233,11 @@ impl NotifyEVChargingScheduleRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `NotifyEVChargingSchedule` response.
@@ -253,7 +265,7 @@ impl NotifyEVChargingScheduleResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -303,7 +315,7 @@ impl NotifyEVChargingScheduleResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -313,7 +325,7 @@ impl NotifyEVChargingScheduleResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -323,7 +335,7 @@ impl NotifyEVChargingScheduleResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -335,7 +347,7 @@ impl NotifyEVChargingScheduleResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -348,12 +360,11 @@ impl NotifyEVChargingScheduleResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -384,11 +395,8 @@ mod tests {
         let charging_schedule = create_test_charging_schedule();
         let evse_id = 1;
 
-        let request = NotifyEVChargingScheduleRequest::new(
-            time_base,
-            charging_schedule.clone(),
-            evse_id,
-        );
+        let request =
+            NotifyEVChargingScheduleRequest::new(time_base, charging_schedule.clone(), evse_id);
 
         assert_eq!(request.get_time_base(), &time_base);
         assert_eq!(request.get_charging_schedule(), &charging_schedule);
@@ -404,11 +412,7 @@ mod tests {
         let charging_schedule = create_test_charging_schedule();
         let evse_id = 1;
 
-        let request = NotifyEVChargingScheduleRequest::new(
-            time_base,
-            charging_schedule,
-            evse_id,
-        );
+        let request = NotifyEVChargingScheduleRequest::new(time_base, charging_schedule, evse_id);
 
         assert!(request.validate().is_ok());
     }
@@ -419,11 +423,7 @@ mod tests {
         let charging_schedule = create_test_charging_schedule();
         let evse_id = 0; // Invalid - must be >= 1
 
-        let request = NotifyEVChargingScheduleRequest::new(
-            time_base,
-            charging_schedule,
-            evse_id,
-        );
+        let request = NotifyEVChargingScheduleRequest::new(time_base, charging_schedule, evse_id);
 
         assert!(request.validate().is_err());
     }
@@ -434,11 +434,8 @@ mod tests {
         let charging_schedule = create_test_charging_schedule();
         let evse_id = 1;
 
-        let request = NotifyEVChargingScheduleRequest::new(
-            time_base,
-            charging_schedule,
-            evse_id,
-        ).with_selected_charging_schedule_id(-1); // Invalid negative value
+        let request = NotifyEVChargingScheduleRequest::new(time_base, charging_schedule, evse_id)
+            .with_selected_charging_schedule_id(-1); // Invalid negative value
 
         assert!(request.validate().is_err());
     }
@@ -452,20 +449,23 @@ mod tests {
         let power_tolerance_acceptance = true;
         let custom_data = create_test_custom_data();
 
-        let request = NotifyEVChargingScheduleRequest::new(
-            time_base,
-            charging_schedule.clone(),
-            evse_id,
-        )
-        .with_selected_charging_schedule_id(selected_charging_schedule_id)
-        .with_power_tolerance_acceptance(power_tolerance_acceptance)
-        .with_custom_data(custom_data.clone());
+        let request =
+            NotifyEVChargingScheduleRequest::new(time_base, charging_schedule.clone(), evse_id)
+                .with_selected_charging_schedule_id(selected_charging_schedule_id)
+                .with_power_tolerance_acceptance(power_tolerance_acceptance)
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_time_base(), &time_base);
         assert_eq!(request.get_charging_schedule(), &charging_schedule);
         assert_eq!(request.get_evse_id(), &evse_id);
-        assert_eq!(request.get_selected_charging_schedule_id(), Some(&selected_charging_schedule_id));
-        assert_eq!(request.get_power_tolerance_acceptance(), Some(&power_tolerance_acceptance));
+        assert_eq!(
+            request.get_selected_charging_schedule_id(),
+            Some(&selected_charging_schedule_id)
+        );
+        assert_eq!(
+            request.get_power_tolerance_acceptance(),
+            Some(&power_tolerance_acceptance)
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -475,11 +475,8 @@ mod tests {
         let charging_schedule = create_test_charging_schedule();
         let evse_id = 1;
 
-        let mut request = NotifyEVChargingScheduleRequest::new(
-            time_base,
-            charging_schedule,
-            evse_id,
-        );
+        let mut request =
+            NotifyEVChargingScheduleRequest::new(time_base, charging_schedule, evse_id);
 
         let new_time_base = Utc::now();
         let new_charging_schedule = create_test_charging_schedule();
@@ -499,8 +496,14 @@ mod tests {
         assert_eq!(request.get_time_base(), &new_time_base);
         assert_eq!(request.get_charging_schedule(), &new_charging_schedule);
         assert_eq!(request.get_evse_id(), &new_evse_id);
-        assert_eq!(request.get_selected_charging_schedule_id(), Some(&selected_charging_schedule_id));
-        assert_eq!(request.get_power_tolerance_acceptance(), Some(&power_tolerance_acceptance));
+        assert_eq!(
+            request.get_selected_charging_schedule_id(),
+            Some(&selected_charging_schedule_id)
+        );
+        assert_eq!(
+            request.get_power_tolerance_acceptance(),
+            Some(&power_tolerance_acceptance)
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -511,14 +514,10 @@ mod tests {
         let evse_id = 1;
         let custom_data = create_test_custom_data();
 
-        let request = NotifyEVChargingScheduleRequest::new(
-            time_base,
-            charging_schedule,
-            evse_id,
-        )
-        .with_selected_charging_schedule_id(5)
-        .with_power_tolerance_acceptance(true)
-        .with_custom_data(custom_data);
+        let request = NotifyEVChargingScheduleRequest::new(time_base, charging_schedule, evse_id)
+            .with_selected_charging_schedule_id(5)
+            .with_power_tolerance_acceptance(true)
+            .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: NotifyEVChargingScheduleRequest =
@@ -535,21 +534,15 @@ mod tests {
 
         // Test with minimum valid evse_id
         let evse_id = 1; // Minimum valid value
-        let request = NotifyEVChargingScheduleRequest::new(
-            time_base,
-            charging_schedule.clone(),
-            evse_id,
-        );
+        let request =
+            NotifyEVChargingScheduleRequest::new(time_base, charging_schedule.clone(), evse_id);
 
         assert_eq!(request.get_evse_id(), &evse_id);
         assert!(request.validate().is_ok());
 
         // Test with minimum valid selected_charging_schedule_id
-        let request = NotifyEVChargingScheduleRequest::new(
-            time_base,
-            charging_schedule,
-            evse_id,
-        ).with_selected_charging_schedule_id(0); // Minimum valid value
+        let request = NotifyEVChargingScheduleRequest::new(time_base, charging_schedule, evse_id)
+            .with_selected_charging_schedule_id(0); // Minimum valid value
 
         assert_eq!(request.get_selected_charging_schedule_id(), Some(&0));
         assert!(request.validate().is_ok());

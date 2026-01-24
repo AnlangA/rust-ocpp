@@ -81,7 +81,7 @@ pub struct EventDataType {
 
 impl EventDataType {
     /// Creates a new `EventDataType` with the minimum required fields.
-    #[must_use] 
+    #[must_use]
     pub fn new(
         event_id: i32,
         timestamp: DateTime<Utc>,
@@ -111,56 +111,56 @@ impl EventDataType {
     }
 
     /// Sets the `custom_data` for the `EventDataType`.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
 
     /// Sets the cause for the `EventDataType`.
-    #[must_use] 
+    #[must_use]
     pub fn with_cause(mut self, cause: i32) -> Self {
         self.cause = Some(cause);
         self
     }
 
     /// Sets the `tech_code` for the `EventDataType`.
-    #[must_use] 
+    #[must_use]
     pub fn with_tech_code(mut self, tech_code: String) -> Self {
         self.tech_code = Some(tech_code);
         self
     }
 
     /// Sets the `tech_info` for the `EventDataType`.
-    #[must_use] 
+    #[must_use]
     pub fn with_tech_info(mut self, tech_info: String) -> Self {
         self.tech_info = Some(tech_info);
         self
     }
 
     /// Sets the cleared status for the `EventDataType`.
-    #[must_use] 
+    #[must_use]
     pub fn with_cleared(mut self, cleared: bool) -> Self {
         self.cleared = Some(cleared);
         self
     }
 
     /// Sets the `transaction_id` for the `EventDataType`.
-    #[must_use] 
+    #[must_use]
     pub fn with_transaction_id(mut self, transaction_id: String) -> Self {
         self.transaction_id = Some(transaction_id);
         self
     }
 
     /// Sets the `variable_monitoring_id` for the `EventDataType`.
-    #[must_use] 
+    #[must_use]
     pub fn with_variable_monitoring_id(mut self, variable_monitoring_id: i32) -> Self {
         self.variable_monitoring_id = Some(variable_monitoring_id);
         self
     }
 
     /// Sets the severity for the `EventDataType`.
-    #[must_use] 
+    #[must_use]
     pub fn with_severity(mut self, severity: i32) -> Self {
         self.severity = Some(severity);
         self

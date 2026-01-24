@@ -35,7 +35,7 @@ impl ClearTariffsRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             tariff_ids: None,
@@ -85,7 +85,7 @@ impl ClearTariffsRequest {
     /// # Returns
     ///
     /// List of tariff Ids to clear. When absent clears all tariffs at _evseId_.
-    #[must_use] 
+    #[must_use]
     pub fn get_tariff_ids(&self) -> Option<&Vec<String>> {
         self.tariff_ids.as_ref()
     }
@@ -95,7 +95,7 @@ impl ClearTariffsRequest {
     /// # Returns
     ///
     /// When present only clear tariffs matching _tariffIds_ at EVSE _evseId_.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -105,7 +105,7 @@ impl ClearTariffsRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -117,7 +117,7 @@ impl ClearTariffsRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tariff_ids(mut self, tariff_ids: Vec<String>) -> Self {
         self.tariff_ids = Some(tariff_ids);
         self
@@ -130,7 +130,7 @@ impl ClearTariffsRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -143,12 +143,11 @@ impl ClearTariffsRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ClearTariffs` response.
@@ -173,7 +172,7 @@ impl ClearTariffsResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(clear_tariffs_result: Vec<ClearTariffsResultType>) -> Self {
         Self {
             clear_tariffs_result,
@@ -188,7 +187,10 @@ impl ClearTariffsResponse {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_clear_tariffs_result(&mut self, clear_tariffs_result: Vec<ClearTariffsResultType>) -> &mut Self {
+    pub fn set_clear_tariffs_result(
+        &mut self,
+        clear_tariffs_result: Vec<ClearTariffsResultType>,
+    ) -> &mut Self {
         self.clear_tariffs_result = clear_tariffs_result;
         self
     }
@@ -210,7 +212,7 @@ impl ClearTariffsResponse {
     /// # Returns
     ///
     /// The `clear_tariffs_result` field
-    #[must_use] 
+    #[must_use]
     pub fn get_clear_tariffs_result(&self) -> &Vec<ClearTariffsResultType> {
         &self.clear_tariffs_result
     }
@@ -220,7 +222,7 @@ impl ClearTariffsResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -232,12 +234,11 @@ impl ClearTariffsResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -250,8 +251,10 @@ mod tests {
     }
 
     fn create_test_clear_tariffs_result() -> ClearTariffsResultType {
-        ClearTariffsResultType::new(crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::Accepted)
-            .with_tariff_id("test-tariff-123".to_string())
+        ClearTariffsResultType::new(
+            crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::Accepted,
+        )
+        .with_tariff_id("test-tariff-123".to_string())
     }
 
     #[test]
@@ -267,8 +270,7 @@ mod tests {
     fn test_clear_tariffs_request_with_tariff_ids() {
         let tariff_ids = vec!["tariff-1".to_string(), "tariff-2".to_string()];
 
-        let request = ClearTariffsRequest::new()
-            .with_tariff_ids(tariff_ids.clone());
+        let request = ClearTariffsRequest::new().with_tariff_ids(tariff_ids.clone());
 
         assert_eq!(request.tariff_ids, Some(tariff_ids));
         assert_eq!(request.evse_id, None);
@@ -279,8 +281,7 @@ mod tests {
     fn test_clear_tariffs_request_with_evse_id() {
         let evse_id = 1;
 
-        let request = ClearTariffsRequest::new()
-            .with_evse_id(evse_id);
+        let request = ClearTariffsRequest::new().with_evse_id(evse_id);
 
         assert_eq!(request.tariff_ids, None);
         assert_eq!(request.evse_id, Some(evse_id));
@@ -291,8 +292,7 @@ mod tests {
     fn test_clear_tariffs_request_with_custom_data() {
         let custom_data = create_test_custom_data();
 
-        let request = ClearTariffsRequest::new()
-            .with_custom_data(custom_data.clone());
+        let request = ClearTariffsRequest::new().with_custom_data(custom_data.clone());
 
         assert_eq!(request.tariff_ids, None);
         assert_eq!(request.evse_id, None);
@@ -307,9 +307,10 @@ mod tests {
         let evse_id = 2;
         let custom_data = create_test_custom_data();
 
-        request.set_tariff_ids(Some(tariff_ids.clone()))
-               .set_evse_id(Some(evse_id))
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_tariff_ids(Some(tariff_ids.clone()))
+            .set_evse_id(Some(evse_id))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.tariff_ids, Some(tariff_ids));
         assert_eq!(request.evse_id, Some(evse_id));
@@ -352,8 +353,7 @@ mod tests {
     fn test_clear_tariffs_request_validation_empty_tariff_ids() {
         let empty_tariff_ids: Vec<String> = vec![];
 
-        let request = ClearTariffsRequest::new()
-            .with_tariff_ids(empty_tariff_ids);
+        let request = ClearTariffsRequest::new().with_tariff_ids(empty_tariff_ids);
 
         let validation_result = request.validate();
         assert!(validation_result.is_err());
@@ -365,16 +365,14 @@ mod tests {
         for i in 0..61 {
             tariff_ids.push(format!("tariff-{}", i));
         }
-        let request = ClearTariffsRequest::new()
-            .with_tariff_ids(tariff_ids);
+        let request = ClearTariffsRequest::new().with_tariff_ids(tariff_ids);
         let validation_result = request.validate();
         assert!(validation_result.is_err());
     }
 
     #[test]
     fn test_clear_tariffs_request_validation_negative_evse_id() {
-        let request = ClearTariffsRequest::new()
-            .with_evse_id(-1);
+        let request = ClearTariffsRequest::new().with_evse_id(-1);
 
         let validation_result = request.validate();
         assert!(validation_result.is_err());
@@ -408,8 +406,8 @@ mod tests {
         let results = vec![create_test_clear_tariffs_result()];
         let custom_data = create_test_custom_data();
 
-        let response = ClearTariffsResponse::new(results.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            ClearTariffsResponse::new(results.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(response.clear_tariffs_result, results);
         assert_eq!(response.custom_data, Some(custom_data));
@@ -421,13 +419,16 @@ mod tests {
 
         let new_results = vec![
             create_test_clear_tariffs_result(),
-            ClearTariffsResultType::new(crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::Rejected)
-                .with_tariff_id("tariff-456".to_string())
+            ClearTariffsResultType::new(
+                crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::Rejected,
+            )
+            .with_tariff_id("tariff-456".to_string()),
         ];
         let custom_data = create_test_custom_data();
 
-        response.set_clear_tariffs_result(new_results.clone())
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_clear_tariffs_result(new_results.clone())
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.clear_tariffs_result, new_results);
         assert_eq!(response.custom_data, Some(custom_data));
@@ -438,8 +439,8 @@ mod tests {
         let results = vec![create_test_clear_tariffs_result()];
         let custom_data = create_test_custom_data();
 
-        let response = ClearTariffsResponse::new(results.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            ClearTariffsResponse::new(results.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_clear_tariffs_result(), &results);
         assert_eq!(response.get_custom_data(), Some(&custom_data));
@@ -499,8 +500,8 @@ mod tests {
         let results = vec![create_test_clear_tariffs_result()];
         let custom_data = create_test_custom_data();
 
-        let response = ClearTariffsResponse::new(results.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            ClearTariffsResponse::new(results.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(response.clear_tariffs_result, results);
         assert_eq!(response.custom_data, Some(custom_data));
@@ -510,22 +511,19 @@ mod tests {
     fn test_clear_tariffs_request_edge_cases() {
         // Test with single tariff ID
         let single_tariff = vec!["single-tariff".to_string()];
-        let request = ClearTariffsRequest::new()
-            .with_tariff_ids(single_tariff.clone());
+        let request = ClearTariffsRequest::new().with_tariff_ids(single_tariff.clone());
 
         assert_eq!(request.tariff_ids, Some(single_tariff));
         assert!(request.validate().is_ok());
 
         // Test with zero EVSE ID
-        let request_zero_evse = ClearTariffsRequest::new()
-            .with_evse_id(0);
+        let request_zero_evse = ClearTariffsRequest::new().with_evse_id(0);
 
         assert_eq!(request_zero_evse.evse_id, Some(0));
         assert!(request_zero_evse.validate().is_ok());
 
         // Test with large EVSE ID
-        let request_large_evse = ClearTariffsRequest::new()
-            .with_evse_id(999999);
+        let request_large_evse = ClearTariffsRequest::new().with_evse_id(999999);
 
         assert_eq!(request_large_evse.evse_id, Some(999999));
         assert!(request_large_evse.validate().is_ok());
@@ -534,11 +532,17 @@ mod tests {
     #[test]
     fn test_clear_tariffs_response_multiple_results() {
         let results = vec![
-            ClearTariffsResultType::new(crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::Accepted)
-                .with_tariff_id("tariff-1".to_string()),
-            ClearTariffsResultType::new(crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::Rejected)
-                .with_tariff_id("tariff-2".to_string()),
-            ClearTariffsResultType::new(crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::NoTariff),
+            ClearTariffsResultType::new(
+                crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::Accepted,
+            )
+            .with_tariff_id("tariff-1".to_string()),
+            ClearTariffsResultType::new(
+                crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::Rejected,
+            )
+            .with_tariff_id("tariff-2".to_string()),
+            ClearTariffsResultType::new(
+                crate::v2_1::datatypes::clear_tariffs_result::TariffClearStatusEnumType::NoTariff,
+            ),
         ];
 
         let response = ClearTariffsResponse::new(results.clone());

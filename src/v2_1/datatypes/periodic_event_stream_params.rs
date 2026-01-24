@@ -32,7 +32,7 @@ impl PeriodicEventStreamParamsType {
     /// # Returns
     ///
     /// A new instance of `PeriodicEventStreamParamsType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(interval: i32, values: i32) -> Self {
         Self {
             interval,
@@ -50,7 +50,7 @@ impl PeriodicEventStreamParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -61,7 +61,7 @@ impl PeriodicEventStreamParamsType {
     /// # Returns
     ///
     /// Time in seconds after which stream data is sent
-    #[must_use] 
+    #[must_use]
     pub fn interval(&self) -> i32 {
         self.interval
     }
@@ -85,7 +85,7 @@ impl PeriodicEventStreamParamsType {
     /// # Returns
     ///
     /// Number of items to be sent together in stream
-    #[must_use] 
+    #[must_use]
     pub fn values(&self) -> i32 {
         self.values
     }
@@ -109,7 +109,7 @@ impl PeriodicEventStreamParamsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

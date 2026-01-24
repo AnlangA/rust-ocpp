@@ -30,7 +30,7 @@ impl MeterValuesRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(evse_id: i32, meter_value: Vec<MeterValueType>) -> Self {
         Self {
             evse_id,
@@ -80,7 +80,7 @@ impl MeterValuesRequest {
     /// # Returns
     ///
     /// This contains a number (&gt;0) designating an EVSE of the Charging Station. ‘0’ (zero) is used to designate the main power meter.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -90,7 +90,7 @@ impl MeterValuesRequest {
     /// # Returns
     ///
     /// The `meter_value` field
-    #[must_use] 
+    #[must_use]
     pub fn get_meter_value(&self) -> &Vec<MeterValueType> {
         &self.meter_value
     }
@@ -100,7 +100,7 @@ impl MeterValuesRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -112,12 +112,11 @@ impl MeterValuesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `MeterValues` response.
@@ -143,11 +142,9 @@ impl MeterValuesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -167,7 +164,7 @@ impl MeterValuesResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -179,12 +176,11 @@ impl MeterValuesResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -234,8 +230,8 @@ mod tests {
     fn test_meter_values_request_with_custom_data() {
         let meter_values = vec![create_test_meter_value()];
         let custom_data = create_test_custom_data();
-        let request = MeterValuesRequest::new(2, meter_values.clone())
-            .with_custom_data(custom_data.clone());
+        let request =
+            MeterValuesRequest::new(2, meter_values.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(request.evse_id, 2);
         assert_eq!(request.meter_value, meter_values);
@@ -262,8 +258,8 @@ mod tests {
     fn test_meter_values_request_getters() {
         let meter_values = vec![create_test_meter_value()];
         let custom_data = create_test_custom_data();
-        let request = MeterValuesRequest::new(4, meter_values.clone())
-            .with_custom_data(custom_data.clone());
+        let request =
+            MeterValuesRequest::new(4, meter_values.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_evse_id(), &4);
         assert_eq!(request.get_meter_value(), &meter_values);
@@ -324,8 +320,7 @@ mod tests {
     fn test_meter_values_request_json_round_trip() {
         let meter_values = vec![create_test_meter_value()];
         let custom_data = create_test_custom_data();
-        let request = MeterValuesRequest::new(5, meter_values)
-            .with_custom_data(custom_data);
+        let request = MeterValuesRequest::new(5, meter_values).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).unwrap();
         let parsed: MeterValuesRequest = serde_json::from_str(&json).unwrap();
@@ -346,8 +341,7 @@ mod tests {
     #[test]
     fn test_meter_values_response_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let response = MeterValuesResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = MeterValuesResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -365,8 +359,7 @@ mod tests {
     #[test]
     fn test_meter_values_response_getters() {
         let custom_data = create_test_custom_data();
-        let response = MeterValuesResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = MeterValuesResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -391,8 +384,7 @@ mod tests {
     #[test]
     fn test_meter_values_response_json_round_trip() {
         let custom_data = create_test_custom_data();
-        let response = MeterValuesResponse::new()
-            .with_custom_data(custom_data);
+        let response = MeterValuesResponse::new().with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).unwrap();
         let parsed: MeterValuesResponse = serde_json::from_str(&json).unwrap();
@@ -404,8 +396,7 @@ mod tests {
     #[test]
     fn test_meter_values_response_clear_custom_data() {
         let custom_data = create_test_custom_data();
-        let mut response = MeterValuesResponse::new()
-            .with_custom_data(custom_data);
+        let mut response = MeterValuesResponse::new().with_custom_data(custom_data);
 
         assert!(response.custom_data.is_some());
 

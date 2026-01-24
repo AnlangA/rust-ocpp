@@ -47,7 +47,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// A new instance of `VariableAttributeType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(type_: AttributeEnumType, mutability: MutabilityEnumType) -> Self {
         Self {
             type_,
@@ -70,7 +70,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// A new instance of `VariableAttributeType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new_with_value(
         type_: AttributeEnumType,
         value: String,
@@ -95,7 +95,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_value(mut self, value: String) -> Self {
         self.value = Some(value);
         self
@@ -110,7 +110,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_persistent(mut self, persistent: bool) -> Self {
         self.persistent = Some(persistent);
         self
@@ -125,7 +125,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_constant(mut self, constant: bool) -> Self {
         self.constant = Some(constant);
         self
@@ -140,7 +140,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -151,7 +151,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// The type of attribute
-    #[must_use] 
+    #[must_use]
     pub fn type_(&self) -> &AttributeEnumType {
         &self.type_
     }
@@ -175,7 +175,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// An optional reference to the value of the attribute
-    #[must_use] 
+    #[must_use]
     pub fn value(&self) -> Option<&String> {
         self.value.as_ref()
     }
@@ -199,7 +199,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// The mutability of this attribute
-    #[must_use] 
+    #[must_use]
     pub fn mutability(&self) -> &MutabilityEnumType {
         &self.mutability
     }
@@ -223,7 +223,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// An optional boolean indicating if this variable is persistent between sessions
-    #[must_use] 
+    #[must_use]
     pub fn persistent(&self) -> Option<bool> {
         self.persistent
     }
@@ -247,7 +247,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// An optional boolean indicating if this variable is constant
-    #[must_use] 
+    #[must_use]
     pub fn constant(&self) -> Option<bool> {
         self.constant
     }
@@ -271,7 +271,7 @@ impl VariableAttributeType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

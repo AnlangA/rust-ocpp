@@ -25,7 +25,11 @@ pub fn validate_identifier_string(s: &str) -> Result<(), ValidationError> {
         .get_or_init(|| Regex::new(r"^[a-zA-Z0-9*+=:|@._-]*$").unwrap())
         .is_match(s);
 
-    if res { Ok(()) } else { Err(ValidationError::new("Not a valid identifierString")) }
+    if res {
+        Ok(())
+    } else {
+        Err(ValidationError::new("Not a valid identifierString"))
+    }
 }
 
 /// Validates that a discharge limit is non-positive (less than or equal to zero).

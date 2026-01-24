@@ -32,7 +32,7 @@ impl EnterServiceGetType {
     /// # Returns
     ///
     /// A new instance of `EnterServiceGetType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(enter_service: EnterServiceType, id: String) -> Self {
         Self {
             enter_service,
@@ -50,7 +50,7 @@ impl EnterServiceGetType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -61,7 +61,7 @@ impl EnterServiceGetType {
     /// # Returns
     ///
     /// A reference to the `EnterService` parameters
-    #[must_use] 
+    #[must_use]
     pub fn enter_service(&self) -> &EnterServiceType {
         &self.enter_service
     }
@@ -85,7 +85,7 @@ impl EnterServiceGetType {
     /// # Returns
     ///
     /// A reference to the ID of the setting
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> &str {
         &self.id
     }
@@ -109,7 +109,7 @@ impl EnterServiceGetType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -145,16 +145,11 @@ mod tests {
         let random_delay = Decimal::from_str("2.0").unwrap();
         let ramp_rate = Decimal::from_str("10.0").unwrap();
 
-        let enter_service = EnterServiceType::new(
-            1,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate);
+        let enter_service =
+            EnterServiceType::new(1, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate);
         let id = "setting1".to_string();
 
         let enter_service_get = EnterServiceGetType::new(enter_service.clone(), id.clone());
@@ -176,16 +171,11 @@ mod tests {
         let random_delay = Decimal::from_str("2.0").unwrap();
         let ramp_rate = Decimal::from_str("10.0").unwrap();
 
-        let enter_service = EnterServiceType::new(
-            1,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate);
+        let enter_service =
+            EnterServiceType::new(1, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate);
         let id = "setting1".to_string();
         let custom_data = CustomDataType::new("VendorX".to_string());
 
@@ -217,26 +207,16 @@ mod tests {
         let random_delay2 = Decimal::from_str("3.0").unwrap();
         let ramp_rate2 = Decimal::from_str("12.0").unwrap();
 
-        let enter_service1 = EnterServiceType::new(
-            1,
-            high_voltage1,
-            low_voltage1,
-            high_freq1,
-            low_freq1,
-        )
-        .with_delay(delay1)
-        .with_random_delay(random_delay1)
-        .with_ramp_rate(ramp_rate1);
-        let enter_service2 = EnterServiceType::new(
-            2,
-            high_voltage2,
-            low_voltage2,
-            high_freq2,
-            low_freq2,
-        )
-        .with_delay(delay2)
-        .with_random_delay(random_delay2)
-        .with_ramp_rate(ramp_rate2);
+        let enter_service1 =
+            EnterServiceType::new(1, high_voltage1, low_voltage1, high_freq1, low_freq1)
+                .with_delay(delay1)
+                .with_random_delay(random_delay1)
+                .with_ramp_rate(ramp_rate1);
+        let enter_service2 =
+            EnterServiceType::new(2, high_voltage2, low_voltage2, high_freq2, low_freq2)
+                .with_delay(delay2)
+                .with_random_delay(random_delay2)
+                .with_ramp_rate(ramp_rate2);
         let id1 = "setting1".to_string();
         let id2 = "setting2".to_string();
         let custom_data = CustomDataType::new("VendorX".to_string());
@@ -270,16 +250,11 @@ mod tests {
         let random_delay = Decimal::from_str("2.0").unwrap();
         let ramp_rate = Decimal::from_str("10.0").unwrap();
 
-        let enter_service = EnterServiceType::new(
-            1,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate);
+        let enter_service =
+            EnterServiceType::new(1, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate);
         let id = "valid_id".to_string();
 
         let valid_enter_service_get = EnterServiceGetType::new(enter_service.clone(), id.clone());
@@ -299,16 +274,11 @@ mod tests {
         assert!(error_message.contains("length"));
 
         // 测试嵌套验证 - enter_service中的priority为负数
-        let invalid_enter_service = EnterServiceType::new(
-            -1,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate);
+        let invalid_enter_service =
+            EnterServiceType::new(-1, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate);
         let enter_service_get_with_invalid_enter_service =
             EnterServiceGetType::new(invalid_enter_service, id.clone());
 
@@ -350,17 +320,12 @@ mod tests {
         let random_delay = Decimal::from_str("2.0").unwrap();
         let ramp_rate = Decimal::from_str("10.0").unwrap();
 
-        let enter_service = EnterServiceType::new(
-            1,
-            high_voltage,
-            low_voltage,
-            high_freq,
-            low_freq,
-        )
-        .with_delay(delay)
-        .with_random_delay(random_delay)
-        .with_ramp_rate(ramp_rate)
-        .with_custom_data(CustomDataType::new("VendorX".to_string()));
+        let enter_service =
+            EnterServiceType::new(1, high_voltage, low_voltage, high_freq, low_freq)
+                .with_delay(delay)
+                .with_random_delay(random_delay)
+                .with_ramp_rate(ramp_rate)
+                .with_custom_data(CustomDataType::new("VendorX".to_string()));
         let id = "setting1".to_string();
         let custom_data = CustomDataType::new("VendorY".to_string())
             .with_property("version".to_string(), json!("1.0"));

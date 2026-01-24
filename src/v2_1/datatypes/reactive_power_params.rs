@@ -44,7 +44,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// A new instance of `ReactivePowerParamsType` with all optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             v_ref: None,
@@ -63,7 +63,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_v_ref(mut self, v_ref: Decimal) -> Self {
         self.v_ref = Some(v_ref);
         self
@@ -78,7 +78,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_autonomous_v_ref_enable(mut self, enable: bool) -> Self {
         self.autonomous_vref_enable = Some(enable);
         self
@@ -93,7 +93,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_autonomous_v_ref_time_constant(mut self, time_constant: Decimal) -> Self {
         self.autonomous_vref_time_constant = Some(time_constant);
         self
@@ -108,7 +108,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -119,7 +119,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// An optional reference to the `VRef` value
-    #[must_use] 
+    #[must_use]
     pub fn v_ref(&self) -> Option<&Decimal> {
         self.v_ref.as_ref()
     }
@@ -143,7 +143,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// An optional reference to the autonomous `VRef` enable flag
-    #[must_use] 
+    #[must_use]
     pub fn autonomous_v_ref_enable(&self) -> Option<&bool> {
         self.autonomous_vref_enable.as_ref()
     }
@@ -167,7 +167,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// An optional reference to the autonomous `VRef` time constant
-    #[must_use] 
+    #[must_use]
     pub fn autonomous_v_ref_time_constant(&self) -> Option<&Decimal> {
         self.autonomous_vref_time_constant.as_ref()
     }
@@ -194,7 +194,7 @@ impl ReactivePowerParamsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

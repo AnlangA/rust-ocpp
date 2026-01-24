@@ -51,7 +51,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// A new instance of `FixedPFType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(priority: i32, displacement: f64, excitation: bool) -> Self {
         Self {
             priority,
@@ -77,7 +77,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// A new instance of `FixedPFType` with all fields set
-    #[must_use] 
+    #[must_use]
     pub fn new_with_all_fields(
         priority: i32,
         displacement: f64,
@@ -105,7 +105,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -120,7 +120,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_start_time(mut self, start_time: DateTime<Utc>) -> Self {
         self.start_time = Some(start_time);
         self
@@ -135,7 +135,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_duration(mut self, duration: f64) -> Self {
         self.duration = Some(Decimal::try_from(duration).unwrap_or_default());
         self
@@ -146,7 +146,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// The priority of setting (0=highest)
-    #[must_use] 
+    #[must_use]
     pub fn priority(&self) -> i32 {
         self.priority
     }
@@ -170,7 +170,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// The power factor, cos(phi), as a Decimal value
-    #[must_use] 
+    #[must_use]
     pub fn displacement(&self) -> &Decimal {
         &self.displacement
     }
@@ -180,7 +180,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// The power factor, cos(phi), as an f64 value, or 0.0 if conversion fails
-    #[must_use] 
+    #[must_use]
     pub fn displacement_as_f64(&self) -> f64 {
         self.displacement.to_f64().unwrap_or(0.0)
     }
@@ -218,7 +218,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// True when absorbing reactive power (under-excited), false when injecting reactive power (over-excited)
-    #[must_use] 
+    #[must_use]
     pub fn excitation(&self) -> bool {
         self.excitation
     }
@@ -242,7 +242,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// An optional reference to the time when this setting becomes active
-    #[must_use] 
+    #[must_use]
     pub fn start_time(&self) -> Option<&DateTime<Utc>> {
         self.start_time.as_ref()
     }
@@ -266,7 +266,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// An optional reference to the duration of the setting in seconds
-    #[must_use] 
+    #[must_use]
     pub fn duration(&self) -> Option<&Decimal> {
         self.duration.as_ref()
     }
@@ -276,9 +276,11 @@ impl FixedPFType {
     /// # Returns
     ///
     /// The duration of the setting in seconds as an f64 value, or None if not set or conversion fails
-    #[must_use] 
+    #[must_use]
     pub fn duration_as_f64(&self) -> Option<f64> {
-        self.duration.as_ref().and_then(rust_decimal::prelude::ToPrimitive::to_f64)
+        self.duration
+            .as_ref()
+            .and_then(rust_decimal::prelude::ToPrimitive::to_f64)
     }
 
     /// Sets the duration.
@@ -314,7 +316,7 @@ impl FixedPFType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

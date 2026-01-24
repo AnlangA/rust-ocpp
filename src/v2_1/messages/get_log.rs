@@ -42,7 +42,7 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(log: LogParametersType, log_type: LogEnumType, request_id: i32) -> Self {
         Self {
             log,
@@ -131,7 +131,7 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// The log field
-    #[must_use] 
+    #[must_use]
     pub fn get_log(&self) -> &LogParametersType {
         &self.log
     }
@@ -141,7 +141,7 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// The `log_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_log_type(&self) -> &LogEnumType {
         &self.log_type
     }
@@ -151,7 +151,7 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// The Id of this request
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -161,7 +161,7 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// This specifies how many times the Charging Station must retry to upload the log before giving up. If this field is not present, it is left to Charging Station to decide how many times it wants to retry. If the value is 0, it means: no retries.
-    #[must_use] 
+    #[must_use]
     pub fn get_retries(&self) -> Option<&i32> {
         self.retries.as_ref()
     }
@@ -171,7 +171,7 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// The interval in seconds after which a retry may be attempted. If this field is not present, it is left to Charging Station to decide how long to wait between attempts.
-    #[must_use] 
+    #[must_use]
     pub fn get_retry_interval(&self) -> Option<&i32> {
         self.retry_interval.as_ref()
     }
@@ -181,7 +181,7 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -193,7 +193,7 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_retries(mut self, retries: i32) -> Self {
         self.retries = Some(retries);
         self
@@ -206,7 +206,7 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_retry_interval(mut self, retry_interval: i32) -> Self {
         self.retry_interval = Some(retry_interval);
         self
@@ -219,12 +219,11 @@ impl GetLogRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetLog` response.
@@ -258,7 +257,7 @@ impl GetLogResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: LogStatusEnumType) -> Self {
         Self {
             status,
@@ -321,7 +320,7 @@ impl GetLogResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &LogStatusEnumType {
         &self.status
     }
@@ -331,7 +330,7 @@ impl GetLogResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -341,7 +340,7 @@ impl GetLogResponse {
     /// # Returns
     ///
     /// This contains the name of the log file that will be uploaded. This field is not present when no logging information is available.
-    #[must_use] 
+    #[must_use]
     pub fn get_filename(&self) -> Option<&String> {
         self.filename.as_ref()
     }
@@ -351,7 +350,7 @@ impl GetLogResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -363,7 +362,7 @@ impl GetLogResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -376,7 +375,7 @@ impl GetLogResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_filename(mut self, filename: String) -> Self {
         self.filename = Some(filename);
         self
@@ -389,12 +388,11 @@ impl GetLogResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -411,16 +409,12 @@ mod tests {
     }
 
     // Tests for GetLogRequest
-    
+
     #[test]
     fn test_get_log_request_new() {
         let log_params = create_test_log_parameters();
-        let request = GetLogRequest::new(
-            log_params.clone(),
-            LogEnumType::DiagnosticsLog,
-            42
-        );
-        
+        let request = GetLogRequest::new(log_params.clone(), LogEnumType::DiagnosticsLog, 42);
+
         assert_eq!(request.log.remote_location, "https://example.com/logs");
         assert_eq!(request.log_type, LogEnumType::DiagnosticsLog);
         assert_eq!(request.request_id, 42);
@@ -432,29 +426,25 @@ mod tests {
     #[test]
     fn test_get_log_request_with_optional_fields() {
         let log_params = create_test_log_parameters();
-        let request = GetLogRequest::new(
-            log_params,
-            LogEnumType::SecurityLog,
-            123
-        )
-        .with_retries(3)
-        .with_retry_interval(60)
-        .with_custom_data(CustomDataType::new("TestVendor".to_string()));
-        
+        let request = GetLogRequest::new(log_params, LogEnumType::SecurityLog, 123)
+            .with_retries(3)
+            .with_retry_interval(60)
+            .with_custom_data(CustomDataType::new("TestVendor".to_string()));
+
         assert_eq!(request.retries, Some(3));
         assert_eq!(request.retry_interval, Some(60));
         assert!(request.custom_data.is_some());
-        assert_eq!(request.custom_data.as_ref().unwrap().vendor_id, "TestVendor");
+        assert_eq!(
+            request.custom_data.as_ref().unwrap().vendor_id,
+            "TestVendor"
+        );
     }
 
     #[test]
     fn test_get_log_request_setters() {
-        let mut request = GetLogRequest::new(
-            create_test_log_parameters(),
-            LogEnumType::DiagnosticsLog,
-            1
-        );
-        
+        let mut request =
+            GetLogRequest::new(create_test_log_parameters(), LogEnumType::DiagnosticsLog, 1);
+
         let new_log_params = LogParametersType::new("https://newlocation.com/logs".to_string());
         request.set_log(new_log_params);
         request.set_log_type(LogEnumType::SecurityLog);
@@ -462,7 +452,7 @@ mod tests {
         request.set_retries(Some(5));
         request.set_retry_interval(Some(120));
         request.set_custom_data(Some(CustomDataType::new("NewVendor".to_string())));
-        
+
         assert_eq!(request.log.remote_location, "https://newlocation.com/logs");
         assert_eq!(request.log_type, LogEnumType::SecurityLog);
         assert_eq!(request.request_id, 999);
@@ -474,15 +464,14 @@ mod tests {
     #[test]
     fn test_get_log_request_getters() {
         let log_params = create_test_log_parameters();
-        let request = GetLogRequest::new(
-            log_params.clone(),
-            LogEnumType::DiagnosticsLog,
-            42
-        )
-        .with_retries(3)
-        .with_retry_interval(60);
-        
-        assert_eq!(request.get_log().remote_location, log_params.remote_location);
+        let request = GetLogRequest::new(log_params.clone(), LogEnumType::DiagnosticsLog, 42)
+            .with_retries(3)
+            .with_retry_interval(60);
+
+        assert_eq!(
+            request.get_log().remote_location,
+            log_params.remote_location
+        );
         assert_eq!(*request.get_log_type(), LogEnumType::DiagnosticsLog);
         assert_eq!(*request.get_request_id(), 42);
         assert_eq!(request.get_retries(), Some(&3));
@@ -493,15 +482,11 @@ mod tests {
     #[test]
     fn test_get_log_request_serialization() {
         let log_params = create_test_log_parameters();
-        let request = GetLogRequest::new(
-            log_params,
-            LogEnumType::SecurityLog,
-            123
-        );
-        
+        let request = GetLogRequest::new(log_params, LogEnumType::SecurityLog, 123);
+
         let json = serde_json::to_string(&request).unwrap();
         let parsed: GetLogRequest = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(request, parsed);
     }
 
@@ -518,9 +503,9 @@ mod tests {
             "retries": 3,
             "retryInterval": 60
         }"#;
-        
+
         let request: GetLogRequest = serde_json::from_str(json).unwrap();
-        
+
         assert_eq!(request.log.remote_location, "https://example.com/logs");
         assert_eq!(request.log_type, LogEnumType::DiagnosticsLog);
         assert_eq!(request.request_id, 42);
@@ -533,7 +518,7 @@ mod tests {
         let request = GetLogRequest::new(
             create_test_log_parameters(),
             LogEnumType::DiagnosticsLog,
-            -1  // Negative request ID
+            -1, // Negative request ID
         );
 
         // Negative request_id is valid (schema has no minimum constraint)
@@ -545,10 +530,10 @@ mod tests {
         let mut request = GetLogRequest::new(
             create_test_log_parameters(),
             LogEnumType::DiagnosticsLog,
-            42
+            42,
         );
         request.set_retries(Some(-1));
-        
+
         assert!(request.validate().is_err());
     }
 
@@ -557,20 +542,20 @@ mod tests {
         let request = GetLogRequest::new(
             create_test_log_parameters(),
             LogEnumType::DiagnosticsLog,
-            42
+            42,
         )
-        .with_retries(0);  // Zero retries is valid (means no retries)
-        
+        .with_retries(0); // Zero retries is valid (means no retries)
+
         assert!(request.validate().is_ok());
         assert_eq!(request.retries, Some(0));
     }
 
     // Tests for GetLogResponse
-    
+
     #[test]
     fn test_get_log_response_new() {
         let response = GetLogResponse::new(LogStatusEnumType::Accepted);
-        
+
         assert_eq!(response.status, LogStatusEnumType::Accepted);
         assert_eq!(response.status_info, None);
         assert_eq!(response.filename, None);
@@ -580,37 +565,48 @@ mod tests {
     #[test]
     fn test_get_log_response_with_optional_fields() {
         let response = GetLogResponse::new(LogStatusEnumType::Accepted)
-            .with_status_info(StatusInfoType::new("Success".to_string())
-                .with_additional_info("Log file ready for upload".to_string()))
+            .with_status_info(
+                StatusInfoType::new("Success".to_string())
+                    .with_additional_info("Log file ready for upload".to_string()),
+            )
             .with_filename("chargepoint_20231231_235959.log".to_string())
             .with_custom_data(CustomDataType::new("TestVendor".to_string()));
-        
+
         assert!(response.status_info.is_some());
-        assert_eq!(response.status_info.as_ref().unwrap().reason_code, "Success");
-        assert_eq!(response.filename, Some("chargepoint_20231231_235959.log".to_string()));
+        assert_eq!(
+            response.status_info.as_ref().unwrap().reason_code,
+            "Success"
+        );
+        assert_eq!(
+            response.filename,
+            Some("chargepoint_20231231_235959.log".to_string())
+        );
         assert!(response.custom_data.is_some());
     }
 
     #[test]
     fn test_get_log_response_setters() {
         let mut response = GetLogResponse::new(LogStatusEnumType::Accepted);
-        
+
         response.set_status(LogStatusEnumType::Rejected);
         response.set_status_info(Some(StatusInfoType::new("NotSupported".to_string())));
         response.set_filename(Some("system.log".to_string()));
         response.set_custom_data(Some(CustomDataType::new("NewVendor".to_string())));
-        
+
         assert_eq!(response.status, LogStatusEnumType::Rejected);
         assert!(response.status_info.is_some());
         assert_eq!(response.filename, Some("system.log".to_string()));
-        assert_eq!(response.custom_data.as_ref().unwrap().vendor_id, "NewVendor");
+        assert_eq!(
+            response.custom_data.as_ref().unwrap().vendor_id,
+            "NewVendor"
+        );
     }
 
     #[test]
     fn test_get_log_response_getters() {
-        let response = GetLogResponse::new(LogStatusEnumType::Accepted)
-            .with_filename("test.log".to_string());
-        
+        let response =
+            GetLogResponse::new(LogStatusEnumType::Accepted).with_filename("test.log".to_string());
+
         assert_eq!(*response.get_status(), LogStatusEnumType::Accepted);
         assert_eq!(response.get_status_info(), None);
         assert_eq!(response.get_filename(), Some(&"test.log".to_string()));
@@ -621,10 +617,10 @@ mod tests {
     fn test_get_log_response_serialization() {
         let response = GetLogResponse::new(LogStatusEnumType::Accepted)
             .with_filename("diagnostics.log".to_string());
-        
+
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetLogResponse = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(response, parsed);
     }
 
@@ -634,9 +630,9 @@ mod tests {
             "status": "Accepted",
             "filename": "security_20231231.log"
         }"#;
-        
+
         let response: GetLogResponse = serde_json::from_str(json).unwrap();
-        
+
         assert_eq!(response.status, LogStatusEnumType::Accepted);
         assert_eq!(response.filename, Some("security_20231231.log".to_string()));
         assert_eq!(response.status_info, None);
@@ -645,9 +641,9 @@ mod tests {
 
     #[test]
     fn test_get_log_response_validation_filename_too_long() {
-        let response = GetLogResponse::new(LogStatusEnumType::Accepted)
-            .with_filename("a".repeat(256));  // 256 characters, exceeds max length of 255
-        
+        let response =
+            GetLogResponse::new(LogStatusEnumType::Accepted).with_filename("a".repeat(256)); // 256 characters, exceeds max length of 255
+
         assert!(response.validate().is_err());
     }
 
@@ -659,7 +655,7 @@ mod tests {
             LogStatusEnumType::Rejected,
             LogStatusEnumType::AcceptedCanceled,
         ];
-        
+
         for status in statuses {
             let response = GetLogResponse::new(status.clone());
             assert_eq!(response.status, status);
@@ -669,17 +665,10 @@ mod tests {
     #[test]
     fn test_get_log_request_all_log_types() {
         // Test with different log types
-        let log_types = vec![
-            LogEnumType::DiagnosticsLog,
-            LogEnumType::SecurityLog,
-        ];
-        
+        let log_types = vec![LogEnumType::DiagnosticsLog, LogEnumType::SecurityLog];
+
         for log_type in log_types {
-            let request = GetLogRequest::new(
-                create_test_log_parameters(),
-                log_type.clone(),
-                42
-            );
+            let request = GetLogRequest::new(create_test_log_parameters(), log_type.clone(), 42);
             assert_eq!(request.log_type, log_type);
         }
     }
@@ -690,54 +679,63 @@ mod tests {
             .with_oldest_timestamp(Utc.with_ymd_and_hms(2023, 1, 1, 0, 0, 0).unwrap())
             .with_latest_timestamp(Utc.with_ymd_and_hms(2023, 12, 31, 23, 59, 59).unwrap())
             .with_custom_data(CustomDataType::new("LogVendor".to_string()));
-            
-        let request = GetLogRequest::new(
-            log_params,
-            LogEnumType::SecurityLog,
-            999
-        )
-        .with_retries(5)
-        .with_retry_interval(300)
-        .with_custom_data(CustomDataType::new("RequestVendor".to_string()));
-        
+
+        let request = GetLogRequest::new(log_params, LogEnumType::SecurityLog, 999)
+            .with_retries(5)
+            .with_retry_interval(300)
+            .with_custom_data(CustomDataType::new("RequestVendor".to_string()));
+
         let json = serde_json::to_string(&request).unwrap();
         let parsed: GetLogRequest = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(request, parsed);
         assert_eq!(parsed.retries, Some(5));
         assert_eq!(parsed.retry_interval, Some(300));
-        assert_eq!(parsed.log.custom_data.as_ref().unwrap().vendor_id, "LogVendor");
-        assert_eq!(parsed.custom_data.as_ref().unwrap().vendor_id, "RequestVendor");
+        assert_eq!(
+            parsed.log.custom_data.as_ref().unwrap().vendor_id,
+            "LogVendor"
+        );
+        assert_eq!(
+            parsed.custom_data.as_ref().unwrap().vendor_id,
+            "RequestVendor"
+        );
     }
 
     #[test]
     fn test_get_log_response_json_round_trip_with_all_fields() {
         let response = GetLogResponse::new(LogStatusEnumType::Accepted)
-            .with_status_info(StatusInfoType::new("LogReady".to_string())
-                .with_additional_info("Log file has been prepared and is ready for upload".to_string()))
+            .with_status_info(
+                StatusInfoType::new("LogReady".to_string()).with_additional_info(
+                    "Log file has been prepared and is ready for upload".to_string(),
+                ),
+            )
             .with_filename("charging_station_diagnostics_20231231.log".to_string())
             .with_custom_data(CustomDataType::new("ResponseVendor".to_string()));
-        
+
         let json = serde_json::to_string(&response).unwrap();
         let parsed: GetLogResponse = serde_json::from_str(&json).unwrap();
-        
+
         assert_eq!(response, parsed);
         assert_eq!(parsed.status_info.as_ref().unwrap().reason_code, "LogReady");
-        assert_eq!(parsed.status_info.as_ref().unwrap().additional_info, 
-                   Some("Log file has been prepared and is ready for upload".to_string()));
-        assert_eq!(parsed.filename, Some("charging_station_diagnostics_20231231.log".to_string()));
-        assert_eq!(parsed.custom_data.as_ref().unwrap().vendor_id, "ResponseVendor");
+        assert_eq!(
+            parsed.status_info.as_ref().unwrap().additional_info,
+            Some("Log file has been prepared and is ready for upload".to_string())
+        );
+        assert_eq!(
+            parsed.filename,
+            Some("charging_station_diagnostics_20231231.log".to_string())
+        );
+        assert_eq!(
+            parsed.custom_data.as_ref().unwrap().vendor_id,
+            "ResponseVendor"
+        );
     }
 
     #[test]
     fn test_get_log_request_with_minimal_log_parameters() {
         let log_params = LogParametersType::new("ftp://logs.example.com/upload".to_string());
-        let request = GetLogRequest::new(
-            log_params,
-            LogEnumType::DiagnosticsLog,
-            1
-        );
-        
+        let request = GetLogRequest::new(log_params, LogEnumType::DiagnosticsLog, 1);
+
         assert_eq!(request.log.remote_location, "ftp://logs.example.com/upload");
         assert_eq!(request.log.oldest_timestamp, None);
         assert_eq!(request.log.latest_timestamp, None);

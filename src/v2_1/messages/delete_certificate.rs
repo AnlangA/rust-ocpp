@@ -25,7 +25,7 @@ impl DeleteCertificateRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(certificate_hash_data: CertificateHashDataType) -> Self {
         Self {
             certificate_hash_data,
@@ -40,7 +40,10 @@ impl DeleteCertificateRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_certificate_hash_data(&mut self, certificate_hash_data: CertificateHashDataType) -> &mut Self {
+    pub fn set_certificate_hash_data(
+        &mut self,
+        certificate_hash_data: CertificateHashDataType,
+    ) -> &mut Self {
         self.certificate_hash_data = certificate_hash_data;
         self
     }
@@ -62,7 +65,7 @@ impl DeleteCertificateRequest {
     /// # Returns
     ///
     /// The `certificate_hash_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_hash_data(&self) -> &CertificateHashDataType {
         &self.certificate_hash_data
     }
@@ -72,7 +75,7 @@ impl DeleteCertificateRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -84,12 +87,11 @@ impl DeleteCertificateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `DeleteCertificate` response.
@@ -117,7 +119,7 @@ impl DeleteCertificateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: DeleteCertificateStatusEnumType) -> Self {
         Self {
             status,
@@ -167,7 +169,7 @@ impl DeleteCertificateResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &DeleteCertificateStatusEnumType {
         &self.status
     }
@@ -177,7 +179,7 @@ impl DeleteCertificateResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -187,7 +189,7 @@ impl DeleteCertificateResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -199,7 +201,7 @@ impl DeleteCertificateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -212,12 +214,11 @@ impl DeleteCertificateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -318,8 +319,14 @@ mod tests {
         }"#;
 
         let request: DeleteCertificateRequest = serde_json::from_str(json).unwrap();
-        assert_eq!(request.certificate_hash_data.hash_algorithm(), &HashAlgorithmEnumType::SHA256);
-        assert_eq!(request.certificate_hash_data.issuer_name_hash(), "issuer_name_hash");
+        assert_eq!(
+            request.certificate_hash_data.hash_algorithm(),
+            &HashAlgorithmEnumType::SHA256
+        );
+        assert_eq!(
+            request.certificate_hash_data.issuer_name_hash(),
+            "issuer_name_hash"
+        );
         assert_eq!(request.custom_data, None);
     }
 
@@ -335,8 +342,7 @@ mod tests {
     fn test_delete_certificate_request_json_round_trip() {
         let cert_hash_data = create_test_certificate_hash_data();
         let custom_data = create_test_custom_data();
-        let request = DeleteCertificateRequest::new(cert_hash_data)
-            .with_custom_data(custom_data);
+        let request = DeleteCertificateRequest::new(cert_hash_data).with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).unwrap();
         let parsed: DeleteCertificateRequest = serde_json::from_str(&json).unwrap();
@@ -383,7 +389,8 @@ mod tests {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        let mut response = DeleteCertificateResponse::new(DeleteCertificateStatusEnumType::Accepted);
+        let mut response =
+            DeleteCertificateResponse::new(DeleteCertificateStatusEnumType::Accepted);
         response.set_status(DeleteCertificateStatusEnumType::Failed);
         response.set_status_info(Some(status_info.clone()));
         response.set_custom_data(Some(custom_data.clone()));
@@ -401,7 +408,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &DeleteCertificateStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &DeleteCertificateStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }

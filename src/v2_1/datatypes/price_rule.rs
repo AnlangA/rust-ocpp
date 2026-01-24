@@ -53,7 +53,7 @@ impl PriceRuleType {
     /// # Returns
     ///
     /// A new instance of `PriceRuleType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(energy_fee: RationalNumberType, power_range_start: RationalNumberType) -> Self {
         Self {
             custom_data: None,
@@ -75,7 +75,7 @@ impl PriceRuleType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -86,7 +86,7 @@ impl PriceRuleType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -110,7 +110,7 @@ impl PriceRuleType {
     /// # Returns
     ///
     /// The duration of the parking fee period in seconds, if set
-    #[must_use] 
+    #[must_use]
     pub fn parking_fee_period(&self) -> Option<i32> {
         self.parking_fee_period
     }
@@ -134,7 +134,7 @@ impl PriceRuleType {
     /// # Returns
     ///
     /// The number of grams of CO2 per kWh, if set
-    #[must_use] 
+    #[must_use]
     pub fn carbon_dioxide_emission(&self) -> Option<i32> {
         self.carbon_dioxide_emission
     }
@@ -161,7 +161,7 @@ impl PriceRuleType {
     /// # Returns
     ///
     /// The percentage of power from renewable resources, if set
-    #[must_use] 
+    #[must_use]
     pub fn renewable_generation_percentage(&self) -> Option<i32> {
         self.renewable_generation_percentage
     }
@@ -188,7 +188,7 @@ impl PriceRuleType {
     /// # Returns
     ///
     /// The energy fee for this price rule
-    #[must_use] 
+    #[must_use]
     pub fn energy_fee(&self) -> &RationalNumberType {
         &self.energy_fee
     }
@@ -212,7 +212,7 @@ impl PriceRuleType {
     /// # Returns
     ///
     /// The parking fee for this price rule, if set
-    #[must_use] 
+    #[must_use]
     pub fn parking_fee(&self) -> Option<&RationalNumberType> {
         self.parking_fee.as_ref()
     }
@@ -236,7 +236,7 @@ impl PriceRuleType {
     /// # Returns
     ///
     /// The start of the power range for this price rule
-    #[must_use] 
+    #[must_use]
     pub fn power_range_start(&self) -> &RationalNumberType {
         &self.power_range_start
     }

@@ -10,4 +10,3 @@ pub enum ClearMessageStatusEnumType {
     Unknown,
     Rejected,
 }
-

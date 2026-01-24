@@ -41,7 +41,7 @@ impl TaxRateType {
     /// # Returns
     ///
     /// A new instance of `TaxRateType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(tax: Decimal, type_: String) -> Self {
         Self {
             type_,
@@ -60,7 +60,7 @@ impl TaxRateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_stack(mut self, stack: i32) -> Self {
         self.stack = Some(stack);
         self
@@ -75,7 +75,7 @@ impl TaxRateType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -86,7 +86,7 @@ impl TaxRateType {
     /// # Returns
     ///
     /// The type of this tax
-    #[must_use] 
+    #[must_use]
     pub fn type_(&self) -> &str {
         &self.type_
     }
@@ -110,7 +110,7 @@ impl TaxRateType {
     /// # Returns
     ///
     /// The tax percentage
-    #[must_use] 
+    #[must_use]
     pub fn tax(&self) -> Decimal {
         self.tax
     }
@@ -134,7 +134,7 @@ impl TaxRateType {
     /// # Returns
     ///
     /// An optional stack level for this type of tax
-    #[must_use] 
+    #[must_use]
     pub fn stack(&self) -> Option<i32> {
         self.stack
     }
@@ -158,7 +158,7 @@ impl TaxRateType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

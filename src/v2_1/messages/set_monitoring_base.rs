@@ -22,7 +22,7 @@ impl SetMonitoringBaseRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(monitoring_base: MonitoringBaseEnumType) -> Self {
         Self {
             monitoring_base,
@@ -59,7 +59,7 @@ impl SetMonitoringBaseRequest {
     /// # Returns
     ///
     /// The `monitoring_base` field
-    #[must_use] 
+    #[must_use]
     pub fn get_monitoring_base(&self) -> &MonitoringBaseEnumType {
         &self.monitoring_base
     }
@@ -69,7 +69,7 @@ impl SetMonitoringBaseRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -81,12 +81,11 @@ impl SetMonitoringBaseRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `SetMonitoringBase` response.
@@ -112,7 +111,7 @@ impl SetMonitoringBaseResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericDeviceModelStatusEnumType) -> Self {
         Self {
             status,
@@ -162,7 +161,7 @@ impl SetMonitoringBaseResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericDeviceModelStatusEnumType {
         &self.status
     }
@@ -172,7 +171,7 @@ impl SetMonitoringBaseResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -182,7 +181,7 @@ impl SetMonitoringBaseResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -194,7 +193,7 @@ impl SetMonitoringBaseResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -207,12 +206,11 @@ impl SetMonitoringBaseResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -233,7 +231,8 @@ mod tests {
         let request = SetMonitoringBaseRequest::new(MonitoringBaseEnumType::FactoryDefault);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: SetMonitoringBaseRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetMonitoringBaseRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(json.contains("\"monitoringBase\":\"FactoryDefault\""));
@@ -260,10 +259,14 @@ mod tests {
         let mut request = SetMonitoringBaseRequest::new(MonitoringBaseEnumType::All);
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        request.set_monitoring_base(MonitoringBaseEnumType::FactoryDefault)
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_monitoring_base(MonitoringBaseEnumType::FactoryDefault)
+            .set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(request.monitoring_base, MonitoringBaseEnumType::FactoryDefault);
+        assert_eq!(
+            request.monitoring_base,
+            MonitoringBaseEnumType::FactoryDefault
+        );
         assert_eq!(request.custom_data, Some(custom_data));
     }
 
@@ -273,7 +276,10 @@ mod tests {
         let request = SetMonitoringBaseRequest::new(MonitoringBaseEnumType::HardWiredOnly)
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(*request.get_monitoring_base(), MonitoringBaseEnumType::HardWiredOnly);
+        assert_eq!(
+            *request.get_monitoring_base(),
+            MonitoringBaseEnumType::HardWiredOnly
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -290,7 +296,8 @@ mod tests {
         let response = SetMonitoringBaseResponse::new(GenericDeviceModelStatusEnumType::Rejected);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: SetMonitoringBaseResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: SetMonitoringBaseResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(json.contains("\"status\":\"Rejected\""));
@@ -300,24 +307,30 @@ mod tests {
     fn test_set_monitoring_base_response_builder_pattern() {
         let status_info = StatusInfoType::new("Monitoring base conflict".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = SetMonitoringBaseResponse::new(GenericDeviceModelStatusEnumType::NotSupported)
-            .with_status_info(status_info.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            SetMonitoringBaseResponse::new(GenericDeviceModelStatusEnumType::NotSupported)
+                .with_status_info(status_info.clone())
+                .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.status, GenericDeviceModelStatusEnumType::NotSupported);
+        assert_eq!(
+            response.status,
+            GenericDeviceModelStatusEnumType::NotSupported
+        );
         assert_eq!(response.status_info, Some(status_info));
         assert_eq!(response.custom_data, Some(custom_data));
     }
 
     #[test]
     fn test_set_monitoring_base_response_setters() {
-        let mut response = SetMonitoringBaseResponse::new(GenericDeviceModelStatusEnumType::Accepted);
+        let mut response =
+            SetMonitoringBaseResponse::new(GenericDeviceModelStatusEnumType::Accepted);
         let status_info = StatusInfoType::new("Updated status".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        response.set_status(GenericDeviceModelStatusEnumType::Rejected)
-                .set_status_info(Some(status_info.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(GenericDeviceModelStatusEnumType::Rejected)
+            .set_status_info(Some(status_info.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, GenericDeviceModelStatusEnumType::Rejected);
         assert_eq!(response.status_info, Some(status_info));
@@ -332,7 +345,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(*response.get_status(), GenericDeviceModelStatusEnumType::Accepted);
+        assert_eq!(
+            *response.get_status(),
+            GenericDeviceModelStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }

@@ -29,7 +29,7 @@ impl RequestBatterySwapRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(id_token: IdTokenType, request_id: i32) -> Self {
         Self {
             id_token,
@@ -79,7 +79,7 @@ impl RequestBatterySwapRequest {
     /// # Returns
     ///
     /// The `id_token` field
-    #[must_use] 
+    #[must_use]
     pub fn get_id_token(&self) -> &IdTokenType {
         &self.id_token
     }
@@ -89,7 +89,7 @@ impl RequestBatterySwapRequest {
     /// # Returns
     ///
     /// Request id to match with `BatterySwapRequest`.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -99,7 +99,7 @@ impl RequestBatterySwapRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -111,12 +111,11 @@ impl RequestBatterySwapRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `BatterySwap` response.
@@ -145,7 +144,7 @@ impl RequestBatterySwapResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -195,7 +194,7 @@ impl RequestBatterySwapResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -205,7 +204,7 @@ impl RequestBatterySwapResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -215,7 +214,7 @@ impl RequestBatterySwapResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -227,7 +226,7 @@ impl RequestBatterySwapResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -240,12 +239,11 @@ impl RequestBatterySwapResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -372,9 +370,10 @@ mod tests {
         let valid_response = RequestBatterySwapResponse::new(GenericStatusEnumType::Accepted);
         assert!(valid_response.validate().is_ok());
 
-        let response_with_all_fields = RequestBatterySwapResponse::new(GenericStatusEnumType::Rejected)
-            .with_status_info(create_test_status_info())
-            .with_custom_data(create_test_custom_data());
+        let response_with_all_fields =
+            RequestBatterySwapResponse::new(GenericStatusEnumType::Rejected)
+                .with_status_info(create_test_status_info())
+                .with_custom_data(create_test_custom_data());
         assert!(response_with_all_fields.validate().is_ok());
     }
 

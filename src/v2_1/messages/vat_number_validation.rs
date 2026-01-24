@@ -29,7 +29,7 @@ impl VatNumberValidationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(vat_number: String) -> Self {
         Self {
             vat_number,
@@ -79,7 +79,7 @@ impl VatNumberValidationRequest {
     /// # Returns
     ///
     /// VAT number to check.
-    #[must_use] 
+    #[must_use]
     pub fn get_vat_number(&self) -> &String {
         &self.vat_number
     }
@@ -89,7 +89,7 @@ impl VatNumberValidationRequest {
     /// # Returns
     ///
     /// EVSE id for which check is done
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -99,7 +99,7 @@ impl VatNumberValidationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -111,7 +111,7 @@ impl VatNumberValidationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -124,12 +124,11 @@ impl VatNumberValidationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `VatNumberValidation` response.
@@ -169,7 +168,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(vat_number: String, status: GenericStatusEnumType) -> Self {
         Self {
             company: None,
@@ -258,7 +257,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// The company field
-    #[must_use] 
+    #[must_use]
     pub fn get_company(&self) -> Option<&AddressType> {
         self.company.as_ref()
     }
@@ -268,7 +267,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -278,7 +277,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// VAT number that was requested.
-    #[must_use] 
+    #[must_use]
     pub fn get_vat_number(&self) -> &String {
         &self.vat_number
     }
@@ -288,7 +287,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// EVSE id for which check was requested.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -298,7 +297,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -308,7 +307,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -320,7 +319,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_company(mut self, company: AddressType) -> Self {
         self.company = Some(company);
         self
@@ -333,7 +332,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -346,7 +345,7 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -359,12 +358,11 @@ impl VatNumberValidationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -392,7 +390,8 @@ mod tests {
         let request = VatNumberValidationRequest::new("FR98765432101".to_string());
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: VatNumberValidationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: VatNumberValidationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -406,8 +405,7 @@ mod tests {
 
     #[test]
     fn test_vat_number_validation_request_with_evse_id() {
-        let request = VatNumberValidationRequest::new("IT12345678901".to_string())
-            .with_evse_id(5);
+        let request = VatNumberValidationRequest::new("IT12345678901".to_string()).with_evse_id(5);
 
         assert_eq!(request.get_evse_id(), Some(&5));
     }
@@ -485,8 +483,8 @@ mod tests {
         assert!(request_single.validate().is_ok());
 
         // Large EVSE ID
-        let request_large_evse = VatNumberValidationRequest::new("TEST123".to_string())
-            .with_evse_id(999999);
+        let request_large_evse =
+            VatNumberValidationRequest::new("TEST123".to_string()).with_evse_id(999999);
         assert!(request_large_evse.validate().is_ok());
     }
 
@@ -508,26 +506,41 @@ mod tests {
 
     #[test]
     fn test_vat_number_validation_response_serialization() {
-        let response = VatNumberValidationResponse::new("FR11223344556".to_string(), GenericStatusEnumType::Rejected);
+        let response = VatNumberValidationResponse::new(
+            "FR11223344556".to_string(),
+            GenericStatusEnumType::Rejected,
+        );
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: VatNumberValidationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: VatNumberValidationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
 
     #[test]
     fn test_vat_number_validation_response_validation() {
-        let response = VatNumberValidationResponse::new("GB999888777".to_string(), GenericStatusEnumType::Accepted);
+        let response = VatNumberValidationResponse::new(
+            "GB999888777".to_string(),
+            GenericStatusEnumType::Accepted,
+        );
 
         assert!(response.validate().is_ok());
     }
 
     #[test]
     fn test_vat_number_validation_response_with_company() {
-        let company = AddressType::new("Test Company".to_string(), "123 Test Street".to_string(), "Test City".to_string(), "Test Country".to_string());
-        let response = VatNumberValidationResponse::new("IT99887766554".to_string(), GenericStatusEnumType::Accepted)
-            .with_company(company.clone());
+        let company = AddressType::new(
+            "Test Company".to_string(),
+            "123 Test Street".to_string(),
+            "Test City".to_string(),
+            "Test Country".to_string(),
+        );
+        let response = VatNumberValidationResponse::new(
+            "IT99887766554".to_string(),
+            GenericStatusEnumType::Accepted,
+        )
+        .with_company(company.clone());
 
         assert_eq!(response.get_company(), Some(&company));
     }
@@ -535,16 +548,22 @@ mod tests {
     #[test]
     fn test_vat_number_validation_response_with_status_info() {
         let status_info = StatusInfoType::new("Validation successful".to_string());
-        let response = VatNumberValidationResponse::new("ES556677889".to_string(), GenericStatusEnumType::Accepted)
-            .with_status_info(status_info.clone());
+        let response = VatNumberValidationResponse::new(
+            "ES556677889".to_string(),
+            GenericStatusEnumType::Accepted,
+        )
+        .with_status_info(status_info.clone());
 
         assert_eq!(response.get_status_info(), Some(&status_info));
     }
 
     #[test]
     fn test_vat_number_validation_response_with_evse_id() {
-        let response = VatNumberValidationResponse::new("NL001122334B56".to_string(), GenericStatusEnumType::Accepted)
-            .with_evse_id(7);
+        let response = VatNumberValidationResponse::new(
+            "NL001122334B56".to_string(),
+            GenericStatusEnumType::Accepted,
+        )
+        .with_evse_id(7);
 
         assert_eq!(response.get_evse_id(), Some(&7));
     }
@@ -552,19 +571,30 @@ mod tests {
     #[test]
     fn test_vat_number_validation_response_with_custom_data() {
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = VatNumberValidationResponse::new("AT123456789".to_string(), GenericStatusEnumType::Rejected)
-            .with_custom_data(custom_data.clone());
+        let response = VatNumberValidationResponse::new(
+            "AT123456789".to_string(),
+            GenericStatusEnumType::Rejected,
+        )
+        .with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
 
     #[test]
     fn test_vat_number_validation_response_set_methods() {
-        let company = AddressType::new("Test Company".to_string(), "123 Test Street".to_string(), "Test City".to_string(), "Test Country".to_string());
+        let company = AddressType::new(
+            "Test Company".to_string(),
+            "123 Test Street".to_string(),
+            "Test City".to_string(),
+            "Test Country".to_string(),
+        );
         let status_info = StatusInfoType::new("Updated info".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let mut response = VatNumberValidationResponse::new("ORIGINAL".to_string(), GenericStatusEnumType::Accepted);
+        let mut response = VatNumberValidationResponse::new(
+            "ORIGINAL".to_string(),
+            GenericStatusEnumType::Accepted,
+        );
 
         response
             .set_company(Some(company.clone()))
@@ -584,15 +614,23 @@ mod tests {
 
     #[test]
     fn test_vat_number_validation_response_builder_pattern() {
-        let company = AddressType::new("Test Company".to_string(), "123 Test Street".to_string(), "Test City".to_string(), "Test Country".to_string());
+        let company = AddressType::new(
+            "Test Company".to_string(),
+            "123 Test Street".to_string(),
+            "Test City".to_string(),
+            "Test Country".to_string(),
+        );
         let status_info = StatusInfoType::new("Builder test".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = VatNumberValidationResponse::new("BUILDER123".to_string(), GenericStatusEnumType::Accepted)
-            .with_company(company.clone())
-            .with_status_info(status_info.clone())
-            .with_evse_id(20)
-            .with_custom_data(custom_data.clone());
+        let response = VatNumberValidationResponse::new(
+            "BUILDER123".to_string(),
+            GenericStatusEnumType::Accepted,
+        )
+        .with_company(company.clone())
+        .with_status_info(status_info.clone())
+        .with_evse_id(20)
+        .with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_company(), Some(&company));
         assert_eq!(response.get_status_info(), Some(&status_info));
@@ -609,12 +647,13 @@ mod tests {
 
         for status in status_types {
             let response = VatNumberValidationResponse::new("TEST123".to_string(), status.clone());
-            
+
             assert_eq!(response.get_status(), &status);
             assert!(response.validate().is_ok());
 
             let json = serde_json::to_string(&response).expect("Failed to serialize");
-            let deserialized: VatNumberValidationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+            let deserialized: VatNumberValidationResponse =
+                serde_json::from_str(&json).expect("Failed to deserialize");
             assert_eq!(response, deserialized);
         }
     }
@@ -622,19 +661,24 @@ mod tests {
     #[test]
     fn test_vat_number_validation_response_vat_number_validation() {
         let max_length_vat = "a".repeat(20); // Max allowed length
-        let response = VatNumberValidationResponse::new(max_length_vat, GenericStatusEnumType::Accepted);
+        let response =
+            VatNumberValidationResponse::new(max_length_vat, GenericStatusEnumType::Accepted);
 
         assert!(response.validate().is_ok());
 
         let too_long_vat = "a".repeat(21); // Exceeds max length
-        let invalid_response = VatNumberValidationResponse::new(too_long_vat, GenericStatusEnumType::Accepted);
+        let invalid_response =
+            VatNumberValidationResponse::new(too_long_vat, GenericStatusEnumType::Accepted);
 
         assert!(invalid_response.validate().is_err());
     }
 
     #[test]
     fn test_vat_number_validation_response_evse_id_validation() {
-        let mut response = VatNumberValidationResponse::new("VALID123".to_string(), GenericStatusEnumType::Accepted);
+        let mut response = VatNumberValidationResponse::new(
+            "VALID123".to_string(),
+            GenericStatusEnumType::Accepted,
+        );
         response.set_evse_id(Some(0)); // Min allowed value
 
         assert!(response.validate().is_ok());
@@ -652,7 +696,8 @@ mod tests {
             .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: VatNumberValidationRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: VatNumberValidationRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -660,17 +705,26 @@ mod tests {
 
     #[test]
     fn test_vat_number_validation_response_json_round_trip() {
-        let company = AddressType::new("Test Company".to_string(), "123 Test Street".to_string(), "Test City".to_string(), "Test Country".to_string());
+        let company = AddressType::new(
+            "Test Company".to_string(),
+            "123 Test Street".to_string(),
+            "Test City".to_string(),
+            "Test Country".to_string(),
+        );
         let status_info = StatusInfoType::new("Round trip test".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        let response = VatNumberValidationResponse::new("ROUNDTRIP456".to_string(), GenericStatusEnumType::Rejected)
-            .with_company(company)
-            .with_status_info(status_info)
-            .with_evse_id(30)
-            .with_custom_data(custom_data);
+        let response = VatNumberValidationResponse::new(
+            "ROUNDTRIP456".to_string(),
+            GenericStatusEnumType::Rejected,
+        )
+        .with_company(company)
+        .with_status_info(status_info)
+        .with_evse_id(30)
+        .with_custom_data(custom_data);
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: VatNumberValidationResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: VatNumberValidationResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
         assert!(deserialized.validate().is_ok());
@@ -678,15 +732,23 @@ mod tests {
 
     #[test]
     fn test_vat_number_validation_response_with_all_optional_fields() {
-        let company = AddressType::new("Test Company".to_string(), "123 Test Street".to_string(), "Test City".to_string(), "Test Country".to_string());
+        let company = AddressType::new(
+            "Test Company".to_string(),
+            "123 Test Street".to_string(),
+            "Test City".to_string(),
+            "Test Country".to_string(),
+        );
         let status_info = StatusInfoType::new("All fields test".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
 
-        let response = VatNumberValidationResponse::new("ALLFIELDS123".to_string(), GenericStatusEnumType::Accepted)
-            .with_company(company.clone())
-            .with_status_info(status_info.clone())
-            .with_evse_id(35)
-            .with_custom_data(custom_data.clone());
+        let response = VatNumberValidationResponse::new(
+            "ALLFIELDS123".to_string(),
+            GenericStatusEnumType::Accepted,
+        )
+        .with_company(company.clone())
+        .with_status_info(status_info.clone())
+        .with_evse_id(35)
+        .with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_vat_number(), "ALLFIELDS123");
         assert_eq!(response.get_status(), &GenericStatusEnumType::Accepted);
@@ -706,7 +768,8 @@ mod tests {
 
     #[test]
     fn test_vat_number_validation_response_empty_vat_number() {
-        let response = VatNumberValidationResponse::new("".to_string(), GenericStatusEnumType::Accepted);
+        let response =
+            VatNumberValidationResponse::new("".to_string(), GenericStatusEnumType::Accepted);
 
         assert!(response.validate().is_ok()); // Empty string is allowed
     }
@@ -722,14 +785,22 @@ mod tests {
 
     #[test]
     fn test_vat_number_validation_response_with_nested_validation() {
-        let company = AddressType::new("Test Company".to_string(), "123 Test Street".to_string(), "Test City".to_string(), "Test Country".to_string());
+        let company = AddressType::new(
+            "Test Company".to_string(),
+            "123 Test Street".to_string(),
+            "Test City".to_string(),
+            "Test Country".to_string(),
+        );
         let status_info = StatusInfoType::new("Nested test".to_string());
         let custom_data = CustomDataType::new("TestVendor".to_string());
-        
-        let response = VatNumberValidationResponse::new("NESTED123".to_string(), GenericStatusEnumType::Accepted)
-            .with_company(company)
-            .with_status_info(status_info)
-            .with_custom_data(custom_data);
+
+        let response = VatNumberValidationResponse::new(
+            "NESTED123".to_string(),
+            GenericStatusEnumType::Accepted,
+        )
+        .with_company(company)
+        .with_status_info(status_info)
+        .with_custom_data(custom_data);
 
         assert!(response.validate().is_ok());
     }

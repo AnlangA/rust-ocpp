@@ -1,8 +1,5 @@
 use crate::v2_1::datatypes::{
-    CertificateHashDataType,
-    CustomDataType,
-    IdTokenType,
-    StatusInfoType,
+    CertificateHashDataType, CustomDataType, IdTokenType, StatusInfoType,
 };
 use crate::v2_1::enumerations::CustomerInformationStatusEnumType;
 use serde::{Deserialize, Serialize};
@@ -53,7 +50,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32, report: bool, clear: bool) -> Self {
         Self {
             customer_certificate: None,
@@ -73,7 +70,10 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_customer_certificate(&mut self, customer_certificate: Option<CertificateHashDataType>) -> &mut Self {
+    pub fn set_customer_certificate(
+        &mut self,
+        customer_certificate: Option<CertificateHashDataType>,
+    ) -> &mut Self {
         self.customer_certificate = customer_certificate;
         self
     }
@@ -155,7 +155,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// The `customer_certificate` field
-    #[must_use] 
+    #[must_use]
     pub fn get_customer_certificate(&self) -> Option<&CertificateHashDataType> {
         self.customer_certificate.as_ref()
     }
@@ -165,7 +165,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// The `id_token` field
-    #[must_use] 
+    #[must_use]
     pub fn get_id_token(&self) -> Option<&IdTokenType> {
         self.id_token.as_ref()
     }
@@ -175,7 +175,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// The Id of the request.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -185,7 +185,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// Flag indicating whether the Charging Station should return `NotifyCustomerInformationRequest` messages containing information about the customer referred to.
-    #[must_use] 
+    #[must_use]
     pub fn get_report(&self) -> &bool {
         &self.report
     }
@@ -195,7 +195,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// Flag indicating whether the Charging Station should clear all information about the customer referred to.
-    #[must_use] 
+    #[must_use]
     pub fn get_clear(&self) -> &bool {
         &self.clear
     }
@@ -205,7 +205,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// A (e.g. vendor specific) identifier of the customer this request refers to. This field contains a custom identifier other than `IdToken` and Certificate. One of the possible identifiers (customerIdentifier, customerIdToken or customerCertificate) should be in the request message.
-    #[must_use] 
+    #[must_use]
     pub fn get_customer_identifier(&self) -> Option<&String> {
         self.customer_identifier.as_ref()
     }
@@ -215,7 +215,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -227,8 +227,11 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
-    pub fn with_customer_certificate(mut self, customer_certificate: CertificateHashDataType) -> Self {
+    #[must_use]
+    pub fn with_customer_certificate(
+        mut self,
+        customer_certificate: CertificateHashDataType,
+    ) -> Self {
         self.customer_certificate = Some(customer_certificate);
         self
     }
@@ -240,7 +243,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_id_token(mut self, id_token: IdTokenType) -> Self {
         self.id_token = Some(id_token);
         self
@@ -253,7 +256,7 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_customer_identifier(mut self, customer_identifier: String) -> Self {
         self.customer_identifier = Some(customer_identifier);
         self
@@ -266,12 +269,11 @@ impl CustomerInformationRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `CustomerInformation` response.
@@ -299,7 +301,7 @@ impl CustomerInformationResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: CustomerInformationStatusEnumType) -> Self {
         Self {
             status,
@@ -349,7 +351,7 @@ impl CustomerInformationResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &CustomerInformationStatusEnumType {
         &self.status
     }
@@ -359,7 +361,7 @@ impl CustomerInformationResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -369,7 +371,7 @@ impl CustomerInformationResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -381,7 +383,7 @@ impl CustomerInformationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -394,12 +396,11 @@ impl CustomerInformationResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -534,13 +535,14 @@ mod tests {
         let customer_identifier = "new_customer_456".to_string();
         let custom_data = create_test_custom_data();
 
-        request.set_request_id(new_request_id)
-               .set_report(new_report)
-               .set_clear(new_clear)
-               .set_customer_certificate(Some(certificate.clone()))
-               .set_id_token(Some(id_token.clone()))
-               .set_customer_identifier(Some(customer_identifier.clone()))
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_request_id(new_request_id)
+            .set_report(new_report)
+            .set_clear(new_clear)
+            .set_customer_certificate(Some(certificate.clone()))
+            .set_id_token(Some(id_token.clone()))
+            .set_customer_identifier(Some(customer_identifier.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.request_id, new_request_id);
         assert_eq!(request.report, new_report);
@@ -572,7 +574,10 @@ mod tests {
         assert_eq!(request.get_clear(), &clear);
         assert_eq!(request.get_customer_certificate(), Some(&certificate));
         assert_eq!(request.get_id_token(), Some(&id_token));
-        assert_eq!(request.get_customer_identifier(), Some(&customer_identifier));
+        assert_eq!(
+            request.get_customer_identifier(),
+            Some(&customer_identifier)
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -638,8 +643,8 @@ mod tests {
         let status = CustomerInformationStatusEnumType::Rejected;
         let status_info = create_test_status_info();
 
-        let response = CustomerInformationResponse::new(status.clone())
-            .with_status_info(status_info.clone());
+        let response =
+            CustomerInformationResponse::new(status.clone()).with_status_info(status_info.clone());
 
         assert_eq!(response.status, status);
         assert_eq!(response.status_info, Some(status_info));
@@ -651,8 +656,8 @@ mod tests {
         let status = CustomerInformationStatusEnumType::Invalid;
         let custom_data = create_test_custom_data();
 
-        let response = CustomerInformationResponse::new(status.clone())
-            .with_custom_data(custom_data.clone());
+        let response =
+            CustomerInformationResponse::new(status.clone()).with_custom_data(custom_data.clone());
 
         assert_eq!(response.status, status);
         assert_eq!(response.status_info, None);
@@ -661,15 +666,17 @@ mod tests {
 
     #[test]
     fn test_customer_information_response_setters() {
-        let mut response = CustomerInformationResponse::new(CustomerInformationStatusEnumType::Accepted);
+        let mut response =
+            CustomerInformationResponse::new(CustomerInformationStatusEnumType::Accepted);
 
         let new_status = CustomerInformationStatusEnumType::Rejected;
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        response.set_status(new_status.clone())
-                .set_status_info(Some(status_info.clone()))
-                .set_custom_data(Some(custom_data.clone()));
+        response
+            .set_status(new_status.clone())
+            .set_status_info(Some(status_info.clone()))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(response.status, new_status);
         assert_eq!(response.status_info, Some(status_info));
@@ -801,12 +808,7 @@ mod tests {
 
     #[test]
     fn test_customer_information_request_boolean_combinations() {
-        let test_cases = vec![
-            (true, true),
-            (true, false),
-            (false, true),
-            (false, false),
-        ];
+        let test_cases = vec![(true, true), (true, false), (false, true), (false, false)];
 
         for (report, clear) in test_cases {
             let request = CustomerInformationRequest::new(1, report, clear);

@@ -1,6 +1,5 @@
 use super::{
-    component::ComponentType, custom_data::CustomDataType,
-    message_content::MessageContentType,
+    component::ComponentType, custom_data::CustomDataType, message_content::MessageContentType,
 };
 use crate::v2_1::enumerations::{MessagePriorityEnumType, MessageStateEnumType};
 use crate::v2_1::helpers::validator::validate_identifier_string;
@@ -94,12 +93,8 @@ impl MessageInfoType {
     ///     Utc::now()
     /// );
     /// ```
-    #[must_use] 
-    pub fn new(
-        id: i32,
-        priority: MessagePriorityEnumType,
-        start_timestamp: DateTime<Utc>,
-    ) -> Self {
+    #[must_use]
+    pub fn new(id: i32, priority: MessagePriorityEnumType, start_timestamp: DateTime<Utc>) -> Self {
         Self {
             id,
             priority,
@@ -127,7 +122,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// A new instance of `MessageInfoType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn builder(
         id: i32,
         priority: MessagePriorityEnumType,
@@ -145,7 +140,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_end_timestamp(mut self, end_timestamp: DateTime<Utc>) -> Self {
         self.end_timestamp = Some(end_timestamp);
         self
@@ -160,7 +155,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_state(mut self, state: MessageStateEnumType) -> Self {
         self.state = Some(state);
         self
@@ -175,7 +170,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_transaction_id(mut self, transaction_id: String) -> Self {
         self.transaction_id = Some(transaction_id);
         self
@@ -190,7 +185,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_message(mut self, message: MessageContentType) -> Self {
         self.message = Some(message);
         self
@@ -205,7 +200,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_display(mut self, display: ComponentType) -> Self {
         self.display = Some(display);
         self
@@ -220,7 +215,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_message_extra(mut self, message_extra: Vec<MessageContentType>) -> Self {
         self.message_extra = message_extra;
         self
@@ -235,7 +230,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -246,7 +241,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// The identifier that identifies this message
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> i32 {
         self.id
     }
@@ -270,7 +265,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// The priority with which this message should be shown
-    #[must_use] 
+    #[must_use]
     pub fn priority(&self) -> &MessagePriorityEnumType {
         &self.priority
     }
@@ -294,7 +289,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the current state of this message
-    #[must_use] 
+    #[must_use]
     pub fn state(&self) -> Option<&MessageStateEnumType> {
         self.state.as_ref()
     }
@@ -318,7 +313,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// The date and time at which this message was received
-    #[must_use] 
+    #[must_use]
     pub fn start_timestamp(&self) -> &DateTime<Utc> {
         &self.start_timestamp
     }
@@ -342,7 +337,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the date and time at which this message should be removed
-    #[must_use] 
+    #[must_use]
     pub fn end_timestamp(&self) -> Option<&DateTime<Utc>> {
         self.end_timestamp.as_ref()
     }
@@ -366,7 +361,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the transaction Id for which this message is intended
-    #[must_use] 
+    #[must_use]
     pub fn transaction_id(&self) -> Option<&str> {
         self.transaction_id.as_deref()
     }
@@ -390,7 +385,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the message details for a specific user
-    #[must_use] 
+    #[must_use]
     pub fn message(&self) -> Option<&MessageContentType> {
         self.message.as_ref()
     }
@@ -414,7 +409,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the display component that this message concerns
-    #[must_use] 
+    #[must_use]
     pub fn display(&self) -> Option<&ComponentType> {
         self.display.as_ref()
     }
@@ -438,7 +433,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// A reference to the additional message details
-    #[must_use] 
+    #[must_use]
     pub fn message_extra(&self) -> &[MessageContentType] {
         &self.message_extra
     }
@@ -462,7 +457,7 @@ impl MessageInfoType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -504,8 +499,7 @@ mod tests {
         let start_timestamp = Utc::now();
 
         let message_info =
-            MessageInfoType::new(id, priority.clone(), start_timestamp)
-                .with_state(state.clone());
+            MessageInfoType::new(id, priority.clone(), start_timestamp).with_state(state.clone());
 
         assert_eq!(message_info.id(), id);
         assert_eq!(message_info.priority(), &priority);
@@ -526,9 +520,8 @@ mod tests {
         let state = MessageStateEnumType::Charging;
         let start_timestamp = Utc::now();
 
-        let message_info =
-            MessageInfoType::builder(id, priority.clone(), start_timestamp)
-                .with_state(state.clone());
+        let message_info = MessageInfoType::builder(id, priority.clone(), start_timestamp)
+            .with_state(state.clone());
 
         assert_eq!(message_info.id(), id);
         assert_eq!(message_info.priority(), &priority);
@@ -566,15 +559,14 @@ mod tests {
         let display = ComponentType::new("MainDisplay".to_string());
         let custom_data = CustomDataType::new("VendorX".to_string());
 
-        let message_info =
-            MessageInfoType::new(id, priority.clone(), start_timestamp)
-                .with_state(state.clone())
-                .with_end_timestamp(end_timestamp)
-                .with_transaction_id(transaction_id.clone())
-                .with_message(message_content.clone())
-                .with_message_extra(vec![message_extra.clone()])
-                .with_display(display.clone())
-                .with_custom_data(custom_data.clone());
+        let message_info = MessageInfoType::new(id, priority.clone(), start_timestamp)
+            .with_state(state.clone())
+            .with_end_timestamp(end_timestamp)
+            .with_transaction_id(transaction_id.clone())
+            .with_message(message_content.clone())
+            .with_message_extra(vec![message_extra.clone()])
+            .with_display(display.clone())
+            .with_custom_data(custom_data.clone());
 
         assert_eq!(message_info.id(), id);
         assert_eq!(message_info.priority(), &priority);
@@ -616,9 +608,8 @@ mod tests {
         let display = ComponentType::new("MainDisplay".to_string());
         let custom_data = CustomDataType::new("VendorX".to_string());
 
-        let mut message_info =
-            MessageInfoType::new(id1, priority1.clone(), start_timestamp1)
-                .with_state(state1.clone());
+        let mut message_info = MessageInfoType::new(id1, priority1.clone(), start_timestamp1)
+            .with_state(state1.clone());
 
         message_info
             .set_id(id2)
@@ -662,12 +653,9 @@ mod tests {
 
     #[test]
     fn test_validation_success() {
-        let message_info = MessageInfoType::new(
-            1,
-            MessagePriorityEnumType::AlwaysFront,
-            Utc::now(),
-        )
-        .with_state(MessageStateEnumType::Charging);
+        let message_info =
+            MessageInfoType::new(1, MessagePriorityEnumType::AlwaysFront, Utc::now())
+                .with_state(MessageStateEnumType::Charging);
 
         // Validation should pass
         assert!(message_info.validate().is_ok());
@@ -700,13 +688,10 @@ mod tests {
     fn test_validation_transaction_id_length() {
         // Create a message with transaction_id that exceeds the maximum length (36 characters)
         let long_transaction_id = "a".repeat(37);
-        let message_info = MessageInfoType::new(
-            1,
-            MessagePriorityEnumType::AlwaysFront,
-            Utc::now(),
-        )
-        .with_state(MessageStateEnumType::Charging)
-        .with_transaction_id(long_transaction_id);
+        let message_info =
+            MessageInfoType::new(1, MessagePriorityEnumType::AlwaysFront, Utc::now())
+                .with_state(MessageStateEnumType::Charging)
+                .with_transaction_id(long_transaction_id);
 
         // Validation should fail
         let result = message_info.validate();
@@ -725,13 +710,10 @@ mod tests {
             custom_data: None,
         };
 
-        let message_info = MessageInfoType::new(
-            1,
-            MessagePriorityEnumType::AlwaysFront,
-            Utc::now(),
-        )
-        .with_state(MessageStateEnumType::Charging)
-        .with_message(invalid_message_content);
+        let message_info =
+            MessageInfoType::new(1, MessagePriorityEnumType::AlwaysFront, Utc::now())
+                .with_state(MessageStateEnumType::Charging)
+                .with_message(invalid_message_content);
 
         // Validation should fail due to nested validation
         let result = message_info.validate();
@@ -857,12 +839,9 @@ mod tests {
         ];
 
         for state in states {
-            let message_info = MessageInfoType::new(
-                1,
-                MessagePriorityEnumType::AlwaysFront,
-                Utc::now(),
-            )
-            .with_state(state.clone());
+            let message_info =
+                MessageInfoType::new(1, MessagePriorityEnumType::AlwaysFront, Utc::now())
+                    .with_state(state.clone());
 
             assert_eq!(message_info.state(), Some(&state));
         }

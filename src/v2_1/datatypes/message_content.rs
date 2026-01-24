@@ -62,7 +62,7 @@ impl MessageContentType {
     /// )
     /// .with_language("en".to_string());
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn new(content: String, format: MessageFormatEnumType) -> Self {
         Self {
             content,
@@ -84,7 +84,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// A new instance of `MessageContentType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn builder(content: String, format: MessageFormatEnumType) -> Self {
         Self::new(content, format)
     }
@@ -98,7 +98,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_language(mut self, language: String) -> Self {
         self.language = Some(language);
         self
@@ -129,7 +129,7 @@ impl MessageContentType {
     /// .with_language("en".to_string())
     /// .with_custom_data(custom_data);
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -140,7 +140,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// The message contents as a string slice
-    #[must_use] 
+    #[must_use]
     pub fn content(&self) -> &str {
         &self.content
     }
@@ -164,7 +164,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// A reference to the format of the message
-    #[must_use] 
+    #[must_use]
     pub fn format(&self) -> &MessageFormatEnumType {
         &self.format
     }
@@ -188,7 +188,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// An optional reference to the language identifier of the message content
-    #[must_use] 
+    #[must_use]
     pub fn language(&self) -> Option<&str> {
         self.language.as_deref()
     }
@@ -212,7 +212,7 @@ impl MessageContentType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -267,9 +267,8 @@ mod tests {
         let format = MessageFormatEnumType::ASCII;
         let language = "en".to_string();
 
-        let message =
-            MessageContentType::builder(content.clone(), format.clone())
-                .with_language(language.clone());
+        let message = MessageContentType::builder(content.clone(), format.clone())
+            .with_language(language.clone());
 
         assert_eq!(message.content(), content);
         assert_eq!(message.format(), &format);
@@ -304,9 +303,8 @@ mod tests {
         let language2 = "fr".to_string();
         let custom_data = CustomDataType::new("VendorX".to_string());
 
-        let mut message =
-            MessageContentType::new(content1.clone(), format1.clone())
-                .with_language(language1.clone());
+        let mut message = MessageContentType::new(content1.clone(), format1.clone())
+            .with_language(language1.clone());
 
         message
             .set_content(content2.clone())
@@ -327,11 +325,9 @@ mod tests {
     #[test]
     fn test_validation_success() {
         // Valid message content
-        let message = MessageContentType::new(
-            "Valid message".to_string(),
-            MessageFormatEnumType::ASCII,
-        )
-        .with_language("en".to_string());
+        let message =
+            MessageContentType::new("Valid message".to_string(), MessageFormatEnumType::ASCII)
+                .with_language("en".to_string());
 
         // Validation should pass
         assert!(message.validate().is_ok());
@@ -341,9 +337,8 @@ mod tests {
     fn test_validation_content_length() {
         // Create a message with content that exceeds the maximum length (1024 characters)
         let long_content = "a".repeat(1025);
-        let message =
-            MessageContentType::new(long_content, MessageFormatEnumType::ASCII)
-                .with_language("en".to_string());
+        let message = MessageContentType::new(long_content, MessageFormatEnumType::ASCII)
+            .with_language("en".to_string());
 
         // Validation should fail
         let result = message.validate();
@@ -356,11 +351,9 @@ mod tests {
     fn test_validation_language_length() {
         // Create a message with language that exceeds the maximum length (8 characters)
         let long_language = "language_too_long".to_string();
-        let message = MessageContentType::new(
-            "Valid message".to_string(),
-            MessageFormatEnumType::ASCII,
-        )
-        .with_language(long_language);
+        let message =
+            MessageContentType::new("Valid message".to_string(), MessageFormatEnumType::ASCII)
+                .with_language(long_language);
 
         // Validation should fail
         let result = message.validate();
@@ -375,12 +368,10 @@ mod tests {
         let invalid_vendor_id = "a".repeat(256); // Max length is 255
         let invalid_custom_data = CustomDataType::new(invalid_vendor_id);
 
-        let message = MessageContentType::new(
-            "Valid message".to_string(),
-            MessageFormatEnumType::ASCII,
-        )
-        .with_language("en".to_string())
-        .with_custom_data(invalid_custom_data);
+        let message =
+            MessageContentType::new("Valid message".to_string(), MessageFormatEnumType::ASCII)
+                .with_language("en".to_string())
+                .with_custom_data(invalid_custom_data);
 
         // Validation should fail
         let result = message.validate();
@@ -463,11 +454,8 @@ mod tests {
         ];
 
         for format in formats {
-            let message = MessageContentType::new(
-                "Test message".to_string(),
-                format.clone(),
-            )
-            .with_language("en".to_string());
+            let message = MessageContentType::new("Test message".to_string(), format.clone())
+                .with_language("en".to_string());
 
             assert_eq!(message.format(), &format);
         }

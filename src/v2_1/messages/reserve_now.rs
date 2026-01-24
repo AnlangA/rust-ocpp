@@ -47,7 +47,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(id: i32, expiry_date_time: DateTime<Utc>, id_token: IdTokenType) -> Self {
         Self {
             id,
@@ -149,7 +149,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// Id of reservation.
-    #[must_use] 
+    #[must_use]
     pub fn get_id(&self) -> &i32 {
         &self.id
     }
@@ -159,7 +159,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// Date and time at which the reservation expires.
-    #[must_use] 
+    #[must_use]
     pub fn get_expiry_date_time(&self) -> &DateTime<Utc> {
         &self.expiry_date_time
     }
@@ -169,7 +169,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// This field specifies the connector type. Values defined in Appendix as `ConnectorEnumStringType`.
-    #[must_use] 
+    #[must_use]
     pub fn get_connector_type(&self) -> Option<&String> {
         self.connector_type.as_ref()
     }
@@ -179,7 +179,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// The `id_token` field
-    #[must_use] 
+    #[must_use]
     pub fn get_id_token(&self) -> &IdTokenType {
         &self.id_token
     }
@@ -189,7 +189,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// This contains ID of the evse to be reserved.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -199,7 +199,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// The `group_id_token` field
-    #[must_use] 
+    #[must_use]
     pub fn get_group_id_token(&self) -> Option<&IdTokenType> {
         self.group_id_token.as_ref()
     }
@@ -209,7 +209,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -221,7 +221,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_connector_type(mut self, connector_type: String) -> Self {
         self.connector_type = Some(connector_type);
         self
@@ -234,7 +234,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -247,7 +247,7 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_group_id_token(mut self, group_id_token: IdTokenType) -> Self {
         self.group_id_token = Some(group_id_token);
         self
@@ -260,12 +260,11 @@ impl ReserveNowRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ReserveNow` response.
@@ -294,7 +293,7 @@ impl ReserveNowResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: ReserveNowStatusEnumType) -> Self {
         Self {
             status,
@@ -344,7 +343,7 @@ impl ReserveNowResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &ReserveNowStatusEnumType {
         &self.status
     }
@@ -354,7 +353,7 @@ impl ReserveNowResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -364,7 +363,7 @@ impl ReserveNowResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -376,7 +375,7 @@ impl ReserveNowResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -389,12 +388,11 @@ impl ReserveNowResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -419,18 +417,16 @@ mod tests {
     }
 
     fn create_test_expiry_date_time() -> DateTime<Utc> {
-        DateTime::parse_from_rfc3339("2024-12-31T23:59:59Z").unwrap().with_timezone(&Utc)
+        DateTime::parse_from_rfc3339("2024-12-31T23:59:59Z")
+            .unwrap()
+            .with_timezone(&Utc)
     }
 
     #[test]
     fn test_reserve_now_request_new() {
         let id_token = create_test_id_token();
         let expiry_date_time = create_test_expiry_date_time();
-        let request = ReserveNowRequest::new(
-            123,
-            expiry_date_time,
-            id_token.clone()
-        );
+        let request = ReserveNowRequest::new(123, expiry_date_time, id_token.clone());
 
         assert_eq!(request.id_token, id_token);
         assert_eq!(request.expiry_date_time, expiry_date_time);
@@ -447,15 +443,11 @@ mod tests {
         let group_id_token = IdTokenType::new("group_token".to_string(), "Local".to_string());
         let expiry_date_time = create_test_expiry_date_time();
 
-        let request = ReserveNowRequest::new(
-            456,
-            expiry_date_time,
-            id_token.clone()
-        )
-        .with_connector_type("cCCS1".to_string())
-        .with_evse_id(2)
-        .with_group_id_token(group_id_token.clone())
-        .with_custom_data(create_test_custom_data());
+        let request = ReserveNowRequest::new(456, expiry_date_time, id_token.clone())
+            .with_connector_type("cCCS1".to_string())
+            .with_evse_id(2)
+            .with_group_id_token(group_id_token.clone())
+            .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: ReserveNowRequest =
@@ -477,11 +469,7 @@ mod tests {
         let expiry_date_time = create_test_expiry_date_time();
 
         // Valid request
-        let valid_request = ReserveNowRequest::new(
-            0,
-            expiry_date_time,
-            id_token.clone()
-        );
+        let valid_request = ReserveNowRequest::new(0, expiry_date_time, id_token.clone());
         assert!(valid_request.validate().is_ok());
 
         // Invalid id (negative)
@@ -516,15 +504,11 @@ mod tests {
         let expiry_date_time = create_test_expiry_date_time();
         let custom_data = create_test_custom_data();
 
-        let request = ReserveNowRequest::new(
-            789,
-            expiry_date_time,
-            id_token.clone()
-        )
-        .with_connector_type("cCCS2".to_string())
-        .with_evse_id(3)
-        .with_group_id_token(group_id_token.clone())
-        .with_custom_data(custom_data.clone());
+        let request = ReserveNowRequest::new(789, expiry_date_time, id_token.clone())
+            .with_connector_type("cCCS2".to_string())
+            .with_evse_id(3)
+            .with_group_id_token(group_id_token.clone())
+            .with_custom_data(custom_data.clone());
 
         assert_eq!(request.id_token, id_token);
         assert_eq!(request.expiry_date_time, expiry_date_time);
@@ -617,7 +601,10 @@ mod tests {
         assert_eq!(occupied_response.status, ReserveNowStatusEnumType::Occupied);
 
         let unavailable_response = ReserveNowResponse::new(ReserveNowStatusEnumType::Unavailable);
-        assert_eq!(unavailable_response.status, ReserveNowStatusEnumType::Unavailable);
+        assert_eq!(
+            unavailable_response.status,
+            ReserveNowStatusEnumType::Unavailable
+        );
     }
 
     #[test]
@@ -641,11 +628,8 @@ mod tests {
         ];
 
         for connector_type in connector_types {
-            let request = ReserveNowRequest::new(
-                1,
-                expiry_date_time,
-                id_token.clone()
-            ).with_connector_type(connector_type.to_string());
+            let request = ReserveNowRequest::new(1, expiry_date_time, id_token.clone())
+                .with_connector_type(connector_type.to_string());
             assert!(request.validate().is_ok());
             assert_eq!(request.connector_type, Some(connector_type.to_string()));
         }
@@ -657,15 +641,11 @@ mod tests {
         let group_id_token = IdTokenType::new("group_token".to_string(), "eMAID".to_string());
         let expiry_date_time = create_test_expiry_date_time();
 
-        let original_request = ReserveNowRequest::new(
-            12345,
-            expiry_date_time,
-            id_token
-        )
-        .with_connector_type("cCCS2".to_string())
-        .with_evse_id(10)
-        .with_group_id_token(group_id_token)
-        .with_custom_data(create_test_custom_data());
+        let original_request = ReserveNowRequest::new(12345, expiry_date_time, id_token)
+            .with_connector_type("cCCS2".to_string())
+            .with_evse_id(10)
+            .with_group_id_token(group_id_token)
+            .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&original_request).expect("Failed to serialize request");
         let parsed_request: ReserveNowRequest =
@@ -698,8 +678,8 @@ mod tests {
         assert!(large_request.validate().is_ok());
 
         // Test minimum valid evse_id
-        let min_evse_request = ReserveNowRequest::new(1, expiry_date_time, id_token)
-            .with_evse_id(0);
+        let min_evse_request =
+            ReserveNowRequest::new(1, expiry_date_time, id_token).with_evse_id(0);
         assert!(min_evse_request.validate().is_ok());
     }
 
@@ -708,8 +688,12 @@ mod tests {
         let id_token = create_test_id_token();
 
         // Test different datetime formats
-        let datetime1 = DateTime::parse_from_rfc3339("2024-01-01T00:00:00Z").unwrap().with_timezone(&Utc);
-        let datetime2 = DateTime::parse_from_rfc3339("2025-12-31T23:59:59.999Z").unwrap().with_timezone(&Utc);
+        let datetime1 = DateTime::parse_from_rfc3339("2024-01-01T00:00:00Z")
+            .unwrap()
+            .with_timezone(&Utc);
+        let datetime2 = DateTime::parse_from_rfc3339("2025-12-31T23:59:59.999Z")
+            .unwrap()
+            .with_timezone(&Utc);
 
         let request1 = ReserveNowRequest::new(1, datetime1, id_token.clone());
         let request2 = ReserveNowRequest::new(2, datetime2, id_token);

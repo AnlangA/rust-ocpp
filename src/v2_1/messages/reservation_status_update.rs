@@ -29,8 +29,11 @@ impl ReservationStatusUpdateRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
-    pub fn new(reservation_id: i32, reservation_update_status: ReservationUpdateStatusEnumType) -> Self {
+    #[must_use]
+    pub fn new(
+        reservation_id: i32,
+        reservation_update_status: ReservationUpdateStatusEnumType,
+    ) -> Self {
         Self {
             reservation_id,
             reservation_update_status,
@@ -57,7 +60,10 @@ impl ReservationStatusUpdateRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_reservation_update_status(&mut self, reservation_update_status: ReservationUpdateStatusEnumType) -> &mut Self {
+    pub fn set_reservation_update_status(
+        &mut self,
+        reservation_update_status: ReservationUpdateStatusEnumType,
+    ) -> &mut Self {
         self.reservation_update_status = reservation_update_status;
         self
     }
@@ -79,7 +85,7 @@ impl ReservationStatusUpdateRequest {
     /// # Returns
     ///
     /// The ID of the reservation.
-    #[must_use] 
+    #[must_use]
     pub fn get_reservation_id(&self) -> &i32 {
         &self.reservation_id
     }
@@ -89,7 +95,7 @@ impl ReservationStatusUpdateRequest {
     /// # Returns
     ///
     /// The `reservation_update_status` field
-    #[must_use] 
+    #[must_use]
     pub fn get_reservation_update_status(&self) -> &ReservationUpdateStatusEnumType {
         &self.reservation_update_status
     }
@@ -99,7 +105,7 @@ impl ReservationStatusUpdateRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -111,12 +117,11 @@ impl ReservationStatusUpdateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ReservationStatusUpdate` response.
@@ -142,11 +147,9 @@ impl ReservationStatusUpdateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -166,7 +169,7 @@ impl ReservationStatusUpdateResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -178,12 +181,11 @@ impl ReservationStatusUpdateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -199,23 +201,22 @@ mod tests {
 
     #[test]
     fn test_reservation_status_update_request_new() {
-        let request = ReservationStatusUpdateRequest::new(
-            123,
-            ReservationUpdateStatusEnumType::Accepted
-        );
+        let request =
+            ReservationStatusUpdateRequest::new(123, ReservationUpdateStatusEnumType::Accepted);
 
         assert_eq!(request.reservation_id, 123);
-        assert_eq!(request.reservation_update_status, ReservationUpdateStatusEnumType::Accepted);
+        assert_eq!(
+            request.reservation_update_status,
+            ReservationUpdateStatusEnumType::Accepted
+        );
         assert!(request.custom_data.is_none());
     }
 
     #[test]
     fn test_reservation_status_update_request_serialization() {
-        let request = ReservationStatusUpdateRequest::new(
-            456,
-            ReservationUpdateStatusEnumType::Rejected
-        )
-        .with_custom_data(create_test_custom_data());
+        let request =
+            ReservationStatusUpdateRequest::new(456, ReservationUpdateStatusEnumType::Rejected)
+                .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: ReservationStatusUpdateRequest =
@@ -223,17 +224,18 @@ mod tests {
 
         assert_eq!(request, deserialized);
         assert_eq!(deserialized.reservation_id, 456);
-        assert_eq!(deserialized.reservation_update_status, ReservationUpdateStatusEnumType::Rejected);
+        assert_eq!(
+            deserialized.reservation_update_status,
+            ReservationUpdateStatusEnumType::Rejected
+        );
         assert!(deserialized.custom_data.is_some());
     }
 
     #[test]
     fn test_reservation_status_update_request_validation() {
         // Valid request
-        let valid_request = ReservationStatusUpdateRequest::new(
-            0,
-            ReservationUpdateStatusEnumType::Accepted
-        );
+        let valid_request =
+            ReservationStatusUpdateRequest::new(0, ReservationUpdateStatusEnumType::Accepted);
         assert!(valid_request.validate().is_ok());
 
         // Invalid reservation_id (negative)
@@ -248,23 +250,22 @@ mod tests {
     #[test]
     fn test_reservation_status_update_request_builder_pattern() {
         let custom_data = create_test_custom_data();
-        let request = ReservationStatusUpdateRequest::new(
-            789,
-            ReservationUpdateStatusEnumType::Failed
-        )
-        .with_custom_data(custom_data.clone());
+        let request =
+            ReservationStatusUpdateRequest::new(789, ReservationUpdateStatusEnumType::Failed)
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(request.reservation_id, 789);
-        assert_eq!(request.reservation_update_status, ReservationUpdateStatusEnumType::Failed);
+        assert_eq!(
+            request.reservation_update_status,
+            ReservationUpdateStatusEnumType::Failed
+        );
         assert_eq!(request.custom_data, Some(custom_data));
     }
 
     #[test]
     fn test_reservation_status_update_request_setters_getters() {
-        let mut request = ReservationStatusUpdateRequest::new(
-            100,
-            ReservationUpdateStatusEnumType::Accepted
-        );
+        let mut request =
+            ReservationStatusUpdateRequest::new(100, ReservationUpdateStatusEnumType::Accepted);
         let custom_data = create_test_custom_data();
 
         // Test setters
@@ -274,7 +275,10 @@ mod tests {
 
         // Test getters
         assert_eq!(*request.get_reservation_id(), 200);
-        assert_eq!(*request.get_reservation_update_status(), ReservationUpdateStatusEnumType::Rejected);
+        assert_eq!(
+            *request.get_reservation_update_status(),
+            ReservationUpdateStatusEnumType::Rejected
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -287,8 +291,8 @@ mod tests {
 
     #[test]
     fn test_reservation_status_update_response_serialization() {
-        let response = ReservationStatusUpdateResponse::new()
-            .with_custom_data(create_test_custom_data());
+        let response =
+            ReservationStatusUpdateResponse::new().with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: ReservationStatusUpdateResponse =
@@ -303,16 +307,15 @@ mod tests {
         let valid_response = ReservationStatusUpdateResponse::new();
         assert!(valid_response.validate().is_ok());
 
-        let response_with_custom_data = ReservationStatusUpdateResponse::new()
-            .with_custom_data(create_test_custom_data());
+        let response_with_custom_data =
+            ReservationStatusUpdateResponse::new().with_custom_data(create_test_custom_data());
         assert!(response_with_custom_data.validate().is_ok());
     }
 
     #[test]
     fn test_reservation_status_update_response_builder_pattern() {
         let custom_data = create_test_custom_data();
-        let response = ReservationStatusUpdateResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = ReservationStatusUpdateResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -331,49 +334,46 @@ mod tests {
 
     #[test]
     fn test_reservation_status_update_request_enum_variants() {
-        let accepted_request = ReservationStatusUpdateRequest::new(
-            1,
+        let accepted_request =
+            ReservationStatusUpdateRequest::new(1, ReservationUpdateStatusEnumType::Accepted);
+        assert_eq!(
+            accepted_request.reservation_update_status,
             ReservationUpdateStatusEnumType::Accepted
         );
-        assert_eq!(accepted_request.reservation_update_status, ReservationUpdateStatusEnumType::Accepted);
 
-        let failed_request = ReservationStatusUpdateRequest::new(
-            2,
+        let failed_request =
+            ReservationStatusUpdateRequest::new(2, ReservationUpdateStatusEnumType::Failed);
+        assert_eq!(
+            failed_request.reservation_update_status,
             ReservationUpdateStatusEnumType::Failed
         );
-        assert_eq!(failed_request.reservation_update_status, ReservationUpdateStatusEnumType::Failed);
 
-        let rejected_request = ReservationStatusUpdateRequest::new(
-            3,
+        let rejected_request =
+            ReservationStatusUpdateRequest::new(3, ReservationUpdateStatusEnumType::Rejected);
+        assert_eq!(
+            rejected_request.reservation_update_status,
             ReservationUpdateStatusEnumType::Rejected
         );
-        assert_eq!(rejected_request.reservation_update_status, ReservationUpdateStatusEnumType::Rejected);
     }
 
     #[test]
     fn test_reservation_status_update_request_edge_cases() {
         // Test minimum valid reservation_id
-        let min_request = ReservationStatusUpdateRequest::new(
-            0,
-            ReservationUpdateStatusEnumType::Accepted
-        );
+        let min_request =
+            ReservationStatusUpdateRequest::new(0, ReservationUpdateStatusEnumType::Accepted);
         assert!(min_request.validate().is_ok());
 
         // Test large reservation_id
-        let large_request = ReservationStatusUpdateRequest::new(
-            i32::MAX,
-            ReservationUpdateStatusEnumType::Failed
-        );
+        let large_request =
+            ReservationStatusUpdateRequest::new(i32::MAX, ReservationUpdateStatusEnumType::Failed);
         assert!(large_request.validate().is_ok());
     }
 
     #[test]
     fn test_reservation_status_update_json_round_trip() {
-        let original_request = ReservationStatusUpdateRequest::new(
-            12345,
-            ReservationUpdateStatusEnumType::Accepted
-        )
-        .with_custom_data(create_test_custom_data());
+        let original_request =
+            ReservationStatusUpdateRequest::new(12345, ReservationUpdateStatusEnumType::Accepted)
+                .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&original_request).expect("Failed to serialize request");
         let parsed_request: ReservationStatusUpdateRequest =
@@ -381,8 +381,8 @@ mod tests {
 
         assert_eq!(original_request, parsed_request);
 
-        let original_response = ReservationStatusUpdateResponse::new()
-            .with_custom_data(create_test_custom_data());
+        let original_response =
+            ReservationStatusUpdateResponse::new().with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&original_response).expect("Failed to serialize response");
         let parsed_response: ReservationStatusUpdateResponse =

@@ -36,7 +36,7 @@ impl Default for UnitOfMeasureType {
 
 impl UnitOfMeasureType {
     /// Creates a new `UnitOfMeasureType` with default values.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
         Self {
             unit: default_unit(),
@@ -46,7 +46,7 @@ impl UnitOfMeasureType {
     }
 
     /// Creates a new `UnitOfMeasureType` with the specified unit.
-    #[must_use] 
+    #[must_use]
     pub fn new_with_unit(unit: String) -> Self {
         Self {
             unit,
@@ -56,7 +56,7 @@ impl UnitOfMeasureType {
     }
 
     /// Gets the unit.
-    #[must_use] 
+    #[must_use]
     pub fn unit(&self) -> &str {
         &self.unit
     }
@@ -68,7 +68,7 @@ impl UnitOfMeasureType {
     }
 
     /// Gets the multiplier.
-    #[must_use] 
+    #[must_use]
     pub fn multiplier(&self) -> i32 {
         self.multiplier
     }
@@ -80,7 +80,7 @@ impl UnitOfMeasureType {
     }
 
     /// Gets the custom data.
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -92,21 +92,21 @@ impl UnitOfMeasureType {
     }
 
     /// Sets the unit using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_unit(mut self, unit: String) -> Self {
         self.unit = unit;
         self
     }
 
     /// Sets the multiplier using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_multiplier(mut self, multiplier: i32) -> Self {
         self.multiplier = multiplier;
         self
     }
 
     /// Sets the custom data using the builder pattern.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self

@@ -69,7 +69,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// A new instance of `ChargingNeedsType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(requested_energy_transfer: EnergyTransferModeEnumType) -> Self {
         Self {
             requested_energy_transfer,
@@ -95,7 +95,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_departure_time(mut self, departure_time: DateTime<Utc>) -> Self {
         self.departure_time = Some(departure_time);
         self
@@ -110,7 +110,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_ac_charging_parameters(
         mut self,
         ac_charging_parameters: ACChargingParametersType,
@@ -128,7 +128,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_dc_charging_parameters(
         mut self,
         dc_charging_parameters: DCChargingParametersType,
@@ -146,7 +146,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -157,7 +157,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// The mode of energy transfer requested by the EV
-    #[must_use] 
+    #[must_use]
     pub fn requested_energy_transfer(&self) -> &EnergyTransferModeEnumType {
         &self.requested_energy_transfer
     }
@@ -184,7 +184,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// An optional reference to the estimated departure time of the EV
-    #[must_use] 
+    #[must_use]
     pub fn departure_time(&self) -> Option<&DateTime<Utc>> {
         self.departure_time.as_ref()
     }
@@ -208,7 +208,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// An optional reference to the EV AC charging parameters
-    #[must_use] 
+    #[must_use]
     pub fn ac_charging_parameters(&self) -> Option<&ACChargingParametersType> {
         self.ac_charging_parameters.as_ref()
     }
@@ -235,7 +235,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// An optional reference to the EV DC charging parameters
-    #[must_use] 
+    #[must_use]
     pub fn dc_charging_parameters(&self) -> Option<&DCChargingParametersType> {
         self.dc_charging_parameters.as_ref()
     }
@@ -262,7 +262,7 @@ impl ChargingNeedsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

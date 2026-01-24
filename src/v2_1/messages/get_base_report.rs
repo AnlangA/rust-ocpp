@@ -28,7 +28,7 @@ impl GetBaseReportRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(request_id: i32, report_base: ReportBaseEnumType) -> Self {
         Self {
             request_id,
@@ -78,7 +78,7 @@ impl GetBaseReportRequest {
     /// # Returns
     ///
     /// The Id of the request.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -88,7 +88,7 @@ impl GetBaseReportRequest {
     /// # Returns
     ///
     /// The `report_base` field
-    #[must_use] 
+    #[must_use]
     pub fn get_report_base(&self) -> &ReportBaseEnumType {
         &self.report_base
     }
@@ -98,7 +98,7 @@ impl GetBaseReportRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -110,12 +110,11 @@ impl GetBaseReportRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `GetBaseReport` response.
@@ -143,7 +142,7 @@ impl GetBaseReportResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericDeviceModelStatusEnumType) -> Self {
         Self {
             status,
@@ -193,7 +192,7 @@ impl GetBaseReportResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericDeviceModelStatusEnumType {
         &self.status
     }
@@ -203,7 +202,7 @@ impl GetBaseReportResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -213,7 +212,7 @@ impl GetBaseReportResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -225,7 +224,7 @@ impl GetBaseReportResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -238,12 +237,11 @@ impl GetBaseReportResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -277,7 +275,10 @@ mod tests {
             .with_custom_data(custom_data.clone());
 
         assert_eq!(request.request_id, 456);
-        assert_eq!(request.report_base, ReportBaseEnumType::ConfigurationInventory);
+        assert_eq!(
+            request.report_base,
+            ReportBaseEnumType::ConfigurationInventory
+        );
         assert_eq!(request.custom_data, Some(custom_data));
     }
 
@@ -302,7 +303,10 @@ mod tests {
             .with_custom_data(custom_data.clone());
 
         assert_eq!(request.get_request_id(), &789);
-        assert_eq!(request.get_report_base(), &ReportBaseEnumType::ConfigurationInventory);
+        assert_eq!(
+            request.get_report_base(),
+            &ReportBaseEnumType::ConfigurationInventory
+        );
         assert_eq!(request.get_custom_data(), Some(&custom_data));
     }
 
@@ -401,7 +405,10 @@ mod tests {
         let response = GetBaseReportResponse::new(GenericDeviceModelStatusEnumType::NotSupported)
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.status, GenericDeviceModelStatusEnumType::NotSupported);
+        assert_eq!(
+            response.status,
+            GenericDeviceModelStatusEnumType::NotSupported
+        );
         assert_eq!(response.status_info, None);
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -416,7 +423,10 @@ mod tests {
         response.set_status_info(Some(status_info.clone()));
         response.set_custom_data(Some(custom_data.clone()));
 
-        assert_eq!(response.status, GenericDeviceModelStatusEnumType::EmptyResultSet);
+        assert_eq!(
+            response.status,
+            GenericDeviceModelStatusEnumType::EmptyResultSet
+        );
         assert_eq!(response.status_info, Some(status_info));
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -429,7 +439,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &GenericDeviceModelStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &GenericDeviceModelStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }

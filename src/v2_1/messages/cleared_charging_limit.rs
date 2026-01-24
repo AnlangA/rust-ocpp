@@ -28,7 +28,7 @@ impl ClearedChargingLimitRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(charging_limit_source: String) -> Self {
         Self {
             charging_limit_source,
@@ -78,7 +78,7 @@ impl ClearedChargingLimitRequest {
     /// # Returns
     ///
     /// Source of the charging limit. Allowed values defined in Appendix as `ChargingLimitSourceEnumStringType`.
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_limit_source(&self) -> &String {
         &self.charging_limit_source
     }
@@ -88,7 +88,7 @@ impl ClearedChargingLimitRequest {
     /// # Returns
     ///
     /// EVSE Identifier.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> Option<&i32> {
         self.evse_id.as_ref()
     }
@@ -98,7 +98,7 @@ impl ClearedChargingLimitRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -110,7 +110,7 @@ impl ClearedChargingLimitRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_evse_id(mut self, evse_id: i32) -> Self {
         self.evse_id = Some(evse_id);
         self
@@ -123,12 +123,11 @@ impl ClearedChargingLimitRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ClearedChargingLimit` response.
@@ -153,11 +152,9 @@ impl ClearedChargingLimitResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -177,7 +174,7 @@ impl ClearedChargingLimitResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -189,12 +186,11 @@ impl ClearedChargingLimitResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -222,8 +218,8 @@ mod tests {
         let charging_limit_source = "EMS".to_string();
         let evse_id = 1;
 
-        let request = ClearedChargingLimitRequest::new(charging_limit_source.clone())
-            .with_evse_id(evse_id);
+        let request =
+            ClearedChargingLimitRequest::new(charging_limit_source.clone()).with_evse_id(evse_id);
 
         assert_eq!(request.charging_limit_source, charging_limit_source);
         assert_eq!(request.evse_id, Some(evse_id));
@@ -251,9 +247,10 @@ mod tests {
         let evse_id = 2;
         let custom_data = create_test_custom_data();
 
-        request.set_charging_limit_source(new_charging_limit_source.clone())
-               .set_evse_id(Some(evse_id))
-               .set_custom_data(Some(custom_data.clone()));
+        request
+            .set_charging_limit_source(new_charging_limit_source.clone())
+            .set_evse_id(Some(evse_id))
+            .set_custom_data(Some(custom_data.clone()));
 
         assert_eq!(request.charging_limit_source, new_charging_limit_source);
         assert_eq!(request.evse_id, Some(evse_id));
@@ -280,8 +277,7 @@ mod tests {
         let charging_limit_source = "EMS".to_string();
         let evse_id = 1;
 
-        let request = ClearedChargingLimitRequest::new(charging_limit_source)
-            .with_evse_id(evse_id);
+        let request = ClearedChargingLimitRequest::new(charging_limit_source).with_evse_id(evse_id);
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
         let deserialized: ClearedChargingLimitRequest =
@@ -302,8 +298,7 @@ mod tests {
 
     #[test]
     fn test_cleared_charging_limit_request_validation_negative_evse_id() {
-        let request = ClearedChargingLimitRequest::new("EMS".to_string())
-            .with_evse_id(-1);
+        let request = ClearedChargingLimitRequest::new("EMS".to_string()).with_evse_id(-1);
 
         let validation_result = request.validate();
         assert!(validation_result.is_err());
@@ -314,8 +309,7 @@ mod tests {
         let charging_limit_source = "EMS".to_string();
         let evse_id = 0; // 0 is valid (min = 0)
 
-        let request = ClearedChargingLimitRequest::new(charging_limit_source)
-            .with_evse_id(evse_id);
+        let request = ClearedChargingLimitRequest::new(charging_limit_source).with_evse_id(evse_id);
 
         let validation_result = request.validate();
         assert!(validation_result.is_ok());
@@ -354,8 +348,7 @@ mod tests {
     fn test_cleared_charging_limit_response_with_custom_data() {
         let custom_data = create_test_custom_data();
 
-        let response = ClearedChargingLimitResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = ClearedChargingLimitResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -375,8 +368,7 @@ mod tests {
     fn test_cleared_charging_limit_response_getters() {
         let custom_data = create_test_custom_data();
 
-        let response = ClearedChargingLimitResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = ClearedChargingLimitResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
@@ -419,8 +411,7 @@ mod tests {
     fn test_cleared_charging_limit_response_builder_pattern() {
         let custom_data = create_test_custom_data();
 
-        let response = ClearedChargingLimitResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = ClearedChargingLimitResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -442,15 +433,14 @@ mod tests {
         assert!(request_max.validate().is_ok());
 
         // Test with zero EVSE ID
-        let request_zero_evse = ClearedChargingLimitRequest::new("EMS".to_string())
-            .with_evse_id(0);
+        let request_zero_evse = ClearedChargingLimitRequest::new("EMS".to_string()).with_evse_id(0);
 
         assert_eq!(request_zero_evse.evse_id, Some(0));
         assert!(request_zero_evse.validate().is_ok());
 
         // Test with large EVSE ID
-        let request_large_evse = ClearedChargingLimitRequest::new("EMS".to_string())
-            .with_evse_id(999999);
+        let request_large_evse =
+            ClearedChargingLimitRequest::new("EMS".to_string()).with_evse_id(999999);
 
         assert_eq!(request_large_evse.evse_id, Some(999999));
         assert!(request_large_evse.validate().is_ok());
@@ -469,11 +459,12 @@ mod tests {
 
         // Test response with custom data
         let custom_data = create_test_custom_data();
-        let response_with_data = ClearedChargingLimitResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response_with_data =
+            ClearedChargingLimitResponse::new().with_custom_data(custom_data.clone());
         assert_eq!(response_with_data.custom_data, Some(custom_data));
 
-        let json_with_data = serde_json::to_string(&response_with_data).expect("Failed to serialize");
+        let json_with_data =
+            serde_json::to_string(&response_with_data).expect("Failed to serialize");
         let deserialized_with_data: ClearedChargingLimitResponse =
             serde_json::from_str(&json_with_data).expect("Failed to deserialize");
         assert_eq!(response_with_data, deserialized_with_data);

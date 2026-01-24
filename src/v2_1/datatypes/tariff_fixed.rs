@@ -53,7 +53,7 @@ impl TariffFixedType {
     /// let fixed_price = TariffFixedPriceType::new(Decimal::new(100, 1)); // 10.0
     /// let tariff_fixed = TariffFixedType::new(vec![fixed_price]);
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn new(prices: Vec<TariffFixedPriceType>) -> Self {
         Self {
             prices,
@@ -82,7 +82,7 @@ impl TariffFixedType {
     /// ```
     #[doc(hidden)]
     #[deprecated(since = "3.0.1", note = "Use new() with a vector instead")]
-    #[must_use] 
+    #[must_use]
     pub fn from_single_price(fixed_price: TariffFixedPriceType) -> Self {
         Self::new(vec![fixed_price])
     }
@@ -107,7 +107,7 @@ impl TariffFixedType {
     /// let tariff_fixed = TariffFixedType::new(vec![fixed_price])
     ///     .with_tax_rates(vec![tax_rate]);
     /// ```
-    #[must_use] 
+    #[must_use]
     pub fn with_tax_rates(mut self, tax_rates: Vec<TaxRateType>) -> Self {
         self.tax_rates = Some(tax_rates);
         self
@@ -122,7 +122,7 @@ impl TariffFixedType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -133,7 +133,7 @@ impl TariffFixedType {
     /// # Returns
     ///
     /// A reference to the list of fixed prices
-    #[must_use] 
+    #[must_use]
     pub fn prices(&self) -> &[TariffFixedPriceType] {
         &self.prices
     }
@@ -161,7 +161,7 @@ impl TariffFixedType {
     /// assert_eq!(price, &fixed_price);
     /// ```
     #[deprecated(since = "3.0.1", note = "Use prices() instead")]
-    #[must_use] 
+    #[must_use]
     pub fn fixed_price(&self) -> &TariffFixedPriceType {
         &self.prices[0]
     }
@@ -185,7 +185,7 @@ impl TariffFixedType {
     /// # Returns
     ///
     /// An optional reference to the list of taxes
-    #[must_use] 
+    #[must_use]
     pub fn tax_rates(&self) -> Option<&[TaxRateType]> {
         self.tax_rates.as_deref()
     }
@@ -209,7 +209,7 @@ impl TariffFixedType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -24,7 +24,7 @@ impl OpenPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(constant_stream_data: ConstantStreamDataType) -> Self {
         Self {
             constant_stream_data,
@@ -39,7 +39,10 @@ impl OpenPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_constant_stream_data(&mut self, constant_stream_data: ConstantStreamDataType) -> &mut Self {
+    pub fn set_constant_stream_data(
+        &mut self,
+        constant_stream_data: ConstantStreamDataType,
+    ) -> &mut Self {
         self.constant_stream_data = constant_stream_data;
         self
     }
@@ -61,7 +64,7 @@ impl OpenPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// The `constant_stream_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_constant_stream_data(&self) -> &ConstantStreamDataType {
         &self.constant_stream_data
     }
@@ -71,7 +74,7 @@ impl OpenPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -83,12 +86,11 @@ impl OpenPeriodicEventStreamRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `OpenPeriodicEventStream` response.
@@ -116,7 +118,7 @@ impl OpenPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: GenericStatusEnumType) -> Self {
         Self {
             status,
@@ -166,7 +168,7 @@ impl OpenPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &GenericStatusEnumType {
         &self.status
     }
@@ -176,7 +178,7 @@ impl OpenPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -186,7 +188,7 @@ impl OpenPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -198,7 +200,7 @@ impl OpenPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -211,12 +213,11 @@ impl OpenPeriodicEventStreamResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -262,7 +263,8 @@ mod tests {
         let request = create_test_open_periodic_event_stream_request();
 
         let json = serde_json::to_string(&request).expect("Failed to serialize");
-        let deserialized: OpenPeriodicEventStreamRequest = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: OpenPeriodicEventStreamRequest =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(request, deserialized);
     }
@@ -286,15 +288,18 @@ mod tests {
     fn test_open_periodic_event_stream_request_get_methods() {
         let request = create_test_open_periodic_event_stream_request();
 
-        assert_eq!(request.get_constant_stream_data(), &request.constant_stream_data);
+        assert_eq!(
+            request.get_constant_stream_data(),
+            &request.constant_stream_data
+        );
         assert_eq!(request.get_custom_data(), None);
     }
 
     #[test]
     fn test_open_periodic_event_stream_request_with_custom_data() {
         let custom_data = create_test_custom_data();
-        let request = create_test_open_periodic_event_stream_request()
-            .with_custom_data(custom_data.clone());
+        let request =
+            create_test_open_periodic_event_stream_request().with_custom_data(custom_data.clone());
 
         assert_eq!(request.custom_data, Some(custom_data));
         assert_eq!(request.get_custom_data(), request.custom_data.as_ref());
@@ -340,7 +345,8 @@ mod tests {
         let response = create_test_open_periodic_event_stream_response();
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
-        let deserialized: OpenPeriodicEventStreamResponse = serde_json::from_str(&json).expect("Failed to deserialize");
+        let deserialized: OpenPeriodicEventStreamResponse =
+            serde_json::from_str(&json).expect("Failed to deserialize");
 
         assert_eq!(response, deserialized);
     }
@@ -357,8 +363,9 @@ mod tests {
         let new_status = GenericStatusEnumType::Rejected;
         let status_info = create_test_status_info();
 
-        response.set_status(new_status.clone())
-                .set_status_info(Some(status_info.clone()));
+        response
+            .set_status(new_status.clone())
+            .set_status_info(Some(status_info.clone()));
 
         assert_eq!(response.status, new_status);
         assert_eq!(response.status_info, Some(status_info));
@@ -422,8 +429,8 @@ mod tests {
         let custom_data = create_test_custom_data();
         let status_info = create_test_status_info();
 
-        let request = create_test_open_periodic_event_stream_request()
-            .with_custom_data(custom_data.clone());
+        let request =
+            create_test_open_periodic_event_stream_request().with_custom_data(custom_data.clone());
 
         let response = create_test_open_periodic_event_stream_response()
             .with_status_info(status_info)
@@ -431,12 +438,14 @@ mod tests {
 
         // Test request round trip
         let request_json = serde_json::to_string(&request).expect("Failed to serialize request");
-        let request_deserialized: OpenPeriodicEventStreamRequest = serde_json::from_str(&request_json).expect("Failed to deserialize request");
+        let request_deserialized: OpenPeriodicEventStreamRequest =
+            serde_json::from_str(&request_json).expect("Failed to deserialize request");
         assert_eq!(request, request_deserialized);
 
         // Test response round trip
         let response_json = serde_json::to_string(&response).expect("Failed to serialize response");
-        let response_deserialized: OpenPeriodicEventStreamResponse = serde_json::from_str(&response_json).expect("Failed to deserialize response");
+        let response_deserialized: OpenPeriodicEventStreamResponse =
+            serde_json::from_str(&response_json).expect("Failed to deserialize response");
         assert_eq!(response, response_deserialized);
     }
 
@@ -455,15 +464,16 @@ mod tests {
 
         // Test serialization preserves data
         let json1 = serde_json::to_string(&request1).expect("Failed to serialize");
-        let deserialized1: OpenPeriodicEventStreamRequest = serde_json::from_str(&json1).expect("Failed to deserialize");
+        let deserialized1: OpenPeriodicEventStreamRequest =
+            serde_json::from_str(&json1).expect("Failed to deserialize");
         assert_eq!(request1, deserialized1);
     }
 
     #[test]
     fn test_open_periodic_event_stream_response_with_status_info() {
         let status_info = create_test_status_info();
-        let response = create_test_open_periodic_event_stream_response()
-            .with_status_info(status_info.clone());
+        let response =
+            create_test_open_periodic_event_stream_response().with_status_info(status_info.clone());
 
         assert_eq!(response.status_info, Some(status_info));
         assert!(response.validate().is_ok());

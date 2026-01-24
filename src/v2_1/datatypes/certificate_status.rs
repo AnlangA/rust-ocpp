@@ -45,7 +45,7 @@ impl CertificateStatusType {
     /// # Returns
     ///
     /// A new instance of `CertificateStatusType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         certificate_hash_data: CertificateHashDataType,
         source: CertificateStatusSourceEnumType,
@@ -70,7 +70,7 @@ impl CertificateStatusType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -81,7 +81,7 @@ impl CertificateStatusType {
     /// # Returns
     ///
     /// A reference to the certificate hash data
-    #[must_use] 
+    #[must_use]
     pub fn certificate_hash_data(&self) -> &CertificateHashDataType {
         &self.certificate_hash_data
     }
@@ -108,7 +108,7 @@ impl CertificateStatusType {
     /// # Returns
     ///
     /// The source of the certificate status information
-    #[must_use] 
+    #[must_use]
     pub fn source(&self) -> &CertificateStatusSourceEnumType {
         &self.source
     }
@@ -132,7 +132,7 @@ impl CertificateStatusType {
     /// # Returns
     ///
     /// The status of the certificate
-    #[must_use] 
+    #[must_use]
     pub fn status(&self) -> &CertificateStatusEnumType {
         &self.status
     }
@@ -156,7 +156,7 @@ impl CertificateStatusType {
     /// # Returns
     ///
     /// The expected time of the next status update
-    #[must_use] 
+    #[must_use]
     pub fn next_update(&self) -> &DateTime<Utc> {
         &self.next_update
     }
@@ -180,7 +180,7 @@ impl CertificateStatusType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

@@ -40,7 +40,7 @@ pub enum StandardSigningMethodEnumType {
 }
 
 impl SigningMethodEnumType {
-    #[must_use] 
+    #[must_use]
     pub fn as_str(&self) -> &str {
         match self {
             Self::Standard(s) => match s {

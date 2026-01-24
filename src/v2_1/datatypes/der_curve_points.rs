@@ -34,7 +34,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// A new instance of `DERCurvePointsType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(x: Decimal, y: Decimal) -> Self {
         Self {
             x,
@@ -52,7 +52,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -63,7 +63,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// The X-axis value
-    #[must_use] 
+    #[must_use]
     pub fn x(&self) -> Decimal {
         self.x
     }
@@ -87,7 +87,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// The Y-axis value
-    #[must_use] 
+    #[must_use]
     pub fn y(&self) -> Decimal {
         self.y
     }
@@ -111,7 +111,7 @@ impl DERCurvePointsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

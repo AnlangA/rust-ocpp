@@ -21,4 +21,3 @@ pub enum FirmwareStatusEnumType {
     InvalidSignature,
     SignatureVerified,
 }
-

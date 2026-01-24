@@ -42,8 +42,13 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
-    pub fn new(request_id: i32, charging_limit_source: String, charging_profile: Vec<ChargingProfileType>, evse_id: i32) -> Self {
+    #[must_use]
+    pub fn new(
+        request_id: i32,
+        charging_limit_source: String,
+        charging_profile: Vec<ChargingProfileType>,
+        evse_id: i32,
+    ) -> Self {
         Self {
             request_id,
             charging_limit_source,
@@ -85,7 +90,10 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_charging_profile(&mut self, charging_profile: Vec<ChargingProfileType>) -> &mut Self {
+    pub fn set_charging_profile(
+        &mut self,
+        charging_profile: Vec<ChargingProfileType>,
+    ) -> &mut Self {
         self.charging_profile = charging_profile;
         self
     }
@@ -131,7 +139,7 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// Id used to match the &lt;&lt;getchargingprofilesrequest, `GetChargingProfilesRequest`&gt;&gt; message with the resulting `ReportChargingProfilesRequest` messages. When the CSMS provided a requestId in the &lt;&lt;getchargingprofilesrequest, `GetChargingProfilesRequest`&gt;&gt;, this field SHALL contain the same value.
-    #[must_use] 
+    #[must_use]
     pub fn get_request_id(&self) -> &i32 {
         &self.request_id
     }
@@ -141,7 +149,7 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// Source that has installed this charging profile. Values defined in Appendix as `ChargingLimitSourceEnumStringType`.
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_limit_source(&self) -> &String {
         &self.charging_limit_source
     }
@@ -151,7 +159,7 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// The `charging_profile` field
-    #[must_use] 
+    #[must_use]
     pub fn get_charging_profile(&self) -> &Vec<ChargingProfileType> {
         &self.charging_profile
     }
@@ -161,7 +169,7 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// To Be Continued. Default value when omitted: false. false indicates that there are no further messages as part of this report.
-    #[must_use] 
+    #[must_use]
     pub fn get_tbc(&self) -> Option<&bool> {
         self.tbc.as_ref()
     }
@@ -171,7 +179,7 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// The evse to which the charging profile applies. If evseId = 0, the message contains an overall limit for the Charging Station.
-    #[must_use] 
+    #[must_use]
     pub fn get_evse_id(&self) -> &i32 {
         &self.evse_id
     }
@@ -181,7 +189,7 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -193,7 +201,7 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_tbc(mut self, tbc: bool) -> Self {
         self.tbc = Some(tbc);
         self
@@ -206,12 +214,11 @@ impl ReportChargingProfilesRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `ReportChargingProfiles` response.
@@ -237,11 +244,9 @@ impl ReportChargingProfilesResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new() -> Self {
-        Self {
-            custom_data: None,
-        }
+        Self { custom_data: None }
     }
 
     /// Sets the `custom_data` field.
@@ -261,7 +266,7 @@ impl ReportChargingProfilesResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -273,19 +278,20 @@ impl ReportChargingProfilesResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
     use crate::v2_1::datatypes::{ChargingProfileType, ChargingScheduleType};
-    use crate::v2_1::enumerations::{ChargingProfileKindEnumType, ChargingProfilePurposeEnumType, ChargingRateUnitEnumType};
+    use crate::v2_1::enumerations::{
+        ChargingProfileKindEnumType, ChargingProfilePurposeEnumType, ChargingRateUnitEnumType,
+    };
     use serde_json;
     use validator::Validate;
 
@@ -298,17 +304,13 @@ mod tests {
         use rust_decimal::prelude::*;
 
         let period = ChargingSchedulePeriodType::new(0, Decimal::from_str("1000.0").unwrap());
-        let schedule = ChargingScheduleType::new(
-            1,
-            ChargingRateUnitEnumType::W,
-            vec![period]
-        );
+        let schedule = ChargingScheduleType::new(1, ChargingRateUnitEnumType::W, vec![period]);
         ChargingProfileType::new(
             1,
             0,
             ChargingProfilePurposeEnumType::TxProfile,
             ChargingProfileKindEnumType::Absolute,
-            vec![schedule]
+            vec![schedule],
         )
     }
 
@@ -319,7 +321,7 @@ mod tests {
             123,
             "EMS".to_string(),
             charging_profiles.clone(),
-            1
+            1,
         );
 
         assert_eq!(request.request_id, 123);
@@ -337,7 +339,7 @@ mod tests {
             456,
             "CSO".to_string(),
             charging_profiles.clone(),
-            2
+            2,
         )
         .with_tbc(true)
         .with_custom_data(create_test_custom_data());
@@ -359,21 +361,13 @@ mod tests {
         let charging_profiles = vec![create_test_charging_profile()];
 
         // Valid request
-        let valid_request = ReportChargingProfilesRequest::new(
-            0,
-            "EMS".to_string(),
-            charging_profiles.clone(),
-            0
-        );
+        let valid_request =
+            ReportChargingProfilesRequest::new(0, "EMS".to_string(), charging_profiles.clone(), 0);
         assert!(valid_request.validate().is_ok());
 
         // Negative request_id is valid (schema has no minimum constraint)
-        let negative_id_request = ReportChargingProfilesRequest::new(
-            -1,
-            "EMS".to_string(),
-            charging_profiles.clone(),
-            0
-        );
+        let negative_id_request =
+            ReportChargingProfilesRequest::new(-1, "EMS".to_string(), charging_profiles.clone(), 0);
         assert!(negative_id_request.validate().is_ok());
 
         // Invalid charging_limit_source (too long)
@@ -415,14 +409,10 @@ mod tests {
         let charging_profiles = vec![create_test_charging_profile()];
         let custom_data = create_test_custom_data();
 
-        let request = ReportChargingProfilesRequest::new(
-            789,
-            "SO".to_string(),
-            charging_profiles.clone(),
-            3
-        )
-        .with_tbc(false)
-        .with_custom_data(custom_data.clone());
+        let request =
+            ReportChargingProfilesRequest::new(789, "SO".to_string(), charging_profiles.clone(), 3)
+                .with_tbc(false)
+                .with_custom_data(custom_data.clone());
 
         assert_eq!(request.request_id, 789);
         assert_eq!(request.charging_limit_source, "SO");
@@ -439,10 +429,13 @@ mod tests {
             100,
             "EMS".to_string(),
             charging_profiles.clone(),
-            1
+            1,
         );
         let custom_data = create_test_custom_data();
-        let new_profiles = vec![create_test_charging_profile(), create_test_charging_profile()];
+        let new_profiles = vec![
+            create_test_charging_profile(),
+            create_test_charging_profile(),
+        ];
 
         // Test setters
         request.set_request_id(200);
@@ -470,8 +463,8 @@ mod tests {
 
     #[test]
     fn test_report_charging_profiles_response_serialization() {
-        let response = ReportChargingProfilesResponse::new()
-            .with_custom_data(create_test_custom_data());
+        let response =
+            ReportChargingProfilesResponse::new().with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&response).expect("Failed to serialize");
         let deserialized: ReportChargingProfilesResponse =
@@ -486,16 +479,15 @@ mod tests {
         let valid_response = ReportChargingProfilesResponse::new();
         assert!(valid_response.validate().is_ok());
 
-        let response_with_custom_data = ReportChargingProfilesResponse::new()
-            .with_custom_data(create_test_custom_data());
+        let response_with_custom_data =
+            ReportChargingProfilesResponse::new().with_custom_data(create_test_custom_data());
         assert!(response_with_custom_data.validate().is_ok());
     }
 
     #[test]
     fn test_report_charging_profiles_response_builder_pattern() {
         let custom_data = create_test_custom_data();
-        let response = ReportChargingProfilesResponse::new()
-            .with_custom_data(custom_data.clone());
+        let response = ReportChargingProfilesResponse::new().with_custom_data(custom_data.clone());
 
         assert_eq!(response.custom_data, Some(custom_data));
     }
@@ -517,12 +509,8 @@ mod tests {
         let charging_profiles = vec![create_test_charging_profile()];
 
         // Test minimum valid values
-        let min_request = ReportChargingProfilesRequest::new(
-            0,
-            "".to_string(),
-            charging_profiles.clone(),
-            0
-        );
+        let min_request =
+            ReportChargingProfilesRequest::new(0, "".to_string(), charging_profiles.clone(), 0);
         assert!(min_request.validate().is_ok());
 
         // Test maximum valid charging_limit_source length
@@ -530,7 +518,7 @@ mod tests {
             i32::MAX,
             "A".repeat(20),
             charging_profiles.clone(),
-            i32::MAX
+            i32::MAX,
         );
         assert!(max_source_request.validate().is_ok());
 
@@ -538,28 +526,20 @@ mod tests {
         let multiple_profiles = vec![
             create_test_charging_profile(),
             create_test_charging_profile(),
-            create_test_charging_profile()
+            create_test_charging_profile(),
         ];
-        let multi_request = ReportChargingProfilesRequest::new(
-            100,
-            "EMS".to_string(),
-            multiple_profiles,
-            1
-        );
+        let multi_request =
+            ReportChargingProfilesRequest::new(100, "EMS".to_string(), multiple_profiles, 1);
         assert!(multi_request.validate().is_ok());
     }
 
     #[test]
     fn test_report_charging_profiles_json_round_trip() {
         let charging_profiles = vec![create_test_charging_profile()];
-        let original_request = ReportChargingProfilesRequest::new(
-            12345,
-            "CSO".to_string(),
-            charging_profiles,
-            10
-        )
-        .with_tbc(true)
-        .with_custom_data(create_test_custom_data());
+        let original_request =
+            ReportChargingProfilesRequest::new(12345, "CSO".to_string(), charging_profiles, 10)
+                .with_tbc(true)
+                .with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&original_request).expect("Failed to serialize request");
         let parsed_request: ReportChargingProfilesRequest =
@@ -567,8 +547,8 @@ mod tests {
 
         assert_eq!(original_request, parsed_request);
 
-        let original_response = ReportChargingProfilesResponse::new()
-            .with_custom_data(create_test_custom_data());
+        let original_response =
+            ReportChargingProfilesResponse::new().with_custom_data(create_test_custom_data());
 
         let json = serde_json::to_string(&original_response).expect("Failed to serialize response");
         let parsed_response: ReportChargingProfilesResponse =
@@ -588,7 +568,7 @@ mod tests {
                 1,
                 source.to_string(),
                 charging_profiles.clone(),
-                1
+                1,
             );
             assert!(request.validate().is_ok());
             assert_eq!(request.charging_limit_source, source);
@@ -600,30 +580,20 @@ mod tests {
         let charging_profiles = vec![create_test_charging_profile()];
 
         // Test with tbc = true
-        let request_true = ReportChargingProfilesRequest::new(
-            1,
-            "EMS".to_string(),
-            charging_profiles.clone(),
-            1
-        ).with_tbc(true);
+        let request_true =
+            ReportChargingProfilesRequest::new(1, "EMS".to_string(), charging_profiles.clone(), 1)
+                .with_tbc(true);
         assert_eq!(request_true.tbc, Some(true));
 
         // Test with tbc = false
-        let request_false = ReportChargingProfilesRequest::new(
-            1,
-            "EMS".to_string(),
-            charging_profiles.clone(),
-            1
-        ).with_tbc(false);
+        let request_false =
+            ReportChargingProfilesRequest::new(1, "EMS".to_string(), charging_profiles.clone(), 1)
+                .with_tbc(false);
         assert_eq!(request_false.tbc, Some(false));
 
         // Test without tbc (None)
-        let request_none = ReportChargingProfilesRequest::new(
-            1,
-            "EMS".to_string(),
-            charging_profiles,
-            1
-        );
+        let request_none =
+            ReportChargingProfilesRequest::new(1, "EMS".to_string(), charging_profiles, 1);
         assert_eq!(request_none.tbc, None);
     }
 }

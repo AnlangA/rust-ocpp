@@ -56,7 +56,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// A new instance of `CostDetailsType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         charging_periods: Vec<ChargingPeriodType>,
         total_cost: TotalCostType,
@@ -81,7 +81,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_failure_to_calculate(mut self, failure_to_calculate: bool) -> Self {
         self.failure_to_calculate = Some(failure_to_calculate);
         self
@@ -96,7 +96,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_failure_reason(mut self, failure_reason: String) -> Self {
         self.failure_reason = Some(failure_reason);
         self
@@ -111,7 +111,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -122,7 +122,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// A reference to the list of charging periods that make up this transaction, or an empty slice if none
-    #[must_use] 
+    #[must_use]
     pub fn charging_periods(&self) -> &[ChargingPeriodType] {
         self.charging_periods.as_deref().unwrap_or(&[])
     }
@@ -146,7 +146,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// A reference to the total cost of this transaction, including taxes
-    #[must_use] 
+    #[must_use]
     pub fn total_cost(&self) -> &TotalCostType {
         &self.total_cost
     }
@@ -170,7 +170,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// A reference to the total usage of energy and time during this transaction
-    #[must_use] 
+    #[must_use]
     pub fn total_usage(&self) -> &TotalUsageType {
         &self.total_usage
     }
@@ -194,7 +194,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// An optional boolean indicating if the Charging Station has failed to calculate the cost
-    #[must_use] 
+    #[must_use]
     pub fn failure_to_calculate(&self) -> Option<bool> {
         self.failure_to_calculate
     }
@@ -218,7 +218,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// An optional reference to the human-readable reason text in case of failure to calculate
-    #[must_use] 
+    #[must_use]
     pub fn failure_reason(&self) -> Option<&str> {
         self.failure_reason.as_deref()
     }
@@ -242,7 +242,7 @@ impl CostDetailsType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }

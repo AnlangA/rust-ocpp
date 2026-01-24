@@ -9,4 +9,3 @@ pub enum ClearCacheStatusEnumType {
     Accepted,
     Rejected,
 }
-

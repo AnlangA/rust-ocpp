@@ -88,7 +88,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// A new instance of `SetMonitoringDataType` with optional fields set to `None`
-    #[must_use] 
+    #[must_use]
     pub fn new(
         value: Decimal,
         kind: MonitorEnumType,
@@ -118,7 +118,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
@@ -133,7 +133,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_id(mut self, id: i32) -> Self {
         self.id = Some(id);
         self
@@ -148,7 +148,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_periodic_event_stream(
         mut self,
         periodic_event_stream: PeriodicEventStreamParamsType,
@@ -166,7 +166,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// Self reference for method chaining
-    #[must_use] 
+    #[must_use]
     pub fn with_transaction(mut self, transaction: bool) -> Self {
         self.transaction = Some(transaction);
         self
@@ -177,7 +177,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// An optional reference to the custom data
-    #[must_use] 
+    #[must_use]
     pub fn custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -201,7 +201,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// The optional ID of the monitor
-    #[must_use] 
+    #[must_use]
     pub fn id(&self) -> Option<i32> {
         self.id
     }
@@ -225,7 +225,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// Optional reference to the periodic event stream parameters
-    #[must_use] 
+    #[must_use]
     pub fn periodic_event_stream(&self) -> Option<&PeriodicEventStreamParamsType> {
         self.periodic_event_stream.as_ref()
     }
@@ -252,7 +252,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// Whether the monitor is only active during transactions
-    #[must_use] 
+    #[must_use]
     pub fn transaction(&self) -> Option<bool> {
         self.transaction
     }
@@ -276,7 +276,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// The value for threshold or delta monitoring
-    #[must_use] 
+    #[must_use]
     pub fn value(&self) -> Decimal {
         self.value
     }
@@ -300,7 +300,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// The type of this monitor
-    #[must_use] 
+    #[must_use]
     pub fn kind(&self) -> &MonitorEnumType {
         &self.kind
     }
@@ -324,7 +324,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// The severity that will be assigned to an event
-    #[must_use] 
+    #[must_use]
     pub fn severity(&self) -> i32 {
         self.severity
     }
@@ -348,7 +348,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// A reference to the component for which a variable is monitored
-    #[must_use] 
+    #[must_use]
     pub fn component(&self) -> &ComponentType {
         &self.component
     }
@@ -372,7 +372,7 @@ impl SetMonitoringDataType {
     /// # Returns
     ///
     /// A reference to the variable that is monitored
-    #[must_use] 
+    #[must_use]
     pub fn variable(&self) -> &VariableType {
         &self.variable
     }

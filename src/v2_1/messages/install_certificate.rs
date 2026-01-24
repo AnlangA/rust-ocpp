@@ -29,7 +29,7 @@ impl InstallCertificateRequest {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(certificate_type: InstallCertificateUseEnumType, certificate: String) -> Self {
         Self {
             certificate_type,
@@ -45,7 +45,10 @@ impl InstallCertificateRequest {
     /// # Returns
     ///
     /// A mutable reference to self for method chaining.
-    pub fn set_certificate_type(&mut self, certificate_type: InstallCertificateUseEnumType) -> &mut Self {
+    pub fn set_certificate_type(
+        &mut self,
+        certificate_type: InstallCertificateUseEnumType,
+    ) -> &mut Self {
         self.certificate_type = certificate_type;
         self
     }
@@ -79,7 +82,7 @@ impl InstallCertificateRequest {
     /// # Returns
     ///
     /// The `certificate_type` field
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate_type(&self) -> &InstallCertificateUseEnumType {
         &self.certificate_type
     }
@@ -89,7 +92,7 @@ impl InstallCertificateRequest {
     /// # Returns
     ///
     /// A PEM encoded X.509 certificate.
-    #[must_use] 
+    #[must_use]
     pub fn get_certificate(&self) -> &String {
         &self.certificate
     }
@@ -99,7 +102,7 @@ impl InstallCertificateRequest {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -111,12 +114,11 @@ impl InstallCertificateRequest {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 /// Response body for the `InstallCertificate` response.
@@ -145,7 +147,7 @@ impl InstallCertificateResponse {
     /// # Returns
     ///
     /// A new instance of the struct with required fields set and optional fields as None.
-    #[must_use] 
+    #[must_use]
     pub fn new(status: InstallCertificateStatusEnumType) -> Self {
         Self {
             status,
@@ -195,7 +197,7 @@ impl InstallCertificateResponse {
     /// # Returns
     ///
     /// The status field
-    #[must_use] 
+    #[must_use]
     pub fn get_status(&self) -> &InstallCertificateStatusEnumType {
         &self.status
     }
@@ -205,7 +207,7 @@ impl InstallCertificateResponse {
     /// # Returns
     ///
     /// The `status_info` field
-    #[must_use] 
+    #[must_use]
     pub fn get_status_info(&self) -> Option<&StatusInfoType> {
         self.status_info.as_ref()
     }
@@ -215,7 +217,7 @@ impl InstallCertificateResponse {
     /// # Returns
     ///
     /// The `custom_data` field
-    #[must_use] 
+    #[must_use]
     pub fn get_custom_data(&self) -> Option<&CustomDataType> {
         self.custom_data.as_ref()
     }
@@ -227,7 +229,7 @@ impl InstallCertificateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_status_info(mut self, status_info: StatusInfoType) -> Self {
         self.status_info = Some(status_info);
         self
@@ -240,12 +242,11 @@ impl InstallCertificateResponse {
     /// # Returns
     ///
     /// Self with the field set.
-    #[must_use] 
+    #[must_use]
     pub fn with_custom_data(mut self, custom_data: CustomDataType) -> Self {
         self.custom_data = Some(custom_data);
         self
     }
-
 }
 
 #[cfg(test)]
@@ -369,7 +370,8 @@ mod tests {
         ];
 
         for cert_type in certificate_types {
-            let request = InstallCertificateRequest::new(cert_type.clone(), "test_cert".to_string());
+            let request =
+                InstallCertificateRequest::new(cert_type.clone(), "test_cert".to_string());
             assert_eq!(request.certificate_type, cert_type);
             assert!(request.validate().is_ok());
         }
@@ -428,7 +430,8 @@ mod tests {
         let status_info = create_test_status_info();
         let custom_data = create_test_custom_data();
 
-        let mut response = InstallCertificateResponse::new(InstallCertificateStatusEnumType::Accepted);
+        let mut response =
+            InstallCertificateResponse::new(InstallCertificateStatusEnumType::Accepted);
         response.set_status(InstallCertificateStatusEnumType::Failed);
         response.set_status_info(Some(status_info.clone()));
         response.set_custom_data(Some(custom_data.clone()));
@@ -446,7 +449,10 @@ mod tests {
             .with_status_info(status_info.clone())
             .with_custom_data(custom_data.clone());
 
-        assert_eq!(response.get_status(), &InstallCertificateStatusEnumType::Accepted);
+        assert_eq!(
+            response.get_status(),
+            &InstallCertificateStatusEnumType::Accepted
+        );
         assert_eq!(response.get_status_info(), Some(&status_info));
         assert_eq!(response.get_custom_data(), Some(&custom_data));
     }
