@@ -1847,4 +1847,136 @@ fn test_invalid_change_availability_request() -> Result<(), Box<dyn std::error::
     Ok(())
 }
 
+#[test]
+fn test_valid_get_local_list_version_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test empty request (no required fields)
+    let instance = serde_json::json!({});
+    assert!(validate_schema_instance(
+        "GetLocalListVersionRequest.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "GetLocalListVersionRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_get_local_list_version_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "versionNumber": 42
+    });
+    assert!(validate_schema_instance(
+        "GetLocalListVersionResponse.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "versionNumber": 100,
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "GetLocalListVersionResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_get_local_list_version_response() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required versionNumber
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "GetLocalListVersionResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_clear_charging_profile_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "chargingProfileId": 42
+    });
+    assert!(validate_schema_instance(
+        "ClearChargingProfileRequest.json",
+        instance
+    )?);
+
+    // Test with chargingProfileCriteria
+    let instance = serde_json::json!({
+        "chargingProfileCriteria": {
+            "chargingProfilePurpose": "TxProfile",
+            "stackLevel": 1,
+            "evseId": 1
+        }
+    });
+    assert!(validate_schema_instance(
+        "ClearChargingProfileRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_clear_charging_profile_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "ClearChargingProfileResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "status": "Unknown",
+        "statusInfo": {
+            "reasonCode": "NotFound"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ClearChargingProfileResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_clear_charging_profile_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with negative evseId in criteria
+    let instance = serde_json::json!({
+        "chargingProfileCriteria": {
+            "evseId": -1
+        }
+    });
+    assert!(!validate_schema_instance(
+        "ClearChargingProfileRequest.json",
+        instance
+    )?);
+
+    // Test with negative stackLevel in criteria
+    let instance = serde_json::json!({
+        "chargingProfileCriteria": {
+            "stackLevel": -1
+        }
+    });
+    assert!(!validate_schema_instance(
+        "ClearChargingProfileRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
 // We recommend installing an extension to run rust tests.
