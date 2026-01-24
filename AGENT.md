@@ -443,3 +443,30 @@ Message 文件 (5个):
 
 **下一步:**
 - 继续为剩余消息添加 schema 验证测试
+
+---
+
+### 2026-01-24 Ralph Loop - Iteration 12
+
+#### 显示消息与充电限制验证测试 ✅
+
+**本次迭代完成的任务:**
+
+**新增验证测试 (6个):**
+   1. ✅ GetDisplayMessages (3 tests) - Request/Response/Invalid
+   2. ✅ ClearedChargingLimit (3 tests) - Request/Response/Invalid
+
+**测试结果:**
+- ✅ Schema 验证测试: 73 → 79 (增加 6 个, +8%)
+- ✅ 所有 2510 个测试通过 (包含新增测试)
+- ✅ 覆盖显示消息和充电限制管理功能
+
+**当前状态:**
+- 92 个消息文件中已有 79 个验证测试 (~86% 覆盖率)
+- 剩余约 13 个消息文件需要添加验证测试
+
+**修改文件:**
+- `src/tests/schema_validation/v2_1.rs` - 新增 6 个验证测试
+
+**下一步:**
+- 继续为剩余消息添加 schema 验证测试
