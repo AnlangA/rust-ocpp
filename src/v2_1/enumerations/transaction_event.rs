@@ -1,6 +1,9 @@
 use serde::{Deserialize, Serialize};
 
-/// Type of event for a transaction.
+/// This contains the type of this event.
+/// The first TransactionEvent of a transaction SHALL contain: Started
+/// The last TransactionEvent of a transaction SHALL contain: Ended
+/// All others SHALL contain: Updated
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, Default)]
 #[serde(rename_all = "PascalCase")]
 pub enum TransactionEventEnumType {

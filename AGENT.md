@@ -139,3 +139,30 @@ pub enum APNAuthenticationEnumType {
 
 **持续验证策略：**
 鉴于代码库质量一致且测试全部通过，建议继续抽样验证或根据优先级验证特定文件。完整的手动验证需要相当长的时间。
+
+### 迭代 4 (2026-01-24)
+
+#### 新增验证与修复
+
+**已验证的文件：**
+7. **TransactionEventRequest** - ✅ 已验证
+   - 字段顺序：Rust代码按required字段在前排序，与schema不同但更易读
+   - 由于使用`#[serde(rename_all = "camelCase")]`，序列化不受内存顺序影响
+   - 所有字段注释与schema描述完全匹配
+
+**修复的问题：**
+- ✅ 更新了 `transaction_event.rs` 枚举的注释，使其与schema描述完全一致
+  - 从 "Type of event for a transaction."
+  - 改为 "This contains the type of this event. The first TransactionEvent of a transaction SHALL contain: Started..."
+
+**验证统计：**
+- 已验证消息文件：7个
+- 已修复注释：1个枚举文件
+- 所有2523个测试持续通过
+
+**重要发现：**
+Rust代码的字段顺序可以与schema不同，只要：
+1. 使用`#[serde(rename_all)]`确保序列化正确
+2. 所有required字段都存在
+3. 字段注释与schema描述匹配
+TransactionEventRequest采用了"required字段在前"的排序，这是良好的代码实践。
