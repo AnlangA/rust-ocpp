@@ -13,6 +13,12 @@ pub struct ClearCacheRequest {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ClearCacheRequest {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ClearCacheRequest {
     /// Creates a new instance of the struct.
     ///

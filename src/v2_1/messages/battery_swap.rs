@@ -178,6 +178,12 @@ pub struct BatterySwapResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for BatterySwapResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BatterySwapResponse {
     /// Creates a new instance of the struct.
     ///
