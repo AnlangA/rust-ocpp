@@ -1712,4 +1712,139 @@ fn test_invalid_trigger_message_request() -> Result<(), Box<dyn std::error::Erro
     Ok(())
 }
 
+#[test]
+fn test_valid_clear_cache_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test empty request (no required fields)
+    let instance = serde_json::json!({});
+    assert!(validate_schema_instance(
+        "ClearCacheRequest.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ClearCacheRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_clear_cache_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "ClearCacheResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "status": "Rejected",
+        "statusInfo": {
+            "reasonCode": "Failed"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ClearCacheResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_clear_cache_response() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required status
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "ClearCacheResponse.json",
+        instance
+    )?);
+
+    // Test with invalid status value
+    let instance = serde_json::json!({
+        "status": "InvalidStatus"
+    });
+    assert!(!validate_schema_instance(
+        "ClearCacheResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_change_availability_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "operationalStatus": "Inoperative"
+    });
+    assert!(validate_schema_instance(
+        "ChangeAvailabilityRequest.json",
+        instance
+    )?);
+
+    // Test with optional evse
+    let instance = serde_json::json!({
+        "operationalStatus": "Operative",
+        "evse": {
+            "id": 1,
+            "connectorId": 2
+        }
+    });
+    assert!(validate_schema_instance(
+        "ChangeAvailabilityRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_change_availability_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "ChangeAvailabilityResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "status": "Scheduled",
+        "statusInfo": {
+            "reasonCode": "Scheduled"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ChangeAvailabilityResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_change_availability_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required operationalStatus
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "ChangeAvailabilityRequest.json",
+        instance
+    )?);
+
+    // Test with invalid operationalStatus value
+    let instance = serde_json::json!({
+        "operationalStatus": "InvalidStatus"
+    });
+    assert!(!validate_schema_instance(
+        "ChangeAvailabilityRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
 // We recommend installing an extension to run rust tests.
