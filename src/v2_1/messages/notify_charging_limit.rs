@@ -175,6 +175,12 @@ pub struct NotifyChargingLimitResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for NotifyChargingLimitResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NotifyChargingLimitResponse {
     /// Creates a new instance of the struct.
     ///

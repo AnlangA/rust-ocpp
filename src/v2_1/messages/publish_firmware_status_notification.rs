@@ -213,6 +213,12 @@ pub struct PublishFirmwareStatusNotificationResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for PublishFirmwareStatusNotificationResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl PublishFirmwareStatusNotificationResponse {
     /// Creates a new instance of the struct.
     ///

@@ -990,6 +990,12 @@ pub struct TransactionEventResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for TransactionEventResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TransactionEventResponse {
     /// Creates a new instance of the struct.
     ///

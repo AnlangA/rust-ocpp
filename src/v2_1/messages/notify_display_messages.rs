@@ -174,6 +174,12 @@ pub struct NotifyDisplayMessagesResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for NotifyDisplayMessagesResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NotifyDisplayMessagesResponse {
     /// Creates a new instance of the struct.
     ///

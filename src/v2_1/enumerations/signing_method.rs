@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::fmt;
 
 /// Standardized values for the signingMethod in a SignedMeterValueType.
 /// The algorithm, curve, key length and hash algorithm information is for documentation only
@@ -88,8 +89,8 @@ impl From<String> for SigningMethodEnumType {
     }
 }
 
-impl ToString for SigningMethodEnumType {
-    fn to_string(&self) -> String {
-        self.as_str().to_string()
+impl fmt::Display for SigningMethodEnumType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

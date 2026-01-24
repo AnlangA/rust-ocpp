@@ -189,6 +189,12 @@ pub struct NotifyDERStartStopResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for NotifyDERStartStopResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NotifyDERStartStopResponse {
     /// Creates a new instance of the struct.
     ///

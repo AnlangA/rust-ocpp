@@ -175,6 +175,12 @@ pub struct LogStatusNotificationResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for LogStatusNotificationResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl LogStatusNotificationResponse {
     /// Creates a new instance of the struct.
     ///

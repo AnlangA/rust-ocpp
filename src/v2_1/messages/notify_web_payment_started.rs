@@ -121,6 +121,12 @@ pub struct NotifyWebPaymentStartedResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for NotifyWebPaymentStartedResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NotifyWebPaymentStartedResponse {
     /// Creates a new instance of the struct.
     ///

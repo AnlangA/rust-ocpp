@@ -79,6 +79,12 @@ pub struct GetLocalListVersionResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for GetLocalListVersionResponse {
+    fn default() -> Self {
+        Self::new(0)
+    }
+}
+
 impl GetLocalListVersionResponse {
     /// Creates a new instance of the struct.
     ///

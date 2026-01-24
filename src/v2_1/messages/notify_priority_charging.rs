@@ -123,6 +123,12 @@ pub struct NotifyPriorityChargingResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for NotifyPriorityChargingResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NotifyPriorityChargingResponse {
     /// Creates a new instance of the struct.
     ///

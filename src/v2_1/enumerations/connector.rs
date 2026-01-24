@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::fmt;
 
 /// Standardized values for a connectorType field.
 /// Fixed cable connections have a name that starts with "c" for captive cabled.
@@ -193,8 +194,8 @@ impl From<String> for ConnectorEnumType {
     }
 }
 
-impl ToString for ConnectorEnumType {
-    fn to_string(&self) -> String {
-        self.as_str().to_string()
+impl fmt::Display for ConnectorEnumType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

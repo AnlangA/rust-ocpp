@@ -228,6 +228,12 @@ pub struct NotifyMonitoringReportResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for NotifyMonitoringReportResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NotifyMonitoringReportResponse {
     /// Creates a new instance of the struct.
     ///

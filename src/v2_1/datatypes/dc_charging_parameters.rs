@@ -342,7 +342,7 @@ impl DCChargingParametersType {
     /// # Arguments
     ///
     /// * `full_so_c` - Percentage of SoC at which the EV considers the battery fully charged (0-100),
-    ///                 or None to clear
+    ///   or None to clear
     ///
     /// # Returns
     ///

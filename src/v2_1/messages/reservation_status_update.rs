@@ -124,6 +124,12 @@ pub struct ReservationStatusUpdateResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ReservationStatusUpdateResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ReservationStatusUpdateResponse {
     /// Creates a new instance of the struct.
     ///

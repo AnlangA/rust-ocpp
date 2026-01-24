@@ -67,9 +67,6 @@ impl EnterServiceType {
     /// * `low_voltage` - Enter service voltage low
     /// * `high_freq` - Enter service frequency high
     /// * `low_freq` - Enter service frequency low
-    /// * `delay` - Enter service delay
-    /// * `random_delay` - Enter service randomized delay
-    /// * `ramp_rate` - Enter service ramp rate in seconds
     ///
     /// # Returns
     ///
@@ -80,9 +77,6 @@ impl EnterServiceType {
         low_voltage: Decimal,
         high_freq: Decimal,
         low_freq: Decimal,
-        delay: Decimal,
-        random_delay: Decimal,
-        ramp_rate: Decimal,
     ) -> Self {
         Self {
             priority,
@@ -90,11 +84,53 @@ impl EnterServiceType {
             low_voltage,
             high_freq,
             low_freq,
-            delay: Some(delay),
-            random_delay: Some(random_delay),
-            ramp_rate: Some(ramp_rate),
+            delay: None,
+            random_delay: None,
+            ramp_rate: None,
             custom_data: None,
         }
+    }
+
+    /// Sets the delay.
+    ///
+    /// # Arguments
+    ///
+    /// * `delay` - Enter service delay
+    ///
+    /// # Returns
+    ///
+    /// Self for builder pattern chaining
+    pub fn with_delay(mut self, delay: Decimal) -> Self {
+        self.delay = Some(delay);
+        self
+    }
+
+    /// Sets the random delay.
+    ///
+    /// # Arguments
+    ///
+    /// * `random_delay` - Enter service randomized delay
+    ///
+    /// # Returns
+    ///
+    /// Self for builder pattern chaining
+    pub fn with_random_delay(mut self, random_delay: Decimal) -> Self {
+        self.random_delay = Some(random_delay);
+        self
+    }
+
+    /// Sets the ramp rate.
+    ///
+    /// # Arguments
+    ///
+    /// * `ramp_rate` - Enter service ramp rate in seconds
+    ///
+    /// # Returns
+    ///
+    /// Self for builder pattern chaining
+    pub fn with_ramp_rate(mut self, ramp_rate: Decimal) -> Self {
+        self.ramp_rate = Some(ramp_rate);
+        self
     }
 
     /// Sets the custom data.
@@ -341,10 +377,10 @@ mod tests {
             low_voltage,
             high_freq,
             low_freq,
-            delay,
-            random_delay,
-            ramp_rate,
-        );
+        )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate);
 
         assert_eq!(enter_service.priority(), priority);
         assert_eq!(enter_service.high_voltage(), high_voltage);
@@ -375,10 +411,10 @@ mod tests {
             low_voltage,
             high_freq,
             low_freq,
-            delay,
-            random_delay,
-            ramp_rate,
         )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate)
         .with_custom_data(custom_data.clone());
 
         assert_eq!(enter_service.priority(), priority);
@@ -420,10 +456,10 @@ mod tests {
             low_voltage1,
             high_freq1,
             low_freq1,
-            delay1,
-            random_delay1,
-            ramp_rate1,
-        );
+        )
+        .with_delay(delay1)
+        .with_random_delay(random_delay1)
+        .with_ramp_rate(ramp_rate1);
 
         enter_service
             .set_priority(priority2)
@@ -469,10 +505,10 @@ mod tests {
             low_voltage,
             high_freq,
             low_freq,
-            delay,
-            random_delay,
-            ramp_rate,
-        );
+        )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate);
 
         // 验证有效实例应该通过
         assert!(valid_enter_service.validate().is_ok());
@@ -485,10 +521,10 @@ mod tests {
             low_voltage,
             high_freq,
             low_freq,
-            delay,
-            random_delay,
-            ramp_rate,
-        );
+        )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate);
 
         // 验证应该失败，因为priority为负数
         let validation_result = invalid_priority_enter_service.validate();
@@ -501,17 +537,17 @@ mod tests {
         let too_long_vendor_id = "X".repeat(256); // 超过255字符限制
         let invalid_custom_data = CustomDataType::new(too_long_vendor_id);
 
-        let enter_service_with_invalid_custom_data = EnterServiceType {
+        let enter_service_with_invalid_custom_data = EnterServiceType::new(
             priority,
             high_voltage,
             low_voltage,
             high_freq,
             low_freq,
-            delay: Some(delay),
-            random_delay: Some(random_delay),
-            ramp_rate: Some(ramp_rate),
-            custom_data: Some(invalid_custom_data),
-        };
+        )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate)
+        .with_custom_data(invalid_custom_data);
 
         // 验证应该失败，因为custom_data无效
         let validation_result = enter_service_with_invalid_custom_data.validate();
@@ -537,17 +573,17 @@ mod tests {
             .with_property("version".to_string(), json!("1.0"));
 
         // 创建完整的EnterServiceType实例
-        let enter_service = EnterServiceType {
+        let enter_service = EnterServiceType::new(
             priority,
             high_voltage,
             low_voltage,
             high_freq,
             low_freq,
-            delay: Some(delay),
-            random_delay: Some(random_delay),
-            ramp_rate: Some(ramp_rate),
-            custom_data: Some(custom_data),
-        };
+        )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate)
+        .with_custom_data(custom_data);
 
         // 序列化为JSON
         let serialized = serde_json::to_string(&enter_service).unwrap();
@@ -597,10 +633,10 @@ mod tests {
             low_voltage.clone(),
             high_freq.clone(),
             low_freq.clone(),
-            delay.clone(),
-            random_delay.clone(),
-            ramp_rate.clone(),
-        );
+        )
+        .with_delay(delay.clone())
+        .with_random_delay(random_delay.clone())
+        .with_ramp_rate(ramp_rate.clone());
 
         // 序列化为JSON
         let serialized = serde_json::to_string(&enter_service).unwrap();

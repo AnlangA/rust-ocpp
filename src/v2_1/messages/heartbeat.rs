@@ -80,6 +80,12 @@ pub struct HeartbeatResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for HeartbeatResponse {
+    fn default() -> Self {
+        Self::new(Utc::now())
+    }
+}
+
 impl HeartbeatResponse {
     /// Creates a new instance of the struct.
     ///

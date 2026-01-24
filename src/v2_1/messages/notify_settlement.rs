@@ -419,6 +419,12 @@ pub struct NotifySettlementResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for NotifySettlementResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl NotifySettlementResponse {
     /// Creates a new instance of the struct.
     ///

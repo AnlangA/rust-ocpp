@@ -215,6 +215,12 @@ pub struct ReportChargingProfilesResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ReportChargingProfilesResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ReportChargingProfilesResponse {
     /// Creates a new instance of the struct.
     ///

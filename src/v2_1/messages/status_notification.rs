@@ -175,6 +175,12 @@ pub struct StatusNotificationResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for StatusNotificationResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl StatusNotificationResponse {
     /// Creates a new instance of the struct.
     ///

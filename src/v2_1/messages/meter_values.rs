@@ -125,6 +125,12 @@ pub struct MeterValuesResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for MeterValuesResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl MeterValuesResponse {
     /// Creates a new instance of the struct.
     ///

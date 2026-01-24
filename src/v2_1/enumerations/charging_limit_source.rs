@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::fmt;
 use validator::Validate;
 
 #[derive(Debug, Validate, Serialize, Deserialize, Clone, PartialEq)]
@@ -60,8 +61,8 @@ impl From<String> for ChargingLimitSourceEnumType {
     }
 }
 
-impl ToString for ChargingLimitSourceEnumType {
-    fn to_string(&self) -> String {
-        self.as_str().to_string()
+impl fmt::Display for ChargingLimitSourceEnumType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.as_str())
     }
 }

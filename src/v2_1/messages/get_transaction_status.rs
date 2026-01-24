@@ -17,6 +17,12 @@ pub struct GetTransactionStatusRequest {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for GetTransactionStatusRequest {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl GetTransactionStatusRequest {
     /// Creates a new instance of the struct.
     ///

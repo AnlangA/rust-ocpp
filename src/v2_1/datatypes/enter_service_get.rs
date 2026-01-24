@@ -146,10 +146,10 @@ mod tests {
             low_voltage,
             high_freq,
             low_freq,
-            delay,
-            random_delay,
-            ramp_rate,
-        );
+        )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate);
         let id = "setting1".to_string();
 
         let enter_service_get = EnterServiceGetType::new(enter_service.clone(), id.clone());
@@ -177,10 +177,10 @@ mod tests {
             low_voltage,
             high_freq,
             low_freq,
-            delay,
-            random_delay,
-            ramp_rate,
-        );
+        )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate);
         let id = "setting1".to_string();
         let custom_data = CustomDataType::new("VendorX".to_string());
 
@@ -218,20 +218,20 @@ mod tests {
             low_voltage1,
             high_freq1,
             low_freq1,
-            delay1,
-            random_delay1,
-            ramp_rate1,
-        );
+        )
+        .with_delay(delay1)
+        .with_random_delay(random_delay1)
+        .with_ramp_rate(ramp_rate1);
         let enter_service2 = EnterServiceType::new(
             2,
             high_voltage2,
             low_voltage2,
             high_freq2,
             low_freq2,
-            delay2,
-            random_delay2,
-            ramp_rate2,
-        );
+        )
+        .with_delay(delay2)
+        .with_random_delay(random_delay2)
+        .with_ramp_rate(ramp_rate2);
         let id1 = "setting1".to_string();
         let id2 = "setting2".to_string();
         let custom_data = CustomDataType::new("VendorX".to_string());
@@ -271,10 +271,10 @@ mod tests {
             low_voltage,
             high_freq,
             low_freq,
-            delay,
-            random_delay,
-            ramp_rate,
-        );
+        )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate);
         let id = "valid_id".to_string();
 
         let valid_enter_service_get = EnterServiceGetType::new(enter_service.clone(), id.clone());
@@ -300,10 +300,10 @@ mod tests {
             low_voltage,
             high_freq,
             low_freq,
-            delay,
-            random_delay,
-            ramp_rate,
-        );
+        )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate);
         let enter_service_get_with_invalid_enter_service =
             EnterServiceGetType::new(invalid_enter_service, id.clone());
 
@@ -351,10 +351,10 @@ mod tests {
             low_voltage,
             high_freq,
             low_freq,
-            delay,
-            random_delay,
-            ramp_rate,
         )
+        .with_delay(delay)
+        .with_random_delay(random_delay)
+        .with_ramp_rate(ramp_rate)
         .with_custom_data(CustomDataType::new("VendorX".to_string()));
         let id = "setting1".to_string();
         let custom_data = CustomDataType::new("VendorY".to_string())

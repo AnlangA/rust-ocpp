@@ -163,6 +163,12 @@ pub struct SecurityEventNotificationResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for SecurityEventNotificationResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl SecurityEventNotificationResponse {
     /// Creates a new instance of the struct.
     ///

@@ -454,6 +454,12 @@ pub struct ReportDERControlResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ReportDERControlResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ReportDERControlResponse {
     /// Creates a new instance of the struct.
     ///
@@ -541,10 +547,10 @@ mod tests {
             Decimal::from_str("220.0").unwrap(),
             Decimal::from_str("60.5").unwrap(),
             Decimal::from_str("59.5").unwrap(),
-            Decimal::from_str("5.0").unwrap(),
-            Decimal::from_str("2.0").unwrap(),
-            Decimal::from_str("10.0").unwrap(),
-        );
+        )
+        .with_delay(Decimal::from_str("5.0").unwrap())
+        .with_random_delay(Decimal::from_str("2.0").unwrap())
+        .with_ramp_rate(Decimal::from_str("10.0").unwrap());
         EnterServiceGetType::new(enter_service, "test_enter_service".to_string())
     }
 
