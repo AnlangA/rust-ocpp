@@ -2322,4 +2322,160 @@ fn test_invalid_clear_tariffs_response() -> Result<(), Box<dyn std::error::Error
     Ok(())
 }
 
+#[test]
+fn test_valid_customer_information_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "requestId": 12345,
+        "report": false,
+        "clear": true
+    });
+    assert!(validate_schema_instance(
+        "CustomerInformationRequest.json",
+        instance
+    )?);
+
+    // Test with idToken
+    let instance = serde_json::json!({
+        "requestId": 67890,
+        "report": true,
+        "clear": false,
+        "idToken": {
+            "idToken": "ABC12345",
+            "type": "ISO14443"
+        }
+    });
+    assert!(validate_schema_instance(
+        "CustomerInformationRequest.json",
+        instance
+    )?);
+
+    // Test with customerIdentifier
+    let instance = serde_json::json!({
+        "requestId": 11111,
+        "report": false,
+        "clear": false,
+        "customerIdentifier": "customer123"
+    });
+    assert!(validate_schema_instance(
+        "CustomerInformationRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_customer_information_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "CustomerInformationResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "status": "Rejected",
+        "statusInfo": {
+            "reasonCode": "NotFound"
+        }
+    });
+    assert!(validate_schema_instance(
+        "CustomerInformationResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_customer_information_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required requestId
+    let instance = serde_json::json!({
+        "report": true,
+        "clear": false
+    });
+    assert!(!validate_schema_instance(
+        "CustomerInformationRequest.json",
+        instance
+    )?);
+
+    // Test with negative requestId
+    let instance = serde_json::json!({
+        "requestId": -1,
+        "report": true,
+        "clear": false
+    });
+    assert!(!validate_schema_instance(
+        "CustomerInformationRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_close_periodic_event_stream_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "id": 42
+    });
+    assert!(validate_schema_instance(
+        "ClosePeriodicEventStreamRequest.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "id": 100,
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ClosePeriodicEventStreamRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_close_periodic_event_stream_response() -> Result<(), Box<dyn std::error::Error>> {
+    // Test empty response (no required fields)
+    let instance = serde_json::json!({});
+    assert!(validate_schema_instance(
+        "ClosePeriodicEventStreamResponse.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ClosePeriodicEventStreamResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_close_periodic_event_stream_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required id
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "ClosePeriodicEventStreamRequest.json",
+        instance
+    )?);
+
+    // Test with negative id
+    let instance = serde_json::json!({
+        "id": -1
+    });
+    assert!(!validate_schema_instance(
+        "ClosePeriodicEventStreamRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
 // We recommend installing an extension to run rust tests.
