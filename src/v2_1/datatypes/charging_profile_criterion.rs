@@ -36,6 +36,12 @@ pub struct ChargingProfileCriterionType {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ChargingProfileCriterionType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ChargingProfileCriterionType {
     /// Creates a new `ChargingProfileCriterionType` with all fields set to `None`.
     ///

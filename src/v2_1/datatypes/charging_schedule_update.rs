@@ -109,6 +109,12 @@ pub struct ChargingScheduleUpdateType {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ChargingScheduleUpdateType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ChargingScheduleUpdateType {
     /// Creates a new `ChargingScheduleUpdateType` with all fields set to `None`.
     ///

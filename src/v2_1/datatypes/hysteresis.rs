@@ -49,6 +49,12 @@ pub struct HysteresisType {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for HysteresisType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl HysteresisType {
     /// Creates a new `HysteresisType` with all fields set to `None`.
     ///

@@ -27,6 +27,12 @@ pub struct ClearChargingProfileType {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ClearChargingProfileType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ClearChargingProfileType {
     /// Creates a new `ClearChargingProfileType` with all fields set to `None`.
     ///

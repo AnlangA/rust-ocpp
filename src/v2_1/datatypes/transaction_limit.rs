@@ -40,6 +40,12 @@ pub struct TransactionLimitType {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for TransactionLimitType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TransactionLimitType {
     /// Creates a new `TransactionLimitType` with all fields set to `None`.
     pub fn new() -> Self {

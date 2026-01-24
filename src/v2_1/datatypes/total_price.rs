@@ -24,6 +24,12 @@ pub struct TotalPriceType {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for TotalPriceType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TotalPriceType {
     /// Creates a new empty `TotalPriceType` with all fields set to `None`.
     pub fn new() -> Self {

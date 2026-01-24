@@ -65,6 +65,12 @@ pub struct TariffConditionsFixedType {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for TariffConditionsFixedType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TariffConditionsFixedType {
     /// Creates a new `TariffConditionsFixedType` with all fields as `None`
     ///

@@ -41,6 +41,12 @@ pub struct VoltageParamsType {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for VoltageParamsType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl VoltageParamsType {
     /// Creates a new `VoltageParamsType` with all fields set to `None`.
     ///

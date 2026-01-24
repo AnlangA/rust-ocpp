@@ -28,6 +28,12 @@ fn default_unit() -> String {
     "Wh".to_string()
 }
 
+impl Default for UnitOfMeasureType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl UnitOfMeasureType {
     /// Creates a new `UnitOfMeasureType` with default values.
     pub fn new() -> Self {

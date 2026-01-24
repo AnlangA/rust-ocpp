@@ -32,6 +32,12 @@ pub struct ReactivePowerParamsType {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ReactivePowerParamsType {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ReactivePowerParamsType {
     /// Creates a new `ReactivePowerParamsType` with all fields set to `None`.
     ///
