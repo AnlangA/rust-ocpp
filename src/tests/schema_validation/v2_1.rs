@@ -884,4 +884,600 @@ fn test_invalid_transaction_event_request() -> Result<(), Box<dyn std::error::Er
     Ok(())
 }
 
+#[test]
+fn test_valid_reset_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "type": "OnIdle",
+        "evseId": 1
+    });
+    assert!(validate_schema_instance(
+        "ResetRequest.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "type": "Immediate",
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ResetRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_reset_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "ResetResponse.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "status": "Accepted",
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ResetResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_reset_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required type field
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "ResetRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_unlock_connector_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "evseId": 1,
+        "connectorId": 2
+    });
+    assert!(validate_schema_instance(
+        "UnlockConnectorRequest.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "evseId": 0,
+        "connectorId": 1,
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "UnlockConnectorRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_unlock_connector_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Unlocked"
+    });
+    assert!(validate_schema_instance(
+        "UnlockConnectorResponse.json",
+        instance
+    )?);
+
+    // Test with statusInfo
+    let instance = serde_json::json!({
+        "status": "UnlockFailed",
+        "statusInfo": {
+            "reasonCode": "ConnectorLocked"
+        }
+    });
+    assert!(validate_schema_instance(
+        "UnlockConnectorResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_unlock_connector_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required connectorId
+    let instance = serde_json::json!({
+        "evseId": 1
+    });
+    assert!(!validate_schema_instance(
+        "UnlockConnectorRequest.json",
+        instance
+    )?);
+
+    // Test with negative evseId
+    let instance = serde_json::json!({
+        "evseId": -1,
+        "connectorId": 1
+    });
+    assert!(!validate_schema_instance(
+        "UnlockConnectorRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_clear_display_message_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "id": 42
+    });
+    assert!(validate_schema_instance(
+        "ClearDisplayMessageRequest.json",
+        instance
+    )?);
+
+    // Test with optional customData
+    let instance = serde_json::json!({
+        "id": 100,
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ClearDisplayMessageRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_clear_display_message_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted"
+    });
+    assert!(validate_schema_instance(
+        "ClearDisplayMessageResponse.json",
+        instance
+    )?);
+
+    // Test with statusInfo (needs reasonCode, max 20 chars)
+    let instance = serde_json::json!({
+        "status": "Rejected",
+        "statusInfo": {
+            "reasonCode": "NotFound"
+        }
+    });
+    assert!(validate_schema_instance(
+        "ClearDisplayMessageResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_clear_display_message_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required id
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "ClearDisplayMessageRequest.json",
+        instance
+    )?);
+
+    // Test with negative id
+    let instance = serde_json::json!({
+        "id": -1
+    });
+    assert!(!validate_schema_instance(
+        "ClearDisplayMessageRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_set_display_message_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "message": {
+            "id": 42,
+            "priority": "AlwaysFront",
+            "state": "Charging",
+            "message": {
+                "format": "UTF8",
+                "content": "Please plug in your vehicle"
+            },
+            "transactionId": "TX12345"
+        }
+    });
+    assert!(validate_schema_instance(
+        "SetDisplayMessageRequest.json",
+        instance
+    )?);
+
+    // Test with optional fields
+    let instance = serde_json::json!({
+        "message": {
+            "id": 100,
+            "priority": "InFront",
+            "state": "Idle",
+            "message": {
+                "format": "UTF8",
+                "content": "Welcome!"
+            },
+            "startDateTime": "2024-01-15T10:00:00Z",
+            "endDateTime": "2024-01-15T12:00:00Z"
+        }
+    });
+    assert!(validate_schema_instance(
+        "SetDisplayMessageRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_set_display_message_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted",
+        "statusInfo": {
+            "reasonCode": "Success"
+        }
+    });
+    assert!(validate_schema_instance(
+        "SetDisplayMessageResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_set_display_message_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required message
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "SetDisplayMessageRequest.json",
+        instance
+    )?);
+
+    // Test with invalid priority value
+    let instance = serde_json::json!({
+        "message": {
+            "id": 42,
+            "priority": "InvalidPriority",
+            "state": "Charging",
+            "message": {
+                "format": "UTF8",
+                "content": "Test"
+            }
+        }
+    });
+    assert!(!validate_schema_instance(
+        "SetDisplayMessageRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_data_transfer_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "vendorId": "VendorX",
+        "messageId": "UpdateConfig",
+        "data": "key=value&key2=value2"
+    });
+    assert!(validate_schema_instance(
+        "DataTransferRequest.json",
+        instance
+    )?);
+
+    // Test with all fields
+    let instance = serde_json::json!({
+        "vendorId": "VendorY",
+        "messageId": "CustomMessage",
+        "data": "custom data here",
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "DataTransferRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_data_transfer_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "status": "Accepted",
+        "data": "Response data"
+    });
+    assert!(validate_schema_instance(
+        "DataTransferResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "status": "Rejected",
+        "statusInfo": {
+            "reasonCode": "UnknownVendorId",
+            "additionalInfo": "Vendor not recognized"
+        }
+    });
+    assert!(validate_schema_instance(
+        "DataTransferResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_data_transfer_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required vendorId
+    let instance = serde_json::json!({
+        "messageId": "TestMessage"
+    });
+    assert!(!validate_schema_instance(
+        "DataTransferRequest.json",
+        instance
+    )?);
+
+    // Test with vendorId exceeding max length
+    let instance = serde_json::json!({
+        "vendorId": "A".repeat(256),  // Max is 255
+        "messageId": "TestMessage"
+    });
+    assert!(!validate_schema_instance(
+        "DataTransferRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_get_variables_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "getVariableData": [{
+            "component": {
+                "name": "Transformer",
+                "instance": "1",
+                "evse": {
+                    "id": 1,
+                    "connectorId": 2
+                }
+            },
+            "variable": {
+                "name": "AlignmentMaxCurrent",
+                "instance": "Transformer1"
+            }
+        }]
+    });
+    assert!(validate_schema_instance(
+        "GetVariablesRequest.json",
+        instance
+    )?);
+
+    // Test with multiple variables
+    let instance = serde_json::json!({
+        "getVariableData": [
+            {
+                "component": {
+                    "name": "Controller",
+                    "instance": "Main"
+                },
+                "variable": {
+                    "name": "AlignmentMaxCurrent"
+                }
+            },
+            {
+                "component": {
+                    "name": "Clock"
+                },
+                "variable": {
+                    "name": "ClockAlignment"
+                }
+            }
+        ]
+    });
+    assert!(validate_schema_instance(
+        "GetVariablesRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_get_variables_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "getVariableResult": [{
+            "attributeStatus": "Accepted",
+            "attributeType": "Actual",
+            "attributeValue": "30.0",
+            "component": {
+                "name": "Transformer",
+                "instance": "1"
+            },
+            "variable": {
+                "name": "AlignmentMaxCurrent",
+                "instance": "Transformer1"
+            }
+        }]
+    });
+    assert!(validate_schema_instance(
+        "GetVariablesResponse.json",
+        instance
+    )?);
+
+    // Test with optional statusInfo
+    let instance = serde_json::json!({
+        "getVariableResult": [{
+            "attributeStatus": "Rejected",
+            "component": {
+                "name": "Clock"
+            },
+            "variable": {
+                "name": "ClockAlignment"
+            },
+            "attributeStatusInfo": {
+                "reasonCode": "UnknownVariable"
+            }
+        }]
+    });
+    assert!(validate_schema_instance(
+        "GetVariablesResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_get_variables_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required getVariableData array
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "GetVariablesRequest.json",
+        instance
+    )?);
+
+    // Test with empty getVariableData array
+    let instance = serde_json::json!({
+        "getVariableData": []
+    });
+    assert!(!validate_schema_instance(
+        "GetVariablesRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_set_variables_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "setVariableData": [{
+            "attributeValue": "35.5",
+            "attributeType": "Actual",
+            "component": {
+                "name": "Transformer",
+                "instance": "1",
+                "evse": {
+                    "id": 1
+                }
+            },
+            "variable": {
+                "name": "AlignmentMaxCurrent"
+            }
+        }]
+    });
+    assert!(validate_schema_instance(
+        "SetVariablesRequest.json",
+        instance
+    )?);
+
+    // Test with multiple variables
+    let instance = serde_json::json!({
+        "setVariableData": [
+            {
+                "attributeValue": "40.0",
+                "attributeType": "Actual",
+                "component": {
+                    "name": "Controller",
+                    "instance": "Main"
+                },
+                "variable": {
+                    "name": "AlignmentMaxCurrent"
+                }
+            },
+            {
+                "attributeValue": "300",
+                "attributeType": "Actual",
+                "component": {
+                    "name": "Controller"
+                },
+                "variable": {
+                    "name": "HeartbeatInterval"
+                }
+            }
+        ]
+    });
+    assert!(validate_schema_instance(
+        "SetVariablesRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_set_variables_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "setVariableResult": [{
+            "attributeStatus": "Accepted",
+            "component": {
+                "name": "Transformer",
+                "instance": "1"
+            },
+            "variable": {
+                "name": "AlignmentMaxCurrent",
+                "instance": "Transformer1"
+            }
+        }]
+    });
+    assert!(validate_schema_instance(
+        "SetVariablesResponse.json",
+        instance
+    )?);
+
+    // Test with all optional fields
+    let instance = serde_json::json!({
+        "setVariableResult": [{
+            "attributeStatus": "Rejected",
+            "attributeType": "Actual",
+            "component": {
+                "name": "Clock"
+            },
+            "variable": {
+                "name": "ClockAlignment"
+            },
+            "attributeStatusInfo": {
+                "reasonCode": "ReadOnly"
+            }
+        }]
+    });
+    assert!(validate_schema_instance(
+        "SetVariablesResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_set_variables_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required setVariableData
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "SetVariablesRequest.json",
+        instance
+    )?);
+
+    // Test with empty setVariableData array
+    let instance = serde_json::json!({
+        "setVariableData": []
+    });
+    assert!(!validate_schema_instance(
+        "SetVariablesRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
 // We recommend installing an extension to run rust tests.

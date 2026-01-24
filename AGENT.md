@@ -300,3 +300,64 @@ Message 文件 (5个):
 **下一步:**
 - 继续为更多消息添加 schema 验证测试
 - 重点关注高优先级消息(ClearDisplayMessage, SetDisplayMessage, 等)
+
+---
+
+### 2026-01-24 Ralph Loop - Iteration 7-8
+
+#### Schema 验证测试修复与扩展 ✅
+
+**本次迭代完成的任务:**
+
+1. **修复 5 个失败的验证测试:**
+   - ✅ GetVariablesRequest - 修正结构 (component + variable)
+   - ✅ GetVariablesResponse - 修正结构并添加 attributeStatus
+   - ✅ SetVariablesRequest - 修正字段名 (attributeValue vs value)
+   - ✅ SetVariablesResponse - 修正结构并添加 attributeStatus
+   - ✅ ClearDisplayMessageResponse - 修正 reasonCode 长度 (20 字符限制)
+
+2. **新增验证测试 (21个):**
+   1. ✅ Reset (3 tests) - Request/Response/Invalid
+   2. ✅ UnlockConnector (3 tests) - Request/Response/Invalid
+   3. ✅ ClearDisplayMessage (3 tests) - Request/Response/Invalid
+   4. ✅ SetDisplayMessage (3 tests) - Request/Response/Invalid
+   5. ✅ DataTransfer (3 tests) - Request/Response/Invalid
+   6. ✅ GetVariables (3 tests) - Request/Response/Invalid
+   7. ✅ SetVariables (3 tests) - Request/Response/Invalid
+
+**Schema 结构修正详细分析:**
+
+**GetVariablesRequest/Response & SetVariablesRequest/Response:**
+- 错误结构: 将 `name`/`instance` 直接放在 data/result 层级
+- 正确结构:
+  ```json
+  {
+    "getVariableData": [{
+      "component": {"name": "...", "instance": "..."},
+      "variable": {"name": "...", "instance": "..."}
+    }]
+  }
+  ```
+- 必填字段:
+  - Request: `component.name`, `variable.name`
+  - Response: `attributeStatus`, `component.name`, `variable.name`
+
+**SetVariablesRequest:**
+- 字段名修正: `value` → `attributeValue`
+- 必填字段: `attributeValue`, `component`, `variable`
+
+**测试结果:**
+- ✅ Schema 验证测试: 31 → 52 (增加 21 个, +68%)
+- ✅ 所有 2483 个测试通过 (包含新增测试)
+- ✅ 验证 Rust 结构与 JSON schema 一致性
+
+**当前状态:**
+- 92 个消息文件中已有 52 个验证测试
+- 剩余约 40 个消息文件需要添加验证测试
+
+**修改文件:**
+- `src/tests/schema_validation/v2_1.rs` - 新增 21 个验证测试, 修复 5 个测试
+
+**下一步:**
+- 继续为剩余消息添加 schema 验证测试
+- 优先处理高优先级消息
