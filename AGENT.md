@@ -166,3 +166,32 @@ Rust代码的字段顺序可以与schema不同，只要：
 2. 所有required字段都存在
 3. 字段注释与schema描述匹配
 TransactionEventRequest采用了"required字段在前"的排序，这是良好的代码实践。
+
+### 迭代 5 (2026-01-24)
+
+#### 新增验证文件
+
+**已验证的文件：**
+8. **RequestStartTransactionRequest** - ✅ 已验证
+   - 字段顺序：采用"required字段在前"模式
+   - 所有字段注释与schema描述完全匹配
+
+9. **RequestStopTransactionRequest** - ✅ 已验证
+   - 字段顺序正确（required在前，optional在后）
+   - 注释与描述匹配
+
+10. **GetBaseReportRequest** - ✅ 已验证
+    - 字段顺序正确
+    - 注释与描述匹配
+
+**验证统计：**
+- 已验证消息文件：10个 (新增3个)
+- 所有验证文件均通过字段顺序和注释检查
+- 所有2523个测试持续通过
+
+**验证模式确认：**
+通过更多样本验证，确认了以下模式：
+1. Rust代码普遍采用"required字段在前"的排序模式
+2. 这与schema的字段顺序可能不同，但由于`#[serde(rename_all)]`的存在，序列化仍然正确
+3. 所有字段注释与schema描述保持一致
+4. 代码质量在所有验证的文件中保持一致的高水平
