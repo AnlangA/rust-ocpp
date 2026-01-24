@@ -21,7 +21,7 @@ pub struct LimitMaxDischargeType {
     pub pct_max_discharge_power: Decimal,
 
     /// Time when this setting becomes active.
-    #[serde(rename = "startTime")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub start_time: Option<DateTime<Utc>>,
 
     /// Duration in seconds that this setting is active.
