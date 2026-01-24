@@ -21,6 +21,12 @@ pub struct ClearChargingProfileRequest {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ClearChargingProfileRequest {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ClearChargingProfileRequest {
     /// Creates a new instance of the struct.
     ///

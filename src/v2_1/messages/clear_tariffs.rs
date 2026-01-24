@@ -22,6 +22,12 @@ pub struct ClearTariffsRequest {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ClearTariffsRequest {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ClearTariffsRequest {
     /// Creates a new instance of the struct.
     ///

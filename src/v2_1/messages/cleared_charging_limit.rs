@@ -134,6 +134,12 @@ pub struct ClearedChargingLimitResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ClearedChargingLimitResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ClearedChargingLimitResponse {
     /// Creates a new instance of the struct.
     ///
