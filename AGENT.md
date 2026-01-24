@@ -262,3 +262,41 @@ Message 文件 (5个):
 - Clippy 警告: 0
 - 测试通过率: 100% (2451/2451)
 - 代码规范: 完全符合 Rust 最佳实践
+
+---
+
+### 2026-01-24 Ralph Loop - Iteration 6
+
+#### Schema 验证测试扩展 ✅
+
+**本次迭代任务:**
+开始为缺少验证测试的消息添加 schema 验证测试,确保 Rust 结构与 JSON schema 一致。
+
+**新增验证测试 (11个):**
+1. ✅ `test_valid_heartbeat_request` - HeartbeatRequest 空请求和 customData 测试
+2. ✅ `test_valid_heartbeat_response` - HeartbeatResponse currentTime 测试
+3. ✅ `test_invalid_heartbeat_response` - 缺少 currentTime 的无效测试
+4. ✅ `test_valid_status_notification_request` - StatusNotificationRequest 完整测试
+5. ✅ `test_valid_status_notification_response` - StatusNotificationResponse 空响应测试
+6. ✅ `test_invalid_status_notification_request` - 缺少必填字段的无效测试
+7. ✅ `test_valid_meter_values_request` - MeterValuesRequest 采样值测试
+8. ✅ `test_valid_meter_values_response` - MeterValuesResponse 空响应测试
+9. ✅ `test_valid_transaction_event_request` - TransactionEventRequest 完整测试(包含 triggerReason)
+10. ✅ `test_valid_transaction_event_response` - TransactionEventResponse totalCost 测试
+11. ✅ `test_invalid_transaction_event_request` - 无效 seqNo 和缺少必填字段测试
+
+**测试结果:**
+- ✅ Schema 验证测试: 20 → 31 (增加 11 个, +55%)
+- ✅ 所有 2462 个测试通过 (包含新增测试)
+- ✅ 验证 Rust 结构与 JSON schema 一致性
+
+**当前状态:**
+- 92 个消息文件中已有 31 个验证测试
+- 剩余约 60 个消息文件需要添加验证测试
+
+**修改文件:**
+- `src/tests/schema_validation/v2_1.rs` - 新增 11 个验证测试
+
+**下一步:**
+- 继续为更多消息添加 schema 验证测试
+- 重点关注高优先级消息(ClearDisplayMessage, SetDisplayMessage, 等)

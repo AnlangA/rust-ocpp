@@ -577,4 +577,311 @@ fn validate_cancel_reservation_response() -> Result<(), Box<dyn std::error::Erro
     Ok(())
 }
 
+#[test]
+fn test_valid_heartbeat_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test empty request (no required fields)
+    let instance = serde_json::json!({});
+    assert!(validate_schema_instance(
+        "HeartbeatRequest.json",
+        instance
+    )?);
+
+    // Test with optional custom data
+    let instance = serde_json::json!({
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "HeartbeatRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_heartbeat_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "currentTime": "2024-01-15T10:30:00Z"
+    });
+    assert!(validate_schema_instance(
+        "HeartbeatResponse.json",
+        instance
+    )?);
+
+    // Test with optional custom data
+    let instance = serde_json::json!({
+        "currentTime": "2024-01-15T10:30:00Z",
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "HeartbeatResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_heartbeat_response() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required currentTime field
+    let instance = serde_json::json!({});
+    assert!(!validate_schema_instance(
+        "HeartbeatResponse.json",
+        instance
+    )?);
+
+    // Test with invalid timestamp format
+    let instance = serde_json::json!({
+        "currentTime": "invalid-date-time"
+    });
+    assert!(!validate_schema_instance(
+        "HeartbeatResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_status_notification_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "timestamp": "2024-01-15T10:30:00Z",
+        "connectorStatus": "Available",
+        "evseId": 1,
+        "connectorId": 1
+    });
+    assert!(validate_schema_instance(
+        "StatusNotificationRequest.json",
+        instance
+    )?);
+
+    // Test with all optional fields
+    let instance = serde_json::json!({
+        "timestamp": "2024-01-15T10:30:00Z",
+        "connectorStatus": "Occupied",
+        "evseId": 2,
+        "connectorId": 3,
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "StatusNotificationRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_status_notification_response() -> Result<(), Box<dyn std::error::Error>> {
+    // Test empty response
+    let instance = serde_json::json!({});
+    assert!(validate_schema_instance(
+        "StatusNotificationResponse.json",
+        instance
+    )?);
+
+    // Test with optional custom data
+    let instance = serde_json::json!({
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "StatusNotificationResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_status_notification_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required field
+    let instance = serde_json::json!({
+        "timestamp": "2024-01-15T10:30:00Z",
+        "connectorStatus": "Available"
+        // Missing required evseId and connectorId
+    });
+    assert!(!validate_schema_instance(
+        "StatusNotificationRequest.json",
+        instance
+    )?);
+
+    // Test with negative evseId (must be >= 0)
+    let instance = serde_json::json!({
+        "timestamp": "2024-01-15T10:30:00Z",
+        "connectorStatus": "Available",
+        "evseId": -1,
+        "connectorId": 1
+    });
+    assert!(!validate_schema_instance(
+        "StatusNotificationRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_meter_values_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "evseId": 1,
+        "meterValue": [{
+            "timestamp": "2024-01-15T10:30:00Z",
+            "sampledValue": [{
+                "value": 100.5,
+                "context": "Transaction.Begin"
+            }]
+        }]
+    });
+    assert!(validate_schema_instance(
+        "MeterValuesRequest.json",
+        instance
+    )?);
+
+    // Test with optional fields
+    let instance = serde_json::json!({
+        "evseId": 2,
+        "meterValue": [{
+            "timestamp": "2024-01-15T10:30:00Z",
+            "sampledValue": [{
+                "value": 200.5,
+                "context": "Transaction.Begin",
+                "measurand": "Energy.Active.Import.Register",
+                "phase": "L1"
+            }],
+            "customData": {
+                "vendorId": "TestVendor"
+            }
+        }],
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "MeterValuesRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_meter_values_response() -> Result<(), Box<dyn std::error::Error>> {
+    // Test empty response
+    let instance = serde_json::json!({});
+    assert!(validate_schema_instance(
+        "MeterValuesResponse.json",
+        instance
+    )?);
+
+    // Test with optional custom data
+    let instance = serde_json::json!({
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "MeterValuesResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_transaction_event_request() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "eventType": "Started",
+        "timestamp": "2024-01-15T10:30:00Z",
+        "triggerReason": "CablePluggedIn",
+        "seqNo": 1,
+        "transactionInfo": {
+            "transactionId": "TX12345",
+            "chargingState": "Charging"
+        }
+    });
+    assert!(validate_schema_instance(
+        "TransactionEventRequest.json",
+        instance
+    )?);
+
+    // Test with more complete data
+    let instance = serde_json::json!({
+        "eventType": "Updated",
+        "timestamp": "2024-01-15T10:30:00Z",
+        "triggerReason": "ChargingStateChanged",
+        "seqNo": 2,
+        "transactionInfo": {
+            "transactionId": "TX12345",
+            "chargingState": "Charging"
+        },
+        "meterValue": [{
+            "timestamp": "2024-01-15T10:30:00Z",
+            "sampledValue": [{
+                "value": 100.5,
+                "context": "Transaction.Begin"
+            }]
+        }]
+    });
+    assert!(validate_schema_instance(
+        "TransactionEventRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_valid_transaction_event_response() -> Result<(), Box<dyn std::error::Error>> {
+    let instance = serde_json::json!({
+        "totalCost": 10.5
+    });
+    assert!(validate_schema_instance(
+        "TransactionEventResponse.json",
+        instance
+    )?);
+
+    // Test with all optional fields
+    let instance = serde_json::json!({
+        "totalCost": 15.75,
+        "customData": {
+            "vendorId": "TestVendor"
+        }
+    });
+    assert!(validate_schema_instance(
+        "TransactionEventResponse.json",
+        instance
+    )?);
+    Ok(())
+}
+
+#[test]
+fn test_invalid_transaction_event_request() -> Result<(), Box<dyn std::error::Error>> {
+    // Test with missing required field
+    let instance = serde_json::json!({
+        "eventType": "Started",
+        "timestamp": "2024-01-15T10:30:00Z",
+        "triggerReason": "CablePluggedIn"
+        // Missing required seqNo and transactionInfo
+    });
+    assert!(!validate_schema_instance(
+        "TransactionEventRequest.json",
+        instance
+    )?);
+
+    // Test with invalid seqNo (must be >= 0)
+    let instance = serde_json::json!({
+        "eventType": "Started",
+        "timestamp": "2024-01-15T10:30:00Z",
+        "triggerReason": "CablePluggedIn",
+        "seqNo": -1,
+        "transactionInfo": {
+            "transactionId": "TX12345"
+        }
+    });
+    assert!(!validate_schema_instance(
+        "TransactionEventRequest.json",
+        instance
+    )?);
+    Ok(())
+}
+
 // We recommend installing an extension to run rust tests.
