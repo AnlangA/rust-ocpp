@@ -95,6 +95,12 @@ pub struct ClosePeriodicEventStreamResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for ClosePeriodicEventStreamResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl ClosePeriodicEventStreamResponse {
     /// Creates a new instance of the struct.
     ///

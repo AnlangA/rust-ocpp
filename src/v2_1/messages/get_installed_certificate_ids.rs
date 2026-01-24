@@ -18,6 +18,12 @@ pub struct GetInstalledCertificateIdsRequest {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for GetInstalledCertificateIdsRequest {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl GetInstalledCertificateIdsRequest {
     /// Creates a new instance of the struct.
     ///

@@ -174,6 +174,12 @@ pub struct FirmwareStatusNotificationResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for FirmwareStatusNotificationResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl FirmwareStatusNotificationResponse {
     /// Creates a new instance of the struct.
     ///

@@ -124,6 +124,12 @@ pub struct CostUpdatedResponse {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for CostUpdatedResponse {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CostUpdatedResponse {
     /// Creates a new instance of the struct.
     ///

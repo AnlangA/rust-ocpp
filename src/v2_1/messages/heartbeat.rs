@@ -13,6 +13,12 @@ pub struct HeartbeatRequest {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for HeartbeatRequest {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl HeartbeatRequest {
     /// Creates a new instance of the struct.
     ///

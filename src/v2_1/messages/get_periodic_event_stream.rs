@@ -12,6 +12,12 @@ pub struct GetPeriodicEventStreamRequest {
     pub custom_data: Option<CustomDataType>,
 }
 
+impl Default for GetPeriodicEventStreamRequest {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl GetPeriodicEventStreamRequest {
     /// Creates a new instance of the struct.
     ///
@@ -74,6 +80,12 @@ pub struct GetPeriodicEventStreamResponse {
     #[serde(skip_serializing_if = "Option::is_none")]
     #[validate(nested)]
     pub custom_data: Option<CustomDataType>,
+}
+
+impl Default for GetPeriodicEventStreamResponse {
+    fn default() -> Self {
+        Self::new()
+    }
 }
 
 impl GetPeriodicEventStreamResponse {
